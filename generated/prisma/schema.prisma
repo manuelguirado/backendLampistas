@@ -1,0 +1,221 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  userID          Int               @id @default(autoincrement())
+  name            String?           @db.VarChar(255)
+  email           String            @unique @db.VarChar(255)
+  password        String            @db.VarChar(255)
+  incidentsID     Int?
+  incidents       Incidents?        @relation("IncidentUsers", fields: [incidentsID], references: [IncidentsID])
+  directions      Directions[]
+  paymentsID      Int?
+  payments        Payments?
+  IncidentHistory IncidentHistory[]
+  machinery       machinery[]
+  role            Role              @default(USER)
+  userCode        String?           @db.VarChar(100)
+
+  Incidents Incidents[] @relation("IncidentCreator")
+
+  Budget Budget[]
+}
+
+model Company {
+  companyID        Int               @id @default(autoincrement())
+  name             String            @db.VarChar(255)
+  phone            String            @db.VarChar(20)
+  password         String            @db.VarChar(255)
+  workers          Worker[]          @relation("Workers")
+  receivedPayments Payments[]        @relation("ReceivedPayments")
+  incidents        Incidents[]       @relation("CompanyIncidents")
+  incidentHistory  IncidentHistory[] @relation("CompanyIncidentHistory")
+  budgetID         Int?
+  budget           Budget?           @relation(fields: [budgetID], references: [budgetID])
+
+  directions   Directions[]  @relation("CompanyDirections")
+  shiftWorkers ShiftWorker[] @relation("CompanyShiftWorkers")
+  role         Role          @default(COMPANY)
+
+  payments    Payments[]  @relation("CompanyPayments")
+  machinery   machinery[] @relation("CompanyMachinery")
+  companyCode String?     @db.VarChar(100)
+  email       String      @unique @db.VarChar(255)
+
+  Budget Budget[] @relation("CompanyBudget")
+}
+
+model Worker {
+  workerid          Int             @id @default(autoincrement())
+  name              String          @db.VarChar(255)
+  email             String          @unique @db.VarChar(255)
+  password          String          @db.VarChar(255)
+  companyID         Int
+  company           Company         @relation("Workers", fields: [companyID], references: [companyID])
+  shiftWorkers      ShiftWorker[]   @relation("WorkerShiftWorkers")
+  assignedIncidents Incidents[]     @relation("WorkerIncidents")
+  jobHistory        JobHistory[]    @relation("WorkerJobHistory")
+  shiftSchedules    ShiftSchedule[] @relation("WorkerShiftSchedules")
+  role              Role            @default(WORKER)
+  workerCode        String?         @db.VarChar(100)
+}
+
+model Admin {
+  id       Int    @id @default(autoincrement())
+  email    String @unique @db.VarChar(255)
+  password String @db.VarChar(255)
+  role     Role   @default(ADMIN)
+}
+
+model Incidents {
+  IncidentsID      Int               @id @default(autoincrement())
+  title            String            @db.VarChar(255)
+  description      String            @db.Text
+  status           String            @db.VarChar(50)
+  priority         String            @db.VarChar(50)
+  createdAt        DateTime          @default(now()) @db.Timestamp(6)
+  updatedAt        DateTime          @updatedAt @db.Timestamp(6)
+  companyID        Int
+  company          Company           @relation("CompanyIncidents", fields: [companyID], references: [companyID])
+  assignedWorkerID Int?
+  assignedWorker   Worker?           @relation("WorkerIncidents", fields: [assignedWorkerID], references: [workerid])
+  budgetID         Int?              @unique
+  budget           Budget?           @relation("BudgetIncidents", fields: [budgetID], references: [budgetID])
+  userID           Int?
+  user             User?             @relation("IncidentCreator", fields: [userID], references: [userID])
+  users            User[]            @relation("IncidentUsers")
+  IncidentHistory  IncidentHistory[] @relation("IncidentHistory")
+  urgency          Boolean?          @default(false)
+
+  Payments Payments[] @relation("IncidentPayments")
+}
+
+model Payments {
+  id            Int             @id @default(autoincrement())
+  amount        Decimal         @db.Decimal(10, 2)
+  date          DateTime        @default(now()) @db.Timestamp(6)
+  method        String          @db.VarChar(50)
+  userID        Int             @unique
+  user          User            @relation(fields: [userID], references: [userID])
+  companyID     Int
+  company       Company         @relation("CompanyPayments", fields: [companyID], references: [companyID])
+  receivedBy    Company         @relation("ReceivedPayments", fields: [receivedByID], references: [companyID])
+  IncidentsID   Int?
+  incident      Incidents?      @relation("IncidentPayments", fields: [IncidentsID], references: [IncidentsID])
+  receivedByID  Int
+  paymentStatus paymentStatus[]
+}
+
+model paymentStatus {
+  id        Int      @id @default(autoincrement())
+  status    String   @db.VarChar(50)
+  paymentID Int
+  payment   Payments @relation(fields: [paymentID], references: [id])
+}
+
+model Budget {
+  budgetID    Int        @id @default(autoincrement())
+  totalAmount Decimal    @db.Decimal(10, 2)
+  items       String     @db.Text
+  companyID   Int
+  description String     @db.Text
+  company     Company    @relation("CompanyBudget", fields: [companyID], references: [companyID])
+  incidentID  Int?
+  incident    Incidents? @relation("BudgetIncidents")
+  workerID    Int
+  userID      Int
+  user        User       @relation(fields: [userID], references: [userID])
+  Company     Company[]
+}
+
+model Subscription {
+  id        Int      @id @default(autoincrement())
+  type      String   @db.VarChar(100)
+  startDate DateTime @db.Timestamp(6)
+  endDate   DateTime @db.Timestamp(6)
+}
+
+model IncidentHistory {
+  id         Int       @id @default(autoincrement())
+  incidentID Int
+  incident   Incidents @relation("IncidentHistory", fields: [incidentID], references: [IncidentsID])
+  companyID  Int
+  company    Company   @relation("CompanyIncidentHistory", fields: [companyID], references: [companyID])
+  userID     Int
+  user       User      @relation(fields: [userID], references: [userID])
+  changeLog  String    @db.Text
+  changedAt  DateTime  @default(now()) @db.Timestamp(6)
+}
+
+model ShiftWorker {
+  id        Int     @id @default(autoincrement())
+  companyID Int
+  company   Company @relation("CompanyShiftWorkers", fields: [companyID], references: [companyID])
+  workerID  Int
+  worker    Worker  @relation("WorkerShiftWorkers", fields: [workerID], references: [workerid])
+}
+
+model JobHistory {
+  id        Int       @id @default(autoincrement())
+  workerID  Int
+  worker    Worker    @relation("WorkerJobHistory", fields: [workerID], references: [workerid])
+  position  String    @db.VarChar(100)
+  startDate DateTime  @db.Timestamp(6)
+  endDate   DateTime? @db.Timestamp(6)
+}
+
+model ShiftSchedule {
+  id        Int      @id @default(autoincrement())
+  workerID  Int
+  worker    Worker   @relation("WorkerShiftSchedules", fields: [workerID], references: [workerid])
+  shiftDate DateTime @db.Timestamp(6)
+  shiftType String   @db.VarChar(50)
+}
+
+model Directions {
+  id     Int  @id @default(autoincrement())
+  userID Int?
+
+  user      User?    @relation(fields: [userID], references: [userID])
+  companyID Int?
+  company   Company? @relation("CompanyDirections", fields: [companyID], references: [companyID])
+
+  address String
+  city    String
+  state   String
+  zipCode String
+}
+
+model machinery {
+  id                 Int      @id @default(autoincrement())
+  name               String
+  description        String
+  maintenanceDate    DateTime @db.Timestamp(6)
+  lastInspectionDate DateTime @db.Timestamp(6)
+  installedAt        DateTime @db.Timestamp(6)
+  clientID           Int
+  client             User     @relation(fields: [clientID], references: [userID])
+  companyName        String
+  companyID          Int
+  company            Company  @relation("CompanyMachinery", fields: [companyID], references: [companyID])
+}
+
+enum Role {
+  ADMIN
+  USER
+  COMPANY
+  WORKER
+}
