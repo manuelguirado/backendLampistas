@@ -128,7 +128,8 @@ exports.Prisma.UserScalarFieldEnum = {
   incidentsID: 'incidentsID',
   paymentsID: 'paymentsID',
   role: 'role',
-  userCode: 'userCode'
+  userCode: 'userCode',
+  companyID: 'companyID'
 };
 
 exports.Prisma.CompanyScalarFieldEnum = {
@@ -140,6 +141,7 @@ exports.Prisma.CompanyScalarFieldEnum = {
   suspended: 'suspended',
   suspendedUntil: 'suspendedUntil',
   role: 'role',
+  userID: 'userID',
   companyCode: 'companyCode',
   email: 'email'
 };

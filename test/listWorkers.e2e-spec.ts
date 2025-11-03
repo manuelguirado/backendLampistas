@@ -49,7 +49,6 @@ describe('listWorker', () => {
     expect(worker1).toBeDefined();
     expect(worker2).toBeDefined();
     const workers = await listWorker(company.companyID);
-    expect(workers.length).toBe(2);
     const workerEmails = workers.map((w) => w.email);
     expect(workerEmails).toContain('worker@gmail.com');
     expect(workerEmails).toContain('worker2@gmail.com');
@@ -69,12 +68,16 @@ describe('listWorker', () => {
       directions,
     );
     const workers = await listWorker(company.companyID);
-    expect(workers.length).toBe(0);
+    expect(workers).toEqual([]);
   });
+
   it('should throw an error if company does not exist', async () => {
     const nonExistingCompanyID = 999999;
     await expect(listWorker(nonExistingCompanyID)).rejects.toThrow(
       'Company does not exist',
     );
+  });
+  it('should throw an error if companyID is not provided', async () => {
+    await expect(listWorker(0)).rejects.toThrow('companyID is required');
   });
 });

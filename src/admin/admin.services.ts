@@ -1,4 +1,3 @@
-import { eliminateCompany } from '../modules/admin/eliminateCompany';
 import { Injectable } from '@nestjs/common';
 import { adminLogin } from '../modules/admin/adminLogin';
 import { suspendCompany } from '../modules/admin/suspendCompany';
@@ -7,6 +6,7 @@ import { editCompany } from '../modules/admin/editCompany';
 import { activateCompany } from '../modules/admin/activateCompany';
 import { generateCode } from '../utils/generateCode';
 import registerAdmin from '../modules/admin/registerAdmin';
+import { eliminateCompany } from '../modules/admin/eliminateCompany';
 @Injectable()
 export class adminServices {
   async registerAdmin(email: string, password: string) {

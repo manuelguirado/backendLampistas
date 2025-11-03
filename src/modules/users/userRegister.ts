@@ -5,6 +5,7 @@ export async function userRegister(
   name: string,
   email: string,
   password: string,
+  CompanyID?: number,
 ) {
   if (!email || !password) {
     throw new Error('Email and password are required');
@@ -23,6 +24,9 @@ export async function userRegister(
       email,
       password: hashedPassword,
       role: 'USER',
+      Company: {
+        connect: { companyID: CompanyID },
+      },
     },
   });
 }

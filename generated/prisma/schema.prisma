@@ -32,6 +32,9 @@ model User {
   Incidents Incidents[] @relation("IncidentCreator")
 
   Budget Budget[]
+
+  companyID Int?
+  Company   Company? @relation(fields: [companyID], references: [companyID])
 }
 
 model Company {
@@ -50,13 +53,15 @@ model Company {
   directions       Directions[]      @relation("CompanyDirections")
   shiftWorkers     ShiftWorker[]     @relation("CompanyShiftWorkers")
   role             Role              @default(COMPANY)
-
-  payments    Payments[]  @relation("CompanyPayments")
-  machinery   machinery[] @relation("CompanyMachinery")
-  companyCode String?     @db.VarChar(100)
-  email       String      @unique @db.VarChar(255)
+  userID           Int?
+  payments         Payments[]        @relation("CompanyPayments")
+  machinery        machinery[]       @relation("CompanyMachinery")
+  companyCode      String?           @db.VarChar(100)
+  email            String            @unique @db.VarChar(255)
 
   Budget Budget[] @relation("CompanyBudget")
+
+  User User[]
 }
 
 model Worker {

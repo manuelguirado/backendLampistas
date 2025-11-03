@@ -2230,6 +2230,7 @@ export namespace Prisma {
     payments: number
     machinery: number
     Budget: number
+    User: number
   }
 
   export type CompanyCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2242,6 +2243,7 @@ export namespace Prisma {
     payments?: boolean | CompanyCountOutputTypeCountPaymentsArgs
     machinery?: boolean | CompanyCountOutputTypeCountMachineryArgs
     Budget?: boolean | CompanyCountOutputTypeCountBudgetArgs
+    User?: boolean | CompanyCountOutputTypeCountUserArgs
   }
 
   // Custom InputTypes
@@ -2316,6 +2318,13 @@ export namespace Prisma {
    */
   export type CompanyCountOutputTypeCountBudgetArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: BudgetWhereInput
+  }
+
+  /**
+   * CompanyCountOutputType without action
+   */
+  export type CompanyCountOutputTypeCountUserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserWhereInput
   }
 
 
@@ -2508,12 +2517,14 @@ export namespace Prisma {
     userID: number | null
     incidentsID: number | null
     paymentsID: number | null
+    companyID: number | null
   }
 
   export type UserSumAggregateOutputType = {
     userID: number | null
     incidentsID: number | null
     paymentsID: number | null
+    companyID: number | null
   }
 
   export type UserMinAggregateOutputType = {
@@ -2525,6 +2536,7 @@ export namespace Prisma {
     paymentsID: number | null
     role: $Enums.Role | null
     userCode: string | null
+    companyID: number | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -2536,6 +2548,7 @@ export namespace Prisma {
     paymentsID: number | null
     role: $Enums.Role | null
     userCode: string | null
+    companyID: number | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -2547,6 +2560,7 @@ export namespace Prisma {
     paymentsID: number
     role: number
     userCode: number
+    companyID: number
     _all: number
   }
 
@@ -2555,12 +2569,14 @@ export namespace Prisma {
     userID?: true
     incidentsID?: true
     paymentsID?: true
+    companyID?: true
   }
 
   export type UserSumAggregateInputType = {
     userID?: true
     incidentsID?: true
     paymentsID?: true
+    companyID?: true
   }
 
   export type UserMinAggregateInputType = {
@@ -2572,6 +2588,7 @@ export namespace Prisma {
     paymentsID?: true
     role?: true
     userCode?: true
+    companyID?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -2583,6 +2600,7 @@ export namespace Prisma {
     paymentsID?: true
     role?: true
     userCode?: true
+    companyID?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -2594,6 +2612,7 @@ export namespace Prisma {
     paymentsID?: true
     role?: true
     userCode?: true
+    companyID?: true
     _all?: true
   }
 
@@ -2692,6 +2711,7 @@ export namespace Prisma {
     paymentsID: number | null
     role: $Enums.Role
     userCode: string | null
+    companyID: number | null
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
     _sum: UserSumAggregateOutputType | null
@@ -2722,6 +2742,7 @@ export namespace Prisma {
     paymentsID?: boolean
     role?: boolean
     userCode?: boolean
+    companyID?: boolean
     incidents?: boolean | User$incidentsArgs<ExtArgs>
     directions?: boolean | User$directionsArgs<ExtArgs>
     payments?: boolean | User$paymentsArgs<ExtArgs>
@@ -2729,6 +2750,7 @@ export namespace Prisma {
     machinery?: boolean | User$machineryArgs<ExtArgs>
     Incidents?: boolean | User$IncidentsArgs<ExtArgs>
     Budget?: boolean | User$BudgetArgs<ExtArgs>
+    Company?: boolean | User$CompanyArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2741,7 +2763,9 @@ export namespace Prisma {
     paymentsID?: boolean
     role?: boolean
     userCode?: boolean
+    companyID?: boolean
     incidents?: boolean | User$incidentsArgs<ExtArgs>
+    Company?: boolean | User$CompanyArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2753,7 +2777,9 @@ export namespace Prisma {
     paymentsID?: boolean
     role?: boolean
     userCode?: boolean
+    companyID?: boolean
     incidents?: boolean | User$incidentsArgs<ExtArgs>
+    Company?: boolean | User$CompanyArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -2765,9 +2791,10 @@ export namespace Prisma {
     paymentsID?: boolean
     role?: boolean
     userCode?: boolean
+    companyID?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"userID" | "name" | "email" | "password" | "incidentsID" | "paymentsID" | "role" | "userCode", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"userID" | "name" | "email" | "password" | "incidentsID" | "paymentsID" | "role" | "userCode" | "companyID", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     incidents?: boolean | User$incidentsArgs<ExtArgs>
     directions?: boolean | User$directionsArgs<ExtArgs>
@@ -2776,13 +2803,16 @@ export namespace Prisma {
     machinery?: boolean | User$machineryArgs<ExtArgs>
     Incidents?: boolean | User$IncidentsArgs<ExtArgs>
     Budget?: boolean | User$BudgetArgs<ExtArgs>
+    Company?: boolean | User$CompanyArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     incidents?: boolean | User$incidentsArgs<ExtArgs>
+    Company?: boolean | User$CompanyArgs<ExtArgs>
   }
   export type UserIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     incidents?: boolean | User$incidentsArgs<ExtArgs>
+    Company?: boolean | User$CompanyArgs<ExtArgs>
   }
 
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2795,6 +2825,7 @@ export namespace Prisma {
       machinery: Prisma.$machineryPayload<ExtArgs>[]
       Incidents: Prisma.$IncidentsPayload<ExtArgs>[]
       Budget: Prisma.$BudgetPayload<ExtArgs>[]
+      Company: Prisma.$CompanyPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       userID: number
@@ -2805,6 +2836,7 @@ export namespace Prisma {
       paymentsID: number | null
       role: $Enums.Role
       userCode: string | null
+      companyID: number | null
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -3206,6 +3238,7 @@ export namespace Prisma {
     machinery<T extends User$machineryArgs<ExtArgs> = {}>(args?: Subset<T, User$machineryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$machineryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Incidents<T extends User$IncidentsArgs<ExtArgs> = {}>(args?: Subset<T, User$IncidentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IncidentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Budget<T extends User$BudgetArgs<ExtArgs> = {}>(args?: Subset<T, User$BudgetArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BudgetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Company<T extends User$CompanyArgs<ExtArgs> = {}>(args?: Subset<T, User$CompanyArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3243,6 +3276,7 @@ export namespace Prisma {
     readonly paymentsID: FieldRef<"User", 'Int'>
     readonly role: FieldRef<"User", 'Role'>
     readonly userCode: FieldRef<"User", 'String'>
+    readonly companyID: FieldRef<"User", 'Int'>
   }
     
 
@@ -3797,6 +3831,25 @@ export namespace Prisma {
   }
 
   /**
+   * User.Company
+   */
+  export type User$CompanyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Company
+     */
+    select?: CompanySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Company
+     */
+    omit?: CompanyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompanyInclude<ExtArgs> | null
+    where?: CompanyWhereInput
+  }
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3830,11 +3883,13 @@ export namespace Prisma {
   export type CompanyAvgAggregateOutputType = {
     companyID: number | null
     budgetID: number | null
+    userID: number | null
   }
 
   export type CompanySumAggregateOutputType = {
     companyID: number | null
     budgetID: number | null
+    userID: number | null
   }
 
   export type CompanyMinAggregateOutputType = {
@@ -3846,6 +3901,7 @@ export namespace Prisma {
     suspended: boolean | null
     suspendedUntil: Date | null
     role: $Enums.Role | null
+    userID: number | null
     companyCode: string | null
     email: string | null
   }
@@ -3859,6 +3915,7 @@ export namespace Prisma {
     suspended: boolean | null
     suspendedUntil: Date | null
     role: $Enums.Role | null
+    userID: number | null
     companyCode: string | null
     email: string | null
   }
@@ -3872,6 +3929,7 @@ export namespace Prisma {
     suspended: number
     suspendedUntil: number
     role: number
+    userID: number
     companyCode: number
     email: number
     _all: number
@@ -3881,11 +3939,13 @@ export namespace Prisma {
   export type CompanyAvgAggregateInputType = {
     companyID?: true
     budgetID?: true
+    userID?: true
   }
 
   export type CompanySumAggregateInputType = {
     companyID?: true
     budgetID?: true
+    userID?: true
   }
 
   export type CompanyMinAggregateInputType = {
@@ -3897,6 +3957,7 @@ export namespace Prisma {
     suspended?: true
     suspendedUntil?: true
     role?: true
+    userID?: true
     companyCode?: true
     email?: true
   }
@@ -3910,6 +3971,7 @@ export namespace Prisma {
     suspended?: true
     suspendedUntil?: true
     role?: true
+    userID?: true
     companyCode?: true
     email?: true
   }
@@ -3923,6 +3985,7 @@ export namespace Prisma {
     suspended?: true
     suspendedUntil?: true
     role?: true
+    userID?: true
     companyCode?: true
     email?: true
     _all?: true
@@ -4023,6 +4086,7 @@ export namespace Prisma {
     suspended: boolean
     suspendedUntil: Date | null
     role: $Enums.Role
+    userID: number | null
     companyCode: string | null
     email: string
     _count: CompanyCountAggregateOutputType | null
@@ -4055,6 +4119,7 @@ export namespace Prisma {
     suspended?: boolean
     suspendedUntil?: boolean
     role?: boolean
+    userID?: boolean
     companyCode?: boolean
     email?: boolean
     workers?: boolean | Company$workersArgs<ExtArgs>
@@ -4067,6 +4132,7 @@ export namespace Prisma {
     payments?: boolean | Company$paymentsArgs<ExtArgs>
     machinery?: boolean | Company$machineryArgs<ExtArgs>
     Budget?: boolean | Company$BudgetArgs<ExtArgs>
+    User?: boolean | Company$UserArgs<ExtArgs>
     _count?: boolean | CompanyCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["company"]>
 
@@ -4079,6 +4145,7 @@ export namespace Prisma {
     suspended?: boolean
     suspendedUntil?: boolean
     role?: boolean
+    userID?: boolean
     companyCode?: boolean
     email?: boolean
     budget?: boolean | Company$budgetArgs<ExtArgs>
@@ -4093,6 +4160,7 @@ export namespace Prisma {
     suspended?: boolean
     suspendedUntil?: boolean
     role?: boolean
+    userID?: boolean
     companyCode?: boolean
     email?: boolean
     budget?: boolean | Company$budgetArgs<ExtArgs>
@@ -4107,11 +4175,12 @@ export namespace Prisma {
     suspended?: boolean
     suspendedUntil?: boolean
     role?: boolean
+    userID?: boolean
     companyCode?: boolean
     email?: boolean
   }
 
-  export type CompanyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"companyID" | "name" | "phone" | "password" | "budgetID" | "suspended" | "suspendedUntil" | "role" | "companyCode" | "email", ExtArgs["result"]["company"]>
+  export type CompanyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"companyID" | "name" | "phone" | "password" | "budgetID" | "suspended" | "suspendedUntil" | "role" | "userID" | "companyCode" | "email", ExtArgs["result"]["company"]>
   export type CompanyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     workers?: boolean | Company$workersArgs<ExtArgs>
     receivedPayments?: boolean | Company$receivedPaymentsArgs<ExtArgs>
@@ -4123,6 +4192,7 @@ export namespace Prisma {
     payments?: boolean | Company$paymentsArgs<ExtArgs>
     machinery?: boolean | Company$machineryArgs<ExtArgs>
     Budget?: boolean | Company$BudgetArgs<ExtArgs>
+    User?: boolean | Company$UserArgs<ExtArgs>
     _count?: boolean | CompanyCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CompanyIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4145,6 +4215,7 @@ export namespace Prisma {
       payments: Prisma.$PaymentsPayload<ExtArgs>[]
       machinery: Prisma.$machineryPayload<ExtArgs>[]
       Budget: Prisma.$BudgetPayload<ExtArgs>[]
+      User: Prisma.$UserPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       companyID: number
@@ -4155,6 +4226,7 @@ export namespace Prisma {
       suspended: boolean
       suspendedUntil: Date | null
       role: $Enums.Role
+      userID: number | null
       companyCode: string | null
       email: string
     }, ExtArgs["result"]["company"]>
@@ -4561,6 +4633,7 @@ export namespace Prisma {
     payments<T extends Company$paymentsArgs<ExtArgs> = {}>(args?: Subset<T, Company$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     machinery<T extends Company$machineryArgs<ExtArgs> = {}>(args?: Subset<T, Company$machineryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$machineryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Budget<T extends Company$BudgetArgs<ExtArgs> = {}>(args?: Subset<T, Company$BudgetArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BudgetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    User<T extends Company$UserArgs<ExtArgs> = {}>(args?: Subset<T, Company$UserArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4598,6 +4671,7 @@ export namespace Prisma {
     readonly suspended: FieldRef<"Company", 'Boolean'>
     readonly suspendedUntil: FieldRef<"Company", 'DateTime'>
     readonly role: FieldRef<"Company", 'Role'>
+    readonly userID: FieldRef<"Company", 'Int'>
     readonly companyCode: FieldRef<"Company", 'String'>
     readonly email: FieldRef<"Company", 'String'>
   }
@@ -5228,6 +5302,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: BudgetScalarFieldEnum | BudgetScalarFieldEnum[]
+  }
+
+  /**
+   * Company.User
+   */
+  export type Company$UserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    cursor?: UserWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
   }
 
   /**
@@ -20150,7 +20248,8 @@ export namespace Prisma {
     incidentsID: 'incidentsID',
     paymentsID: 'paymentsID',
     role: 'role',
-    userCode: 'userCode'
+    userCode: 'userCode',
+    companyID: 'companyID'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -20165,6 +20264,7 @@ export namespace Prisma {
     suspended: 'suspended',
     suspendedUntil: 'suspendedUntil',
     role: 'role',
+    userID: 'userID',
     companyCode: 'companyCode',
     email: 'email'
   };
@@ -20466,6 +20566,7 @@ export namespace Prisma {
     paymentsID?: IntNullableFilter<"User"> | number | null
     role?: EnumRoleFilter<"User"> | $Enums.Role
     userCode?: StringNullableFilter<"User"> | string | null
+    companyID?: IntNullableFilter<"User"> | number | null
     incidents?: XOR<IncidentsNullableScalarRelationFilter, IncidentsWhereInput> | null
     directions?: DirectionsListRelationFilter
     payments?: XOR<PaymentsNullableScalarRelationFilter, PaymentsWhereInput> | null
@@ -20473,6 +20574,7 @@ export namespace Prisma {
     machinery?: MachineryListRelationFilter
     Incidents?: IncidentsListRelationFilter
     Budget?: BudgetListRelationFilter
+    Company?: XOR<CompanyNullableScalarRelationFilter, CompanyWhereInput> | null
   }
 
   export type UserOrderByWithRelationInput = {
@@ -20484,6 +20586,7 @@ export namespace Prisma {
     paymentsID?: SortOrderInput | SortOrder
     role?: SortOrder
     userCode?: SortOrderInput | SortOrder
+    companyID?: SortOrderInput | SortOrder
     incidents?: IncidentsOrderByWithRelationInput
     directions?: DirectionsOrderByRelationAggregateInput
     payments?: PaymentsOrderByWithRelationInput
@@ -20491,6 +20594,7 @@ export namespace Prisma {
     machinery?: machineryOrderByRelationAggregateInput
     Incidents?: IncidentsOrderByRelationAggregateInput
     Budget?: BudgetOrderByRelationAggregateInput
+    Company?: CompanyOrderByWithRelationInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -20505,6 +20609,7 @@ export namespace Prisma {
     paymentsID?: IntNullableFilter<"User"> | number | null
     role?: EnumRoleFilter<"User"> | $Enums.Role
     userCode?: StringNullableFilter<"User"> | string | null
+    companyID?: IntNullableFilter<"User"> | number | null
     incidents?: XOR<IncidentsNullableScalarRelationFilter, IncidentsWhereInput> | null
     directions?: DirectionsListRelationFilter
     payments?: XOR<PaymentsNullableScalarRelationFilter, PaymentsWhereInput> | null
@@ -20512,6 +20617,7 @@ export namespace Prisma {
     machinery?: MachineryListRelationFilter
     Incidents?: IncidentsListRelationFilter
     Budget?: BudgetListRelationFilter
+    Company?: XOR<CompanyNullableScalarRelationFilter, CompanyWhereInput> | null
   }, "userID" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -20523,6 +20629,7 @@ export namespace Prisma {
     paymentsID?: SortOrderInput | SortOrder
     role?: SortOrder
     userCode?: SortOrderInput | SortOrder
+    companyID?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
     _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
@@ -20542,6 +20649,7 @@ export namespace Prisma {
     paymentsID?: IntNullableWithAggregatesFilter<"User"> | number | null
     role?: EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
     userCode?: StringNullableWithAggregatesFilter<"User"> | string | null
+    companyID?: IntNullableWithAggregatesFilter<"User"> | number | null
   }
 
   export type CompanyWhereInput = {
@@ -20556,6 +20664,7 @@ export namespace Prisma {
     suspended?: BoolFilter<"Company"> | boolean
     suspendedUntil?: DateTimeNullableFilter<"Company"> | Date | string | null
     role?: EnumRoleFilter<"Company"> | $Enums.Role
+    userID?: IntNullableFilter<"Company"> | number | null
     companyCode?: StringNullableFilter<"Company"> | string | null
     email?: StringFilter<"Company"> | string
     workers?: WorkerListRelationFilter
@@ -20568,6 +20677,7 @@ export namespace Prisma {
     payments?: PaymentsListRelationFilter
     machinery?: MachineryListRelationFilter
     Budget?: BudgetListRelationFilter
+    User?: UserListRelationFilter
   }
 
   export type CompanyOrderByWithRelationInput = {
@@ -20579,6 +20689,7 @@ export namespace Prisma {
     suspended?: SortOrder
     suspendedUntil?: SortOrderInput | SortOrder
     role?: SortOrder
+    userID?: SortOrderInput | SortOrder
     companyCode?: SortOrderInput | SortOrder
     email?: SortOrder
     workers?: WorkerOrderByRelationAggregateInput
@@ -20591,6 +20702,7 @@ export namespace Prisma {
     payments?: PaymentsOrderByRelationAggregateInput
     machinery?: machineryOrderByRelationAggregateInput
     Budget?: BudgetOrderByRelationAggregateInput
+    User?: UserOrderByRelationAggregateInput
   }
 
   export type CompanyWhereUniqueInput = Prisma.AtLeast<{
@@ -20606,6 +20718,7 @@ export namespace Prisma {
     suspended?: BoolFilter<"Company"> | boolean
     suspendedUntil?: DateTimeNullableFilter<"Company"> | Date | string | null
     role?: EnumRoleFilter<"Company"> | $Enums.Role
+    userID?: IntNullableFilter<"Company"> | number | null
     companyCode?: StringNullableFilter<"Company"> | string | null
     workers?: WorkerListRelationFilter
     receivedPayments?: PaymentsListRelationFilter
@@ -20617,6 +20730,7 @@ export namespace Prisma {
     payments?: PaymentsListRelationFilter
     machinery?: MachineryListRelationFilter
     Budget?: BudgetListRelationFilter
+    User?: UserListRelationFilter
   }, "companyID" | "email">
 
   export type CompanyOrderByWithAggregationInput = {
@@ -20628,6 +20742,7 @@ export namespace Prisma {
     suspended?: SortOrder
     suspendedUntil?: SortOrderInput | SortOrder
     role?: SortOrder
+    userID?: SortOrderInput | SortOrder
     companyCode?: SortOrderInput | SortOrder
     email?: SortOrder
     _count?: CompanyCountOrderByAggregateInput
@@ -20649,6 +20764,7 @@ export namespace Prisma {
     suspended?: BoolWithAggregatesFilter<"Company"> | boolean
     suspendedUntil?: DateTimeNullableWithAggregatesFilter<"Company"> | Date | string | null
     role?: EnumRoleWithAggregatesFilter<"Company"> | $Enums.Role
+    userID?: IntNullableWithAggregatesFilter<"Company"> | number | null
     companyCode?: StringNullableWithAggregatesFilter<"Company"> | string | null
     email?: StringWithAggregatesFilter<"Company"> | string
   }
@@ -21548,6 +21664,7 @@ export namespace Prisma {
     machinery?: machineryCreateNestedManyWithoutClientInput
     Incidents?: IncidentsCreateNestedManyWithoutUserInput
     Budget?: BudgetCreateNestedManyWithoutUserInput
+    Company?: CompanyCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -21559,6 +21676,7 @@ export namespace Prisma {
     paymentsID?: number | null
     role?: $Enums.Role
     userCode?: string | null
+    companyID?: number | null
     directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
@@ -21581,6 +21699,7 @@ export namespace Prisma {
     machinery?: machineryUpdateManyWithoutClientNestedInput
     Incidents?: IncidentsUpdateManyWithoutUserNestedInput
     Budget?: BudgetUpdateManyWithoutUserNestedInput
+    Company?: CompanyUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -21592,6 +21711,7 @@ export namespace Prisma {
     paymentsID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
+    companyID?: NullableIntFieldUpdateOperationsInput | number | null
     directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
@@ -21609,6 +21729,7 @@ export namespace Prisma {
     paymentsID?: number | null
     role?: $Enums.Role
     userCode?: string | null
+    companyID?: number | null
   }
 
   export type UserUpdateManyMutationInput = {
@@ -21629,6 +21750,7 @@ export namespace Prisma {
     paymentsID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
+    companyID?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type CompanyCreateInput = {
@@ -21638,6 +21760,7 @@ export namespace Prisma {
     suspended?: boolean
     suspendedUntil?: Date | string | null
     role?: $Enums.Role
+    userID?: number | null
     companyCode?: string | null
     email: string
     workers?: WorkerCreateNestedManyWithoutCompanyInput
@@ -21650,6 +21773,7 @@ export namespace Prisma {
     payments?: PaymentsCreateNestedManyWithoutCompanyInput
     machinery?: machineryCreateNestedManyWithoutCompanyInput
     Budget?: BudgetCreateNestedManyWithoutCompanyInput
+    User?: UserCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateInput = {
@@ -21661,6 +21785,7 @@ export namespace Prisma {
     suspended?: boolean
     suspendedUntil?: Date | string | null
     role?: $Enums.Role
+    userID?: number | null
     companyCode?: string | null
     email: string
     workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
@@ -21672,6 +21797,7 @@ export namespace Prisma {
     payments?: PaymentsUncheckedCreateNestedManyWithoutCompanyInput
     machinery?: machineryUncheckedCreateNestedManyWithoutCompanyInput
     Budget?: BudgetUncheckedCreateNestedManyWithoutCompanyInput
+    User?: UserUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUpdateInput = {
@@ -21681,6 +21807,7 @@ export namespace Prisma {
     suspended?: BoolFieldUpdateOperationsInput | boolean
     suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     workers?: WorkerUpdateManyWithoutCompanyNestedInput
@@ -21693,6 +21820,7 @@ export namespace Prisma {
     payments?: PaymentsUpdateManyWithoutCompanyNestedInput
     machinery?: machineryUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUpdateManyWithoutCompanyNestedInput
+    User?: UserUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateInput = {
@@ -21704,6 +21832,7 @@ export namespace Prisma {
     suspended?: BoolFieldUpdateOperationsInput | boolean
     suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
@@ -21715,6 +21844,7 @@ export namespace Prisma {
     payments?: PaymentsUncheckedUpdateManyWithoutCompanyNestedInput
     machinery?: machineryUncheckedUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUncheckedUpdateManyWithoutCompanyNestedInput
+    User?: UserUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyCreateManyInput = {
@@ -21726,6 +21856,7 @@ export namespace Prisma {
     suspended?: boolean
     suspendedUntil?: Date | string | null
     role?: $Enums.Role
+    userID?: number | null
     companyCode?: string | null
     email: string
   }
@@ -21737,6 +21868,7 @@ export namespace Prisma {
     suspended?: BoolFieldUpdateOperationsInput | boolean
     suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
   }
@@ -21750,6 +21882,7 @@ export namespace Prisma {
     suspended?: BoolFieldUpdateOperationsInput | boolean
     suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
   }
@@ -22672,6 +22805,11 @@ export namespace Prisma {
     none?: BudgetWhereInput
   }
 
+  export type CompanyNullableScalarRelationFilter = {
+    is?: CompanyWhereInput | null
+    isNot?: CompanyWhereInput | null
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -22706,12 +22844,14 @@ export namespace Prisma {
     paymentsID?: SortOrder
     role?: SortOrder
     userCode?: SortOrder
+    companyID?: SortOrder
   }
 
   export type UserAvgOrderByAggregateInput = {
     userID?: SortOrder
     incidentsID?: SortOrder
     paymentsID?: SortOrder
+    companyID?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -22723,6 +22863,7 @@ export namespace Prisma {
     paymentsID?: SortOrder
     role?: SortOrder
     userCode?: SortOrder
+    companyID?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -22734,12 +22875,14 @@ export namespace Prisma {
     paymentsID?: SortOrder
     role?: SortOrder
     userCode?: SortOrder
+    companyID?: SortOrder
   }
 
   export type UserSumOrderByAggregateInput = {
     userID?: SortOrder
     incidentsID?: SortOrder
     paymentsID?: SortOrder
+    companyID?: SortOrder
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -22859,6 +23002,12 @@ export namespace Prisma {
     none?: ShiftWorkerWhereInput
   }
 
+  export type UserListRelationFilter = {
+    every?: UserWhereInput
+    some?: UserWhereInput
+    none?: UserWhereInput
+  }
+
   export type WorkerOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -22871,6 +23020,10 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type UserOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type CompanyCountOrderByAggregateInput = {
     companyID?: SortOrder
     name?: SortOrder
@@ -22880,6 +23033,7 @@ export namespace Prisma {
     suspended?: SortOrder
     suspendedUntil?: SortOrder
     role?: SortOrder
+    userID?: SortOrder
     companyCode?: SortOrder
     email?: SortOrder
   }
@@ -22887,6 +23041,7 @@ export namespace Prisma {
   export type CompanyAvgOrderByAggregateInput = {
     companyID?: SortOrder
     budgetID?: SortOrder
+    userID?: SortOrder
   }
 
   export type CompanyMaxOrderByAggregateInput = {
@@ -22898,6 +23053,7 @@ export namespace Prisma {
     suspended?: SortOrder
     suspendedUntil?: SortOrder
     role?: SortOrder
+    userID?: SortOrder
     companyCode?: SortOrder
     email?: SortOrder
   }
@@ -22911,6 +23067,7 @@ export namespace Prisma {
     suspended?: SortOrder
     suspendedUntil?: SortOrder
     role?: SortOrder
+    userID?: SortOrder
     companyCode?: SortOrder
     email?: SortOrder
   }
@@ -22918,6 +23075,7 @@ export namespace Prisma {
   export type CompanySumOrderByAggregateInput = {
     companyID?: SortOrder
     budgetID?: SortOrder
+    userID?: SortOrder
   }
 
   export type BoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -23060,16 +23218,6 @@ export namespace Prisma {
   export type UserNullableScalarRelationFilter = {
     is?: UserWhereInput | null
     isNot?: UserWhereInput | null
-  }
-
-  export type UserListRelationFilter = {
-    every?: UserWhereInput
-    some?: UserWhereInput
-    none?: UserWhereInput
-  }
-
-  export type UserOrderByRelationAggregateInput = {
-    _count?: SortOrder
   }
 
   export type IncidentsCountOrderByAggregateInput = {
@@ -23517,11 +23665,6 @@ export namespace Prisma {
     workerID?: SortOrder
   }
 
-  export type CompanyNullableScalarRelationFilter = {
-    is?: CompanyWhereInput | null
-    isNot?: CompanyWhereInput | null
-  }
-
   export type DirectionsCountOrderByAggregateInput = {
     id?: SortOrder
     userID?: SortOrder
@@ -23660,6 +23803,12 @@ export namespace Prisma {
     connectOrCreate?: BudgetCreateOrConnectWithoutUserInput | BudgetCreateOrConnectWithoutUserInput[]
     createMany?: BudgetCreateManyUserInputEnvelope
     connect?: BudgetWhereUniqueInput | BudgetWhereUniqueInput[]
+  }
+
+  export type CompanyCreateNestedOneWithoutUserInput = {
+    create?: XOR<CompanyCreateWithoutUserInput, CompanyUncheckedCreateWithoutUserInput>
+    connectOrCreate?: CompanyCreateOrConnectWithoutUserInput
+    connect?: CompanyWhereUniqueInput
   }
 
   export type DirectionsUncheckedCreateNestedManyWithoutUserInput = {
@@ -23811,6 +23960,16 @@ export namespace Prisma {
     update?: BudgetUpdateWithWhereUniqueWithoutUserInput | BudgetUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: BudgetUpdateManyWithWhereWithoutUserInput | BudgetUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: BudgetScalarWhereInput | BudgetScalarWhereInput[]
+  }
+
+  export type CompanyUpdateOneWithoutUserNestedInput = {
+    create?: XOR<CompanyCreateWithoutUserInput, CompanyUncheckedCreateWithoutUserInput>
+    connectOrCreate?: CompanyCreateOrConnectWithoutUserInput
+    upsert?: CompanyUpsertWithoutUserInput
+    disconnect?: CompanyWhereInput | boolean
+    delete?: CompanyWhereInput | boolean
+    connect?: CompanyWhereUniqueInput
+    update?: XOR<XOR<CompanyUpdateToOneWithWhereWithoutUserInput, CompanyUpdateWithoutUserInput>, CompanyUncheckedUpdateWithoutUserInput>
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -23970,6 +24129,13 @@ export namespace Prisma {
     connect?: BudgetWhereUniqueInput | BudgetWhereUniqueInput[]
   }
 
+  export type UserCreateNestedManyWithoutCompanyInput = {
+    create?: XOR<UserCreateWithoutCompanyInput, UserUncheckedCreateWithoutCompanyInput> | UserCreateWithoutCompanyInput[] | UserUncheckedCreateWithoutCompanyInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutCompanyInput | UserCreateOrConnectWithoutCompanyInput[]
+    createMany?: UserCreateManyCompanyInputEnvelope
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
   export type WorkerUncheckedCreateNestedManyWithoutCompanyInput = {
     create?: XOR<WorkerCreateWithoutCompanyInput, WorkerUncheckedCreateWithoutCompanyInput> | WorkerCreateWithoutCompanyInput[] | WorkerUncheckedCreateWithoutCompanyInput[]
     connectOrCreate?: WorkerCreateOrConnectWithoutCompanyInput | WorkerCreateOrConnectWithoutCompanyInput[]
@@ -24031,6 +24197,13 @@ export namespace Prisma {
     connectOrCreate?: BudgetCreateOrConnectWithoutCompanyInput | BudgetCreateOrConnectWithoutCompanyInput[]
     createMany?: BudgetCreateManyCompanyInputEnvelope
     connect?: BudgetWhereUniqueInput | BudgetWhereUniqueInput[]
+  }
+
+  export type UserUncheckedCreateNestedManyWithoutCompanyInput = {
+    create?: XOR<UserCreateWithoutCompanyInput, UserUncheckedCreateWithoutCompanyInput> | UserCreateWithoutCompanyInput[] | UserUncheckedCreateWithoutCompanyInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutCompanyInput | UserCreateOrConnectWithoutCompanyInput[]
+    createMany?: UserCreateManyCompanyInputEnvelope
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
   }
 
   export type BoolFieldUpdateOperationsInput = {
@@ -24177,6 +24350,20 @@ export namespace Prisma {
     deleteMany?: BudgetScalarWhereInput | BudgetScalarWhereInput[]
   }
 
+  export type UserUpdateManyWithoutCompanyNestedInput = {
+    create?: XOR<UserCreateWithoutCompanyInput, UserUncheckedCreateWithoutCompanyInput> | UserCreateWithoutCompanyInput[] | UserUncheckedCreateWithoutCompanyInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutCompanyInput | UserCreateOrConnectWithoutCompanyInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutCompanyInput | UserUpsertWithWhereUniqueWithoutCompanyInput[]
+    createMany?: UserCreateManyCompanyInputEnvelope
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutCompanyInput | UserUpdateWithWhereUniqueWithoutCompanyInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutCompanyInput | UserUpdateManyWithWhereWithoutCompanyInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
   export type WorkerUncheckedUpdateManyWithoutCompanyNestedInput = {
     create?: XOR<WorkerCreateWithoutCompanyInput, WorkerUncheckedCreateWithoutCompanyInput> | WorkerCreateWithoutCompanyInput[] | WorkerUncheckedCreateWithoutCompanyInput[]
     connectOrCreate?: WorkerCreateOrConnectWithoutCompanyInput | WorkerCreateOrConnectWithoutCompanyInput[]
@@ -24301,6 +24488,20 @@ export namespace Prisma {
     update?: BudgetUpdateWithWhereUniqueWithoutCompanyInput | BudgetUpdateWithWhereUniqueWithoutCompanyInput[]
     updateMany?: BudgetUpdateManyWithWhereWithoutCompanyInput | BudgetUpdateManyWithWhereWithoutCompanyInput[]
     deleteMany?: BudgetScalarWhereInput | BudgetScalarWhereInput[]
+  }
+
+  export type UserUncheckedUpdateManyWithoutCompanyNestedInput = {
+    create?: XOR<UserCreateWithoutCompanyInput, UserUncheckedCreateWithoutCompanyInput> | UserCreateWithoutCompanyInput[] | UserUncheckedCreateWithoutCompanyInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutCompanyInput | UserCreateOrConnectWithoutCompanyInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutCompanyInput | UserUpsertWithWhereUniqueWithoutCompanyInput[]
+    createMany?: UserCreateManyCompanyInputEnvelope
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutCompanyInput | UserUpdateWithWhereUniqueWithoutCompanyInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutCompanyInput | UserUpdateManyWithWhereWithoutCompanyInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
   }
 
   export type CompanyCreateNestedOneWithoutWorkersInput = {
@@ -25546,6 +25747,56 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type CompanyCreateWithoutUserInput = {
+    name: string
+    phone: string
+    password: string
+    suspended?: boolean
+    suspendedUntil?: Date | string | null
+    role?: $Enums.Role
+    userID?: number | null
+    companyCode?: string | null
+    email: string
+    workers?: WorkerCreateNestedManyWithoutCompanyInput
+    receivedPayments?: PaymentsCreateNestedManyWithoutReceivedByInput
+    incidents?: IncidentsCreateNestedManyWithoutCompanyInput
+    incidentHistory?: IncidentHistoryCreateNestedManyWithoutCompanyInput
+    budget?: BudgetCreateNestedOneWithoutCompanyInput
+    directions?: DirectionsCreateNestedManyWithoutCompanyInput
+    shiftWorkers?: ShiftWorkerCreateNestedManyWithoutCompanyInput
+    payments?: PaymentsCreateNestedManyWithoutCompanyInput
+    machinery?: machineryCreateNestedManyWithoutCompanyInput
+    Budget?: BudgetCreateNestedManyWithoutCompanyInput
+  }
+
+  export type CompanyUncheckedCreateWithoutUserInput = {
+    companyID?: number
+    name: string
+    phone: string
+    password: string
+    budgetID?: number | null
+    suspended?: boolean
+    suspendedUntil?: Date | string | null
+    role?: $Enums.Role
+    userID?: number | null
+    companyCode?: string | null
+    email: string
+    workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
+    receivedPayments?: PaymentsUncheckedCreateNestedManyWithoutReceivedByInput
+    incidents?: IncidentsUncheckedCreateNestedManyWithoutCompanyInput
+    incidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutCompanyInput
+    directions?: DirectionsUncheckedCreateNestedManyWithoutCompanyInput
+    shiftWorkers?: ShiftWorkerUncheckedCreateNestedManyWithoutCompanyInput
+    payments?: PaymentsUncheckedCreateNestedManyWithoutCompanyInput
+    machinery?: machineryUncheckedCreateNestedManyWithoutCompanyInput
+    Budget?: BudgetUncheckedCreateNestedManyWithoutCompanyInput
+  }
+
+  export type CompanyCreateOrConnectWithoutUserInput = {
+    where: CompanyWhereUniqueInput
+    create: XOR<CompanyCreateWithoutUserInput, CompanyUncheckedCreateWithoutUserInput>
+  }
+
   export type IncidentsUpsertWithoutUsersInput = {
     update: XOR<IncidentsUpdateWithoutUsersInput, IncidentsUncheckedUpdateWithoutUsersInput>
     create: XOR<IncidentsCreateWithoutUsersInput, IncidentsUncheckedCreateWithoutUsersInput>
@@ -25773,6 +26024,62 @@ export namespace Prisma {
     incidentID?: IntNullableFilter<"Budget"> | number | null
     workerID?: IntFilter<"Budget"> | number
     userID?: IntFilter<"Budget"> | number
+  }
+
+  export type CompanyUpsertWithoutUserInput = {
+    update: XOR<CompanyUpdateWithoutUserInput, CompanyUncheckedUpdateWithoutUserInput>
+    create: XOR<CompanyCreateWithoutUserInput, CompanyUncheckedCreateWithoutUserInput>
+    where?: CompanyWhereInput
+  }
+
+  export type CompanyUpdateToOneWithWhereWithoutUserInput = {
+    where?: CompanyWhereInput
+    data: XOR<CompanyUpdateWithoutUserInput, CompanyUncheckedUpdateWithoutUserInput>
+  }
+
+  export type CompanyUpdateWithoutUserInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    suspended?: BoolFieldUpdateOperationsInput | boolean
+    suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userID?: NullableIntFieldUpdateOperationsInput | number | null
+    companyCode?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    workers?: WorkerUpdateManyWithoutCompanyNestedInput
+    receivedPayments?: PaymentsUpdateManyWithoutReceivedByNestedInput
+    incidents?: IncidentsUpdateManyWithoutCompanyNestedInput
+    incidentHistory?: IncidentHistoryUpdateManyWithoutCompanyNestedInput
+    budget?: BudgetUpdateOneWithoutCompanyNestedInput
+    directions?: DirectionsUpdateManyWithoutCompanyNestedInput
+    shiftWorkers?: ShiftWorkerUpdateManyWithoutCompanyNestedInput
+    payments?: PaymentsUpdateManyWithoutCompanyNestedInput
+    machinery?: machineryUpdateManyWithoutCompanyNestedInput
+    Budget?: BudgetUpdateManyWithoutCompanyNestedInput
+  }
+
+  export type CompanyUncheckedUpdateWithoutUserInput = {
+    companyID?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    budgetID?: NullableIntFieldUpdateOperationsInput | number | null
+    suspended?: BoolFieldUpdateOperationsInput | boolean
+    suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userID?: NullableIntFieldUpdateOperationsInput | number | null
+    companyCode?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
+    receivedPayments?: PaymentsUncheckedUpdateManyWithoutReceivedByNestedInput
+    incidents?: IncidentsUncheckedUpdateManyWithoutCompanyNestedInput
+    incidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutCompanyNestedInput
+    directions?: DirectionsUncheckedUpdateManyWithoutCompanyNestedInput
+    shiftWorkers?: ShiftWorkerUncheckedUpdateManyWithoutCompanyNestedInput
+    payments?: PaymentsUncheckedUpdateManyWithoutCompanyNestedInput
+    machinery?: machineryUncheckedUpdateManyWithoutCompanyNestedInput
+    Budget?: BudgetUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type WorkerCreateWithoutCompanyInput = {
@@ -26075,6 +26382,49 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type UserCreateWithoutCompanyInput = {
+    name?: string | null
+    email: string
+    password: string
+    paymentsID?: number | null
+    role?: $Enums.Role
+    userCode?: string | null
+    incidents?: IncidentsCreateNestedOneWithoutUsersInput
+    directions?: DirectionsCreateNestedManyWithoutUserInput
+    payments?: PaymentsCreateNestedOneWithoutUserInput
+    IncidentHistory?: IncidentHistoryCreateNestedManyWithoutUserInput
+    machinery?: machineryCreateNestedManyWithoutClientInput
+    Incidents?: IncidentsCreateNestedManyWithoutUserInput
+    Budget?: BudgetCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutCompanyInput = {
+    userID?: number
+    name?: string | null
+    email: string
+    password: string
+    incidentsID?: number | null
+    paymentsID?: number | null
+    role?: $Enums.Role
+    userCode?: string | null
+    directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
+    payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
+    IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
+    machinery?: machineryUncheckedCreateNestedManyWithoutClientInput
+    Incidents?: IncidentsUncheckedCreateNestedManyWithoutUserInput
+    Budget?: BudgetUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutCompanyInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCompanyInput, UserUncheckedCreateWithoutCompanyInput>
+  }
+
+  export type UserCreateManyCompanyInputEnvelope = {
+    data: UserCreateManyCompanyInput | UserCreateManyCompanyInput[]
+    skipDuplicates?: boolean
+  }
+
   export type WorkerUpsertWithWhereUniqueWithoutCompanyInput = {
     where: WorkerWhereUniqueInput
     update: XOR<WorkerUpdateWithoutCompanyInput, WorkerUncheckedUpdateWithoutCompanyInput>
@@ -26289,6 +26639,37 @@ export namespace Prisma {
     data: XOR<BudgetUpdateManyMutationInput, BudgetUncheckedUpdateManyWithoutCompanyInput>
   }
 
+  export type UserUpsertWithWhereUniqueWithoutCompanyInput = {
+    where: UserWhereUniqueInput
+    update: XOR<UserUpdateWithoutCompanyInput, UserUncheckedUpdateWithoutCompanyInput>
+    create: XOR<UserCreateWithoutCompanyInput, UserUncheckedCreateWithoutCompanyInput>
+  }
+
+  export type UserUpdateWithWhereUniqueWithoutCompanyInput = {
+    where: UserWhereUniqueInput
+    data: XOR<UserUpdateWithoutCompanyInput, UserUncheckedUpdateWithoutCompanyInput>
+  }
+
+  export type UserUpdateManyWithWhereWithoutCompanyInput = {
+    where: UserScalarWhereInput
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutCompanyInput>
+  }
+
+  export type UserScalarWhereInput = {
+    AND?: UserScalarWhereInput | UserScalarWhereInput[]
+    OR?: UserScalarWhereInput[]
+    NOT?: UserScalarWhereInput | UserScalarWhereInput[]
+    userID?: IntFilter<"User"> | number
+    name?: StringNullableFilter<"User"> | string | null
+    email?: StringFilter<"User"> | string
+    password?: StringFilter<"User"> | string
+    incidentsID?: IntNullableFilter<"User"> | number | null
+    paymentsID?: IntNullableFilter<"User"> | number | null
+    role?: EnumRoleFilter<"User"> | $Enums.Role
+    userCode?: StringNullableFilter<"User"> | string | null
+    companyID?: IntNullableFilter<"User"> | number | null
+  }
+
   export type CompanyCreateWithoutWorkersInput = {
     name: string
     phone: string
@@ -26296,6 +26677,7 @@ export namespace Prisma {
     suspended?: boolean
     suspendedUntil?: Date | string | null
     role?: $Enums.Role
+    userID?: number | null
     companyCode?: string | null
     email: string
     receivedPayments?: PaymentsCreateNestedManyWithoutReceivedByInput
@@ -26307,6 +26689,7 @@ export namespace Prisma {
     payments?: PaymentsCreateNestedManyWithoutCompanyInput
     machinery?: machineryCreateNestedManyWithoutCompanyInput
     Budget?: BudgetCreateNestedManyWithoutCompanyInput
+    User?: UserCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutWorkersInput = {
@@ -26318,6 +26701,7 @@ export namespace Prisma {
     suspended?: boolean
     suspendedUntil?: Date | string | null
     role?: $Enums.Role
+    userID?: number | null
     companyCode?: string | null
     email: string
     receivedPayments?: PaymentsUncheckedCreateNestedManyWithoutReceivedByInput
@@ -26328,6 +26712,7 @@ export namespace Prisma {
     payments?: PaymentsUncheckedCreateNestedManyWithoutCompanyInput
     machinery?: machineryUncheckedCreateNestedManyWithoutCompanyInput
     Budget?: BudgetUncheckedCreateNestedManyWithoutCompanyInput
+    User?: UserUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutWorkersInput = {
@@ -26459,6 +26844,7 @@ export namespace Prisma {
     suspended?: BoolFieldUpdateOperationsInput | boolean
     suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     receivedPayments?: PaymentsUpdateManyWithoutReceivedByNestedInput
@@ -26470,6 +26856,7 @@ export namespace Prisma {
     payments?: PaymentsUpdateManyWithoutCompanyNestedInput
     machinery?: machineryUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUpdateManyWithoutCompanyNestedInput
+    User?: UserUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutWorkersInput = {
@@ -26481,6 +26868,7 @@ export namespace Prisma {
     suspended?: BoolFieldUpdateOperationsInput | boolean
     suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     receivedPayments?: PaymentsUncheckedUpdateManyWithoutReceivedByNestedInput
@@ -26491,6 +26879,7 @@ export namespace Prisma {
     payments?: PaymentsUncheckedUpdateManyWithoutCompanyNestedInput
     machinery?: machineryUncheckedUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUncheckedUpdateManyWithoutCompanyNestedInput
+    User?: UserUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type ShiftWorkerUpsertWithWhereUniqueWithoutWorkerInput = {
@@ -26585,6 +26974,7 @@ export namespace Prisma {
     suspended?: boolean
     suspendedUntil?: Date | string | null
     role?: $Enums.Role
+    userID?: number | null
     companyCode?: string | null
     email: string
     workers?: WorkerCreateNestedManyWithoutCompanyInput
@@ -26596,6 +26986,7 @@ export namespace Prisma {
     payments?: PaymentsCreateNestedManyWithoutCompanyInput
     machinery?: machineryCreateNestedManyWithoutCompanyInput
     Budget?: BudgetCreateNestedManyWithoutCompanyInput
+    User?: UserCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutIncidentsInput = {
@@ -26607,6 +26998,7 @@ export namespace Prisma {
     suspended?: boolean
     suspendedUntil?: Date | string | null
     role?: $Enums.Role
+    userID?: number | null
     companyCode?: string | null
     email: string
     workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
@@ -26617,6 +27009,7 @@ export namespace Prisma {
     payments?: PaymentsUncheckedCreateNestedManyWithoutCompanyInput
     machinery?: machineryUncheckedCreateNestedManyWithoutCompanyInput
     Budget?: BudgetUncheckedCreateNestedManyWithoutCompanyInput
+    User?: UserUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutIncidentsInput = {
@@ -26695,6 +27088,7 @@ export namespace Prisma {
     IncidentHistory?: IncidentHistoryCreateNestedManyWithoutUserInput
     machinery?: machineryCreateNestedManyWithoutClientInput
     Budget?: BudgetCreateNestedManyWithoutUserInput
+    Company?: CompanyCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutIncidentsInput = {
@@ -26706,6 +27100,7 @@ export namespace Prisma {
     paymentsID?: number | null
     role?: $Enums.Role
     userCode?: string | null
+    companyID?: number | null
     directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
@@ -26731,6 +27126,7 @@ export namespace Prisma {
     machinery?: machineryCreateNestedManyWithoutClientInput
     Incidents?: IncidentsCreateNestedManyWithoutUserInput
     Budget?: BudgetCreateNestedManyWithoutUserInput
+    Company?: CompanyCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutIncidentsInput = {
@@ -26741,6 +27137,7 @@ export namespace Prisma {
     paymentsID?: number | null
     role?: $Enums.Role
     userCode?: string | null
+    companyID?: number | null
     directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
@@ -26828,6 +27225,7 @@ export namespace Prisma {
     suspended?: BoolFieldUpdateOperationsInput | boolean
     suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     workers?: WorkerUpdateManyWithoutCompanyNestedInput
@@ -26839,6 +27237,7 @@ export namespace Prisma {
     payments?: PaymentsUpdateManyWithoutCompanyNestedInput
     machinery?: machineryUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUpdateManyWithoutCompanyNestedInput
+    User?: UserUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutIncidentsInput = {
@@ -26850,6 +27249,7 @@ export namespace Prisma {
     suspended?: BoolFieldUpdateOperationsInput | boolean
     suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
@@ -26860,6 +27260,7 @@ export namespace Prisma {
     payments?: PaymentsUncheckedUpdateManyWithoutCompanyNestedInput
     machinery?: machineryUncheckedUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUncheckedUpdateManyWithoutCompanyNestedInput
+    User?: UserUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type WorkerUpsertWithoutAssignedIncidentsInput = {
@@ -26956,6 +27357,7 @@ export namespace Prisma {
     IncidentHistory?: IncidentHistoryUpdateManyWithoutUserNestedInput
     machinery?: machineryUpdateManyWithoutClientNestedInput
     Budget?: BudgetUpdateManyWithoutUserNestedInput
+    Company?: CompanyUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutIncidentsInput = {
@@ -26967,6 +27369,7 @@ export namespace Prisma {
     paymentsID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
+    companyID?: NullableIntFieldUpdateOperationsInput | number | null
     directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
@@ -26988,20 +27391,6 @@ export namespace Prisma {
   export type UserUpdateManyWithWhereWithoutIncidentsInput = {
     where: UserScalarWhereInput
     data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutIncidentsInput>
-  }
-
-  export type UserScalarWhereInput = {
-    AND?: UserScalarWhereInput | UserScalarWhereInput[]
-    OR?: UserScalarWhereInput[]
-    NOT?: UserScalarWhereInput | UserScalarWhereInput[]
-    userID?: IntFilter<"User"> | number
-    name?: StringNullableFilter<"User"> | string | null
-    email?: StringFilter<"User"> | string
-    password?: StringFilter<"User"> | string
-    incidentsID?: IntNullableFilter<"User"> | number | null
-    paymentsID?: IntNullableFilter<"User"> | number | null
-    role?: EnumRoleFilter<"User"> | $Enums.Role
-    userCode?: StringNullableFilter<"User"> | string | null
   }
 
   export type IncidentHistoryUpsertWithWhereUniqueWithoutIncidentInput = {
@@ -27049,6 +27438,7 @@ export namespace Prisma {
     machinery?: machineryCreateNestedManyWithoutClientInput
     Incidents?: IncidentsCreateNestedManyWithoutUserInput
     Budget?: BudgetCreateNestedManyWithoutUserInput
+    Company?: CompanyCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPaymentsInput = {
@@ -27060,6 +27450,7 @@ export namespace Prisma {
     paymentsID?: number | null
     role?: $Enums.Role
     userCode?: string | null
+    companyID?: number | null
     directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
     machinery?: machineryUncheckedCreateNestedManyWithoutClientInput
@@ -27079,6 +27470,7 @@ export namespace Prisma {
     suspended?: boolean
     suspendedUntil?: Date | string | null
     role?: $Enums.Role
+    userID?: number | null
     companyCode?: string | null
     email: string
     workers?: WorkerCreateNestedManyWithoutCompanyInput
@@ -27090,6 +27482,7 @@ export namespace Prisma {
     shiftWorkers?: ShiftWorkerCreateNestedManyWithoutCompanyInput
     machinery?: machineryCreateNestedManyWithoutCompanyInput
     Budget?: BudgetCreateNestedManyWithoutCompanyInput
+    User?: UserCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutPaymentsInput = {
@@ -27101,6 +27494,7 @@ export namespace Prisma {
     suspended?: boolean
     suspendedUntil?: Date | string | null
     role?: $Enums.Role
+    userID?: number | null
     companyCode?: string | null
     email: string
     workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
@@ -27111,6 +27505,7 @@ export namespace Prisma {
     shiftWorkers?: ShiftWorkerUncheckedCreateNestedManyWithoutCompanyInput
     machinery?: machineryUncheckedCreateNestedManyWithoutCompanyInput
     Budget?: BudgetUncheckedCreateNestedManyWithoutCompanyInput
+    User?: UserUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutPaymentsInput = {
@@ -27125,6 +27520,7 @@ export namespace Prisma {
     suspended?: boolean
     suspendedUntil?: Date | string | null
     role?: $Enums.Role
+    userID?: number | null
     companyCode?: string | null
     email: string
     workers?: WorkerCreateNestedManyWithoutCompanyInput
@@ -27136,6 +27532,7 @@ export namespace Prisma {
     payments?: PaymentsCreateNestedManyWithoutCompanyInput
     machinery?: machineryCreateNestedManyWithoutCompanyInput
     Budget?: BudgetCreateNestedManyWithoutCompanyInput
+    User?: UserCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutReceivedPaymentsInput = {
@@ -27147,6 +27544,7 @@ export namespace Prisma {
     suspended?: boolean
     suspendedUntil?: Date | string | null
     role?: $Enums.Role
+    userID?: number | null
     companyCode?: string | null
     email: string
     workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
@@ -27157,6 +27555,7 @@ export namespace Prisma {
     payments?: PaymentsUncheckedCreateNestedManyWithoutCompanyInput
     machinery?: machineryUncheckedCreateNestedManyWithoutCompanyInput
     Budget?: BudgetUncheckedCreateNestedManyWithoutCompanyInput
+    User?: UserUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutReceivedPaymentsInput = {
@@ -27245,6 +27644,7 @@ export namespace Prisma {
     machinery?: machineryUpdateManyWithoutClientNestedInput
     Incidents?: IncidentsUpdateManyWithoutUserNestedInput
     Budget?: BudgetUpdateManyWithoutUserNestedInput
+    Company?: CompanyUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPaymentsInput = {
@@ -27256,6 +27656,7 @@ export namespace Prisma {
     paymentsID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
+    companyID?: NullableIntFieldUpdateOperationsInput | number | null
     directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
     machinery?: machineryUncheckedUpdateManyWithoutClientNestedInput
@@ -27281,6 +27682,7 @@ export namespace Prisma {
     suspended?: BoolFieldUpdateOperationsInput | boolean
     suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     workers?: WorkerUpdateManyWithoutCompanyNestedInput
@@ -27292,6 +27694,7 @@ export namespace Prisma {
     shiftWorkers?: ShiftWorkerUpdateManyWithoutCompanyNestedInput
     machinery?: machineryUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUpdateManyWithoutCompanyNestedInput
+    User?: UserUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutPaymentsInput = {
@@ -27303,6 +27706,7 @@ export namespace Prisma {
     suspended?: BoolFieldUpdateOperationsInput | boolean
     suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
@@ -27313,6 +27717,7 @@ export namespace Prisma {
     shiftWorkers?: ShiftWorkerUncheckedUpdateManyWithoutCompanyNestedInput
     machinery?: machineryUncheckedUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUncheckedUpdateManyWithoutCompanyNestedInput
+    User?: UserUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUpsertWithoutReceivedPaymentsInput = {
@@ -27333,6 +27738,7 @@ export namespace Prisma {
     suspended?: BoolFieldUpdateOperationsInput | boolean
     suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     workers?: WorkerUpdateManyWithoutCompanyNestedInput
@@ -27344,6 +27750,7 @@ export namespace Prisma {
     payments?: PaymentsUpdateManyWithoutCompanyNestedInput
     machinery?: machineryUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUpdateManyWithoutCompanyNestedInput
+    User?: UserUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutReceivedPaymentsInput = {
@@ -27355,6 +27762,7 @@ export namespace Prisma {
     suspended?: BoolFieldUpdateOperationsInput | boolean
     suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
@@ -27365,6 +27773,7 @@ export namespace Prisma {
     payments?: PaymentsUncheckedUpdateManyWithoutCompanyNestedInput
     machinery?: machineryUncheckedUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUncheckedUpdateManyWithoutCompanyNestedInput
+    User?: UserUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type IncidentsUpsertWithoutPaymentsInput = {
@@ -27501,6 +27910,7 @@ export namespace Prisma {
     suspended?: boolean
     suspendedUntil?: Date | string | null
     role?: $Enums.Role
+    userID?: number | null
     companyCode?: string | null
     email: string
     workers?: WorkerCreateNestedManyWithoutCompanyInput
@@ -27512,6 +27922,7 @@ export namespace Prisma {
     shiftWorkers?: ShiftWorkerCreateNestedManyWithoutCompanyInput
     payments?: PaymentsCreateNestedManyWithoutCompanyInput
     machinery?: machineryCreateNestedManyWithoutCompanyInput
+    User?: UserCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutBudgetInput = {
@@ -27523,6 +27934,7 @@ export namespace Prisma {
     suspended?: boolean
     suspendedUntil?: Date | string | null
     role?: $Enums.Role
+    userID?: number | null
     companyCode?: string | null
     email: string
     workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
@@ -27533,6 +27945,7 @@ export namespace Prisma {
     shiftWorkers?: ShiftWorkerUncheckedCreateNestedManyWithoutCompanyInput
     payments?: PaymentsUncheckedCreateNestedManyWithoutCompanyInput
     machinery?: machineryUncheckedCreateNestedManyWithoutCompanyInput
+    User?: UserUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutBudgetInput = {
@@ -27591,6 +28004,7 @@ export namespace Prisma {
     IncidentHistory?: IncidentHistoryCreateNestedManyWithoutUserInput
     machinery?: machineryCreateNestedManyWithoutClientInput
     Incidents?: IncidentsCreateNestedManyWithoutUserInput
+    Company?: CompanyCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutBudgetInput = {
@@ -27602,6 +28016,7 @@ export namespace Prisma {
     paymentsID?: number | null
     role?: $Enums.Role
     userCode?: string | null
+    companyID?: number | null
     directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
@@ -27621,6 +28036,7 @@ export namespace Prisma {
     suspended?: boolean
     suspendedUntil?: Date | string | null
     role?: $Enums.Role
+    userID?: number | null
     companyCode?: string | null
     email: string
     workers?: WorkerCreateNestedManyWithoutCompanyInput
@@ -27632,6 +28048,7 @@ export namespace Prisma {
     payments?: PaymentsCreateNestedManyWithoutCompanyInput
     machinery?: machineryCreateNestedManyWithoutCompanyInput
     Budget?: BudgetCreateNestedManyWithoutCompanyInput
+    User?: UserCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutBudgetInput = {
@@ -27642,6 +28059,7 @@ export namespace Prisma {
     suspended?: boolean
     suspendedUntil?: Date | string | null
     role?: $Enums.Role
+    userID?: number | null
     companyCode?: string | null
     email: string
     workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
@@ -27653,6 +28071,7 @@ export namespace Prisma {
     payments?: PaymentsUncheckedCreateNestedManyWithoutCompanyInput
     machinery?: machineryUncheckedCreateNestedManyWithoutCompanyInput
     Budget?: BudgetUncheckedCreateNestedManyWithoutCompanyInput
+    User?: UserUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateManyBudgetInputEnvelope = {
@@ -27678,6 +28097,7 @@ export namespace Prisma {
     suspended?: BoolFieldUpdateOperationsInput | boolean
     suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     workers?: WorkerUpdateManyWithoutCompanyNestedInput
@@ -27689,6 +28109,7 @@ export namespace Prisma {
     shiftWorkers?: ShiftWorkerUpdateManyWithoutCompanyNestedInput
     payments?: PaymentsUpdateManyWithoutCompanyNestedInput
     machinery?: machineryUpdateManyWithoutCompanyNestedInput
+    User?: UserUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutBudgetInput = {
@@ -27700,6 +28121,7 @@ export namespace Prisma {
     suspended?: BoolFieldUpdateOperationsInput | boolean
     suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
@@ -27710,6 +28132,7 @@ export namespace Prisma {
     shiftWorkers?: ShiftWorkerUncheckedUpdateManyWithoutCompanyNestedInput
     payments?: PaymentsUncheckedUpdateManyWithoutCompanyNestedInput
     machinery?: machineryUncheckedUpdateManyWithoutCompanyNestedInput
+    User?: UserUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type IncidentsUpsertWithoutBudgetInput = {
@@ -27780,6 +28203,7 @@ export namespace Prisma {
     IncidentHistory?: IncidentHistoryUpdateManyWithoutUserNestedInput
     machinery?: machineryUpdateManyWithoutClientNestedInput
     Incidents?: IncidentsUpdateManyWithoutUserNestedInput
+    Company?: CompanyUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBudgetInput = {
@@ -27791,6 +28215,7 @@ export namespace Prisma {
     paymentsID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
+    companyID?: NullableIntFieldUpdateOperationsInput | number | null
     directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
@@ -27826,6 +28251,7 @@ export namespace Prisma {
     suspended?: BoolFilter<"Company"> | boolean
     suspendedUntil?: DateTimeNullableFilter<"Company"> | Date | string | null
     role?: EnumRoleFilter<"Company"> | $Enums.Role
+    userID?: IntNullableFilter<"Company"> | number | null
     companyCode?: StringNullableFilter<"Company"> | string | null
     email?: StringFilter<"Company"> | string
   }
@@ -27875,6 +28301,7 @@ export namespace Prisma {
     suspended?: boolean
     suspendedUntil?: Date | string | null
     role?: $Enums.Role
+    userID?: number | null
     companyCode?: string | null
     email: string
     workers?: WorkerCreateNestedManyWithoutCompanyInput
@@ -27886,6 +28313,7 @@ export namespace Prisma {
     payments?: PaymentsCreateNestedManyWithoutCompanyInput
     machinery?: machineryCreateNestedManyWithoutCompanyInput
     Budget?: BudgetCreateNestedManyWithoutCompanyInput
+    User?: UserCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutIncidentHistoryInput = {
@@ -27897,6 +28325,7 @@ export namespace Prisma {
     suspended?: boolean
     suspendedUntil?: Date | string | null
     role?: $Enums.Role
+    userID?: number | null
     companyCode?: string | null
     email: string
     workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
@@ -27907,6 +28336,7 @@ export namespace Prisma {
     payments?: PaymentsUncheckedCreateNestedManyWithoutCompanyInput
     machinery?: machineryUncheckedCreateNestedManyWithoutCompanyInput
     Budget?: BudgetUncheckedCreateNestedManyWithoutCompanyInput
+    User?: UserUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutIncidentHistoryInput = {
@@ -27927,6 +28357,7 @@ export namespace Prisma {
     machinery?: machineryCreateNestedManyWithoutClientInput
     Incidents?: IncidentsCreateNestedManyWithoutUserInput
     Budget?: BudgetCreateNestedManyWithoutUserInput
+    Company?: CompanyCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutIncidentHistoryInput = {
@@ -27938,6 +28369,7 @@ export namespace Prisma {
     paymentsID?: number | null
     role?: $Enums.Role
     userCode?: string | null
+    companyID?: number | null
     directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
     machinery?: machineryUncheckedCreateNestedManyWithoutClientInput
@@ -28012,6 +28444,7 @@ export namespace Prisma {
     suspended?: BoolFieldUpdateOperationsInput | boolean
     suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     workers?: WorkerUpdateManyWithoutCompanyNestedInput
@@ -28023,6 +28456,7 @@ export namespace Prisma {
     payments?: PaymentsUpdateManyWithoutCompanyNestedInput
     machinery?: machineryUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUpdateManyWithoutCompanyNestedInput
+    User?: UserUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutIncidentHistoryInput = {
@@ -28034,6 +28468,7 @@ export namespace Prisma {
     suspended?: BoolFieldUpdateOperationsInput | boolean
     suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
@@ -28044,6 +28479,7 @@ export namespace Prisma {
     payments?: PaymentsUncheckedUpdateManyWithoutCompanyNestedInput
     machinery?: machineryUncheckedUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUncheckedUpdateManyWithoutCompanyNestedInput
+    User?: UserUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type UserUpsertWithoutIncidentHistoryInput = {
@@ -28070,6 +28506,7 @@ export namespace Prisma {
     machinery?: machineryUpdateManyWithoutClientNestedInput
     Incidents?: IncidentsUpdateManyWithoutUserNestedInput
     Budget?: BudgetUpdateManyWithoutUserNestedInput
+    Company?: CompanyUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutIncidentHistoryInput = {
@@ -28081,6 +28518,7 @@ export namespace Prisma {
     paymentsID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
+    companyID?: NullableIntFieldUpdateOperationsInput | number | null
     directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
     machinery?: machineryUncheckedUpdateManyWithoutClientNestedInput
@@ -28095,6 +28533,7 @@ export namespace Prisma {
     suspended?: boolean
     suspendedUntil?: Date | string | null
     role?: $Enums.Role
+    userID?: number | null
     companyCode?: string | null
     email: string
     workers?: WorkerCreateNestedManyWithoutCompanyInput
@@ -28106,6 +28545,7 @@ export namespace Prisma {
     payments?: PaymentsCreateNestedManyWithoutCompanyInput
     machinery?: machineryCreateNestedManyWithoutCompanyInput
     Budget?: BudgetCreateNestedManyWithoutCompanyInput
+    User?: UserCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutShiftWorkersInput = {
@@ -28117,6 +28557,7 @@ export namespace Prisma {
     suspended?: boolean
     suspendedUntil?: Date | string | null
     role?: $Enums.Role
+    userID?: number | null
     companyCode?: string | null
     email: string
     workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
@@ -28127,6 +28568,7 @@ export namespace Prisma {
     payments?: PaymentsUncheckedCreateNestedManyWithoutCompanyInput
     machinery?: machineryUncheckedCreateNestedManyWithoutCompanyInput
     Budget?: BudgetUncheckedCreateNestedManyWithoutCompanyInput
+    User?: UserUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutShiftWorkersInput = {
@@ -28182,6 +28624,7 @@ export namespace Prisma {
     suspended?: BoolFieldUpdateOperationsInput | boolean
     suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     workers?: WorkerUpdateManyWithoutCompanyNestedInput
@@ -28193,6 +28636,7 @@ export namespace Prisma {
     payments?: PaymentsUpdateManyWithoutCompanyNestedInput
     machinery?: machineryUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUpdateManyWithoutCompanyNestedInput
+    User?: UserUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutShiftWorkersInput = {
@@ -28204,6 +28648,7 @@ export namespace Prisma {
     suspended?: BoolFieldUpdateOperationsInput | boolean
     suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
@@ -28214,6 +28659,7 @@ export namespace Prisma {
     payments?: PaymentsUncheckedUpdateManyWithoutCompanyNestedInput
     machinery?: machineryUncheckedUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUncheckedUpdateManyWithoutCompanyNestedInput
+    User?: UserUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type WorkerUpsertWithoutShiftWorkersInput = {
@@ -28397,6 +28843,7 @@ export namespace Prisma {
     machinery?: machineryCreateNestedManyWithoutClientInput
     Incidents?: IncidentsCreateNestedManyWithoutUserInput
     Budget?: BudgetCreateNestedManyWithoutUserInput
+    Company?: CompanyCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutDirectionsInput = {
@@ -28408,6 +28855,7 @@ export namespace Prisma {
     paymentsID?: number | null
     role?: $Enums.Role
     userCode?: string | null
+    companyID?: number | null
     payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
     machinery?: machineryUncheckedCreateNestedManyWithoutClientInput
@@ -28427,6 +28875,7 @@ export namespace Prisma {
     suspended?: boolean
     suspendedUntil?: Date | string | null
     role?: $Enums.Role
+    userID?: number | null
     companyCode?: string | null
     email: string
     workers?: WorkerCreateNestedManyWithoutCompanyInput
@@ -28438,6 +28887,7 @@ export namespace Prisma {
     payments?: PaymentsCreateNestedManyWithoutCompanyInput
     machinery?: machineryCreateNestedManyWithoutCompanyInput
     Budget?: BudgetCreateNestedManyWithoutCompanyInput
+    User?: UserCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutDirectionsInput = {
@@ -28449,6 +28899,7 @@ export namespace Prisma {
     suspended?: boolean
     suspendedUntil?: Date | string | null
     role?: $Enums.Role
+    userID?: number | null
     companyCode?: string | null
     email: string
     workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
@@ -28459,6 +28910,7 @@ export namespace Prisma {
     payments?: PaymentsUncheckedCreateNestedManyWithoutCompanyInput
     machinery?: machineryUncheckedCreateNestedManyWithoutCompanyInput
     Budget?: BudgetUncheckedCreateNestedManyWithoutCompanyInput
+    User?: UserUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutDirectionsInput = {
@@ -28490,6 +28942,7 @@ export namespace Prisma {
     machinery?: machineryUpdateManyWithoutClientNestedInput
     Incidents?: IncidentsUpdateManyWithoutUserNestedInput
     Budget?: BudgetUpdateManyWithoutUserNestedInput
+    Company?: CompanyUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDirectionsInput = {
@@ -28501,6 +28954,7 @@ export namespace Prisma {
     paymentsID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
+    companyID?: NullableIntFieldUpdateOperationsInput | number | null
     payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
     machinery?: machineryUncheckedUpdateManyWithoutClientNestedInput
@@ -28526,6 +28980,7 @@ export namespace Prisma {
     suspended?: BoolFieldUpdateOperationsInput | boolean
     suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     workers?: WorkerUpdateManyWithoutCompanyNestedInput
@@ -28537,6 +28992,7 @@ export namespace Prisma {
     payments?: PaymentsUpdateManyWithoutCompanyNestedInput
     machinery?: machineryUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUpdateManyWithoutCompanyNestedInput
+    User?: UserUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutDirectionsInput = {
@@ -28548,6 +29004,7 @@ export namespace Prisma {
     suspended?: BoolFieldUpdateOperationsInput | boolean
     suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
@@ -28558,6 +29015,7 @@ export namespace Prisma {
     payments?: PaymentsUncheckedUpdateManyWithoutCompanyNestedInput
     machinery?: machineryUncheckedUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUncheckedUpdateManyWithoutCompanyNestedInput
+    User?: UserUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type UserCreateWithoutMachineryInput = {
@@ -28573,6 +29031,7 @@ export namespace Prisma {
     IncidentHistory?: IncidentHistoryCreateNestedManyWithoutUserInput
     Incidents?: IncidentsCreateNestedManyWithoutUserInput
     Budget?: BudgetCreateNestedManyWithoutUserInput
+    Company?: CompanyCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutMachineryInput = {
@@ -28584,6 +29043,7 @@ export namespace Prisma {
     paymentsID?: number | null
     role?: $Enums.Role
     userCode?: string | null
+    companyID?: number | null
     directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
@@ -28603,6 +29063,7 @@ export namespace Prisma {
     suspended?: boolean
     suspendedUntil?: Date | string | null
     role?: $Enums.Role
+    userID?: number | null
     companyCode?: string | null
     email: string
     workers?: WorkerCreateNestedManyWithoutCompanyInput
@@ -28614,6 +29075,7 @@ export namespace Prisma {
     shiftWorkers?: ShiftWorkerCreateNestedManyWithoutCompanyInput
     payments?: PaymentsCreateNestedManyWithoutCompanyInput
     Budget?: BudgetCreateNestedManyWithoutCompanyInput
+    User?: UserCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutMachineryInput = {
@@ -28625,6 +29087,7 @@ export namespace Prisma {
     suspended?: boolean
     suspendedUntil?: Date | string | null
     role?: $Enums.Role
+    userID?: number | null
     companyCode?: string | null
     email: string
     workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
@@ -28635,6 +29098,7 @@ export namespace Prisma {
     shiftWorkers?: ShiftWorkerUncheckedCreateNestedManyWithoutCompanyInput
     payments?: PaymentsUncheckedCreateNestedManyWithoutCompanyInput
     Budget?: BudgetUncheckedCreateNestedManyWithoutCompanyInput
+    User?: UserUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutMachineryInput = {
@@ -28666,6 +29130,7 @@ export namespace Prisma {
     IncidentHistory?: IncidentHistoryUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUpdateManyWithoutUserNestedInput
     Budget?: BudgetUpdateManyWithoutUserNestedInput
+    Company?: CompanyUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMachineryInput = {
@@ -28677,6 +29142,7 @@ export namespace Prisma {
     paymentsID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
+    companyID?: NullableIntFieldUpdateOperationsInput | number | null
     directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
@@ -28702,6 +29168,7 @@ export namespace Prisma {
     suspended?: BoolFieldUpdateOperationsInput | boolean
     suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     workers?: WorkerUpdateManyWithoutCompanyNestedInput
@@ -28713,6 +29180,7 @@ export namespace Prisma {
     shiftWorkers?: ShiftWorkerUpdateManyWithoutCompanyNestedInput
     payments?: PaymentsUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUpdateManyWithoutCompanyNestedInput
+    User?: UserUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutMachineryInput = {
@@ -28724,6 +29192,7 @@ export namespace Prisma {
     suspended?: BoolFieldUpdateOperationsInput | boolean
     suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
@@ -28734,6 +29203,7 @@ export namespace Prisma {
     shiftWorkers?: ShiftWorkerUncheckedUpdateManyWithoutCompanyNestedInput
     payments?: PaymentsUncheckedUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUncheckedUpdateManyWithoutCompanyNestedInput
+    User?: UserUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type DirectionsCreateManyUserInput = {
@@ -29040,6 +29510,17 @@ export namespace Prisma {
     userID: number
   }
 
+  export type UserCreateManyCompanyInput = {
+    userID?: number
+    name?: string | null
+    email: string
+    password: string
+    incidentsID?: number | null
+    paymentsID?: number | null
+    role?: $Enums.Role
+    userCode?: string | null
+  }
+
   export type WorkerUpdateWithoutCompanyInput = {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -29314,6 +29795,50 @@ export namespace Prisma {
     userID?: IntFieldUpdateOperationsInput | number
   }
 
+  export type UserUpdateWithoutCompanyInput = {
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    paymentsID?: NullableIntFieldUpdateOperationsInput | number | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userCode?: NullableStringFieldUpdateOperationsInput | string | null
+    incidents?: IncidentsUpdateOneWithoutUsersNestedInput
+    directions?: DirectionsUpdateManyWithoutUserNestedInput
+    payments?: PaymentsUpdateOneWithoutUserNestedInput
+    IncidentHistory?: IncidentHistoryUpdateManyWithoutUserNestedInput
+    machinery?: machineryUpdateManyWithoutClientNestedInput
+    Incidents?: IncidentsUpdateManyWithoutUserNestedInput
+    Budget?: BudgetUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCompanyInput = {
+    userID?: IntFieldUpdateOperationsInput | number
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    incidentsID?: NullableIntFieldUpdateOperationsInput | number | null
+    paymentsID?: NullableIntFieldUpdateOperationsInput | number | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userCode?: NullableStringFieldUpdateOperationsInput | string | null
+    directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
+    payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
+    IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
+    machinery?: machineryUncheckedUpdateManyWithoutClientNestedInput
+    Incidents?: IncidentsUncheckedUpdateManyWithoutUserNestedInput
+    Budget?: BudgetUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateManyWithoutCompanyInput = {
+    userID?: IntFieldUpdateOperationsInput | number
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    incidentsID?: NullableIntFieldUpdateOperationsInput | number | null
+    paymentsID?: NullableIntFieldUpdateOperationsInput | number | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userCode?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type ShiftWorkerCreateManyWorkerInput = {
     id?: number
     companyID: number
@@ -29452,6 +29977,7 @@ export namespace Prisma {
     paymentsID?: number | null
     role?: $Enums.Role
     userCode?: string | null
+    companyID?: number | null
   }
 
   export type IncidentHistoryCreateManyIncidentInput = {
@@ -29485,6 +30011,7 @@ export namespace Prisma {
     machinery?: machineryUpdateManyWithoutClientNestedInput
     Incidents?: IncidentsUpdateManyWithoutUserNestedInput
     Budget?: BudgetUpdateManyWithoutUserNestedInput
+    Company?: CompanyUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutIncidentsInput = {
@@ -29495,6 +30022,7 @@ export namespace Prisma {
     paymentsID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
+    companyID?: NullableIntFieldUpdateOperationsInput | number | null
     directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
@@ -29511,6 +30039,7 @@ export namespace Prisma {
     paymentsID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
+    companyID?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type IncidentHistoryUpdateWithoutIncidentInput = {
@@ -29594,6 +30123,7 @@ export namespace Prisma {
     suspended?: boolean
     suspendedUntil?: Date | string | null
     role?: $Enums.Role
+    userID?: number | null
     companyCode?: string | null
     email: string
   }
@@ -29605,6 +30135,7 @@ export namespace Prisma {
     suspended?: BoolFieldUpdateOperationsInput | boolean
     suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     workers?: WorkerUpdateManyWithoutCompanyNestedInput
@@ -29616,6 +30147,7 @@ export namespace Prisma {
     payments?: PaymentsUpdateManyWithoutCompanyNestedInput
     machinery?: machineryUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUpdateManyWithoutCompanyNestedInput
+    User?: UserUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutBudgetInput = {
@@ -29626,6 +30158,7 @@ export namespace Prisma {
     suspended?: BoolFieldUpdateOperationsInput | boolean
     suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
@@ -29637,6 +30170,7 @@ export namespace Prisma {
     payments?: PaymentsUncheckedUpdateManyWithoutCompanyNestedInput
     machinery?: machineryUncheckedUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUncheckedUpdateManyWithoutCompanyNestedInput
+    User?: UserUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateManyWithoutBudgetInput = {
@@ -29647,6 +30181,7 @@ export namespace Prisma {
     suspended?: BoolFieldUpdateOperationsInput | boolean
     suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
   }
