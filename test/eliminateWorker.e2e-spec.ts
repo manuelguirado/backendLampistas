@@ -29,7 +29,7 @@ describe('eliminateWorker', () => {
     );
     const company = await registerCompany(
       'Test Company',
-      '123-456-7890',
+      '1234567890',
       'test@company.com',
       'securePassword',
       directions,

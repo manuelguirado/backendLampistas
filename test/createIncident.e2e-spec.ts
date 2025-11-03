@@ -39,7 +39,7 @@ describe('createIncident', () => {
     );
     const company = await registerCompany(
       'company test',
-      '123-456-7890',
+      '1234567890',
       `company-test-${Date.now()}@example.com`,
       'pasword123',
       directions,
@@ -105,7 +105,7 @@ describe('createIncident', () => {
     );
     const company = await registerCompany(
       'Test Company, Inc.',
-      '123-456-7890',
+      '1234567890',
       `company-test-${Date.now()}@example.com`,
       'securePassword',
       directions,

@@ -137,6 +137,8 @@ exports.Prisma.CompanyScalarFieldEnum = {
   phone: 'phone',
   password: 'password',
   budgetID: 'budgetID',
+  suspended: 'suspended',
+  suspendedUntil: 'suspendedUntil',
   role: 'role',
   companyCode: 'companyCode',
   email: 'email'
@@ -256,6 +258,7 @@ exports.Prisma.MachineryScalarFieldEnum = {
   maintenanceDate: 'maintenanceDate',
   lastInspectionDate: 'lastInspectionDate',
   installedAt: 'installedAt',
+  machineType: 'machineType',
   clientID: 'clientID',
   companyName: 'companyName',
   companyID: 'companyID'

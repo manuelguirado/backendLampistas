@@ -42,7 +42,7 @@ describe('Company registration', () => {
   });
   it('should not allow registration with existing company name', async () => {
     const name = 'Duplicate Company';
-    const phone = '0987654321';
+    const phone = '1234567890';
     const email1 = `duplicate1-${Date.now()}@test.com`;
     const email2 = `duplicate2-${Date.now()}@test.com`;
     const address = await registerDirections(

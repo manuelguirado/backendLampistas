@@ -34,7 +34,7 @@ describe('registerWorker', () => {
     // First, create a company to associate the worker with
     const company = await registerCompany(
       `Worker Test Company ${Date.now()}`,
-      '123-456-7890',
+      '1234567890',
       `worker-company-${Date.now()}@example.com`,
       'compPassword',
       directions,
@@ -76,7 +76,7 @@ describe('registerWorker', () => {
 
     const company = await registerCompany(
       `Worker Test Company ${Date.now()}`,
-      '123-456-7890',
+      '1234567890',
       `worker-company-${Date.now()}@example.com`,
       'compPassword',
       directions,

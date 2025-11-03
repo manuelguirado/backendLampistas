@@ -43,7 +43,7 @@ describe('createBudget', () => {
     );
     const company = await registerCompany(
       'Test Company',
-      '123-456-7890',
+      '1234567890',
       'test@company.com',
       '123 Test St',
       directions,
@@ -98,7 +98,7 @@ describe('createBudget', () => {
     );
     const company = await registerCompany(
       'Test Company 1',
-      '123-456-7890',
+      '1234567890',
       'test1@company.com',
       'mysecurepassword',
       directions,
@@ -156,7 +156,7 @@ describe('createBudget', () => {
     );
     const company = await registerCompany(
       'Test Company 2',
-      '123-456-7890',
+      '1234567890',
       'test2@company.com',
       'mysecurepassword',
       directions,

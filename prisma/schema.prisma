@@ -37,7 +37,7 @@ model User {
 model Company {
   companyID        Int               @id @default(autoincrement())
   name             String            @db.VarChar(255)
-  phone            String            @db.VarChar(20)
+  phone            String            @db.VarChar(255)
   password         String            @db.VarChar(255)
   workers          Worker[]          @relation("Workers")
   receivedPayments Payments[]        @relation("ReceivedPayments")
@@ -45,7 +45,8 @@ model Company {
   incidentHistory  IncidentHistory[] @relation("CompanyIncidentHistory")
   budgetID         Int?
   budget           Budget?           @relation(fields: [budgetID], references: [budgetID])
-
+  suspended        Boolean           @default(false)
+  suspendedUntil   DateTime?
   directions       Directions[]      @relation("CompanyDirections")
   shiftWorkers     ShiftWorker[]     @relation("CompanyShiftWorkers")
   role             Role              @default(COMPANY)
@@ -206,6 +207,7 @@ model machinery {
   maintenanceDate    DateTime @db.Timestamp(6)
   lastInspectionDate DateTime @db.Timestamp(6)
   installedAt        DateTime @db.Timestamp(6)
+  machineType        String
   clientID           Int
   client             User     @relation(fields: [clientID], references: [userID])
   companyName        String

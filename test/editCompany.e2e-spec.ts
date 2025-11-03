@@ -1,0 +1,62 @@
+import { editCompany } from '../src/modules/admin/editCompany';
+import { registerDirections } from '../src/modules/directions/registerDirections';
+import { registerCompany } from '../src/modules/companies/registerCompany';
+import { PrismaClient } from '../generated/prisma';
+jest.mock('uuid', () => ({
+  v4: () => 'test-uuid',
+}));
+const prisma = new PrismaClient();
+describe('editCompany', () => {
+  beforeAll(async () => {
+    // Clean up all test data before tests
+    await prisma.directions.deleteMany({});
+    await prisma.worker.deleteMany({});
+    await prisma.company.deleteMany({});
+  });
+  afterAll(async () => {
+    // Clean up all test data and disconnect after all tests
+    await prisma.directions.deleteMany({});
+    await prisma.worker.deleteMany({});
+    await prisma.company.deleteMany({});
+    await prisma.$disconnect();
+  });
+  it("should edit a company's details successfully", async () => {
+    const directions = await registerDirections(
+      'Initial Direction',
+      '123 Initial St',
+      '555-0000',
+      'test-uuid',
+    );
+    const updateData = {
+      name: 'updatedcompany',
+      email: 'updatedemail@example.com',
+      phone: '  5550001',
+    };
+    // First, register a new company
+    const company = await registerCompany(
+      'initialcompany',
+      '12345678901',
+      'test-uuid',
+      'password123',
+      directions,
+    );
+    const updatedCompany = await editCompany(company.companyID, updateData);
+
+    // Add other fields as needed to match the expected type
+    expect(updatedCompany.companyID).toBe(company.companyID);
+    expect(updatedCompany.email).toBe(updateData.email);
+    expect(updatedCompany.phone).toBe(updateData.phone);
+  });
+
+  it('should throw an error when trying to edit a company with invalid ID', async () => {
+    const updateData = {
+      name: 'nonexistentcompany',
+      email: 'noexistingo@example.com',
+      phone: '5559999',
+    };
+
+    await expect(editCompany(0, updateData)).rejects.toThrow(
+      'Company ID is required',
+    );
+  });
+});

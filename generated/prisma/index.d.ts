@@ -3843,6 +3843,8 @@ export namespace Prisma {
     phone: string | null
     password: string | null
     budgetID: number | null
+    suspended: boolean | null
+    suspendedUntil: Date | null
     role: $Enums.Role | null
     companyCode: string | null
     email: string | null
@@ -3854,6 +3856,8 @@ export namespace Prisma {
     phone: string | null
     password: string | null
     budgetID: number | null
+    suspended: boolean | null
+    suspendedUntil: Date | null
     role: $Enums.Role | null
     companyCode: string | null
     email: string | null
@@ -3865,6 +3869,8 @@ export namespace Prisma {
     phone: number
     password: number
     budgetID: number
+    suspended: number
+    suspendedUntil: number
     role: number
     companyCode: number
     email: number
@@ -3888,6 +3894,8 @@ export namespace Prisma {
     phone?: true
     password?: true
     budgetID?: true
+    suspended?: true
+    suspendedUntil?: true
     role?: true
     companyCode?: true
     email?: true
@@ -3899,6 +3907,8 @@ export namespace Prisma {
     phone?: true
     password?: true
     budgetID?: true
+    suspended?: true
+    suspendedUntil?: true
     role?: true
     companyCode?: true
     email?: true
@@ -3910,6 +3920,8 @@ export namespace Prisma {
     phone?: true
     password?: true
     budgetID?: true
+    suspended?: true
+    suspendedUntil?: true
     role?: true
     companyCode?: true
     email?: true
@@ -4008,6 +4020,8 @@ export namespace Prisma {
     phone: string
     password: string
     budgetID: number | null
+    suspended: boolean
+    suspendedUntil: Date | null
     role: $Enums.Role
     companyCode: string | null
     email: string
@@ -4038,6 +4052,8 @@ export namespace Prisma {
     phone?: boolean
     password?: boolean
     budgetID?: boolean
+    suspended?: boolean
+    suspendedUntil?: boolean
     role?: boolean
     companyCode?: boolean
     email?: boolean
@@ -4060,6 +4076,8 @@ export namespace Prisma {
     phone?: boolean
     password?: boolean
     budgetID?: boolean
+    suspended?: boolean
+    suspendedUntil?: boolean
     role?: boolean
     companyCode?: boolean
     email?: boolean
@@ -4072,6 +4090,8 @@ export namespace Prisma {
     phone?: boolean
     password?: boolean
     budgetID?: boolean
+    suspended?: boolean
+    suspendedUntil?: boolean
     role?: boolean
     companyCode?: boolean
     email?: boolean
@@ -4084,12 +4104,14 @@ export namespace Prisma {
     phone?: boolean
     password?: boolean
     budgetID?: boolean
+    suspended?: boolean
+    suspendedUntil?: boolean
     role?: boolean
     companyCode?: boolean
     email?: boolean
   }
 
-  export type CompanyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"companyID" | "name" | "phone" | "password" | "budgetID" | "role" | "companyCode" | "email", ExtArgs["result"]["company"]>
+  export type CompanyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"companyID" | "name" | "phone" | "password" | "budgetID" | "suspended" | "suspendedUntil" | "role" | "companyCode" | "email", ExtArgs["result"]["company"]>
   export type CompanyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     workers?: boolean | Company$workersArgs<ExtArgs>
     receivedPayments?: boolean | Company$receivedPaymentsArgs<ExtArgs>
@@ -4130,6 +4152,8 @@ export namespace Prisma {
       phone: string
       password: string
       budgetID: number | null
+      suspended: boolean
+      suspendedUntil: Date | null
       role: $Enums.Role
       companyCode: string | null
       email: string
@@ -4571,6 +4595,8 @@ export namespace Prisma {
     readonly phone: FieldRef<"Company", 'String'>
     readonly password: FieldRef<"Company", 'String'>
     readonly budgetID: FieldRef<"Company", 'Int'>
+    readonly suspended: FieldRef<"Company", 'Boolean'>
+    readonly suspendedUntil: FieldRef<"Company", 'DateTime'>
     readonly role: FieldRef<"Company", 'Role'>
     readonly companyCode: FieldRef<"Company", 'String'>
     readonly email: FieldRef<"Company", 'String'>
@@ -18960,6 +18986,7 @@ export namespace Prisma {
     maintenanceDate: Date | null
     lastInspectionDate: Date | null
     installedAt: Date | null
+    machineType: string | null
     clientID: number | null
     companyName: string | null
     companyID: number | null
@@ -18972,6 +18999,7 @@ export namespace Prisma {
     maintenanceDate: Date | null
     lastInspectionDate: Date | null
     installedAt: Date | null
+    machineType: string | null
     clientID: number | null
     companyName: string | null
     companyID: number | null
@@ -18984,6 +19012,7 @@ export namespace Prisma {
     maintenanceDate: number
     lastInspectionDate: number
     installedAt: number
+    machineType: number
     clientID: number
     companyName: number
     companyID: number
@@ -19010,6 +19039,7 @@ export namespace Prisma {
     maintenanceDate?: true
     lastInspectionDate?: true
     installedAt?: true
+    machineType?: true
     clientID?: true
     companyName?: true
     companyID?: true
@@ -19022,6 +19052,7 @@ export namespace Prisma {
     maintenanceDate?: true
     lastInspectionDate?: true
     installedAt?: true
+    machineType?: true
     clientID?: true
     companyName?: true
     companyID?: true
@@ -19034,6 +19065,7 @@ export namespace Prisma {
     maintenanceDate?: true
     lastInspectionDate?: true
     installedAt?: true
+    machineType?: true
     clientID?: true
     companyName?: true
     companyID?: true
@@ -19133,6 +19165,7 @@ export namespace Prisma {
     maintenanceDate: Date
     lastInspectionDate: Date
     installedAt: Date
+    machineType: string
     clientID: number
     companyName: string
     companyID: number
@@ -19164,6 +19197,7 @@ export namespace Prisma {
     maintenanceDate?: boolean
     lastInspectionDate?: boolean
     installedAt?: boolean
+    machineType?: boolean
     clientID?: boolean
     companyName?: boolean
     companyID?: boolean
@@ -19178,6 +19212,7 @@ export namespace Prisma {
     maintenanceDate?: boolean
     lastInspectionDate?: boolean
     installedAt?: boolean
+    machineType?: boolean
     clientID?: boolean
     companyName?: boolean
     companyID?: boolean
@@ -19192,6 +19227,7 @@ export namespace Prisma {
     maintenanceDate?: boolean
     lastInspectionDate?: boolean
     installedAt?: boolean
+    machineType?: boolean
     clientID?: boolean
     companyName?: boolean
     companyID?: boolean
@@ -19206,12 +19242,13 @@ export namespace Prisma {
     maintenanceDate?: boolean
     lastInspectionDate?: boolean
     installedAt?: boolean
+    machineType?: boolean
     clientID?: boolean
     companyName?: boolean
     companyID?: boolean
   }
 
-  export type machineryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "maintenanceDate" | "lastInspectionDate" | "installedAt" | "clientID" | "companyName" | "companyID", ExtArgs["result"]["machinery"]>
+  export type machineryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "maintenanceDate" | "lastInspectionDate" | "installedAt" | "machineType" | "clientID" | "companyName" | "companyID", ExtArgs["result"]["machinery"]>
   export type machineryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     client?: boolean | UserDefaultArgs<ExtArgs>
     company?: boolean | CompanyDefaultArgs<ExtArgs>
@@ -19238,6 +19275,7 @@ export namespace Prisma {
       maintenanceDate: Date
       lastInspectionDate: Date
       installedAt: Date
+      machineType: string
       clientID: number
       companyName: string
       companyID: number
@@ -19672,6 +19710,7 @@ export namespace Prisma {
     readonly maintenanceDate: FieldRef<"machinery", 'DateTime'>
     readonly lastInspectionDate: FieldRef<"machinery", 'DateTime'>
     readonly installedAt: FieldRef<"machinery", 'DateTime'>
+    readonly machineType: FieldRef<"machinery", 'String'>
     readonly clientID: FieldRef<"machinery", 'Int'>
     readonly companyName: FieldRef<"machinery", 'String'>
     readonly companyID: FieldRef<"machinery", 'Int'>
@@ -20123,6 +20162,8 @@ export namespace Prisma {
     phone: 'phone',
     password: 'password',
     budgetID: 'budgetID',
+    suspended: 'suspended',
+    suspendedUntil: 'suspendedUntil',
     role: 'role',
     companyCode: 'companyCode',
     email: 'email'
@@ -20281,6 +20322,7 @@ export namespace Prisma {
     maintenanceDate: 'maintenanceDate',
     lastInspectionDate: 'lastInspectionDate',
     installedAt: 'installedAt',
+    machineType: 'machineType',
     clientID: 'clientID',
     companyName: 'companyName',
     companyID: 'companyID'
@@ -20361,6 +20403,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -20371,13 +20420,6 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -20511,6 +20553,8 @@ export namespace Prisma {
     phone?: StringFilter<"Company"> | string
     password?: StringFilter<"Company"> | string
     budgetID?: IntNullableFilter<"Company"> | number | null
+    suspended?: BoolFilter<"Company"> | boolean
+    suspendedUntil?: DateTimeNullableFilter<"Company"> | Date | string | null
     role?: EnumRoleFilter<"Company"> | $Enums.Role
     companyCode?: StringNullableFilter<"Company"> | string | null
     email?: StringFilter<"Company"> | string
@@ -20532,6 +20576,8 @@ export namespace Prisma {
     phone?: SortOrder
     password?: SortOrder
     budgetID?: SortOrderInput | SortOrder
+    suspended?: SortOrder
+    suspendedUntil?: SortOrderInput | SortOrder
     role?: SortOrder
     companyCode?: SortOrderInput | SortOrder
     email?: SortOrder
@@ -20557,6 +20603,8 @@ export namespace Prisma {
     phone?: StringFilter<"Company"> | string
     password?: StringFilter<"Company"> | string
     budgetID?: IntNullableFilter<"Company"> | number | null
+    suspended?: BoolFilter<"Company"> | boolean
+    suspendedUntil?: DateTimeNullableFilter<"Company"> | Date | string | null
     role?: EnumRoleFilter<"Company"> | $Enums.Role
     companyCode?: StringNullableFilter<"Company"> | string | null
     workers?: WorkerListRelationFilter
@@ -20577,6 +20625,8 @@ export namespace Prisma {
     phone?: SortOrder
     password?: SortOrder
     budgetID?: SortOrderInput | SortOrder
+    suspended?: SortOrder
+    suspendedUntil?: SortOrderInput | SortOrder
     role?: SortOrder
     companyCode?: SortOrderInput | SortOrder
     email?: SortOrder
@@ -20596,6 +20646,8 @@ export namespace Prisma {
     phone?: StringWithAggregatesFilter<"Company"> | string
     password?: StringWithAggregatesFilter<"Company"> | string
     budgetID?: IntNullableWithAggregatesFilter<"Company"> | number | null
+    suspended?: BoolWithAggregatesFilter<"Company"> | boolean
+    suspendedUntil?: DateTimeNullableWithAggregatesFilter<"Company"> | Date | string | null
     role?: EnumRoleWithAggregatesFilter<"Company"> | $Enums.Role
     companyCode?: StringNullableWithAggregatesFilter<"Company"> | string | null
     email?: StringWithAggregatesFilter<"Company"> | string
@@ -21407,6 +21459,7 @@ export namespace Prisma {
     maintenanceDate?: DateTimeFilter<"machinery"> | Date | string
     lastInspectionDate?: DateTimeFilter<"machinery"> | Date | string
     installedAt?: DateTimeFilter<"machinery"> | Date | string
+    machineType?: StringFilter<"machinery"> | string
     clientID?: IntFilter<"machinery"> | number
     companyName?: StringFilter<"machinery"> | string
     companyID?: IntFilter<"machinery"> | number
@@ -21421,6 +21474,7 @@ export namespace Prisma {
     maintenanceDate?: SortOrder
     lastInspectionDate?: SortOrder
     installedAt?: SortOrder
+    machineType?: SortOrder
     clientID?: SortOrder
     companyName?: SortOrder
     companyID?: SortOrder
@@ -21438,6 +21492,7 @@ export namespace Prisma {
     maintenanceDate?: DateTimeFilter<"machinery"> | Date | string
     lastInspectionDate?: DateTimeFilter<"machinery"> | Date | string
     installedAt?: DateTimeFilter<"machinery"> | Date | string
+    machineType?: StringFilter<"machinery"> | string
     clientID?: IntFilter<"machinery"> | number
     companyName?: StringFilter<"machinery"> | string
     companyID?: IntFilter<"machinery"> | number
@@ -21452,6 +21507,7 @@ export namespace Prisma {
     maintenanceDate?: SortOrder
     lastInspectionDate?: SortOrder
     installedAt?: SortOrder
+    machineType?: SortOrder
     clientID?: SortOrder
     companyName?: SortOrder
     companyID?: SortOrder
@@ -21472,6 +21528,7 @@ export namespace Prisma {
     maintenanceDate?: DateTimeWithAggregatesFilter<"machinery"> | Date | string
     lastInspectionDate?: DateTimeWithAggregatesFilter<"machinery"> | Date | string
     installedAt?: DateTimeWithAggregatesFilter<"machinery"> | Date | string
+    machineType?: StringWithAggregatesFilter<"machinery"> | string
     clientID?: IntWithAggregatesFilter<"machinery"> | number
     companyName?: StringWithAggregatesFilter<"machinery"> | string
     companyID?: IntWithAggregatesFilter<"machinery"> | number
@@ -21578,6 +21635,8 @@ export namespace Prisma {
     name: string
     phone: string
     password: string
+    suspended?: boolean
+    suspendedUntil?: Date | string | null
     role?: $Enums.Role
     companyCode?: string | null
     email: string
@@ -21599,6 +21658,8 @@ export namespace Prisma {
     phone: string
     password: string
     budgetID?: number | null
+    suspended?: boolean
+    suspendedUntil?: Date | string | null
     role?: $Enums.Role
     companyCode?: string | null
     email: string
@@ -21617,6 +21678,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    suspended?: BoolFieldUpdateOperationsInput | boolean
+    suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
@@ -21638,6 +21701,8 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     budgetID?: NullableIntFieldUpdateOperationsInput | number | null
+    suspended?: BoolFieldUpdateOperationsInput | boolean
+    suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
@@ -21658,6 +21723,8 @@ export namespace Prisma {
     phone: string
     password: string
     budgetID?: number | null
+    suspended?: boolean
+    suspendedUntil?: Date | string | null
     role?: $Enums.Role
     companyCode?: string | null
     email: string
@@ -21667,6 +21734,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    suspended?: BoolFieldUpdateOperationsInput | boolean
+    suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
@@ -21678,6 +21747,8 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     budgetID?: NullableIntFieldUpdateOperationsInput | number | null
+    suspended?: BoolFieldUpdateOperationsInput | boolean
+    suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
@@ -22422,6 +22493,7 @@ export namespace Prisma {
     maintenanceDate: Date | string
     lastInspectionDate: Date | string
     installedAt: Date | string
+    machineType: string
     companyName: string
     client: UserCreateNestedOneWithoutMachineryInput
     company: CompanyCreateNestedOneWithoutMachineryInput
@@ -22434,6 +22506,7 @@ export namespace Prisma {
     maintenanceDate: Date | string
     lastInspectionDate: Date | string
     installedAt: Date | string
+    machineType: string
     clientID: number
     companyName: string
     companyID: number
@@ -22445,6 +22518,7 @@ export namespace Prisma {
     maintenanceDate?: DateTimeFieldUpdateOperationsInput | Date | string
     lastInspectionDate?: DateTimeFieldUpdateOperationsInput | Date | string
     installedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    machineType?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     client?: UserUpdateOneRequiredWithoutMachineryNestedInput
     company?: CompanyUpdateOneRequiredWithoutMachineryNestedInput
@@ -22457,6 +22531,7 @@ export namespace Prisma {
     maintenanceDate?: DateTimeFieldUpdateOperationsInput | Date | string
     lastInspectionDate?: DateTimeFieldUpdateOperationsInput | Date | string
     installedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    machineType?: StringFieldUpdateOperationsInput | string
     clientID?: IntFieldUpdateOperationsInput | number
     companyName?: StringFieldUpdateOperationsInput | string
     companyID?: IntFieldUpdateOperationsInput | number
@@ -22469,6 +22544,7 @@ export namespace Prisma {
     maintenanceDate: Date | string
     lastInspectionDate: Date | string
     installedAt: Date | string
+    machineType: string
     clientID: number
     companyName: string
     companyID: number
@@ -22480,6 +22556,7 @@ export namespace Prisma {
     maintenanceDate?: DateTimeFieldUpdateOperationsInput | Date | string
     lastInspectionDate?: DateTimeFieldUpdateOperationsInput | Date | string
     installedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    machineType?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
   }
 
@@ -22490,6 +22567,7 @@ export namespace Prisma {
     maintenanceDate?: DateTimeFieldUpdateOperationsInput | Date | string
     lastInspectionDate?: DateTimeFieldUpdateOperationsInput | Date | string
     installedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    machineType?: StringFieldUpdateOperationsInput | string
     clientID?: IntFieldUpdateOperationsInput | number
     companyName?: StringFieldUpdateOperationsInput | string
     companyID?: IntFieldUpdateOperationsInput | number
@@ -22742,6 +22820,22 @@ export namespace Prisma {
     _max?: NestedEnumRoleFilter<$PrismaModel>
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type WorkerListRelationFilter = {
     every?: WorkerWhereInput
     some?: WorkerWhereInput
@@ -22783,6 +22877,8 @@ export namespace Prisma {
     phone?: SortOrder
     password?: SortOrder
     budgetID?: SortOrder
+    suspended?: SortOrder
+    suspendedUntil?: SortOrder
     role?: SortOrder
     companyCode?: SortOrder
     email?: SortOrder
@@ -22799,6 +22895,8 @@ export namespace Prisma {
     phone?: SortOrder
     password?: SortOrder
     budgetID?: SortOrder
+    suspended?: SortOrder
+    suspendedUntil?: SortOrder
     role?: SortOrder
     companyCode?: SortOrder
     email?: SortOrder
@@ -22810,6 +22908,8 @@ export namespace Prisma {
     phone?: SortOrder
     password?: SortOrder
     budgetID?: SortOrder
+    suspended?: SortOrder
+    suspendedUntil?: SortOrder
     role?: SortOrder
     companyCode?: SortOrder
     email?: SortOrder
@@ -22818,6 +22918,28 @@ export namespace Prisma {
   export type CompanySumOrderByAggregateInput = {
     companyID?: SortOrder
     budgetID?: SortOrder
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type CompanyScalarRelationFilter = {
@@ -23330,17 +23452,6 @@ export namespace Prisma {
     workerID?: SortOrder
   }
 
-  export type DateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
   export type JobHistoryCountOrderByAggregateInput = {
     id?: SortOrder
     workerID?: SortOrder
@@ -23373,20 +23484,6 @@ export namespace Prisma {
   export type JobHistorySumOrderByAggregateInput = {
     id?: SortOrder
     workerID?: SortOrder
-  }
-
-  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type ShiftScheduleCountOrderByAggregateInput = {
@@ -23474,6 +23571,7 @@ export namespace Prisma {
     maintenanceDate?: SortOrder
     lastInspectionDate?: SortOrder
     installedAt?: SortOrder
+    machineType?: SortOrder
     clientID?: SortOrder
     companyName?: SortOrder
     companyID?: SortOrder
@@ -23492,6 +23590,7 @@ export namespace Prisma {
     maintenanceDate?: SortOrder
     lastInspectionDate?: SortOrder
     installedAt?: SortOrder
+    machineType?: SortOrder
     clientID?: SortOrder
     companyName?: SortOrder
     companyID?: SortOrder
@@ -23504,6 +23603,7 @@ export namespace Prisma {
     maintenanceDate?: SortOrder
     lastInspectionDate?: SortOrder
     installedAt?: SortOrder
+    machineType?: SortOrder
     clientID?: SortOrder
     companyName?: SortOrder
     companyID?: SortOrder
@@ -23931,6 +24031,14 @@ export namespace Prisma {
     connectOrCreate?: BudgetCreateOrConnectWithoutCompanyInput | BudgetCreateOrConnectWithoutCompanyInput[]
     createMany?: BudgetCreateManyCompanyInputEnvelope
     connect?: BudgetWhereUniqueInput | BudgetWhereUniqueInput[]
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
   }
 
   export type WorkerUpdateManyWithoutCompanyNestedInput = {
@@ -24873,10 +24981,6 @@ export namespace Prisma {
     connect?: WorkerWhereUniqueInput
   }
 
-  export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null
-  }
-
   export type WorkerUpdateOneRequiredWithoutJobHistoryNestedInput = {
     create?: XOR<WorkerCreateWithoutJobHistoryInput, WorkerUncheckedCreateWithoutJobHistoryInput>
     connectOrCreate?: WorkerCreateOrConnectWithoutJobHistoryInput
@@ -25114,6 +25218,44 @@ export namespace Prisma {
     _max?: NestedEnumRoleFilter<$PrismaModel>
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -25177,31 +25319,6 @@ export namespace Prisma {
     _sum?: NestedDecimalFilter<$PrismaModel>
     _min?: NestedDecimalFilter<$PrismaModel>
     _max?: NestedDecimalFilter<$PrismaModel>
-  }
-
-  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
-  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type IncidentsCreateWithoutUsersInput = {
@@ -25326,6 +25443,7 @@ export namespace Prisma {
     maintenanceDate: Date | string
     lastInspectionDate: Date | string
     installedAt: Date | string
+    machineType: string
     companyName: string
     company: CompanyCreateNestedOneWithoutMachineryInput
   }
@@ -25337,6 +25455,7 @@ export namespace Prisma {
     maintenanceDate: Date | string
     lastInspectionDate: Date | string
     installedAt: Date | string
+    machineType: string
     companyName: string
     companyID: number
   }
@@ -25586,6 +25705,7 @@ export namespace Prisma {
     maintenanceDate?: DateTimeFilter<"machinery"> | Date | string
     lastInspectionDate?: DateTimeFilter<"machinery"> | Date | string
     installedAt?: DateTimeFilter<"machinery"> | Date | string
+    machineType?: StringFilter<"machinery"> | string
     clientID?: IntFilter<"machinery"> | number
     companyName?: StringFilter<"machinery"> | string
     companyID?: IntFilter<"machinery"> | number
@@ -25900,6 +26020,7 @@ export namespace Prisma {
     maintenanceDate: Date | string
     lastInspectionDate: Date | string
     installedAt: Date | string
+    machineType: string
     companyName: string
     client: UserCreateNestedOneWithoutMachineryInput
   }
@@ -25911,6 +26032,7 @@ export namespace Prisma {
     maintenanceDate: Date | string
     lastInspectionDate: Date | string
     installedAt: Date | string
+    machineType: string
     clientID: number
     companyName: string
   }
@@ -26171,6 +26293,8 @@ export namespace Prisma {
     name: string
     phone: string
     password: string
+    suspended?: boolean
+    suspendedUntil?: Date | string | null
     role?: $Enums.Role
     companyCode?: string | null
     email: string
@@ -26191,6 +26315,8 @@ export namespace Prisma {
     phone: string
     password: string
     budgetID?: number | null
+    suspended?: boolean
+    suspendedUntil?: Date | string | null
     role?: $Enums.Role
     companyCode?: string | null
     email: string
@@ -26330,6 +26456,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    suspended?: BoolFieldUpdateOperationsInput | boolean
+    suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
@@ -26350,6 +26478,8 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     budgetID?: NullableIntFieldUpdateOperationsInput | number | null
+    suspended?: BoolFieldUpdateOperationsInput | boolean
+    suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
@@ -26452,6 +26582,8 @@ export namespace Prisma {
     name: string
     phone: string
     password: string
+    suspended?: boolean
+    suspendedUntil?: Date | string | null
     role?: $Enums.Role
     companyCode?: string | null
     email: string
@@ -26472,6 +26604,8 @@ export namespace Prisma {
     phone: string
     password: string
     budgetID?: number | null
+    suspended?: boolean
+    suspendedUntil?: Date | string | null
     role?: $Enums.Role
     companyCode?: string | null
     email: string
@@ -26691,6 +26825,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    suspended?: BoolFieldUpdateOperationsInput | boolean
+    suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
@@ -26711,6 +26847,8 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     budgetID?: NullableIntFieldUpdateOperationsInput | number | null
+    suspended?: BoolFieldUpdateOperationsInput | boolean
+    suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
@@ -26938,6 +27076,8 @@ export namespace Prisma {
     name: string
     phone: string
     password: string
+    suspended?: boolean
+    suspendedUntil?: Date | string | null
     role?: $Enums.Role
     companyCode?: string | null
     email: string
@@ -26958,6 +27098,8 @@ export namespace Prisma {
     phone: string
     password: string
     budgetID?: number | null
+    suspended?: boolean
+    suspendedUntil?: Date | string | null
     role?: $Enums.Role
     companyCode?: string | null
     email: string
@@ -26980,6 +27122,8 @@ export namespace Prisma {
     name: string
     phone: string
     password: string
+    suspended?: boolean
+    suspendedUntil?: Date | string | null
     role?: $Enums.Role
     companyCode?: string | null
     email: string
@@ -27000,6 +27144,8 @@ export namespace Prisma {
     phone: string
     password: string
     budgetID?: number | null
+    suspended?: boolean
+    suspendedUntil?: Date | string | null
     role?: $Enums.Role
     companyCode?: string | null
     email: string
@@ -27132,6 +27278,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    suspended?: BoolFieldUpdateOperationsInput | boolean
+    suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
@@ -27152,6 +27300,8 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     budgetID?: NullableIntFieldUpdateOperationsInput | number | null
+    suspended?: BoolFieldUpdateOperationsInput | boolean
+    suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
@@ -27180,6 +27330,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    suspended?: BoolFieldUpdateOperationsInput | boolean
+    suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
@@ -27200,6 +27352,8 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     budgetID?: NullableIntFieldUpdateOperationsInput | number | null
+    suspended?: BoolFieldUpdateOperationsInput | boolean
+    suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
@@ -27344,6 +27498,8 @@ export namespace Prisma {
     name: string
     phone: string
     password: string
+    suspended?: boolean
+    suspendedUntil?: Date | string | null
     role?: $Enums.Role
     companyCode?: string | null
     email: string
@@ -27364,6 +27520,8 @@ export namespace Prisma {
     phone: string
     password: string
     budgetID?: number | null
+    suspended?: boolean
+    suspendedUntil?: Date | string | null
     role?: $Enums.Role
     companyCode?: string | null
     email: string
@@ -27460,6 +27618,8 @@ export namespace Prisma {
     name: string
     phone: string
     password: string
+    suspended?: boolean
+    suspendedUntil?: Date | string | null
     role?: $Enums.Role
     companyCode?: string | null
     email: string
@@ -27479,6 +27639,8 @@ export namespace Prisma {
     name: string
     phone: string
     password: string
+    suspended?: boolean
+    suspendedUntil?: Date | string | null
     role?: $Enums.Role
     companyCode?: string | null
     email: string
@@ -27513,6 +27675,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    suspended?: BoolFieldUpdateOperationsInput | boolean
+    suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
@@ -27533,6 +27697,8 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     budgetID?: NullableIntFieldUpdateOperationsInput | number | null
+    suspended?: BoolFieldUpdateOperationsInput | boolean
+    suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
@@ -27657,6 +27823,8 @@ export namespace Prisma {
     phone?: StringFilter<"Company"> | string
     password?: StringFilter<"Company"> | string
     budgetID?: IntNullableFilter<"Company"> | number | null
+    suspended?: BoolFilter<"Company"> | boolean
+    suspendedUntil?: DateTimeNullableFilter<"Company"> | Date | string | null
     role?: EnumRoleFilter<"Company"> | $Enums.Role
     companyCode?: StringNullableFilter<"Company"> | string | null
     email?: StringFilter<"Company"> | string
@@ -27704,6 +27872,8 @@ export namespace Prisma {
     name: string
     phone: string
     password: string
+    suspended?: boolean
+    suspendedUntil?: Date | string | null
     role?: $Enums.Role
     companyCode?: string | null
     email: string
@@ -27724,6 +27894,8 @@ export namespace Prisma {
     phone: string
     password: string
     budgetID?: number | null
+    suspended?: boolean
+    suspendedUntil?: Date | string | null
     role?: $Enums.Role
     companyCode?: string | null
     email: string
@@ -27837,6 +28009,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    suspended?: BoolFieldUpdateOperationsInput | boolean
+    suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
@@ -27857,6 +28031,8 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     budgetID?: NullableIntFieldUpdateOperationsInput | number | null
+    suspended?: BoolFieldUpdateOperationsInput | boolean
+    suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
@@ -27916,6 +28092,8 @@ export namespace Prisma {
     name: string
     phone: string
     password: string
+    suspended?: boolean
+    suspendedUntil?: Date | string | null
     role?: $Enums.Role
     companyCode?: string | null
     email: string
@@ -27936,6 +28114,8 @@ export namespace Prisma {
     phone: string
     password: string
     budgetID?: number | null
+    suspended?: boolean
+    suspendedUntil?: Date | string | null
     role?: $Enums.Role
     companyCode?: string | null
     email: string
@@ -27999,6 +28179,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    suspended?: BoolFieldUpdateOperationsInput | boolean
+    suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
@@ -28019,6 +28201,8 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     budgetID?: NullableIntFieldUpdateOperationsInput | number | null
+    suspended?: BoolFieldUpdateOperationsInput | boolean
+    suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
@@ -28240,6 +28424,8 @@ export namespace Prisma {
     name: string
     phone: string
     password: string
+    suspended?: boolean
+    suspendedUntil?: Date | string | null
     role?: $Enums.Role
     companyCode?: string | null
     email: string
@@ -28260,6 +28446,8 @@ export namespace Prisma {
     phone: string
     password: string
     budgetID?: number | null
+    suspended?: boolean
+    suspendedUntil?: Date | string | null
     role?: $Enums.Role
     companyCode?: string | null
     email: string
@@ -28335,6 +28523,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    suspended?: BoolFieldUpdateOperationsInput | boolean
+    suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
@@ -28355,6 +28545,8 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     budgetID?: NullableIntFieldUpdateOperationsInput | number | null
+    suspended?: BoolFieldUpdateOperationsInput | boolean
+    suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
@@ -28408,6 +28600,8 @@ export namespace Prisma {
     name: string
     phone: string
     password: string
+    suspended?: boolean
+    suspendedUntil?: Date | string | null
     role?: $Enums.Role
     companyCode?: string | null
     email: string
@@ -28428,6 +28622,8 @@ export namespace Prisma {
     phone: string
     password: string
     budgetID?: number | null
+    suspended?: boolean
+    suspendedUntil?: Date | string | null
     role?: $Enums.Role
     companyCode?: string | null
     email: string
@@ -28503,6 +28699,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    suspended?: BoolFieldUpdateOperationsInput | boolean
+    suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
@@ -28523,6 +28721,8 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     budgetID?: NullableIntFieldUpdateOperationsInput | number | null
+    suspended?: BoolFieldUpdateOperationsInput | boolean
+    suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
@@ -28560,6 +28760,7 @@ export namespace Prisma {
     maintenanceDate: Date | string
     lastInspectionDate: Date | string
     installedAt: Date | string
+    machineType: string
     companyName: string
     companyID: number
   }
@@ -28643,6 +28844,7 @@ export namespace Prisma {
     maintenanceDate?: DateTimeFieldUpdateOperationsInput | Date | string
     lastInspectionDate?: DateTimeFieldUpdateOperationsInput | Date | string
     installedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    machineType?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     company?: CompanyUpdateOneRequiredWithoutMachineryNestedInput
   }
@@ -28654,6 +28856,7 @@ export namespace Prisma {
     maintenanceDate?: DateTimeFieldUpdateOperationsInput | Date | string
     lastInspectionDate?: DateTimeFieldUpdateOperationsInput | Date | string
     installedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    machineType?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyID?: IntFieldUpdateOperationsInput | number
   }
@@ -28665,6 +28868,7 @@ export namespace Prisma {
     maintenanceDate?: DateTimeFieldUpdateOperationsInput | Date | string
     lastInspectionDate?: DateTimeFieldUpdateOperationsInput | Date | string
     installedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    machineType?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyID?: IntFieldUpdateOperationsInput | number
   }
@@ -28821,6 +29025,7 @@ export namespace Prisma {
     maintenanceDate: Date | string
     lastInspectionDate: Date | string
     installedAt: Date | string
+    machineType: string
     clientID: number
     companyName: string
   }
@@ -29047,6 +29252,7 @@ export namespace Prisma {
     maintenanceDate?: DateTimeFieldUpdateOperationsInput | Date | string
     lastInspectionDate?: DateTimeFieldUpdateOperationsInput | Date | string
     installedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    machineType?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     client?: UserUpdateOneRequiredWithoutMachineryNestedInput
   }
@@ -29058,6 +29264,7 @@ export namespace Prisma {
     maintenanceDate?: DateTimeFieldUpdateOperationsInput | Date | string
     lastInspectionDate?: DateTimeFieldUpdateOperationsInput | Date | string
     installedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    machineType?: StringFieldUpdateOperationsInput | string
     clientID?: IntFieldUpdateOperationsInput | number
     companyName?: StringFieldUpdateOperationsInput | string
   }
@@ -29069,6 +29276,7 @@ export namespace Prisma {
     maintenanceDate?: DateTimeFieldUpdateOperationsInput | Date | string
     lastInspectionDate?: DateTimeFieldUpdateOperationsInput | Date | string
     installedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    machineType?: StringFieldUpdateOperationsInput | string
     clientID?: IntFieldUpdateOperationsInput | number
     companyName?: StringFieldUpdateOperationsInput | string
   }
@@ -29383,6 +29591,8 @@ export namespace Prisma {
     name: string
     phone: string
     password: string
+    suspended?: boolean
+    suspendedUntil?: Date | string | null
     role?: $Enums.Role
     companyCode?: string | null
     email: string
@@ -29392,6 +29602,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    suspended?: BoolFieldUpdateOperationsInput | boolean
+    suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
@@ -29411,6 +29623,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    suspended?: BoolFieldUpdateOperationsInput | boolean
+    suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
@@ -29430,6 +29644,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    suspended?: BoolFieldUpdateOperationsInput | boolean
+    suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string

@@ -30,7 +30,7 @@ describe('workerLogin', () => {
     );
     const newCompany = await registerCompany(
       `Worker Login Test Company ${Date.now()}`,
-      '123-456-7890',
+      '1234567890',
       `worker-login-company-${Date.now()}@example.com`,
       'compPassword',
       Directions,
@@ -64,7 +64,7 @@ describe('workerLogin', () => {
     );
     const newCompany = await registerCompany(
       `Worker Login Test Company ${Date.now()}`,
-      '123-456-7890',
+      '1234567890',
       `worker-login-company-${Date.now()}@example.com`,
       'compPassword',
       Directions,
@@ -94,7 +94,7 @@ describe('workerLogin', () => {
     );
     const newCompany = await registerCompany(
       `Worker Login Test Company ${Date.now()}`,
-      '123-456-7890',
+      '1234567890',
       `worker-login-company-${Date.now()}@example.com`,
       'compPassword',
       Directions,
