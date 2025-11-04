@@ -51,4 +51,10 @@ export class AdminController {
     const { companyID, data } = body;
     return this.adminService.editCompany(companyID, data);
   }
+  @UseGuards(AuthGuard)
+  @Get('admin/listCompany')
+  listCompany(@Body() body: { adminID: number }) {
+    const { adminID } = body;
+    return this.adminService.listCompany(adminID);
+  }
 }

@@ -181,7 +181,8 @@ exports.Prisma.IncidentsScalarFieldEnum = {
   assignedWorkerID: 'assignedWorkerID',
   budgetID: 'budgetID',
   userID: 'userID',
-  urgency: 'urgency'
+  urgency: 'urgency',
+  workerID: 'workerID'
 };
 
 exports.Prisma.PaymentsScalarFieldEnum = {
@@ -231,7 +232,10 @@ exports.Prisma.IncidentHistoryScalarFieldEnum = {
 exports.Prisma.ShiftWorkerScalarFieldEnum = {
   id: 'id',
   companyID: 'companyID',
-  workerID: 'workerID'
+  workerID: 'workerID',
+  shiftID: 'shiftID',
+  shiftSchedule: 'shiftSchedule',
+  shiftType: 'shiftType'
 };
 
 exports.Prisma.JobHistoryScalarFieldEnum = {
@@ -243,9 +247,9 @@ exports.Prisma.JobHistoryScalarFieldEnum = {
 };
 
 exports.Prisma.ShiftScheduleScalarFieldEnum = {
-  id: 'id',
+  ShiftID: 'ShiftID',
   workerID: 'workerID',
-  shiftDate: 'shiftDate',
+  shiftSchedule: 'shiftSchedule',
   shiftType: 'shiftType'
 };
 

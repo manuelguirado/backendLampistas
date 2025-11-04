@@ -285,4 +285,32 @@ describe('AdminController', () => {
       'Company activated successfully',
     );
   });
+  it('should list companies for an admin', async () => {
+    const request = supertest('http://localhost:3000/admin/listCompany');
+    const adminEmail = `admin-list-company-test-${Date.now()}@example.com`;
+    const adminPassword = 'secureAdminPassword';
+
+    // First, register the admin
+    const registerResponse = await request.post('/admin/register').send({
+      email: adminEmail,
+      password: adminPassword,
+    });
+    expect(registerResponse.status).toBe(201);
+
+    // Login to get the token
+    const loginResponse = await request.post('/admin/login').send({
+      email: adminEmail,
+      password: adminPassword,
+    });
+    expect(loginResponse.status).toBe(200);
+    const { token } = loginResponse.body as { token: string };
+
+    // List companies for the admin
+    const listResponse = await request
+      .get('/admin/listCompany')
+      .set('Authorization', `Bearer ${token}`);
+
+    expect(listResponse.status).toBe(200);
+    expect(Array.isArray(listResponse.body)).toBe(true);
+  });
 });

@@ -121,7 +121,7 @@ model Incidents {
   users            User[]            @relation("IncidentUsers")
   IncidentHistory  IncidentHistory[] @relation("IncidentHistory")
   urgency          Boolean?          @default(false)
-
+  workerID       Int?
   Payments Payments[] @relation("IncidentPayments")
 }
 
@@ -188,6 +188,10 @@ model ShiftWorker {
   company   Company @relation("CompanyShiftWorkers", fields: [companyID], references: [companyID])
   workerID  Int
   worker    Worker  @relation("WorkerShiftWorkers", fields: [workerID], references: [workerid])
+  shiftID  Int
+  shift    ShiftSchedule @relation(fields: [shiftID], references: [ShiftID])
+  shiftSchedule DateTime? @db.Timestamp(6)
+  shiftType     String?  @db.VarChar(50)
 }
 
 model JobHistory {
@@ -200,11 +204,13 @@ model JobHistory {
 }
 
 model ShiftSchedule {
-  id        Int      @id @default(autoincrement())
-  workerID  Int
-  worker    Worker   @relation("WorkerShiftSchedules", fields: [workerID], references: [workerid])
-  shiftDate DateTime @db.Timestamp(6)
-  shiftType String   @db.VarChar(50)
+  ShiftID        Int      @id @default(autoincrement())
+  workerID      Int
+  worker        Worker   @relation("WorkerShiftSchedules", fields: [workerID], references: [workerid])
+  shiftSchedule DateTime @db.Timestamp(6)
+  shiftType     String   @db.VarChar(50)
+
+  shiftWorkers ShiftWorker[]
 }
 
 model Directions {

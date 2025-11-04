@@ -6,12 +6,11 @@ export async function createIncident(
   description: string,
   userID: number,
   companyID: number,
-  workerID: number,
   status?: string,
   priority?: string,
   urgency?: boolean,
 ) {
-  if (!title || !description || !companyID || !workerID) {
+  if (!title || !description || !companyID) {
     throw new Error('Title, description, companyID, and workerID are required');
   }
 
@@ -20,13 +19,6 @@ export async function createIncident(
   });
   if (!foundCompany) {
     throw new Error('Company not found');
-  }
-
-  const assignedWorker = await prisma.worker.findUnique({
-    where: { workerid: workerID },
-  });
-  if (!assignedWorker) {
-    throw new Error('Worker not found');
   }
 
   // ✅ CORRECTO - Buscar por userID, no por id
@@ -49,7 +41,6 @@ export async function createIncident(
       description,
       userID, // ✅ Changed to userId to match Prisma schema
       companyID,
-      assignedWorkerID: workerID,
       status: finalStatus,
       priority: priority || (urgency ? 'HIGH' : 'MEDIUM'),
       urgency: urgency || false,

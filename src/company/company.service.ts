@@ -5,7 +5,10 @@ import { eliminateWorker } from '../modules/workers/eliminateWorker';
 import { createBudget } from '../modules/budgets/createbudget';
 import { registerCompany } from '../modules/companies/registerCompany';
 import { companyLogin } from '../modules/companies/companyLogin';
-
+import { listWorker } from '../modules/workers/listWorker';
+import { assignIncident } from '../modules/incidents/assignIncident';
+import { createMachinery } from '../modules/machinery/createMachinery';
+import { assignShiftWorker } from '../modules/companies/assignShiftWorker';
 @Injectable()
 export class CompanyService {
   async companyLogin(email: string, password: string) {
@@ -14,9 +17,10 @@ export class CompanyService {
 
   async registerCompany(
     name: string,
-    email: string,
     phone: string,
+    email: string,
     password: string,
+    admin: number,
     directions: {
       address: string;
       city: string;
@@ -24,7 +28,7 @@ export class CompanyService {
       zipCode: string;
     },
   ) {
-    return registerCompany(name, phone, email, password, directions);
+    return registerCompany(name, phone, email, password, admin, directions);
   }
   async registerWorker(
     email: string,
@@ -63,5 +67,41 @@ export class CompanyService {
       workerID,
       items,
     );
+  }
+  async listWorker(companyID: number) {
+    return listWorker(companyID);
+  }
+  async assignIncident(incidentID: number, workerID: number) {
+    return assignIncident(incidentID, workerID);
+  }
+  createMachinery(
+    name: string,
+    description: string,
+    maintanceDate: Date,
+    lastInspectionDate: Date,
+    InstalledAT: Date,
+    clientId: number,
+    companyName: string,
+    machineType: string,
+    companyID: number,
+  ) {
+    return createMachinery(
+      name,
+      description,
+      maintanceDate,
+      lastInspectionDate,
+      InstalledAT,
+      clientId,
+      companyName,
+      machineType,
+      companyID,
+    );
+  }
+  async assignShiftWorker(
+    workerID: number,
+    shiftSchedule: Date,
+    shiftType: string,
+  ) {
+    return assignShiftWorker(workerID, shiftSchedule, shiftType);
   }
 }

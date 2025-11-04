@@ -16,10 +16,10 @@ describe('createBudget', () => {
   jest.setTimeout(20000); // 20 segundos para cada test
   beforeEach(async () => {
     // Clean up all test data before running tests
+    await prisma.worker.deleteMany({});
     await prisma.budget.deleteMany({});
     await prisma.incidents.deleteMany({});
     await prisma.user.deleteMany({});
-    await prisma.worker.deleteMany({});
     await prisma.directions.deleteMany({});
     await prisma.adminsCompanies.deleteMany({});
     await prisma.admin.deleteMany({});
@@ -28,10 +28,10 @@ describe('createBudget', () => {
 
   afterAll(async () => {
     // Clean up all test data and disconnect after all tests
+    await prisma.worker.deleteMany({});
     await prisma.budget.deleteMany({});
     await prisma.incidents.deleteMany({});
     await prisma.user.deleteMany({});
-    await prisma.worker.deleteMany({});
     await prisma.directions.deleteMany({});
     await prisma.adminsCompanies.deleteMany({});
     await prisma.admin.deleteMany({});
@@ -80,7 +80,6 @@ describe('createBudget', () => {
       'This is a test incident',
       user.userID,
       company.companyID,
-      worker.workerid,
     );
 
     // Finally, create a budget for that incident
@@ -120,13 +119,6 @@ describe('createBudget', () => {
       directions,
     );
 
-    // Then, register a worker
-    const worker = await registerWorker(
-      'John Doe',
-      'worker1@test.com',
-      'password123',
-      company.companyID,
-    );
     // Finally, register a user
     const user = await userRegister(
       'Test User 1',
@@ -140,7 +132,6 @@ describe('createBudget', () => {
       'This is a test incident 1',
       user.userID,
       company.companyID,
-      worker.workerid,
     );
 
     // Finally, attempt to create a budget with a non-existing worker

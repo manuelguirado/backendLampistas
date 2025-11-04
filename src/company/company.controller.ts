@@ -16,9 +16,10 @@ export class CompanyController {
     @Body()
     body: {
       name: string;
-      email: string;
       phone: string;
+      email: string;
       password: string;
+      admin: number;
       directions: {
         address: string;
         city: string;
@@ -27,16 +28,17 @@ export class CompanyController {
       };
     },
   ) {
-    const { name, email, phone, password, directions } = body;
+    const { name, email, phone, password, admin, directions } = body;
     return this.companyService.registerCompany(
       name,
       email,
       phone,
       password,
+      admin,
       directions,
     );
   }
-  @UseGuards(AuthGuard)
+
   @Post('company/registerWorker')
   registerWorker(
     @Body()
@@ -94,6 +96,80 @@ export class CompanyController {
       companyID,
       workerID,
       items,
+    );
+  }
+  @UseGuards(AuthGuard)
+  @Post('company/listWorker')
+  listWorker(@Body() body: { companyID: number }) {
+    const { companyID } = body;
+    return this.companyService.listWorker(companyID);
+  }
+  @UseGuards(AuthGuard)
+  @Post('company/assignIncident')
+  assignIncident(
+    @Body()
+    body: {
+      incidentID: number;
+      workerID: number;
+    },
+  ) {
+    const { incidentID, workerID } = body;
+    return this.companyService.assignIncident(incidentID, workerID);
+  }
+  @UseGuards(AuthGuard)
+  @Post('company/createMachinery')
+  createMachinery(
+    @Body()
+    body: {
+      name: string;
+      description: string;
+      maintanceDate: Date;
+      lastInspectionDate: Date;
+      InstalledAT: Date;
+      clientId: number;
+      companyName: string;
+      machineType: string;
+      companyID: number;
+    },
+  ) {
+    const {
+      name,
+      description,
+      maintanceDate,
+      lastInspectionDate,
+      InstalledAT,
+      clientId,
+      companyName,
+      machineType,
+      companyID,
+    } = body;
+    return this.companyService.createMachinery(
+      name,
+      description,
+      maintanceDate,
+      lastInspectionDate,
+      InstalledAT,
+      clientId,
+      companyName,
+      machineType,
+      companyID,
+    );
+  }
+  @UseGuards(AuthGuard)
+  @Post('company/assignShiftWorker')
+  assignShiftWorker(
+    @Body()
+    body: {
+      workerID: number;
+      shiftSchedule: Date;
+      shiftType: string;
+    },
+  ) {
+    const { workerID, shiftSchedule, shiftType } = body;
+    return this.companyService.assignShiftWorker(
+      workerID,
+      shiftSchedule,
+      shiftType,
     );
   }
 }

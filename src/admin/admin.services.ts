@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { adminLogin } from '../modules/admin/adminLogin';
 import { suspendCompany } from '../modules/admin/suspendCompany';
 import { editCompany } from '../modules/admin/editCompany';
-
+import { listCompany } from '../modules/admin/listCompany';
 import { activateCompany } from '../modules/admin/activateCompany';
 import { generateCode } from '../utils/generateCode';
 import registerAdmin from '../modules/admin/registerAdmin';
@@ -32,5 +32,8 @@ export class adminServices {
   }
   async activateCompany(companyID: number) {
     return activateCompany(companyID);
+  }
+  async listCompany(adminID: number) {
+    return listCompany(adminID);
   }
 }
