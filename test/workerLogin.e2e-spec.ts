@@ -3,20 +3,26 @@ import { registerWorker } from '../src/modules/workers/registerWorker';
 import { PrismaClient } from '../generated/prisma';
 import { registerCompany } from '../src/modules/companies/registerCompany';
 import { registerDirections } from '../src/modules/directions/registerDirections';
+import registerAdmin from '../src/modules/admin/registerAdmin';
 const prisma = new PrismaClient();
 describe('workerLogin', () => {
+  jest.setTimeout(10000); // Aumentar timeout a 10 segundos
   beforeEach(async () => {
     // Limpiar TODAS las tablas relacionadas
-    jest.setTimeout(10000); // Aumentar timeout a 10 segundos
+    await prisma.$connect();
     await prisma.worker.deleteMany({});
+    await prisma.adminsCompanies.deleteMany({}); //  Limpiar tabla intermedia
     await prisma.company.deleteMany({}); // ✅ También limpiar companies
     await prisma.directions.deleteMany({});
+    await prisma.admin.deleteMany({});
   });
 
   afterAll(async () => {
     await prisma.worker.deleteMany({});
+    await prisma.adminsCompanies.deleteMany({}); // Limpiar tabla intermedia
     await prisma.company.deleteMany({});
     await prisma.directions.deleteMany({});
+    await prisma.admin.deleteMany({});
     await prisma.$disconnect();
   });
   it('should login a worker successfully with correct email and password', async () => {
@@ -28,11 +34,16 @@ describe('workerLogin', () => {
       'TS',
       '12345',
     );
+    const admin = await registerAdmin(
+      `admin-${Date.now()}@test.com`,
+      'adminPassword',
+    );
     const newCompany = await registerCompany(
       `Worker Login Test Company ${Date.now()}`,
       '1234567890',
       `worker-login-company-${Date.now()}@example.com`,
       'compPassword',
+      admin.adminID,
       Directions,
     );
 
@@ -62,11 +73,16 @@ describe('workerLogin', () => {
       'TS',
       '12345',
     );
+    const admin = await registerAdmin(
+      `admin-${Date.now()}@test.com`,
+      'adminPassword',
+    );
     const newCompany = await registerCompany(
       `Worker Login Test Company ${Date.now()}`,
       '1234567890',
       `worker-login-company-${Date.now()}@example.com`,
       'compPassword',
+      admin.adminID,
       Directions,
     );
 
@@ -92,11 +108,16 @@ describe('workerLogin', () => {
       'TS',
       '12345',
     );
+    const Admin = await registerAdmin(
+      `admin-${Date.now()}@test.com`,
+      'adminPassword',
+    );
     const newCompany = await registerCompany(
       `Worker Login Test Company ${Date.now()}`,
       '1234567890',
       `worker-login-company-${Date.now()}@example.com`,
       'compPassword',
+      Admin.adminID,
       Directions,
     );
 

@@ -4,20 +4,26 @@ import { PrismaClient } from '../generated/prisma';
 import { registerCompany } from '../src/modules/companies/registerCompany';
 import { registerDirections } from '../src/modules/directions/registerDirections';
 import { userRegister } from '../src/modules/users/userRegister';
+import registerAdmin from '../src/modules/admin/registerAdmin';
 const prisma = new PrismaClient();
 describe('findMyMachinery', () => {
+  jest.setTimeout(20000); // 20 segundos para cada test
   beforeAll(async () => {
     await prisma.$connect();
     await prisma.machinery.deleteMany({});
     await prisma.directions.deleteMany({});
     await prisma.user.deleteMany({});
+    await prisma.adminsCompanies.deleteMany({});
     await prisma.company.deleteMany({});
+    await prisma.admin.deleteMany({});
   });
   afterAll(async () => {
     await prisma.machinery.deleteMany({});
     await prisma.directions.deleteMany({});
     await prisma.user.deleteMany({});
+    await prisma.adminsCompanies.deleteMany({});
     await prisma.company.deleteMany({});
+    await prisma.admin.deleteMany({});
     await prisma.$disconnect();
   });
   it('should find machinery for a given company', async () => {
@@ -27,11 +33,16 @@ describe('findMyMachinery', () => {
       'TS',
       '12345',
     );
+    const admin = await registerAdmin(
+      `admin-${Date.now()}@test.com`,
+      'adminPassword',
+    );
     const company = await registerCompany(
       'Test Company',
       '1234567890',
       `company-${Date.now()}@test.com`,
       'securePassword',
+      admin.adminID,
       directions,
     );
     const user = await userRegister(
@@ -80,11 +91,16 @@ describe('findMyMachinery', () => {
       'AC',
       '67890',
     );
+    const admin = await registerAdmin(
+      `admin-${Date.now()}@test.com`,
+      'adminPassword',
+    );
     const company = await registerCompany(
       'Another Company',
       '0987654321',
       `company-${Date.now()}@test.com`,
       'securePassword',
+      admin.adminID,
       directions,
     );
     const machineryList = await findMyMachinery(company.companyID);

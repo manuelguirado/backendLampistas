@@ -3,19 +3,25 @@ import { registerDirections } from '../src/modules/directions/registerDirections
 import { registerWorker } from '../src/modules/workers/registerWorker';
 import { listWorker } from '../src/modules/workers/listWorker';
 import { PrismaClient } from '../generated/prisma';
+import registerAdmin from '../src/modules/admin/registerAdmin';
 
 const prisma = new PrismaClient();
 describe('listWorker', () => {
+  jest.setTimeout(20000); // 20 segundos para cada test
   beforeAll(async () => {
     await prisma.$connect();
     await prisma.worker.deleteMany({});
     await prisma.directions.deleteMany({});
+    await prisma.adminsCompanies.deleteMany({});
     await prisma.company.deleteMany({});
+    await prisma.admin.deleteMany({});
   });
   afterAll(async () => {
     await prisma.worker.deleteMany({});
     await prisma.directions.deleteMany({});
+    await prisma.adminsCompanies.deleteMany({});
     await prisma.company.deleteMany({});
+    await prisma.admin.deleteMany({});
     await prisma.$disconnect();
   });
   it('should list workers for a given company', async () => {
@@ -25,11 +31,16 @@ describe('listWorker', () => {
       'TS',
       '12345',
     );
+    const admin = await registerAdmin(
+      `admin-${Date.now()}@test.com`,
+      'adminPassword',
+    );
     const company = await registerCompany(
       'Test Company',
       '1234567890',
       `company-${Date.now()}@test.com`,
       'securePassword',
+      admin.adminID,
       directions,
     );
     // Register workers for the company
@@ -60,11 +71,16 @@ describe('listWorker', () => {
       'AC',
       '67890',
     );
+    const admin = await registerAdmin(
+      `admin-${Date.now()}@test.com`,
+      'adminPassword',
+    );
     const company = await registerCompany(
       'Empty Company',
       '0987654321',
       `empty-company-${Date.now()}@test.com`,
       'anotherSecurePassword',
+      admin.adminID,
       directions,
     );
     const workers = await listWorker(company.companyID);

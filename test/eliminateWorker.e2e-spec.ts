@@ -3,20 +3,27 @@ import { registerDirections } from '../src/modules/directions/registerDirections
 import { eliminateWorker } from '../src/modules/workers/eliminateWorker';
 import { registerCompany } from '../src/modules/companies/registerCompany';
 import { registerWorker } from '../src/modules/workers/registerWorker';
+import registerAdmin from '../src/modules/admin/registerAdmin';
 jest.mock('uuid', () => ({
   v4: () => 'test-uuid',
 }));
 const prisma = new PrismaClient();
 describe('eliminateWorker', () => {
+  jest.setTimeout(20000); // 20 segundos para cada test
   beforeAll(async () => {
     // Clean up all test data before tests
+    await prisma.$connect();
     await prisma.worker.deleteMany({});
+    await prisma.adminsCompanies.deleteMany({});
     await prisma.company.deleteMany({});
+    await prisma.admin.deleteMany({});
   });
   afterAll(async () => {
     // Clean up all test data and disconnect after all tests
     await prisma.worker.deleteMany({});
+    await prisma.adminsCompanies.deleteMany({});
     await prisma.company.deleteMany({});
+    await prisma.admin.deleteMany({});
     await prisma.$disconnect();
   });
   it('should eliminate an existing worker successfully', async () => {
@@ -27,11 +34,16 @@ describe('eliminateWorker', () => {
       'TS',
       '12345',
     );
+    const admin = await registerAdmin(
+      `admin-${Date.now()}@test.com`,
+      'adminPassword',
+    );
     const company = await registerCompany(
       'Test Company',
       '1234567890',
       'test@company.com',
       'securePassword',
+      admin.adminID,
       directions,
     );
     // Then, create a worker for that company

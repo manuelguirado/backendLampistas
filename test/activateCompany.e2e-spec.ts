@@ -1,6 +1,7 @@
 import { activateCompany } from '../src/modules/admin/activateCompany';
 import { registerDirections } from '../src/modules/directions/registerDirections';
 import { registerCompany } from '../src/modules/companies/registerCompany';
+import registerAdmin from '../src/modules/admin/registerAdmin';
 import { PrismaClient } from '../generated/prisma';
 jest.mock('uuid', () => ({
   v4: () => 'test-uuid',
@@ -11,12 +12,16 @@ describe('activateCompany', () => {
     // Clean up all test data before tests
     await prisma.directions.deleteMany({});
     await prisma.worker.deleteMany({});
+    await prisma.adminsCompanies.deleteMany({});
+    await prisma.admin.deleteMany({});
     await prisma.company.deleteMany({});
   });
   afterAll(async () => {
     // Clean up all test data and disconnect after all tests
     await prisma.directions.deleteMany({});
     await prisma.worker.deleteMany({});
+    await prisma.adminsCompanies.deleteMany({});
+    await prisma.admin.deleteMany({});
     await prisma.company.deleteMany({});
     await prisma.$disconnect();
   });
@@ -27,12 +32,17 @@ describe('activateCompany', () => {
       '555-1234',
       'test-uuid',
     );
+    const admin = await registerAdmin(
+      `admin-${Date.now()}@test.com`,
+      'adminPassword',
+    );
     // First, register a new company
     const company = await registerCompany(
       'testcompany',
       ' 1234567890',
       'testcompany@example.com',
       'password123',
+      admin.adminID,
       directions,
     );
     const suspendUntil = new Date();

@@ -6,6 +6,7 @@ export async function registerCompany(
   phone: string,
   email: string,
   password: string,
+  admin: number,
   directions: { address: string; city: string; state: string; zipCode: string },
 ) {
   if (!name || !phone || !password || !directions) {
@@ -25,6 +26,12 @@ export async function registerCompany(
   if (existingCompany) {
     throw new Error('Company with this name already exists');
   }
+  const existingAdmin = await prisma.admin.findUnique({
+    where: { adminID: admin },
+  });
+  if (!existingAdmin) {
+    throw new Error('Admin does not exist');
+  }
   const hashedPassword = await hashPassword(password);
   const company = await prisma.company.create({
     data: {
@@ -35,6 +42,32 @@ export async function registerCompany(
       role: 'COMPANY',
     },
   });
+  const companyAdmin = await prisma.admin.findUnique({
+    where: { adminID: admin },
+  });
+  if (!companyAdmin) {
+    throw new Error('Admin does not exist');
+  }
+  await prisma.adminsCompanies.create({
+    data: {
+      Admin: { connect: { adminID: admin } },
+      Company: { connect: { companyID: company.companyID } },
+    },
+  });
+
+  await prisma.company.update({
+    where: { companyID: company.companyID },
+    data: {
+      admins: {
+        connect: [
+          {
+            adminID_companyID: { adminID: admin, companyID: company.companyID },
+          },
+        ],
+      },
+    },
+  });
+
   await prisma.directions.create({
     data: {
       address: directions.address,

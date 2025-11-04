@@ -5,6 +5,7 @@ import { createIncident } from '../src/modules/incidents/createIncident';
 import { registerWorker } from '../src/modules/workers/registerWorker';
 import { userRegister } from '../src/modules/users/userRegister';
 import { registerDirections } from '../src/modules/directions/registerDirections';
+import registerAdmin from '../src/modules/admin/registerAdmin';
 
 const prisma = new PrismaClient();
 jest.mock('uuid', () => ({
@@ -12,14 +13,17 @@ jest.mock('uuid', () => ({
 }));
 
 describe('createBudget', () => {
+  jest.setTimeout(20000); // 20 segundos para cada test
   beforeEach(async () => {
     // Clean up all test data before running tests
     await prisma.budget.deleteMany({});
     await prisma.incidents.deleteMany({});
     await prisma.user.deleteMany({});
     await prisma.worker.deleteMany({});
-    await prisma.company.deleteMany({});
     await prisma.directions.deleteMany({});
+    await prisma.adminsCompanies.deleteMany({});
+    await prisma.admin.deleteMany({});
+    await prisma.company.deleteMany({});
   });
 
   afterAll(async () => {
@@ -28,8 +32,10 @@ describe('createBudget', () => {
     await prisma.incidents.deleteMany({});
     await prisma.user.deleteMany({});
     await prisma.worker.deleteMany({});
-    await prisma.company.deleteMany({});
     await prisma.directions.deleteMany({});
+    await prisma.adminsCompanies.deleteMany({});
+    await prisma.admin.deleteMany({});
+    await prisma.company.deleteMany({});
     await prisma.$disconnect();
   });
 
@@ -41,11 +47,16 @@ describe('createBudget', () => {
       'TS',
       '12345',
     );
+    const admin = await registerAdmin(
+      `admin-${Date.now()}@test.com`,
+      'adminPassword',
+    );
     const company = await registerCompany(
       'Test Company',
       '1234567890',
       'test@company.com',
       '123 Test St',
+      admin.adminID,
       directions,
     );
 
@@ -96,11 +107,16 @@ describe('createBudget', () => {
       'TS',
       '12345',
     );
+    const admin = await registerAdmin(
+      `admin-${Date.now()}@test.com`,
+      'adminPassword',
+    );
     const company = await registerCompany(
       'Test Company 1',
       '1234567890',
       'test1@company.com',
       'mysecurepassword',
+      admin.adminID,
       directions,
     );
 
@@ -154,11 +170,16 @@ describe('createBudget', () => {
       'TS',
       '12345',
     );
+    const admin = await registerAdmin(
+      `admin-${Date.now()}@test.com`,
+      'adminPassword',
+    );
     const company = await registerCompany(
       'Test Company 2',
       '1234567890',
       'test2@company.com',
       'mysecurepassword',
+      admin.adminID,
       directions,
     );
 

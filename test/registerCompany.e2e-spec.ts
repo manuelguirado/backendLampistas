@@ -1,18 +1,24 @@
 import { registerDirections } from '../src/modules/directions/registerDirections';
 import { PrismaClient } from '../generated/prisma';
 import { registerCompany } from '../src/modules/companies/registerCompany';
+import registerAdmin from '../src/modules/admin/registerAdmin';
 const prisma = new PrismaClient();
 describe('Company registration', () => {
+  jest.setTimeout(20000); // 20 segundos para cada test
   beforeAll(async () => {
     // Setup code before all tests run
     await prisma.$connect();
+    await prisma.adminsCompanies.deleteMany({});
     await prisma.company.deleteMany({});
+    await prisma.admin.deleteMany({});
     await prisma.directions.deleteMany({});
   });
 
   afterAll(async () => {
     // Cleanup code after all tests run
+    await prisma.adminsCompanies.deleteMany({});
     await prisma.company.deleteMany({});
+    await prisma.admin.deleteMany({});
     await prisma.directions.deleteMany({});
     await prisma.$disconnect();
   });
@@ -28,11 +34,19 @@ describe('Company registration', () => {
       'TS',
       '12345',
     );
+    const admin = await registerAdmin(
+      `admin-${Date.now()}@test.com`,
+      'adminPassword',
+    );
+    if (!admin || typeof admin.adminID !== 'number') {
+      throw new Error('Failed to register admin or invalid adminID');
+    }
     const Company = await registerCompany(
       name,
       phone,
       email,
       password,
+      admin.adminID,
       directions,
     );
     expect(Company).toBeDefined();
@@ -52,9 +66,13 @@ describe('Company registration', () => {
       '67890',
     );
     const password = 'anotherSecurePassword';
+    const admin = await registerAdmin(
+      `admin-${Date.now()}@test.com`,
+      'adminPassword',
+    );
 
     // First registration should succeed
-    await registerCompany(name, phone, email1, password, {
+    await registerCompany(name, phone, email1, password, admin.adminID, {
       address: address.address,
       city: address.city,
       state: address.state,
@@ -63,7 +81,7 @@ describe('Company registration', () => {
 
     // Second registration with same name should fail
     await expect(
-      registerCompany(name, phone, email2, password, {
+      registerCompany(name, phone, email2, password, admin.adminID, {
         address: address.address,
         city: address.city,
         state: address.state,
@@ -83,11 +101,16 @@ describe('Company registration', () => {
       'DC',
       '11223',
     );
+    const admin = await registerAdmin(
+      `admin-${Date.now()}@test.com`,
+      'adminPassword',
+    );
     const company = await registerCompany(
       name,
       phone,
       email,
       password,
+      admin.adminID,
       directions,
     );
     const fetchedDirections = await prisma.directions.findFirst({
@@ -111,9 +134,12 @@ describe('Company registration', () => {
       '00000',
     );
     const password = 'password';
-
+    const admin = await registerAdmin(
+      `admin-${Date.now()}@test.com`,
+      'adminPassword',
+    );
     await expect(
-      registerCompany(name, phone, email, password, address),
+      registerCompany(name, phone, email, password, admin.adminID, address),
     ).rejects.toThrow('Name, phone, password and directions are required');
   });
 });

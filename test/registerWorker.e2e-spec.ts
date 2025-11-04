@@ -2,22 +2,29 @@ import { PrismaClient } from '../generated/prisma';
 import { registerWorker } from '../src/modules/workers/registerWorker';
 import { registerCompany } from '../src/modules/companies/registerCompany';
 import { registerDirections } from '../src/modules/directions/registerDirections';
+import registerAdmin from '../src/modules/admin/registerAdmin';
 
 const prisma = new PrismaClient();
 
 describe('registerWorker', () => {
+  jest.setTimeout(20000); // 20 segundos para cada test
   beforeEach(async () => {
     // cleanup database before each test
+    await prisma.$connect();
     await prisma.worker.deleteMany({});
+    await prisma.adminsCompanies.deleteMany({});
     await prisma.company.deleteMany({});
     await prisma.directions.deleteMany({});
+    await prisma.admin.deleteMany({});
   });
 
   afterAll(async () => {
     // cleanup database after tests
+    await prisma.adminsCompanies.deleteMany({});
     await prisma.worker.deleteMany({});
     await prisma.company.deleteMany({});
     await prisma.directions.deleteMany({});
+    await prisma.admin.deleteMany({});
     await prisma.$disconnect();
   });
 
@@ -31,12 +38,17 @@ describe('registerWorker', () => {
       'WC',
       '12345',
     );
+    const admin = await registerAdmin(
+      `admin-${Date.now()}@test.com`,
+      'adminPassword',
+    );
     // First, create a company to associate the worker with
     const company = await registerCompany(
       `Worker Test Company ${Date.now()}`,
       '1234567890',
       `worker-company-${Date.now()}@example.com`,
       'compPassword',
+      admin.adminID,
       directions,
     );
 
@@ -72,6 +84,10 @@ describe('registerWorker', () => {
       'WC',
       '12345',
     );
+    const admin = await registerAdmin(
+      `admin-${Date.now()}@test.com`,
+      'adminPassword',
+    );
     // First, create a company to associate the worker with
 
     const company = await registerCompany(
@@ -79,6 +95,7 @@ describe('registerWorker', () => {
       '1234567890',
       `worker-company-${Date.now()}@example.com`,
       'compPassword',
+      admin.adminID,
       directions,
     );
 

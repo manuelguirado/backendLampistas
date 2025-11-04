@@ -1,24 +1,28 @@
 import { companyUsers } from '../src/modules/companies/companyUsers';
 import { registerCompany } from '../src/modules/companies/registerCompany';
 import { registerDirections } from '../src/modules/directions/registerDirections';
+import registerAdmin from '../src/modules/admin/registerAdmin';
 import { userRegister } from '../src/modules/users/userRegister';
 import { PrismaClient } from '../generated/prisma';
 const prisma = new PrismaClient();
 
 describe('companyUsers', () => {
+  jest.setTimeout(20000); // 20 segundos para cada test
   beforeAll(async () => {
     await prisma.$connect();
     await prisma.directions.deleteMany({});
     await prisma.user.deleteMany({});
+    await prisma.adminsCompanies.deleteMany({});
     await prisma.company.deleteMany({});
-    await prisma.user.deleteMany({});
+    await prisma.admin.deleteMany({});
   });
 
   afterAll(async () => {
     await prisma.directions.deleteMany({});
     await prisma.user.deleteMany({});
+    await prisma.adminsCompanies.deleteMany({});
     await prisma.company.deleteMany({});
-    await prisma.user.deleteMany({});
+    await prisma.admin.deleteMany({});
     await prisma.$disconnect();
   });
 
@@ -29,11 +33,16 @@ describe('companyUsers', () => {
       'TS',
       '12345',
     );
+    const admin = await registerAdmin(
+      `admin-${Date.now()}@test.com`,
+      'adminPassword',
+    );
     const company = await registerCompany(
       'Test Company',
       '1234567890',
       `company-${Date.now()}@test.com`,
       'securePassword',
+      admin.adminID,
       directions,
     );
     const user1 = await userRegister(
@@ -65,11 +74,16 @@ describe('companyUsers', () => {
       'AC',
       '67890',
     );
+    const admin = await registerAdmin(
+      `admin2-${Date.now()}@test.com`,
+      'adminPassword2',
+    );
     const company = await registerCompany(
       'Another Test Company',
       '0987654321',
       `another-company-${Date.now()}@test.com`,
       'anotherSecurePassword',
+      admin.adminID,
       directions,
     );
 

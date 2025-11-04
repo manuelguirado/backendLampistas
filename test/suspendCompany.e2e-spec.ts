@@ -2,22 +2,30 @@ import { suspendCompany } from '../src/modules/admin/suspendCompany';
 import { registerDirections } from '../src/modules/directions/registerDirections';
 import { registerCompany } from '../src/modules/companies/registerCompany';
 import { PrismaClient } from '../generated/prisma';
+import registerAdmin from '../src/modules/admin/registerAdmin';
 jest.mock('uuid', () => ({
   v4: () => 'test-uuid',
 }));
 const prisma = new PrismaClient();
 describe('suspendCompany', () => {
+  jest.setTimeout(20000); // 20 segundos para cada test
   beforeAll(async () => {
     // Clean up all test data before tests
+    await prisma.$connect();
+
     await prisma.directions.deleteMany({});
     await prisma.worker.deleteMany({});
+    await prisma.adminsCompanies.deleteMany({});
     await prisma.company.deleteMany({});
+    await prisma.admin.deleteMany({});
   });
   afterAll(async () => {
     // Clean up all test data and disconnect after all tests
     await prisma.directions.deleteMany({});
     await prisma.worker.deleteMany({});
+    await prisma.adminsCompanies.deleteMany({});
     await prisma.company.deleteMany({});
+    await prisma.admin.deleteMany({});
     await prisma.$disconnect();
   });
   it('should suspend a company successfully', async () => {
@@ -27,12 +35,17 @@ describe('suspendCompany', () => {
       '555-1234',
       'test-uuid',
     );
+    const admin = await registerAdmin(
+      `admin-${Date.now()}@test.com`,
+      'adminPassword',
+    );
     // First, register a new company
     const company = await registerCompany(
       'testcompany',
       '59289289042',
       'testcompany@example.com',
       'password123',
+      admin.adminID,
       directions,
     );
     const suspendUntil = new Date();
@@ -53,12 +66,17 @@ describe('suspendCompany', () => {
       '555-5678',
       'test-uuid-2',
     );
+    const admin = await registerAdmin(
+      `admin-${Date.now()}@test.com`,
+      'adminPassword',
+    );
     // First, register a new company
     const company = await registerCompany(
       'testcompany2',
       '12345678901',
       'testcompany2@example.com',
       'password456',
+      admin.adminID,
       directions,
     );
     // Then, suspend the company without a date

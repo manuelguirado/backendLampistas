@@ -146,6 +146,12 @@ exports.Prisma.CompanyScalarFieldEnum = {
   email: 'email'
 };
 
+exports.Prisma.AdminsCompaniesScalarFieldEnum = {
+  id: 'id',
+  adminID: 'adminID',
+  companyID: 'companyID'
+};
+
 exports.Prisma.WorkerScalarFieldEnum = {
   workerid: 'workerid',
   name: 'name',
@@ -157,7 +163,7 @@ exports.Prisma.WorkerScalarFieldEnum = {
 };
 
 exports.Prisma.AdminScalarFieldEnum = {
-  id: 'id',
+  adminID: 'adminID',
   email: 'email',
   password: 'password',
   role: 'role'
@@ -290,6 +296,7 @@ exports.Role = exports.$Enums.Role = {
 exports.Prisma.ModelName = {
   User: 'User',
   Company: 'Company',
+  AdminsCompanies: 'AdminsCompanies',
   Worker: 'Worker',
   Admin: 'Admin',
   Incidents: 'Incidents',

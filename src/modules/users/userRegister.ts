@@ -24,9 +24,7 @@ export async function userRegister(
       email,
       password: hashedPassword,
       role: 'USER',
-      Company: {
-        connect: { companyID: CompanyID },
-      },
+      companyID: CompanyID,
     },
   });
 }

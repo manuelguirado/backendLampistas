@@ -33,7 +33,7 @@ export default async function registerAdmin(
   // ✅ Verificar que quien hace la request es admin (si se proporciona requesterId)
   if (requesterId) {
     const requester = await prisma.admin.findUnique({
-      where: { id: requesterId },
+      where: { adminID: requesterId },
     });
     if (!requester) {
       throw new Error('Only existing admins can create new admins');

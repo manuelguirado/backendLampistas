@@ -53,16 +53,29 @@ model Company {
   directions       Directions[]      @relation("CompanyDirections")
   shiftWorkers     ShiftWorker[]     @relation("CompanyShiftWorkers")
   role             Role              @default(COMPANY)
-  userID           Int?
+  userID           Int? @unique
   payments         Payments[]        @relation("CompanyPayments")
   machinery        machinery[]       @relation("CompanyMachinery")
   companyCode      String?           @db.VarChar(100)
   email            String            @unique @db.VarChar(255)
 
   Budget Budget[] @relation("CompanyBudget")
-
-
   User User[]
+
+  admins      AdminsCompanies[]  @relation("CompanyToAdminsCompanies")
+}
+model AdminsCompanies{
+  id        Int      @id @default(autoincrement())
+
+
+  Admin     Admin   @relation(fields: [adminID], references: [adminID])
+  Company   Company @relation("CompanyToAdminsCompanies", fields: [companyID], references: [companyID])
+  adminID   Int
+  companyID Int
+
+  @@unique([adminID, companyID])
+
+
 }
 
 model Worker {
@@ -81,10 +94,12 @@ model Worker {
 }
 
 model Admin {
-  id       Int    @id @default(autoincrement())
-  email    String @unique @db.VarChar(255)
-  password String @db.VarChar(255)
-  role     Role   @default(ADMIN)
+  adminID        Int      @id @default(autoincrement())
+  email     String   @unique @db.VarChar(255)
+  password  String   @db.VarChar(255)
+  role      Role     @default(ADMIN)
+
+  companies AdminsCompanies[]
 }
 
 model Incidents {

@@ -2,22 +2,30 @@ import { editCompany } from '../src/modules/admin/editCompany';
 import { registerDirections } from '../src/modules/directions/registerDirections';
 import { registerCompany } from '../src/modules/companies/registerCompany';
 import { PrismaClient } from '../generated/prisma';
+import registerAdmin from '../src/modules/admin/registerAdmin';
 jest.mock('uuid', () => ({
   v4: () => 'test-uuid',
 }));
 const prisma = new PrismaClient();
+
 describe('editCompany', () => {
+  jest.setTimeout(20000); // 20 segundos para cada test
   beforeAll(async () => {
     // Clean up all test data before tests
+    await prisma.$connect();
     await prisma.directions.deleteMany({});
     await prisma.worker.deleteMany({});
+    await prisma.adminsCompanies.deleteMany({});
     await prisma.company.deleteMany({});
+    await prisma.admin.deleteMany({});
   });
   afterAll(async () => {
     // Clean up all test data and disconnect after all tests
     await prisma.directions.deleteMany({});
     await prisma.worker.deleteMany({});
+    await prisma.adminsCompanies.deleteMany({});
     await prisma.company.deleteMany({});
+    await prisma.admin.deleteMany({});
     await prisma.$disconnect();
   });
   it("should edit a company's details successfully", async () => {
@@ -32,12 +40,17 @@ describe('editCompany', () => {
       email: 'updatedemail@example.com',
       phone: '  5550001',
     };
+    const admin = await registerAdmin(
+      `admin-${Date.now()}@test.com`,
+      'adminPassword',
+    );
     // First, register a new company
     const company = await registerCompany(
       'initialcompany',
       '12345678901',
       'test-uuid',
       'password123',
+      admin.adminID,
       directions,
     );
     const updatedCompany = await editCompany(company.companyID, updateData);

@@ -2,6 +2,7 @@ import { createMachinery } from '../src/modules/machinery/createMachinery';
 import { registerCompany } from '../src/modules/companies/registerCompany';
 import { userRegister } from '../src/modules/users/userRegister';
 import { registerDirections } from '../src/modules/directions/registerDirections';
+import registerAdmin from '../src/modules/admin/registerAdmin';
 import { PrismaClient } from '../generated/prisma';
 
 const prisma = new PrismaClient();
@@ -9,19 +10,24 @@ jest.mock('uuid', () => ({
   v4: () => 'test-uuid',
 }));
 describe('createMachinery', () => {
+  jest.setTimeout(20000); // 20 segundos para cada test
   beforeAll(async () => {
     // Clean up all test data before tests
     await prisma.machinery.deleteMany({});
     await prisma.directions.deleteMany({});
-    await prisma.company.deleteMany({});
     await prisma.user.deleteMany({});
+    await prisma.adminsCompanies.deleteMany({});
+    await prisma.admin.deleteMany({});
+    await prisma.company.deleteMany({});
   });
   afterAll(async () => {
     // Clean up all test data and disconnect after all tests
     await prisma.machinery.deleteMany({});
-    await prisma.company.deleteMany({});
-    await prisma.user.deleteMany({});
     await prisma.directions.deleteMany({});
+    await prisma.user.deleteMany({});
+    await prisma.adminsCompanies.deleteMany({});
+    await prisma.admin.deleteMany({});
+    await prisma.company.deleteMany({});
     await prisma.$disconnect();
   });
   it('should create machinery successfully with valid data', async () => {
@@ -33,6 +39,10 @@ describe('createMachinery', () => {
       'NY',
       '10001',
     );
+    const admin = await registerAdmin(
+      `admin-${Date.now()}@test.com`,
+      'adminPassword',
+    );
 
     const companyEmail = `machinery-test-company-${Date.now()}@example.com`;
     const companyPassword = 'companyPassword';
@@ -41,6 +51,7 @@ describe('createMachinery', () => {
       '1234567890',
       companyEmail,
       companyPassword,
+      admin.adminID,
       directions,
     );
     // Then, register a user for that company
