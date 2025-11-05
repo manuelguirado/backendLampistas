@@ -1,5 +1,5 @@
 import { userRegister } from '../modules/users/userRegister';
-import { userLogin } from '../auth/user/userLogin';
+import { userLogin } from '../modules/users/userLogin';
 import { createIncident } from '../modules/incidents/createIncident';
 import { findMyMachinery } from '../modules/machinery/findMymachinery';
 import { Injectable } from '@nestjs/common';

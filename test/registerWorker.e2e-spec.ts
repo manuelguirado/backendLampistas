@@ -11,6 +11,7 @@ describe('registerWorker', () => {
   beforeEach(async () => {
     // cleanup database before each test
     await prisma.$connect();
+    await prisma.incidents.deleteMany({});
     await prisma.worker.deleteMany({});
     await prisma.adminsCompanies.deleteMany({});
     await prisma.company.deleteMany({});
@@ -20,6 +21,7 @@ describe('registerWorker', () => {
 
   afterAll(async () => {
     // cleanup database after tests
+    await prisma.incidents.deleteMany({});
     await prisma.adminsCompanies.deleteMany({});
     await prisma.worker.deleteMany({});
     await prisma.company.deleteMany({});

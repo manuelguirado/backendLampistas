@@ -10,6 +10,7 @@ describe('listWorker', () => {
   jest.setTimeout(20000); // 20 segundos para cada test
   beforeAll(async () => {
     await prisma.$connect();
+    await prisma.incidents.deleteMany({});
     await prisma.worker.deleteMany({});
     await prisma.directions.deleteMany({});
     await prisma.adminsCompanies.deleteMany({});
@@ -17,6 +18,7 @@ describe('listWorker', () => {
     await prisma.admin.deleteMany({});
   });
   afterAll(async () => {
+    await prisma.incidents.deleteMany({});
     await prisma.worker.deleteMany({});
     await prisma.directions.deleteMany({});
     await prisma.adminsCompanies.deleteMany({});

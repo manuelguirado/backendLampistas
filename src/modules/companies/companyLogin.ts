@@ -1,4 +1,5 @@
 import { PrismaClient } from '../../../generated/prisma';
+import jwt, { SignOptions } from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 const prisma = new PrismaClient();
 const MAX_ATTEMPTS = 3;
@@ -37,9 +38,12 @@ export async function companyLogin(email: string, password: string) {
     if (lockUntil) throw new Error('Account locked. Try again later');
     throw new Error('Invalid password');
   }
-
+  const payload = { companyID: company.companyID, role: company.role };
+  const secret = process.env.JWT_SECRET as string;
+  const options: SignOptions = { expiresIn: '1h' };
+  const token = jwt.sign(payload, secret, options);
   // Login correcto: resetea contador
   loginAttempts.delete(email);
 
-  return company;
+  return { company, token };
 }

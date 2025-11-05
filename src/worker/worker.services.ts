@@ -14,10 +14,7 @@ export class WorkerService {
     return listAssignedIncidents(workerID);
   }
 
-  async updateStatusIncident(
-    incidentID: number,
-    status: 'PENDING' | 'IN_PROGRESS' | 'COMPLETED',
-  ) {
+  async updateStatusIncident(incidentID: number, status: string) {
     return updateStatusIncident(incidentID, status);
   }
   async myShifts(workerID: number) {

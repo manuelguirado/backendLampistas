@@ -2,16 +2,15 @@ import { Controller, Delete } from '@nestjs/common';
 import { CompanyService } from './company.service';
 import { Body, Post, Patch, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '../auth/auth.guard';
-
 @Controller('company')
 export class CompanyController {
   constructor(private readonly companyService: CompanyService) {}
-  @Post('company/login')
+  @Post('CompanyLogin')
   companyLogin(@Body() body: { email: string; password: string }) {
     const { email, password } = body;
     return this.companyService.companyLogin(email, password);
   }
-  @Post('company/register')
+  @Post('CompanyRegister')
   registerCompany(
     @Body()
     body: {
@@ -39,7 +38,7 @@ export class CompanyController {
     );
   }
 
-  @Post('company/registerWorker')
+  @Post('RegisterWorker')
   registerWorker(
     @Body()
     body: {
@@ -53,20 +52,24 @@ export class CompanyController {
     return this.companyService.registerWorker(email, password, name, companyID);
   }
   @UseGuards(AuthGuard)
-  @Patch('company/editWorker')
+  @Patch('editWorker')
   editWorker(
-    workerID,
-    data: { email?: string; name?: string; password?: string },
+    @Body()
+    body: {
+      workerID: number;
+      data: { email?: string; name?: string; password?: string };
+    },
   ) {
+    const { workerID, data } = body;
     return this.companyService.editWorker(workerID, data);
   }
   @UseGuards(AuthGuard)
-  @Delete('company/deleteWorker')
-  deleteWorker(workerID: number) {
-    return this.companyService.eliminateWorker(workerID);
+  @Delete('deleteWorker')
+  deleteWorker(@Body() body: { workerID: number }) {
+    return this.companyService.eliminateWorker(body.workerID);
   }
   @UseGuards(AuthGuard)
-  @Post('company/createBudget')
+  @Post('CreateBudget')
   createBudget(
     @Body()
     body: {
@@ -99,13 +102,13 @@ export class CompanyController {
     );
   }
   @UseGuards(AuthGuard)
-  @Post('company/listWorker')
+  @Post('listWorker')
   listWorker(@Body() body: { companyID: number }) {
     const { companyID } = body;
     return this.companyService.listWorker(companyID);
   }
   @UseGuards(AuthGuard)
-  @Post('company/assignIncident')
+  @Post('assignIncident')
   assignIncident(
     @Body()
     body: {
@@ -117,7 +120,7 @@ export class CompanyController {
     return this.companyService.assignIncident(incidentID, workerID);
   }
   @UseGuards(AuthGuard)
-  @Post('company/createMachinery')
+  @Post('createMachinery')
   createMachinery(
     @Body()
     body: {
@@ -156,7 +159,7 @@ export class CompanyController {
     );
   }
   @UseGuards(AuthGuard)
-  @Post('company/assignShiftWorker')
+  @Post('assignShiftWorker')
   assignShiftWorker(
     @Body()
     body: {

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Query } from '@nestjs/common';
 import { WorkerService } from './worker.services';
 
 @Controller('worker')
@@ -10,24 +10,18 @@ export class WorkerController {
     return this.workerService.workerLogin(email, password);
   }
   @Get('worker/assignedIncidents')
-  async listAssignedIncidents(@Body() body: { workerID: number }) {
-    const { workerID } = body;
+  async listAssignedIncidents(@Query('workerID') workerID: number) {
     return this.workerService.listAssignedIncidents(workerID);
   }
   @Patch('worker/updateIncidentStatus')
-  async updateStatusIncident(
-    @Body()
-    body: {
-      incidentID: number;
-      status: 'PENDING' | 'IN_PROGRESS' | 'COMPLETED';
-    },
+  async updateIncidentStatus(
+    @Body() body: { incidentID: number; status: string },
   ) {
     const { incidentID, status } = body;
     return this.workerService.updateStatusIncident(incidentID, status);
   }
   @Get('worker/myShifts')
-  async myShifts(@Body() body: { workerID: number }) {
-    const { workerID } = body;
+  async myShifts(@Query('workerID') workerID: number) {
     return this.workerService.myShifts(workerID);
   }
 }

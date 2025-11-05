@@ -10,6 +10,7 @@ describe('findMyMachinery', () => {
   jest.setTimeout(20000); // 20 segundos para cada test
   beforeAll(async () => {
     await prisma.$connect();
+    await prisma.incidents.deleteMany({});
     await prisma.machinery.deleteMany({});
     await prisma.directions.deleteMany({});
     await prisma.user.deleteMany({});
@@ -18,6 +19,7 @@ describe('findMyMachinery', () => {
     await prisma.admin.deleteMany({});
   });
   afterAll(async () => {
+    await prisma.incidents.deleteMany({});
     await prisma.machinery.deleteMany({});
     await prisma.directions.deleteMany({});
     await prisma.user.deleteMany({});

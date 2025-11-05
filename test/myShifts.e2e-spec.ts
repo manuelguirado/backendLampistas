@@ -12,6 +12,7 @@ describe('myShifts', () => {
 
   beforeAll(async () => {
     await prisma.$connect();
+    await prisma.incidents.deleteMany({});
     await prisma.shiftSchedule.deleteMany({});
     await prisma.worker.deleteMany({});
     await prisma.adminsCompanies.deleteMany({});
@@ -21,6 +22,7 @@ describe('myShifts', () => {
   });
 
   afterAll(async () => {
+    await prisma.incidents.deleteMany({});
     await prisma.shiftSchedule.deleteMany({});
     await prisma.worker.deleteMany({});
     await prisma.adminsCompanies.deleteMany({});

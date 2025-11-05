@@ -1,3 +1,4 @@
+import jwt from 'jsonwebtoken';
 import { PrismaClient } from '../generated/prisma';
 import { companyLogin } from '../src/modules/companies/companyLogin';
 import bcrypt from 'bcryptjs';
@@ -6,11 +7,13 @@ const prisma = new PrismaClient();
 describe('Company login', () => {
   beforeEach(async () => {
     // Clean up all test data before each test
+    await prisma.incidents.deleteMany({});
     await prisma.company.deleteMany({});
     await prisma.user.deleteMany({});
   });
   afterAll(async () => {
     // Clean up all test data and disconnect after all tests
+    await prisma.incidents.deleteMany({});
     await prisma.company.deleteMany({});
     await prisma.user.deleteMany({});
     await prisma.$disconnect();
@@ -20,7 +23,7 @@ describe('Company login', () => {
     const password = 'companySecurePassword';
     const email = `company-login-test-${Date.now()}-1@example.com`;
 
-    await prisma.company.create({
+    const company = await prisma.company.create({
       data: {
         name: companyName,
         email,
@@ -28,9 +31,10 @@ describe('Company login', () => {
         phone: '123456789',
       },
     });
-
+    expect(company).toBeDefined();
     const response = await companyLogin(email, password);
-    expect(response.name).toBe(companyName);
+    expect(company.name).toBe(companyName);
+    expect(response).toBeDefined();
   });
   it('Should throw an error if company does not exist', async () => {
     const email = `nonexisting-company-${Date.now()}@example.com`;
@@ -110,5 +114,28 @@ describe('Company login', () => {
     await expect(companyLogin(email, wrongPassword)).rejects.toThrow(
       'Account locked. Try again later',
     );
+  });
+  it('should verify the jwt token upon successful login', async () => {
+    const companyName = `company-login-test-${Date.now()}-5`;
+    const password = 'companySecurePassword';
+    const email = `company-login-test-${Date.now()}-5@example.com`;
+    const company = await prisma.company.create({
+      data: {
+        name: companyName,
+        email,
+        password: await bcrypt.hash(password, 10),
+        phone: '123456789',
+      },
+    });
+    const response = await companyLogin(email, password);
+    expect(response).toBeDefined();
+    expect(response.token).toBeDefined();
+    console.log(response.token);
+
+    // Verify the token
+    const secret = process.env.JWT_SECRET as string;
+    const decoded = jwt.verify(response.token, secret);
+    expect(decoded).toBeDefined();
+    expect(company).toBeDefined();
   });
 });

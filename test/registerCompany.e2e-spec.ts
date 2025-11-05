@@ -8,6 +8,8 @@ describe('Company registration', () => {
   beforeAll(async () => {
     // Setup code before all tests run
     await prisma.$connect();
+    await prisma.incidents.deleteMany({});
+    await prisma.worker.deleteMany({});
     await prisma.adminsCompanies.deleteMany({});
     await prisma.company.deleteMany({});
     await prisma.admin.deleteMany({});
@@ -16,6 +18,8 @@ describe('Company registration', () => {
 
   afterAll(async () => {
     // Cleanup code after all tests run
+    await prisma.incidents.deleteMany({});
+    await prisma.worker.deleteMany({});
     await prisma.adminsCompanies.deleteMany({});
     await prisma.company.deleteMany({});
     await prisma.admin.deleteMany({});

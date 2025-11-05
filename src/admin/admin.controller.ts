@@ -1,5 +1,5 @@
-import { Controller, Body, Post, Get, Patch, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '../auth/auth.guard';
+import { Controller, Body, Post, Get, Patch, UseGuards } from '@nestjs/common';
 
 import { adminServices } from './admin.services';
 @Controller('admin')
