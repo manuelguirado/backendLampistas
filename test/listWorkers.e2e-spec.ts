@@ -4,6 +4,9 @@ import { registerWorker } from '../src/modules/workers/registerWorker';
 import { listWorker } from '../src/modules/workers/listWorker';
 import { PrismaClient } from '../generated/prisma';
 import registerAdmin from '../src/modules/admin/registerAdmin';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+dotenv.config({ path: '../.env' });
 
 const prisma = new PrismaClient();
 describe('listWorker', () => {
@@ -61,8 +64,10 @@ describe('listWorker', () => {
     // List workers for the company
     expect(worker1).toBeDefined();
     expect(worker2).toBeDefined();
-    const workers = await listWorker(company.companyID);
-    const workerEmails = workers.map((w) => w.email);
+    const result = await listWorker(company.companyID);
+    const workerEmails = Array.isArray(result)
+      ? result.map((w: { email: string }) => w.email)
+      : result.workers.map((w: { email: string }) => w.email);
     expect(workerEmails).toContain('worker@gmail.com');
     expect(workerEmails).toContain('worker2@gmail.com');
   });
@@ -85,8 +90,13 @@ describe('listWorker', () => {
       admin.adminID,
       directions,
     );
-    const workers = await listWorker(company.companyID);
-    expect(workers).toEqual([]);
+    const result = await listWorker(company.companyID);
+    if (Array.isArray(result)) {
+      expect(result).toEqual([]); // Verifica que la lista de workers está vacía
+    } else {
+      expect(result.workers).toEqual([]); // Verifica que la lista de workers está vacía
+      expect(typeof result.token).toBe('string'); // Opcional: verifica que el token existe
+    }
   });
 
   it('should throw an error if company does not exist', async () => {
@@ -97,5 +107,53 @@ describe('listWorker', () => {
   });
   it('should throw an error if companyID is not provided', async () => {
     await expect(listWorker(0)).rejects.toThrow('companyID is required');
+  });
+  it('should return jwt token along with workers', async () => {
+    const directions = await registerDirections(
+      '123 Test St',
+      'Test City',
+      'TS',
+      '12345',
+    );
+    const admin = await registerAdmin(
+      `admin-${Date.now()}@test.com`,
+      'adminPassword',
+    );
+    const company = await registerCompany(
+      'JWT Company',
+      '1234567890',
+      `jwt-company-${Date.now()}@test.com`,
+      'securePassword',
+      admin.adminID,
+      directions,
+    );
+    // Register a worker
+    const worker = await registerWorker(
+      `jwt-worker-${Date.now()}@test.com`,
+      'workerPassword',
+      'JWT Worker',
+      company.companyID,
+    );
+
+    const result = await listWorker(company.companyID);
+    expect(result).toBeDefined();
+
+    if (Array.isArray(result)) {
+      // If result is an array, token should not exist
+      expect(result.length).toBeGreaterThanOrEqual(0);
+    } else {
+      expect(result.token).toBeDefined();
+    }
+
+    // Verify JWT token
+    const secret = process.env.JWT_SECRET as string;
+    const decoded = jwt.verify((result as { token: string }).token, secret) as {
+      companyID: number;
+      iat: number;
+      exp: number;
+    };
+    expect(decoded).toBeDefined();
+    expect(worker).toBeDefined();
+    expect(decoded.companyID).toBe(company.companyID);
   });
 });

@@ -4,7 +4,9 @@ import { userRegister } from '../src/modules/users/userRegister';
 import { registerDirections } from '../src/modules/directions/registerDirections';
 import registerAdmin from '../src/modules/admin/registerAdmin';
 import { PrismaClient } from '../generated/prisma';
-
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+dotenv.config({ path: '../.env' });
 const prisma = new PrismaClient();
 jest.mock('uuid', () => ({
   v4: () => 'test-uuid',
@@ -69,6 +71,7 @@ describe('createMachinery', () => {
       company.name,
       'Construction',
       company.companyID,
+      'SN12345',
     );
     expect(machinery).toBeDefined();
     expect(machinery.name).toBe('Excavator');
@@ -86,7 +89,61 @@ describe('createMachinery', () => {
         'Test Company',
         'Construction',
         1,
+        'SN12345',
       ),
     ).rejects.toThrow('All fields are required');
+  });
+  it('should return jwt token upon machinery creation', async () => {
+    // First, register a company
+    const directions = await registerDirections(
+      '456 Another St',
+      'Gotham',
+      'IL',
+      '60601',
+    );
+    const admin = await registerAdmin(
+      `admin-${Date.now()}@test.com`,
+      'adminPassword',
+    );
+    const companyEmail = `jwt-test-company-${Date.now()}@example.com`;
+    const companyPassword = 'companyPassword';
+    const company = await registerCompany(
+      'JWT Test Company',
+      '0987654321',
+      companyEmail,
+      companyPassword,
+      admin.adminID,
+      directions,
+    );
+    // Then, register a user for that company
+    const userEmail = `jwt-test-user-${Date.now()}@example.com`;
+    const userPassword = 'userPassword';
+    const user = await userRegister('jwtTestUser', userEmail, userPassword);
+    // Now, create machinery
+    const machineryWithToken = await createMachinery(
+      'Bulldozer',
+      'Heavy duty bulldozer',
+      new Date('2024-10-01'),
+      new Date('2024-09-01'),
+      new Date('2024-02-20'),
+      user.userID,
+      company.name,
+      'Construction',
+      company.companyID,
+      'ABC123',
+    );
+    expect(machineryWithToken).toBeDefined();
+    const token = machineryWithToken.token;
+    expect(token).toBeDefined();
+    // Verify JWT token
+    const secret = process.env.JWT_SECRET as string;
+    const decoded = jwt.verify(token, secret) as {
+      companyID: number;
+      role: string;
+      iat: number;
+      exp: number;
+    };
+    expect(decoded.companyID).toBe(company.companyID);
+    expect(decoded.role).toBe('COMPANY');
   });
 });

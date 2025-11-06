@@ -3,6 +3,9 @@ import { registerWorker } from '../src/modules/workers/registerWorker';
 import { registerCompany } from '../src/modules/companies/registerCompany';
 import { registerDirections } from '../src/modules/directions/registerDirections';
 import registerAdmin from '../src/modules/admin/registerAdmin';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+dotenv.config({ path: '../.env' });
 
 const prisma = new PrismaClient();
 
@@ -108,5 +111,51 @@ describe('registerWorker', () => {
     await expect(
       registerWorker(email, password, name, company.companyID),
     ).rejects.toThrow('Worker already exists');
+  });
+  it('should generate a valid JWT token upon registration', async () => {
+    const email = `worker-jwt-${Date.now()}@example.com`;
+    const name = 'JWT Worker';
+    const password = 'workerPassword';
+    const directions = await registerDirections(
+      '123 JWT St,  JWT City, JC 12345',
+      'JWT City',
+      'JC',
+      '12345',
+    );
+    const admin = await registerAdmin(
+      `admin-${Date.now()}@test.com`,
+      'adminPassword',
+    );
+    // First, create a company to associate the worker with
+    const company = await registerCompany(
+      `JWT Test Company ${Date.now()}`,
+      '1234567890',
+      `jwt-company-${Date.now()}@example.com`,
+      'compPassword',
+      admin.adminID,
+      directions,
+    );
+
+    const result = await registerWorker(
+      email,
+      password,
+      name,
+      company.companyID,
+    );
+
+    expect(result).toBeDefined();
+    expect(result.token).toBeDefined();
+
+    // Verify the token
+    const secret = process.env.JWT_SECRET as string;
+    const decoded = jwt.verify(result.token, secret) as {
+      workerID: string;
+      companyID: string;
+      iat: number;
+      exp: number;
+    };
+    expect(decoded).toBeDefined();
+    expect(decoded.workerID).toBe(result.workerid);
+    expect(decoded.companyID).toBe(company.companyID);
   });
 });

@@ -4,6 +4,9 @@ import { registerWorker } from '../src/modules/workers/registerWorker';
 import { registerCompany } from '../src/modules/companies/registerCompany';
 import { registerDirections } from '../src/modules/directions/registerDirections';
 import registerAdmin from '../src/modules/admin/registerAdmin';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+dotenv.config({ path: '../../.env' });
 const prisma = new PrismaClient();
 describe('editWorker', () => {
   jest.setTimeout(20000); // 20 segundos para cada test
@@ -70,5 +73,47 @@ describe('editWorker', () => {
     await expect(
       editWorker(undefined as unknown as number, { name: 'No ID' }),
     ).rejects.toThrow('workerID and update data are required');
+  });
+  it('should generate a valid JWT token upon successful edit', async () => {
+    const directions = await registerDirections(
+      'calle inventada 456, Ciudad Inventada, Estado Inventado, 67890',
+      'Ciudad Inventada',
+      'Estado Inventado',
+      '67890',
+    );
+
+    const admin = await registerAdmin(
+      `admin2-${Date.now()}@test.com`,
+      'adminPassword',
+    );
+    const company = await registerCompany(
+      'JWT Worker Company',
+      '0987654321',
+      `jwt-company-${Date.now()}@test.com`,
+      'securePassword',
+      admin.adminID,
+      directions,
+    );
+    const registeredWorker = await registerWorker(
+      'JWT Worker',
+      '0987654321',
+      `jwt-worker-${Date.now()}`,
+      company.companyID,
+    );
+    const updates = {
+      name: 'JWT Updated Worker',
+    };
+    const updatedWorker = await editWorker(registeredWorker.workerid, updates);
+    expect(updatedWorker.token).toBeDefined();
+    // Verify JWT token
+    const secret = process.env.JWT_SECRET as string;
+    const decoded = jwt.verify(updatedWorker.token, secret) as {
+      workerID: number;
+      role: string;
+      iat: number;
+      exp: number;
+    };
+    expect(decoded.workerID).toBe(registeredWorker.workerid);
+    expect(decoded.role).toBe(registeredWorker.role);
   });
 });

@@ -1,5 +1,7 @@
-import { Worker } from './../../../generated/prisma/index.d';
 import { PrismaClient } from '../../../generated/prisma';
+import jwt, { SignOptions } from 'jsonwebtoken';
+import dotenv from 'dotenv';
+dotenv.config({ path: '../../../.env' });
 const prisma = new PrismaClient();
 
 export async function listAssignedIncidents(workerid: number) {
@@ -38,6 +40,14 @@ export async function listAssignedIncidents(workerid: number) {
     reportedByUserID: incident.userID,
     assignedWorkerID: incident.assignedWorkerID,
   }));
-
-  return mappedIncidents;
+  try {
+    const payload = { workerid: worker.workerid, role: worker.role };
+    const secret = process.env.JWT_SECRET as string;
+    const options: SignOptions = { expiresIn: '1h' };
+    const token = jwt.sign(payload, secret, options);
+    return { assignedIncidents: mappedIncidents, token };
+  } catch (error) {
+    console.error('Error generating JWT:', error);
+    throw new Error('Internal server error');
+  }
 }

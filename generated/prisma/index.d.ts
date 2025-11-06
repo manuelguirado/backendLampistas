@@ -448,8 +448,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.18.0
-   * Query Engine version: 34b5a692b7bd79939a9a2c3ef97d816e749cda2f
+   * Prisma Client JS version: 6.19.0
+   * Query Engine version: 2ba551f319ab1df4bc874a89965d8b3641056773
    */
   export type PrismaVersion = {
     client: string
@@ -20533,6 +20533,7 @@ export namespace Prisma {
     clientID: number | null
     companyName: string | null
     companyID: number | null
+    serialNumber: string | null
   }
 
   export type MachineryMaxAggregateOutputType = {
@@ -20546,6 +20547,7 @@ export namespace Prisma {
     clientID: number | null
     companyName: string | null
     companyID: number | null
+    serialNumber: string | null
   }
 
   export type MachineryCountAggregateOutputType = {
@@ -20559,6 +20561,7 @@ export namespace Prisma {
     clientID: number
     companyName: number
     companyID: number
+    serialNumber: number
     _all: number
   }
 
@@ -20586,6 +20589,7 @@ export namespace Prisma {
     clientID?: true
     companyName?: true
     companyID?: true
+    serialNumber?: true
   }
 
   export type MachineryMaxAggregateInputType = {
@@ -20599,6 +20603,7 @@ export namespace Prisma {
     clientID?: true
     companyName?: true
     companyID?: true
+    serialNumber?: true
   }
 
   export type MachineryCountAggregateInputType = {
@@ -20612,6 +20617,7 @@ export namespace Prisma {
     clientID?: true
     companyName?: true
     companyID?: true
+    serialNumber?: true
     _all?: true
   }
 
@@ -20712,6 +20718,7 @@ export namespace Prisma {
     clientID: number
     companyName: string
     companyID: number
+    serialNumber: string
     _count: MachineryCountAggregateOutputType | null
     _avg: MachineryAvgAggregateOutputType | null
     _sum: MachinerySumAggregateOutputType | null
@@ -20744,6 +20751,7 @@ export namespace Prisma {
     clientID?: boolean
     companyName?: boolean
     companyID?: boolean
+    serialNumber?: boolean
     client?: boolean | UserDefaultArgs<ExtArgs>
     company?: boolean | CompanyDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["machinery"]>
@@ -20759,6 +20767,7 @@ export namespace Prisma {
     clientID?: boolean
     companyName?: boolean
     companyID?: boolean
+    serialNumber?: boolean
     client?: boolean | UserDefaultArgs<ExtArgs>
     company?: boolean | CompanyDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["machinery"]>
@@ -20774,6 +20783,7 @@ export namespace Prisma {
     clientID?: boolean
     companyName?: boolean
     companyID?: boolean
+    serialNumber?: boolean
     client?: boolean | UserDefaultArgs<ExtArgs>
     company?: boolean | CompanyDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["machinery"]>
@@ -20789,9 +20799,10 @@ export namespace Prisma {
     clientID?: boolean
     companyName?: boolean
     companyID?: boolean
+    serialNumber?: boolean
   }
 
-  export type machineryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "maintenanceDate" | "lastInspectionDate" | "installedAt" | "machineType" | "clientID" | "companyName" | "companyID", ExtArgs["result"]["machinery"]>
+  export type machineryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "maintenanceDate" | "lastInspectionDate" | "installedAt" | "machineType" | "clientID" | "companyName" | "companyID" | "serialNumber", ExtArgs["result"]["machinery"]>
   export type machineryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     client?: boolean | UserDefaultArgs<ExtArgs>
     company?: boolean | CompanyDefaultArgs<ExtArgs>
@@ -20822,6 +20833,7 @@ export namespace Prisma {
       clientID: number
       companyName: string
       companyID: number
+      serialNumber: string
     }, ExtArgs["result"]["machinery"]>
     composites: {}
   }
@@ -21257,6 +21269,7 @@ export namespace Prisma {
     readonly clientID: FieldRef<"machinery", 'Int'>
     readonly companyName: FieldRef<"machinery", 'String'>
     readonly companyID: FieldRef<"machinery", 'Int'>
+    readonly serialNumber: FieldRef<"machinery", 'String'>
   }
     
 
@@ -21883,7 +21896,8 @@ export namespace Prisma {
     machineType: 'machineType',
     clientID: 'clientID',
     companyName: 'companyName',
-    companyID: 'companyID'
+    companyID: 'companyID',
+    serialNumber: 'serialNumber'
   };
 
   export type MachineryScalarFieldEnum = (typeof MachineryScalarFieldEnum)[keyof typeof MachineryScalarFieldEnum]
@@ -23120,6 +23134,7 @@ export namespace Prisma {
     clientID?: IntFilter<"machinery"> | number
     companyName?: StringFilter<"machinery"> | string
     companyID?: IntFilter<"machinery"> | number
+    serialNumber?: StringFilter<"machinery"> | string
     client?: XOR<UserScalarRelationFilter, UserWhereInput>
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
   }
@@ -23135,12 +23150,14 @@ export namespace Prisma {
     clientID?: SortOrder
     companyName?: SortOrder
     companyID?: SortOrder
+    serialNumber?: SortOrder
     client?: UserOrderByWithRelationInput
     company?: CompanyOrderByWithRelationInput
   }
 
   export type machineryWhereUniqueInput = Prisma.AtLeast<{
     id?: number
+    serialNumber?: string
     AND?: machineryWhereInput | machineryWhereInput[]
     OR?: machineryWhereInput[]
     NOT?: machineryWhereInput | machineryWhereInput[]
@@ -23155,7 +23172,7 @@ export namespace Prisma {
     companyID?: IntFilter<"machinery"> | number
     client?: XOR<UserScalarRelationFilter, UserWhereInput>
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
-  }, "id">
+  }, "id" | "serialNumber">
 
   export type machineryOrderByWithAggregationInput = {
     id?: SortOrder
@@ -23168,6 +23185,7 @@ export namespace Prisma {
     clientID?: SortOrder
     companyName?: SortOrder
     companyID?: SortOrder
+    serialNumber?: SortOrder
     _count?: machineryCountOrderByAggregateInput
     _avg?: machineryAvgOrderByAggregateInput
     _max?: machineryMaxOrderByAggregateInput
@@ -23189,6 +23207,7 @@ export namespace Prisma {
     clientID?: IntWithAggregatesFilter<"machinery"> | number
     companyName?: StringWithAggregatesFilter<"machinery"> | string
     companyID?: IntWithAggregatesFilter<"machinery"> | number
+    serialNumber?: StringWithAggregatesFilter<"machinery"> | string
   }
 
   export type UserCreateInput = {
@@ -24245,6 +24264,7 @@ export namespace Prisma {
     installedAt: Date | string
     machineType: string
     companyName: string
+    serialNumber: string
     client: UserCreateNestedOneWithoutMachineryInput
     company: CompanyCreateNestedOneWithoutMachineryInput
   }
@@ -24260,6 +24280,7 @@ export namespace Prisma {
     clientID: number
     companyName: string
     companyID: number
+    serialNumber: string
   }
 
   export type machineryUpdateInput = {
@@ -24270,6 +24291,7 @@ export namespace Prisma {
     installedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     machineType?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
+    serialNumber?: StringFieldUpdateOperationsInput | string
     client?: UserUpdateOneRequiredWithoutMachineryNestedInput
     company?: CompanyUpdateOneRequiredWithoutMachineryNestedInput
   }
@@ -24285,6 +24307,7 @@ export namespace Prisma {
     clientID?: IntFieldUpdateOperationsInput | number
     companyName?: StringFieldUpdateOperationsInput | string
     companyID?: IntFieldUpdateOperationsInput | number
+    serialNumber?: StringFieldUpdateOperationsInput | string
   }
 
   export type machineryCreateManyInput = {
@@ -24298,6 +24321,7 @@ export namespace Prisma {
     clientID: number
     companyName: string
     companyID: number
+    serialNumber: string
   }
 
   export type machineryUpdateManyMutationInput = {
@@ -24308,6 +24332,7 @@ export namespace Prisma {
     installedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     machineType?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
+    serialNumber?: StringFieldUpdateOperationsInput | string
   }
 
   export type machineryUncheckedUpdateManyInput = {
@@ -24321,6 +24346,7 @@ export namespace Prisma {
     clientID?: IntFieldUpdateOperationsInput | number
     companyName?: StringFieldUpdateOperationsInput | string
     companyID?: IntFieldUpdateOperationsInput | number
+    serialNumber?: StringFieldUpdateOperationsInput | string
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -25406,6 +25432,7 @@ export namespace Prisma {
     clientID?: SortOrder
     companyName?: SortOrder
     companyID?: SortOrder
+    serialNumber?: SortOrder
   }
 
   export type machineryAvgOrderByAggregateInput = {
@@ -25425,6 +25452,7 @@ export namespace Prisma {
     clientID?: SortOrder
     companyName?: SortOrder
     companyID?: SortOrder
+    serialNumber?: SortOrder
   }
 
   export type machineryMinOrderByAggregateInput = {
@@ -25438,6 +25466,7 @@ export namespace Prisma {
     clientID?: SortOrder
     companyName?: SortOrder
     companyID?: SortOrder
+    serialNumber?: SortOrder
   }
 
   export type machinerySumOrderByAggregateInput = {
@@ -27504,6 +27533,7 @@ export namespace Prisma {
     installedAt: Date | string
     machineType: string
     companyName: string
+    serialNumber: string
     company: CompanyCreateNestedOneWithoutMachineryInput
   }
 
@@ -27517,6 +27547,7 @@ export namespace Prisma {
     machineType: string
     companyName: string
     companyID: number
+    serialNumber: string
   }
 
   export type machineryCreateOrConnectWithoutClientInput = {
@@ -27824,6 +27855,7 @@ export namespace Prisma {
     clientID?: IntFilter<"machinery"> | number
     companyName?: StringFilter<"machinery"> | string
     companyID?: IntFilter<"machinery"> | number
+    serialNumber?: StringFilter<"machinery"> | string
   }
 
   export type IncidentsUpsertWithWhereUniqueWithoutUserInput = {
@@ -28204,6 +28236,7 @@ export namespace Prisma {
     installedAt: Date | string
     machineType: string
     companyName: string
+    serialNumber: string
     client: UserCreateNestedOneWithoutMachineryInput
   }
 
@@ -28217,6 +28250,7 @@ export namespace Prisma {
     machineType: string
     clientID: number
     companyName: string
+    serialNumber: string
   }
 
   export type machineryCreateOrConnectWithoutCompanyInput = {
@@ -31485,6 +31519,7 @@ export namespace Prisma {
     machineType: string
     companyName: string
     companyID: number
+    serialNumber: string
   }
 
   export type IncidentsCreateManyUserInput = {
@@ -31569,6 +31604,7 @@ export namespace Prisma {
     installedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     machineType?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
+    serialNumber?: StringFieldUpdateOperationsInput | string
     company?: CompanyUpdateOneRequiredWithoutMachineryNestedInput
   }
 
@@ -31582,6 +31618,7 @@ export namespace Prisma {
     machineType?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyID?: IntFieldUpdateOperationsInput | number
+    serialNumber?: StringFieldUpdateOperationsInput | string
   }
 
   export type machineryUncheckedUpdateManyWithoutClientInput = {
@@ -31594,6 +31631,7 @@ export namespace Prisma {
     machineType?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyID?: IntFieldUpdateOperationsInput | number
+    serialNumber?: StringFieldUpdateOperationsInput | string
   }
 
   export type IncidentsUpdateWithoutUserInput = {
@@ -31758,6 +31796,7 @@ export namespace Prisma {
     machineType: string
     clientID: number
     companyName: string
+    serialNumber: string
   }
 
   export type BudgetCreateManyCompanyInput = {
@@ -32012,6 +32051,7 @@ export namespace Prisma {
     installedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     machineType?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
+    serialNumber?: StringFieldUpdateOperationsInput | string
     client?: UserUpdateOneRequiredWithoutMachineryNestedInput
   }
 
@@ -32025,6 +32065,7 @@ export namespace Prisma {
     machineType?: StringFieldUpdateOperationsInput | string
     clientID?: IntFieldUpdateOperationsInput | number
     companyName?: StringFieldUpdateOperationsInput | string
+    serialNumber?: StringFieldUpdateOperationsInput | string
   }
 
   export type machineryUncheckedUpdateManyWithoutCompanyInput = {
@@ -32037,6 +32078,7 @@ export namespace Prisma {
     machineType?: StringFieldUpdateOperationsInput | string
     clientID?: IntFieldUpdateOperationsInput | number
     companyName?: StringFieldUpdateOperationsInput | string
+    serialNumber?: StringFieldUpdateOperationsInput | string
   }
 
   export type BudgetUpdateWithoutCompanyInput = {

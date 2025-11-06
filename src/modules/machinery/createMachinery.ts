@@ -1,4 +1,7 @@
 import { PrismaClient } from '../../../generated/prisma';
+import jwt, { SignOptions } from 'jsonwebtoken';
+import dotenv from 'dotenv';
+dotenv.config({ path: '../../../.env' });
 const prisma = new PrismaClient();
 export async function createMachinery(
   name: string,
@@ -10,6 +13,7 @@ export async function createMachinery(
   companyName: string,
   machineType: string,
   companyID: number,
+  serialNumber: string,
 ) {
   if (
     !name ||
@@ -20,7 +24,8 @@ export async function createMachinery(
     !clientId ||
     !companyName ||
     !machineType ||
-    !companyID
+    !companyID ||
+    !serialNumber
   ) {
     throw new Error('All fields are required');
   }
@@ -35,7 +40,16 @@ export async function createMachinery(
       companyName,
       machineType,
       companyID,
+      serialNumber,
     },
   });
-  return machinery;
+  try {
+    const payload = { companyID: companyID, role: 'COMPANY' };
+    const secret = process.env.JWT_SECRET as string;
+    const options: SignOptions = { expiresIn: '1h' };
+    const token = jwt.sign(payload, secret, options);
+    return { token, ...machinery };
+  } catch (error) {
+    throw new Error('Error generating token', error);
+  }
 }

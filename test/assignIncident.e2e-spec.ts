@@ -5,6 +5,9 @@ import { registerDirections } from '../src/modules/directions/registerDirections
 import { registerCompany } from '../src/modules/companies/registerCompany';
 import registerAdmin from '../src/modules/admin/registerAdmin';
 import { PrismaClient } from '../generated/prisma';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+dotenv.config({ path: '../.env' });
 const prisma = new PrismaClient();
 
 describe('assignIncident', () => {
@@ -139,4 +142,72 @@ it('should throw an error when assigning to a non-existent worker', async () => 
   await expect(
     assignIncident(incident.IncidentsID, 9999), // workerID que no existe
   ).rejects.toThrow('Worker not found');
+});
+it('should return JWT token upon successful assignment', async () => {
+  // ✅ Crear company
+  const directions = await registerDirections(
+    '123 Test St, Test City, TS 12345',
+    'Test City',
+    'TS',
+    '12345',
+  );
+  const admin = await registerAdmin(
+    `admin-${Date.now()}@test.com`,
+    'adminPassword',
+  );
+  const company = await registerCompany(
+    'company test-jwt',
+    '1234567890',
+    `company-test-${Date.now()}@example.com`,
+    'pasword123',
+    admin.adminID,
+    directions,
+  );
+
+  // ✅ Crear usuario
+  const user = await userRegister(
+    'Test User1',
+    `user-${Date.now()}@example.com`,
+    'userPassword',
+  );
+
+  // ✅ Crear worker
+  const worker = await registerWorker(
+    `worker-${Date.now()}@example.com`,
+    'workerPassword',
+    'Worker Name',
+    company.companyID,
+  );
+
+  // ✅ Crear incidente
+  const incident = await prisma.incidents.create({
+    data: {
+      title: 'Test Incident',
+      description: 'Incident details',
+      userID: user.userID,
+      companyID: company.companyID,
+      status: 'OPEN',
+      priority: 'MEDIUM',
+      urgency: false,
+    },
+  });
+
+  // ✅ Asignar incidente al worker
+  const result = await assignIncident(incident.IncidentsID, worker.workerid);
+
+  // ✅ Verificar que se retorna un token JWT válido
+  expect(result).toBeDefined();
+  expect(result.token).toBeDefined();
+
+  const jwtSecret = process.env.JWT_SECRET as string;
+  // Verificar validez del token
+  const decoded = jwt.verify(result.token, jwtSecret) as {
+    incidentID: number;
+    workerID: number;
+    iat: number;
+    exp: number;
+  };
+
+  expect(decoded.incidentID).toBe(incident.IncidentsID);
+  expect(decoded.workerID).toBe(worker.workerid);
 });

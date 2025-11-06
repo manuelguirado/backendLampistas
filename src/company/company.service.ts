@@ -84,6 +84,7 @@ export class CompanyService {
     companyName: string,
     machineType: string,
     companyID: number,
+    serialNumber: string,
   ) {
     return createMachinery(
       name,
@@ -95,6 +96,7 @@ export class CompanyService {
       companyName,
       machineType,
       companyID,
+      serialNumber,
     );
   }
   async assignShiftWorker(

@@ -3,6 +3,9 @@ import { registerDirections } from '../src/modules/directions/registerDirections
 import { registerCompany } from '../src/modules/companies/registerCompany';
 import registerAdmin from '../src/modules/admin/registerAdmin';
 import { PrismaClient } from '../generated/prisma';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+dotenv.config({ path: '../.env' });
 jest.mock('uuid', () => ({
   v4: () => 'test-uuid',
 }));
@@ -66,5 +69,33 @@ describe('activateCompany', () => {
   });
   it('should throw an error when trying to activate a company with invalid ID', async () => {
     await expect(activateCompany(0)).rejects.toThrow('Company ID is required');
+  });
+  it('should retunr JWT token upon successful activation', async () => {
+    const directions = await registerDirections(
+      'Test Direction',
+      '123 Test St',
+      '555-1234',
+      'test-uuid',
+    );
+    const admin = await registerAdmin(
+      `admin-${Date.now()}@test.com`,
+      'adminPassword',
+    );
+    // First, register a new company
+    const company = await registerCompany(
+      'jwtcompany',
+      ' 1234567890',
+      'jwtcompany@example.com',
+      'password123',
+      admin.adminID,
+      directions,
+    );
+    // Activate the company
+    const result = await activateCompany(company.companyID);
+    expect(result).toHaveProperty('token');
+    expect(result.token).toBeDefined();
+    const secret = process.env.JWT_SECRET as string;
+    const decoded = jwt.verify(result.token, secret);
+    expect(decoded).toHaveProperty('companyID', company.companyID);
   });
 });

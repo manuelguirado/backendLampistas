@@ -4,6 +4,9 @@ import { registerDirections } from '../src/modules/directions/registerDirections
 import registerAdmin from '../src/modules/admin/registerAdmin';
 import { userRegister } from '../src/modules/users/userRegister';
 import { PrismaClient } from '../generated/prisma';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+dotenv.config({ path: '../.env' });
 const prisma = new PrismaClient();
 
 describe('companyUsers', () => {
@@ -64,9 +67,19 @@ describe('companyUsers', () => {
 
     expect(user1).toBeDefined();
     expect(user2).toBeDefined();
-    const users = await companyUsers(company.companyID);
-    expect(users).toHaveLength(2);
-    const userEmails = users.map((u) => u.email);
+    const usersResult = await companyUsers(company.companyID);
+
+    let userEmails: string[] = [];
+    if (Array.isArray(usersResult)) {
+      expect(usersResult).toHaveLength(2);
+      userEmails = usersResult.map((u: { email: string }) => u.email);
+    } else if (usersResult && Array.isArray(usersResult.users)) {
+      expect(usersResult.users).toHaveLength(2);
+      userEmails = usersResult.users.map((u: { email: string }) => u.email);
+    } else {
+      throw new Error('Unexpected result type from companyUsers');
+    }
+
     expect(userEmails).toContain(user1.email);
     expect(userEmails).toContain(user2.email);
   });
@@ -92,6 +105,54 @@ describe('companyUsers', () => {
     );
 
     const users = await companyUsers(company.companyID);
-    expect(users).toEqual([]);
+    if (Array.isArray(users)) {
+      expect(users).toHaveLength(0);
+    } else {
+      expect(users.users).toEqual([]);
+      expect(users).toHaveProperty('token');
+    }
+  });
+  it('should also return a valid JWT token', async () => {
+    const directions = await registerDirections(
+      '789 Token St, Token City, TC 11223',
+      'Token City',
+      'TC',
+      '11223',
+    );
+    const admin = await registerAdmin(
+      `admin3-${Date.now()}@test.com`,
+      'adminPassword3',
+    );
+    const company = await registerCompany(
+      'Token Test Company',
+      '5555555555',
+      `token-company-${Date.now()}@test.com`,
+      'tokenSecurePassword',
+      admin.adminID,
+      directions,
+    );
+    const user = await userRegister(
+      `token-user-${Date.now()}@test.com`,
+      'tokenUserPassword',
+      'Token User',
+      company.companyID,
+    );
+
+    expect(user).toBeDefined();
+    const result = await companyUsers(company.companyID);
+
+    if (!Array.isArray(result)) {
+      expect(result.token).toBeDefined();
+      const token = result.token;
+      // Verify JWT token
+      const secret = process.env.JWT_SECRET as string;
+      const decoded: any = jwt.verify(token, secret);
+      expect(decoded).toHaveProperty('companyID', company.companyID);
+      expect(decoded).toHaveProperty('role', company.role);
+    } else {
+      throw new Error(
+        'Expected result to be an object with a token property, but got an array.',
+      );
+    }
   });
 });

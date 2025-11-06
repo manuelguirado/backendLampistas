@@ -87,8 +87,9 @@ describe('CompanyController', () => {
       .send({ email: company.email, password: company.password })
       .expect(201);
     console.log('Login Response Body:', companyLogin.body); // Agregado para depuración
+    console.log('tokencabeceras ', companyLogin.headers.authorization); //extraer el token de las headers
 
-    const token: string = companyLogin.body.token;
+    const token: string = companyLogin.headers.authorization;
     console.log('Token:', token); // Agregado para depuración
     const response = await request
       .post('')
@@ -101,6 +102,7 @@ describe('CompanyController', () => {
       .set('Authorization', `Bearer ${token}`)
       .expect(201);
     console.log('Response Body:', response.body); // Agregado para depuración
+    console.log('Token used for request:', token); // Agregado para depuración
     expect(token).toBeDefined();
     expect(response.body).toBeDefined();
   });

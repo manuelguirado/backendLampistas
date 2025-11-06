@@ -1,5 +1,7 @@
 import { PrismaClient } from '../../../generated/prisma';
-
+import jwt, { SignOptions } from 'jsonwebtoken';
+import dotenv from 'dotenv';
+dotenv.config({ path: '../../../.env' });
 const prisma = new PrismaClient();
 
 export async function companyUsers(companyID: number) {
@@ -28,5 +30,14 @@ export async function companyUsers(companyID: number) {
       companyID,
     };
   });
-  return mapUsers;
+  try {
+    const payload = { companyID: Company.companyID, role: Company.role };
+    const secret = process.env.JWT_SECRET as string;
+    const options: SignOptions = { expiresIn: '1h' };
+    const token = jwt.sign(payload, secret, options);
+    return { token, users: mapUsers };
+  } catch (error) {
+    console.error('Error generating token:', error);
+    throw new Error('Failed to generate token');
+  }
 }

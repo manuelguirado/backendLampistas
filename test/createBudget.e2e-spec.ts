@@ -6,7 +6,9 @@ import { registerWorker } from '../src/modules/workers/registerWorker';
 import { userRegister } from '../src/modules/users/userRegister';
 import { registerDirections } from '../src/modules/directions/registerDirections';
 import registerAdmin from '../src/modules/admin/registerAdmin';
-
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+dotenv.config({ path: '../.env' });
 const prisma = new PrismaClient();
 jest.mock('uuid', () => ({
   v4: () => 'test-uuid',
@@ -84,7 +86,7 @@ describe('createBudget', () => {
 
     // Finally, create a budget for that incident
     const budget = await createBudget(
-      incident.IncidentsID,
+      incident?.IncidentsID ?? 0,
       1000,
       'Test budget description',
       user.userID,
@@ -137,7 +139,7 @@ describe('createBudget', () => {
     // Finally, attempt to create a budget with a non-existing worker
     await expect(
       createBudget(
-        incident.IncidentsID,
+        incident?.IncidentsID ?? 0,
         1000,
         'Description',
         user.userID,
@@ -199,5 +201,65 @@ describe('createBudget', () => {
         ['Item1'],
       ),
     ).rejects.toThrow('Incident not found');
+  });
+  it('should return JWT token upon successful budget creation', async () => {
+    // First, register a company
+    const directions = await registerDirections(
+      '123 Test St, Test City, TS 12345',
+      'Test City',
+      'TS',
+      '12345',
+    );
+    const admin = await registerAdmin(
+      `admin-${Date.now()}@test.com`,
+      'adminPassword',
+    );
+    const company = await registerCompany(
+      'Test Company 3',
+      '1234567890',
+      'test3@company.com',
+      'mysecurepassword',
+      admin.adminID,
+      directions,
+    );
+    // Then, register a worker
+    const worker = await registerWorker(
+      'John Doe',
+      'worker3@test.com',
+      'password123',
+      company.companyID,
+    );
+    // Finally, register a user
+    const user = await userRegister(
+      'Test User 3',
+      'user3@test.com',
+      'password123',
+    );
+    // Then, create an incident for that company
+    const incident = await createIncident(
+      'Test Incident 3',
+      'This is a test incident 3',
+      user.userID,
+      company.companyID,
+    );
+    // Finally, create a budget for that incident
+    const budget = await createBudget(
+      incident?.IncidentsID ?? 0,
+      1500,
+      'Test budget description 3',
+      user.userID,
+      company.companyID,
+      worker.workerid,
+      ['ItemA', 'ItemB'],
+    );
+    const token = budget.token;
+    expect(token).toBeDefined();
+
+    // Generate JWT token
+    const secret = process.env.JWT_SECRET as string;
+
+    const decoded: any = jwt.verify(token, secret);
+    expect(decoded).toHaveProperty('budgetID', budget.budgetID);
+    expect(decoded).toHaveProperty('companyID', company.companyID);
   });
 });

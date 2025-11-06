@@ -5,6 +5,9 @@ import { registerCompany } from '../src/modules/companies/registerCompany';
 import { registerDirections } from '../src/modules/directions/registerDirections';
 import registerAdmin from '../src/modules/admin/registerAdmin';
 import { assignShiftWorker } from '../src/modules/companies/assignShiftWorker';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+dotenv.config({ path: '../.env' });
 const prisma = new PrismaClient();
 
 describe('myShifts', () => {
@@ -72,13 +75,20 @@ describe('myShifts', () => {
     // Retrieve shifts for the worker
     const shifts = await myShifts(worker.workerid);
     expect(shifts).toBeDefined();
-    expect(shifts.length).toBe(2);
+    const shiftList = Array.isArray(shifts) ? shifts : shifts.shifts;
+    expect(shiftList.length).toBe(2);
 
-    const mappedShifts = shifts.map((shift) => ({
-      workerID: shift.workerID,
-      shiftSchedule: shift.shiftSchedule,
-      shiftType: shift.shiftType,
-    }));
+    const mappedShifts = shiftList.map(
+      (shift: {
+        workerID: number;
+        shiftSchedule: Date;
+        shiftType: string;
+      }) => ({
+        workerID: shift.workerID,
+        shiftSchedule: shift.shiftSchedule,
+        shiftType: shift.shiftType,
+      }),
+    );
 
     expect(mappedShifts).toEqual(
       expect.arrayContaining([
@@ -94,5 +104,60 @@ describe('myShifts', () => {
         }),
       ]),
     );
+  });
+  it('should return jwt token along with shifts', async () => {
+    const Directions = await registerDirections(
+      '456 Another St, Another City, AC 67890',
+      'Another City',
+      'AC',
+      '67890',
+    );
+    const admin = await registerAdmin(
+      `admin-${Date.now()}@test.com`,
+      'adminPassword',
+    );
+    const newCompany = await registerCompany(
+      `JWT Shift Test Company ${Date.now()}`,
+      '0987654321',
+      `jwt-shift-company-${Date.now()}@example.com`,
+      'compPassword',
+      admin.adminID,
+      Directions,
+    );
+
+    // Register a worker
+    const worker = await registerWorker(
+      `jwt-shift-worker-${Date.now()}@example.com`,
+      'workerPassword',
+      'JWT Shift Worker',
+      newCompany.companyID,
+    );
+
+    // Assign a shift to the worker
+    const shiftDate = new Date('2024-08-01T08:00:00Z');
+    const shiftType = 'morning';
+    await assignShiftWorker(worker.workerid, shiftDate, shiftType);
+
+    // Retrieve shifts for the worker
+    const result = await myShifts(worker.workerid);
+    expect(result).toBeDefined();
+    if (!Array.isArray(result)) {
+      expect(result.token).toBeDefined();
+
+      // Verify JWT token
+      const secret = process.env.JWT_SECRET as string;
+      const decoded = jwt.verify(result.token, secret) as {
+        workerID: number;
+        companyID: number;
+        iat: number;
+        exp: number;
+      };
+      expect(decoded.workerID).toBe(worker.workerid);
+      expect(decoded.companyID).toBe(worker.companyID);
+    } else {
+      throw new Error(
+        'Expected result to be an object with token, but got an array',
+      );
+    }
   });
 });

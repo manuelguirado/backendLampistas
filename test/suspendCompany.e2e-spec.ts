@@ -2,6 +2,9 @@ import { suspendCompany } from '../src/modules/admin/suspendCompany';
 import { registerDirections } from '../src/modules/directions/registerDirections';
 import { registerCompany } from '../src/modules/companies/registerCompany';
 import { PrismaClient } from '../generated/prisma';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+dotenv.config({ path: '../.env' });
 import registerAdmin from '../src/modules/admin/registerAdmin';
 jest.mock('uuid', () => ({
   v4: () => 'test-uuid',
@@ -91,5 +94,36 @@ describe('suspendCompany', () => {
   });
   it('should throw an error when trying to suspend a company with invalid ID', async () => {
     await expect(suspendCompany(0)).rejects.toThrow('Company ID is required');
+  });
+  it('should return JWT token with companyID when suspending a company', async () => {
+    const directions = await registerDirections(
+      'Test Direction 3',
+      '789 Test Blvd',
+      '555-9012',
+      'test-uuid-3',
+    );
+    const admin = await registerAdmin(
+      `admin-${Date.now()}@test.com`,
+      'adminPassword',
+    );
+    // First, register a new company
+    const company = await registerCompany(
+      'testcompany3',
+      '10987654321',
+      `testcompany3-${Date.now()}@example.com`,
+      'password789',
+      admin.adminID,
+      directions,
+    );
+    // Then, suspend the company
+    const suspendResult: { token: string } = await suspendCompany(
+      company.companyID,
+    );
+    const token = suspendResult.token;
+    // Finally, verify the JWT token
+    expect(token).toBeDefined();
+    const secret = process.env.JWT_SECRET || 'defaultsecret';
+    const decoded = jwt.verify(token, secret) as { companyID: number };
+    expect(decoded).toHaveProperty('companyID', company.companyID);
   });
 });

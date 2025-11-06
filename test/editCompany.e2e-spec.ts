@@ -3,6 +3,9 @@ import { registerDirections } from '../src/modules/directions/registerDirections
 import { registerCompany } from '../src/modules/companies/registerCompany';
 import { PrismaClient } from '../generated/prisma';
 import registerAdmin from '../src/modules/admin/registerAdmin';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+dotenv.config({ path: '../.env' });
 jest.mock('uuid', () => ({
   v4: () => 'test-uuid',
 }));
@@ -71,5 +74,41 @@ describe('editCompany', () => {
     await expect(editCompany(0, updateData)).rejects.toThrow(
       'Company ID is required',
     );
+  });
+  it('should return JWT token on company edit', async () => {
+    const directions = await registerDirections(
+      'Initial Direction',
+      '123 Initial St',
+      '555-0000',
+      'test-uuid',
+    );
+    const updateData = {
+      name: 'updatedcompany',
+      email: `updatedemail-${Date.now()}@example.com`,
+      phone: '  5550001',
+    };
+    const admin = await registerAdmin(
+      `admin-${Date.now()}@test.com`,
+      'adminPassword',
+    );
+    // First, register a new company
+    const company = await registerCompany(
+      'initialcompany',
+      '12345678901',
+      `company-${Date.now()}@test.com`,
+      'password123',
+      admin.adminID,
+      directions,
+    );
+    const updatedCompany = await editCompany(company.companyID, updateData);
+    const token = updatedCompany.token;
+    // Generate JWT token
+    const secret = process.env.JWT_SECRET as string;
+
+    expect(token).toBeDefined();
+    const decoded: any = jwt.verify(token, secret);
+    expect(company.companyID).toBe(company.companyID);
+    expect(company.role).toBe(company.role);
+    expect(decoded).toBeDefined();
   });
 });

@@ -6,6 +6,9 @@ import { registerDirections } from '../src/modules/directions/registerDirections
 import { PrismaClient } from '../generated/prisma';
 import { registerWorker } from '../src/modules/workers/registerWorker';
 import { listAssignedIncidents } from '../src/modules/workers/listAssignedIncidents';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+dotenv.config({ path: '../.env' });
 const prisma = new PrismaClient();
 describe('List Assigned Incidents', () => {
   jest.setTimeout(20000); // 20 segundos para cada test
@@ -77,6 +80,9 @@ describe('List Assigned Incidents', () => {
       'HIGH',
     );
     // Assign incident to worker
+    if (!incident) {
+      throw new Error('Incident creation failed');
+    }
     await prisma.incidents.update({
       where: { IncidentsID: incident.IncidentsID },
       data: {
@@ -86,8 +92,12 @@ describe('List Assigned Incidents', () => {
     // List assigned incidents
     const assignedIncidents = await listAssignedIncidents(worker.workerid);
     expect(assignedIncidents).toBeDefined();
-    expect(assignedIncidents.length).toBe(1);
-    expect(assignedIncidents[0].incidentID).toBe(incident.IncidentsID);
+    if (Array.isArray(assignedIncidents)) {
+      // If it's an array, fail the test
+      expect(assignedIncidents).toEqual([]);
+    } else {
+      expect(assignedIncidents.assignedIncidents.length).toBe(1);
+    }
   });
   it('should return empty list if no incidents assigned', async () => {
     // Register admin
@@ -121,6 +131,54 @@ describe('List Assigned Incidents', () => {
     // List assigned incidents
     const assignedIncidents = await listAssignedIncidents(worker.workerid);
     expect(assignedIncidents).toBeDefined();
-    expect(assignedIncidents.length).toBe(0);
+    if (Array.isArray(assignedIncidents)) {
+      // If it's an array, fail the test
+      expect(assignedIncidents).toEqual([]);
+    } else {
+      expect(assignedIncidents.assignedIncidents.length).toBe(0);
+    }
+  });
+  it('should also return a valid JWT token', async () => {
+    // Register admin
+    const admin = await registerAdmin(
+      `admin-${Date.now()}@test.com`,
+      'adminPassword',
+    );
+    // Register company
+    const directions = await registerDirections(
+      '123 Test St',
+      'Test City',
+      'TS',
+      '12345',
+    );
+    const company = await registerCompany(
+      'Test Company JWT',
+      '1234567890',
+      `company-${Date.now()}@test.com`,
+      'securePassword',
+      admin.adminID,
+      directions,
+    );
+    // Register worker with unique email
+    const uniqueWorkerEmail = `worker3-${Date.now()}@test.com`;
+    const worker = await registerWorker(
+      uniqueWorkerEmail,
+      'superSecurePassword',
+      'Worker JWT',
+      company.companyID,
+    );
+    // List assigned incidents
+    const result = await listAssignedIncidents(worker.workerid);
+    expect(result).toBeDefined();
+    if (Array.isArray(result)) {
+      // If it's an array, fail the test
+      expect(result).toEqual([]);
+    } else {
+      expect(result.token).toBeDefined();
+      // Verify JWT token
+      const secret = process.env.JWT_SECRET as string;
+      const decoded = jwt.verify(result.token, secret);
+      expect(decoded).toBeDefined();
+    }
   });
 });

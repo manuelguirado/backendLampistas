@@ -133,6 +133,7 @@ export class CompanyController {
       companyName: string;
       machineType: string;
       companyID: number;
+      serialNumber: string;
     },
   ) {
     const {
@@ -145,6 +146,7 @@ export class CompanyController {
       companyName,
       machineType,
       companyID,
+      serialNumber,
     } = body;
     return this.companyService.createMachinery(
       name,
@@ -156,6 +158,7 @@ export class CompanyController {
       companyName,
       machineType,
       companyID,
+      serialNumber,
     );
   }
   @UseGuards(AuthGuard)

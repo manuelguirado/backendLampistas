@@ -238,6 +238,7 @@ model machinery {
   companyName        String
   companyID          Int
   company            Company  @relation("CompanyMachinery", fields: [companyID], references: [companyID])
+  serialNumber       String   @unique
 }
 
 enum Role {
