@@ -1,6 +1,8 @@
 import { PrismaClient } from '../../../generated/prisma';
 import jwt, { SignOptions } from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
+import dotenv from 'dotenv';
+dotenv.config({ path: '../../../.env' });
 const prisma = new PrismaClient();
 const MAX_ATTEMPTS = 3;
 const LOCK_TIME = 15 * 60 * 1000; // 15 minutes in milliseconds
@@ -38,12 +40,15 @@ export async function companyLogin(email: string, password: string) {
     if (lockUntil) throw new Error('Account locked. Try again later');
     throw new Error('Invalid password');
   }
-  const payload = { companyID: company.companyID, role: company.role };
-  const secret = process.env.JWT_SECRET as string;
-  const options: SignOptions = { expiresIn: '1h' };
-  const token = jwt.sign(payload, secret, options);
-  // Login correcto: resetea contador
-  loginAttempts.delete(email);
-
-  return { company, token };
+  try {
+    const payload = { companyID: company.companyID, role: company.role };
+    const secret = process.env.JWT_SECRET as string;
+    const options: SignOptions = { expiresIn: '1h' };
+    const token = jwt.sign(payload, secret, options);
+    loginAttempts.delete(email);
+    return { token, ...company };
+  } catch (error) {
+    console.error('Error generating JWT:', error);
+    throw new Error('Internal server error');
+  }
 }

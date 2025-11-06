@@ -1,5 +1,8 @@
 import { PrismaClient } from '../../../generated/prisma';
+import jwt, { SignOptions } from 'jsonwebtoken';
+import dotenv from 'dotenv';
 import bcrypt from 'bcryptjs';
+dotenv.config({ path: '../../../.env' });
 const prisma = new PrismaClient();
 const MAX_ATTEMPTS = 3;
 const LOCK_TIME = 15 * 60 * 1000; // 15 minutes in milliseconds
@@ -29,8 +32,15 @@ export async function workerLogin(email: string, password: string) {
     throw new Error('Invalid password');
   }
 
-  // Login correcto: resetea contador
-  loginAttempts.delete(email);
-
-  return worker;
+  try {
+    const payload = { workerid: worker.workerid, role: worker.role };
+    const secret = process.env.JWT_SECRET as string;
+    const options: SignOptions = { expiresIn: '1h' };
+    const token = jwt.sign(payload, secret, options);
+    loginAttempts.delete(email);
+    return { token, ...worker };
+  } catch (error) {
+    console.error('Error generating JWT:', error);
+    throw new Error('Internal server error');
+  }
 }

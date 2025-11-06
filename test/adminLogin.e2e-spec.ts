@@ -1,6 +1,9 @@
 import { PrismaClient } from '../generated/prisma';
 import { adminLogin } from '../src/modules/admin/adminLogin';
 import { hashPassword } from '../src/utils/hash/hashPassword';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+dotenv.config({ path: '../.env' });
 
 const prisma = new PrismaClient();
 
@@ -88,5 +91,36 @@ describe('adminLogin', () => {
     await expect(adminLogin(email, password)).rejects.toThrow(
       'Unauthorized - Invalid role',
     );
+  });
+  it('should return a valid JWT token upon successful login', async () => {
+    const email = `admin-jwt-test-${Date.now()}@example.com`;
+    const password = 'adminPassword123';
+    const hashedPassword = await hashPassword(password);
+
+    // Crear admin
+    await prisma.admin.create({
+      data: {
+        email,
+        password: hashedPassword,
+      },
+    });
+
+    // Intentar login
+    const result = await adminLogin(email, password);
+
+    expect(result).toBeDefined();
+    expect(result.token).toBeDefined();
+
+    // Verificar el token JWT
+    const secret = process.env.JWT_SECRET as string;
+    const decoded = jwt.verify(result.token, secret) as {
+      adminID: string;
+      role: string;
+      iat: number;
+      exp: number;
+    };
+
+    expect(decoded.adminID).toBe(result.adminID);
+    expect(decoded.role).toBe(result.role);
   });
 });

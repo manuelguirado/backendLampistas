@@ -2,20 +2,28 @@ import jwt from 'jsonwebtoken';
 import { PrismaClient } from '../generated/prisma';
 import { companyLogin } from '../src/modules/companies/companyLogin';
 import bcrypt from 'bcryptjs';
+import dotenv from 'dotenv';
+dotenv.config({ path: '../.env' });
+
+const secret = process.env.JWT_SECRET as string;
 
 const prisma = new PrismaClient();
 describe('Company login', () => {
   beforeEach(async () => {
     // Clean up all test data before each test
     await prisma.incidents.deleteMany({});
-    await prisma.company.deleteMany({});
     await prisma.user.deleteMany({});
+    await prisma.adminsCompanies.deleteMany({});
+    await prisma.admin.deleteMany({});
+    await prisma.company.deleteMany({});
   });
   afterAll(async () => {
     // Clean up all test data and disconnect after all tests
     await prisma.incidents.deleteMany({});
-    await prisma.company.deleteMany({});
     await prisma.user.deleteMany({});
+    await prisma.adminsCompanies.deleteMany({});
+    await prisma.admin.deleteMany({});
+    await prisma.company.deleteMany({});
     await prisma.$disconnect();
   });
   it('Should login a company successfully with correct name and password', async () => {
@@ -129,12 +137,10 @@ describe('Company login', () => {
     });
     const response = await companyLogin(email, password);
     expect(response).toBeDefined();
-    expect(response.token).toBeDefined();
-    console.log(response.token);
-
+    const token = response.token;
+    expect(token).toBeDefined();
     // Verify the token
-    const secret = process.env.JWT_SECRET as string;
-    const decoded = jwt.verify(response.token, secret);
+    const decoded = jwt.verify(token, secret);
     expect(decoded).toBeDefined();
     expect(company).toBeDefined();
   });

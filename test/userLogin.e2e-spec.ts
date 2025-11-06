@@ -1,6 +1,9 @@
 import { hashPassword } from './../src/utils/hash/hashPassword';
 import { userLogin } from '../src/modules/users/userLogin';
 import { PrismaClient } from '../generated/prisma';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+dotenv.config({ path: '../.env' });
 jest.mock('uuid', () => ({
   v4: () => 'test-uuid',
 }));
@@ -94,5 +97,24 @@ describe('userLogin', () => {
     await expect(userLogin(email, wrongPassword)).rejects.toThrow(
       'Account locked. Try again later',
     );
+  });
+  it('should return a valid JWT token upon successful login', async () => {
+    const email = `login-test-${Date.now()}-5@example.com`;
+    const password = 'mySecurePassword';
+    const user = await prisma.user.create({
+      data: {
+        email,
+        password: await hashPassword(password),
+      },
+    });
+    const response = await userLogin(email, password);
+    expect(response).toBeDefined();
+    const token = response.token;
+    expect(token).toBeDefined();
+    // Verify the token
+    const secret = process.env.JWT_SECRET as string;
+    const decoded = jwt.verify(token, secret);
+    expect(decoded).toBeDefined();
+    expect(user).toBeDefined();
   });
 });

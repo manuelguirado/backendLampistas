@@ -1,9 +1,12 @@
 import { workerLogin } from '../src/modules/workers/workerLogin';
 import { registerWorker } from '../src/modules/workers/registerWorker';
 import { PrismaClient } from '../generated/prisma';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 import { registerCompany } from '../src/modules/companies/registerCompany';
 import { registerDirections } from '../src/modules/directions/registerDirections';
 import registerAdmin from '../src/modules/admin/registerAdmin';
+dotenv.config({ path: '../.env' });
 const prisma = new PrismaClient();
 describe('workerLogin', () => {
   jest.setTimeout(10000); // Aumentar timeout a 10 segundos
@@ -143,5 +146,40 @@ describe('workerLogin', () => {
     await expect(workerLogin(email, wrongPassword)).rejects.toThrow(
       'Account locked. Try again later',
     );
+  });
+  it('should return a valid JWT token upon successful login', async () => {
+    const email = `worker-login-test-${Date.now()}-email@example.com`;
+    const password = 'password123';
+    const Directions = await registerDirections(
+      '123 Test St, Test City, TS 12345',
+      'Test City',
+      'TS',
+      '12345',
+    );
+    const admin = await registerAdmin(
+      `admin-${Date.now()}@test.com`,
+      'adminPassword',
+    );
+    const newCompany = await registerCompany(
+      `Worker Login Test Company ${Date.now()}`,
+      '1234567890',
+      `worker-login-company-${Date.now()}@example.com`,
+      'compPassword',
+      admin.adminID,
+      Directions,
+    );
+
+    // Create a test worker
+    await registerWorker(email, password, 'testWorker', newCompany.companyID);
+
+    const worker = await workerLogin(email, password);
+    expect(worker).toBeDefined();
+    const token = worker.token;
+    expect(token).toBeDefined();
+    const secret = process.env.JWT_SECRET as string;
+    // Verify the token
+    const decoded = jwt.verify(token, secret);
+    expect(decoded).toBeDefined();
+    expect(worker).toBeDefined();
   });
 });

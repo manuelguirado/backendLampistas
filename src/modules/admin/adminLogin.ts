@@ -1,5 +1,8 @@
 import { PrismaClient } from '../../../generated/prisma';
 import bcrypt from 'bcryptjs';
+import jwt, { SignOptions } from 'jsonwebtoken';
+import dotenv from 'dotenv';
+dotenv.config({ path: '../../../.env' });
 const prisma = new PrismaClient();
 export async function adminLogin(email: string, password: string) {
   if (!email || !password) throw new Error('Email and password are required');
@@ -22,5 +25,14 @@ export async function adminLogin(email: string, password: string) {
   if (!passwordIsValid) {
     throw new Error('Invalid password');
   }
-  return admin;
+  try {
+    const payload = { adminID: admin.adminID, role: admin.role };
+    const secret = process.env.JWT_SECRET as string;
+    const options: SignOptions = { expiresIn: '1h' };
+    const token = jwt.sign(payload, secret, options);
+    return { token, ...admin };
+  } catch (error) {
+    console.error('Error generating JWT:', error);
+    throw new Error('Internal server error');
+  }
 }
