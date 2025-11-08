@@ -15,18 +15,18 @@ describe('createMachinery', () => {
   jest.setTimeout(20000); // 20 segundos para cada test
   beforeAll(async () => {
     // Clean up all test data before tests
+    await prisma.user.deleteMany({});
     await prisma.machinery.deleteMany({});
     await prisma.directions.deleteMany({});
-    await prisma.user.deleteMany({});
     await prisma.adminsCompanies.deleteMany({});
     await prisma.admin.deleteMany({});
     await prisma.company.deleteMany({});
   });
   afterAll(async () => {
     // Clean up all test data and disconnect after all tests
+    await prisma.user.deleteMany({});
     await prisma.machinery.deleteMany({});
     await prisma.directions.deleteMany({});
-    await prisma.user.deleteMany({});
     await prisma.adminsCompanies.deleteMany({});
     await prisma.admin.deleteMany({});
     await prisma.company.deleteMany({});

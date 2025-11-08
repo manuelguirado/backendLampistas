@@ -14,10 +14,21 @@ export class UserService {
   async createIncident(
     title: string,
     description: string,
-    machineryID: number,
     userID: number,
+    companyID: number,
+    status?: string,
+    priority?: string,
+    urgency?: boolean,
   ) {
-    return createIncident(title, description, machineryID, userID);
+    return createIncident(
+      title,
+      description,
+      userID,
+      companyID,
+      status,
+      priority,
+      urgency,
+    );
   }
   async findMyMachinery(userID: number) {
     return findMyMachinery(userID);

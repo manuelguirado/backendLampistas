@@ -1,11 +1,11 @@
-import { Controller, Post, Get, UseGuards, Body } from '@nestjs/common';
+import { Controller, Post, Get, UseGuards, Body, Query } from '@nestjs/common';
 import { UserService } from './user.service';
 import { AuthGuard } from '../auth/auth.guard';
 
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
-  @Post('user/useerRegister')
+  @Post('userRegister')
   async register(
     @Body() userData: { name: string; email: string; password: string },
   ) {
@@ -15,34 +15,41 @@ export class UserController {
       userData.password,
     );
   }
-  @Post('user/userLogin')
+  @Post('userLogin')
   async login(@Body() body: { email: string; password: string }) {
     const { email, password } = body;
     return this.userService.userLogin(email, password);
   }
   @UseGuards(AuthGuard)
-  @Get('user/userMachinery')
-  async findMyMachinery(@Body() body: { userID: number }) {
-    const { userID } = body;
-    return this.userService.findMyMachinery(userID);
+  @Get('userMachinery')
+  async findMyMachinery(@Query('userID') userID: string) {
+    const userIDNum = parseInt(userID, 10);
+    return this.userService.findMyMachinery(userIDNum);
   }
   @UseGuards(AuthGuard)
-  @Post('user/createIncident')
+  @Post('createIncident')
   async createIncident(
     @Body()
     body: {
       title: string;
       description: string;
-      machineryID: number;
       userID: number;
+      companyID: number;
+      status?: string;
+      priority?: string;
+      urgency?: boolean;
     },
   ) {
-    const { title, description, machineryID, userID } = body;
+    const { title, description, userID, companyID, status, priority, urgency } =
+      body;
     return this.userService.createIncident(
       title,
       description,
-      machineryID,
       userID,
+      companyID,
+      status,
+      priority,
+      urgency,
     );
   }
 }

@@ -33,49 +33,54 @@ export async function registerCompany(
     throw new Error('Admin does not exist');
   }
   const hashedPassword = await hashPassword(password);
-  const company = await prisma.company.create({
-    data: {
-      name,
-      email,
-      phone,
-      password: hashedPassword,
-      role: 'COMPANY',
-    },
-  });
-  const companyAdmin = await prisma.admin.findUnique({
-    where: { adminID: admin },
-  });
-  if (!companyAdmin) {
-    throw new Error('Admin does not exist');
-  }
-  await prisma.adminsCompanies.create({
-    data: {
-      Admin: { connect: { adminID: admin } },
-      Company: { connect: { companyID: company.companyID } },
-    },
-  });
 
-  await prisma.company.update({
-    where: { companyID: company.companyID },
-    data: {
-      admins: {
-        connect: [
-          {
-            adminID_companyID: { adminID: admin, companyID: company.companyID },
-          },
-        ],
+  // Usar transacción para asegurar consistencia
+  const result = await prisma.$transaction(async (tx) => {
+    const company = await tx.company.create({
+      data: {
+        name,
+        email,
+        phone,
+        password: hashedPassword,
+        role: 'COMPANY',
       },
-    },
+    });
+
+    await tx.adminsCompanies.create({
+      data: {
+        Admin: { connect: { adminID: admin } },
+        Company: { connect: { companyID: company.companyID } },
+      },
+    });
+
+    await tx.company.update({
+      where: { companyID: company.companyID },
+      data: {
+        admins: {
+          connect: [
+            {
+              adminID_companyID: {
+                adminID: admin,
+                companyID: company.companyID,
+              },
+            },
+          ],
+        },
+      },
+    });
+
+    await tx.directions.create({
+      data: {
+        address: directions.address,
+        city: directions.city,
+        state: directions.state,
+        zipCode: directions.zipCode,
+        company: { connect: { companyID: company.companyID } },
+      },
+    });
+
+    return company;
   });
 
-  await prisma.directions.create({
-    data: {
-      address: directions.address,
-      city: directions.city,
-      state: directions.state,
-      zipCode: directions.zipCode,
-      company: { connect: { companyID: company.companyID } },
-    },
-  });
-  return company;
+  return result;
 }

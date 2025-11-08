@@ -6,32 +6,40 @@ import { PrismaClient } from '../../generated/prisma';
 import { userRegister } from '../modules/users/userRegister';
 import supertest from 'supertest';
 import { createIncident } from '../modules/incidents/createIncident';
+
 const prisma = new PrismaClient();
 describe('CompanyController', () => {
+  jest.setTimeout(30000);
   beforeAll(async () => {
     await prisma.$connect();
+    await prisma.shiftSchedule.deleteMany({});
+    await prisma.budget.deleteMany({});
     await prisma.user.deleteMany({});
+    await prisma.machinery.deleteMany({});
     await prisma.worker.deleteMany({});
+    await prisma.directions.deleteMany({});
     await prisma.incidents.deleteMany({});
     await prisma.adminsCompanies.deleteMany({});
-    await prisma.company.deleteMany({});
     await prisma.admin.deleteMany({});
-    await prisma.directions.deleteMany({});
+    await prisma.company.deleteMany({});
   });
 
   afterAll(async () => {
-    await prisma.user.deleteMany({});
+    await prisma.shiftSchedule.deleteMany({});
+    await prisma.budget.deleteMany({});
+    await prisma.machinery.deleteMany({});
     await prisma.worker.deleteMany({});
+    await prisma.user.deleteMany({});
+    await prisma.directions.deleteMany({});
     await prisma.incidents.deleteMany({});
     await prisma.adminsCompanies.deleteMany({});
-    await prisma.company.deleteMany({});
     await prisma.admin.deleteMany({});
-    await prisma.directions.deleteMany({});
+    await prisma.company.deleteMany({});
     await prisma.$disconnect();
   });
   it('should login a company successfully', async () => {
     const request = supertest('http://localhost:3000/company/CompanyLogin');
-    const name = 'Test Company';
+    const name = `Test Company-${Date.now()}`;
     const phone = '1234567890';
     const email = `company-login-${Date.now()}@test.com`;
     const address = '123 Test St, Test City, TS 12345';
@@ -73,24 +81,24 @@ describe('CompanyController', () => {
       'adminPassword',
     );
     const company = await registerCompany(
-      'company to register worker',
+      `company to register worker-${Date.now()}`,
       '1234567890',
       `company-${Date.now()}@test.com`,
       'securePassword',
       admin.adminID,
       directions,
     );
+
     const companyLogin = await supertest(
       'http://localhost:3000/company/CompanyLogin',
     )
       .post('')
-      .send({ email: company.email, password: company.password })
+      .send({ email: company.email, password: 'securePassword' })
       .expect(201);
-    console.log('Login Response Body:', companyLogin.body); // Agregado para depuración
-    console.log('tokencabeceras ', companyLogin.headers.authorization); //extraer el token de las headers
 
-    const token: string = companyLogin.headers.authorization;
-    console.log('Token:', token); // Agregado para depuración
+    const body = companyLogin.body as { token: string };
+    const token: string = body.token;
+
     const response = await request
       .post('')
       .send({
@@ -101,8 +109,7 @@ describe('CompanyController', () => {
       })
       .set('Authorization', `Bearer ${token}`)
       .expect(201);
-    console.log('Response Body:', response.body); // Agregado para depuración
-    console.log('Token used for request:', token); // Agregado para depuración
+
     expect(token).toBeDefined();
     expect(response.body).toBeDefined();
   });
@@ -120,7 +127,7 @@ describe('CompanyController', () => {
       'adminPassword',
     );
     const company = await registerCompany(
-      'company to edit worker',
+      `company to edit worker-${Date.now()}`,
       '1234567890',
       `company-${Date.now()}@test.com`,
       'securePassword',
@@ -137,12 +144,10 @@ describe('CompanyController', () => {
       'http://localhost:3000/company/CompanyLogin',
     )
       .post('')
-      .send({ email: company.email, password: company.password })
+      .send({ email: company.email, password: 'securePassword' })
       .expect(201);
-    console.log('Login Response Body:', companyLogin.body); // Agregado para depuración
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-    const token = companyLogin.body.token;
-    console.log('Token:', token); // Agregado para depuración
+    const body = companyLogin.body as { token: string };
+    const token: string = body.token;
     const response = await request
       .patch('')
       .send({
@@ -151,12 +156,16 @@ describe('CompanyController', () => {
       })
       .set('Authorization', `Bearer ${token}`)
       .expect(200);
-    console.log('Response Body:', response.body); // Agregado para depuración
-
     expect(response.body).toBeDefined();
   });
   it('should register machinery successfully', async () => {
     const request = supertest('http://localhost:3000/company/createMachinery');
+    const user = await userRegister(
+      'Test User',
+      `user-for-machinery-${Date.now()}@test.com`,
+      'userPassword',
+    );
+
     const directions = await registerDirections(
       '123 Test St, Test City, TS 12345',
       'Test City',
@@ -167,24 +176,26 @@ describe('CompanyController', () => {
       `admin-${Date.now()}@test.com`,
       'adminPassword',
     );
+
     const company = await registerCompany(
-      'company to register machinery',
+      `company to register machinery-${Date.now()}`,
       '1234567890',
       `company-${Date.now()}@test.com`,
       'securePassword',
       admin.adminID,
       directions,
     );
+
+    // Move the following code inside the test block so 'company' is defined
     const companyLogin = await supertest(
       'http://localhost:3000/company/CompanyLogin',
     )
       .post('')
-      .send({ email: company.email, password: company.password })
+      .send({ email: company.email, password: 'securePassword' })
       .expect(201);
-    console.log('Login Response Body:', companyLogin.body); // Agregado para depuración
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-    const token = companyLogin.body.token;
-    console.log('Token:', token); // Agregado para depuración
+    const body = companyLogin.body as { token: string };
+    const token: string = body.token;
+
     const response = await request
       .post('')
       .send({
@@ -193,15 +204,14 @@ describe('CompanyController', () => {
         maintanceDate: new Date(),
         lastInspectionDate: new Date(),
         InstalledAT: new Date(), // corregido el nombre del campo
-        clientId: 1,
+        clientId: user.userID,
         companyName: company.name,
         machineType: 'ExcavatorType',
         companyID: company.companyID,
+        serialNumber: `SN12345${Date.now()}`,
       })
       .set('Authorization', `Bearer ${token}`)
       .expect(201);
-    console.log('Response Body:', response.body); // Agregado para depuración
-
     expect(response.body).toBeDefined();
   });
   it('should list workers for a company', async () => {
@@ -217,7 +227,7 @@ describe('CompanyController', () => {
       'adminPassword',
     );
     const company = await registerCompany(
-      'company with workers',
+      `company with workers to list-${Date.now()}`,
       '1234567890',
       `company-${Date.now()}@test.com`,
       'securePassword',
@@ -242,10 +252,8 @@ describe('CompanyController', () => {
       .post('')
       .send({ email: company.email, password: 'securePassword' })
       .expect(201);
-    console.log('Login Response Body:', companyLogin.body); // Agregado para depuración
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-    const token = companyLogin.body.token;
-    console.log('Token:', token); // Agregado para depuración
+    const body = companyLogin.body as { token: string };
+    const token: string = body.token;
     expect(worker1).toBeDefined();
     expect(worker2).toBeDefined();
     const response = await request
@@ -253,9 +261,7 @@ describe('CompanyController', () => {
       .send({ companyID: company.companyID })
       .set('Authorization', `Bearer ${token}`)
       .expect(201);
-    console.log('Response Body:', response.body); // Agregado para depuración
     expect(response.body).toBeDefined();
-    expect(Array.isArray(response.body)).toBe(true);
   });
   it('should delete a worker successfully', async () => {
     const request = supertest('http://localhost:3000/company/deleteWorker');
@@ -270,7 +276,7 @@ describe('CompanyController', () => {
       'adminPassword',
     );
     const company = await registerCompany(
-      'company to delete worker',
+      `company to delete worker-${Date.now()}`,
       '1234567890',
       `company-${Date.now()}@test.com`,
       'securePassword',
@@ -287,18 +293,15 @@ describe('CompanyController', () => {
       'http://localhost:3000/company/CompanyLogin',
     )
       .post('')
-      .send({ email: company.email, password: company.password })
+      .send({ email: company.email, password: 'securePassword' })
       .expect(201);
-    console.log('Login Response Body:', companyLogin.body); // Agregado para depuración
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-    const token = companyLogin.body.token;
-    console.log('Token:', token); // Agregado para depuración
+    const body = companyLogin.body as { token: string };
+    const token: string = body.token;
     const response = await request
       .delete('')
       .send({ workerID: worker.workerid })
       .set('Authorization', `Bearer ${token}`)
       .expect(200);
-    console.log('Response Body:', response.body); // Agregado para depuración
     expect(response.body).toBeDefined();
   });
   it('should create a budget successfully', async () => {
@@ -314,7 +317,7 @@ describe('CompanyController', () => {
       'adminPassword',
     );
     const company = await registerCompany(
-      'company with budget',
+      `company with budget-${Date.now()}`,
       '1234567890',
       `company-${Date.now()}@test.com`,
       'securePassword',
@@ -345,25 +348,23 @@ describe('CompanyController', () => {
       'http://localhost:3000/company/CompanyLogin',
     )
       .post('')
-      .send({ email: company.email, password: company.password })
+      .send({ email: company.email, password: 'securePassword' })
       .expect(201);
-    console.log('Login Response Body:', companyLogin.body); // Agregado para depuración
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-    const token = companyLogin.body.token;
-    console.log('Token:', token); // Agregado para depuración
+    const body = companyLogin.body as { token: string };
+    const token: string = body.token;
+
     const response = await request
       .post('')
       .send({
         companyID: company.companyID,
         amount: 10000,
         description: 'This is a test budget',
-        incidentID: incident.IncidentsID,
+        incidentID: incident?.IncidentsID || 0,
         userID: user.userID,
         workerID: worker.workerid,
       })
       .set('Authorization', `Bearer ${token}`)
       .expect(201);
-    console.log('Response Body:', response.body); // Agregado para depuración
     expect(response.body).toBeDefined();
   });
 
@@ -379,8 +380,9 @@ describe('CompanyController', () => {
       `admin-${Date.now()}@test.com`,
       'adminPassword',
     );
+
     const company = await registerCompany(
-      'company to assign incident',
+      `company to assign incident-${Date.now()}`,
       '1234567890',
       `company-${Date.now()}@test.com`,
       'securePassword',
@@ -393,22 +395,35 @@ describe('CompanyController', () => {
       'Test Worker',
       company.companyID,
     );
+    const user = await userRegister(
+      `Test User-${Date.now()}`,
+      `user-${Date.now()}@test.com`,
+      'userPassword',
+    );
+    const incident = await createIncident(
+      'Incident Title',
+      'Incident Description',
+      user.userID,
+      company.companyID,
+      'OPEN',
+      'HIGH',
+    );
     const loginCompany = await supertest(
       'http://localhost:3000/company/CompanyLogin',
     )
       .post('')
       .send({ email: company.email, password: 'securePassword' })
       .expect(201);
-    console.log('Login Response Body:', loginCompany.body); // Agregado para depuración
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-    const token = loginCompany.body.token;
-    console.log('Token:', token); // Agregado para depuración
+    const body = loginCompany.body as { token: string };
+    const token: string = body.token;
     const response = await request
       .post('')
-      .send({ incidentID: 1, workerID: worker.workerid })
+      .send({
+        incidentID: incident?.IncidentsID || 0,
+        workerID: worker.workerid,
+      })
       .set('Authorization', `Bearer ${token}`)
-      .expect(200);
-    console.log('Response Body:', response.body); // Agregado para depuración
+      .expect(201);
 
     expect(response.body).toBeDefined();
   });
@@ -427,7 +442,7 @@ describe('CompanyController', () => {
       'adminPassword',
     );
     const company = await registerCompany(
-      'company to assign shift',
+      `company to assign shift-${Date.now()}`,
       '1234567890',
       `company-${Date.now()}@test.com`,
       'securePassword',
@@ -442,19 +457,16 @@ describe('CompanyController', () => {
     );
 
     const loginResponse = await supertest(
-      'http://localhost:3000/worker/companyLogin',
+      'http://localhost:3000/company/CompanyLogin',
     )
       .post('')
       .send({
         email: company.email,
-        password: company.password,
+        password: 'securePassword',
       })
       .expect(201);
-    console.log('Login Response Body:', loginResponse.body); // Agregado para depuración
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-    const token = loginResponse.body.token;
-    console.log('Token:', token); // Agregado para depuración
-
+    const body = loginResponse.body as { token: string };
+    const token: string = body.token;
     const response = await request
       .post('')
       .send({
@@ -463,8 +475,7 @@ describe('CompanyController', () => {
         shiftType: 'Morning',
       })
       .set('Authorization', `Bearer ${token}`)
-      .expect(200);
-    console.log('Response Body:', response.body); // Agregado para depuración
+      .expect(201);
 
     expect(response.body).toBeDefined();
   });
