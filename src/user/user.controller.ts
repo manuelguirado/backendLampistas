@@ -1,7 +1,7 @@
 import { Controller, Post, Get, UseGuards, Body, Query } from '@nestjs/common';
 import { UserService } from './user.service';
 import { AuthGuard } from '../auth/auth.guard';
-
+import { UserGuard } from './user.guard';
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
@@ -20,13 +20,13 @@ export class UserController {
     const { email, password } = body;
     return this.userService.userLogin(email, password);
   }
-  @UseGuards(AuthGuard)
+  @UseGuards(AuthGuard, UserGuard)
   @Get('userMachinery')
   async findMyMachinery(@Query('userID') userID: string) {
     const userIDNum = parseInt(userID, 10);
     return this.userService.findMyMachinery(userIDNum);
   }
-  @UseGuards(AuthGuard)
+  @UseGuards(AuthGuard, UserGuard)
   @Post('createIncident')
   async createIncident(
     @Body()

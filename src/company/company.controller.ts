@@ -2,6 +2,7 @@ import { Controller, Delete } from '@nestjs/common';
 import { CompanyService } from './company.service';
 import { Body, Post, Patch, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '../auth/auth.guard';
+import { CompanyGuard } from './company.guard';
 @Controller('company')
 export class CompanyController {
   constructor(private readonly companyService: CompanyService) {}
@@ -37,7 +38,7 @@ export class CompanyController {
       directions,
     );
   }
-
+  @UseGuards(AuthGuard, CompanyGuard)
   @Post('RegisterWorker')
   registerWorker(
     @Body()
@@ -51,7 +52,7 @@ export class CompanyController {
     const { email, password, name, companyID } = body;
     return this.companyService.registerWorker(email, password, name, companyID);
   }
-  @UseGuards(AuthGuard)
+  @UseGuards(AuthGuard, CompanyGuard)
   @Patch('editWorker')
   editWorker(
     @Body()
@@ -63,12 +64,12 @@ export class CompanyController {
     const { workerID, data } = body;
     return this.companyService.editWorker(workerID, data);
   }
-  @UseGuards(AuthGuard)
+  @UseGuards(AuthGuard, CompanyGuard)
   @Delete('deleteWorker')
   deleteWorker(@Body() body: { workerID: number }) {
     return this.companyService.eliminateWorker(body.workerID);
   }
-  @UseGuards(AuthGuard)
+  @UseGuards(AuthGuard, CompanyGuard)
   @Post('CreateBudget')
   createBudget(
     @Body()
@@ -101,13 +102,13 @@ export class CompanyController {
       items,
     );
   }
-  @UseGuards(AuthGuard)
+  @UseGuards(AuthGuard, CompanyGuard)
   @Post('listWorker')
   listWorker(@Body() body: { companyID: number }) {
     const { companyID } = body;
     return this.companyService.listWorker(companyID);
   }
-  @UseGuards(AuthGuard)
+  @UseGuards(AuthGuard, CompanyGuard)
   @Post('assignIncident')
   assignIncident(
     @Body()
@@ -119,7 +120,7 @@ export class CompanyController {
     const { incidentID, workerID } = body;
     return this.companyService.assignIncident(incidentID, workerID);
   }
-  @UseGuards(AuthGuard)
+  @UseGuards(AuthGuard, CompanyGuard)
   @Post('createMachinery')
   createMachinery(
     @Body()
@@ -161,7 +162,7 @@ export class CompanyController {
       serialNumber,
     );
   }
-  @UseGuards(AuthGuard)
+  @UseGuards(AuthGuard, CompanyGuard)
   @Post('assignShiftWorker')
   assignShiftWorker(
     @Body()

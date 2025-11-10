@@ -1,4 +1,3 @@
-import { Worker } from './../../generated/prisma/index.d';
 import {
   Controller,
   Get,
@@ -7,9 +6,11 @@ import {
   Patch,
   Query,
   BadRequestException,
+  UseGuards,
 } from '@nestjs/common';
 import { WorkerService } from './worker.services';
-
+import { WorkerGuard } from './worker.guard';
+import { AuthGuard } from '../auth/auth.guard';
 @Controller('worker')
 export class WorkerController {
   constructor(private readonly workerService: WorkerService) {}
@@ -18,6 +19,8 @@ export class WorkerController {
     const { email, password } = body;
     return this.workerService.workerLogin(email, password);
   }
+
+  @UseGuards(AuthGuard, WorkerGuard)
   @Get('assignedIncidents')
   async listAssignedIncidents(@Query('workerID') workerID: string) {
     const workerIDNum = parseInt(workerID, 10);
@@ -26,6 +29,7 @@ export class WorkerController {
     }
     return this.workerService.listAssignedIncidents(workerIDNum);
   }
+  @UseGuards(AuthGuard, WorkerGuard)
   @Patch('updateIncidentStatus')
   async updateIncidentStatus(
     @Body() body: { incidentID: number; status: string },
@@ -33,6 +37,7 @@ export class WorkerController {
     const { incidentID, status } = body;
     return this.workerService.updateStatusIncident(incidentID, status);
   }
+  @UseGuards(AuthGuard, WorkerGuard)
   @Get('myShifts')
   async myShifts(@Query('workerID') workerID: string) {
     const WorkerIDNum = parseInt(workerID, 10);
