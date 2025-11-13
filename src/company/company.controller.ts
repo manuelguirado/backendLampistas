@@ -11,33 +11,7 @@ export class CompanyController {
     const { email, password } = body;
     return this.companyService.companyLogin(email, password);
   }
-  @Post('CompanyRegister')
-  registerCompany(
-    @Body()
-    body: {
-      name: string;
-      phone: string;
-      email: string;
-      password: string;
-      admin: number;
-      directions: {
-        address: string;
-        city: string;
-        state: string;
-        zipCode: string;
-      };
-    },
-  ) {
-    const { name, email, phone, password, admin, directions } = body;
-    return this.companyService.registerCompany(
-      name,
-      email,
-      phone,
-      password,
-      admin,
-      directions,
-    );
-  }
+
   @UseGuards(AuthGuard, CompanyGuard)
   @Post('RegisterWorker')
   registerWorker(

@@ -7,9 +7,10 @@ export class AuthService {
 
   validateToken(token: string) {
     try {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
       return this.jwtServ.verify(token, {
-        secret: process.env.JWT_SECRET_KEY,
+        // use the same env var as JwtModule registration
+        secret: process.env.JWT_SECRET || process.env.JWT_SECRET_KEY,
       });
     } catch (error) {
       console.error('Token validation error:', error);

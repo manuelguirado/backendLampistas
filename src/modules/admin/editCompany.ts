@@ -12,6 +12,7 @@ export async function editCompany(
     password?: string;
     phone?: string;
   },
+  adminID: number,
 ) {
   {
     if (!companyID) {
@@ -28,13 +29,18 @@ export async function editCompany(
     if (!existingCompany) {
       throw new Error('Company not found');
     }
+    const checkRoleAdmin = await prisma.admin.findFirst({
+      where: { adminID: adminID },
+    });
+    if (checkRoleAdmin?.role !== 'ADMIN') {
+      throw new Error('Unauthorized - Invalid role');
+    }
     const updatedCompany = await prisma.company.update({
       where: { companyID: companyID },
       data: {
         ...update,
       },
     });
-
     try {
       const payload = {
         companyID: updatedCompany.companyID,
@@ -43,8 +49,8 @@ export async function editCompany(
       const secret = process.env.JWT_SECRET as string;
       const options: SignOptions = { expiresIn: '1h' };
       const token = jwt.sign(payload, secret, options);
-      return { token, ...updatedCompany };
-    } catch (error) {
+      return { token, ...updatedCompany, adminID };
+    } catch (error: any) {
       console.error('Error generating token:', error);
       throw new Error('Error generating token');
     }

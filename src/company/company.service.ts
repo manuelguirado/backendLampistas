@@ -3,7 +3,7 @@ import { editWorker } from '../modules/workers/editWorker';
 import { registerWorker } from '../modules/workers/registerWorker';
 import { eliminateWorker } from '../modules/workers/eliminateWorker';
 import { createBudget } from '../modules/budgets/createbudget';
-import { registerCompany } from '../modules/companies/registerCompany';
+
 import { companyLogin } from '../modules/companies/companyLogin';
 import { listWorker } from '../modules/workers/listWorker';
 import { assignIncident } from '../modules/incidents/assignIncident';
@@ -15,21 +15,6 @@ export class CompanyService {
     return companyLogin(email, password);
   }
 
-  async registerCompany(
-    name: string,
-    phone: string,
-    email: string,
-    password: string,
-    admin: number,
-    directions: {
-      address: string;
-      city: string;
-      state: string;
-      zipCode: string;
-    },
-  ) {
-    return registerCompany(name, phone, email, password, admin, directions);
-  }
   async registerWorker(
     email: string,
     password: string,

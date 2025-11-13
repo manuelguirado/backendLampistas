@@ -2,6 +2,9 @@ import { registerDirections } from '../src/modules/directions/registerDirections
 import { PrismaClient } from '../generated/prisma';
 import { registerCompany } from '../src/modules/companies/registerCompany';
 import registerAdmin from '../src/modules/admin/registerAdmin';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+dotenv.config({ path: '../.env' });
 const prisma = new PrismaClient();
 describe('Company registration', () => {
   jest.setTimeout(20000); // 20 segundos para cada test
@@ -145,5 +148,37 @@ describe('Company registration', () => {
     await expect(
       registerCompany(name, phone, email, password, admin.adminID, address),
     ).rejects.toThrow('Name, phone, password and directions are required');
+  });
+  it('should generate a valid JWT token upon registration', async () => {
+    const name = 'JWT Test Company';
+    const phone = '9999999999';
+    const email = `jwt-${Date.now()}@test.com`;
+    const address = await registerDirections(
+      '999 JWT St, JWT City, JW 99999',
+      'JWT City',
+      'JW',
+      '99999',
+    );
+    const password = 'jwtPassword';
+    const admin = await registerAdmin(
+      `admin-${Date.now()}@test.com`,
+      'adminPassword',
+    );
+    const company = await registerCompany(
+      name,
+      phone,
+      email,
+      password,
+      admin.adminID,
+      address,
+    );
+    expect(company.token).toBeDefined();
+    // Verify the token
+    const decoded = jwt.verify(
+      company.token,
+      process.env.JWT_SECRET as string,
+    ) as { companyID: number; role: string; iat: number; exp: number };
+    expect(decoded.companyID).toBe(company.companyID);
+    expect(decoded.role).toBe('COMPANY');
   });
 });

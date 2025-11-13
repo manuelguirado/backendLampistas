@@ -14,7 +14,6 @@ import { adminServices } from './admin.services';
 @Controller('admin')
 export class AdminController {
   constructor(private readonly adminService: adminServices) {}
-  @UseGuards(AdminGuard)
   @Post('adminLogin')
   adminLogin(@Body() body: { email: string; password: string }) {
     const { email, password } = body;
@@ -56,10 +55,11 @@ export class AdminController {
     body: {
       companyID: number;
       data: { name?: string; email?: string; password?: string };
+      adminID: number;
     },
   ) {
-    const { companyID, data } = body;
-    return this.adminService.editCompany(companyID, data);
+    const { companyID, data, adminID } = body;
+    return this.adminService.editCompany(companyID, data, adminID);
   }
   @UseGuards(AuthGuard, AdminGuard)
   @Get('listCompany')
@@ -68,5 +68,33 @@ export class AdminController {
     const adminIDnumber = parseInt(adminID, 10);
 
     return this.adminService.listCompany(adminIDnumber);
+  }
+  @UseGuards(AuthGuard, AdminGuard)
+  @Post('registerCompany')
+  registerCompany(
+    @Body()
+    body: {
+      name: string;
+      phone: string;
+      email: string;
+      password: string;
+      admin: number;
+      directions: {
+        address: string;
+        city: string;
+        state: string;
+        zipCode: string;
+      };
+    },
+  ) {
+    const { name, phone, email, password, admin, directions } = body;
+    return this.adminService.registerCompany(
+      name,
+      phone,
+      email,
+      password,
+      admin,
+      directions,
+    );
   }
 }

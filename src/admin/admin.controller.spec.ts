@@ -8,13 +8,21 @@ describe('AdminController', () => {
   beforeAll(async () => {
     //clean up the database
     await prisma.$connect();
+    // Delete child tables first (those with foreign keys)
+    await prisma.incidents.deleteMany({});
+    await prisma.worker.deleteMany({});
     await prisma.adminsCompanies.deleteMany({});
+    // Then parent tables
     await prisma.admin.deleteMany({});
     await prisma.company.deleteMany({});
   });
   afterAll(async () => {
     //clean up the database
+    // Delete child tables first (those with foreign keys)
+    await prisma.incidents.deleteMany({});
+    await prisma.worker.deleteMany({});
     await prisma.adminsCompanies.deleteMany({});
+    // Then parent tables
     await prisma.admin.deleteMany({});
     await prisma.company.deleteMany({});
     await prisma.$disconnect();
@@ -43,7 +51,7 @@ describe('AdminController', () => {
     // Then, attempt to login
     const loginResponse = await request
       .post('')
-      .send({ email, password })
+      .send({ email, password: 'secureAdminPassword' })
       .expect(201);
 
     expect(loginResponse.body).toBeDefined();
@@ -252,4 +260,45 @@ it('should list companies for an admin', async () => {
     .set('Authorization', `Bearer ${token}`);
 
   expect(listResponse.status).toBe(200);
+});
+it('should register a company under an admin', async () => {
+  const request = supertest('http://localhost:3000');
+  const adminEmail = `admin-register-company-test-${Date.now()}@example.com`;
+  const adminPassword = 'secureAdminPassword';
+
+  // First, register the admin
+  const admin = await registerAdmin(adminEmail, adminPassword);
+  expect(admin).toBeDefined();
+
+  // Login to get the token
+  const loginResponse = await request.post('/admin/adminLogin').send({
+    email: adminEmail,
+    password: adminPassword,
+  });
+  expect(loginResponse.status).toBe(201);
+  const { token, adminID } = loginResponse.body as {
+    token: string;
+    adminID: string;
+  };
+
+  // Register a new company under the admin
+  const companyData = {
+    name: `New Company-${Date.now()}`,
+    phone: '1234567890',
+    email: `new-company-${Date.now()}@example.com`,
+    password: 'secureCompanyPassword',
+    directions: {
+      address: '123 Main St',
+      city: 'Test City',
+      state: 'TS',
+      zipCode: '12345',
+    },
+  };
+
+  const registerResponse = await request
+    .post('/admin/registerCompany')
+    .set('Authorization', `Bearer ${token}`)
+    .send({ ...companyData, admin: adminID });
+
+  expect(registerResponse.status).toBe(201);
 });

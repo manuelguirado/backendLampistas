@@ -19,16 +19,16 @@ describe('editCompany', () => {
     await prisma.directions.deleteMany({});
     await prisma.worker.deleteMany({});
     await prisma.adminsCompanies.deleteMany({});
-    await prisma.company.deleteMany({});
     await prisma.admin.deleteMany({});
+    await prisma.company.deleteMany({});
   });
   afterAll(async () => {
     // Clean up all test data and disconnect after all tests
     await prisma.directions.deleteMany({});
     await prisma.worker.deleteMany({});
     await prisma.adminsCompanies.deleteMany({});
-    await prisma.company.deleteMany({});
     await prisma.admin.deleteMany({});
+    await prisma.company.deleteMany({});
     await prisma.$disconnect();
   });
   it("should edit a company's details successfully", async () => {
@@ -56,7 +56,11 @@ describe('editCompany', () => {
       admin.adminID,
       directions,
     );
-    const updatedCompany = await editCompany(company.companyID, updateData);
+    const updatedCompany = await editCompany(
+      company.companyID,
+      updateData,
+      admin.adminID,
+    );
 
     // Add other fields as needed to match the expected type
     expect(updatedCompany.companyID).toBe(company.companyID);
@@ -71,7 +75,7 @@ describe('editCompany', () => {
       phone: '5559999',
     };
 
-    await expect(editCompany(0, updateData)).rejects.toThrow(
+    await expect(editCompany(0, updateData, 0)).rejects.toThrow(
       'Company ID is required',
     );
   });
@@ -100,7 +104,11 @@ describe('editCompany', () => {
       admin.adminID,
       directions,
     );
-    const updatedCompany = await editCompany(company.companyID, updateData);
+    const updatedCompany = await editCompany(
+      company.companyID,
+      updateData,
+      admin.adminID,
+    );
     const token = updatedCompany.token;
     // Generate JWT token
     const secret = process.env.JWT_SECRET as string;

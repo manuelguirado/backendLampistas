@@ -7,6 +7,7 @@ import { activateCompany } from '../modules/admin/activateCompany';
 import { generateCode } from '../utils/generateCode';
 import registerAdmin from '../modules/admin/registerAdmin';
 import { eliminateCompany } from '../modules/admin/eliminateCompany';
+import { registerCompany } from '../modules/companies/registerCompany';
 @Injectable()
 export class adminServices {
   async registerAdmin(email: string, password: string) {
@@ -24,8 +25,9 @@ export class adminServices {
   async editCompany(
     companyID: number,
     data: { name?: string; email?: string; password?: string },
+    adminID: number,
   ) {
-    return editCompany(companyID, data);
+    return editCompany(companyID, data, adminID);
   }
   async eliminateCompany(companyID: number) {
     return eliminateCompany(companyID);
@@ -35,5 +37,20 @@ export class adminServices {
   }
   async listCompany(adminID: number) {
     return listCompany(adminID);
+  }
+  async registerCompany(
+    name: string,
+    phone: string,
+    email: string,
+    password: string,
+    admin: number,
+    directions: {
+      address: string;
+      city: string;
+      state: string;
+      zipCode: string;
+    },
+  ) {
+    return registerCompany(name, phone, email, password, admin, directions);
   }
 }
