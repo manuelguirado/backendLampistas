@@ -16,7 +16,11 @@ export async function listCompany(adminID: number) {
   if (!admin) {
     throw new Error('Admin does not exist');
   }
-  const companies = await prisma.company.findMany();
+  const companies = await prisma.company.findMany({
+    include: {
+      directions: true,
+    },
+  });
 
   if (!companies) {
     return [];
@@ -28,6 +32,7 @@ export async function listCompany(adminID: number) {
       name: company.name,
       email: company.email,
       phone: company.phone,
+      directions: company.directions[0] || null,
     };
   });
 

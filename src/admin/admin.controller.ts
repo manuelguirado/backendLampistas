@@ -8,6 +8,7 @@ import {
   Patch,
   UseGuards,
   Query,
+  Request,
 } from '@nestjs/common';
 
 import { adminServices } from './admin.services';
@@ -63,11 +64,9 @@ export class AdminController {
   }
   @UseGuards(AuthGuard, AdminGuard)
   @Get('listCompany')
-  listCompany(@Query() body: { adminID: string }) {
-    const { adminID } = body;
-    const adminIDnumber = parseInt(adminID, 10);
-
-    return this.adminService.listCompany(adminIDnumber);
+  listCompany(@Request() req: any) {
+    const adminID = req.user.adminID;
+    return this.adminService.listCompany(adminID);
   }
   @UseGuards(AuthGuard, AdminGuard)
   @Post('registerCompany')

@@ -15,7 +15,8 @@ export class AdminGuard implements CanActivate {
     // accept several possible id fields and case-insensitive role
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
     const role = (user.role || user.roleName || '').toString().toLowerCase();
-    if (role === 'admin' || role === 'ADMIN') {
+    console.log('AdminGuard: user role is', role);
+    if (role === 'admin') {
       return true;
     }
     return false;
