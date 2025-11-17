@@ -1,6 +1,6 @@
-import { UserType } from './../../utils/types/userType';
-import { PrismaClient } from '../../../generated/prisma';
-import { generateCode } from '../../utils/generateCode';
+import { UserType } from '../utils//types/userType';
+import { PrismaClient } from '../../generated/prisma';
+import { generateCode } from '../utils/generateCode';
 
 const prisma = new PrismaClient();
 export async function assignCode(

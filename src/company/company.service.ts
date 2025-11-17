@@ -3,7 +3,7 @@ import { editWorker } from '../modules/workers/editWorker';
 import { registerWorker } from '../modules/workers/registerWorker';
 import { eliminateWorker } from '../modules/workers/eliminateWorker';
 import { createBudget } from '../modules/budgets/createbudget';
-
+import { assignCode } from '../utils/assingCode';
 import { companyLogin } from '../modules/companies/companyLogin';
 import { listWorker } from '../modules/workers/listWorker';
 import { assignIncident } from '../modules/incidents/assignIncident';
@@ -13,6 +13,13 @@ import { assignShiftWorker } from '../modules/companies/assignShiftWorker';
 export class CompanyService {
   async companyLogin(email: string, password: string) {
     return companyLogin(email, password);
+  }
+  async assignCode(companyID: number, workerid?: number, userID?: number) {
+    if (workerid !== undefined) {
+      return assignCode('worker', undefined, workerid, undefined);
+    } else if (userID !== undefined) {
+      return assignCode('user', undefined, undefined, userID);
+    }
   }
 
   async registerWorker(

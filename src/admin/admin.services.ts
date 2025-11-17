@@ -4,7 +4,7 @@ import { suspendCompany } from '../modules/admin/suspendCompany';
 import { editCompany } from '../modules/admin/editCompany';
 import { listCompany } from '../modules/admin/listCompany';
 import { activateCompany } from '../modules/admin/activateCompany';
-import { generateCode } from '../utils/generateCode';
+import { assignCode } from '../utils/assingCode';
 import registerAdmin from '../modules/admin/registerAdmin';
 import { eliminateCompany } from '../modules/admin/eliminateCompany';
 import { registerCompany } from '../modules/companies/registerCompany';
@@ -16,8 +16,8 @@ export class adminServices {
   async adminLogin(email: string, password: string) {
     return adminLogin(email, password);
   }
-  generateCode() {
-    return generateCode();
+  assignCode(companyID: number) {
+    return assignCode('company', companyID);
   }
   async suspendCompany(companyID: number, until?: Date) {
     return suspendCompany(companyID, until);

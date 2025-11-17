@@ -11,6 +11,19 @@ export class CompanyController {
     const { email, password } = body;
     return this.companyService.companyLogin(email, password);
   }
+  @UseGuards(AuthGuard, CompanyGuard)
+  @Post('assignCode')
+  assignCode(
+    @Body()
+    body: {
+      companyID: number;
+      workerid?: number;
+      userID?: number;
+    },
+  ) {
+    const { companyID, workerid, userID } = body;
+    return this.companyService.assignCode(companyID, workerid, userID);
+  }
 
   @UseGuards(AuthGuard, CompanyGuard)
   @Post('RegisterWorker')

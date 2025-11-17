@@ -26,10 +26,11 @@ export class AdminController {
     const { email, password } = body;
     return this.adminService.registerAdmin(email, password);
   }
-  @UseGuards(AuthGuard)
-  @Get('generateCode')
-  generateCode() {
-    return this.adminService.generateCode();
+  @UseGuards(AuthGuard, AdminGuard)
+  @Get('assignCode')
+  assingCode(@Query('companyID') companyID: number) {
+    const parseString = Number(companyID);
+    return this.adminService.assignCode(parseString);
   }
   @UseGuards(AuthGuard, AdminGuard)
   @Patch('suspendCompany')

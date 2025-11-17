@@ -68,6 +68,93 @@ describe('CompanyController', () => {
       .expect(201);
     expect(response.body).toBeDefined();
   });
+  it('should assign code a worker successfully', async () => {
+    const request = supertest('http://localhost:3000/company/assignCode');
+    const directions = await registerDirections(
+      '123 Test St, Test City, TS 12345',
+      'Test City',
+      'TS',
+      '12345',
+    );
+    const admin = await registerAdmin(
+      `admin-assign-code-${Date.now()}@test.com`,
+      'adminPassword',
+    );
+    const company = await registerCompany(
+      `company to assign code-${Date.now()}`,
+      '1234567890',
+      `company-assign-code-${Date.now()}@test.com`,
+      'securePassword',
+      admin.adminID,
+      directions,
+    );
+    const worker = await registerWorker(
+      `worker-assign-code-${Date.now()}@example.com`,
+      'workerPassword',
+      'Test Worker',
+      company.companyID,
+    );
+    const companyLogin = await supertest(
+      'http://localhost:3000/company/CompanyLogin',
+    )
+      .post('')
+      .send({ email: company.email, password: 'securePassword' })
+      .expect(201);
+    const body = companyLogin.body as { token: string };
+    const token: string = body.token;
+    const response = await request
+      .post('')
+      .send({
+        companyID: company.companyID,
+        workerid: worker.workerid,
+      })
+      .set('Authorization', `Bearer ${token}`)
+      .expect(201);
+    expect(response.body).toBeDefined();
+  });
+  it('should assign code a user successfully', async () => {
+    const request = supertest('http://localhost:3000/company/assignCode');
+    const directions = await registerDirections(
+      '123 Test St, Test City, TS 12345',
+      'Test City',
+      'TS',
+      '12345',
+    );
+    const admin = await registerAdmin(
+      `admin-assign-code-user-${Date.now()}@test.com`,
+      'adminPassword',
+    );
+    const company = await registerCompany(
+      `company to assign code user-${Date.now()}`,
+      '1234567890',
+      `company-assign-code-user-${Date.now()}@test.com`,
+      'securePassword',
+      admin.adminID,
+      directions,
+    );
+    const user = await userRegister(
+      'Test User',
+      `user-assign-code-${Date.now()}@example.com`,
+      'userPassword',
+    );
+    const companyLogin = await supertest(
+      'http://localhost:3000/company/CompanyLogin',
+    )
+      .post('')
+      .send({ email: company.email, password: 'securePassword' })
+      .expect(201);
+    const body = companyLogin.body as { token: string };
+    const token: string = body.token;
+    const response = await request
+      .post('')
+      .send({
+        companyID: company.companyID,
+        userID: user.userID,
+      })
+      .set('Authorization', `Bearer ${token}`)
+      .expect(201);
+    expect(response.body).toBeDefined();
+  });
   it('should register a worker successfully', async () => {
     const request = supertest('http://localhost:3000/company/RegisterWorker');
     const directions = await registerDirections(

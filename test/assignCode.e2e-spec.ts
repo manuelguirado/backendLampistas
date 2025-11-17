@@ -1,7 +1,7 @@
 import { registerWorker } from '../src/modules/workers/registerWorker';
 import { registerCompany } from '../src/modules/companies/registerCompany';
 import { registerDirections } from '../src/modules/directions/registerDirections';
-import { assignCode } from '../src/modules/admin/assingCode';
+import { assignCode } from '../src/utils/assingCode';
 import { PrismaClient } from '../generated/prisma';
 import { userRegister } from '../src/modules/users/userRegister';
 import registerAdmin from '../src/modules/admin/registerAdmin';
