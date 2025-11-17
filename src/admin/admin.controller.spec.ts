@@ -30,7 +30,6 @@ describe('AdminController', () => {
     await prisma.$disconnect();
   });
   it('should assign code to a company', async () => {
-    const request = supertest('http://localhost:3000/admin/assignCode');
     const directions = await registerDirections(
       '456 Business Rd',
       'Commercetown',
@@ -48,6 +47,9 @@ describe('AdminController', () => {
       'securepassword',
       admin.adminID,
       directions,
+    );
+    const request = supertest(
+      `http://localhost:3000/admin/assignCode/${company.companyID}`,
     );
     const adminLogin = supertest('http://localhost:3000/admin/adminLogin');
     const loginResponse = await adminLogin.post('').send({
@@ -67,6 +69,7 @@ describe('AdminController', () => {
     );
     expect(response.body).toHaveProperty('code');
   });
+
   it('should register a new admin successfully', async () => {
     const request = supertest('http://localhost:3000/admin/adminRegister');
     const email = `admin-test-${Date.now()}@example.com`;
@@ -128,8 +131,8 @@ describe('AdminController', () => {
     // Create a company directly in the database
     // Suspend the company
     const suspendResponse = await request
-      .patch('/admin/suspendCompany')
-      .send({ companyID: company.companyID })
+      .patch(`/admin/suspendCompany/${company.companyID}`)
+      .send({ until: new Date('2026-01-01').toISOString() })
       .set('Authorization', `Bearer ${token}`);
 
     expect(suspendResponse.status).toBe(200);
@@ -164,10 +167,9 @@ describe('AdminController', () => {
     // Edit the company details
     const newName = 'Updated Company Name';
     const editResponse = await request
-      .patch('/admin/editCompany')
+      .patch(`/admin/editCompany/${company.companyID}`)
       .set('Authorization', `Bearer ${token}`)
       .send({
-        companyID: company.companyID,
         data: { name: newName },
       });
 
@@ -204,8 +206,7 @@ describe('AdminController', () => {
 
     // Eliminate the company
     const eliminateResponse = await request
-      .post('/admin/eliminateCompany')
-      .send({ companyID: company.companyID })
+      .post(`/admin/eliminateCompany/${company.companyID}`)
       .set('Authorization', `Bearer ${token}`);
 
     expect(eliminateResponse.status).toBe(201);
@@ -242,7 +243,7 @@ describe('AdminController', () => {
 
     // Activate the company
     const activateResponse = await request
-      .patch('/admin/activateCompany')
+      .patch(`/admin/activateCompany/${company.companyID}`)
       .set('Authorization', `Bearer ${token}`)
       .send({ companyID: company.companyID });
     expect(activateResponse.status).toBe(200);
@@ -270,11 +271,48 @@ describe('AdminController', () => {
 
     // List companies for the admin
     const listResponse = await request
-      .get('/admin/listCompany')
-      .query({ adminID })
+      .get(`/admin/listCompany/${adminID}`)
       .set('Authorization', `Bearer ${token}`);
 
     expect(listResponse.status).toBe(200);
+  });
+  it('should consult the status of a company', async () => {
+    const request = supertest('http://localhost:3000');
+    const adminEmail = `admin-consult-status-test-${Date.now()}@example.com`;
+    const adminPassword = 'secureAdminPassword';
+    const admin = await registerAdmin(adminEmail, adminPassword);
+    expect(admin).toBeDefined();
+    // First, register the admin
+    const loginResponse = await request.post('/admin/adminLogin').send({
+      email: adminEmail,
+      password: adminPassword,
+    });
+    expect(loginResponse.status).toBe(201);
+    const { token } = loginResponse.body as { token: string };
+
+    // Create a company directly in the database
+    const companyEmail = `company-consult-status-test-${Date.now()}@example.com`;
+    const direction = await registerDirections(
+      '123 Status St',
+      'Statustown',
+      'Statestate',
+      '11223',
+    );
+    const company = await registerCompany(
+      'Status Test Company',
+      '1234567890',
+      companyEmail,
+      'secureCompanyPassword',
+      admin.adminID,
+      direction,
+    );
+
+    // Consult the status of the company
+    const consultResponse = await request
+      .get(`/admin/consultStatus/${company.companyID}`)
+      .set('Authorization', `Bearer ${token}`);
+
+    expect(consultResponse.status).toBe(200);
   });
   it('should register a company under an admin', async () => {
     const request = supertest('http://localhost:3000');

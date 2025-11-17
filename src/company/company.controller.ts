@@ -3,6 +3,7 @@ import { CompanyService } from './company.service';
 import { Body, Post, Patch, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '../auth/auth.guard';
 import { CompanyGuard } from './company.guard';
+import { use } from 'react';
 @Controller('company')
 export class CompanyController {
   constructor(private readonly companyService: CompanyService) {}
@@ -24,7 +25,7 @@ export class CompanyController {
     const { companyID, workerid, userID } = body;
     return this.companyService.assignCode(companyID, workerid, userID);
   }
-
+   
   @UseGuards(AuthGuard, CompanyGuard)
   @Post('RegisterWorker')
   registerWorker(

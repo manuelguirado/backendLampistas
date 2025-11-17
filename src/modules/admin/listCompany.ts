@@ -32,6 +32,7 @@ export async function listCompany(adminID: number) {
       name: company.name,
       email: company.email,
       phone: company.phone,
+      suspended: company.suspended,
       directions: company.directions[0] || null,
     };
   });

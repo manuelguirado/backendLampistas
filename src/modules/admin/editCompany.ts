@@ -11,6 +11,7 @@ export async function editCompany(
     email?: string;
     password?: string;
     phone?: string;
+    address?: string;
   },
   adminID: number,
 ) {

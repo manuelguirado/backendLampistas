@@ -5,7 +5,9 @@ import { editCompany } from '../modules/admin/editCompany';
 import { listCompany } from '../modules/admin/listCompany';
 import { activateCompany } from '../modules/admin/activateCompany';
 import { assignCode } from '../utils/assingCode';
+import { consultStatus } from '../modules/admin/consultStatus';
 import registerAdmin from '../modules/admin/registerAdmin';
+
 import { eliminateCompany } from '../modules/admin/eliminateCompany';
 import { registerCompany } from '../modules/companies/registerCompany';
 @Injectable()
@@ -16,6 +18,9 @@ export class adminServices {
   async adminLogin(email: string, password: string) {
     return adminLogin(email, password);
   }
+  async consultStatus(companyID: number) {
+    return consultStatus(companyID);
+  }
   assignCode(companyID: number) {
     return assignCode('company', companyID);
   }
@@ -24,7 +29,16 @@ export class adminServices {
   }
   async editCompany(
     companyID: number,
-    data: { name?: string; email?: string; password?: string },
+    data: {
+      name?: string;
+      email?: string;
+      password?: string;
+      address?: string;
+      phone?: string;
+      zipCode?: string;
+      city?: string;
+      state?: string;
+    },
     adminID: number,
   ) {
     return editCompany(companyID, data, adminID);

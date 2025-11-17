@@ -21,7 +21,7 @@ export class CompanyService {
       return assignCode('user', undefined, undefined, userID);
     }
   }
-
+  
   async registerWorker(
     email: string,
     password: string,

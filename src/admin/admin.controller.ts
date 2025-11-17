@@ -7,11 +7,12 @@ import {
   Get,
   Patch,
   UseGuards,
-  Query,
   Request,
+  Param,
 } from '@nestjs/common';
 
 import { adminServices } from './admin.services';
+
 @Controller('admin')
 export class AdminController {
   constructor(private readonly adminService: adminServices) {}
@@ -27,41 +28,52 @@ export class AdminController {
     return this.adminService.registerAdmin(email, password);
   }
   @UseGuards(AuthGuard, AdminGuard)
-  @Get('assignCode')
-  assingCode(@Query('companyID') companyID: number) {
+  @Get('consultStatus/:companyID')
+  consultStatus(@Param('companyID') companyID: string) {
+    const parseCompanyID = Number(companyID);
+    return this.adminService.consultStatus(parseCompanyID);
+  }
+  @UseGuards(AuthGuard, AdminGuard)
+  @Get('assignCode/:companyID')
+  assingCode(@Param('companyID') companyID: string) {
     const parseString = Number(companyID);
     return this.adminService.assignCode(parseString);
   }
   @UseGuards(AuthGuard, AdminGuard)
-  @Patch('suspendCompany')
-  suspendCompany(@Body() body: { companyID: number; until?: Date }) {
-    const { companyID, until } = body;
-    return this.adminService.suspendCompany(companyID, until);
+  @Patch('suspendCompany/:companyID')
+  suspendCompany(
+    @Param('companyID') companyID: string,
+    @Body() body: { until?: Date },
+  ) {
+    const parseCompanyID = Number(companyID);
+    const { until } = body;
+    return this.adminService.suspendCompany(parseCompanyID, until);
   }
   @UseGuards(AuthGuard, AdminGuard)
-  @Post('eliminateCompany')
-  eliminateCompany(@Body() body: { companyID: number }) {
-    const { companyID } = body;
-    return this.adminService.eliminateCompany(companyID);
+  @Post('eliminateCompany/:companyID')
+  eliminateCompany(@Param('companyID') companyID: string) {
+    const parseCompanyID = Number(companyID);
+    return this.adminService.eliminateCompany(parseCompanyID);
   }
   @UseGuards(AuthGuard, AdminGuard)
-  @Patch('activateCompany')
+  @Patch('activateCompany/:companyID')
   activateCompany(@Body() body: { companyID: number }) {
     const { companyID } = body;
     return this.adminService.activateCompany(companyID);
   }
   @UseGuards(AuthGuard, AdminGuard)
-  @Patch('editCompany')
+  @Patch('editCompany/:companyID')
   editCompany(
+    @Param('companyID') companyID: string,
     @Body()
     body: {
-      companyID: number;
-      data: { name?: string; email?: string; password?: string };
+      data: { name?: string; phone?: string; email?: string };
       adminID: number;
     },
   ) {
-    const { companyID, data, adminID } = body;
-    return this.adminService.editCompany(companyID, data, adminID);
+    const { data, adminID } = body;
+    const parseCompanyID = Number(companyID);
+    return this.adminService.editCompany(parseCompanyID, data, adminID);
   }
   @UseGuards(AuthGuard, AdminGuard)
   @Get('listCompany')
