@@ -9,6 +9,7 @@ import {
   UseGuards,
   Request,
   Param,
+  Query,
 } from '@nestjs/common';
 
 import { adminServices } from './admin.services';
@@ -77,9 +78,15 @@ export class AdminController {
   }
   @UseGuards(AuthGuard, AdminGuard)
   @Get('listCompany')
-  listCompany(@Request() req: any) {
+  listCompany(
+    @Request() req: any,
+    @Query('limit') limit?: string,
+    @Query('offset') offset?: string,
+  ) {
     const adminID = req.user.adminID;
-    return this.adminService.listCompany(adminID);
+    const parsedLimit = limit ? Number(limit) : 5;
+    const parsedOffset = offset ? Number(offset) : 0;
+    return this.adminService.listCompany(adminID, parsedLimit, parsedOffset);
   }
   @UseGuards(AuthGuard, AdminGuard)
   @Post('registerCompany')

@@ -4,7 +4,11 @@ import dotenv from 'dotenv';
 dotenv.config({ path: '../../../.env' });
 const prisma = new PrismaClient();
 
-export async function listCompany(adminID: number) {
+export async function listCompany(
+  adminID: number,
+  limit: number = 5,
+  offset: number = 0,
+) {
   if (!adminID) {
     throw new Error('adminID is required');
   }
@@ -16,10 +20,17 @@ export async function listCompany(adminID: number) {
   if (!admin) {
     throw new Error('Admin does not exist');
   }
+
+  // Obtener el total de compañías
+  const totalCompanies = await prisma.company.count();
+
   const companies = await prisma.company.findMany({
     include: {
       directions: true,
     },
+    take: limit,
+    skip: offset,
+    orderBy: { companyID: 'desc' },
   });
 
   if (!companies) {
@@ -42,7 +53,7 @@ export async function listCompany(adminID: number) {
     const secret = process.env.JWT_SECRET as string;
     const options: SignOptions = { expiresIn: '1h' };
     const token = jwt.sign(payload, secret, options);
-    return { token, companies: mappedCompanies };
+    return { token, companies: mappedCompanies, total: totalCompanies };
   } catch (error) {
     throw new Error(`Error generating token ${error}`);
   }

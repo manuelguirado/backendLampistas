@@ -49,8 +49,8 @@ export class adminServices {
   async activateCompany(companyID: number) {
     return activateCompany(companyID);
   }
-  async listCompany(adminID: number) {
-    return listCompany(adminID);
+  async listCompany(adminID: number, limit: number = 5, offset: number = 0) {
+    return listCompany(adminID, limit, offset);
   }
   async registerCompany(
     name: string,

@@ -9,6 +9,7 @@ import { listWorker } from '../modules/workers/listWorker';
 import { assignIncident } from '../modules/incidents/assignIncident';
 import { createMachinery } from '../modules/machinery/createMachinery';
 import { assignShiftWorker } from '../modules/companies/assignShiftWorker';
+import { validateCode } from '../utils/validateCode';
 @Injectable()
 export class CompanyService {
   async companyLogin(email: string, password: string) {
@@ -21,7 +22,14 @@ export class CompanyService {
       return assignCode('user', undefined, undefined, userID);
     }
   }
-  
+  async validateCode(
+    userType: 'company' | 'user' | 'worker',
+    id: number,
+    code: string,
+  ) {
+    return validateCode(userType, id, code);
+  }
+
   async registerWorker(
     email: string,
     password: string,

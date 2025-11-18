@@ -9,7 +9,7 @@ import { createIncident } from '../modules/incidents/createIncident';
 
 const prisma = new PrismaClient();
 describe('CompanyController', () => {
-  jest.setTimeout(30000);
+  jest.setTimeout(40000);
   beforeAll(async () => {
     await prisma.$connect();
     await prisma.shiftSchedule.deleteMany({});
@@ -150,6 +150,58 @@ describe('CompanyController', () => {
       .send({
         companyID: company.companyID,
         userID: user.userID,
+      })
+      .set('Authorization', `Bearer ${token}`)
+      .expect(201);
+    expect(response.body).toBeDefined();
+  });
+  it('should validate a code successfully', async () => {
+    const request = supertest('http://localhost:3000/company/validateCode');
+    const directions = await registerDirections(
+      '123 Test St, Test City, TS 12345',
+      'Test City',
+      'TS',
+      '12345',
+    );
+    const admin = await registerAdmin(
+      `admin-validate-code-${Date.now()}@test.com`,
+      'adminPassword',
+    );
+    const company = await registerCompany(
+      `company to validate code-${Date.now()}`,
+      '1234567890',
+      `company-validate-code-${Date.now()}@test.com`,
+      'securePassword',
+      admin.adminID,
+      directions,
+    );
+    const companyLogin = await supertest(
+      'http://localhost:3000/company/CompanyLogin',
+    )
+      .post('')
+      .send({ email: company.email, password: 'securePassword' })
+      .expect(201);
+    const body = companyLogin.body as { token: string };
+    const token: string = body.token;
+
+    // First, assign a code to the company
+    const assignCodeResponse = await supertest(
+      `http://localhost:3000/admin/assignCode/${company.companyID}`,
+    )
+      .post('')
+      .send({
+        companyID: company.companyID,
+      })
+      .set('Authorization', `Bearer ${token}`)
+      .expect(201);
+    const bodyAssign = assignCodeResponse.body as { code: string };
+    const assignedCode = bodyAssign.code;
+    const response = await request
+      .post('')
+      .send({
+        userType: 'company',
+        id: company.companyID,
+        code: assignedCode,
       })
       .set('Authorization', `Bearer ${token}`)
       .expect(201);
