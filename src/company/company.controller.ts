@@ -1,6 +1,15 @@
 import { Controller, Delete } from '@nestjs/common';
 import { CompanyService } from './company.service';
-import { Body, Post, Patch, UseGuards, Request, Query } from '@nestjs/common';
+import {
+  Body,
+  Post,
+  Patch,
+  UseGuards,
+  Request,
+  Param,
+  Get,
+  Query,
+} from '@nestjs/common';
 import { AuthGuard } from '../auth/auth.guard';
 import { CompanyGuard } from './company.guard';
 @Controller('company')
@@ -12,17 +21,20 @@ export class CompanyController {
     return this.companyService.companyLogin(email, password);
   }
   @UseGuards(AuthGuard, CompanyGuard)
-  @Post('assignCode')
-  assignCode(
-    @Body()
-    body: {
-      companyID?: number;
-      workerid?: number;
-      userID?: number;
-    },
-  ) {
-    const { companyID, workerid, userID } = body;
-    return this.companyService.assignCode(companyID!, workerid, userID);
+  @Get('assignWorkerCode/:workerID')
+  assignCode(@Request() req: any, @Param('workerID') workerID: string) {
+    const { companyID } = req.user;
+    return this.companyService.assignCode(
+      companyID,
+      Number(workerID),
+      undefined,
+    );
+  }
+  @UseGuards(AuthGuard, CompanyGuard)
+  @Get('assignUserCode/:userID')
+  assignUserCode(@Request() req: any, @Param('userID') userID: string) {
+    const { companyID } = req.user;
+    return this.companyService.assignCode(companyID, undefined, Number(userID));
   }
 
   @UseGuards(AuthGuard, CompanyGuard)
@@ -103,7 +115,7 @@ export class CompanyController {
     );
   }
   @UseGuards(AuthGuard, CompanyGuard)
-  @Post('listWorkers')
+  @Get('listWorkers')
   listWorkers(
     @Request() req: any,
     @Query('limit') limit?: string,

@@ -17,8 +17,8 @@ export async function listWorkers(
   if (!company) {
     throw new Error('Company does not exist');
   }
-  // Obtener el total de clientes asociados a la compañía
-  const totalClients = await prisma.user.count({
+  // Obtener el total de trabajadores asociados a la compañía
+  const totalWorkers = await prisma.worker.count({
     where: { companyID: companyID },
   });
   const workers = await prisma.worker.findMany({
@@ -58,7 +58,7 @@ export async function listWorkers(
     return {
       token,
       workers: mappedWorkers,
-      total: totalClients,
+      total: totalWorkers,
     };
   } catch (error) {
     throw new Error(`Error generating token ${error}`);
