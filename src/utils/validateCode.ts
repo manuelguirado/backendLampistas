@@ -17,7 +17,6 @@ export async function validateCode(userType: UserType, code: string) {
   if (!code) {
     throw new Error('code are required');
   }
-  console.log('Validating code:', code, 'for userType:', userType);
 
   switch (userType) {
     case 'company': {
