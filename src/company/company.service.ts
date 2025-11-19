@@ -64,8 +64,8 @@ export class CompanyService {
       items,
     );
   }
-  async listWorkers(companyID: number) {
-    return listWorkers(companyID);
+  async listWorkers(companyID: number, limit: number = 5, offset: number = 0) {
+    return listWorkers(companyID, limit, offset);
   }
   async assignIncident(incidentID: number, workerID: number) {
     return assignIncident(incidentID, workerID);

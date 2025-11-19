@@ -66,7 +66,8 @@ model Company {
   Budget Budget[] @relation("CompanyBudget")
   User   User[]
 
-  admins AdminsCompanies[] @relation("CompanyToAdminsCompanies")
+  admins           AdminsCompanies[]  @relation("CompanyToAdminsCompanies")
+  workersCompanies workersCompanies[]
 }
 
 model AdminsCompanies {
@@ -81,18 +82,19 @@ model AdminsCompanies {
 }
 
 model Worker {
-  workerid          Int             @id @default(autoincrement())
-  name              String          @db.VarChar(255)
-  email             String          @unique @db.VarChar(255)
-  password          String          @db.VarChar(255)
+  workerid          Int                @id @default(autoincrement())
+  name              String             @db.VarChar(255)
+  email             String             @unique @db.VarChar(255)
+  password          String             @db.VarChar(255)
   companyID         Int
-  company           Company         @relation("Workers", fields: [companyID], references: [companyID])
-  shiftWorkers      ShiftWorker[]   @relation("WorkerShiftWorkers")
-  assignedIncidents Incidents[]     @relation("WorkerIncidents")
-  jobHistory        JobHistory[]    @relation("WorkerJobHistory")
-  shiftSchedules    ShiftSchedule[] @relation("WorkerShiftSchedules")
-  role              Role            @default(WORKER)
-  workerCode        String?         @db.VarChar(100)
+  company           Company            @relation("Workers", fields: [companyID], references: [companyID])
+  shiftWorkers      ShiftWorker[]      @relation("WorkerShiftWorkers")
+  assignedIncidents Incidents[]        @relation("WorkerIncidents")
+  jobHistory        JobHistory[]       @relation("WorkerJobHistory")
+  shiftSchedules    ShiftSchedule[]    @relation("WorkerShiftSchedules")
+  role              Role               @default(WORKER)
+  workerCode        String?            @db.VarChar(100)
+  workersCompanies  workersCompanies[]
 }
 
 model Admin {
@@ -102,6 +104,17 @@ model Admin {
   role     Role   @default(ADMIN)
 
   companies AdminsCompanies[]
+}
+
+model workersCompanies {
+  id Int @id @default(autoincrement())
+
+  Worker    Worker  @relation(fields: [workerID], references: [workerid])
+  Company   Company @relation(fields: [companyID], references: [companyID])
+  workerID  Int
+  companyID Int
+
+  @@unique([workerID, companyID])
 }
 
 model Incidents {

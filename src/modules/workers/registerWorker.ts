@@ -12,7 +12,7 @@ export async function registerWorker(
   companyID: number,
 ) {
   if (!email || !password || !name || !companyID) {
-    throw new Error('Email, password, name and companyID are required');
+    throw new Error('Email, password, name, and companyID are required');
   }
   const existingWorker = await prisma.worker.findUnique({
     where: { email },
@@ -26,7 +26,9 @@ export async function registerWorker(
       email,
       password: hashedPassword,
       name,
-      companyID,
+      company: {
+        connect: { companyID },
+      },
     },
   });
   try {

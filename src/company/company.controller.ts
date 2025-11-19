@@ -1,6 +1,6 @@
 import { Controller, Delete } from '@nestjs/common';
 import { CompanyService } from './company.service';
-import { Body, Post, Patch, UseGuards } from '@nestjs/common';
+import { Body, Post, Patch, UseGuards, Request, Query } from '@nestjs/common';
 import { AuthGuard } from '../auth/auth.guard';
 import { CompanyGuard } from './company.guard';
 @Controller('company')
@@ -28,15 +28,16 @@ export class CompanyController {
   @UseGuards(AuthGuard, CompanyGuard)
   @Post('RegisterWorker')
   registerWorker(
+    @Request() req: any,
     @Body()
     body: {
       email: string;
       password: string;
       name: string;
-      companyID: number;
     },
   ) {
-    const { email, password, name, companyID } = body;
+    const { email, password, name } = body;
+    const companyID = req.user.companyID;
     return this.companyService.registerWorker(email, password, name, companyID);
   }
 
@@ -103,9 +104,20 @@ export class CompanyController {
   }
   @UseGuards(AuthGuard, CompanyGuard)
   @Post('listWorkers')
-  listWorkers(@Body() body: { companyID: number }) {
-    const { companyID } = body;
-    return this.companyService.listWorkers(companyID);
+  listWorkers(
+    @Request() req: any,
+    @Query('limit') limit?: string,
+    @Query('offset') offset?: string,
+  ) {
+    const { companyID } = req.user;
+
+    const parsedLimit = limit ? Number(limit) : 5;
+    const parsedOffset = offset ? Number(offset) : 0;
+    return this.companyService.listWorkers(
+      companyID,
+      parsedLimit,
+      parsedOffset,
+    );
   }
   @UseGuards(AuthGuard, CompanyGuard)
   @Post('assignIncident')

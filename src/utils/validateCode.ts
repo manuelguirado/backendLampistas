@@ -2,9 +2,9 @@ import { UserType } from './types/userType';
 import { PrismaClient } from '../../generated/prisma';
 import jwt, { SignOptions } from 'jsonwebtoken';
 const prisma = new PrismaClient();
-function generatetoken(usertype: UserType, code: string) {
+
+function generateToken(payload: object) {
   try {
-    const payload = { code, usertype };
     const secret = process.env.JWT_SECRET as string;
     const options: SignOptions = { expiresIn: '1h' };
     const token = jwt.sign(payload, secret, options);
@@ -13,6 +13,7 @@ function generatetoken(usertype: UserType, code: string) {
     throw new Error(`Error generating token ${error}`);
   }
 }
+
 export async function validateCode(userType: UserType, code: string) {
   if (!code) {
     throw new Error('code are required');
@@ -25,8 +26,12 @@ export async function validateCode(userType: UserType, code: string) {
           companyCode: code,
         },
       });
-      const token = generatetoken('company', code);
-      return { company: company !== null, token };
+      if (!company) {
+        throw new Error('Invalid company code');
+      }
+      const payload = { companyID: company.companyID, role: company.role };
+      const token = generateToken(payload);
+      return { company: true, token };
     }
     case 'user': {
       const user = await prisma.user.findFirst({
@@ -34,8 +39,12 @@ export async function validateCode(userType: UserType, code: string) {
           userCode: code,
         },
       });
-      const token = generatetoken('user', code);
-      return { user: user !== null, token };
+      if (!user) {
+        throw new Error('Invalid user code');
+      }
+      const payload = { userID: user.userID, role: user.role };
+      const token = generateToken(payload);
+      return { user: true, token };
     }
     case 'worker': {
       const worker = await prisma.worker.findFirst({
@@ -43,9 +52,16 @@ export async function validateCode(userType: UserType, code: string) {
           workerCode: code,
         },
       });
-      const token = generatetoken('worker', code);
-      console.log('Generated token for worker:', token);
-      return { worker: worker !== null, token };
+      if (!worker) {
+        throw new Error('Invalid worker code');
+      }
+      const payload = {
+        workerID: worker.workerid,
+        companyID: worker.companyID,
+        role: 'WORKER',
+      };
+      const token = generateToken(payload);
+      return { worker: true, token };
     }
     default:
       throw new Error(`Invalid user type `);

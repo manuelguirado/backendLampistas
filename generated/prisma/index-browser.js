@@ -171,6 +171,12 @@ exports.Prisma.AdminScalarFieldEnum = {
   role: 'role'
 };
 
+exports.Prisma.WorkersCompaniesScalarFieldEnum = {
+  id: 'id',
+  workerID: 'workerID',
+  companyID: 'companyID'
+};
+
 exports.Prisma.IncidentsScalarFieldEnum = {
   IncidentsID: 'IncidentsID',
   title: 'title',
@@ -311,6 +317,7 @@ exports.Prisma.ModelName = {
   AdminsCompanies: 'AdminsCompanies',
   Worker: 'Worker',
   Admin: 'Admin',
+  workersCompanies: 'workersCompanies',
   Incidents: 'Incidents',
   Payments: 'Payments',
   paymentStatus: 'paymentStatus',
