@@ -49,11 +49,12 @@ describe('validateCode', () => {
       admin.adminID,
       directions,
     );
+    expect(company).toBeDefined();
 
     // Asignar código a la compañía
-    const { code } = await assignCode('company', company.companyID);
+    const { code } = await assignCode('company');
 
-    const isValid = await validateCode('company', company.companyID, code);
+    const isValid = await validateCode('company', code);
     expect(isValid).toBe(true);
   });
 
@@ -72,7 +73,7 @@ describe('validateCode', () => {
       user.userID,
     );
 
-    const isValid = await validateCode('user', user.userID, code);
+    const isValid = await validateCode('user', code);
     expect(isValid).toBe(true);
   });
 
@@ -101,16 +102,16 @@ describe('validateCode', () => {
       'Test Worker',
       company.companyID,
     );
-
+    expect(worker).toBeDefined();
     // Asignar código al trabajador
-    const { code } = await assignCode('worker', undefined, worker.workerid);
+    const { code } = await assignCode('worker');
 
-    const isValid = await validateCode('worker', worker.workerid, code);
+    const isValid = await validateCode('worker', code);
     expect(isValid).toBe(true);
   });
 
   it('should return false for invalid code', async () => {
-    const isValid = await validateCode('user', 1, 'invalid-code');
+    const isValid = await validateCode('user', 'invalid-code');
     expect(isValid).toBe(false);
   });
 });

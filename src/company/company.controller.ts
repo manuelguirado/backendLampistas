@@ -16,13 +16,13 @@ export class CompanyController {
   assignCode(
     @Body()
     body: {
-      companyID: number;
+      companyID?: number;
       workerid?: number;
       userID?: number;
     },
   ) {
     const { companyID, workerid, userID } = body;
-    return this.companyService.assignCode(companyID, workerid, userID);
+    return this.companyService.assignCode(companyID!, workerid, userID);
   }
 
   @UseGuards(AuthGuard, CompanyGuard)
@@ -39,18 +39,17 @@ export class CompanyController {
     const { email, password, name, companyID } = body;
     return this.companyService.registerWorker(email, password, name, companyID);
   }
-  @UseGuards(AuthGuard, CompanyGuard)
+
   @Post('validateCode')
   validateCode(
     @Body()
     body: {
       userType: 'company';
-      id: number;
       code: string;
     },
   ) {
-    const { userType, id, code } = body;
-    return this.companyService.validateCode(userType, id, code);
+    const { userType, code } = body;
+    return this.companyService.validateCode(userType, code);
   }
   @UseGuards(AuthGuard, CompanyGuard)
   @Patch('editWorker')

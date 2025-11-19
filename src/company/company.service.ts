@@ -22,12 +22,8 @@ export class CompanyService {
       return assignCode('user', undefined, undefined, userID);
     }
   }
-  async validateCode(
-    userType: 'company' | 'user' | 'worker',
-    id: number,
-    code: string,
-  ) {
-    return validateCode(userType, id, code);
+  async validateCode(userType: 'company' | 'user' | 'worker', code: string) {
+    return validateCode(userType, code);
   }
 
   async registerWorker(
