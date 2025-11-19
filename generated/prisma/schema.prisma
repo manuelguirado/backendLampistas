@@ -25,7 +25,9 @@ model User {
   paymentsID      Int?
   payments        Payments?
   IncidentHistory IncidentHistory[]
-  machinery       machinery[]
+  machineryID     Int?
+
+  ClientMachinery ClientMachinery[]
   role            Role              @default(USER)
   userCode        String?           @db.VarChar(100)
 
@@ -35,6 +37,8 @@ model User {
 
   companyID Int?
   Company   Company? @relation(fields: [companyID], references: [companyID])
+
+  machinery machinery[]
 }
 
 model Company {
@@ -239,6 +243,18 @@ model machinery {
   companyID          Int
   company            Company  @relation("CompanyMachinery", fields: [companyID], references: [companyID])
   serialNumber       String   @unique
+
+  ClientMachinery ClientMachinery[]
+}
+
+model ClientMachinery {
+  userID      Int
+  machineryID Int
+
+  user      User      @relation(fields: [userID], references: [userID])
+  machinery machinery @relation(fields: [machineryID], references: [id])
+
+  @@id([userID, machineryID])
 }
 
 enum Role {

@@ -93,6 +93,11 @@ export type Directions = $Result.DefaultSelection<Prisma.$DirectionsPayload>
  * 
  */
 export type machinery = $Result.DefaultSelection<Prisma.$machineryPayload>
+/**
+ * Model ClientMachinery
+ * 
+ */
+export type ClientMachinery = $Result.DefaultSelection<Prisma.$ClientMachineryPayload>
 
 /**
  * Enums
@@ -390,6 +395,16 @@ export class PrismaClient<
     * ```
     */
   get machinery(): Prisma.machineryDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.clientMachinery`: Exposes CRUD operations for the **ClientMachinery** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ClientMachineries
+    * const clientMachineries = await prisma.clientMachinery.findMany()
+    * ```
+    */
+  get clientMachinery(): Prisma.ClientMachineryDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -846,7 +861,8 @@ export namespace Prisma {
     JobHistory: 'JobHistory',
     ShiftSchedule: 'ShiftSchedule',
     Directions: 'Directions',
-    machinery: 'machinery'
+    machinery: 'machinery',
+    ClientMachinery: 'ClientMachinery'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -865,7 +881,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "company" | "adminsCompanies" | "worker" | "admin" | "incidents" | "payments" | "paymentStatus" | "budget" | "subscription" | "incidentHistory" | "shiftWorker" | "jobHistory" | "shiftSchedule" | "directions" | "machinery"
+      modelProps: "user" | "company" | "adminsCompanies" | "worker" | "admin" | "incidents" | "payments" | "paymentStatus" | "budget" | "subscription" | "incidentHistory" | "shiftWorker" | "jobHistory" | "shiftSchedule" | "directions" | "machinery" | "clientMachinery"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2053,6 +2069,80 @@ export namespace Prisma {
           }
         }
       }
+      ClientMachinery: {
+        payload: Prisma.$ClientMachineryPayload<ExtArgs>
+        fields: Prisma.ClientMachineryFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ClientMachineryFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientMachineryPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ClientMachineryFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientMachineryPayload>
+          }
+          findFirst: {
+            args: Prisma.ClientMachineryFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientMachineryPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ClientMachineryFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientMachineryPayload>
+          }
+          findMany: {
+            args: Prisma.ClientMachineryFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientMachineryPayload>[]
+          }
+          create: {
+            args: Prisma.ClientMachineryCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientMachineryPayload>
+          }
+          createMany: {
+            args: Prisma.ClientMachineryCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ClientMachineryCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientMachineryPayload>[]
+          }
+          delete: {
+            args: Prisma.ClientMachineryDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientMachineryPayload>
+          }
+          update: {
+            args: Prisma.ClientMachineryUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientMachineryPayload>
+          }
+          deleteMany: {
+            args: Prisma.ClientMachineryDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ClientMachineryUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ClientMachineryUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientMachineryPayload>[]
+          }
+          upsert: {
+            args: Prisma.ClientMachineryUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientMachineryPayload>
+          }
+          aggregate: {
+            args: Prisma.ClientMachineryAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateClientMachinery>
+          }
+          groupBy: {
+            args: Prisma.ClientMachineryGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ClientMachineryGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ClientMachineryCountArgs<ExtArgs>
+            result: $Utils.Optional<ClientMachineryCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2165,6 +2255,7 @@ export namespace Prisma {
     shiftSchedule?: ShiftScheduleOmit
     directions?: DirectionsOmit
     machinery?: machineryOmit
+    clientMachinery?: ClientMachineryOmit
   }
 
   /* Types for Logging */
@@ -2247,17 +2338,19 @@ export namespace Prisma {
   export type UserCountOutputType = {
     directions: number
     IncidentHistory: number
-    machinery: number
+    ClientMachinery: number
     Incidents: number
     Budget: number
+    machinery: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     directions?: boolean | UserCountOutputTypeCountDirectionsArgs
     IncidentHistory?: boolean | UserCountOutputTypeCountIncidentHistoryArgs
-    machinery?: boolean | UserCountOutputTypeCountMachineryArgs
+    ClientMachinery?: boolean | UserCountOutputTypeCountClientMachineryArgs
     Incidents?: boolean | UserCountOutputTypeCountIncidentsArgs
     Budget?: boolean | UserCountOutputTypeCountBudgetArgs
+    machinery?: boolean | UserCountOutputTypeCountMachineryArgs
   }
 
   // Custom InputTypes
@@ -2288,8 +2381,8 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountMachineryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: machineryWhereInput
+  export type UserCountOutputTypeCountClientMachineryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClientMachineryWhereInput
   }
 
   /**
@@ -2304,6 +2397,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountBudgetArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: BudgetWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountMachineryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: machineryWhereInput
   }
 
 
@@ -2660,6 +2760,37 @@ export namespace Prisma {
 
 
   /**
+   * Count Type MachineryCountOutputType
+   */
+
+  export type MachineryCountOutputType = {
+    ClientMachinery: number
+  }
+
+  export type MachineryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    ClientMachinery?: boolean | MachineryCountOutputTypeCountClientMachineryArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * MachineryCountOutputType without action
+   */
+  export type MachineryCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MachineryCountOutputType
+     */
+    select?: MachineryCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * MachineryCountOutputType without action
+   */
+  export type MachineryCountOutputTypeCountClientMachineryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClientMachineryWhereInput
+  }
+
+
+  /**
    * Models
    */
 
@@ -2679,6 +2810,7 @@ export namespace Prisma {
     userID: number | null
     incidentsID: number | null
     paymentsID: number | null
+    machineryID: number | null
     companyID: number | null
   }
 
@@ -2686,6 +2818,7 @@ export namespace Prisma {
     userID: number | null
     incidentsID: number | null
     paymentsID: number | null
+    machineryID: number | null
     companyID: number | null
   }
 
@@ -2696,6 +2829,7 @@ export namespace Prisma {
     password: string | null
     incidentsID: number | null
     paymentsID: number | null
+    machineryID: number | null
     role: $Enums.Role | null
     userCode: string | null
     companyID: number | null
@@ -2708,6 +2842,7 @@ export namespace Prisma {
     password: string | null
     incidentsID: number | null
     paymentsID: number | null
+    machineryID: number | null
     role: $Enums.Role | null
     userCode: string | null
     companyID: number | null
@@ -2720,6 +2855,7 @@ export namespace Prisma {
     password: number
     incidentsID: number
     paymentsID: number
+    machineryID: number
     role: number
     userCode: number
     companyID: number
@@ -2731,6 +2867,7 @@ export namespace Prisma {
     userID?: true
     incidentsID?: true
     paymentsID?: true
+    machineryID?: true
     companyID?: true
   }
 
@@ -2738,6 +2875,7 @@ export namespace Prisma {
     userID?: true
     incidentsID?: true
     paymentsID?: true
+    machineryID?: true
     companyID?: true
   }
 
@@ -2748,6 +2886,7 @@ export namespace Prisma {
     password?: true
     incidentsID?: true
     paymentsID?: true
+    machineryID?: true
     role?: true
     userCode?: true
     companyID?: true
@@ -2760,6 +2899,7 @@ export namespace Prisma {
     password?: true
     incidentsID?: true
     paymentsID?: true
+    machineryID?: true
     role?: true
     userCode?: true
     companyID?: true
@@ -2772,6 +2912,7 @@ export namespace Prisma {
     password?: true
     incidentsID?: true
     paymentsID?: true
+    machineryID?: true
     role?: true
     userCode?: true
     companyID?: true
@@ -2871,6 +3012,7 @@ export namespace Prisma {
     password: string
     incidentsID: number | null
     paymentsID: number | null
+    machineryID: number | null
     role: $Enums.Role
     userCode: string | null
     companyID: number | null
@@ -2902,6 +3044,7 @@ export namespace Prisma {
     password?: boolean
     incidentsID?: boolean
     paymentsID?: boolean
+    machineryID?: boolean
     role?: boolean
     userCode?: boolean
     companyID?: boolean
@@ -2909,10 +3052,11 @@ export namespace Prisma {
     directions?: boolean | User$directionsArgs<ExtArgs>
     payments?: boolean | User$paymentsArgs<ExtArgs>
     IncidentHistory?: boolean | User$IncidentHistoryArgs<ExtArgs>
-    machinery?: boolean | User$machineryArgs<ExtArgs>
+    ClientMachinery?: boolean | User$ClientMachineryArgs<ExtArgs>
     Incidents?: boolean | User$IncidentsArgs<ExtArgs>
     Budget?: boolean | User$BudgetArgs<ExtArgs>
     Company?: boolean | User$CompanyArgs<ExtArgs>
+    machinery?: boolean | User$machineryArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2923,6 +3067,7 @@ export namespace Prisma {
     password?: boolean
     incidentsID?: boolean
     paymentsID?: boolean
+    machineryID?: boolean
     role?: boolean
     userCode?: boolean
     companyID?: boolean
@@ -2937,6 +3082,7 @@ export namespace Prisma {
     password?: boolean
     incidentsID?: boolean
     paymentsID?: boolean
+    machineryID?: boolean
     role?: boolean
     userCode?: boolean
     companyID?: boolean
@@ -2951,21 +3097,23 @@ export namespace Prisma {
     password?: boolean
     incidentsID?: boolean
     paymentsID?: boolean
+    machineryID?: boolean
     role?: boolean
     userCode?: boolean
     companyID?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"userID" | "name" | "email" | "password" | "incidentsID" | "paymentsID" | "role" | "userCode" | "companyID", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"userID" | "name" | "email" | "password" | "incidentsID" | "paymentsID" | "machineryID" | "role" | "userCode" | "companyID", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     incidents?: boolean | User$incidentsArgs<ExtArgs>
     directions?: boolean | User$directionsArgs<ExtArgs>
     payments?: boolean | User$paymentsArgs<ExtArgs>
     IncidentHistory?: boolean | User$IncidentHistoryArgs<ExtArgs>
-    machinery?: boolean | User$machineryArgs<ExtArgs>
+    ClientMachinery?: boolean | User$ClientMachineryArgs<ExtArgs>
     Incidents?: boolean | User$IncidentsArgs<ExtArgs>
     Budget?: boolean | User$BudgetArgs<ExtArgs>
     Company?: boolean | User$CompanyArgs<ExtArgs>
+    machinery?: boolean | User$machineryArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2984,10 +3132,11 @@ export namespace Prisma {
       directions: Prisma.$DirectionsPayload<ExtArgs>[]
       payments: Prisma.$PaymentsPayload<ExtArgs> | null
       IncidentHistory: Prisma.$IncidentHistoryPayload<ExtArgs>[]
-      machinery: Prisma.$machineryPayload<ExtArgs>[]
+      ClientMachinery: Prisma.$ClientMachineryPayload<ExtArgs>[]
       Incidents: Prisma.$IncidentsPayload<ExtArgs>[]
       Budget: Prisma.$BudgetPayload<ExtArgs>[]
       Company: Prisma.$CompanyPayload<ExtArgs> | null
+      machinery: Prisma.$machineryPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       userID: number
@@ -2996,6 +3145,7 @@ export namespace Prisma {
       password: string
       incidentsID: number | null
       paymentsID: number | null
+      machineryID: number | null
       role: $Enums.Role
       userCode: string | null
       companyID: number | null
@@ -3397,10 +3547,11 @@ export namespace Prisma {
     directions<T extends User$directionsArgs<ExtArgs> = {}>(args?: Subset<T, User$directionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DirectionsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     payments<T extends User$paymentsArgs<ExtArgs> = {}>(args?: Subset<T, User$paymentsArgs<ExtArgs>>): Prisma__PaymentsClient<$Result.GetResult<Prisma.$PaymentsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     IncidentHistory<T extends User$IncidentHistoryArgs<ExtArgs> = {}>(args?: Subset<T, User$IncidentHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IncidentHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    machinery<T extends User$machineryArgs<ExtArgs> = {}>(args?: Subset<T, User$machineryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$machineryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    ClientMachinery<T extends User$ClientMachineryArgs<ExtArgs> = {}>(args?: Subset<T, User$ClientMachineryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClientMachineryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Incidents<T extends User$IncidentsArgs<ExtArgs> = {}>(args?: Subset<T, User$IncidentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IncidentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Budget<T extends User$BudgetArgs<ExtArgs> = {}>(args?: Subset<T, User$BudgetArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BudgetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Company<T extends User$CompanyArgs<ExtArgs> = {}>(args?: Subset<T, User$CompanyArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    machinery<T extends User$machineryArgs<ExtArgs> = {}>(args?: Subset<T, User$machineryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$machineryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3436,6 +3587,7 @@ export namespace Prisma {
     readonly password: FieldRef<"User", 'String'>
     readonly incidentsID: FieldRef<"User", 'Int'>
     readonly paymentsID: FieldRef<"User", 'Int'>
+    readonly machineryID: FieldRef<"User", 'Int'>
     readonly role: FieldRef<"User", 'Role'>
     readonly userCode: FieldRef<"User", 'String'>
     readonly companyID: FieldRef<"User", 'Int'>
@@ -3921,27 +4073,27 @@ export namespace Prisma {
   }
 
   /**
-   * User.machinery
+   * User.ClientMachinery
    */
-  export type User$machineryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$ClientMachineryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the machinery
+     * Select specific fields to fetch from the ClientMachinery
      */
-    select?: machinerySelect<ExtArgs> | null
+    select?: ClientMachinerySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the machinery
+     * Omit specific fields from the ClientMachinery
      */
-    omit?: machineryOmit<ExtArgs> | null
+    omit?: ClientMachineryOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: machineryInclude<ExtArgs> | null
-    where?: machineryWhereInput
-    orderBy?: machineryOrderByWithRelationInput | machineryOrderByWithRelationInput[]
-    cursor?: machineryWhereUniqueInput
+    include?: ClientMachineryInclude<ExtArgs> | null
+    where?: ClientMachineryWhereInput
+    orderBy?: ClientMachineryOrderByWithRelationInput | ClientMachineryOrderByWithRelationInput[]
+    cursor?: ClientMachineryWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: MachineryScalarFieldEnum | MachineryScalarFieldEnum[]
+    distinct?: ClientMachineryScalarFieldEnum | ClientMachineryScalarFieldEnum[]
   }
 
   /**
@@ -4009,6 +4161,30 @@ export namespace Prisma {
      */
     include?: CompanyInclude<ExtArgs> | null
     where?: CompanyWhereInput
+  }
+
+  /**
+   * User.machinery
+   */
+  export type User$machineryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the machinery
+     */
+    select?: machinerySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the machinery
+     */
+    omit?: machineryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: machineryInclude<ExtArgs> | null
+    where?: machineryWhereInput
+    orderBy?: machineryOrderByWithRelationInput | machineryOrderByWithRelationInput[]
+    cursor?: machineryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MachineryScalarFieldEnum | MachineryScalarFieldEnum[]
   }
 
   /**
@@ -20754,6 +20930,8 @@ export namespace Prisma {
     serialNumber?: boolean
     client?: boolean | UserDefaultArgs<ExtArgs>
     company?: boolean | CompanyDefaultArgs<ExtArgs>
+    ClientMachinery?: boolean | machinery$ClientMachineryArgs<ExtArgs>
+    _count?: boolean | MachineryCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["machinery"]>
 
   export type machinerySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -20806,6 +20984,8 @@ export namespace Prisma {
   export type machineryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     client?: boolean | UserDefaultArgs<ExtArgs>
     company?: boolean | CompanyDefaultArgs<ExtArgs>
+    ClientMachinery?: boolean | machinery$ClientMachineryArgs<ExtArgs>
+    _count?: boolean | MachineryCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type machineryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     client?: boolean | UserDefaultArgs<ExtArgs>
@@ -20821,6 +21001,7 @@ export namespace Prisma {
     objects: {
       client: Prisma.$UserPayload<ExtArgs>
       company: Prisma.$CompanyPayload<ExtArgs>
+      ClientMachinery: Prisma.$ClientMachineryPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -21230,6 +21411,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     client<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     company<T extends CompanyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CompanyDefaultArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    ClientMachinery<T extends machinery$ClientMachineryArgs<ExtArgs> = {}>(args?: Subset<T, machinery$ClientMachineryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClientMachineryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -21666,6 +21848,30 @@ export namespace Prisma {
   }
 
   /**
+   * machinery.ClientMachinery
+   */
+  export type machinery$ClientMachineryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientMachinery
+     */
+    select?: ClientMachinerySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientMachinery
+     */
+    omit?: ClientMachineryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientMachineryInclude<ExtArgs> | null
+    where?: ClientMachineryWhereInput
+    orderBy?: ClientMachineryOrderByWithRelationInput | ClientMachineryOrderByWithRelationInput[]
+    cursor?: ClientMachineryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ClientMachineryScalarFieldEnum | ClientMachineryScalarFieldEnum[]
+  }
+
+  /**
    * machinery without action
    */
   export type machineryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -21681,6 +21887,1071 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: machineryInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ClientMachinery
+   */
+
+  export type AggregateClientMachinery = {
+    _count: ClientMachineryCountAggregateOutputType | null
+    _avg: ClientMachineryAvgAggregateOutputType | null
+    _sum: ClientMachinerySumAggregateOutputType | null
+    _min: ClientMachineryMinAggregateOutputType | null
+    _max: ClientMachineryMaxAggregateOutputType | null
+  }
+
+  export type ClientMachineryAvgAggregateOutputType = {
+    userID: number | null
+    machineryID: number | null
+  }
+
+  export type ClientMachinerySumAggregateOutputType = {
+    userID: number | null
+    machineryID: number | null
+  }
+
+  export type ClientMachineryMinAggregateOutputType = {
+    userID: number | null
+    machineryID: number | null
+  }
+
+  export type ClientMachineryMaxAggregateOutputType = {
+    userID: number | null
+    machineryID: number | null
+  }
+
+  export type ClientMachineryCountAggregateOutputType = {
+    userID: number
+    machineryID: number
+    _all: number
+  }
+
+
+  export type ClientMachineryAvgAggregateInputType = {
+    userID?: true
+    machineryID?: true
+  }
+
+  export type ClientMachinerySumAggregateInputType = {
+    userID?: true
+    machineryID?: true
+  }
+
+  export type ClientMachineryMinAggregateInputType = {
+    userID?: true
+    machineryID?: true
+  }
+
+  export type ClientMachineryMaxAggregateInputType = {
+    userID?: true
+    machineryID?: true
+  }
+
+  export type ClientMachineryCountAggregateInputType = {
+    userID?: true
+    machineryID?: true
+    _all?: true
+  }
+
+  export type ClientMachineryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ClientMachinery to aggregate.
+     */
+    where?: ClientMachineryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ClientMachineries to fetch.
+     */
+    orderBy?: ClientMachineryOrderByWithRelationInput | ClientMachineryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ClientMachineryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ClientMachineries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ClientMachineries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ClientMachineries
+    **/
+    _count?: true | ClientMachineryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ClientMachineryAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ClientMachinerySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ClientMachineryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ClientMachineryMaxAggregateInputType
+  }
+
+  export type GetClientMachineryAggregateType<T extends ClientMachineryAggregateArgs> = {
+        [P in keyof T & keyof AggregateClientMachinery]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateClientMachinery[P]>
+      : GetScalarType<T[P], AggregateClientMachinery[P]>
+  }
+
+
+
+
+  export type ClientMachineryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClientMachineryWhereInput
+    orderBy?: ClientMachineryOrderByWithAggregationInput | ClientMachineryOrderByWithAggregationInput[]
+    by: ClientMachineryScalarFieldEnum[] | ClientMachineryScalarFieldEnum
+    having?: ClientMachineryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ClientMachineryCountAggregateInputType | true
+    _avg?: ClientMachineryAvgAggregateInputType
+    _sum?: ClientMachinerySumAggregateInputType
+    _min?: ClientMachineryMinAggregateInputType
+    _max?: ClientMachineryMaxAggregateInputType
+  }
+
+  export type ClientMachineryGroupByOutputType = {
+    userID: number
+    machineryID: number
+    _count: ClientMachineryCountAggregateOutputType | null
+    _avg: ClientMachineryAvgAggregateOutputType | null
+    _sum: ClientMachinerySumAggregateOutputType | null
+    _min: ClientMachineryMinAggregateOutputType | null
+    _max: ClientMachineryMaxAggregateOutputType | null
+  }
+
+  type GetClientMachineryGroupByPayload<T extends ClientMachineryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ClientMachineryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ClientMachineryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ClientMachineryGroupByOutputType[P]>
+            : GetScalarType<T[P], ClientMachineryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ClientMachinerySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    userID?: boolean
+    machineryID?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    machinery?: boolean | machineryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["clientMachinery"]>
+
+  export type ClientMachinerySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    userID?: boolean
+    machineryID?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    machinery?: boolean | machineryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["clientMachinery"]>
+
+  export type ClientMachinerySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    userID?: boolean
+    machineryID?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    machinery?: boolean | machineryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["clientMachinery"]>
+
+  export type ClientMachinerySelectScalar = {
+    userID?: boolean
+    machineryID?: boolean
+  }
+
+  export type ClientMachineryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"userID" | "machineryID", ExtArgs["result"]["clientMachinery"]>
+  export type ClientMachineryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    machinery?: boolean | machineryDefaultArgs<ExtArgs>
+  }
+  export type ClientMachineryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    machinery?: boolean | machineryDefaultArgs<ExtArgs>
+  }
+  export type ClientMachineryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    machinery?: boolean | machineryDefaultArgs<ExtArgs>
+  }
+
+  export type $ClientMachineryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ClientMachinery"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      machinery: Prisma.$machineryPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      userID: number
+      machineryID: number
+    }, ExtArgs["result"]["clientMachinery"]>
+    composites: {}
+  }
+
+  type ClientMachineryGetPayload<S extends boolean | null | undefined | ClientMachineryDefaultArgs> = $Result.GetResult<Prisma.$ClientMachineryPayload, S>
+
+  type ClientMachineryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ClientMachineryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ClientMachineryCountAggregateInputType | true
+    }
+
+  export interface ClientMachineryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ClientMachinery'], meta: { name: 'ClientMachinery' } }
+    /**
+     * Find zero or one ClientMachinery that matches the filter.
+     * @param {ClientMachineryFindUniqueArgs} args - Arguments to find a ClientMachinery
+     * @example
+     * // Get one ClientMachinery
+     * const clientMachinery = await prisma.clientMachinery.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ClientMachineryFindUniqueArgs>(args: SelectSubset<T, ClientMachineryFindUniqueArgs<ExtArgs>>): Prisma__ClientMachineryClient<$Result.GetResult<Prisma.$ClientMachineryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ClientMachinery that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ClientMachineryFindUniqueOrThrowArgs} args - Arguments to find a ClientMachinery
+     * @example
+     * // Get one ClientMachinery
+     * const clientMachinery = await prisma.clientMachinery.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ClientMachineryFindUniqueOrThrowArgs>(args: SelectSubset<T, ClientMachineryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ClientMachineryClient<$Result.GetResult<Prisma.$ClientMachineryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ClientMachinery that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientMachineryFindFirstArgs} args - Arguments to find a ClientMachinery
+     * @example
+     * // Get one ClientMachinery
+     * const clientMachinery = await prisma.clientMachinery.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ClientMachineryFindFirstArgs>(args?: SelectSubset<T, ClientMachineryFindFirstArgs<ExtArgs>>): Prisma__ClientMachineryClient<$Result.GetResult<Prisma.$ClientMachineryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ClientMachinery that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientMachineryFindFirstOrThrowArgs} args - Arguments to find a ClientMachinery
+     * @example
+     * // Get one ClientMachinery
+     * const clientMachinery = await prisma.clientMachinery.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ClientMachineryFindFirstOrThrowArgs>(args?: SelectSubset<T, ClientMachineryFindFirstOrThrowArgs<ExtArgs>>): Prisma__ClientMachineryClient<$Result.GetResult<Prisma.$ClientMachineryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ClientMachineries that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientMachineryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ClientMachineries
+     * const clientMachineries = await prisma.clientMachinery.findMany()
+     * 
+     * // Get first 10 ClientMachineries
+     * const clientMachineries = await prisma.clientMachinery.findMany({ take: 10 })
+     * 
+     * // Only select the `userID`
+     * const clientMachineryWithUserIDOnly = await prisma.clientMachinery.findMany({ select: { userID: true } })
+     * 
+     */
+    findMany<T extends ClientMachineryFindManyArgs>(args?: SelectSubset<T, ClientMachineryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClientMachineryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ClientMachinery.
+     * @param {ClientMachineryCreateArgs} args - Arguments to create a ClientMachinery.
+     * @example
+     * // Create one ClientMachinery
+     * const ClientMachinery = await prisma.clientMachinery.create({
+     *   data: {
+     *     // ... data to create a ClientMachinery
+     *   }
+     * })
+     * 
+     */
+    create<T extends ClientMachineryCreateArgs>(args: SelectSubset<T, ClientMachineryCreateArgs<ExtArgs>>): Prisma__ClientMachineryClient<$Result.GetResult<Prisma.$ClientMachineryPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ClientMachineries.
+     * @param {ClientMachineryCreateManyArgs} args - Arguments to create many ClientMachineries.
+     * @example
+     * // Create many ClientMachineries
+     * const clientMachinery = await prisma.clientMachinery.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ClientMachineryCreateManyArgs>(args?: SelectSubset<T, ClientMachineryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ClientMachineries and returns the data saved in the database.
+     * @param {ClientMachineryCreateManyAndReturnArgs} args - Arguments to create many ClientMachineries.
+     * @example
+     * // Create many ClientMachineries
+     * const clientMachinery = await prisma.clientMachinery.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ClientMachineries and only return the `userID`
+     * const clientMachineryWithUserIDOnly = await prisma.clientMachinery.createManyAndReturn({
+     *   select: { userID: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ClientMachineryCreateManyAndReturnArgs>(args?: SelectSubset<T, ClientMachineryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClientMachineryPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ClientMachinery.
+     * @param {ClientMachineryDeleteArgs} args - Arguments to delete one ClientMachinery.
+     * @example
+     * // Delete one ClientMachinery
+     * const ClientMachinery = await prisma.clientMachinery.delete({
+     *   where: {
+     *     // ... filter to delete one ClientMachinery
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ClientMachineryDeleteArgs>(args: SelectSubset<T, ClientMachineryDeleteArgs<ExtArgs>>): Prisma__ClientMachineryClient<$Result.GetResult<Prisma.$ClientMachineryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ClientMachinery.
+     * @param {ClientMachineryUpdateArgs} args - Arguments to update one ClientMachinery.
+     * @example
+     * // Update one ClientMachinery
+     * const clientMachinery = await prisma.clientMachinery.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ClientMachineryUpdateArgs>(args: SelectSubset<T, ClientMachineryUpdateArgs<ExtArgs>>): Prisma__ClientMachineryClient<$Result.GetResult<Prisma.$ClientMachineryPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ClientMachineries.
+     * @param {ClientMachineryDeleteManyArgs} args - Arguments to filter ClientMachineries to delete.
+     * @example
+     * // Delete a few ClientMachineries
+     * const { count } = await prisma.clientMachinery.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ClientMachineryDeleteManyArgs>(args?: SelectSubset<T, ClientMachineryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ClientMachineries.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientMachineryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ClientMachineries
+     * const clientMachinery = await prisma.clientMachinery.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ClientMachineryUpdateManyArgs>(args: SelectSubset<T, ClientMachineryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ClientMachineries and returns the data updated in the database.
+     * @param {ClientMachineryUpdateManyAndReturnArgs} args - Arguments to update many ClientMachineries.
+     * @example
+     * // Update many ClientMachineries
+     * const clientMachinery = await prisma.clientMachinery.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ClientMachineries and only return the `userID`
+     * const clientMachineryWithUserIDOnly = await prisma.clientMachinery.updateManyAndReturn({
+     *   select: { userID: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ClientMachineryUpdateManyAndReturnArgs>(args: SelectSubset<T, ClientMachineryUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClientMachineryPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ClientMachinery.
+     * @param {ClientMachineryUpsertArgs} args - Arguments to update or create a ClientMachinery.
+     * @example
+     * // Update or create a ClientMachinery
+     * const clientMachinery = await prisma.clientMachinery.upsert({
+     *   create: {
+     *     // ... data to create a ClientMachinery
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ClientMachinery we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ClientMachineryUpsertArgs>(args: SelectSubset<T, ClientMachineryUpsertArgs<ExtArgs>>): Prisma__ClientMachineryClient<$Result.GetResult<Prisma.$ClientMachineryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ClientMachineries.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientMachineryCountArgs} args - Arguments to filter ClientMachineries to count.
+     * @example
+     * // Count the number of ClientMachineries
+     * const count = await prisma.clientMachinery.count({
+     *   where: {
+     *     // ... the filter for the ClientMachineries we want to count
+     *   }
+     * })
+    **/
+    count<T extends ClientMachineryCountArgs>(
+      args?: Subset<T, ClientMachineryCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ClientMachineryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ClientMachinery.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientMachineryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ClientMachineryAggregateArgs>(args: Subset<T, ClientMachineryAggregateArgs>): Prisma.PrismaPromise<GetClientMachineryAggregateType<T>>
+
+    /**
+     * Group by ClientMachinery.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientMachineryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ClientMachineryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ClientMachineryGroupByArgs['orderBy'] }
+        : { orderBy?: ClientMachineryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ClientMachineryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetClientMachineryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ClientMachinery model
+   */
+  readonly fields: ClientMachineryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ClientMachinery.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ClientMachineryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    machinery<T extends machineryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, machineryDefaultArgs<ExtArgs>>): Prisma__machineryClient<$Result.GetResult<Prisma.$machineryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ClientMachinery model
+   */
+  interface ClientMachineryFieldRefs {
+    readonly userID: FieldRef<"ClientMachinery", 'Int'>
+    readonly machineryID: FieldRef<"ClientMachinery", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ClientMachinery findUnique
+   */
+  export type ClientMachineryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientMachinery
+     */
+    select?: ClientMachinerySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientMachinery
+     */
+    omit?: ClientMachineryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientMachineryInclude<ExtArgs> | null
+    /**
+     * Filter, which ClientMachinery to fetch.
+     */
+    where: ClientMachineryWhereUniqueInput
+  }
+
+  /**
+   * ClientMachinery findUniqueOrThrow
+   */
+  export type ClientMachineryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientMachinery
+     */
+    select?: ClientMachinerySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientMachinery
+     */
+    omit?: ClientMachineryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientMachineryInclude<ExtArgs> | null
+    /**
+     * Filter, which ClientMachinery to fetch.
+     */
+    where: ClientMachineryWhereUniqueInput
+  }
+
+  /**
+   * ClientMachinery findFirst
+   */
+  export type ClientMachineryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientMachinery
+     */
+    select?: ClientMachinerySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientMachinery
+     */
+    omit?: ClientMachineryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientMachineryInclude<ExtArgs> | null
+    /**
+     * Filter, which ClientMachinery to fetch.
+     */
+    where?: ClientMachineryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ClientMachineries to fetch.
+     */
+    orderBy?: ClientMachineryOrderByWithRelationInput | ClientMachineryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ClientMachineries.
+     */
+    cursor?: ClientMachineryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ClientMachineries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ClientMachineries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ClientMachineries.
+     */
+    distinct?: ClientMachineryScalarFieldEnum | ClientMachineryScalarFieldEnum[]
+  }
+
+  /**
+   * ClientMachinery findFirstOrThrow
+   */
+  export type ClientMachineryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientMachinery
+     */
+    select?: ClientMachinerySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientMachinery
+     */
+    omit?: ClientMachineryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientMachineryInclude<ExtArgs> | null
+    /**
+     * Filter, which ClientMachinery to fetch.
+     */
+    where?: ClientMachineryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ClientMachineries to fetch.
+     */
+    orderBy?: ClientMachineryOrderByWithRelationInput | ClientMachineryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ClientMachineries.
+     */
+    cursor?: ClientMachineryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ClientMachineries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ClientMachineries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ClientMachineries.
+     */
+    distinct?: ClientMachineryScalarFieldEnum | ClientMachineryScalarFieldEnum[]
+  }
+
+  /**
+   * ClientMachinery findMany
+   */
+  export type ClientMachineryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientMachinery
+     */
+    select?: ClientMachinerySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientMachinery
+     */
+    omit?: ClientMachineryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientMachineryInclude<ExtArgs> | null
+    /**
+     * Filter, which ClientMachineries to fetch.
+     */
+    where?: ClientMachineryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ClientMachineries to fetch.
+     */
+    orderBy?: ClientMachineryOrderByWithRelationInput | ClientMachineryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ClientMachineries.
+     */
+    cursor?: ClientMachineryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ClientMachineries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ClientMachineries.
+     */
+    skip?: number
+    distinct?: ClientMachineryScalarFieldEnum | ClientMachineryScalarFieldEnum[]
+  }
+
+  /**
+   * ClientMachinery create
+   */
+  export type ClientMachineryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientMachinery
+     */
+    select?: ClientMachinerySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientMachinery
+     */
+    omit?: ClientMachineryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientMachineryInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ClientMachinery.
+     */
+    data: XOR<ClientMachineryCreateInput, ClientMachineryUncheckedCreateInput>
+  }
+
+  /**
+   * ClientMachinery createMany
+   */
+  export type ClientMachineryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ClientMachineries.
+     */
+    data: ClientMachineryCreateManyInput | ClientMachineryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ClientMachinery createManyAndReturn
+   */
+  export type ClientMachineryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientMachinery
+     */
+    select?: ClientMachinerySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientMachinery
+     */
+    omit?: ClientMachineryOmit<ExtArgs> | null
+    /**
+     * The data used to create many ClientMachineries.
+     */
+    data: ClientMachineryCreateManyInput | ClientMachineryCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientMachineryIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ClientMachinery update
+   */
+  export type ClientMachineryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientMachinery
+     */
+    select?: ClientMachinerySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientMachinery
+     */
+    omit?: ClientMachineryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientMachineryInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ClientMachinery.
+     */
+    data: XOR<ClientMachineryUpdateInput, ClientMachineryUncheckedUpdateInput>
+    /**
+     * Choose, which ClientMachinery to update.
+     */
+    where: ClientMachineryWhereUniqueInput
+  }
+
+  /**
+   * ClientMachinery updateMany
+   */
+  export type ClientMachineryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ClientMachineries.
+     */
+    data: XOR<ClientMachineryUpdateManyMutationInput, ClientMachineryUncheckedUpdateManyInput>
+    /**
+     * Filter which ClientMachineries to update
+     */
+    where?: ClientMachineryWhereInput
+    /**
+     * Limit how many ClientMachineries to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ClientMachinery updateManyAndReturn
+   */
+  export type ClientMachineryUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientMachinery
+     */
+    select?: ClientMachinerySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientMachinery
+     */
+    omit?: ClientMachineryOmit<ExtArgs> | null
+    /**
+     * The data used to update ClientMachineries.
+     */
+    data: XOR<ClientMachineryUpdateManyMutationInput, ClientMachineryUncheckedUpdateManyInput>
+    /**
+     * Filter which ClientMachineries to update
+     */
+    where?: ClientMachineryWhereInput
+    /**
+     * Limit how many ClientMachineries to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientMachineryIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ClientMachinery upsert
+   */
+  export type ClientMachineryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientMachinery
+     */
+    select?: ClientMachinerySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientMachinery
+     */
+    omit?: ClientMachineryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientMachineryInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ClientMachinery to update in case it exists.
+     */
+    where: ClientMachineryWhereUniqueInput
+    /**
+     * In case the ClientMachinery found by the `where` argument doesn't exist, create a new ClientMachinery with this data.
+     */
+    create: XOR<ClientMachineryCreateInput, ClientMachineryUncheckedCreateInput>
+    /**
+     * In case the ClientMachinery was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ClientMachineryUpdateInput, ClientMachineryUncheckedUpdateInput>
+  }
+
+  /**
+   * ClientMachinery delete
+   */
+  export type ClientMachineryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientMachinery
+     */
+    select?: ClientMachinerySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientMachinery
+     */
+    omit?: ClientMachineryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientMachineryInclude<ExtArgs> | null
+    /**
+     * Filter which ClientMachinery to delete.
+     */
+    where: ClientMachineryWhereUniqueInput
+  }
+
+  /**
+   * ClientMachinery deleteMany
+   */
+  export type ClientMachineryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ClientMachineries to delete
+     */
+    where?: ClientMachineryWhereInput
+    /**
+     * Limit how many ClientMachineries to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ClientMachinery without action
+   */
+  export type ClientMachineryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientMachinery
+     */
+    select?: ClientMachinerySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientMachinery
+     */
+    omit?: ClientMachineryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientMachineryInclude<ExtArgs> | null
   }
 
 
@@ -21705,6 +22976,7 @@ export namespace Prisma {
     password: 'password',
     incidentsID: 'incidentsID',
     paymentsID: 'paymentsID',
+    machineryID: 'machineryID',
     role: 'role',
     userCode: 'userCode',
     companyID: 'companyID'
@@ -21903,6 +23175,14 @@ export namespace Prisma {
   export type MachineryScalarFieldEnum = (typeof MachineryScalarFieldEnum)[keyof typeof MachineryScalarFieldEnum]
 
 
+  export const ClientMachineryScalarFieldEnum: {
+    userID: 'userID',
+    machineryID: 'machineryID'
+  };
+
+  export type ClientMachineryScalarFieldEnum = (typeof ClientMachineryScalarFieldEnum)[keyof typeof ClientMachineryScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -22036,6 +23316,7 @@ export namespace Prisma {
     password?: StringFilter<"User"> | string
     incidentsID?: IntNullableFilter<"User"> | number | null
     paymentsID?: IntNullableFilter<"User"> | number | null
+    machineryID?: IntNullableFilter<"User"> | number | null
     role?: EnumRoleFilter<"User"> | $Enums.Role
     userCode?: StringNullableFilter<"User"> | string | null
     companyID?: IntNullableFilter<"User"> | number | null
@@ -22043,10 +23324,11 @@ export namespace Prisma {
     directions?: DirectionsListRelationFilter
     payments?: XOR<PaymentsNullableScalarRelationFilter, PaymentsWhereInput> | null
     IncidentHistory?: IncidentHistoryListRelationFilter
-    machinery?: MachineryListRelationFilter
+    ClientMachinery?: ClientMachineryListRelationFilter
     Incidents?: IncidentsListRelationFilter
     Budget?: BudgetListRelationFilter
     Company?: XOR<CompanyNullableScalarRelationFilter, CompanyWhereInput> | null
+    machinery?: MachineryListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -22056,6 +23338,7 @@ export namespace Prisma {
     password?: SortOrder
     incidentsID?: SortOrderInput | SortOrder
     paymentsID?: SortOrderInput | SortOrder
+    machineryID?: SortOrderInput | SortOrder
     role?: SortOrder
     userCode?: SortOrderInput | SortOrder
     companyID?: SortOrderInput | SortOrder
@@ -22063,10 +23346,11 @@ export namespace Prisma {
     directions?: DirectionsOrderByRelationAggregateInput
     payments?: PaymentsOrderByWithRelationInput
     IncidentHistory?: IncidentHistoryOrderByRelationAggregateInput
-    machinery?: machineryOrderByRelationAggregateInput
+    ClientMachinery?: ClientMachineryOrderByRelationAggregateInput
     Incidents?: IncidentsOrderByRelationAggregateInput
     Budget?: BudgetOrderByRelationAggregateInput
     Company?: CompanyOrderByWithRelationInput
+    machinery?: machineryOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -22079,6 +23363,7 @@ export namespace Prisma {
     password?: StringFilter<"User"> | string
     incidentsID?: IntNullableFilter<"User"> | number | null
     paymentsID?: IntNullableFilter<"User"> | number | null
+    machineryID?: IntNullableFilter<"User"> | number | null
     role?: EnumRoleFilter<"User"> | $Enums.Role
     userCode?: StringNullableFilter<"User"> | string | null
     companyID?: IntNullableFilter<"User"> | number | null
@@ -22086,10 +23371,11 @@ export namespace Prisma {
     directions?: DirectionsListRelationFilter
     payments?: XOR<PaymentsNullableScalarRelationFilter, PaymentsWhereInput> | null
     IncidentHistory?: IncidentHistoryListRelationFilter
-    machinery?: MachineryListRelationFilter
+    ClientMachinery?: ClientMachineryListRelationFilter
     Incidents?: IncidentsListRelationFilter
     Budget?: BudgetListRelationFilter
     Company?: XOR<CompanyNullableScalarRelationFilter, CompanyWhereInput> | null
+    machinery?: MachineryListRelationFilter
   }, "userID" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -22099,6 +23385,7 @@ export namespace Prisma {
     password?: SortOrder
     incidentsID?: SortOrderInput | SortOrder
     paymentsID?: SortOrderInput | SortOrder
+    machineryID?: SortOrderInput | SortOrder
     role?: SortOrder
     userCode?: SortOrderInput | SortOrder
     companyID?: SortOrderInput | SortOrder
@@ -22119,6 +23406,7 @@ export namespace Prisma {
     password?: StringWithAggregatesFilter<"User"> | string
     incidentsID?: IntNullableWithAggregatesFilter<"User"> | number | null
     paymentsID?: IntNullableWithAggregatesFilter<"User"> | number | null
+    machineryID?: IntNullableWithAggregatesFilter<"User"> | number | null
     role?: EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
     userCode?: StringNullableWithAggregatesFilter<"User"> | string | null
     companyID?: IntNullableWithAggregatesFilter<"User"> | number | null
@@ -23137,6 +24425,7 @@ export namespace Prisma {
     serialNumber?: StringFilter<"machinery"> | string
     client?: XOR<UserScalarRelationFilter, UserWhereInput>
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
+    ClientMachinery?: ClientMachineryListRelationFilter
   }
 
   export type machineryOrderByWithRelationInput = {
@@ -23153,6 +24442,7 @@ export namespace Prisma {
     serialNumber?: SortOrder
     client?: UserOrderByWithRelationInput
     company?: CompanyOrderByWithRelationInput
+    ClientMachinery?: ClientMachineryOrderByRelationAggregateInput
   }
 
   export type machineryWhereUniqueInput = Prisma.AtLeast<{
@@ -23172,6 +24462,7 @@ export namespace Prisma {
     companyID?: IntFilter<"machinery"> | number
     client?: XOR<UserScalarRelationFilter, UserWhereInput>
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
+    ClientMachinery?: ClientMachineryListRelationFilter
   }, "id" | "serialNumber">
 
   export type machineryOrderByWithAggregationInput = {
@@ -23210,21 +24501,69 @@ export namespace Prisma {
     serialNumber?: StringWithAggregatesFilter<"machinery"> | string
   }
 
+  export type ClientMachineryWhereInput = {
+    AND?: ClientMachineryWhereInput | ClientMachineryWhereInput[]
+    OR?: ClientMachineryWhereInput[]
+    NOT?: ClientMachineryWhereInput | ClientMachineryWhereInput[]
+    userID?: IntFilter<"ClientMachinery"> | number
+    machineryID?: IntFilter<"ClientMachinery"> | number
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    machinery?: XOR<MachineryScalarRelationFilter, machineryWhereInput>
+  }
+
+  export type ClientMachineryOrderByWithRelationInput = {
+    userID?: SortOrder
+    machineryID?: SortOrder
+    user?: UserOrderByWithRelationInput
+    machinery?: machineryOrderByWithRelationInput
+  }
+
+  export type ClientMachineryWhereUniqueInput = Prisma.AtLeast<{
+    userID_machineryID?: ClientMachineryUserIDMachineryIDCompoundUniqueInput
+    AND?: ClientMachineryWhereInput | ClientMachineryWhereInput[]
+    OR?: ClientMachineryWhereInput[]
+    NOT?: ClientMachineryWhereInput | ClientMachineryWhereInput[]
+    userID?: IntFilter<"ClientMachinery"> | number
+    machineryID?: IntFilter<"ClientMachinery"> | number
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    machinery?: XOR<MachineryScalarRelationFilter, machineryWhereInput>
+  }, "userID_machineryID">
+
+  export type ClientMachineryOrderByWithAggregationInput = {
+    userID?: SortOrder
+    machineryID?: SortOrder
+    _count?: ClientMachineryCountOrderByAggregateInput
+    _avg?: ClientMachineryAvgOrderByAggregateInput
+    _max?: ClientMachineryMaxOrderByAggregateInput
+    _min?: ClientMachineryMinOrderByAggregateInput
+    _sum?: ClientMachinerySumOrderByAggregateInput
+  }
+
+  export type ClientMachineryScalarWhereWithAggregatesInput = {
+    AND?: ClientMachineryScalarWhereWithAggregatesInput | ClientMachineryScalarWhereWithAggregatesInput[]
+    OR?: ClientMachineryScalarWhereWithAggregatesInput[]
+    NOT?: ClientMachineryScalarWhereWithAggregatesInput | ClientMachineryScalarWhereWithAggregatesInput[]
+    userID?: IntWithAggregatesFilter<"ClientMachinery"> | number
+    machineryID?: IntWithAggregatesFilter<"ClientMachinery"> | number
+  }
+
   export type UserCreateInput = {
     name?: string | null
     email: string
     password: string
     paymentsID?: number | null
+    machineryID?: number | null
     role?: $Enums.Role
     userCode?: string | null
     incidents?: IncidentsCreateNestedOneWithoutUsersInput
     directions?: DirectionsCreateNestedManyWithoutUserInput
     payments?: PaymentsCreateNestedOneWithoutUserInput
     IncidentHistory?: IncidentHistoryCreateNestedManyWithoutUserInput
-    machinery?: machineryCreateNestedManyWithoutClientInput
+    ClientMachinery?: ClientMachineryCreateNestedManyWithoutUserInput
     Incidents?: IncidentsCreateNestedManyWithoutUserInput
     Budget?: BudgetCreateNestedManyWithoutUserInput
     Company?: CompanyCreateNestedOneWithoutUserInput
+    machinery?: machineryCreateNestedManyWithoutClientInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -23234,15 +24573,17 @@ export namespace Prisma {
     password: string
     incidentsID?: number | null
     paymentsID?: number | null
+    machineryID?: number | null
     role?: $Enums.Role
     userCode?: string | null
     companyID?: number | null
     directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
-    machinery?: machineryUncheckedCreateNestedManyWithoutClientInput
+    ClientMachinery?: ClientMachineryUncheckedCreateNestedManyWithoutUserInput
     Incidents?: IncidentsUncheckedCreateNestedManyWithoutUserInput
     Budget?: BudgetUncheckedCreateNestedManyWithoutUserInput
+    machinery?: machineryUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type UserUpdateInput = {
@@ -23250,16 +24591,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     paymentsID?: NullableIntFieldUpdateOperationsInput | number | null
+    machineryID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     incidents?: IncidentsUpdateOneWithoutUsersNestedInput
     directions?: DirectionsUpdateManyWithoutUserNestedInput
     payments?: PaymentsUpdateOneWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUpdateManyWithoutUserNestedInput
-    machinery?: machineryUpdateManyWithoutClientNestedInput
+    ClientMachinery?: ClientMachineryUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUpdateManyWithoutUserNestedInput
     Budget?: BudgetUpdateManyWithoutUserNestedInput
     Company?: CompanyUpdateOneWithoutUserNestedInput
+    machinery?: machineryUpdateManyWithoutClientNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -23269,15 +24612,17 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     incidentsID?: NullableIntFieldUpdateOperationsInput | number | null
     paymentsID?: NullableIntFieldUpdateOperationsInput | number | null
+    machineryID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
     directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
-    machinery?: machineryUncheckedUpdateManyWithoutClientNestedInput
+    ClientMachinery?: ClientMachineryUncheckedUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUncheckedUpdateManyWithoutUserNestedInput
     Budget?: BudgetUncheckedUpdateManyWithoutUserNestedInput
+    machinery?: machineryUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -23287,6 +24632,7 @@ export namespace Prisma {
     password: string
     incidentsID?: number | null
     paymentsID?: number | null
+    machineryID?: number | null
     role?: $Enums.Role
     userCode?: string | null
     companyID?: number | null
@@ -23297,6 +24643,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     paymentsID?: NullableIntFieldUpdateOperationsInput | number | null
+    machineryID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -23308,6 +24655,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     incidentsID?: NullableIntFieldUpdateOperationsInput | number | null
     paymentsID?: NullableIntFieldUpdateOperationsInput | number | null
+    machineryID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
@@ -24267,6 +25615,7 @@ export namespace Prisma {
     serialNumber: string
     client: UserCreateNestedOneWithoutMachineryInput
     company: CompanyCreateNestedOneWithoutMachineryInput
+    ClientMachinery?: ClientMachineryCreateNestedManyWithoutMachineryInput
   }
 
   export type machineryUncheckedCreateInput = {
@@ -24281,6 +25630,7 @@ export namespace Prisma {
     companyName: string
     companyID: number
     serialNumber: string
+    ClientMachinery?: ClientMachineryUncheckedCreateNestedManyWithoutMachineryInput
   }
 
   export type machineryUpdateInput = {
@@ -24294,6 +25644,7 @@ export namespace Prisma {
     serialNumber?: StringFieldUpdateOperationsInput | string
     client?: UserUpdateOneRequiredWithoutMachineryNestedInput
     company?: CompanyUpdateOneRequiredWithoutMachineryNestedInput
+    ClientMachinery?: ClientMachineryUpdateManyWithoutMachineryNestedInput
   }
 
   export type machineryUncheckedUpdateInput = {
@@ -24308,6 +25659,7 @@ export namespace Prisma {
     companyName?: StringFieldUpdateOperationsInput | string
     companyID?: IntFieldUpdateOperationsInput | number
     serialNumber?: StringFieldUpdateOperationsInput | string
+    ClientMachinery?: ClientMachineryUncheckedUpdateManyWithoutMachineryNestedInput
   }
 
   export type machineryCreateManyInput = {
@@ -24347,6 +25699,40 @@ export namespace Prisma {
     companyName?: StringFieldUpdateOperationsInput | string
     companyID?: IntFieldUpdateOperationsInput | number
     serialNumber?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ClientMachineryCreateInput = {
+    user: UserCreateNestedOneWithoutClientMachineryInput
+    machinery: machineryCreateNestedOneWithoutClientMachineryInput
+  }
+
+  export type ClientMachineryUncheckedCreateInput = {
+    userID: number
+    machineryID: number
+  }
+
+  export type ClientMachineryUpdateInput = {
+    user?: UserUpdateOneRequiredWithoutClientMachineryNestedInput
+    machinery?: machineryUpdateOneRequiredWithoutClientMachineryNestedInput
+  }
+
+  export type ClientMachineryUncheckedUpdateInput = {
+    userID?: IntFieldUpdateOperationsInput | number
+    machineryID?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ClientMachineryCreateManyInput = {
+    userID: number
+    machineryID: number
+  }
+
+  export type ClientMachineryUpdateManyMutationInput = {
+
+  }
+
+  export type ClientMachineryUncheckedUpdateManyInput = {
+    userID?: IntFieldUpdateOperationsInput | number
+    machineryID?: IntFieldUpdateOperationsInput | number
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -24430,10 +25816,10 @@ export namespace Prisma {
     none?: IncidentHistoryWhereInput
   }
 
-  export type MachineryListRelationFilter = {
-    every?: machineryWhereInput
-    some?: machineryWhereInput
-    none?: machineryWhereInput
+  export type ClientMachineryListRelationFilter = {
+    every?: ClientMachineryWhereInput
+    some?: ClientMachineryWhereInput
+    none?: ClientMachineryWhereInput
   }
 
   export type IncidentsListRelationFilter = {
@@ -24453,6 +25839,12 @@ export namespace Prisma {
     isNot?: CompanyWhereInput | null
   }
 
+  export type MachineryListRelationFilter = {
+    every?: machineryWhereInput
+    some?: machineryWhereInput
+    none?: machineryWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -24466,7 +25858,7 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
-  export type machineryOrderByRelationAggregateInput = {
+  export type ClientMachineryOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -24478,6 +25870,10 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type machineryOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type UserCountOrderByAggregateInput = {
     userID?: SortOrder
     name?: SortOrder
@@ -24485,6 +25881,7 @@ export namespace Prisma {
     password?: SortOrder
     incidentsID?: SortOrder
     paymentsID?: SortOrder
+    machineryID?: SortOrder
     role?: SortOrder
     userCode?: SortOrder
     companyID?: SortOrder
@@ -24494,6 +25891,7 @@ export namespace Prisma {
     userID?: SortOrder
     incidentsID?: SortOrder
     paymentsID?: SortOrder
+    machineryID?: SortOrder
     companyID?: SortOrder
   }
 
@@ -24504,6 +25902,7 @@ export namespace Prisma {
     password?: SortOrder
     incidentsID?: SortOrder
     paymentsID?: SortOrder
+    machineryID?: SortOrder
     role?: SortOrder
     userCode?: SortOrder
     companyID?: SortOrder
@@ -24516,6 +25915,7 @@ export namespace Prisma {
     password?: SortOrder
     incidentsID?: SortOrder
     paymentsID?: SortOrder
+    machineryID?: SortOrder
     role?: SortOrder
     userCode?: SortOrder
     companyID?: SortOrder
@@ -24525,6 +25925,7 @@ export namespace Prisma {
     userID?: SortOrder
     incidentsID?: SortOrder
     paymentsID?: SortOrder
+    machineryID?: SortOrder
     companyID?: SortOrder
   }
 
@@ -25475,6 +26876,41 @@ export namespace Prisma {
     companyID?: SortOrder
   }
 
+  export type MachineryScalarRelationFilter = {
+    is?: machineryWhereInput
+    isNot?: machineryWhereInput
+  }
+
+  export type ClientMachineryUserIDMachineryIDCompoundUniqueInput = {
+    userID: number
+    machineryID: number
+  }
+
+  export type ClientMachineryCountOrderByAggregateInput = {
+    userID?: SortOrder
+    machineryID?: SortOrder
+  }
+
+  export type ClientMachineryAvgOrderByAggregateInput = {
+    userID?: SortOrder
+    machineryID?: SortOrder
+  }
+
+  export type ClientMachineryMaxOrderByAggregateInput = {
+    userID?: SortOrder
+    machineryID?: SortOrder
+  }
+
+  export type ClientMachineryMinOrderByAggregateInput = {
+    userID?: SortOrder
+    machineryID?: SortOrder
+  }
+
+  export type ClientMachinerySumOrderByAggregateInput = {
+    userID?: SortOrder
+    machineryID?: SortOrder
+  }
+
   export type IncidentsCreateNestedOneWithoutUsersInput = {
     create?: XOR<IncidentsCreateWithoutUsersInput, IncidentsUncheckedCreateWithoutUsersInput>
     connectOrCreate?: IncidentsCreateOrConnectWithoutUsersInput
@@ -25501,11 +26937,11 @@ export namespace Prisma {
     connect?: IncidentHistoryWhereUniqueInput | IncidentHistoryWhereUniqueInput[]
   }
 
-  export type machineryCreateNestedManyWithoutClientInput = {
-    create?: XOR<machineryCreateWithoutClientInput, machineryUncheckedCreateWithoutClientInput> | machineryCreateWithoutClientInput[] | machineryUncheckedCreateWithoutClientInput[]
-    connectOrCreate?: machineryCreateOrConnectWithoutClientInput | machineryCreateOrConnectWithoutClientInput[]
-    createMany?: machineryCreateManyClientInputEnvelope
-    connect?: machineryWhereUniqueInput | machineryWhereUniqueInput[]
+  export type ClientMachineryCreateNestedManyWithoutUserInput = {
+    create?: XOR<ClientMachineryCreateWithoutUserInput, ClientMachineryUncheckedCreateWithoutUserInput> | ClientMachineryCreateWithoutUserInput[] | ClientMachineryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ClientMachineryCreateOrConnectWithoutUserInput | ClientMachineryCreateOrConnectWithoutUserInput[]
+    createMany?: ClientMachineryCreateManyUserInputEnvelope
+    connect?: ClientMachineryWhereUniqueInput | ClientMachineryWhereUniqueInput[]
   }
 
   export type IncidentsCreateNestedManyWithoutUserInput = {
@@ -25528,6 +26964,13 @@ export namespace Prisma {
     connect?: CompanyWhereUniqueInput
   }
 
+  export type machineryCreateNestedManyWithoutClientInput = {
+    create?: XOR<machineryCreateWithoutClientInput, machineryUncheckedCreateWithoutClientInput> | machineryCreateWithoutClientInput[] | machineryUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: machineryCreateOrConnectWithoutClientInput | machineryCreateOrConnectWithoutClientInput[]
+    createMany?: machineryCreateManyClientInputEnvelope
+    connect?: machineryWhereUniqueInput | machineryWhereUniqueInput[]
+  }
+
   export type DirectionsUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<DirectionsCreateWithoutUserInput, DirectionsUncheckedCreateWithoutUserInput> | DirectionsCreateWithoutUserInput[] | DirectionsUncheckedCreateWithoutUserInput[]
     connectOrCreate?: DirectionsCreateOrConnectWithoutUserInput | DirectionsCreateOrConnectWithoutUserInput[]
@@ -25548,11 +26991,11 @@ export namespace Prisma {
     connect?: IncidentHistoryWhereUniqueInput | IncidentHistoryWhereUniqueInput[]
   }
 
-  export type machineryUncheckedCreateNestedManyWithoutClientInput = {
-    create?: XOR<machineryCreateWithoutClientInput, machineryUncheckedCreateWithoutClientInput> | machineryCreateWithoutClientInput[] | machineryUncheckedCreateWithoutClientInput[]
-    connectOrCreate?: machineryCreateOrConnectWithoutClientInput | machineryCreateOrConnectWithoutClientInput[]
-    createMany?: machineryCreateManyClientInputEnvelope
-    connect?: machineryWhereUniqueInput | machineryWhereUniqueInput[]
+  export type ClientMachineryUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ClientMachineryCreateWithoutUserInput, ClientMachineryUncheckedCreateWithoutUserInput> | ClientMachineryCreateWithoutUserInput[] | ClientMachineryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ClientMachineryCreateOrConnectWithoutUserInput | ClientMachineryCreateOrConnectWithoutUserInput[]
+    createMany?: ClientMachineryCreateManyUserInputEnvelope
+    connect?: ClientMachineryWhereUniqueInput | ClientMachineryWhereUniqueInput[]
   }
 
   export type IncidentsUncheckedCreateNestedManyWithoutUserInput = {
@@ -25567,6 +27010,13 @@ export namespace Prisma {
     connectOrCreate?: BudgetCreateOrConnectWithoutUserInput | BudgetCreateOrConnectWithoutUserInput[]
     createMany?: BudgetCreateManyUserInputEnvelope
     connect?: BudgetWhereUniqueInput | BudgetWhereUniqueInput[]
+  }
+
+  export type machineryUncheckedCreateNestedManyWithoutClientInput = {
+    create?: XOR<machineryCreateWithoutClientInput, machineryUncheckedCreateWithoutClientInput> | machineryCreateWithoutClientInput[] | machineryUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: machineryCreateOrConnectWithoutClientInput | machineryCreateOrConnectWithoutClientInput[]
+    createMany?: machineryCreateManyClientInputEnvelope
+    connect?: machineryWhereUniqueInput | machineryWhereUniqueInput[]
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
@@ -25637,18 +27087,18 @@ export namespace Prisma {
     deleteMany?: IncidentHistoryScalarWhereInput | IncidentHistoryScalarWhereInput[]
   }
 
-  export type machineryUpdateManyWithoutClientNestedInput = {
-    create?: XOR<machineryCreateWithoutClientInput, machineryUncheckedCreateWithoutClientInput> | machineryCreateWithoutClientInput[] | machineryUncheckedCreateWithoutClientInput[]
-    connectOrCreate?: machineryCreateOrConnectWithoutClientInput | machineryCreateOrConnectWithoutClientInput[]
-    upsert?: machineryUpsertWithWhereUniqueWithoutClientInput | machineryUpsertWithWhereUniqueWithoutClientInput[]
-    createMany?: machineryCreateManyClientInputEnvelope
-    set?: machineryWhereUniqueInput | machineryWhereUniqueInput[]
-    disconnect?: machineryWhereUniqueInput | machineryWhereUniqueInput[]
-    delete?: machineryWhereUniqueInput | machineryWhereUniqueInput[]
-    connect?: machineryWhereUniqueInput | machineryWhereUniqueInput[]
-    update?: machineryUpdateWithWhereUniqueWithoutClientInput | machineryUpdateWithWhereUniqueWithoutClientInput[]
-    updateMany?: machineryUpdateManyWithWhereWithoutClientInput | machineryUpdateManyWithWhereWithoutClientInput[]
-    deleteMany?: machineryScalarWhereInput | machineryScalarWhereInput[]
+  export type ClientMachineryUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ClientMachineryCreateWithoutUserInput, ClientMachineryUncheckedCreateWithoutUserInput> | ClientMachineryCreateWithoutUserInput[] | ClientMachineryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ClientMachineryCreateOrConnectWithoutUserInput | ClientMachineryCreateOrConnectWithoutUserInput[]
+    upsert?: ClientMachineryUpsertWithWhereUniqueWithoutUserInput | ClientMachineryUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ClientMachineryCreateManyUserInputEnvelope
+    set?: ClientMachineryWhereUniqueInput | ClientMachineryWhereUniqueInput[]
+    disconnect?: ClientMachineryWhereUniqueInput | ClientMachineryWhereUniqueInput[]
+    delete?: ClientMachineryWhereUniqueInput | ClientMachineryWhereUniqueInput[]
+    connect?: ClientMachineryWhereUniqueInput | ClientMachineryWhereUniqueInput[]
+    update?: ClientMachineryUpdateWithWhereUniqueWithoutUserInput | ClientMachineryUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ClientMachineryUpdateManyWithWhereWithoutUserInput | ClientMachineryUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ClientMachineryScalarWhereInput | ClientMachineryScalarWhereInput[]
   }
 
   export type IncidentsUpdateManyWithoutUserNestedInput = {
@@ -25687,6 +27137,20 @@ export namespace Prisma {
     delete?: CompanyWhereInput | boolean
     connect?: CompanyWhereUniqueInput
     update?: XOR<XOR<CompanyUpdateToOneWithWhereWithoutUserInput, CompanyUpdateWithoutUserInput>, CompanyUncheckedUpdateWithoutUserInput>
+  }
+
+  export type machineryUpdateManyWithoutClientNestedInput = {
+    create?: XOR<machineryCreateWithoutClientInput, machineryUncheckedCreateWithoutClientInput> | machineryCreateWithoutClientInput[] | machineryUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: machineryCreateOrConnectWithoutClientInput | machineryCreateOrConnectWithoutClientInput[]
+    upsert?: machineryUpsertWithWhereUniqueWithoutClientInput | machineryUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: machineryCreateManyClientInputEnvelope
+    set?: machineryWhereUniqueInput | machineryWhereUniqueInput[]
+    disconnect?: machineryWhereUniqueInput | machineryWhereUniqueInput[]
+    delete?: machineryWhereUniqueInput | machineryWhereUniqueInput[]
+    connect?: machineryWhereUniqueInput | machineryWhereUniqueInput[]
+    update?: machineryUpdateWithWhereUniqueWithoutClientInput | machineryUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: machineryUpdateManyWithWhereWithoutClientInput | machineryUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: machineryScalarWhereInput | machineryScalarWhereInput[]
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -25735,18 +27199,18 @@ export namespace Prisma {
     deleteMany?: IncidentHistoryScalarWhereInput | IncidentHistoryScalarWhereInput[]
   }
 
-  export type machineryUncheckedUpdateManyWithoutClientNestedInput = {
-    create?: XOR<machineryCreateWithoutClientInput, machineryUncheckedCreateWithoutClientInput> | machineryCreateWithoutClientInput[] | machineryUncheckedCreateWithoutClientInput[]
-    connectOrCreate?: machineryCreateOrConnectWithoutClientInput | machineryCreateOrConnectWithoutClientInput[]
-    upsert?: machineryUpsertWithWhereUniqueWithoutClientInput | machineryUpsertWithWhereUniqueWithoutClientInput[]
-    createMany?: machineryCreateManyClientInputEnvelope
-    set?: machineryWhereUniqueInput | machineryWhereUniqueInput[]
-    disconnect?: machineryWhereUniqueInput | machineryWhereUniqueInput[]
-    delete?: machineryWhereUniqueInput | machineryWhereUniqueInput[]
-    connect?: machineryWhereUniqueInput | machineryWhereUniqueInput[]
-    update?: machineryUpdateWithWhereUniqueWithoutClientInput | machineryUpdateWithWhereUniqueWithoutClientInput[]
-    updateMany?: machineryUpdateManyWithWhereWithoutClientInput | machineryUpdateManyWithWhereWithoutClientInput[]
-    deleteMany?: machineryScalarWhereInput | machineryScalarWhereInput[]
+  export type ClientMachineryUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ClientMachineryCreateWithoutUserInput, ClientMachineryUncheckedCreateWithoutUserInput> | ClientMachineryCreateWithoutUserInput[] | ClientMachineryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ClientMachineryCreateOrConnectWithoutUserInput | ClientMachineryCreateOrConnectWithoutUserInput[]
+    upsert?: ClientMachineryUpsertWithWhereUniqueWithoutUserInput | ClientMachineryUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ClientMachineryCreateManyUserInputEnvelope
+    set?: ClientMachineryWhereUniqueInput | ClientMachineryWhereUniqueInput[]
+    disconnect?: ClientMachineryWhereUniqueInput | ClientMachineryWhereUniqueInput[]
+    delete?: ClientMachineryWhereUniqueInput | ClientMachineryWhereUniqueInput[]
+    connect?: ClientMachineryWhereUniqueInput | ClientMachineryWhereUniqueInput[]
+    update?: ClientMachineryUpdateWithWhereUniqueWithoutUserInput | ClientMachineryUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ClientMachineryUpdateManyWithWhereWithoutUserInput | ClientMachineryUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ClientMachineryScalarWhereInput | ClientMachineryScalarWhereInput[]
   }
 
   export type IncidentsUncheckedUpdateManyWithoutUserNestedInput = {
@@ -25775,6 +27239,20 @@ export namespace Prisma {
     update?: BudgetUpdateWithWhereUniqueWithoutUserInput | BudgetUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: BudgetUpdateManyWithWhereWithoutUserInput | BudgetUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: BudgetScalarWhereInput | BudgetScalarWhereInput[]
+  }
+
+  export type machineryUncheckedUpdateManyWithoutClientNestedInput = {
+    create?: XOR<machineryCreateWithoutClientInput, machineryUncheckedCreateWithoutClientInput> | machineryCreateWithoutClientInput[] | machineryUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: machineryCreateOrConnectWithoutClientInput | machineryCreateOrConnectWithoutClientInput[]
+    upsert?: machineryUpsertWithWhereUniqueWithoutClientInput | machineryUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: machineryCreateManyClientInputEnvelope
+    set?: machineryWhereUniqueInput | machineryWhereUniqueInput[]
+    disconnect?: machineryWhereUniqueInput | machineryWhereUniqueInput[]
+    delete?: machineryWhereUniqueInput | machineryWhereUniqueInput[]
+    connect?: machineryWhereUniqueInput | machineryWhereUniqueInput[]
+    update?: machineryUpdateWithWhereUniqueWithoutClientInput | machineryUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: machineryUpdateManyWithWhereWithoutClientInput | machineryUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: machineryScalarWhereInput | machineryScalarWhereInput[]
   }
 
   export type WorkerCreateNestedManyWithoutCompanyInput = {
@@ -27133,6 +28611,20 @@ export namespace Prisma {
     connect?: CompanyWhereUniqueInput
   }
 
+  export type ClientMachineryCreateNestedManyWithoutMachineryInput = {
+    create?: XOR<ClientMachineryCreateWithoutMachineryInput, ClientMachineryUncheckedCreateWithoutMachineryInput> | ClientMachineryCreateWithoutMachineryInput[] | ClientMachineryUncheckedCreateWithoutMachineryInput[]
+    connectOrCreate?: ClientMachineryCreateOrConnectWithoutMachineryInput | ClientMachineryCreateOrConnectWithoutMachineryInput[]
+    createMany?: ClientMachineryCreateManyMachineryInputEnvelope
+    connect?: ClientMachineryWhereUniqueInput | ClientMachineryWhereUniqueInput[]
+  }
+
+  export type ClientMachineryUncheckedCreateNestedManyWithoutMachineryInput = {
+    create?: XOR<ClientMachineryCreateWithoutMachineryInput, ClientMachineryUncheckedCreateWithoutMachineryInput> | ClientMachineryCreateWithoutMachineryInput[] | ClientMachineryUncheckedCreateWithoutMachineryInput[]
+    connectOrCreate?: ClientMachineryCreateOrConnectWithoutMachineryInput | ClientMachineryCreateOrConnectWithoutMachineryInput[]
+    createMany?: ClientMachineryCreateManyMachineryInputEnvelope
+    connect?: ClientMachineryWhereUniqueInput | ClientMachineryWhereUniqueInput[]
+  }
+
   export type UserUpdateOneRequiredWithoutMachineryNestedInput = {
     create?: XOR<UserCreateWithoutMachineryInput, UserUncheckedCreateWithoutMachineryInput>
     connectOrCreate?: UserCreateOrConnectWithoutMachineryInput
@@ -27147,6 +28639,62 @@ export namespace Prisma {
     upsert?: CompanyUpsertWithoutMachineryInput
     connect?: CompanyWhereUniqueInput
     update?: XOR<XOR<CompanyUpdateToOneWithWhereWithoutMachineryInput, CompanyUpdateWithoutMachineryInput>, CompanyUncheckedUpdateWithoutMachineryInput>
+  }
+
+  export type ClientMachineryUpdateManyWithoutMachineryNestedInput = {
+    create?: XOR<ClientMachineryCreateWithoutMachineryInput, ClientMachineryUncheckedCreateWithoutMachineryInput> | ClientMachineryCreateWithoutMachineryInput[] | ClientMachineryUncheckedCreateWithoutMachineryInput[]
+    connectOrCreate?: ClientMachineryCreateOrConnectWithoutMachineryInput | ClientMachineryCreateOrConnectWithoutMachineryInput[]
+    upsert?: ClientMachineryUpsertWithWhereUniqueWithoutMachineryInput | ClientMachineryUpsertWithWhereUniqueWithoutMachineryInput[]
+    createMany?: ClientMachineryCreateManyMachineryInputEnvelope
+    set?: ClientMachineryWhereUniqueInput | ClientMachineryWhereUniqueInput[]
+    disconnect?: ClientMachineryWhereUniqueInput | ClientMachineryWhereUniqueInput[]
+    delete?: ClientMachineryWhereUniqueInput | ClientMachineryWhereUniqueInput[]
+    connect?: ClientMachineryWhereUniqueInput | ClientMachineryWhereUniqueInput[]
+    update?: ClientMachineryUpdateWithWhereUniqueWithoutMachineryInput | ClientMachineryUpdateWithWhereUniqueWithoutMachineryInput[]
+    updateMany?: ClientMachineryUpdateManyWithWhereWithoutMachineryInput | ClientMachineryUpdateManyWithWhereWithoutMachineryInput[]
+    deleteMany?: ClientMachineryScalarWhereInput | ClientMachineryScalarWhereInput[]
+  }
+
+  export type ClientMachineryUncheckedUpdateManyWithoutMachineryNestedInput = {
+    create?: XOR<ClientMachineryCreateWithoutMachineryInput, ClientMachineryUncheckedCreateWithoutMachineryInput> | ClientMachineryCreateWithoutMachineryInput[] | ClientMachineryUncheckedCreateWithoutMachineryInput[]
+    connectOrCreate?: ClientMachineryCreateOrConnectWithoutMachineryInput | ClientMachineryCreateOrConnectWithoutMachineryInput[]
+    upsert?: ClientMachineryUpsertWithWhereUniqueWithoutMachineryInput | ClientMachineryUpsertWithWhereUniqueWithoutMachineryInput[]
+    createMany?: ClientMachineryCreateManyMachineryInputEnvelope
+    set?: ClientMachineryWhereUniqueInput | ClientMachineryWhereUniqueInput[]
+    disconnect?: ClientMachineryWhereUniqueInput | ClientMachineryWhereUniqueInput[]
+    delete?: ClientMachineryWhereUniqueInput | ClientMachineryWhereUniqueInput[]
+    connect?: ClientMachineryWhereUniqueInput | ClientMachineryWhereUniqueInput[]
+    update?: ClientMachineryUpdateWithWhereUniqueWithoutMachineryInput | ClientMachineryUpdateWithWhereUniqueWithoutMachineryInput[]
+    updateMany?: ClientMachineryUpdateManyWithWhereWithoutMachineryInput | ClientMachineryUpdateManyWithWhereWithoutMachineryInput[]
+    deleteMany?: ClientMachineryScalarWhereInput | ClientMachineryScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutClientMachineryInput = {
+    create?: XOR<UserCreateWithoutClientMachineryInput, UserUncheckedCreateWithoutClientMachineryInput>
+    connectOrCreate?: UserCreateOrConnectWithoutClientMachineryInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type machineryCreateNestedOneWithoutClientMachineryInput = {
+    create?: XOR<machineryCreateWithoutClientMachineryInput, machineryUncheckedCreateWithoutClientMachineryInput>
+    connectOrCreate?: machineryCreateOrConnectWithoutClientMachineryInput
+    connect?: machineryWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutClientMachineryNestedInput = {
+    create?: XOR<UserCreateWithoutClientMachineryInput, UserUncheckedCreateWithoutClientMachineryInput>
+    connectOrCreate?: UserCreateOrConnectWithoutClientMachineryInput
+    upsert?: UserUpsertWithoutClientMachineryInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutClientMachineryInput, UserUpdateWithoutClientMachineryInput>, UserUncheckedUpdateWithoutClientMachineryInput>
+  }
+
+  export type machineryUpdateOneRequiredWithoutClientMachineryNestedInput = {
+    create?: XOR<machineryCreateWithoutClientMachineryInput, machineryUncheckedCreateWithoutClientMachineryInput>
+    connectOrCreate?: machineryCreateOrConnectWithoutClientMachineryInput
+    upsert?: machineryUpsertWithoutClientMachineryInput
+    connect?: machineryWhereUniqueInput
+    update?: XOR<XOR<machineryUpdateToOneWithWhereWithoutClientMachineryInput, machineryUpdateWithoutClientMachineryInput>, machineryUncheckedUpdateWithoutClientMachineryInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -27525,38 +29073,21 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type machineryCreateWithoutClientInput = {
-    name: string
-    description: string
-    maintenanceDate: Date | string
-    lastInspectionDate: Date | string
-    installedAt: Date | string
-    machineType: string
-    companyName: string
-    serialNumber: string
-    company: CompanyCreateNestedOneWithoutMachineryInput
+  export type ClientMachineryCreateWithoutUserInput = {
+    machinery: machineryCreateNestedOneWithoutClientMachineryInput
   }
 
-  export type machineryUncheckedCreateWithoutClientInput = {
-    id?: number
-    name: string
-    description: string
-    maintenanceDate: Date | string
-    lastInspectionDate: Date | string
-    installedAt: Date | string
-    machineType: string
-    companyName: string
-    companyID: number
-    serialNumber: string
+  export type ClientMachineryUncheckedCreateWithoutUserInput = {
+    machineryID: number
   }
 
-  export type machineryCreateOrConnectWithoutClientInput = {
-    where: machineryWhereUniqueInput
-    create: XOR<machineryCreateWithoutClientInput, machineryUncheckedCreateWithoutClientInput>
+  export type ClientMachineryCreateOrConnectWithoutUserInput = {
+    where: ClientMachineryWhereUniqueInput
+    create: XOR<ClientMachineryCreateWithoutUserInput, ClientMachineryUncheckedCreateWithoutUserInput>
   }
 
-  export type machineryCreateManyClientInputEnvelope = {
-    data: machineryCreateManyClientInput | machineryCreateManyClientInput[]
+  export type ClientMachineryCreateManyUserInputEnvelope = {
+    data: ClientMachineryCreateManyUserInput | ClientMachineryCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -27688,6 +29219,43 @@ export namespace Prisma {
   export type CompanyCreateOrConnectWithoutUserInput = {
     where: CompanyWhereUniqueInput
     create: XOR<CompanyCreateWithoutUserInput, CompanyUncheckedCreateWithoutUserInput>
+  }
+
+  export type machineryCreateWithoutClientInput = {
+    name: string
+    description: string
+    maintenanceDate: Date | string
+    lastInspectionDate: Date | string
+    installedAt: Date | string
+    machineType: string
+    companyName: string
+    serialNumber: string
+    company: CompanyCreateNestedOneWithoutMachineryInput
+    ClientMachinery?: ClientMachineryCreateNestedManyWithoutMachineryInput
+  }
+
+  export type machineryUncheckedCreateWithoutClientInput = {
+    id?: number
+    name: string
+    description: string
+    maintenanceDate: Date | string
+    lastInspectionDate: Date | string
+    installedAt: Date | string
+    machineType: string
+    companyName: string
+    companyID: number
+    serialNumber: string
+    ClientMachinery?: ClientMachineryUncheckedCreateNestedManyWithoutMachineryInput
+  }
+
+  export type machineryCreateOrConnectWithoutClientInput = {
+    where: machineryWhereUniqueInput
+    create: XOR<machineryCreateWithoutClientInput, machineryUncheckedCreateWithoutClientInput>
+  }
+
+  export type machineryCreateManyClientInputEnvelope = {
+    data: machineryCreateManyClientInput | machineryCreateManyClientInput[]
+    skipDuplicates?: boolean
   }
 
   export type IncidentsUpsertWithoutUsersInput = {
@@ -27825,37 +29393,28 @@ export namespace Prisma {
     changedAt?: DateTimeFilter<"IncidentHistory"> | Date | string
   }
 
-  export type machineryUpsertWithWhereUniqueWithoutClientInput = {
-    where: machineryWhereUniqueInput
-    update: XOR<machineryUpdateWithoutClientInput, machineryUncheckedUpdateWithoutClientInput>
-    create: XOR<machineryCreateWithoutClientInput, machineryUncheckedCreateWithoutClientInput>
+  export type ClientMachineryUpsertWithWhereUniqueWithoutUserInput = {
+    where: ClientMachineryWhereUniqueInput
+    update: XOR<ClientMachineryUpdateWithoutUserInput, ClientMachineryUncheckedUpdateWithoutUserInput>
+    create: XOR<ClientMachineryCreateWithoutUserInput, ClientMachineryUncheckedCreateWithoutUserInput>
   }
 
-  export type machineryUpdateWithWhereUniqueWithoutClientInput = {
-    where: machineryWhereUniqueInput
-    data: XOR<machineryUpdateWithoutClientInput, machineryUncheckedUpdateWithoutClientInput>
+  export type ClientMachineryUpdateWithWhereUniqueWithoutUserInput = {
+    where: ClientMachineryWhereUniqueInput
+    data: XOR<ClientMachineryUpdateWithoutUserInput, ClientMachineryUncheckedUpdateWithoutUserInput>
   }
 
-  export type machineryUpdateManyWithWhereWithoutClientInput = {
-    where: machineryScalarWhereInput
-    data: XOR<machineryUpdateManyMutationInput, machineryUncheckedUpdateManyWithoutClientInput>
+  export type ClientMachineryUpdateManyWithWhereWithoutUserInput = {
+    where: ClientMachineryScalarWhereInput
+    data: XOR<ClientMachineryUpdateManyMutationInput, ClientMachineryUncheckedUpdateManyWithoutUserInput>
   }
 
-  export type machineryScalarWhereInput = {
-    AND?: machineryScalarWhereInput | machineryScalarWhereInput[]
-    OR?: machineryScalarWhereInput[]
-    NOT?: machineryScalarWhereInput | machineryScalarWhereInput[]
-    id?: IntFilter<"machinery"> | number
-    name?: StringFilter<"machinery"> | string
-    description?: StringFilter<"machinery"> | string
-    maintenanceDate?: DateTimeFilter<"machinery"> | Date | string
-    lastInspectionDate?: DateTimeFilter<"machinery"> | Date | string
-    installedAt?: DateTimeFilter<"machinery"> | Date | string
-    machineType?: StringFilter<"machinery"> | string
-    clientID?: IntFilter<"machinery"> | number
-    companyName?: StringFilter<"machinery"> | string
-    companyID?: IntFilter<"machinery"> | number
-    serialNumber?: StringFilter<"machinery"> | string
+  export type ClientMachineryScalarWhereInput = {
+    AND?: ClientMachineryScalarWhereInput | ClientMachineryScalarWhereInput[]
+    OR?: ClientMachineryScalarWhereInput[]
+    NOT?: ClientMachineryScalarWhereInput | ClientMachineryScalarWhereInput[]
+    userID?: IntFilter<"ClientMachinery"> | number
+    machineryID?: IntFilter<"ClientMachinery"> | number
   }
 
   export type IncidentsUpsertWithWhereUniqueWithoutUserInput = {
@@ -27979,6 +29538,39 @@ export namespace Prisma {
     machinery?: machineryUncheckedUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUncheckedUpdateManyWithoutCompanyNestedInput
     admins?: AdminsCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
+  }
+
+  export type machineryUpsertWithWhereUniqueWithoutClientInput = {
+    where: machineryWhereUniqueInput
+    update: XOR<machineryUpdateWithoutClientInput, machineryUncheckedUpdateWithoutClientInput>
+    create: XOR<machineryCreateWithoutClientInput, machineryUncheckedCreateWithoutClientInput>
+  }
+
+  export type machineryUpdateWithWhereUniqueWithoutClientInput = {
+    where: machineryWhereUniqueInput
+    data: XOR<machineryUpdateWithoutClientInput, machineryUncheckedUpdateWithoutClientInput>
+  }
+
+  export type machineryUpdateManyWithWhereWithoutClientInput = {
+    where: machineryScalarWhereInput
+    data: XOR<machineryUpdateManyMutationInput, machineryUncheckedUpdateManyWithoutClientInput>
+  }
+
+  export type machineryScalarWhereInput = {
+    AND?: machineryScalarWhereInput | machineryScalarWhereInput[]
+    OR?: machineryScalarWhereInput[]
+    NOT?: machineryScalarWhereInput | machineryScalarWhereInput[]
+    id?: IntFilter<"machinery"> | number
+    name?: StringFilter<"machinery"> | string
+    description?: StringFilter<"machinery"> | string
+    maintenanceDate?: DateTimeFilter<"machinery"> | Date | string
+    lastInspectionDate?: DateTimeFilter<"machinery"> | Date | string
+    installedAt?: DateTimeFilter<"machinery"> | Date | string
+    machineType?: StringFilter<"machinery"> | string
+    clientID?: IntFilter<"machinery"> | number
+    companyName?: StringFilter<"machinery"> | string
+    companyID?: IntFilter<"machinery"> | number
+    serialNumber?: StringFilter<"machinery"> | string
   }
 
   export type WorkerCreateWithoutCompanyInput = {
@@ -28238,6 +29830,7 @@ export namespace Prisma {
     companyName: string
     serialNumber: string
     client: UserCreateNestedOneWithoutMachineryInput
+    ClientMachinery?: ClientMachineryCreateNestedManyWithoutMachineryInput
   }
 
   export type machineryUncheckedCreateWithoutCompanyInput = {
@@ -28251,6 +29844,7 @@ export namespace Prisma {
     clientID: number
     companyName: string
     serialNumber: string
+    ClientMachinery?: ClientMachineryUncheckedCreateNestedManyWithoutMachineryInput
   }
 
   export type machineryCreateOrConnectWithoutCompanyInput = {
@@ -28296,15 +29890,17 @@ export namespace Prisma {
     email: string
     password: string
     paymentsID?: number | null
+    machineryID?: number | null
     role?: $Enums.Role
     userCode?: string | null
     incidents?: IncidentsCreateNestedOneWithoutUsersInput
     directions?: DirectionsCreateNestedManyWithoutUserInput
     payments?: PaymentsCreateNestedOneWithoutUserInput
     IncidentHistory?: IncidentHistoryCreateNestedManyWithoutUserInput
-    machinery?: machineryCreateNestedManyWithoutClientInput
+    ClientMachinery?: ClientMachineryCreateNestedManyWithoutUserInput
     Incidents?: IncidentsCreateNestedManyWithoutUserInput
     Budget?: BudgetCreateNestedManyWithoutUserInput
+    machinery?: machineryCreateNestedManyWithoutClientInput
   }
 
   export type UserUncheckedCreateWithoutCompanyInput = {
@@ -28314,14 +29910,16 @@ export namespace Prisma {
     password: string
     incidentsID?: number | null
     paymentsID?: number | null
+    machineryID?: number | null
     role?: $Enums.Role
     userCode?: string | null
     directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
-    machinery?: machineryUncheckedCreateNestedManyWithoutClientInput
+    ClientMachinery?: ClientMachineryUncheckedCreateNestedManyWithoutUserInput
     Incidents?: IncidentsUncheckedCreateNestedManyWithoutUserInput
     Budget?: BudgetUncheckedCreateNestedManyWithoutUserInput
+    machinery?: machineryUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type UserCreateOrConnectWithoutCompanyInput = {
@@ -28596,6 +30194,7 @@ export namespace Prisma {
     password?: StringFilter<"User"> | string
     incidentsID?: IntNullableFilter<"User"> | number | null
     paymentsID?: IntNullableFilter<"User"> | number | null
+    machineryID?: IntNullableFilter<"User"> | number | null
     role?: EnumRoleFilter<"User"> | $Enums.Role
     userCode?: StringNullableFilter<"User"> | string | null
     companyID?: IntNullableFilter<"User"> | number | null
@@ -29239,15 +30838,17 @@ export namespace Prisma {
     email: string
     password: string
     paymentsID?: number | null
+    machineryID?: number | null
     role?: $Enums.Role
     userCode?: string | null
     incidents?: IncidentsCreateNestedOneWithoutUsersInput
     directions?: DirectionsCreateNestedManyWithoutUserInput
     payments?: PaymentsCreateNestedOneWithoutUserInput
     IncidentHistory?: IncidentHistoryCreateNestedManyWithoutUserInput
-    machinery?: machineryCreateNestedManyWithoutClientInput
+    ClientMachinery?: ClientMachineryCreateNestedManyWithoutUserInput
     Budget?: BudgetCreateNestedManyWithoutUserInput
     Company?: CompanyCreateNestedOneWithoutUserInput
+    machinery?: machineryCreateNestedManyWithoutClientInput
   }
 
   export type UserUncheckedCreateWithoutIncidentsInput = {
@@ -29257,14 +30858,16 @@ export namespace Prisma {
     password: string
     incidentsID?: number | null
     paymentsID?: number | null
+    machineryID?: number | null
     role?: $Enums.Role
     userCode?: string | null
     companyID?: number | null
     directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
-    machinery?: machineryUncheckedCreateNestedManyWithoutClientInput
+    ClientMachinery?: ClientMachineryUncheckedCreateNestedManyWithoutUserInput
     Budget?: BudgetUncheckedCreateNestedManyWithoutUserInput
+    machinery?: machineryUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type UserCreateOrConnectWithoutIncidentsInput = {
@@ -29277,15 +30880,17 @@ export namespace Prisma {
     email: string
     password: string
     paymentsID?: number | null
+    machineryID?: number | null
     role?: $Enums.Role
     userCode?: string | null
     directions?: DirectionsCreateNestedManyWithoutUserInput
     payments?: PaymentsCreateNestedOneWithoutUserInput
     IncidentHistory?: IncidentHistoryCreateNestedManyWithoutUserInput
-    machinery?: machineryCreateNestedManyWithoutClientInput
+    ClientMachinery?: ClientMachineryCreateNestedManyWithoutUserInput
     Incidents?: IncidentsCreateNestedManyWithoutUserInput
     Budget?: BudgetCreateNestedManyWithoutUserInput
     Company?: CompanyCreateNestedOneWithoutUserInput
+    machinery?: machineryCreateNestedManyWithoutClientInput
   }
 
   export type UserUncheckedCreateWithoutIncidentsInput = {
@@ -29294,15 +30899,17 @@ export namespace Prisma {
     email: string
     password: string
     paymentsID?: number | null
+    machineryID?: number | null
     role?: $Enums.Role
     userCode?: string | null
     companyID?: number | null
     directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
-    machinery?: machineryUncheckedCreateNestedManyWithoutClientInput
+    ClientMachinery?: ClientMachineryUncheckedCreateNestedManyWithoutUserInput
     Incidents?: IncidentsUncheckedCreateNestedManyWithoutUserInput
     Budget?: BudgetUncheckedCreateNestedManyWithoutUserInput
+    machinery?: machineryUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type UserCreateManyIncidentsInputEnvelope = {
@@ -29510,15 +31117,17 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     paymentsID?: NullableIntFieldUpdateOperationsInput | number | null
+    machineryID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     incidents?: IncidentsUpdateOneWithoutUsersNestedInput
     directions?: DirectionsUpdateManyWithoutUserNestedInput
     payments?: PaymentsUpdateOneWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUpdateManyWithoutUserNestedInput
-    machinery?: machineryUpdateManyWithoutClientNestedInput
+    ClientMachinery?: ClientMachineryUpdateManyWithoutUserNestedInput
     Budget?: BudgetUpdateManyWithoutUserNestedInput
     Company?: CompanyUpdateOneWithoutUserNestedInput
+    machinery?: machineryUpdateManyWithoutClientNestedInput
   }
 
   export type UserUncheckedUpdateWithoutIncidentsInput = {
@@ -29528,14 +31137,16 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     incidentsID?: NullableIntFieldUpdateOperationsInput | number | null
     paymentsID?: NullableIntFieldUpdateOperationsInput | number | null
+    machineryID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
     directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
-    machinery?: machineryUncheckedUpdateManyWithoutClientNestedInput
+    ClientMachinery?: ClientMachineryUncheckedUpdateManyWithoutUserNestedInput
     Budget?: BudgetUncheckedUpdateManyWithoutUserNestedInput
+    machinery?: machineryUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type UserUpsertWithWhereUniqueWithoutIncidentsInput = {
@@ -29591,15 +31202,17 @@ export namespace Prisma {
     email: string
     password: string
     paymentsID?: number | null
+    machineryID?: number | null
     role?: $Enums.Role
     userCode?: string | null
     incidents?: IncidentsCreateNestedOneWithoutUsersInput
     directions?: DirectionsCreateNestedManyWithoutUserInput
     IncidentHistory?: IncidentHistoryCreateNestedManyWithoutUserInput
-    machinery?: machineryCreateNestedManyWithoutClientInput
+    ClientMachinery?: ClientMachineryCreateNestedManyWithoutUserInput
     Incidents?: IncidentsCreateNestedManyWithoutUserInput
     Budget?: BudgetCreateNestedManyWithoutUserInput
     Company?: CompanyCreateNestedOneWithoutUserInput
+    machinery?: machineryCreateNestedManyWithoutClientInput
   }
 
   export type UserUncheckedCreateWithoutPaymentsInput = {
@@ -29609,14 +31222,16 @@ export namespace Prisma {
     password: string
     incidentsID?: number | null
     paymentsID?: number | null
+    machineryID?: number | null
     role?: $Enums.Role
     userCode?: string | null
     companyID?: number | null
     directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
-    machinery?: machineryUncheckedCreateNestedManyWithoutClientInput
+    ClientMachinery?: ClientMachineryUncheckedCreateNestedManyWithoutUserInput
     Incidents?: IncidentsUncheckedCreateNestedManyWithoutUserInput
     Budget?: BudgetUncheckedCreateNestedManyWithoutUserInput
+    machinery?: machineryUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type UserCreateOrConnectWithoutPaymentsInput = {
@@ -29803,15 +31418,17 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     paymentsID?: NullableIntFieldUpdateOperationsInput | number | null
+    machineryID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     incidents?: IncidentsUpdateOneWithoutUsersNestedInput
     directions?: DirectionsUpdateManyWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUpdateManyWithoutUserNestedInput
-    machinery?: machineryUpdateManyWithoutClientNestedInput
+    ClientMachinery?: ClientMachineryUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUpdateManyWithoutUserNestedInput
     Budget?: BudgetUpdateManyWithoutUserNestedInput
     Company?: CompanyUpdateOneWithoutUserNestedInput
+    machinery?: machineryUpdateManyWithoutClientNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPaymentsInput = {
@@ -29821,14 +31438,16 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     incidentsID?: NullableIntFieldUpdateOperationsInput | number | null
     paymentsID?: NullableIntFieldUpdateOperationsInput | number | null
+    machineryID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
     directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
-    machinery?: machineryUncheckedUpdateManyWithoutClientNestedInput
+    ClientMachinery?: ClientMachineryUncheckedUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUncheckedUpdateManyWithoutUserNestedInput
     Budget?: BudgetUncheckedUpdateManyWithoutUserNestedInput
+    machinery?: machineryUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type CompanyUpsertWithoutPaymentsInput = {
@@ -30173,15 +31792,17 @@ export namespace Prisma {
     email: string
     password: string
     paymentsID?: number | null
+    machineryID?: number | null
     role?: $Enums.Role
     userCode?: string | null
     incidents?: IncidentsCreateNestedOneWithoutUsersInput
     directions?: DirectionsCreateNestedManyWithoutUserInput
     payments?: PaymentsCreateNestedOneWithoutUserInput
     IncidentHistory?: IncidentHistoryCreateNestedManyWithoutUserInput
-    machinery?: machineryCreateNestedManyWithoutClientInput
+    ClientMachinery?: ClientMachineryCreateNestedManyWithoutUserInput
     Incidents?: IncidentsCreateNestedManyWithoutUserInput
     Company?: CompanyCreateNestedOneWithoutUserInput
+    machinery?: machineryCreateNestedManyWithoutClientInput
   }
 
   export type UserUncheckedCreateWithoutBudgetInput = {
@@ -30191,14 +31812,16 @@ export namespace Prisma {
     password: string
     incidentsID?: number | null
     paymentsID?: number | null
+    machineryID?: number | null
     role?: $Enums.Role
     userCode?: string | null
     companyID?: number | null
     directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
-    machinery?: machineryUncheckedCreateNestedManyWithoutClientInput
+    ClientMachinery?: ClientMachineryUncheckedCreateNestedManyWithoutUserInput
     Incidents?: IncidentsUncheckedCreateNestedManyWithoutUserInput
+    machinery?: machineryUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type UserCreateOrConnectWithoutBudgetInput = {
@@ -30378,15 +32001,17 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     paymentsID?: NullableIntFieldUpdateOperationsInput | number | null
+    machineryID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     incidents?: IncidentsUpdateOneWithoutUsersNestedInput
     directions?: DirectionsUpdateManyWithoutUserNestedInput
     payments?: PaymentsUpdateOneWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUpdateManyWithoutUserNestedInput
-    machinery?: machineryUpdateManyWithoutClientNestedInput
+    ClientMachinery?: ClientMachineryUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUpdateManyWithoutUserNestedInput
     Company?: CompanyUpdateOneWithoutUserNestedInput
+    machinery?: machineryUpdateManyWithoutClientNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBudgetInput = {
@@ -30396,14 +32021,16 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     incidentsID?: NullableIntFieldUpdateOperationsInput | number | null
     paymentsID?: NullableIntFieldUpdateOperationsInput | number | null
+    machineryID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
     directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
-    machinery?: machineryUncheckedUpdateManyWithoutClientNestedInput
+    ClientMachinery?: ClientMachineryUncheckedUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUncheckedUpdateManyWithoutUserNestedInput
+    machinery?: machineryUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type CompanyUpsertWithWhereUniqueWithoutBudgetInput = {
@@ -30536,15 +32163,17 @@ export namespace Prisma {
     email: string
     password: string
     paymentsID?: number | null
+    machineryID?: number | null
     role?: $Enums.Role
     userCode?: string | null
     incidents?: IncidentsCreateNestedOneWithoutUsersInput
     directions?: DirectionsCreateNestedManyWithoutUserInput
     payments?: PaymentsCreateNestedOneWithoutUserInput
-    machinery?: machineryCreateNestedManyWithoutClientInput
+    ClientMachinery?: ClientMachineryCreateNestedManyWithoutUserInput
     Incidents?: IncidentsCreateNestedManyWithoutUserInput
     Budget?: BudgetCreateNestedManyWithoutUserInput
     Company?: CompanyCreateNestedOneWithoutUserInput
+    machinery?: machineryCreateNestedManyWithoutClientInput
   }
 
   export type UserUncheckedCreateWithoutIncidentHistoryInput = {
@@ -30554,14 +32183,16 @@ export namespace Prisma {
     password: string
     incidentsID?: number | null
     paymentsID?: number | null
+    machineryID?: number | null
     role?: $Enums.Role
     userCode?: string | null
     companyID?: number | null
     directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
-    machinery?: machineryUncheckedCreateNestedManyWithoutClientInput
+    ClientMachinery?: ClientMachineryUncheckedCreateNestedManyWithoutUserInput
     Incidents?: IncidentsUncheckedCreateNestedManyWithoutUserInput
     Budget?: BudgetUncheckedCreateNestedManyWithoutUserInput
+    machinery?: machineryUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type UserCreateOrConnectWithoutIncidentHistoryInput = {
@@ -30689,15 +32320,17 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     paymentsID?: NullableIntFieldUpdateOperationsInput | number | null
+    machineryID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     incidents?: IncidentsUpdateOneWithoutUsersNestedInput
     directions?: DirectionsUpdateManyWithoutUserNestedInput
     payments?: PaymentsUpdateOneWithoutUserNestedInput
-    machinery?: machineryUpdateManyWithoutClientNestedInput
+    ClientMachinery?: ClientMachineryUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUpdateManyWithoutUserNestedInput
     Budget?: BudgetUpdateManyWithoutUserNestedInput
     Company?: CompanyUpdateOneWithoutUserNestedInput
+    machinery?: machineryUpdateManyWithoutClientNestedInput
   }
 
   export type UserUncheckedUpdateWithoutIncidentHistoryInput = {
@@ -30707,14 +32340,16 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     incidentsID?: NullableIntFieldUpdateOperationsInput | number | null
     paymentsID?: NullableIntFieldUpdateOperationsInput | number | null
+    machineryID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
     directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
-    machinery?: machineryUncheckedUpdateManyWithoutClientNestedInput
+    ClientMachinery?: ClientMachineryUncheckedUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUncheckedUpdateManyWithoutUserNestedInput
     Budget?: BudgetUncheckedUpdateManyWithoutUserNestedInput
+    machinery?: machineryUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type CompanyCreateWithoutShiftWorkersInput = {
@@ -31113,15 +32748,17 @@ export namespace Prisma {
     email: string
     password: string
     paymentsID?: number | null
+    machineryID?: number | null
     role?: $Enums.Role
     userCode?: string | null
     incidents?: IncidentsCreateNestedOneWithoutUsersInput
     payments?: PaymentsCreateNestedOneWithoutUserInput
     IncidentHistory?: IncidentHistoryCreateNestedManyWithoutUserInput
-    machinery?: machineryCreateNestedManyWithoutClientInput
+    ClientMachinery?: ClientMachineryCreateNestedManyWithoutUserInput
     Incidents?: IncidentsCreateNestedManyWithoutUserInput
     Budget?: BudgetCreateNestedManyWithoutUserInput
     Company?: CompanyCreateNestedOneWithoutUserInput
+    machinery?: machineryCreateNestedManyWithoutClientInput
   }
 
   export type UserUncheckedCreateWithoutDirectionsInput = {
@@ -31131,14 +32768,16 @@ export namespace Prisma {
     password: string
     incidentsID?: number | null
     paymentsID?: number | null
+    machineryID?: number | null
     role?: $Enums.Role
     userCode?: string | null
     companyID?: number | null
     payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
-    machinery?: machineryUncheckedCreateNestedManyWithoutClientInput
+    ClientMachinery?: ClientMachineryUncheckedCreateNestedManyWithoutUserInput
     Incidents?: IncidentsUncheckedCreateNestedManyWithoutUserInput
     Budget?: BudgetUncheckedCreateNestedManyWithoutUserInput
+    machinery?: machineryUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type UserCreateOrConnectWithoutDirectionsInput = {
@@ -31214,15 +32853,17 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     paymentsID?: NullableIntFieldUpdateOperationsInput | number | null
+    machineryID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     incidents?: IncidentsUpdateOneWithoutUsersNestedInput
     payments?: PaymentsUpdateOneWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUpdateManyWithoutUserNestedInput
-    machinery?: machineryUpdateManyWithoutClientNestedInput
+    ClientMachinery?: ClientMachineryUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUpdateManyWithoutUserNestedInput
     Budget?: BudgetUpdateManyWithoutUserNestedInput
     Company?: CompanyUpdateOneWithoutUserNestedInput
+    machinery?: machineryUpdateManyWithoutClientNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDirectionsInput = {
@@ -31232,14 +32873,16 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     incidentsID?: NullableIntFieldUpdateOperationsInput | number | null
     paymentsID?: NullableIntFieldUpdateOperationsInput | number | null
+    machineryID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
     payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
-    machinery?: machineryUncheckedUpdateManyWithoutClientNestedInput
+    ClientMachinery?: ClientMachineryUncheckedUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUncheckedUpdateManyWithoutUserNestedInput
     Budget?: BudgetUncheckedUpdateManyWithoutUserNestedInput
+    machinery?: machineryUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type CompanyUpsertWithoutDirectionsInput = {
@@ -31305,12 +32948,14 @@ export namespace Prisma {
     email: string
     password: string
     paymentsID?: number | null
+    machineryID?: number | null
     role?: $Enums.Role
     userCode?: string | null
     incidents?: IncidentsCreateNestedOneWithoutUsersInput
     directions?: DirectionsCreateNestedManyWithoutUserInput
     payments?: PaymentsCreateNestedOneWithoutUserInput
     IncidentHistory?: IncidentHistoryCreateNestedManyWithoutUserInput
+    ClientMachinery?: ClientMachineryCreateNestedManyWithoutUserInput
     Incidents?: IncidentsCreateNestedManyWithoutUserInput
     Budget?: BudgetCreateNestedManyWithoutUserInput
     Company?: CompanyCreateNestedOneWithoutUserInput
@@ -31323,12 +32968,14 @@ export namespace Prisma {
     password: string
     incidentsID?: number | null
     paymentsID?: number | null
+    machineryID?: number | null
     role?: $Enums.Role
     userCode?: string | null
     companyID?: number | null
     directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
+    ClientMachinery?: ClientMachineryUncheckedCreateNestedManyWithoutUserInput
     Incidents?: IncidentsUncheckedCreateNestedManyWithoutUserInput
     Budget?: BudgetUncheckedCreateNestedManyWithoutUserInput
   }
@@ -31390,6 +33037,24 @@ export namespace Prisma {
     create: XOR<CompanyCreateWithoutMachineryInput, CompanyUncheckedCreateWithoutMachineryInput>
   }
 
+  export type ClientMachineryCreateWithoutMachineryInput = {
+    user: UserCreateNestedOneWithoutClientMachineryInput
+  }
+
+  export type ClientMachineryUncheckedCreateWithoutMachineryInput = {
+    userID: number
+  }
+
+  export type ClientMachineryCreateOrConnectWithoutMachineryInput = {
+    where: ClientMachineryWhereUniqueInput
+    create: XOR<ClientMachineryCreateWithoutMachineryInput, ClientMachineryUncheckedCreateWithoutMachineryInput>
+  }
+
+  export type ClientMachineryCreateManyMachineryInputEnvelope = {
+    data: ClientMachineryCreateManyMachineryInput | ClientMachineryCreateManyMachineryInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithoutMachineryInput = {
     update: XOR<UserUpdateWithoutMachineryInput, UserUncheckedUpdateWithoutMachineryInput>
     create: XOR<UserCreateWithoutMachineryInput, UserUncheckedCreateWithoutMachineryInput>
@@ -31406,12 +33071,14 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     paymentsID?: NullableIntFieldUpdateOperationsInput | number | null
+    machineryID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     incidents?: IncidentsUpdateOneWithoutUsersNestedInput
     directions?: DirectionsUpdateManyWithoutUserNestedInput
     payments?: PaymentsUpdateOneWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUpdateManyWithoutUserNestedInput
+    ClientMachinery?: ClientMachineryUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUpdateManyWithoutUserNestedInput
     Budget?: BudgetUpdateManyWithoutUserNestedInput
     Company?: CompanyUpdateOneWithoutUserNestedInput
@@ -31424,12 +33091,14 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     incidentsID?: NullableIntFieldUpdateOperationsInput | number | null
     paymentsID?: NullableIntFieldUpdateOperationsInput | number | null
+    machineryID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
     directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
+    ClientMachinery?: ClientMachineryUncheckedUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUncheckedUpdateManyWithoutUserNestedInput
     Budget?: BudgetUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -31492,6 +33161,182 @@ export namespace Prisma {
     admins?: AdminsCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
+  export type ClientMachineryUpsertWithWhereUniqueWithoutMachineryInput = {
+    where: ClientMachineryWhereUniqueInput
+    update: XOR<ClientMachineryUpdateWithoutMachineryInput, ClientMachineryUncheckedUpdateWithoutMachineryInput>
+    create: XOR<ClientMachineryCreateWithoutMachineryInput, ClientMachineryUncheckedCreateWithoutMachineryInput>
+  }
+
+  export type ClientMachineryUpdateWithWhereUniqueWithoutMachineryInput = {
+    where: ClientMachineryWhereUniqueInput
+    data: XOR<ClientMachineryUpdateWithoutMachineryInput, ClientMachineryUncheckedUpdateWithoutMachineryInput>
+  }
+
+  export type ClientMachineryUpdateManyWithWhereWithoutMachineryInput = {
+    where: ClientMachineryScalarWhereInput
+    data: XOR<ClientMachineryUpdateManyMutationInput, ClientMachineryUncheckedUpdateManyWithoutMachineryInput>
+  }
+
+  export type UserCreateWithoutClientMachineryInput = {
+    name?: string | null
+    email: string
+    password: string
+    paymentsID?: number | null
+    machineryID?: number | null
+    role?: $Enums.Role
+    userCode?: string | null
+    incidents?: IncidentsCreateNestedOneWithoutUsersInput
+    directions?: DirectionsCreateNestedManyWithoutUserInput
+    payments?: PaymentsCreateNestedOneWithoutUserInput
+    IncidentHistory?: IncidentHistoryCreateNestedManyWithoutUserInput
+    Incidents?: IncidentsCreateNestedManyWithoutUserInput
+    Budget?: BudgetCreateNestedManyWithoutUserInput
+    Company?: CompanyCreateNestedOneWithoutUserInput
+    machinery?: machineryCreateNestedManyWithoutClientInput
+  }
+
+  export type UserUncheckedCreateWithoutClientMachineryInput = {
+    userID?: number
+    name?: string | null
+    email: string
+    password: string
+    incidentsID?: number | null
+    paymentsID?: number | null
+    machineryID?: number | null
+    role?: $Enums.Role
+    userCode?: string | null
+    companyID?: number | null
+    directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
+    payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
+    IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
+    Incidents?: IncidentsUncheckedCreateNestedManyWithoutUserInput
+    Budget?: BudgetUncheckedCreateNestedManyWithoutUserInput
+    machinery?: machineryUncheckedCreateNestedManyWithoutClientInput
+  }
+
+  export type UserCreateOrConnectWithoutClientMachineryInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutClientMachineryInput, UserUncheckedCreateWithoutClientMachineryInput>
+  }
+
+  export type machineryCreateWithoutClientMachineryInput = {
+    name: string
+    description: string
+    maintenanceDate: Date | string
+    lastInspectionDate: Date | string
+    installedAt: Date | string
+    machineType: string
+    companyName: string
+    serialNumber: string
+    client: UserCreateNestedOneWithoutMachineryInput
+    company: CompanyCreateNestedOneWithoutMachineryInput
+  }
+
+  export type machineryUncheckedCreateWithoutClientMachineryInput = {
+    id?: number
+    name: string
+    description: string
+    maintenanceDate: Date | string
+    lastInspectionDate: Date | string
+    installedAt: Date | string
+    machineType: string
+    clientID: number
+    companyName: string
+    companyID: number
+    serialNumber: string
+  }
+
+  export type machineryCreateOrConnectWithoutClientMachineryInput = {
+    where: machineryWhereUniqueInput
+    create: XOR<machineryCreateWithoutClientMachineryInput, machineryUncheckedCreateWithoutClientMachineryInput>
+  }
+
+  export type UserUpsertWithoutClientMachineryInput = {
+    update: XOR<UserUpdateWithoutClientMachineryInput, UserUncheckedUpdateWithoutClientMachineryInput>
+    create: XOR<UserCreateWithoutClientMachineryInput, UserUncheckedCreateWithoutClientMachineryInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutClientMachineryInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutClientMachineryInput, UserUncheckedUpdateWithoutClientMachineryInput>
+  }
+
+  export type UserUpdateWithoutClientMachineryInput = {
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    paymentsID?: NullableIntFieldUpdateOperationsInput | number | null
+    machineryID?: NullableIntFieldUpdateOperationsInput | number | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userCode?: NullableStringFieldUpdateOperationsInput | string | null
+    incidents?: IncidentsUpdateOneWithoutUsersNestedInput
+    directions?: DirectionsUpdateManyWithoutUserNestedInput
+    payments?: PaymentsUpdateOneWithoutUserNestedInput
+    IncidentHistory?: IncidentHistoryUpdateManyWithoutUserNestedInput
+    Incidents?: IncidentsUpdateManyWithoutUserNestedInput
+    Budget?: BudgetUpdateManyWithoutUserNestedInput
+    Company?: CompanyUpdateOneWithoutUserNestedInput
+    machinery?: machineryUpdateManyWithoutClientNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutClientMachineryInput = {
+    userID?: IntFieldUpdateOperationsInput | number
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    incidentsID?: NullableIntFieldUpdateOperationsInput | number | null
+    paymentsID?: NullableIntFieldUpdateOperationsInput | number | null
+    machineryID?: NullableIntFieldUpdateOperationsInput | number | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userCode?: NullableStringFieldUpdateOperationsInput | string | null
+    companyID?: NullableIntFieldUpdateOperationsInput | number | null
+    directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
+    payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
+    IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
+    Incidents?: IncidentsUncheckedUpdateManyWithoutUserNestedInput
+    Budget?: BudgetUncheckedUpdateManyWithoutUserNestedInput
+    machinery?: machineryUncheckedUpdateManyWithoutClientNestedInput
+  }
+
+  export type machineryUpsertWithoutClientMachineryInput = {
+    update: XOR<machineryUpdateWithoutClientMachineryInput, machineryUncheckedUpdateWithoutClientMachineryInput>
+    create: XOR<machineryCreateWithoutClientMachineryInput, machineryUncheckedCreateWithoutClientMachineryInput>
+    where?: machineryWhereInput
+  }
+
+  export type machineryUpdateToOneWithWhereWithoutClientMachineryInput = {
+    where?: machineryWhereInput
+    data: XOR<machineryUpdateWithoutClientMachineryInput, machineryUncheckedUpdateWithoutClientMachineryInput>
+  }
+
+  export type machineryUpdateWithoutClientMachineryInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    maintenanceDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastInspectionDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    installedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    machineType?: StringFieldUpdateOperationsInput | string
+    companyName?: StringFieldUpdateOperationsInput | string
+    serialNumber?: StringFieldUpdateOperationsInput | string
+    client?: UserUpdateOneRequiredWithoutMachineryNestedInput
+    company?: CompanyUpdateOneRequiredWithoutMachineryNestedInput
+  }
+
+  export type machineryUncheckedUpdateWithoutClientMachineryInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    maintenanceDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastInspectionDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    installedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    machineType?: StringFieldUpdateOperationsInput | string
+    clientID?: IntFieldUpdateOperationsInput | number
+    companyName?: StringFieldUpdateOperationsInput | string
+    companyID?: IntFieldUpdateOperationsInput | number
+    serialNumber?: StringFieldUpdateOperationsInput | string
+  }
+
   export type DirectionsCreateManyUserInput = {
     id?: number
     companyID?: number | null
@@ -31509,17 +33354,8 @@ export namespace Prisma {
     changedAt?: Date | string
   }
 
-  export type machineryCreateManyClientInput = {
-    id?: number
-    name: string
-    description: string
-    maintenanceDate: Date | string
-    lastInspectionDate: Date | string
-    installedAt: Date | string
-    machineType: string
-    companyName: string
-    companyID: number
-    serialNumber: string
+  export type ClientMachineryCreateManyUserInput = {
+    machineryID: number
   }
 
   export type IncidentsCreateManyUserInput = {
@@ -31545,6 +33381,19 @@ export namespace Prisma {
     description: string
     incidentID?: number | null
     workerID: number
+  }
+
+  export type machineryCreateManyClientInput = {
+    id?: number
+    name: string
+    description: string
+    maintenanceDate: Date | string
+    lastInspectionDate: Date | string
+    installedAt: Date | string
+    machineType: string
+    companyName: string
+    companyID: number
+    serialNumber: string
   }
 
   export type DirectionsUpdateWithoutUserInput = {
@@ -31596,42 +33445,16 @@ export namespace Prisma {
     changedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type machineryUpdateWithoutClientInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    maintenanceDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    lastInspectionDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    installedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    machineType?: StringFieldUpdateOperationsInput | string
-    companyName?: StringFieldUpdateOperationsInput | string
-    serialNumber?: StringFieldUpdateOperationsInput | string
-    company?: CompanyUpdateOneRequiredWithoutMachineryNestedInput
+  export type ClientMachineryUpdateWithoutUserInput = {
+    machinery?: machineryUpdateOneRequiredWithoutClientMachineryNestedInput
   }
 
-  export type machineryUncheckedUpdateWithoutClientInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    maintenanceDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    lastInspectionDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    installedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    machineType?: StringFieldUpdateOperationsInput | string
-    companyName?: StringFieldUpdateOperationsInput | string
-    companyID?: IntFieldUpdateOperationsInput | number
-    serialNumber?: StringFieldUpdateOperationsInput | string
+  export type ClientMachineryUncheckedUpdateWithoutUserInput = {
+    machineryID?: IntFieldUpdateOperationsInput | number
   }
 
-  export type machineryUncheckedUpdateManyWithoutClientInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    maintenanceDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    lastInspectionDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    installedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    machineType?: StringFieldUpdateOperationsInput | string
-    companyName?: StringFieldUpdateOperationsInput | string
-    companyID?: IntFieldUpdateOperationsInput | number
-    serialNumber?: StringFieldUpdateOperationsInput | string
+  export type ClientMachineryUncheckedUpdateManyWithoutUserInput = {
+    machineryID?: IntFieldUpdateOperationsInput | number
   }
 
   export type IncidentsUpdateWithoutUserInput = {
@@ -31715,6 +33538,46 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     incidentID?: NullableIntFieldUpdateOperationsInput | number | null
     workerID?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type machineryUpdateWithoutClientInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    maintenanceDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastInspectionDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    installedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    machineType?: StringFieldUpdateOperationsInput | string
+    companyName?: StringFieldUpdateOperationsInput | string
+    serialNumber?: StringFieldUpdateOperationsInput | string
+    company?: CompanyUpdateOneRequiredWithoutMachineryNestedInput
+    ClientMachinery?: ClientMachineryUpdateManyWithoutMachineryNestedInput
+  }
+
+  export type machineryUncheckedUpdateWithoutClientInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    maintenanceDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastInspectionDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    installedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    machineType?: StringFieldUpdateOperationsInput | string
+    companyName?: StringFieldUpdateOperationsInput | string
+    companyID?: IntFieldUpdateOperationsInput | number
+    serialNumber?: StringFieldUpdateOperationsInput | string
+    ClientMachinery?: ClientMachineryUncheckedUpdateManyWithoutMachineryNestedInput
+  }
+
+  export type machineryUncheckedUpdateManyWithoutClientInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    maintenanceDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastInspectionDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    installedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    machineType?: StringFieldUpdateOperationsInput | string
+    companyName?: StringFieldUpdateOperationsInput | string
+    companyID?: IntFieldUpdateOperationsInput | number
+    serialNumber?: StringFieldUpdateOperationsInput | string
   }
 
   export type WorkerCreateManyCompanyInput = {
@@ -31816,6 +33679,7 @@ export namespace Prisma {
     password: string
     incidentsID?: number | null
     paymentsID?: number | null
+    machineryID?: number | null
     role?: $Enums.Role
     userCode?: string | null
   }
@@ -32053,6 +33917,7 @@ export namespace Prisma {
     companyName?: StringFieldUpdateOperationsInput | string
     serialNumber?: StringFieldUpdateOperationsInput | string
     client?: UserUpdateOneRequiredWithoutMachineryNestedInput
+    ClientMachinery?: ClientMachineryUpdateManyWithoutMachineryNestedInput
   }
 
   export type machineryUncheckedUpdateWithoutCompanyInput = {
@@ -32066,6 +33931,7 @@ export namespace Prisma {
     clientID?: IntFieldUpdateOperationsInput | number
     companyName?: StringFieldUpdateOperationsInput | string
     serialNumber?: StringFieldUpdateOperationsInput | string
+    ClientMachinery?: ClientMachineryUncheckedUpdateManyWithoutMachineryNestedInput
   }
 
   export type machineryUncheckedUpdateManyWithoutCompanyInput = {
@@ -32119,15 +33985,17 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     paymentsID?: NullableIntFieldUpdateOperationsInput | number | null
+    machineryID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     incidents?: IncidentsUpdateOneWithoutUsersNestedInput
     directions?: DirectionsUpdateManyWithoutUserNestedInput
     payments?: PaymentsUpdateOneWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUpdateManyWithoutUserNestedInput
-    machinery?: machineryUpdateManyWithoutClientNestedInput
+    ClientMachinery?: ClientMachineryUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUpdateManyWithoutUserNestedInput
     Budget?: BudgetUpdateManyWithoutUserNestedInput
+    machinery?: machineryUpdateManyWithoutClientNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCompanyInput = {
@@ -32137,14 +34005,16 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     incidentsID?: NullableIntFieldUpdateOperationsInput | number | null
     paymentsID?: NullableIntFieldUpdateOperationsInput | number | null
+    machineryID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
-    machinery?: machineryUncheckedUpdateManyWithoutClientNestedInput
+    ClientMachinery?: ClientMachineryUncheckedUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUncheckedUpdateManyWithoutUserNestedInput
     Budget?: BudgetUncheckedUpdateManyWithoutUserNestedInput
+    machinery?: machineryUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutCompanyInput = {
@@ -32154,6 +34024,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     incidentsID?: NullableIntFieldUpdateOperationsInput | number | null
     paymentsID?: NullableIntFieldUpdateOperationsInput | number | null
+    machineryID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -32345,6 +34216,7 @@ export namespace Prisma {
     email: string
     password: string
     paymentsID?: number | null
+    machineryID?: number | null
     role?: $Enums.Role
     userCode?: string | null
     companyID?: number | null
@@ -32373,15 +34245,17 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     paymentsID?: NullableIntFieldUpdateOperationsInput | number | null
+    machineryID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     directions?: DirectionsUpdateManyWithoutUserNestedInput
     payments?: PaymentsUpdateOneWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUpdateManyWithoutUserNestedInput
-    machinery?: machineryUpdateManyWithoutClientNestedInput
+    ClientMachinery?: ClientMachineryUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUpdateManyWithoutUserNestedInput
     Budget?: BudgetUpdateManyWithoutUserNestedInput
     Company?: CompanyUpdateOneWithoutUserNestedInput
+    machinery?: machineryUpdateManyWithoutClientNestedInput
   }
 
   export type UserUncheckedUpdateWithoutIncidentsInput = {
@@ -32390,15 +34264,17 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     paymentsID?: NullableIntFieldUpdateOperationsInput | number | null
+    machineryID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
     directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
-    machinery?: machineryUncheckedUpdateManyWithoutClientNestedInput
+    ClientMachinery?: ClientMachineryUncheckedUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUncheckedUpdateManyWithoutUserNestedInput
     Budget?: BudgetUncheckedUpdateManyWithoutUserNestedInput
+    machinery?: machineryUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutIncidentsInput = {
@@ -32407,6 +34283,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     paymentsID?: NullableIntFieldUpdateOperationsInput | number | null
+    machineryID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
@@ -32587,6 +34464,22 @@ export namespace Prisma {
     workerID?: IntFieldUpdateOperationsInput | number
     shiftSchedule?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     shiftType?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ClientMachineryCreateManyMachineryInput = {
+    userID: number
+  }
+
+  export type ClientMachineryUpdateWithoutMachineryInput = {
+    user?: UserUpdateOneRequiredWithoutClientMachineryNestedInput
+  }
+
+  export type ClientMachineryUncheckedUpdateWithoutMachineryInput = {
+    userID?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ClientMachineryUncheckedUpdateManyWithoutMachineryInput = {
+    userID?: IntFieldUpdateOperationsInput | number
   }
 
 

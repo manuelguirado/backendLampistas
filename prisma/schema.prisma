@@ -11,6 +11,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -24,7 +25,9 @@ model User {
   paymentsID      Int?
   payments        Payments?
   IncidentHistory IncidentHistory[]
-  machinery       machinery[]
+  machineryID     Int?
+
+  ClientMachinery ClientMachinery[]
   role            Role              @default(USER)
   userCode        String?           @db.VarChar(100)
 
@@ -34,6 +37,8 @@ model User {
 
   companyID Int?
   Company   Company? @relation(fields: [companyID], references: [companyID])
+
+  machinery machinery[]
 }
 
 model Company {
@@ -52,20 +57,20 @@ model Company {
   directions       Directions[]      @relation("CompanyDirections")
   shiftWorkers     ShiftWorker[]     @relation("CompanyShiftWorkers")
   role             Role              @default(COMPANY)
-  userID           Int? @unique
+  userID           Int?              @unique
   payments         Payments[]        @relation("CompanyPayments")
   machinery        machinery[]       @relation("CompanyMachinery")
   companyCode      String?           @db.VarChar(100)
   email            String            @unique @db.VarChar(255)
 
   Budget Budget[] @relation("CompanyBudget")
-  User User[]
+  User   User[]
 
-  admins      AdminsCompanies[]  @relation("CompanyToAdminsCompanies")
+  admins AdminsCompanies[] @relation("CompanyToAdminsCompanies")
 }
-model AdminsCompanies{
-  id        Int      @id @default(autoincrement())
 
+model AdminsCompanies {
+  id Int @id @default(autoincrement())
 
   Admin     Admin   @relation(fields: [adminID], references: [adminID])
   Company   Company @relation("CompanyToAdminsCompanies", fields: [companyID], references: [companyID])
@@ -73,8 +78,6 @@ model AdminsCompanies{
   companyID Int
 
   @@unique([adminID, companyID])
-
-
 }
 
 model Worker {
@@ -93,10 +96,10 @@ model Worker {
 }
 
 model Admin {
-  adminID        Int      @id @default(autoincrement())
-  email     String   @unique @db.VarChar(255)
-  password  String   @db.VarChar(255)
-  role      Role     @default(ADMIN)
+  adminID  Int    @id @default(autoincrement())
+  email    String @unique @db.VarChar(255)
+  password String @db.VarChar(255)
+  role     Role   @default(ADMIN)
 
   companies AdminsCompanies[]
 }
@@ -120,8 +123,8 @@ model Incidents {
   users            User[]            @relation("IncidentUsers")
   IncidentHistory  IncidentHistory[] @relation("IncidentHistory")
   urgency          Boolean?          @default(false)
-  workerID       Int?
-  Payments Payments[] @relation("IncidentPayments")
+  workerID         Int?
+  Payments         Payments[]        @relation("IncidentPayments")
 }
 
 model Payments {
@@ -182,15 +185,15 @@ model IncidentHistory {
 }
 
 model ShiftWorker {
-  id        Int     @id @default(autoincrement())
-  companyID Int
-  company   Company @relation("CompanyShiftWorkers", fields: [companyID], references: [companyID])
-  workerID  Int
-  worker    Worker  @relation("WorkerShiftWorkers", fields: [workerID], references: [workerid])
-  shiftID  Int
-  shift    ShiftSchedule @relation(fields: [shiftID], references: [ShiftID])
-  shiftSchedule DateTime? @db.Timestamp(6)
-  shiftType     String?  @db.VarChar(50)
+  id            Int           @id @default(autoincrement())
+  companyID     Int
+  company       Company       @relation("CompanyShiftWorkers", fields: [companyID], references: [companyID])
+  workerID      Int
+  worker        Worker        @relation("WorkerShiftWorkers", fields: [workerID], references: [workerid])
+  shiftID       Int
+  shift         ShiftSchedule @relation(fields: [shiftID], references: [ShiftID])
+  shiftSchedule DateTime?     @db.Timestamp(6)
+  shiftType     String?       @db.VarChar(50)
 }
 
 model JobHistory {
@@ -203,7 +206,7 @@ model JobHistory {
 }
 
 model ShiftSchedule {
-  ShiftID        Int      @id @default(autoincrement())
+  ShiftID       Int      @id @default(autoincrement())
   workerID      Int
   worker        Worker   @relation("WorkerShiftSchedules", fields: [workerID], references: [workerid])
   shiftSchedule DateTime @db.Timestamp(6)
@@ -239,7 +242,19 @@ model machinery {
   companyName        String
   companyID          Int
   company            Company  @relation("CompanyMachinery", fields: [companyID], references: [companyID])
-  serialNumber      String   @unique
+  serialNumber       String   @unique
+
+  ClientMachinery ClientMachinery[]
+}
+
+model ClientMachinery {
+  userID      Int
+  machineryID Int
+
+  user      User      @relation(fields: [userID], references: [userID])
+  machinery machinery @relation(fields: [machineryID], references: [id])
+
+  @@id([userID, machineryID])
 }
 
 enum Role {

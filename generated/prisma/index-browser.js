@@ -128,6 +128,7 @@ exports.Prisma.UserScalarFieldEnum = {
   password: 'password',
   incidentsID: 'incidentsID',
   paymentsID: 'paymentsID',
+  machineryID: 'machineryID',
   role: 'role',
   userCode: 'userCode',
   companyID: 'companyID'
@@ -278,6 +279,11 @@ exports.Prisma.MachineryScalarFieldEnum = {
   serialNumber: 'serialNumber'
 };
 
+exports.Prisma.ClientMachineryScalarFieldEnum = {
+  userID: 'userID',
+  machineryID: 'machineryID'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -315,7 +321,8 @@ exports.Prisma.ModelName = {
   JobHistory: 'JobHistory',
   ShiftSchedule: 'ShiftSchedule',
   Directions: 'Directions',
-  machinery: 'machinery'
+  machinery: 'machinery',
+  ClientMachinery: 'ClientMachinery'
 };
 
 /**

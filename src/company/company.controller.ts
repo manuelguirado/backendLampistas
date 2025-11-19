@@ -102,10 +102,10 @@ export class CompanyController {
     );
   }
   @UseGuards(AuthGuard, CompanyGuard)
-  @Post('listWorker')
-  listWorker(@Body() body: { companyID: number }) {
+  @Post('listWorkers')
+  listWorkers(@Body() body: { companyID: number }) {
     const { companyID } = body;
-    return this.companyService.listWorker(companyID);
+    return this.companyService.listWorkers(companyID);
   }
   @UseGuards(AuthGuard, CompanyGuard)
   @Post('assignIncident')

@@ -5,7 +5,7 @@ import { eliminateWorker } from '../modules/workers/eliminateWorker';
 import { createBudget } from '../modules/budgets/createbudget';
 import { assignCode } from '../utils/assingCode';
 import { companyLogin } from '../modules/companies/companyLogin';
-import { listWorker } from '../modules/workers/listWorker';
+import { listWorkers } from '../modules/companies/listWorkers';
 import { assignIncident } from '../modules/incidents/assignIncident';
 import { createMachinery } from '../modules/machinery/createMachinery';
 import { assignShiftWorker } from '../modules/companies/assignShiftWorker';
@@ -64,8 +64,8 @@ export class CompanyService {
       items,
     );
   }
-  async listWorker(companyID: number) {
-    return listWorker(companyID);
+  async listWorkers(companyID: number) {
+    return listWorkers(companyID);
   }
   async assignIncident(incidentID: number, workerID: number) {
     return assignIncident(incidentID, workerID);

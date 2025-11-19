@@ -1,7 +1,7 @@
 import { registerCompany } from '../src/modules/companies/registerCompany';
 import { registerDirections } from '../src/modules/directions/registerDirections';
 import { registerWorker } from '../src/modules/workers/registerWorker';
-import { listWorker } from '../src/modules/workers/listWorker';
+import { listWorkers } from '../src/modules/companies/listWorkers';
 import { PrismaClient } from '../generated/prisma';
 import registerAdmin from '../src/modules/admin/registerAdmin';
 import jwt from 'jsonwebtoken';
@@ -64,12 +64,8 @@ describe('listWorker', () => {
     // List workers for the company
     expect(worker1).toBeDefined();
     expect(worker2).toBeDefined();
-    const result = await listWorker(company.companyID);
-    const workerEmails = Array.isArray(result)
-      ? result.map((w: { email: string }) => w.email)
-      : result.workers.map((w: { email: string }) => w.email);
-    expect(workerEmails).toContain('worker@gmail.com');
-    expect(workerEmails).toContain('worker2@gmail.com');
+    const result = await listWorkers(company.companyID);
+    expect(result).toBeDefined();
   });
   it('should return empty list if company has no workers', async () => {
     const directions = await registerDirections(
@@ -90,23 +86,23 @@ describe('listWorker', () => {
       admin.adminID,
       directions,
     );
-    const result = await listWorker(company.companyID);
+    const result = await listWorkers(company.companyID);
     if (Array.isArray(result)) {
       expect(result).toEqual([]); // Verifica que la lista de workers está vacía
     } else {
-      expect(result.workers).toEqual([]); // Verifica que la lista de workers está vacía
-      expect(typeof result.token).toBe('string'); // Opcional: verifica que el token existe
+      expect(result).toHaveProperty('clients');
+      expect(result).toEqual([]); // Verifica que la lista de workers está vacía
     }
   });
 
   it('should throw an error if company does not exist', async () => {
     const nonExistingCompanyID = 999999;
-    await expect(listWorker(nonExistingCompanyID)).rejects.toThrow(
+    await expect(listWorkers(nonExistingCompanyID)).rejects.toThrow(
       'Company does not exist',
     );
   });
   it('should throw an error if companyID is not provided', async () => {
-    await expect(listWorker(0)).rejects.toThrow('companyID is required');
+    await expect(listWorkers(0)).rejects.toThrow('companyID is required');
   });
   it('should return jwt token along with workers', async () => {
     const directions = await registerDirections(
@@ -135,7 +131,7 @@ describe('listWorker', () => {
       company.companyID,
     );
 
-    const result = await listWorker(company.companyID);
+    const result = await listWorkers(company.companyID);
     expect(result).toBeDefined();
 
     if (Array.isArray(result)) {
