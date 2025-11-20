@@ -131,6 +131,7 @@ exports.Prisma.UserScalarFieldEnum = {
   machineryID: 'machineryID',
   role: 'role',
   userCode: 'userCode',
+  contractID: 'contractID',
   companyID: 'companyID'
 };
 
@@ -169,6 +170,22 @@ exports.Prisma.AdminScalarFieldEnum = {
   email: 'email',
   password: 'password',
   role: 'role'
+};
+
+exports.Prisma.UsersCompaniesScalarFieldEnum = {
+  id: 'id',
+  userID: 'userID',
+  companyID: 'companyID'
+};
+
+exports.Prisma.ContractsScalarFieldEnum = {
+  id: 'id',
+  userID: 'userID',
+  companyID: 'companyID',
+  contractType: 'contractType',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  isActive: 'isActive'
 };
 
 exports.Prisma.WorkersCompaniesScalarFieldEnum = {
@@ -311,12 +328,25 @@ exports.Role = exports.$Enums.Role = {
   WORKER: 'WORKER'
 };
 
+exports.ContractType = exports.$Enums.ContractType = {
+  contract: 'contract',
+  freeChoice: 'freeChoice'
+};
+
+exports.paymentStatusEnum = exports.$Enums.paymentStatusEnum = {
+  PENDING: 'PENDING',
+  COMPLETED: 'COMPLETED',
+  FAILED: 'FAILED'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Company: 'Company',
   AdminsCompanies: 'AdminsCompanies',
   Worker: 'Worker',
   Admin: 'Admin',
+  usersCompanies: 'usersCompanies',
+  contracts: 'contracts',
   workersCompanies: 'workersCompanies',
   Incidents: 'Incidents',
   Payments: 'Payments',

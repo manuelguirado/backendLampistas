@@ -39,6 +39,16 @@ export type Worker = $Result.DefaultSelection<Prisma.$WorkerPayload>
  */
 export type Admin = $Result.DefaultSelection<Prisma.$AdminPayload>
 /**
+ * Model usersCompanies
+ * 
+ */
+export type usersCompanies = $Result.DefaultSelection<Prisma.$usersCompaniesPayload>
+/**
+ * Model contracts
+ * 
+ */
+export type contracts = $Result.DefaultSelection<Prisma.$contractsPayload>
+/**
  * Model workersCompanies
  * 
  */
@@ -117,11 +127,36 @@ export namespace $Enums {
 
 export type Role = (typeof Role)[keyof typeof Role]
 
+
+export const paymentStatusEnum: {
+  PENDING: 'PENDING',
+  COMPLETED: 'COMPLETED',
+  FAILED: 'FAILED'
+};
+
+export type paymentStatusEnum = (typeof paymentStatusEnum)[keyof typeof paymentStatusEnum]
+
+
+export const ContractType: {
+  contract: 'contract',
+  freeChoice: 'freeChoice'
+};
+
+export type ContractType = (typeof ContractType)[keyof typeof ContractType]
+
 }
 
 export type Role = $Enums.Role
 
 export const Role: typeof $Enums.Role
+
+export type paymentStatusEnum = $Enums.paymentStatusEnum
+
+export const paymentStatusEnum: typeof $Enums.paymentStatusEnum
+
+export type ContractType = $Enums.ContractType
+
+export const ContractType: typeof $Enums.ContractType
 
 /**
  * ##  Prisma Client ʲˢ
@@ -290,6 +325,26 @@ export class PrismaClient<
     * ```
     */
   get admin(): Prisma.AdminDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.usersCompanies`: Exposes CRUD operations for the **usersCompanies** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more UsersCompanies
+    * const usersCompanies = await prisma.usersCompanies.findMany()
+    * ```
+    */
+  get usersCompanies(): Prisma.usersCompaniesDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.contracts`: Exposes CRUD operations for the **contracts** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Contracts
+    * const contracts = await prisma.contracts.findMany()
+    * ```
+    */
+  get contracts(): Prisma.contractsDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.workersCompanies`: Exposes CRUD operations for the **workersCompanies** model.
@@ -866,6 +921,8 @@ export namespace Prisma {
     AdminsCompanies: 'AdminsCompanies',
     Worker: 'Worker',
     Admin: 'Admin',
+    usersCompanies: 'usersCompanies',
+    contracts: 'contracts',
     workersCompanies: 'workersCompanies',
     Incidents: 'Incidents',
     Payments: 'Payments',
@@ -897,7 +954,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "company" | "adminsCompanies" | "worker" | "admin" | "workersCompanies" | "incidents" | "payments" | "paymentStatus" | "budget" | "subscription" | "incidentHistory" | "shiftWorker" | "jobHistory" | "shiftSchedule" | "directions" | "machinery" | "clientMachinery"
+      modelProps: "user" | "company" | "adminsCompanies" | "worker" | "admin" | "usersCompanies" | "contracts" | "workersCompanies" | "incidents" | "payments" | "paymentStatus" | "budget" | "subscription" | "incidentHistory" | "shiftWorker" | "jobHistory" | "shiftSchedule" | "directions" | "machinery" | "clientMachinery"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1268,6 +1325,154 @@ export namespace Prisma {
           count: {
             args: Prisma.AdminCountArgs<ExtArgs>
             result: $Utils.Optional<AdminCountAggregateOutputType> | number
+          }
+        }
+      }
+      usersCompanies: {
+        payload: Prisma.$usersCompaniesPayload<ExtArgs>
+        fields: Prisma.usersCompaniesFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.usersCompaniesFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$usersCompaniesPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.usersCompaniesFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$usersCompaniesPayload>
+          }
+          findFirst: {
+            args: Prisma.usersCompaniesFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$usersCompaniesPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.usersCompaniesFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$usersCompaniesPayload>
+          }
+          findMany: {
+            args: Prisma.usersCompaniesFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$usersCompaniesPayload>[]
+          }
+          create: {
+            args: Prisma.usersCompaniesCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$usersCompaniesPayload>
+          }
+          createMany: {
+            args: Prisma.usersCompaniesCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.usersCompaniesCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$usersCompaniesPayload>[]
+          }
+          delete: {
+            args: Prisma.usersCompaniesDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$usersCompaniesPayload>
+          }
+          update: {
+            args: Prisma.usersCompaniesUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$usersCompaniesPayload>
+          }
+          deleteMany: {
+            args: Prisma.usersCompaniesDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.usersCompaniesUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.usersCompaniesUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$usersCompaniesPayload>[]
+          }
+          upsert: {
+            args: Prisma.usersCompaniesUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$usersCompaniesPayload>
+          }
+          aggregate: {
+            args: Prisma.UsersCompaniesAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUsersCompanies>
+          }
+          groupBy: {
+            args: Prisma.usersCompaniesGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UsersCompaniesGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.usersCompaniesCountArgs<ExtArgs>
+            result: $Utils.Optional<UsersCompaniesCountAggregateOutputType> | number
+          }
+        }
+      }
+      contracts: {
+        payload: Prisma.$contractsPayload<ExtArgs>
+        fields: Prisma.contractsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.contractsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$contractsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.contractsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$contractsPayload>
+          }
+          findFirst: {
+            args: Prisma.contractsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$contractsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.contractsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$contractsPayload>
+          }
+          findMany: {
+            args: Prisma.contractsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$contractsPayload>[]
+          }
+          create: {
+            args: Prisma.contractsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$contractsPayload>
+          }
+          createMany: {
+            args: Prisma.contractsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.contractsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$contractsPayload>[]
+          }
+          delete: {
+            args: Prisma.contractsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$contractsPayload>
+          }
+          update: {
+            args: Prisma.contractsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$contractsPayload>
+          }
+          deleteMany: {
+            args: Prisma.contractsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.contractsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.contractsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$contractsPayload>[]
+          }
+          upsert: {
+            args: Prisma.contractsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$contractsPayload>
+          }
+          aggregate: {
+            args: Prisma.ContractsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateContracts>
+          }
+          groupBy: {
+            args: Prisma.contractsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ContractsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.contractsCountArgs<ExtArgs>
+            result: $Utils.Optional<ContractsCountAggregateOutputType> | number
           }
         }
       }
@@ -2334,6 +2539,8 @@ export namespace Prisma {
     adminsCompanies?: AdminsCompaniesOmit
     worker?: WorkerOmit
     admin?: AdminOmit
+    usersCompanies?: usersCompaniesOmit
+    contracts?: contractsOmit
     workersCompanies?: workersCompaniesOmit
     incidents?: IncidentsOmit
     payments?: PaymentsOmit
@@ -2432,7 +2639,9 @@ export namespace Prisma {
     ClientMachinery: number
     Incidents: number
     Budget: number
+    contracts: number
     machinery: number
+    usersCompanies: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2441,7 +2650,9 @@ export namespace Prisma {
     ClientMachinery?: boolean | UserCountOutputTypeCountClientMachineryArgs
     Incidents?: boolean | UserCountOutputTypeCountIncidentsArgs
     Budget?: boolean | UserCountOutputTypeCountBudgetArgs
+    contracts?: boolean | UserCountOutputTypeCountContractsArgs
     machinery?: boolean | UserCountOutputTypeCountMachineryArgs
+    usersCompanies?: boolean | UserCountOutputTypeCountUsersCompaniesArgs
   }
 
   // Custom InputTypes
@@ -2493,8 +2704,22 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
+  export type UserCountOutputTypeCountContractsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: contractsWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
   export type UserCountOutputTypeCountMachineryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: machineryWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountUsersCompaniesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: usersCompaniesWhereInput
   }
 
 
@@ -2513,8 +2738,10 @@ export namespace Prisma {
     machinery: number
     Budget: number
     User: number
+    contracts: number
     admins: number
     workersCompanies: number
+    usersCompanies: number
   }
 
   export type CompanyCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2528,8 +2755,10 @@ export namespace Prisma {
     machinery?: boolean | CompanyCountOutputTypeCountMachineryArgs
     Budget?: boolean | CompanyCountOutputTypeCountBudgetArgs
     User?: boolean | CompanyCountOutputTypeCountUserArgs
+    contracts?: boolean | CompanyCountOutputTypeCountContractsArgs
     admins?: boolean | CompanyCountOutputTypeCountAdminsArgs
     workersCompanies?: boolean | CompanyCountOutputTypeCountWorkersCompaniesArgs
+    usersCompanies?: boolean | CompanyCountOutputTypeCountUsersCompaniesArgs
   }
 
   // Custom InputTypes
@@ -2616,6 +2845,13 @@ export namespace Prisma {
   /**
    * CompanyCountOutputType without action
    */
+  export type CompanyCountOutputTypeCountContractsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: contractsWhereInput
+  }
+
+  /**
+   * CompanyCountOutputType without action
+   */
   export type CompanyCountOutputTypeCountAdminsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AdminsCompaniesWhereInput
   }
@@ -2625,6 +2861,13 @@ export namespace Prisma {
    */
   export type CompanyCountOutputTypeCountWorkersCompaniesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: workersCompaniesWhereInput
+  }
+
+  /**
+   * CompanyCountOutputType without action
+   */
+  export type CompanyCountOutputTypeCountUsersCompaniesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: usersCompaniesWhereInput
   }
 
 
@@ -2920,6 +3163,7 @@ export namespace Prisma {
     incidentsID: number | null
     paymentsID: number | null
     machineryID: number | null
+    contractID: number | null
     companyID: number | null
   }
 
@@ -2928,6 +3172,7 @@ export namespace Prisma {
     incidentsID: number | null
     paymentsID: number | null
     machineryID: number | null
+    contractID: number | null
     companyID: number | null
   }
 
@@ -2941,6 +3186,7 @@ export namespace Prisma {
     machineryID: number | null
     role: $Enums.Role | null
     userCode: string | null
+    contractID: number | null
     companyID: number | null
   }
 
@@ -2954,6 +3200,7 @@ export namespace Prisma {
     machineryID: number | null
     role: $Enums.Role | null
     userCode: string | null
+    contractID: number | null
     companyID: number | null
   }
 
@@ -2967,6 +3214,7 @@ export namespace Prisma {
     machineryID: number
     role: number
     userCode: number
+    contractID: number
     companyID: number
     _all: number
   }
@@ -2977,6 +3225,7 @@ export namespace Prisma {
     incidentsID?: true
     paymentsID?: true
     machineryID?: true
+    contractID?: true
     companyID?: true
   }
 
@@ -2985,6 +3234,7 @@ export namespace Prisma {
     incidentsID?: true
     paymentsID?: true
     machineryID?: true
+    contractID?: true
     companyID?: true
   }
 
@@ -2998,6 +3248,7 @@ export namespace Prisma {
     machineryID?: true
     role?: true
     userCode?: true
+    contractID?: true
     companyID?: true
   }
 
@@ -3011,6 +3262,7 @@ export namespace Prisma {
     machineryID?: true
     role?: true
     userCode?: true
+    contractID?: true
     companyID?: true
   }
 
@@ -3024,6 +3276,7 @@ export namespace Prisma {
     machineryID?: true
     role?: true
     userCode?: true
+    contractID?: true
     companyID?: true
     _all?: true
   }
@@ -3124,6 +3377,7 @@ export namespace Prisma {
     machineryID: number | null
     role: $Enums.Role
     userCode: string | null
+    contractID: number | null
     companyID: number | null
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
@@ -3156,6 +3410,7 @@ export namespace Prisma {
     machineryID?: boolean
     role?: boolean
     userCode?: boolean
+    contractID?: boolean
     companyID?: boolean
     incidents?: boolean | User$incidentsArgs<ExtArgs>
     directions?: boolean | User$directionsArgs<ExtArgs>
@@ -3165,7 +3420,9 @@ export namespace Prisma {
     Incidents?: boolean | User$IncidentsArgs<ExtArgs>
     Budget?: boolean | User$BudgetArgs<ExtArgs>
     Company?: boolean | User$CompanyArgs<ExtArgs>
+    contracts?: boolean | User$contractsArgs<ExtArgs>
     machinery?: boolean | User$machineryArgs<ExtArgs>
+    usersCompanies?: boolean | User$usersCompaniesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -3179,6 +3436,7 @@ export namespace Prisma {
     machineryID?: boolean
     role?: boolean
     userCode?: boolean
+    contractID?: boolean
     companyID?: boolean
     incidents?: boolean | User$incidentsArgs<ExtArgs>
     Company?: boolean | User$CompanyArgs<ExtArgs>
@@ -3194,6 +3452,7 @@ export namespace Prisma {
     machineryID?: boolean
     role?: boolean
     userCode?: boolean
+    contractID?: boolean
     companyID?: boolean
     incidents?: boolean | User$incidentsArgs<ExtArgs>
     Company?: boolean | User$CompanyArgs<ExtArgs>
@@ -3209,10 +3468,11 @@ export namespace Prisma {
     machineryID?: boolean
     role?: boolean
     userCode?: boolean
+    contractID?: boolean
     companyID?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"userID" | "name" | "email" | "password" | "incidentsID" | "paymentsID" | "machineryID" | "role" | "userCode" | "companyID", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"userID" | "name" | "email" | "password" | "incidentsID" | "paymentsID" | "machineryID" | "role" | "userCode" | "contractID" | "companyID", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     incidents?: boolean | User$incidentsArgs<ExtArgs>
     directions?: boolean | User$directionsArgs<ExtArgs>
@@ -3222,7 +3482,9 @@ export namespace Prisma {
     Incidents?: boolean | User$IncidentsArgs<ExtArgs>
     Budget?: boolean | User$BudgetArgs<ExtArgs>
     Company?: boolean | User$CompanyArgs<ExtArgs>
+    contracts?: boolean | User$contractsArgs<ExtArgs>
     machinery?: boolean | User$machineryArgs<ExtArgs>
+    usersCompanies?: boolean | User$usersCompaniesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3245,7 +3507,9 @@ export namespace Prisma {
       Incidents: Prisma.$IncidentsPayload<ExtArgs>[]
       Budget: Prisma.$BudgetPayload<ExtArgs>[]
       Company: Prisma.$CompanyPayload<ExtArgs> | null
+      contracts: Prisma.$contractsPayload<ExtArgs>[]
       machinery: Prisma.$machineryPayload<ExtArgs>[]
+      usersCompanies: Prisma.$usersCompaniesPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       userID: number
@@ -3257,6 +3521,7 @@ export namespace Prisma {
       machineryID: number | null
       role: $Enums.Role
       userCode: string | null
+      contractID: number | null
       companyID: number | null
     }, ExtArgs["result"]["user"]>
     composites: {}
@@ -3660,7 +3925,9 @@ export namespace Prisma {
     Incidents<T extends User$IncidentsArgs<ExtArgs> = {}>(args?: Subset<T, User$IncidentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IncidentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Budget<T extends User$BudgetArgs<ExtArgs> = {}>(args?: Subset<T, User$BudgetArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BudgetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Company<T extends User$CompanyArgs<ExtArgs> = {}>(args?: Subset<T, User$CompanyArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    contracts<T extends User$contractsArgs<ExtArgs> = {}>(args?: Subset<T, User$contractsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$contractsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     machinery<T extends User$machineryArgs<ExtArgs> = {}>(args?: Subset<T, User$machineryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$machineryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    usersCompanies<T extends User$usersCompaniesArgs<ExtArgs> = {}>(args?: Subset<T, User$usersCompaniesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$usersCompaniesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3699,6 +3966,7 @@ export namespace Prisma {
     readonly machineryID: FieldRef<"User", 'Int'>
     readonly role: FieldRef<"User", 'Role'>
     readonly userCode: FieldRef<"User", 'String'>
+    readonly contractID: FieldRef<"User", 'Int'>
     readonly companyID: FieldRef<"User", 'Int'>
   }
     
@@ -4273,6 +4541,30 @@ export namespace Prisma {
   }
 
   /**
+   * User.contracts
+   */
+  export type User$contractsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contracts
+     */
+    select?: contractsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the contracts
+     */
+    omit?: contractsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: contractsInclude<ExtArgs> | null
+    where?: contractsWhereInput
+    orderBy?: contractsOrderByWithRelationInput | contractsOrderByWithRelationInput[]
+    cursor?: contractsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ContractsScalarFieldEnum | ContractsScalarFieldEnum[]
+  }
+
+  /**
    * User.machinery
    */
   export type User$machineryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4294,6 +4586,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: MachineryScalarFieldEnum | MachineryScalarFieldEnum[]
+  }
+
+  /**
+   * User.usersCompanies
+   */
+  export type User$usersCompaniesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the usersCompanies
+     */
+    select?: usersCompaniesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the usersCompanies
+     */
+    omit?: usersCompaniesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersCompaniesInclude<ExtArgs> | null
+    where?: usersCompaniesWhereInput
+    orderBy?: usersCompaniesOrderByWithRelationInput | usersCompaniesOrderByWithRelationInput[]
+    cursor?: usersCompaniesWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UsersCompaniesScalarFieldEnum | UsersCompaniesScalarFieldEnum[]
   }
 
   /**
@@ -4580,8 +4896,10 @@ export namespace Prisma {
     machinery?: boolean | Company$machineryArgs<ExtArgs>
     Budget?: boolean | Company$BudgetArgs<ExtArgs>
     User?: boolean | Company$UserArgs<ExtArgs>
+    contracts?: boolean | Company$contractsArgs<ExtArgs>
     admins?: boolean | Company$adminsArgs<ExtArgs>
     workersCompanies?: boolean | Company$workersCompaniesArgs<ExtArgs>
+    usersCompanies?: boolean | Company$usersCompaniesArgs<ExtArgs>
     _count?: boolean | CompanyCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["company"]>
 
@@ -4642,8 +4960,10 @@ export namespace Prisma {
     machinery?: boolean | Company$machineryArgs<ExtArgs>
     Budget?: boolean | Company$BudgetArgs<ExtArgs>
     User?: boolean | Company$UserArgs<ExtArgs>
+    contracts?: boolean | Company$contractsArgs<ExtArgs>
     admins?: boolean | Company$adminsArgs<ExtArgs>
     workersCompanies?: boolean | Company$workersCompaniesArgs<ExtArgs>
+    usersCompanies?: boolean | Company$usersCompaniesArgs<ExtArgs>
     _count?: boolean | CompanyCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CompanyIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4667,8 +4987,10 @@ export namespace Prisma {
       machinery: Prisma.$machineryPayload<ExtArgs>[]
       Budget: Prisma.$BudgetPayload<ExtArgs>[]
       User: Prisma.$UserPayload<ExtArgs>[]
+      contracts: Prisma.$contractsPayload<ExtArgs>[]
       admins: Prisma.$AdminsCompaniesPayload<ExtArgs>[]
       workersCompanies: Prisma.$workersCompaniesPayload<ExtArgs>[]
+      usersCompanies: Prisma.$usersCompaniesPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       companyID: number
@@ -5087,8 +5409,10 @@ export namespace Prisma {
     machinery<T extends Company$machineryArgs<ExtArgs> = {}>(args?: Subset<T, Company$machineryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$machineryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Budget<T extends Company$BudgetArgs<ExtArgs> = {}>(args?: Subset<T, Company$BudgetArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BudgetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     User<T extends Company$UserArgs<ExtArgs> = {}>(args?: Subset<T, Company$UserArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    contracts<T extends Company$contractsArgs<ExtArgs> = {}>(args?: Subset<T, Company$contractsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$contractsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     admins<T extends Company$adminsArgs<ExtArgs> = {}>(args?: Subset<T, Company$adminsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdminsCompaniesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     workersCompanies<T extends Company$workersCompaniesArgs<ExtArgs> = {}>(args?: Subset<T, Company$workersCompaniesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$workersCompaniesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    usersCompanies<T extends Company$usersCompaniesArgs<ExtArgs> = {}>(args?: Subset<T, Company$usersCompaniesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$usersCompaniesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5784,6 +6108,30 @@ export namespace Prisma {
   }
 
   /**
+   * Company.contracts
+   */
+  export type Company$contractsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contracts
+     */
+    select?: contractsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the contracts
+     */
+    omit?: contractsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: contractsInclude<ExtArgs> | null
+    where?: contractsWhereInput
+    orderBy?: contractsOrderByWithRelationInput | contractsOrderByWithRelationInput[]
+    cursor?: contractsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ContractsScalarFieldEnum | ContractsScalarFieldEnum[]
+  }
+
+  /**
    * Company.admins
    */
   export type Company$adminsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5829,6 +6177,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: WorkersCompaniesScalarFieldEnum | WorkersCompaniesScalarFieldEnum[]
+  }
+
+  /**
+   * Company.usersCompanies
+   */
+  export type Company$usersCompaniesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the usersCompanies
+     */
+    select?: usersCompaniesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the usersCompanies
+     */
+    omit?: usersCompaniesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersCompaniesInclude<ExtArgs> | null
+    where?: usersCompaniesWhereInput
+    orderBy?: usersCompaniesOrderByWithRelationInput | usersCompaniesOrderByWithRelationInput[]
+    cursor?: usersCompaniesWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UsersCompaniesScalarFieldEnum | UsersCompaniesScalarFieldEnum[]
   }
 
   /**
@@ -9284,6 +9656,2222 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: AdminInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model usersCompanies
+   */
+
+  export type AggregateUsersCompanies = {
+    _count: UsersCompaniesCountAggregateOutputType | null
+    _avg: UsersCompaniesAvgAggregateOutputType | null
+    _sum: UsersCompaniesSumAggregateOutputType | null
+    _min: UsersCompaniesMinAggregateOutputType | null
+    _max: UsersCompaniesMaxAggregateOutputType | null
+  }
+
+  export type UsersCompaniesAvgAggregateOutputType = {
+    id: number | null
+    userID: number | null
+    companyID: number | null
+  }
+
+  export type UsersCompaniesSumAggregateOutputType = {
+    id: number | null
+    userID: number | null
+    companyID: number | null
+  }
+
+  export type UsersCompaniesMinAggregateOutputType = {
+    id: number | null
+    userID: number | null
+    companyID: number | null
+  }
+
+  export type UsersCompaniesMaxAggregateOutputType = {
+    id: number | null
+    userID: number | null
+    companyID: number | null
+  }
+
+  export type UsersCompaniesCountAggregateOutputType = {
+    id: number
+    userID: number
+    companyID: number
+    _all: number
+  }
+
+
+  export type UsersCompaniesAvgAggregateInputType = {
+    id?: true
+    userID?: true
+    companyID?: true
+  }
+
+  export type UsersCompaniesSumAggregateInputType = {
+    id?: true
+    userID?: true
+    companyID?: true
+  }
+
+  export type UsersCompaniesMinAggregateInputType = {
+    id?: true
+    userID?: true
+    companyID?: true
+  }
+
+  export type UsersCompaniesMaxAggregateInputType = {
+    id?: true
+    userID?: true
+    companyID?: true
+  }
+
+  export type UsersCompaniesCountAggregateInputType = {
+    id?: true
+    userID?: true
+    companyID?: true
+    _all?: true
+  }
+
+  export type UsersCompaniesAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which usersCompanies to aggregate.
+     */
+    where?: usersCompaniesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of usersCompanies to fetch.
+     */
+    orderBy?: usersCompaniesOrderByWithRelationInput | usersCompaniesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: usersCompaniesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` usersCompanies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` usersCompanies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned usersCompanies
+    **/
+    _count?: true | UsersCompaniesCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: UsersCompaniesAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UsersCompaniesSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UsersCompaniesMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UsersCompaniesMaxAggregateInputType
+  }
+
+  export type GetUsersCompaniesAggregateType<T extends UsersCompaniesAggregateArgs> = {
+        [P in keyof T & keyof AggregateUsersCompanies]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUsersCompanies[P]>
+      : GetScalarType<T[P], AggregateUsersCompanies[P]>
+  }
+
+
+
+
+  export type usersCompaniesGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: usersCompaniesWhereInput
+    orderBy?: usersCompaniesOrderByWithAggregationInput | usersCompaniesOrderByWithAggregationInput[]
+    by: UsersCompaniesScalarFieldEnum[] | UsersCompaniesScalarFieldEnum
+    having?: usersCompaniesScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UsersCompaniesCountAggregateInputType | true
+    _avg?: UsersCompaniesAvgAggregateInputType
+    _sum?: UsersCompaniesSumAggregateInputType
+    _min?: UsersCompaniesMinAggregateInputType
+    _max?: UsersCompaniesMaxAggregateInputType
+  }
+
+  export type UsersCompaniesGroupByOutputType = {
+    id: number
+    userID: number
+    companyID: number
+    _count: UsersCompaniesCountAggregateOutputType | null
+    _avg: UsersCompaniesAvgAggregateOutputType | null
+    _sum: UsersCompaniesSumAggregateOutputType | null
+    _min: UsersCompaniesMinAggregateOutputType | null
+    _max: UsersCompaniesMaxAggregateOutputType | null
+  }
+
+  type GetUsersCompaniesGroupByPayload<T extends usersCompaniesGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UsersCompaniesGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UsersCompaniesGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UsersCompaniesGroupByOutputType[P]>
+            : GetScalarType<T[P], UsersCompaniesGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type usersCompaniesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userID?: boolean
+    companyID?: boolean
+    User?: boolean | UserDefaultArgs<ExtArgs>
+    Company?: boolean | CompanyDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["usersCompanies"]>
+
+  export type usersCompaniesSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userID?: boolean
+    companyID?: boolean
+    User?: boolean | UserDefaultArgs<ExtArgs>
+    Company?: boolean | CompanyDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["usersCompanies"]>
+
+  export type usersCompaniesSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userID?: boolean
+    companyID?: boolean
+    User?: boolean | UserDefaultArgs<ExtArgs>
+    Company?: boolean | CompanyDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["usersCompanies"]>
+
+  export type usersCompaniesSelectScalar = {
+    id?: boolean
+    userID?: boolean
+    companyID?: boolean
+  }
+
+  export type usersCompaniesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userID" | "companyID", ExtArgs["result"]["usersCompanies"]>
+  export type usersCompaniesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    User?: boolean | UserDefaultArgs<ExtArgs>
+    Company?: boolean | CompanyDefaultArgs<ExtArgs>
+  }
+  export type usersCompaniesIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    User?: boolean | UserDefaultArgs<ExtArgs>
+    Company?: boolean | CompanyDefaultArgs<ExtArgs>
+  }
+  export type usersCompaniesIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    User?: boolean | UserDefaultArgs<ExtArgs>
+    Company?: boolean | CompanyDefaultArgs<ExtArgs>
+  }
+
+  export type $usersCompaniesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "usersCompanies"
+    objects: {
+      User: Prisma.$UserPayload<ExtArgs>
+      Company: Prisma.$CompanyPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      userID: number
+      companyID: number
+    }, ExtArgs["result"]["usersCompanies"]>
+    composites: {}
+  }
+
+  type usersCompaniesGetPayload<S extends boolean | null | undefined | usersCompaniesDefaultArgs> = $Result.GetResult<Prisma.$usersCompaniesPayload, S>
+
+  type usersCompaniesCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<usersCompaniesFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UsersCompaniesCountAggregateInputType | true
+    }
+
+  export interface usersCompaniesDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['usersCompanies'], meta: { name: 'usersCompanies' } }
+    /**
+     * Find zero or one UsersCompanies that matches the filter.
+     * @param {usersCompaniesFindUniqueArgs} args - Arguments to find a UsersCompanies
+     * @example
+     * // Get one UsersCompanies
+     * const usersCompanies = await prisma.usersCompanies.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends usersCompaniesFindUniqueArgs>(args: SelectSubset<T, usersCompaniesFindUniqueArgs<ExtArgs>>): Prisma__usersCompaniesClient<$Result.GetResult<Prisma.$usersCompaniesPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one UsersCompanies that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {usersCompaniesFindUniqueOrThrowArgs} args - Arguments to find a UsersCompanies
+     * @example
+     * // Get one UsersCompanies
+     * const usersCompanies = await prisma.usersCompanies.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends usersCompaniesFindUniqueOrThrowArgs>(args: SelectSubset<T, usersCompaniesFindUniqueOrThrowArgs<ExtArgs>>): Prisma__usersCompaniesClient<$Result.GetResult<Prisma.$usersCompaniesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UsersCompanies that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {usersCompaniesFindFirstArgs} args - Arguments to find a UsersCompanies
+     * @example
+     * // Get one UsersCompanies
+     * const usersCompanies = await prisma.usersCompanies.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends usersCompaniesFindFirstArgs>(args?: SelectSubset<T, usersCompaniesFindFirstArgs<ExtArgs>>): Prisma__usersCompaniesClient<$Result.GetResult<Prisma.$usersCompaniesPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UsersCompanies that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {usersCompaniesFindFirstOrThrowArgs} args - Arguments to find a UsersCompanies
+     * @example
+     * // Get one UsersCompanies
+     * const usersCompanies = await prisma.usersCompanies.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends usersCompaniesFindFirstOrThrowArgs>(args?: SelectSubset<T, usersCompaniesFindFirstOrThrowArgs<ExtArgs>>): Prisma__usersCompaniesClient<$Result.GetResult<Prisma.$usersCompaniesPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more UsersCompanies that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {usersCompaniesFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UsersCompanies
+     * const usersCompanies = await prisma.usersCompanies.findMany()
+     * 
+     * // Get first 10 UsersCompanies
+     * const usersCompanies = await prisma.usersCompanies.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const usersCompaniesWithIdOnly = await prisma.usersCompanies.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends usersCompaniesFindManyArgs>(args?: SelectSubset<T, usersCompaniesFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$usersCompaniesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a UsersCompanies.
+     * @param {usersCompaniesCreateArgs} args - Arguments to create a UsersCompanies.
+     * @example
+     * // Create one UsersCompanies
+     * const UsersCompanies = await prisma.usersCompanies.create({
+     *   data: {
+     *     // ... data to create a UsersCompanies
+     *   }
+     * })
+     * 
+     */
+    create<T extends usersCompaniesCreateArgs>(args: SelectSubset<T, usersCompaniesCreateArgs<ExtArgs>>): Prisma__usersCompaniesClient<$Result.GetResult<Prisma.$usersCompaniesPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many UsersCompanies.
+     * @param {usersCompaniesCreateManyArgs} args - Arguments to create many UsersCompanies.
+     * @example
+     * // Create many UsersCompanies
+     * const usersCompanies = await prisma.usersCompanies.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends usersCompaniesCreateManyArgs>(args?: SelectSubset<T, usersCompaniesCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many UsersCompanies and returns the data saved in the database.
+     * @param {usersCompaniesCreateManyAndReturnArgs} args - Arguments to create many UsersCompanies.
+     * @example
+     * // Create many UsersCompanies
+     * const usersCompanies = await prisma.usersCompanies.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many UsersCompanies and only return the `id`
+     * const usersCompaniesWithIdOnly = await prisma.usersCompanies.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends usersCompaniesCreateManyAndReturnArgs>(args?: SelectSubset<T, usersCompaniesCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$usersCompaniesPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a UsersCompanies.
+     * @param {usersCompaniesDeleteArgs} args - Arguments to delete one UsersCompanies.
+     * @example
+     * // Delete one UsersCompanies
+     * const UsersCompanies = await prisma.usersCompanies.delete({
+     *   where: {
+     *     // ... filter to delete one UsersCompanies
+     *   }
+     * })
+     * 
+     */
+    delete<T extends usersCompaniesDeleteArgs>(args: SelectSubset<T, usersCompaniesDeleteArgs<ExtArgs>>): Prisma__usersCompaniesClient<$Result.GetResult<Prisma.$usersCompaniesPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one UsersCompanies.
+     * @param {usersCompaniesUpdateArgs} args - Arguments to update one UsersCompanies.
+     * @example
+     * // Update one UsersCompanies
+     * const usersCompanies = await prisma.usersCompanies.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends usersCompaniesUpdateArgs>(args: SelectSubset<T, usersCompaniesUpdateArgs<ExtArgs>>): Prisma__usersCompaniesClient<$Result.GetResult<Prisma.$usersCompaniesPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more UsersCompanies.
+     * @param {usersCompaniesDeleteManyArgs} args - Arguments to filter UsersCompanies to delete.
+     * @example
+     * // Delete a few UsersCompanies
+     * const { count } = await prisma.usersCompanies.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends usersCompaniesDeleteManyArgs>(args?: SelectSubset<T, usersCompaniesDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UsersCompanies.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {usersCompaniesUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UsersCompanies
+     * const usersCompanies = await prisma.usersCompanies.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends usersCompaniesUpdateManyArgs>(args: SelectSubset<T, usersCompaniesUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UsersCompanies and returns the data updated in the database.
+     * @param {usersCompaniesUpdateManyAndReturnArgs} args - Arguments to update many UsersCompanies.
+     * @example
+     * // Update many UsersCompanies
+     * const usersCompanies = await prisma.usersCompanies.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more UsersCompanies and only return the `id`
+     * const usersCompaniesWithIdOnly = await prisma.usersCompanies.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends usersCompaniesUpdateManyAndReturnArgs>(args: SelectSubset<T, usersCompaniesUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$usersCompaniesPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one UsersCompanies.
+     * @param {usersCompaniesUpsertArgs} args - Arguments to update or create a UsersCompanies.
+     * @example
+     * // Update or create a UsersCompanies
+     * const usersCompanies = await prisma.usersCompanies.upsert({
+     *   create: {
+     *     // ... data to create a UsersCompanies
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UsersCompanies we want to update
+     *   }
+     * })
+     */
+    upsert<T extends usersCompaniesUpsertArgs>(args: SelectSubset<T, usersCompaniesUpsertArgs<ExtArgs>>): Prisma__usersCompaniesClient<$Result.GetResult<Prisma.$usersCompaniesPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of UsersCompanies.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {usersCompaniesCountArgs} args - Arguments to filter UsersCompanies to count.
+     * @example
+     * // Count the number of UsersCompanies
+     * const count = await prisma.usersCompanies.count({
+     *   where: {
+     *     // ... the filter for the UsersCompanies we want to count
+     *   }
+     * })
+    **/
+    count<T extends usersCompaniesCountArgs>(
+      args?: Subset<T, usersCompaniesCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UsersCompaniesCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a UsersCompanies.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UsersCompaniesAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UsersCompaniesAggregateArgs>(args: Subset<T, UsersCompaniesAggregateArgs>): Prisma.PrismaPromise<GetUsersCompaniesAggregateType<T>>
+
+    /**
+     * Group by UsersCompanies.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {usersCompaniesGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends usersCompaniesGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: usersCompaniesGroupByArgs['orderBy'] }
+        : { orderBy?: usersCompaniesGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, usersCompaniesGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUsersCompaniesGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the usersCompanies model
+   */
+  readonly fields: usersCompaniesFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for usersCompanies.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__usersCompaniesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    User<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    Company<T extends CompanyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CompanyDefaultArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the usersCompanies model
+   */
+  interface usersCompaniesFieldRefs {
+    readonly id: FieldRef<"usersCompanies", 'Int'>
+    readonly userID: FieldRef<"usersCompanies", 'Int'>
+    readonly companyID: FieldRef<"usersCompanies", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * usersCompanies findUnique
+   */
+  export type usersCompaniesFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the usersCompanies
+     */
+    select?: usersCompaniesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the usersCompanies
+     */
+    omit?: usersCompaniesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersCompaniesInclude<ExtArgs> | null
+    /**
+     * Filter, which usersCompanies to fetch.
+     */
+    where: usersCompaniesWhereUniqueInput
+  }
+
+  /**
+   * usersCompanies findUniqueOrThrow
+   */
+  export type usersCompaniesFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the usersCompanies
+     */
+    select?: usersCompaniesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the usersCompanies
+     */
+    omit?: usersCompaniesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersCompaniesInclude<ExtArgs> | null
+    /**
+     * Filter, which usersCompanies to fetch.
+     */
+    where: usersCompaniesWhereUniqueInput
+  }
+
+  /**
+   * usersCompanies findFirst
+   */
+  export type usersCompaniesFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the usersCompanies
+     */
+    select?: usersCompaniesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the usersCompanies
+     */
+    omit?: usersCompaniesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersCompaniesInclude<ExtArgs> | null
+    /**
+     * Filter, which usersCompanies to fetch.
+     */
+    where?: usersCompaniesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of usersCompanies to fetch.
+     */
+    orderBy?: usersCompaniesOrderByWithRelationInput | usersCompaniesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for usersCompanies.
+     */
+    cursor?: usersCompaniesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` usersCompanies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` usersCompanies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of usersCompanies.
+     */
+    distinct?: UsersCompaniesScalarFieldEnum | UsersCompaniesScalarFieldEnum[]
+  }
+
+  /**
+   * usersCompanies findFirstOrThrow
+   */
+  export type usersCompaniesFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the usersCompanies
+     */
+    select?: usersCompaniesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the usersCompanies
+     */
+    omit?: usersCompaniesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersCompaniesInclude<ExtArgs> | null
+    /**
+     * Filter, which usersCompanies to fetch.
+     */
+    where?: usersCompaniesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of usersCompanies to fetch.
+     */
+    orderBy?: usersCompaniesOrderByWithRelationInput | usersCompaniesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for usersCompanies.
+     */
+    cursor?: usersCompaniesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` usersCompanies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` usersCompanies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of usersCompanies.
+     */
+    distinct?: UsersCompaniesScalarFieldEnum | UsersCompaniesScalarFieldEnum[]
+  }
+
+  /**
+   * usersCompanies findMany
+   */
+  export type usersCompaniesFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the usersCompanies
+     */
+    select?: usersCompaniesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the usersCompanies
+     */
+    omit?: usersCompaniesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersCompaniesInclude<ExtArgs> | null
+    /**
+     * Filter, which usersCompanies to fetch.
+     */
+    where?: usersCompaniesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of usersCompanies to fetch.
+     */
+    orderBy?: usersCompaniesOrderByWithRelationInput | usersCompaniesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing usersCompanies.
+     */
+    cursor?: usersCompaniesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` usersCompanies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` usersCompanies.
+     */
+    skip?: number
+    distinct?: UsersCompaniesScalarFieldEnum | UsersCompaniesScalarFieldEnum[]
+  }
+
+  /**
+   * usersCompanies create
+   */
+  export type usersCompaniesCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the usersCompanies
+     */
+    select?: usersCompaniesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the usersCompanies
+     */
+    omit?: usersCompaniesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersCompaniesInclude<ExtArgs> | null
+    /**
+     * The data needed to create a usersCompanies.
+     */
+    data: XOR<usersCompaniesCreateInput, usersCompaniesUncheckedCreateInput>
+  }
+
+  /**
+   * usersCompanies createMany
+   */
+  export type usersCompaniesCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many usersCompanies.
+     */
+    data: usersCompaniesCreateManyInput | usersCompaniesCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * usersCompanies createManyAndReturn
+   */
+  export type usersCompaniesCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the usersCompanies
+     */
+    select?: usersCompaniesSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the usersCompanies
+     */
+    omit?: usersCompaniesOmit<ExtArgs> | null
+    /**
+     * The data used to create many usersCompanies.
+     */
+    data: usersCompaniesCreateManyInput | usersCompaniesCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersCompaniesIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * usersCompanies update
+   */
+  export type usersCompaniesUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the usersCompanies
+     */
+    select?: usersCompaniesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the usersCompanies
+     */
+    omit?: usersCompaniesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersCompaniesInclude<ExtArgs> | null
+    /**
+     * The data needed to update a usersCompanies.
+     */
+    data: XOR<usersCompaniesUpdateInput, usersCompaniesUncheckedUpdateInput>
+    /**
+     * Choose, which usersCompanies to update.
+     */
+    where: usersCompaniesWhereUniqueInput
+  }
+
+  /**
+   * usersCompanies updateMany
+   */
+  export type usersCompaniesUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update usersCompanies.
+     */
+    data: XOR<usersCompaniesUpdateManyMutationInput, usersCompaniesUncheckedUpdateManyInput>
+    /**
+     * Filter which usersCompanies to update
+     */
+    where?: usersCompaniesWhereInput
+    /**
+     * Limit how many usersCompanies to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * usersCompanies updateManyAndReturn
+   */
+  export type usersCompaniesUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the usersCompanies
+     */
+    select?: usersCompaniesSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the usersCompanies
+     */
+    omit?: usersCompaniesOmit<ExtArgs> | null
+    /**
+     * The data used to update usersCompanies.
+     */
+    data: XOR<usersCompaniesUpdateManyMutationInput, usersCompaniesUncheckedUpdateManyInput>
+    /**
+     * Filter which usersCompanies to update
+     */
+    where?: usersCompaniesWhereInput
+    /**
+     * Limit how many usersCompanies to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersCompaniesIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * usersCompanies upsert
+   */
+  export type usersCompaniesUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the usersCompanies
+     */
+    select?: usersCompaniesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the usersCompanies
+     */
+    omit?: usersCompaniesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersCompaniesInclude<ExtArgs> | null
+    /**
+     * The filter to search for the usersCompanies to update in case it exists.
+     */
+    where: usersCompaniesWhereUniqueInput
+    /**
+     * In case the usersCompanies found by the `where` argument doesn't exist, create a new usersCompanies with this data.
+     */
+    create: XOR<usersCompaniesCreateInput, usersCompaniesUncheckedCreateInput>
+    /**
+     * In case the usersCompanies was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<usersCompaniesUpdateInput, usersCompaniesUncheckedUpdateInput>
+  }
+
+  /**
+   * usersCompanies delete
+   */
+  export type usersCompaniesDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the usersCompanies
+     */
+    select?: usersCompaniesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the usersCompanies
+     */
+    omit?: usersCompaniesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersCompaniesInclude<ExtArgs> | null
+    /**
+     * Filter which usersCompanies to delete.
+     */
+    where: usersCompaniesWhereUniqueInput
+  }
+
+  /**
+   * usersCompanies deleteMany
+   */
+  export type usersCompaniesDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which usersCompanies to delete
+     */
+    where?: usersCompaniesWhereInput
+    /**
+     * Limit how many usersCompanies to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * usersCompanies without action
+   */
+  export type usersCompaniesDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the usersCompanies
+     */
+    select?: usersCompaniesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the usersCompanies
+     */
+    omit?: usersCompaniesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersCompaniesInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model contracts
+   */
+
+  export type AggregateContracts = {
+    _count: ContractsCountAggregateOutputType | null
+    _avg: ContractsAvgAggregateOutputType | null
+    _sum: ContractsSumAggregateOutputType | null
+    _min: ContractsMinAggregateOutputType | null
+    _max: ContractsMaxAggregateOutputType | null
+  }
+
+  export type ContractsAvgAggregateOutputType = {
+    id: number | null
+    userID: number | null
+    companyID: number | null
+  }
+
+  export type ContractsSumAggregateOutputType = {
+    id: number | null
+    userID: number | null
+    companyID: number | null
+  }
+
+  export type ContractsMinAggregateOutputType = {
+    id: number | null
+    userID: number | null
+    companyID: number | null
+    contractType: $Enums.ContractType | null
+    startDate: Date | null
+    endDate: Date | null
+    isActive: boolean | null
+  }
+
+  export type ContractsMaxAggregateOutputType = {
+    id: number | null
+    userID: number | null
+    companyID: number | null
+    contractType: $Enums.ContractType | null
+    startDate: Date | null
+    endDate: Date | null
+    isActive: boolean | null
+  }
+
+  export type ContractsCountAggregateOutputType = {
+    id: number
+    userID: number
+    companyID: number
+    contractType: number
+    startDate: number
+    endDate: number
+    isActive: number
+    _all: number
+  }
+
+
+  export type ContractsAvgAggregateInputType = {
+    id?: true
+    userID?: true
+    companyID?: true
+  }
+
+  export type ContractsSumAggregateInputType = {
+    id?: true
+    userID?: true
+    companyID?: true
+  }
+
+  export type ContractsMinAggregateInputType = {
+    id?: true
+    userID?: true
+    companyID?: true
+    contractType?: true
+    startDate?: true
+    endDate?: true
+    isActive?: true
+  }
+
+  export type ContractsMaxAggregateInputType = {
+    id?: true
+    userID?: true
+    companyID?: true
+    contractType?: true
+    startDate?: true
+    endDate?: true
+    isActive?: true
+  }
+
+  export type ContractsCountAggregateInputType = {
+    id?: true
+    userID?: true
+    companyID?: true
+    contractType?: true
+    startDate?: true
+    endDate?: true
+    isActive?: true
+    _all?: true
+  }
+
+  export type ContractsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which contracts to aggregate.
+     */
+    where?: contractsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of contracts to fetch.
+     */
+    orderBy?: contractsOrderByWithRelationInput | contractsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: contractsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` contracts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` contracts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned contracts
+    **/
+    _count?: true | ContractsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ContractsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ContractsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ContractsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ContractsMaxAggregateInputType
+  }
+
+  export type GetContractsAggregateType<T extends ContractsAggregateArgs> = {
+        [P in keyof T & keyof AggregateContracts]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateContracts[P]>
+      : GetScalarType<T[P], AggregateContracts[P]>
+  }
+
+
+
+
+  export type contractsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: contractsWhereInput
+    orderBy?: contractsOrderByWithAggregationInput | contractsOrderByWithAggregationInput[]
+    by: ContractsScalarFieldEnum[] | ContractsScalarFieldEnum
+    having?: contractsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ContractsCountAggregateInputType | true
+    _avg?: ContractsAvgAggregateInputType
+    _sum?: ContractsSumAggregateInputType
+    _min?: ContractsMinAggregateInputType
+    _max?: ContractsMaxAggregateInputType
+  }
+
+  export type ContractsGroupByOutputType = {
+    id: number
+    userID: number
+    companyID: number
+    contractType: $Enums.ContractType | null
+    startDate: Date
+    endDate: Date | null
+    isActive: boolean
+    _count: ContractsCountAggregateOutputType | null
+    _avg: ContractsAvgAggregateOutputType | null
+    _sum: ContractsSumAggregateOutputType | null
+    _min: ContractsMinAggregateOutputType | null
+    _max: ContractsMaxAggregateOutputType | null
+  }
+
+  type GetContractsGroupByPayload<T extends contractsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ContractsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ContractsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ContractsGroupByOutputType[P]>
+            : GetScalarType<T[P], ContractsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type contractsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userID?: boolean
+    companyID?: boolean
+    contractType?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    isActive?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    company?: boolean | CompanyDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["contracts"]>
+
+  export type contractsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userID?: boolean
+    companyID?: boolean
+    contractType?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    isActive?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    company?: boolean | CompanyDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["contracts"]>
+
+  export type contractsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userID?: boolean
+    companyID?: boolean
+    contractType?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    isActive?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    company?: boolean | CompanyDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["contracts"]>
+
+  export type contractsSelectScalar = {
+    id?: boolean
+    userID?: boolean
+    companyID?: boolean
+    contractType?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    isActive?: boolean
+  }
+
+  export type contractsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userID" | "companyID" | "contractType" | "startDate" | "endDate" | "isActive", ExtArgs["result"]["contracts"]>
+  export type contractsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    company?: boolean | CompanyDefaultArgs<ExtArgs>
+  }
+  export type contractsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    company?: boolean | CompanyDefaultArgs<ExtArgs>
+  }
+  export type contractsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    company?: boolean | CompanyDefaultArgs<ExtArgs>
+  }
+
+  export type $contractsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "contracts"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      company: Prisma.$CompanyPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      userID: number
+      companyID: number
+      contractType: $Enums.ContractType | null
+      startDate: Date
+      endDate: Date | null
+      isActive: boolean
+    }, ExtArgs["result"]["contracts"]>
+    composites: {}
+  }
+
+  type contractsGetPayload<S extends boolean | null | undefined | contractsDefaultArgs> = $Result.GetResult<Prisma.$contractsPayload, S>
+
+  type contractsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<contractsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ContractsCountAggregateInputType | true
+    }
+
+  export interface contractsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['contracts'], meta: { name: 'contracts' } }
+    /**
+     * Find zero or one Contracts that matches the filter.
+     * @param {contractsFindUniqueArgs} args - Arguments to find a Contracts
+     * @example
+     * // Get one Contracts
+     * const contracts = await prisma.contracts.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends contractsFindUniqueArgs>(args: SelectSubset<T, contractsFindUniqueArgs<ExtArgs>>): Prisma__contractsClient<$Result.GetResult<Prisma.$contractsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Contracts that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {contractsFindUniqueOrThrowArgs} args - Arguments to find a Contracts
+     * @example
+     * // Get one Contracts
+     * const contracts = await prisma.contracts.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends contractsFindUniqueOrThrowArgs>(args: SelectSubset<T, contractsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__contractsClient<$Result.GetResult<Prisma.$contractsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Contracts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {contractsFindFirstArgs} args - Arguments to find a Contracts
+     * @example
+     * // Get one Contracts
+     * const contracts = await prisma.contracts.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends contractsFindFirstArgs>(args?: SelectSubset<T, contractsFindFirstArgs<ExtArgs>>): Prisma__contractsClient<$Result.GetResult<Prisma.$contractsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Contracts that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {contractsFindFirstOrThrowArgs} args - Arguments to find a Contracts
+     * @example
+     * // Get one Contracts
+     * const contracts = await prisma.contracts.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends contractsFindFirstOrThrowArgs>(args?: SelectSubset<T, contractsFindFirstOrThrowArgs<ExtArgs>>): Prisma__contractsClient<$Result.GetResult<Prisma.$contractsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Contracts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {contractsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Contracts
+     * const contracts = await prisma.contracts.findMany()
+     * 
+     * // Get first 10 Contracts
+     * const contracts = await prisma.contracts.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const contractsWithIdOnly = await prisma.contracts.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends contractsFindManyArgs>(args?: SelectSubset<T, contractsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$contractsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Contracts.
+     * @param {contractsCreateArgs} args - Arguments to create a Contracts.
+     * @example
+     * // Create one Contracts
+     * const Contracts = await prisma.contracts.create({
+     *   data: {
+     *     // ... data to create a Contracts
+     *   }
+     * })
+     * 
+     */
+    create<T extends contractsCreateArgs>(args: SelectSubset<T, contractsCreateArgs<ExtArgs>>): Prisma__contractsClient<$Result.GetResult<Prisma.$contractsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Contracts.
+     * @param {contractsCreateManyArgs} args - Arguments to create many Contracts.
+     * @example
+     * // Create many Contracts
+     * const contracts = await prisma.contracts.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends contractsCreateManyArgs>(args?: SelectSubset<T, contractsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Contracts and returns the data saved in the database.
+     * @param {contractsCreateManyAndReturnArgs} args - Arguments to create many Contracts.
+     * @example
+     * // Create many Contracts
+     * const contracts = await prisma.contracts.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Contracts and only return the `id`
+     * const contractsWithIdOnly = await prisma.contracts.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends contractsCreateManyAndReturnArgs>(args?: SelectSubset<T, contractsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$contractsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Contracts.
+     * @param {contractsDeleteArgs} args - Arguments to delete one Contracts.
+     * @example
+     * // Delete one Contracts
+     * const Contracts = await prisma.contracts.delete({
+     *   where: {
+     *     // ... filter to delete one Contracts
+     *   }
+     * })
+     * 
+     */
+    delete<T extends contractsDeleteArgs>(args: SelectSubset<T, contractsDeleteArgs<ExtArgs>>): Prisma__contractsClient<$Result.GetResult<Prisma.$contractsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Contracts.
+     * @param {contractsUpdateArgs} args - Arguments to update one Contracts.
+     * @example
+     * // Update one Contracts
+     * const contracts = await prisma.contracts.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends contractsUpdateArgs>(args: SelectSubset<T, contractsUpdateArgs<ExtArgs>>): Prisma__contractsClient<$Result.GetResult<Prisma.$contractsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Contracts.
+     * @param {contractsDeleteManyArgs} args - Arguments to filter Contracts to delete.
+     * @example
+     * // Delete a few Contracts
+     * const { count } = await prisma.contracts.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends contractsDeleteManyArgs>(args?: SelectSubset<T, contractsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Contracts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {contractsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Contracts
+     * const contracts = await prisma.contracts.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends contractsUpdateManyArgs>(args: SelectSubset<T, contractsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Contracts and returns the data updated in the database.
+     * @param {contractsUpdateManyAndReturnArgs} args - Arguments to update many Contracts.
+     * @example
+     * // Update many Contracts
+     * const contracts = await prisma.contracts.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Contracts and only return the `id`
+     * const contractsWithIdOnly = await prisma.contracts.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends contractsUpdateManyAndReturnArgs>(args: SelectSubset<T, contractsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$contractsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Contracts.
+     * @param {contractsUpsertArgs} args - Arguments to update or create a Contracts.
+     * @example
+     * // Update or create a Contracts
+     * const contracts = await prisma.contracts.upsert({
+     *   create: {
+     *     // ... data to create a Contracts
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Contracts we want to update
+     *   }
+     * })
+     */
+    upsert<T extends contractsUpsertArgs>(args: SelectSubset<T, contractsUpsertArgs<ExtArgs>>): Prisma__contractsClient<$Result.GetResult<Prisma.$contractsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Contracts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {contractsCountArgs} args - Arguments to filter Contracts to count.
+     * @example
+     * // Count the number of Contracts
+     * const count = await prisma.contracts.count({
+     *   where: {
+     *     // ... the filter for the Contracts we want to count
+     *   }
+     * })
+    **/
+    count<T extends contractsCountArgs>(
+      args?: Subset<T, contractsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ContractsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Contracts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContractsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ContractsAggregateArgs>(args: Subset<T, ContractsAggregateArgs>): Prisma.PrismaPromise<GetContractsAggregateType<T>>
+
+    /**
+     * Group by Contracts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {contractsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends contractsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: contractsGroupByArgs['orderBy'] }
+        : { orderBy?: contractsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, contractsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetContractsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the contracts model
+   */
+  readonly fields: contractsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for contracts.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__contractsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    company<T extends CompanyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CompanyDefaultArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the contracts model
+   */
+  interface contractsFieldRefs {
+    readonly id: FieldRef<"contracts", 'Int'>
+    readonly userID: FieldRef<"contracts", 'Int'>
+    readonly companyID: FieldRef<"contracts", 'Int'>
+    readonly contractType: FieldRef<"contracts", 'ContractType'>
+    readonly startDate: FieldRef<"contracts", 'DateTime'>
+    readonly endDate: FieldRef<"contracts", 'DateTime'>
+    readonly isActive: FieldRef<"contracts", 'Boolean'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * contracts findUnique
+   */
+  export type contractsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contracts
+     */
+    select?: contractsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the contracts
+     */
+    omit?: contractsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: contractsInclude<ExtArgs> | null
+    /**
+     * Filter, which contracts to fetch.
+     */
+    where: contractsWhereUniqueInput
+  }
+
+  /**
+   * contracts findUniqueOrThrow
+   */
+  export type contractsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contracts
+     */
+    select?: contractsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the contracts
+     */
+    omit?: contractsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: contractsInclude<ExtArgs> | null
+    /**
+     * Filter, which contracts to fetch.
+     */
+    where: contractsWhereUniqueInput
+  }
+
+  /**
+   * contracts findFirst
+   */
+  export type contractsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contracts
+     */
+    select?: contractsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the contracts
+     */
+    omit?: contractsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: contractsInclude<ExtArgs> | null
+    /**
+     * Filter, which contracts to fetch.
+     */
+    where?: contractsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of contracts to fetch.
+     */
+    orderBy?: contractsOrderByWithRelationInput | contractsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for contracts.
+     */
+    cursor?: contractsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` contracts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` contracts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of contracts.
+     */
+    distinct?: ContractsScalarFieldEnum | ContractsScalarFieldEnum[]
+  }
+
+  /**
+   * contracts findFirstOrThrow
+   */
+  export type contractsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contracts
+     */
+    select?: contractsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the contracts
+     */
+    omit?: contractsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: contractsInclude<ExtArgs> | null
+    /**
+     * Filter, which contracts to fetch.
+     */
+    where?: contractsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of contracts to fetch.
+     */
+    orderBy?: contractsOrderByWithRelationInput | contractsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for contracts.
+     */
+    cursor?: contractsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` contracts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` contracts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of contracts.
+     */
+    distinct?: ContractsScalarFieldEnum | ContractsScalarFieldEnum[]
+  }
+
+  /**
+   * contracts findMany
+   */
+  export type contractsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contracts
+     */
+    select?: contractsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the contracts
+     */
+    omit?: contractsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: contractsInclude<ExtArgs> | null
+    /**
+     * Filter, which contracts to fetch.
+     */
+    where?: contractsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of contracts to fetch.
+     */
+    orderBy?: contractsOrderByWithRelationInput | contractsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing contracts.
+     */
+    cursor?: contractsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` contracts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` contracts.
+     */
+    skip?: number
+    distinct?: ContractsScalarFieldEnum | ContractsScalarFieldEnum[]
+  }
+
+  /**
+   * contracts create
+   */
+  export type contractsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contracts
+     */
+    select?: contractsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the contracts
+     */
+    omit?: contractsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: contractsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a contracts.
+     */
+    data: XOR<contractsCreateInput, contractsUncheckedCreateInput>
+  }
+
+  /**
+   * contracts createMany
+   */
+  export type contractsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many contracts.
+     */
+    data: contractsCreateManyInput | contractsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * contracts createManyAndReturn
+   */
+  export type contractsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contracts
+     */
+    select?: contractsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the contracts
+     */
+    omit?: contractsOmit<ExtArgs> | null
+    /**
+     * The data used to create many contracts.
+     */
+    data: contractsCreateManyInput | contractsCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: contractsIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * contracts update
+   */
+  export type contractsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contracts
+     */
+    select?: contractsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the contracts
+     */
+    omit?: contractsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: contractsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a contracts.
+     */
+    data: XOR<contractsUpdateInput, contractsUncheckedUpdateInput>
+    /**
+     * Choose, which contracts to update.
+     */
+    where: contractsWhereUniqueInput
+  }
+
+  /**
+   * contracts updateMany
+   */
+  export type contractsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update contracts.
+     */
+    data: XOR<contractsUpdateManyMutationInput, contractsUncheckedUpdateManyInput>
+    /**
+     * Filter which contracts to update
+     */
+    where?: contractsWhereInput
+    /**
+     * Limit how many contracts to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * contracts updateManyAndReturn
+   */
+  export type contractsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contracts
+     */
+    select?: contractsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the contracts
+     */
+    omit?: contractsOmit<ExtArgs> | null
+    /**
+     * The data used to update contracts.
+     */
+    data: XOR<contractsUpdateManyMutationInput, contractsUncheckedUpdateManyInput>
+    /**
+     * Filter which contracts to update
+     */
+    where?: contractsWhereInput
+    /**
+     * Limit how many contracts to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: contractsIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * contracts upsert
+   */
+  export type contractsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contracts
+     */
+    select?: contractsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the contracts
+     */
+    omit?: contractsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: contractsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the contracts to update in case it exists.
+     */
+    where: contractsWhereUniqueInput
+    /**
+     * In case the contracts found by the `where` argument doesn't exist, create a new contracts with this data.
+     */
+    create: XOR<contractsCreateInput, contractsUncheckedCreateInput>
+    /**
+     * In case the contracts was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<contractsUpdateInput, contractsUncheckedUpdateInput>
+  }
+
+  /**
+   * contracts delete
+   */
+  export type contractsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contracts
+     */
+    select?: contractsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the contracts
+     */
+    omit?: contractsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: contractsInclude<ExtArgs> | null
+    /**
+     * Filter which contracts to delete.
+     */
+    where: contractsWhereUniqueInput
+  }
+
+  /**
+   * contracts deleteMany
+   */
+  export type contractsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which contracts to delete
+     */
+    where?: contractsWhereInput
+    /**
+     * Limit how many contracts to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * contracts without action
+   */
+  export type contractsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contracts
+     */
+    select?: contractsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the contracts
+     */
+    omit?: contractsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: contractsInclude<ExtArgs> | null
   }
 
 
@@ -13000,13 +15588,13 @@ export namespace Prisma {
 
   export type PaymentStatusMinAggregateOutputType = {
     id: number | null
-    status: string | null
+    status: $Enums.paymentStatusEnum | null
     paymentID: number | null
   }
 
   export type PaymentStatusMaxAggregateOutputType = {
     id: number | null
-    status: string | null
+    status: $Enums.paymentStatusEnum | null
     paymentID: number | null
   }
 
@@ -13135,7 +15723,7 @@ export namespace Prisma {
 
   export type PaymentStatusGroupByOutputType = {
     id: number
-    status: string
+    status: $Enums.paymentStatusEnum
     paymentID: number
     _count: PaymentStatusCountAggregateOutputType | null
     _avg: PaymentStatusAvgAggregateOutputType | null
@@ -13203,7 +15791,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      status: string
+      status: $Enums.paymentStatusEnum
       paymentID: number
     }, ExtArgs["result"]["paymentStatus"]>
     composites: {}
@@ -13630,7 +16218,7 @@ export namespace Prisma {
    */
   interface paymentStatusFieldRefs {
     readonly id: FieldRef<"paymentStatus", 'Int'>
-    readonly status: FieldRef<"paymentStatus", 'String'>
+    readonly status: FieldRef<"paymentStatus", 'paymentStatusEnum'>
     readonly paymentID: FieldRef<"paymentStatus", 'Int'>
   }
     
@@ -24226,6 +26814,7 @@ export namespace Prisma {
     machineryID: 'machineryID',
     role: 'role',
     userCode: 'userCode',
+    contractID: 'contractID',
     companyID: 'companyID'
   };
 
@@ -24279,6 +26868,28 @@ export namespace Prisma {
   };
 
   export type AdminScalarFieldEnum = (typeof AdminScalarFieldEnum)[keyof typeof AdminScalarFieldEnum]
+
+
+  export const UsersCompaniesScalarFieldEnum: {
+    id: 'id',
+    userID: 'userID',
+    companyID: 'companyID'
+  };
+
+  export type UsersCompaniesScalarFieldEnum = (typeof UsersCompaniesScalarFieldEnum)[keyof typeof UsersCompaniesScalarFieldEnum]
+
+
+  export const ContractsScalarFieldEnum: {
+    id: 'id',
+    userID: 'userID',
+    companyID: 'companyID',
+    contractType: 'contractType',
+    startDate: 'startDate',
+    endDate: 'endDate',
+    isActive: 'isActive'
+  };
+
+  export type ContractsScalarFieldEnum = (typeof ContractsScalarFieldEnum)[keyof typeof ContractsScalarFieldEnum]
 
 
   export const WorkersCompaniesScalarFieldEnum: {
@@ -24532,6 +27143,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'ContractType'
+   */
+  export type EnumContractTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ContractType'>
+    
+
+
+  /**
+   * Reference to a field of type 'ContractType[]'
+   */
+  export type ListEnumContractTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ContractType[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Decimal'
    */
   export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
@@ -24542,6 +27167,20 @@ export namespace Prisma {
    * Reference to a field of type 'Decimal[]'
    */
   export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'paymentStatusEnum'
+   */
+  export type EnumpaymentStatusEnumFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'paymentStatusEnum'>
+    
+
+
+  /**
+   * Reference to a field of type 'paymentStatusEnum[]'
+   */
+  export type ListEnumpaymentStatusEnumFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'paymentStatusEnum[]'>
     
 
 
@@ -24575,6 +27214,7 @@ export namespace Prisma {
     machineryID?: IntNullableFilter<"User"> | number | null
     role?: EnumRoleFilter<"User"> | $Enums.Role
     userCode?: StringNullableFilter<"User"> | string | null
+    contractID?: IntNullableFilter<"User"> | number | null
     companyID?: IntNullableFilter<"User"> | number | null
     incidents?: XOR<IncidentsNullableScalarRelationFilter, IncidentsWhereInput> | null
     directions?: DirectionsListRelationFilter
@@ -24584,7 +27224,9 @@ export namespace Prisma {
     Incidents?: IncidentsListRelationFilter
     Budget?: BudgetListRelationFilter
     Company?: XOR<CompanyNullableScalarRelationFilter, CompanyWhereInput> | null
+    contracts?: ContractsListRelationFilter
     machinery?: MachineryListRelationFilter
+    usersCompanies?: UsersCompaniesListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -24597,6 +27239,7 @@ export namespace Prisma {
     machineryID?: SortOrderInput | SortOrder
     role?: SortOrder
     userCode?: SortOrderInput | SortOrder
+    contractID?: SortOrderInput | SortOrder
     companyID?: SortOrderInput | SortOrder
     incidents?: IncidentsOrderByWithRelationInput
     directions?: DirectionsOrderByRelationAggregateInput
@@ -24606,7 +27249,9 @@ export namespace Prisma {
     Incidents?: IncidentsOrderByRelationAggregateInput
     Budget?: BudgetOrderByRelationAggregateInput
     Company?: CompanyOrderByWithRelationInput
+    contracts?: contractsOrderByRelationAggregateInput
     machinery?: machineryOrderByRelationAggregateInput
+    usersCompanies?: usersCompaniesOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -24622,6 +27267,7 @@ export namespace Prisma {
     machineryID?: IntNullableFilter<"User"> | number | null
     role?: EnumRoleFilter<"User"> | $Enums.Role
     userCode?: StringNullableFilter<"User"> | string | null
+    contractID?: IntNullableFilter<"User"> | number | null
     companyID?: IntNullableFilter<"User"> | number | null
     incidents?: XOR<IncidentsNullableScalarRelationFilter, IncidentsWhereInput> | null
     directions?: DirectionsListRelationFilter
@@ -24631,7 +27277,9 @@ export namespace Prisma {
     Incidents?: IncidentsListRelationFilter
     Budget?: BudgetListRelationFilter
     Company?: XOR<CompanyNullableScalarRelationFilter, CompanyWhereInput> | null
+    contracts?: ContractsListRelationFilter
     machinery?: MachineryListRelationFilter
+    usersCompanies?: UsersCompaniesListRelationFilter
   }, "userID" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -24644,6 +27292,7 @@ export namespace Prisma {
     machineryID?: SortOrderInput | SortOrder
     role?: SortOrder
     userCode?: SortOrderInput | SortOrder
+    contractID?: SortOrderInput | SortOrder
     companyID?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
     _avg?: UserAvgOrderByAggregateInput
@@ -24665,6 +27314,7 @@ export namespace Prisma {
     machineryID?: IntNullableWithAggregatesFilter<"User"> | number | null
     role?: EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
     userCode?: StringNullableWithAggregatesFilter<"User"> | string | null
+    contractID?: IntNullableWithAggregatesFilter<"User"> | number | null
     companyID?: IntNullableWithAggregatesFilter<"User"> | number | null
   }
 
@@ -24694,8 +27344,10 @@ export namespace Prisma {
     machinery?: MachineryListRelationFilter
     Budget?: BudgetListRelationFilter
     User?: UserListRelationFilter
+    contracts?: ContractsListRelationFilter
     admins?: AdminsCompaniesListRelationFilter
     workersCompanies?: WorkersCompaniesListRelationFilter
+    usersCompanies?: UsersCompaniesListRelationFilter
   }
 
   export type CompanyOrderByWithRelationInput = {
@@ -24721,8 +27373,10 @@ export namespace Prisma {
     machinery?: machineryOrderByRelationAggregateInput
     Budget?: BudgetOrderByRelationAggregateInput
     User?: UserOrderByRelationAggregateInput
+    contracts?: contractsOrderByRelationAggregateInput
     admins?: AdminsCompaniesOrderByRelationAggregateInput
     workersCompanies?: workersCompaniesOrderByRelationAggregateInput
+    usersCompanies?: usersCompaniesOrderByRelationAggregateInput
   }
 
   export type CompanyWhereUniqueInput = Prisma.AtLeast<{
@@ -24751,8 +27405,10 @@ export namespace Prisma {
     machinery?: MachineryListRelationFilter
     Budget?: BudgetListRelationFilter
     User?: UserListRelationFilter
+    contracts?: ContractsListRelationFilter
     admins?: AdminsCompaniesListRelationFilter
     workersCompanies?: WorkersCompaniesListRelationFilter
+    usersCompanies?: UsersCompaniesListRelationFilter
   }, "companyID" | "userID" | "email">
 
   export type CompanyOrderByWithAggregationInput = {
@@ -24974,6 +27630,128 @@ export namespace Prisma {
     email?: StringWithAggregatesFilter<"Admin"> | string
     password?: StringWithAggregatesFilter<"Admin"> | string
     role?: EnumRoleWithAggregatesFilter<"Admin"> | $Enums.Role
+  }
+
+  export type usersCompaniesWhereInput = {
+    AND?: usersCompaniesWhereInput | usersCompaniesWhereInput[]
+    OR?: usersCompaniesWhereInput[]
+    NOT?: usersCompaniesWhereInput | usersCompaniesWhereInput[]
+    id?: IntFilter<"usersCompanies"> | number
+    userID?: IntFilter<"usersCompanies"> | number
+    companyID?: IntFilter<"usersCompanies"> | number
+    User?: XOR<UserScalarRelationFilter, UserWhereInput>
+    Company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
+  }
+
+  export type usersCompaniesOrderByWithRelationInput = {
+    id?: SortOrder
+    userID?: SortOrder
+    companyID?: SortOrder
+    User?: UserOrderByWithRelationInput
+    Company?: CompanyOrderByWithRelationInput
+  }
+
+  export type usersCompaniesWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    userID_companyID?: usersCompaniesUserIDCompanyIDCompoundUniqueInput
+    AND?: usersCompaniesWhereInput | usersCompaniesWhereInput[]
+    OR?: usersCompaniesWhereInput[]
+    NOT?: usersCompaniesWhereInput | usersCompaniesWhereInput[]
+    userID?: IntFilter<"usersCompanies"> | number
+    companyID?: IntFilter<"usersCompanies"> | number
+    User?: XOR<UserScalarRelationFilter, UserWhereInput>
+    Company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
+  }, "id" | "userID_companyID">
+
+  export type usersCompaniesOrderByWithAggregationInput = {
+    id?: SortOrder
+    userID?: SortOrder
+    companyID?: SortOrder
+    _count?: usersCompaniesCountOrderByAggregateInput
+    _avg?: usersCompaniesAvgOrderByAggregateInput
+    _max?: usersCompaniesMaxOrderByAggregateInput
+    _min?: usersCompaniesMinOrderByAggregateInput
+    _sum?: usersCompaniesSumOrderByAggregateInput
+  }
+
+  export type usersCompaniesScalarWhereWithAggregatesInput = {
+    AND?: usersCompaniesScalarWhereWithAggregatesInput | usersCompaniesScalarWhereWithAggregatesInput[]
+    OR?: usersCompaniesScalarWhereWithAggregatesInput[]
+    NOT?: usersCompaniesScalarWhereWithAggregatesInput | usersCompaniesScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"usersCompanies"> | number
+    userID?: IntWithAggregatesFilter<"usersCompanies"> | number
+    companyID?: IntWithAggregatesFilter<"usersCompanies"> | number
+  }
+
+  export type contractsWhereInput = {
+    AND?: contractsWhereInput | contractsWhereInput[]
+    OR?: contractsWhereInput[]
+    NOT?: contractsWhereInput | contractsWhereInput[]
+    id?: IntFilter<"contracts"> | number
+    userID?: IntFilter<"contracts"> | number
+    companyID?: IntFilter<"contracts"> | number
+    contractType?: EnumContractTypeNullableFilter<"contracts"> | $Enums.ContractType | null
+    startDate?: DateTimeFilter<"contracts"> | Date | string
+    endDate?: DateTimeNullableFilter<"contracts"> | Date | string | null
+    isActive?: BoolFilter<"contracts"> | boolean
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
+  }
+
+  export type contractsOrderByWithRelationInput = {
+    id?: SortOrder
+    userID?: SortOrder
+    companyID?: SortOrder
+    contractType?: SortOrderInput | SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrderInput | SortOrder
+    isActive?: SortOrder
+    user?: UserOrderByWithRelationInput
+    company?: CompanyOrderByWithRelationInput
+  }
+
+  export type contractsWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    userID_companyID_contractType?: contractsUserIDCompanyIDContractTypeCompoundUniqueInput
+    AND?: contractsWhereInput | contractsWhereInput[]
+    OR?: contractsWhereInput[]
+    NOT?: contractsWhereInput | contractsWhereInput[]
+    userID?: IntFilter<"contracts"> | number
+    companyID?: IntFilter<"contracts"> | number
+    contractType?: EnumContractTypeNullableFilter<"contracts"> | $Enums.ContractType | null
+    startDate?: DateTimeFilter<"contracts"> | Date | string
+    endDate?: DateTimeNullableFilter<"contracts"> | Date | string | null
+    isActive?: BoolFilter<"contracts"> | boolean
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
+  }, "id" | "userID_companyID_contractType">
+
+  export type contractsOrderByWithAggregationInput = {
+    id?: SortOrder
+    userID?: SortOrder
+    companyID?: SortOrder
+    contractType?: SortOrderInput | SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrderInput | SortOrder
+    isActive?: SortOrder
+    _count?: contractsCountOrderByAggregateInput
+    _avg?: contractsAvgOrderByAggregateInput
+    _max?: contractsMaxOrderByAggregateInput
+    _min?: contractsMinOrderByAggregateInput
+    _sum?: contractsSumOrderByAggregateInput
+  }
+
+  export type contractsScalarWhereWithAggregatesInput = {
+    AND?: contractsScalarWhereWithAggregatesInput | contractsScalarWhereWithAggregatesInput[]
+    OR?: contractsScalarWhereWithAggregatesInput[]
+    NOT?: contractsScalarWhereWithAggregatesInput | contractsScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"contracts"> | number
+    userID?: IntWithAggregatesFilter<"contracts"> | number
+    companyID?: IntWithAggregatesFilter<"contracts"> | number
+    contractType?: EnumContractTypeNullableWithAggregatesFilter<"contracts"> | $Enums.ContractType | null
+    startDate?: DateTimeWithAggregatesFilter<"contracts"> | Date | string
+    endDate?: DateTimeNullableWithAggregatesFilter<"contracts"> | Date | string | null
+    isActive?: BoolWithAggregatesFilter<"contracts"> | boolean
   }
 
   export type workersCompaniesWhereInput = {
@@ -25231,7 +28009,7 @@ export namespace Prisma {
     OR?: paymentStatusWhereInput[]
     NOT?: paymentStatusWhereInput | paymentStatusWhereInput[]
     id?: IntFilter<"paymentStatus"> | number
-    status?: StringFilter<"paymentStatus"> | string
+    status?: EnumpaymentStatusEnumFilter<"paymentStatus"> | $Enums.paymentStatusEnum
     paymentID?: IntFilter<"paymentStatus"> | number
     payment?: XOR<PaymentsScalarRelationFilter, PaymentsWhereInput>
   }
@@ -25248,7 +28026,7 @@ export namespace Prisma {
     AND?: paymentStatusWhereInput | paymentStatusWhereInput[]
     OR?: paymentStatusWhereInput[]
     NOT?: paymentStatusWhereInput | paymentStatusWhereInput[]
-    status?: StringFilter<"paymentStatus"> | string
+    status?: EnumpaymentStatusEnumFilter<"paymentStatus"> | $Enums.paymentStatusEnum
     paymentID?: IntFilter<"paymentStatus"> | number
     payment?: XOR<PaymentsScalarRelationFilter, PaymentsWhereInput>
   }, "id">
@@ -25269,7 +28047,7 @@ export namespace Prisma {
     OR?: paymentStatusScalarWhereWithAggregatesInput[]
     NOT?: paymentStatusScalarWhereWithAggregatesInput | paymentStatusScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"paymentStatus"> | number
-    status?: StringWithAggregatesFilter<"paymentStatus"> | string
+    status?: EnumpaymentStatusEnumWithAggregatesFilter<"paymentStatus"> | $Enums.paymentStatusEnum
     paymentID?: IntWithAggregatesFilter<"paymentStatus"> | number
   }
 
@@ -25868,6 +28646,7 @@ export namespace Prisma {
     machineryID?: number | null
     role?: $Enums.Role
     userCode?: string | null
+    contractID?: number | null
     incidents?: IncidentsCreateNestedOneWithoutUsersInput
     directions?: DirectionsCreateNestedManyWithoutUserInput
     payments?: PaymentsCreateNestedOneWithoutUserInput
@@ -25876,7 +28655,9 @@ export namespace Prisma {
     Incidents?: IncidentsCreateNestedManyWithoutUserInput
     Budget?: BudgetCreateNestedManyWithoutUserInput
     Company?: CompanyCreateNestedOneWithoutUserInput
+    contracts?: contractsCreateNestedManyWithoutUserInput
     machinery?: machineryCreateNestedManyWithoutClientInput
+    usersCompanies?: usersCompaniesCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -25889,6 +28670,7 @@ export namespace Prisma {
     machineryID?: number | null
     role?: $Enums.Role
     userCode?: string | null
+    contractID?: number | null
     companyID?: number | null
     directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
@@ -25896,7 +28678,9 @@ export namespace Prisma {
     ClientMachinery?: ClientMachineryUncheckedCreateNestedManyWithoutUserInput
     Incidents?: IncidentsUncheckedCreateNestedManyWithoutUserInput
     Budget?: BudgetUncheckedCreateNestedManyWithoutUserInput
+    contracts?: contractsUncheckedCreateNestedManyWithoutUserInput
     machinery?: machineryUncheckedCreateNestedManyWithoutClientInput
+    usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -25907,6 +28691,7 @@ export namespace Prisma {
     machineryID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
+    contractID?: NullableIntFieldUpdateOperationsInput | number | null
     incidents?: IncidentsUpdateOneWithoutUsersNestedInput
     directions?: DirectionsUpdateManyWithoutUserNestedInput
     payments?: PaymentsUpdateOneWithoutUserNestedInput
@@ -25915,7 +28700,9 @@ export namespace Prisma {
     Incidents?: IncidentsUpdateManyWithoutUserNestedInput
     Budget?: BudgetUpdateManyWithoutUserNestedInput
     Company?: CompanyUpdateOneWithoutUserNestedInput
+    contracts?: contractsUpdateManyWithoutUserNestedInput
     machinery?: machineryUpdateManyWithoutClientNestedInput
+    usersCompanies?: usersCompaniesUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -25928,6 +28715,7 @@ export namespace Prisma {
     machineryID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
+    contractID?: NullableIntFieldUpdateOperationsInput | number | null
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
     directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
@@ -25935,7 +28723,9 @@ export namespace Prisma {
     ClientMachinery?: ClientMachineryUncheckedUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUncheckedUpdateManyWithoutUserNestedInput
     Budget?: BudgetUncheckedUpdateManyWithoutUserNestedInput
+    contracts?: contractsUncheckedUpdateManyWithoutUserNestedInput
     machinery?: machineryUncheckedUpdateManyWithoutClientNestedInput
+    usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -25948,6 +28738,7 @@ export namespace Prisma {
     machineryID?: number | null
     role?: $Enums.Role
     userCode?: string | null
+    contractID?: number | null
     companyID?: number | null
   }
 
@@ -25959,6 +28750,7 @@ export namespace Prisma {
     machineryID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
+    contractID?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -25971,6 +28763,7 @@ export namespace Prisma {
     machineryID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
+    contractID?: NullableIntFieldUpdateOperationsInput | number | null
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
@@ -25995,8 +28788,10 @@ export namespace Prisma {
     machinery?: machineryCreateNestedManyWithoutCompanyInput
     Budget?: BudgetCreateNestedManyWithoutCompanyInput
     User?: UserCreateNestedManyWithoutCompanyInput
+    contracts?: contractsCreateNestedManyWithoutCompanyInput
     admins?: AdminsCompaniesCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
+    usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateInput = {
@@ -26021,8 +28816,10 @@ export namespace Prisma {
     machinery?: machineryUncheckedCreateNestedManyWithoutCompanyInput
     Budget?: BudgetUncheckedCreateNestedManyWithoutCompanyInput
     User?: UserUncheckedCreateNestedManyWithoutCompanyInput
+    contracts?: contractsUncheckedCreateNestedManyWithoutCompanyInput
     admins?: AdminsCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
+    usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUpdateInput = {
@@ -26046,8 +28843,10 @@ export namespace Prisma {
     machinery?: machineryUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUpdateManyWithoutCompanyNestedInput
     User?: UserUpdateManyWithoutCompanyNestedInput
+    contracts?: contractsUpdateManyWithoutCompanyNestedInput
     admins?: AdminsCompaniesUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
+    usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateInput = {
@@ -26072,8 +28871,10 @@ export namespace Prisma {
     machinery?: machineryUncheckedUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUncheckedUpdateManyWithoutCompanyNestedInput
     User?: UserUncheckedUpdateManyWithoutCompanyNestedInput
+    contracts?: contractsUncheckedUpdateManyWithoutCompanyNestedInput
     admins?: AdminsCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
+    usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyCreateManyInput = {
@@ -26288,6 +29089,109 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  }
+
+  export type usersCompaniesCreateInput = {
+    User: UserCreateNestedOneWithoutUsersCompaniesInput
+    Company: CompanyCreateNestedOneWithoutUsersCompaniesInput
+  }
+
+  export type usersCompaniesUncheckedCreateInput = {
+    id?: number
+    userID: number
+    companyID: number
+  }
+
+  export type usersCompaniesUpdateInput = {
+    User?: UserUpdateOneRequiredWithoutUsersCompaniesNestedInput
+    Company?: CompanyUpdateOneRequiredWithoutUsersCompaniesNestedInput
+  }
+
+  export type usersCompaniesUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userID?: IntFieldUpdateOperationsInput | number
+    companyID?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type usersCompaniesCreateManyInput = {
+    id?: number
+    userID: number
+    companyID: number
+  }
+
+  export type usersCompaniesUpdateManyMutationInput = {
+
+  }
+
+  export type usersCompaniesUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userID?: IntFieldUpdateOperationsInput | number
+    companyID?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type contractsCreateInput = {
+    contractType?: $Enums.ContractType | null
+    startDate?: Date | string
+    endDate?: Date | string | null
+    isActive?: boolean
+    user: UserCreateNestedOneWithoutContractsInput
+    company: CompanyCreateNestedOneWithoutContractsInput
+  }
+
+  export type contractsUncheckedCreateInput = {
+    id?: number
+    userID: number
+    companyID: number
+    contractType?: $Enums.ContractType | null
+    startDate?: Date | string
+    endDate?: Date | string | null
+    isActive?: boolean
+  }
+
+  export type contractsUpdateInput = {
+    contractType?: NullableEnumContractTypeFieldUpdateOperationsInput | $Enums.ContractType | null
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    user?: UserUpdateOneRequiredWithoutContractsNestedInput
+    company?: CompanyUpdateOneRequiredWithoutContractsNestedInput
+  }
+
+  export type contractsUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userID?: IntFieldUpdateOperationsInput | number
+    companyID?: IntFieldUpdateOperationsInput | number
+    contractType?: NullableEnumContractTypeFieldUpdateOperationsInput | $Enums.ContractType | null
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type contractsCreateManyInput = {
+    id?: number
+    userID: number
+    companyID: number
+    contractType?: $Enums.ContractType | null
+    startDate?: Date | string
+    endDate?: Date | string | null
+    isActive?: boolean
+  }
+
+  export type contractsUpdateManyMutationInput = {
+    contractType?: NullableEnumContractTypeFieldUpdateOperationsInput | $Enums.ContractType | null
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type contractsUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userID?: IntFieldUpdateOperationsInput | number
+    companyID?: IntFieldUpdateOperationsInput | number
+    contractType?: NullableEnumContractTypeFieldUpdateOperationsInput | $Enums.ContractType | null
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type workersCompaniesCreateInput = {
@@ -26520,40 +29424,40 @@ export namespace Prisma {
   }
 
   export type paymentStatusCreateInput = {
-    status: string
+    status: $Enums.paymentStatusEnum
     payment: PaymentsCreateNestedOneWithoutPaymentStatusInput
   }
 
   export type paymentStatusUncheckedCreateInput = {
     id?: number
-    status: string
+    status: $Enums.paymentStatusEnum
     paymentID: number
   }
 
   export type paymentStatusUpdateInput = {
-    status?: StringFieldUpdateOperationsInput | string
+    status?: EnumpaymentStatusEnumFieldUpdateOperationsInput | $Enums.paymentStatusEnum
     payment?: PaymentsUpdateOneRequiredWithoutPaymentStatusNestedInput
   }
 
   export type paymentStatusUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    status?: StringFieldUpdateOperationsInput | string
+    status?: EnumpaymentStatusEnumFieldUpdateOperationsInput | $Enums.paymentStatusEnum
     paymentID?: IntFieldUpdateOperationsInput | number
   }
 
   export type paymentStatusCreateManyInput = {
     id?: number
-    status: string
+    status: $Enums.paymentStatusEnum
     paymentID: number
   }
 
   export type paymentStatusUpdateManyMutationInput = {
-    status?: StringFieldUpdateOperationsInput | string
+    status?: EnumpaymentStatusEnumFieldUpdateOperationsInput | $Enums.paymentStatusEnum
   }
 
   export type paymentStatusUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    status?: StringFieldUpdateOperationsInput | string
+    status?: EnumpaymentStatusEnumFieldUpdateOperationsInput | $Enums.paymentStatusEnum
     paymentID?: IntFieldUpdateOperationsInput | number
   }
 
@@ -27198,10 +30102,22 @@ export namespace Prisma {
     isNot?: CompanyWhereInput | null
   }
 
+  export type ContractsListRelationFilter = {
+    every?: contractsWhereInput
+    some?: contractsWhereInput
+    none?: contractsWhereInput
+  }
+
   export type MachineryListRelationFilter = {
     every?: machineryWhereInput
     some?: machineryWhereInput
     none?: machineryWhereInput
+  }
+
+  export type UsersCompaniesListRelationFilter = {
+    every?: usersCompaniesWhereInput
+    some?: usersCompaniesWhereInput
+    none?: usersCompaniesWhereInput
   }
 
   export type SortOrderInput = {
@@ -27229,7 +30145,15 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type contractsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type machineryOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type usersCompaniesOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -27243,6 +30167,7 @@ export namespace Prisma {
     machineryID?: SortOrder
     role?: SortOrder
     userCode?: SortOrder
+    contractID?: SortOrder
     companyID?: SortOrder
   }
 
@@ -27251,6 +30176,7 @@ export namespace Prisma {
     incidentsID?: SortOrder
     paymentsID?: SortOrder
     machineryID?: SortOrder
+    contractID?: SortOrder
     companyID?: SortOrder
   }
 
@@ -27264,6 +30190,7 @@ export namespace Prisma {
     machineryID?: SortOrder
     role?: SortOrder
     userCode?: SortOrder
+    contractID?: SortOrder
     companyID?: SortOrder
   }
 
@@ -27277,6 +30204,7 @@ export namespace Prisma {
     machineryID?: SortOrder
     role?: SortOrder
     userCode?: SortOrder
+    contractID?: SortOrder
     companyID?: SortOrder
   }
 
@@ -27285,6 +30213,7 @@ export namespace Prisma {
     incidentsID?: SortOrder
     paymentsID?: SortOrder
     machineryID?: SortOrder
+    contractID?: SortOrder
     companyID?: SortOrder
   }
 
@@ -27657,6 +30586,136 @@ export namespace Prisma {
     adminID?: SortOrder
   }
 
+  export type UserScalarRelationFilter = {
+    is?: UserWhereInput
+    isNot?: UserWhereInput
+  }
+
+  export type usersCompaniesUserIDCompanyIDCompoundUniqueInput = {
+    userID: number
+    companyID: number
+  }
+
+  export type usersCompaniesCountOrderByAggregateInput = {
+    id?: SortOrder
+    userID?: SortOrder
+    companyID?: SortOrder
+  }
+
+  export type usersCompaniesAvgOrderByAggregateInput = {
+    id?: SortOrder
+    userID?: SortOrder
+    companyID?: SortOrder
+  }
+
+  export type usersCompaniesMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userID?: SortOrder
+    companyID?: SortOrder
+  }
+
+  export type usersCompaniesMinOrderByAggregateInput = {
+    id?: SortOrder
+    userID?: SortOrder
+    companyID?: SortOrder
+  }
+
+  export type usersCompaniesSumOrderByAggregateInput = {
+    id?: SortOrder
+    userID?: SortOrder
+    companyID?: SortOrder
+  }
+
+  export type EnumContractTypeNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.ContractType | EnumContractTypeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.ContractType[] | ListEnumContractTypeFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.ContractType[] | ListEnumContractTypeFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumContractTypeNullableFilter<$PrismaModel> | $Enums.ContractType | null
+  }
+
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type contractsUserIDCompanyIDContractTypeCompoundUniqueInput = {
+    userID: number
+    companyID: number
+    contractType: $Enums.ContractType
+  }
+
+  export type contractsCountOrderByAggregateInput = {
+    id?: SortOrder
+    userID?: SortOrder
+    companyID?: SortOrder
+    contractType?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    isActive?: SortOrder
+  }
+
+  export type contractsAvgOrderByAggregateInput = {
+    id?: SortOrder
+    userID?: SortOrder
+    companyID?: SortOrder
+  }
+
+  export type contractsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userID?: SortOrder
+    companyID?: SortOrder
+    contractType?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    isActive?: SortOrder
+  }
+
+  export type contractsMinOrderByAggregateInput = {
+    id?: SortOrder
+    userID?: SortOrder
+    companyID?: SortOrder
+    contractType?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    isActive?: SortOrder
+  }
+
+  export type contractsSumOrderByAggregateInput = {
+    id?: SortOrder
+    userID?: SortOrder
+    companyID?: SortOrder
+  }
+
+  export type EnumContractTypeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ContractType | EnumContractTypeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.ContractType[] | ListEnumContractTypeFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.ContractType[] | ListEnumContractTypeFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumContractTypeNullableWithAggregatesFilter<$PrismaModel> | $Enums.ContractType | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumContractTypeNullableFilter<$PrismaModel>
+    _max?: NestedEnumContractTypeNullableFilter<$PrismaModel>
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
   export type WorkerScalarRelationFilter = {
     is?: WorkerWhereInput
     isNot?: WorkerWhereInput
@@ -27695,17 +30754,6 @@ export namespace Prisma {
     id?: SortOrder
     workerID?: SortOrder
     companyID?: SortOrder
-  }
-
-  export type DateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type BoolNullableFilter<$PrismaModel = never> = {
@@ -27789,20 +30837,6 @@ export namespace Prisma {
     workerID?: SortOrder
   }
 
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
   export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
     not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
@@ -27820,11 +30854,6 @@ export namespace Prisma {
     gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
-  }
-
-  export type UserScalarRelationFilter = {
-    is?: UserWhereInput
-    isNot?: UserWhereInput
   }
 
   export type PaymentStatusListRelationFilter = {
@@ -27904,6 +30933,13 @@ export namespace Prisma {
     _max?: NestedDecimalFilter<$PrismaModel>
   }
 
+  export type EnumpaymentStatusEnumFilter<$PrismaModel = never> = {
+    equals?: $Enums.paymentStatusEnum | EnumpaymentStatusEnumFieldRefInput<$PrismaModel>
+    in?: $Enums.paymentStatusEnum[] | ListEnumpaymentStatusEnumFieldRefInput<$PrismaModel>
+    notIn?: $Enums.paymentStatusEnum[] | ListEnumpaymentStatusEnumFieldRefInput<$PrismaModel>
+    not?: NestedEnumpaymentStatusEnumFilter<$PrismaModel> | $Enums.paymentStatusEnum
+  }
+
   export type PaymentsScalarRelationFilter = {
     is?: PaymentsWhereInput
     isNot?: PaymentsWhereInput
@@ -27935,6 +30971,16 @@ export namespace Prisma {
   export type paymentStatusSumOrderByAggregateInput = {
     id?: SortOrder
     paymentID?: SortOrder
+  }
+
+  export type EnumpaymentStatusEnumWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.paymentStatusEnum | EnumpaymentStatusEnumFieldRefInput<$PrismaModel>
+    in?: $Enums.paymentStatusEnum[] | ListEnumpaymentStatusEnumFieldRefInput<$PrismaModel>
+    notIn?: $Enums.paymentStatusEnum[] | ListEnumpaymentStatusEnumFieldRefInput<$PrismaModel>
+    not?: NestedEnumpaymentStatusEnumWithAggregatesFilter<$PrismaModel> | $Enums.paymentStatusEnum
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumpaymentStatusEnumFilter<$PrismaModel>
+    _max?: NestedEnumpaymentStatusEnumFilter<$PrismaModel>
   }
 
   export type CompanyListRelationFilter = {
@@ -28368,11 +31414,25 @@ export namespace Prisma {
     connect?: CompanyWhereUniqueInput
   }
 
+  export type contractsCreateNestedManyWithoutUserInput = {
+    create?: XOR<contractsCreateWithoutUserInput, contractsUncheckedCreateWithoutUserInput> | contractsCreateWithoutUserInput[] | contractsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: contractsCreateOrConnectWithoutUserInput | contractsCreateOrConnectWithoutUserInput[]
+    createMany?: contractsCreateManyUserInputEnvelope
+    connect?: contractsWhereUniqueInput | contractsWhereUniqueInput[]
+  }
+
   export type machineryCreateNestedManyWithoutClientInput = {
     create?: XOR<machineryCreateWithoutClientInput, machineryUncheckedCreateWithoutClientInput> | machineryCreateWithoutClientInput[] | machineryUncheckedCreateWithoutClientInput[]
     connectOrCreate?: machineryCreateOrConnectWithoutClientInput | machineryCreateOrConnectWithoutClientInput[]
     createMany?: machineryCreateManyClientInputEnvelope
     connect?: machineryWhereUniqueInput | machineryWhereUniqueInput[]
+  }
+
+  export type usersCompaniesCreateNestedManyWithoutUserInput = {
+    create?: XOR<usersCompaniesCreateWithoutUserInput, usersCompaniesUncheckedCreateWithoutUserInput> | usersCompaniesCreateWithoutUserInput[] | usersCompaniesUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: usersCompaniesCreateOrConnectWithoutUserInput | usersCompaniesCreateOrConnectWithoutUserInput[]
+    createMany?: usersCompaniesCreateManyUserInputEnvelope
+    connect?: usersCompaniesWhereUniqueInput | usersCompaniesWhereUniqueInput[]
   }
 
   export type DirectionsUncheckedCreateNestedManyWithoutUserInput = {
@@ -28416,11 +31476,25 @@ export namespace Prisma {
     connect?: BudgetWhereUniqueInput | BudgetWhereUniqueInput[]
   }
 
+  export type contractsUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<contractsCreateWithoutUserInput, contractsUncheckedCreateWithoutUserInput> | contractsCreateWithoutUserInput[] | contractsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: contractsCreateOrConnectWithoutUserInput | contractsCreateOrConnectWithoutUserInput[]
+    createMany?: contractsCreateManyUserInputEnvelope
+    connect?: contractsWhereUniqueInput | contractsWhereUniqueInput[]
+  }
+
   export type machineryUncheckedCreateNestedManyWithoutClientInput = {
     create?: XOR<machineryCreateWithoutClientInput, machineryUncheckedCreateWithoutClientInput> | machineryCreateWithoutClientInput[] | machineryUncheckedCreateWithoutClientInput[]
     connectOrCreate?: machineryCreateOrConnectWithoutClientInput | machineryCreateOrConnectWithoutClientInput[]
     createMany?: machineryCreateManyClientInputEnvelope
     connect?: machineryWhereUniqueInput | machineryWhereUniqueInput[]
+  }
+
+  export type usersCompaniesUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<usersCompaniesCreateWithoutUserInput, usersCompaniesUncheckedCreateWithoutUserInput> | usersCompaniesCreateWithoutUserInput[] | usersCompaniesUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: usersCompaniesCreateOrConnectWithoutUserInput | usersCompaniesCreateOrConnectWithoutUserInput[]
+    createMany?: usersCompaniesCreateManyUserInputEnvelope
+    connect?: usersCompaniesWhereUniqueInput | usersCompaniesWhereUniqueInput[]
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
@@ -28543,6 +31617,20 @@ export namespace Prisma {
     update?: XOR<XOR<CompanyUpdateToOneWithWhereWithoutUserInput, CompanyUpdateWithoutUserInput>, CompanyUncheckedUpdateWithoutUserInput>
   }
 
+  export type contractsUpdateManyWithoutUserNestedInput = {
+    create?: XOR<contractsCreateWithoutUserInput, contractsUncheckedCreateWithoutUserInput> | contractsCreateWithoutUserInput[] | contractsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: contractsCreateOrConnectWithoutUserInput | contractsCreateOrConnectWithoutUserInput[]
+    upsert?: contractsUpsertWithWhereUniqueWithoutUserInput | contractsUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: contractsCreateManyUserInputEnvelope
+    set?: contractsWhereUniqueInput | contractsWhereUniqueInput[]
+    disconnect?: contractsWhereUniqueInput | contractsWhereUniqueInput[]
+    delete?: contractsWhereUniqueInput | contractsWhereUniqueInput[]
+    connect?: contractsWhereUniqueInput | contractsWhereUniqueInput[]
+    update?: contractsUpdateWithWhereUniqueWithoutUserInput | contractsUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: contractsUpdateManyWithWhereWithoutUserInput | contractsUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: contractsScalarWhereInput | contractsScalarWhereInput[]
+  }
+
   export type machineryUpdateManyWithoutClientNestedInput = {
     create?: XOR<machineryCreateWithoutClientInput, machineryUncheckedCreateWithoutClientInput> | machineryCreateWithoutClientInput[] | machineryUncheckedCreateWithoutClientInput[]
     connectOrCreate?: machineryCreateOrConnectWithoutClientInput | machineryCreateOrConnectWithoutClientInput[]
@@ -28555,6 +31643,20 @@ export namespace Prisma {
     update?: machineryUpdateWithWhereUniqueWithoutClientInput | machineryUpdateWithWhereUniqueWithoutClientInput[]
     updateMany?: machineryUpdateManyWithWhereWithoutClientInput | machineryUpdateManyWithWhereWithoutClientInput[]
     deleteMany?: machineryScalarWhereInput | machineryScalarWhereInput[]
+  }
+
+  export type usersCompaniesUpdateManyWithoutUserNestedInput = {
+    create?: XOR<usersCompaniesCreateWithoutUserInput, usersCompaniesUncheckedCreateWithoutUserInput> | usersCompaniesCreateWithoutUserInput[] | usersCompaniesUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: usersCompaniesCreateOrConnectWithoutUserInput | usersCompaniesCreateOrConnectWithoutUserInput[]
+    upsert?: usersCompaniesUpsertWithWhereUniqueWithoutUserInput | usersCompaniesUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: usersCompaniesCreateManyUserInputEnvelope
+    set?: usersCompaniesWhereUniqueInput | usersCompaniesWhereUniqueInput[]
+    disconnect?: usersCompaniesWhereUniqueInput | usersCompaniesWhereUniqueInput[]
+    delete?: usersCompaniesWhereUniqueInput | usersCompaniesWhereUniqueInput[]
+    connect?: usersCompaniesWhereUniqueInput | usersCompaniesWhereUniqueInput[]
+    update?: usersCompaniesUpdateWithWhereUniqueWithoutUserInput | usersCompaniesUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: usersCompaniesUpdateManyWithWhereWithoutUserInput | usersCompaniesUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: usersCompaniesScalarWhereInput | usersCompaniesScalarWhereInput[]
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -28645,6 +31747,20 @@ export namespace Prisma {
     deleteMany?: BudgetScalarWhereInput | BudgetScalarWhereInput[]
   }
 
+  export type contractsUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<contractsCreateWithoutUserInput, contractsUncheckedCreateWithoutUserInput> | contractsCreateWithoutUserInput[] | contractsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: contractsCreateOrConnectWithoutUserInput | contractsCreateOrConnectWithoutUserInput[]
+    upsert?: contractsUpsertWithWhereUniqueWithoutUserInput | contractsUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: contractsCreateManyUserInputEnvelope
+    set?: contractsWhereUniqueInput | contractsWhereUniqueInput[]
+    disconnect?: contractsWhereUniqueInput | contractsWhereUniqueInput[]
+    delete?: contractsWhereUniqueInput | contractsWhereUniqueInput[]
+    connect?: contractsWhereUniqueInput | contractsWhereUniqueInput[]
+    update?: contractsUpdateWithWhereUniqueWithoutUserInput | contractsUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: contractsUpdateManyWithWhereWithoutUserInput | contractsUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: contractsScalarWhereInput | contractsScalarWhereInput[]
+  }
+
   export type machineryUncheckedUpdateManyWithoutClientNestedInput = {
     create?: XOR<machineryCreateWithoutClientInput, machineryUncheckedCreateWithoutClientInput> | machineryCreateWithoutClientInput[] | machineryUncheckedCreateWithoutClientInput[]
     connectOrCreate?: machineryCreateOrConnectWithoutClientInput | machineryCreateOrConnectWithoutClientInput[]
@@ -28657,6 +31773,20 @@ export namespace Prisma {
     update?: machineryUpdateWithWhereUniqueWithoutClientInput | machineryUpdateWithWhereUniqueWithoutClientInput[]
     updateMany?: machineryUpdateManyWithWhereWithoutClientInput | machineryUpdateManyWithWhereWithoutClientInput[]
     deleteMany?: machineryScalarWhereInput | machineryScalarWhereInput[]
+  }
+
+  export type usersCompaniesUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<usersCompaniesCreateWithoutUserInput, usersCompaniesUncheckedCreateWithoutUserInput> | usersCompaniesCreateWithoutUserInput[] | usersCompaniesUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: usersCompaniesCreateOrConnectWithoutUserInput | usersCompaniesCreateOrConnectWithoutUserInput[]
+    upsert?: usersCompaniesUpsertWithWhereUniqueWithoutUserInput | usersCompaniesUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: usersCompaniesCreateManyUserInputEnvelope
+    set?: usersCompaniesWhereUniqueInput | usersCompaniesWhereUniqueInput[]
+    disconnect?: usersCompaniesWhereUniqueInput | usersCompaniesWhereUniqueInput[]
+    delete?: usersCompaniesWhereUniqueInput | usersCompaniesWhereUniqueInput[]
+    connect?: usersCompaniesWhereUniqueInput | usersCompaniesWhereUniqueInput[]
+    update?: usersCompaniesUpdateWithWhereUniqueWithoutUserInput | usersCompaniesUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: usersCompaniesUpdateManyWithWhereWithoutUserInput | usersCompaniesUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: usersCompaniesScalarWhereInput | usersCompaniesScalarWhereInput[]
   }
 
   export type WorkerCreateNestedManyWithoutCompanyInput = {
@@ -28735,6 +31865,13 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
   }
 
+  export type contractsCreateNestedManyWithoutCompanyInput = {
+    create?: XOR<contractsCreateWithoutCompanyInput, contractsUncheckedCreateWithoutCompanyInput> | contractsCreateWithoutCompanyInput[] | contractsUncheckedCreateWithoutCompanyInput[]
+    connectOrCreate?: contractsCreateOrConnectWithoutCompanyInput | contractsCreateOrConnectWithoutCompanyInput[]
+    createMany?: contractsCreateManyCompanyInputEnvelope
+    connect?: contractsWhereUniqueInput | contractsWhereUniqueInput[]
+  }
+
   export type AdminsCompaniesCreateNestedManyWithoutCompanyInput = {
     create?: XOR<AdminsCompaniesCreateWithoutCompanyInput, AdminsCompaniesUncheckedCreateWithoutCompanyInput> | AdminsCompaniesCreateWithoutCompanyInput[] | AdminsCompaniesUncheckedCreateWithoutCompanyInput[]
     connectOrCreate?: AdminsCompaniesCreateOrConnectWithoutCompanyInput | AdminsCompaniesCreateOrConnectWithoutCompanyInput[]
@@ -28747,6 +31884,13 @@ export namespace Prisma {
     connectOrCreate?: workersCompaniesCreateOrConnectWithoutCompanyInput | workersCompaniesCreateOrConnectWithoutCompanyInput[]
     createMany?: workersCompaniesCreateManyCompanyInputEnvelope
     connect?: workersCompaniesWhereUniqueInput | workersCompaniesWhereUniqueInput[]
+  }
+
+  export type usersCompaniesCreateNestedManyWithoutCompanyInput = {
+    create?: XOR<usersCompaniesCreateWithoutCompanyInput, usersCompaniesUncheckedCreateWithoutCompanyInput> | usersCompaniesCreateWithoutCompanyInput[] | usersCompaniesUncheckedCreateWithoutCompanyInput[]
+    connectOrCreate?: usersCompaniesCreateOrConnectWithoutCompanyInput | usersCompaniesCreateOrConnectWithoutCompanyInput[]
+    createMany?: usersCompaniesCreateManyCompanyInputEnvelope
+    connect?: usersCompaniesWhereUniqueInput | usersCompaniesWhereUniqueInput[]
   }
 
   export type WorkerUncheckedCreateNestedManyWithoutCompanyInput = {
@@ -28819,6 +31963,13 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
   }
 
+  export type contractsUncheckedCreateNestedManyWithoutCompanyInput = {
+    create?: XOR<contractsCreateWithoutCompanyInput, contractsUncheckedCreateWithoutCompanyInput> | contractsCreateWithoutCompanyInput[] | contractsUncheckedCreateWithoutCompanyInput[]
+    connectOrCreate?: contractsCreateOrConnectWithoutCompanyInput | contractsCreateOrConnectWithoutCompanyInput[]
+    createMany?: contractsCreateManyCompanyInputEnvelope
+    connect?: contractsWhereUniqueInput | contractsWhereUniqueInput[]
+  }
+
   export type AdminsCompaniesUncheckedCreateNestedManyWithoutCompanyInput = {
     create?: XOR<AdminsCompaniesCreateWithoutCompanyInput, AdminsCompaniesUncheckedCreateWithoutCompanyInput> | AdminsCompaniesCreateWithoutCompanyInput[] | AdminsCompaniesUncheckedCreateWithoutCompanyInput[]
     connectOrCreate?: AdminsCompaniesCreateOrConnectWithoutCompanyInput | AdminsCompaniesCreateOrConnectWithoutCompanyInput[]
@@ -28831,6 +31982,13 @@ export namespace Prisma {
     connectOrCreate?: workersCompaniesCreateOrConnectWithoutCompanyInput | workersCompaniesCreateOrConnectWithoutCompanyInput[]
     createMany?: workersCompaniesCreateManyCompanyInputEnvelope
     connect?: workersCompaniesWhereUniqueInput | workersCompaniesWhereUniqueInput[]
+  }
+
+  export type usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput = {
+    create?: XOR<usersCompaniesCreateWithoutCompanyInput, usersCompaniesUncheckedCreateWithoutCompanyInput> | usersCompaniesCreateWithoutCompanyInput[] | usersCompaniesUncheckedCreateWithoutCompanyInput[]
+    connectOrCreate?: usersCompaniesCreateOrConnectWithoutCompanyInput | usersCompaniesCreateOrConnectWithoutCompanyInput[]
+    createMany?: usersCompaniesCreateManyCompanyInputEnvelope
+    connect?: usersCompaniesWhereUniqueInput | usersCompaniesWhereUniqueInput[]
   }
 
   export type BoolFieldUpdateOperationsInput = {
@@ -28991,6 +32149,20 @@ export namespace Prisma {
     deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
   }
 
+  export type contractsUpdateManyWithoutCompanyNestedInput = {
+    create?: XOR<contractsCreateWithoutCompanyInput, contractsUncheckedCreateWithoutCompanyInput> | contractsCreateWithoutCompanyInput[] | contractsUncheckedCreateWithoutCompanyInput[]
+    connectOrCreate?: contractsCreateOrConnectWithoutCompanyInput | contractsCreateOrConnectWithoutCompanyInput[]
+    upsert?: contractsUpsertWithWhereUniqueWithoutCompanyInput | contractsUpsertWithWhereUniqueWithoutCompanyInput[]
+    createMany?: contractsCreateManyCompanyInputEnvelope
+    set?: contractsWhereUniqueInput | contractsWhereUniqueInput[]
+    disconnect?: contractsWhereUniqueInput | contractsWhereUniqueInput[]
+    delete?: contractsWhereUniqueInput | contractsWhereUniqueInput[]
+    connect?: contractsWhereUniqueInput | contractsWhereUniqueInput[]
+    update?: contractsUpdateWithWhereUniqueWithoutCompanyInput | contractsUpdateWithWhereUniqueWithoutCompanyInput[]
+    updateMany?: contractsUpdateManyWithWhereWithoutCompanyInput | contractsUpdateManyWithWhereWithoutCompanyInput[]
+    deleteMany?: contractsScalarWhereInput | contractsScalarWhereInput[]
+  }
+
   export type AdminsCompaniesUpdateManyWithoutCompanyNestedInput = {
     create?: XOR<AdminsCompaniesCreateWithoutCompanyInput, AdminsCompaniesUncheckedCreateWithoutCompanyInput> | AdminsCompaniesCreateWithoutCompanyInput[] | AdminsCompaniesUncheckedCreateWithoutCompanyInput[]
     connectOrCreate?: AdminsCompaniesCreateOrConnectWithoutCompanyInput | AdminsCompaniesCreateOrConnectWithoutCompanyInput[]
@@ -29017,6 +32189,20 @@ export namespace Prisma {
     update?: workersCompaniesUpdateWithWhereUniqueWithoutCompanyInput | workersCompaniesUpdateWithWhereUniqueWithoutCompanyInput[]
     updateMany?: workersCompaniesUpdateManyWithWhereWithoutCompanyInput | workersCompaniesUpdateManyWithWhereWithoutCompanyInput[]
     deleteMany?: workersCompaniesScalarWhereInput | workersCompaniesScalarWhereInput[]
+  }
+
+  export type usersCompaniesUpdateManyWithoutCompanyNestedInput = {
+    create?: XOR<usersCompaniesCreateWithoutCompanyInput, usersCompaniesUncheckedCreateWithoutCompanyInput> | usersCompaniesCreateWithoutCompanyInput[] | usersCompaniesUncheckedCreateWithoutCompanyInput[]
+    connectOrCreate?: usersCompaniesCreateOrConnectWithoutCompanyInput | usersCompaniesCreateOrConnectWithoutCompanyInput[]
+    upsert?: usersCompaniesUpsertWithWhereUniqueWithoutCompanyInput | usersCompaniesUpsertWithWhereUniqueWithoutCompanyInput[]
+    createMany?: usersCompaniesCreateManyCompanyInputEnvelope
+    set?: usersCompaniesWhereUniqueInput | usersCompaniesWhereUniqueInput[]
+    disconnect?: usersCompaniesWhereUniqueInput | usersCompaniesWhereUniqueInput[]
+    delete?: usersCompaniesWhereUniqueInput | usersCompaniesWhereUniqueInput[]
+    connect?: usersCompaniesWhereUniqueInput | usersCompaniesWhereUniqueInput[]
+    update?: usersCompaniesUpdateWithWhereUniqueWithoutCompanyInput | usersCompaniesUpdateWithWhereUniqueWithoutCompanyInput[]
+    updateMany?: usersCompaniesUpdateManyWithWhereWithoutCompanyInput | usersCompaniesUpdateManyWithWhereWithoutCompanyInput[]
+    deleteMany?: usersCompaniesScalarWhereInput | usersCompaniesScalarWhereInput[]
   }
 
   export type WorkerUncheckedUpdateManyWithoutCompanyNestedInput = {
@@ -29159,6 +32345,20 @@ export namespace Prisma {
     deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
   }
 
+  export type contractsUncheckedUpdateManyWithoutCompanyNestedInput = {
+    create?: XOR<contractsCreateWithoutCompanyInput, contractsUncheckedCreateWithoutCompanyInput> | contractsCreateWithoutCompanyInput[] | contractsUncheckedCreateWithoutCompanyInput[]
+    connectOrCreate?: contractsCreateOrConnectWithoutCompanyInput | contractsCreateOrConnectWithoutCompanyInput[]
+    upsert?: contractsUpsertWithWhereUniqueWithoutCompanyInput | contractsUpsertWithWhereUniqueWithoutCompanyInput[]
+    createMany?: contractsCreateManyCompanyInputEnvelope
+    set?: contractsWhereUniqueInput | contractsWhereUniqueInput[]
+    disconnect?: contractsWhereUniqueInput | contractsWhereUniqueInput[]
+    delete?: contractsWhereUniqueInput | contractsWhereUniqueInput[]
+    connect?: contractsWhereUniqueInput | contractsWhereUniqueInput[]
+    update?: contractsUpdateWithWhereUniqueWithoutCompanyInput | contractsUpdateWithWhereUniqueWithoutCompanyInput[]
+    updateMany?: contractsUpdateManyWithWhereWithoutCompanyInput | contractsUpdateManyWithWhereWithoutCompanyInput[]
+    deleteMany?: contractsScalarWhereInput | contractsScalarWhereInput[]
+  }
+
   export type AdminsCompaniesUncheckedUpdateManyWithoutCompanyNestedInput = {
     create?: XOR<AdminsCompaniesCreateWithoutCompanyInput, AdminsCompaniesUncheckedCreateWithoutCompanyInput> | AdminsCompaniesCreateWithoutCompanyInput[] | AdminsCompaniesUncheckedCreateWithoutCompanyInput[]
     connectOrCreate?: AdminsCompaniesCreateOrConnectWithoutCompanyInput | AdminsCompaniesCreateOrConnectWithoutCompanyInput[]
@@ -29185,6 +32385,20 @@ export namespace Prisma {
     update?: workersCompaniesUpdateWithWhereUniqueWithoutCompanyInput | workersCompaniesUpdateWithWhereUniqueWithoutCompanyInput[]
     updateMany?: workersCompaniesUpdateManyWithWhereWithoutCompanyInput | workersCompaniesUpdateManyWithWhereWithoutCompanyInput[]
     deleteMany?: workersCompaniesScalarWhereInput | workersCompaniesScalarWhereInput[]
+  }
+
+  export type usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput = {
+    create?: XOR<usersCompaniesCreateWithoutCompanyInput, usersCompaniesUncheckedCreateWithoutCompanyInput> | usersCompaniesCreateWithoutCompanyInput[] | usersCompaniesUncheckedCreateWithoutCompanyInput[]
+    connectOrCreate?: usersCompaniesCreateOrConnectWithoutCompanyInput | usersCompaniesCreateOrConnectWithoutCompanyInput[]
+    upsert?: usersCompaniesUpsertWithWhereUniqueWithoutCompanyInput | usersCompaniesUpsertWithWhereUniqueWithoutCompanyInput[]
+    createMany?: usersCompaniesCreateManyCompanyInputEnvelope
+    set?: usersCompaniesWhereUniqueInput | usersCompaniesWhereUniqueInput[]
+    disconnect?: usersCompaniesWhereUniqueInput | usersCompaniesWhereUniqueInput[]
+    delete?: usersCompaniesWhereUniqueInput | usersCompaniesWhereUniqueInput[]
+    connect?: usersCompaniesWhereUniqueInput | usersCompaniesWhereUniqueInput[]
+    update?: usersCompaniesUpdateWithWhereUniqueWithoutCompanyInput | usersCompaniesUpdateWithWhereUniqueWithoutCompanyInput[]
+    updateMany?: usersCompaniesUpdateManyWithWhereWithoutCompanyInput | usersCompaniesUpdateManyWithWhereWithoutCompanyInput[]
+    deleteMany?: usersCompaniesScalarWhereInput | usersCompaniesScalarWhereInput[]
   }
 
   export type AdminCreateNestedOneWithoutCompaniesInput = {
@@ -29481,6 +32695,70 @@ export namespace Prisma {
     deleteMany?: AdminsCompaniesScalarWhereInput | AdminsCompaniesScalarWhereInput[]
   }
 
+  export type UserCreateNestedOneWithoutUsersCompaniesInput = {
+    create?: XOR<UserCreateWithoutUsersCompaniesInput, UserUncheckedCreateWithoutUsersCompaniesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUsersCompaniesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type CompanyCreateNestedOneWithoutUsersCompaniesInput = {
+    create?: XOR<CompanyCreateWithoutUsersCompaniesInput, CompanyUncheckedCreateWithoutUsersCompaniesInput>
+    connectOrCreate?: CompanyCreateOrConnectWithoutUsersCompaniesInput
+    connect?: CompanyWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutUsersCompaniesNestedInput = {
+    create?: XOR<UserCreateWithoutUsersCompaniesInput, UserUncheckedCreateWithoutUsersCompaniesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUsersCompaniesInput
+    upsert?: UserUpsertWithoutUsersCompaniesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutUsersCompaniesInput, UserUpdateWithoutUsersCompaniesInput>, UserUncheckedUpdateWithoutUsersCompaniesInput>
+  }
+
+  export type CompanyUpdateOneRequiredWithoutUsersCompaniesNestedInput = {
+    create?: XOR<CompanyCreateWithoutUsersCompaniesInput, CompanyUncheckedCreateWithoutUsersCompaniesInput>
+    connectOrCreate?: CompanyCreateOrConnectWithoutUsersCompaniesInput
+    upsert?: CompanyUpsertWithoutUsersCompaniesInput
+    connect?: CompanyWhereUniqueInput
+    update?: XOR<XOR<CompanyUpdateToOneWithWhereWithoutUsersCompaniesInput, CompanyUpdateWithoutUsersCompaniesInput>, CompanyUncheckedUpdateWithoutUsersCompaniesInput>
+  }
+
+  export type UserCreateNestedOneWithoutContractsInput = {
+    create?: XOR<UserCreateWithoutContractsInput, UserUncheckedCreateWithoutContractsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutContractsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type CompanyCreateNestedOneWithoutContractsInput = {
+    create?: XOR<CompanyCreateWithoutContractsInput, CompanyUncheckedCreateWithoutContractsInput>
+    connectOrCreate?: CompanyCreateOrConnectWithoutContractsInput
+    connect?: CompanyWhereUniqueInput
+  }
+
+  export type NullableEnumContractTypeFieldUpdateOperationsInput = {
+    set?: $Enums.ContractType | null
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
+  export type UserUpdateOneRequiredWithoutContractsNestedInput = {
+    create?: XOR<UserCreateWithoutContractsInput, UserUncheckedCreateWithoutContractsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutContractsInput
+    upsert?: UserUpsertWithoutContractsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutContractsInput, UserUpdateWithoutContractsInput>, UserUncheckedUpdateWithoutContractsInput>
+  }
+
+  export type CompanyUpdateOneRequiredWithoutContractsNestedInput = {
+    create?: XOR<CompanyCreateWithoutContractsInput, CompanyUncheckedCreateWithoutContractsInput>
+    connectOrCreate?: CompanyCreateOrConnectWithoutContractsInput
+    upsert?: CompanyUpsertWithoutContractsInput
+    connect?: CompanyWhereUniqueInput
+    update?: XOR<XOR<CompanyUpdateToOneWithWhereWithoutContractsInput, CompanyUpdateWithoutContractsInput>, CompanyUncheckedUpdateWithoutContractsInput>
+  }
+
   export type WorkerCreateNestedOneWithoutWorkersCompaniesInput = {
     create?: XOR<WorkerCreateWithoutWorkersCompaniesInput, WorkerUncheckedCreateWithoutWorkersCompaniesInput>
     connectOrCreate?: WorkerCreateOrConnectWithoutWorkersCompaniesInput
@@ -29573,10 +32851,6 @@ export namespace Prisma {
     connectOrCreate?: PaymentsCreateOrConnectWithoutIncidentInput | PaymentsCreateOrConnectWithoutIncidentInput[]
     createMany?: PaymentsCreateManyIncidentInputEnvelope
     connect?: PaymentsWhereUniqueInput | PaymentsWhereUniqueInput[]
-  }
-
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
   }
 
   export type NullableBoolFieldUpdateOperationsInput = {
@@ -29817,6 +33091,10 @@ export namespace Prisma {
     create?: XOR<PaymentsCreateWithoutPaymentStatusInput, PaymentsUncheckedCreateWithoutPaymentStatusInput>
     connectOrCreate?: PaymentsCreateOrConnectWithoutPaymentStatusInput
     connect?: PaymentsWhereUniqueInput
+  }
+
+  export type EnumpaymentStatusEnumFieldUpdateOperationsInput = {
+    set?: $Enums.paymentStatusEnum
   }
 
   export type PaymentsUpdateOneRequiredWithoutPaymentStatusNestedInput = {
@@ -30406,6 +33684,13 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type NestedEnumContractTypeNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.ContractType | EnumContractTypeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.ContractType[] | ListEnumContractTypeFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.ContractType[] | ListEnumContractTypeFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumContractTypeNullableFilter<$PrismaModel> | $Enums.ContractType | null
+  }
+
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -30417,9 +33702,14 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type NestedBoolNullableFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
-    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  export type NestedEnumContractTypeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ContractType | EnumContractTypeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.ContractType[] | ListEnumContractTypeFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.ContractType[] | ListEnumContractTypeFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumContractTypeNullableWithAggregatesFilter<$PrismaModel> | $Enums.ContractType | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumContractTypeNullableFilter<$PrismaModel>
+    _max?: NestedEnumContractTypeNullableFilter<$PrismaModel>
   }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -30434,6 +33724,11 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedBoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
   }
 
   export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -30469,6 +33764,23 @@ export namespace Prisma {
     _sum?: NestedDecimalFilter<$PrismaModel>
     _min?: NestedDecimalFilter<$PrismaModel>
     _max?: NestedDecimalFilter<$PrismaModel>
+  }
+
+  export type NestedEnumpaymentStatusEnumFilter<$PrismaModel = never> = {
+    equals?: $Enums.paymentStatusEnum | EnumpaymentStatusEnumFieldRefInput<$PrismaModel>
+    in?: $Enums.paymentStatusEnum[] | ListEnumpaymentStatusEnumFieldRefInput<$PrismaModel>
+    notIn?: $Enums.paymentStatusEnum[] | ListEnumpaymentStatusEnumFieldRefInput<$PrismaModel>
+    not?: NestedEnumpaymentStatusEnumFilter<$PrismaModel> | $Enums.paymentStatusEnum
+  }
+
+  export type NestedEnumpaymentStatusEnumWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.paymentStatusEnum | EnumpaymentStatusEnumFieldRefInput<$PrismaModel>
+    in?: $Enums.paymentStatusEnum[] | ListEnumpaymentStatusEnumFieldRefInput<$PrismaModel>
+    notIn?: $Enums.paymentStatusEnum[] | ListEnumpaymentStatusEnumFieldRefInput<$PrismaModel>
+    not?: NestedEnumpaymentStatusEnumWithAggregatesFilter<$PrismaModel> | $Enums.paymentStatusEnum
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumpaymentStatusEnumFilter<$PrismaModel>
+    _max?: NestedEnumpaymentStatusEnumFilter<$PrismaModel>
   }
 
   export type IncidentsCreateWithoutUsersInput = {
@@ -30705,8 +34017,10 @@ export namespace Prisma {
     payments?: PaymentsCreateNestedManyWithoutCompanyInput
     machinery?: machineryCreateNestedManyWithoutCompanyInput
     Budget?: BudgetCreateNestedManyWithoutCompanyInput
+    contracts?: contractsCreateNestedManyWithoutCompanyInput
     admins?: AdminsCompaniesCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
+    usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutUserInput = {
@@ -30730,13 +34044,42 @@ export namespace Prisma {
     payments?: PaymentsUncheckedCreateNestedManyWithoutCompanyInput
     machinery?: machineryUncheckedCreateNestedManyWithoutCompanyInput
     Budget?: BudgetUncheckedCreateNestedManyWithoutCompanyInput
+    contracts?: contractsUncheckedCreateNestedManyWithoutCompanyInput
     admins?: AdminsCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
+    usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutUserInput = {
     where: CompanyWhereUniqueInput
     create: XOR<CompanyCreateWithoutUserInput, CompanyUncheckedCreateWithoutUserInput>
+  }
+
+  export type contractsCreateWithoutUserInput = {
+    contractType?: $Enums.ContractType | null
+    startDate?: Date | string
+    endDate?: Date | string | null
+    isActive?: boolean
+    company: CompanyCreateNestedOneWithoutContractsInput
+  }
+
+  export type contractsUncheckedCreateWithoutUserInput = {
+    id?: number
+    companyID: number
+    contractType?: $Enums.ContractType | null
+    startDate?: Date | string
+    endDate?: Date | string | null
+    isActive?: boolean
+  }
+
+  export type contractsCreateOrConnectWithoutUserInput = {
+    where: contractsWhereUniqueInput
+    create: XOR<contractsCreateWithoutUserInput, contractsUncheckedCreateWithoutUserInput>
+  }
+
+  export type contractsCreateManyUserInputEnvelope = {
+    data: contractsCreateManyUserInput | contractsCreateManyUserInput[]
+    skipDuplicates?: boolean
   }
 
   export type machineryCreateWithoutClientInput = {
@@ -30773,6 +34116,25 @@ export namespace Prisma {
 
   export type machineryCreateManyClientInputEnvelope = {
     data: machineryCreateManyClientInput | machineryCreateManyClientInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type usersCompaniesCreateWithoutUserInput = {
+    Company: CompanyCreateNestedOneWithoutUsersCompaniesInput
+  }
+
+  export type usersCompaniesUncheckedCreateWithoutUserInput = {
+    id?: number
+    companyID: number
+  }
+
+  export type usersCompaniesCreateOrConnectWithoutUserInput = {
+    where: usersCompaniesWhereUniqueInput
+    create: XOR<usersCompaniesCreateWithoutUserInput, usersCompaniesUncheckedCreateWithoutUserInput>
+  }
+
+  export type usersCompaniesCreateManyUserInputEnvelope = {
+    data: usersCompaniesCreateManyUserInput | usersCompaniesCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -31031,8 +34393,10 @@ export namespace Prisma {
     payments?: PaymentsUpdateManyWithoutCompanyNestedInput
     machinery?: machineryUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUpdateManyWithoutCompanyNestedInput
+    contracts?: contractsUpdateManyWithoutCompanyNestedInput
     admins?: AdminsCompaniesUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
+    usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutUserInput = {
@@ -31056,8 +34420,39 @@ export namespace Prisma {
     payments?: PaymentsUncheckedUpdateManyWithoutCompanyNestedInput
     machinery?: machineryUncheckedUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUncheckedUpdateManyWithoutCompanyNestedInput
+    contracts?: contractsUncheckedUpdateManyWithoutCompanyNestedInput
     admins?: AdminsCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
+    usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
+  }
+
+  export type contractsUpsertWithWhereUniqueWithoutUserInput = {
+    where: contractsWhereUniqueInput
+    update: XOR<contractsUpdateWithoutUserInput, contractsUncheckedUpdateWithoutUserInput>
+    create: XOR<contractsCreateWithoutUserInput, contractsUncheckedCreateWithoutUserInput>
+  }
+
+  export type contractsUpdateWithWhereUniqueWithoutUserInput = {
+    where: contractsWhereUniqueInput
+    data: XOR<contractsUpdateWithoutUserInput, contractsUncheckedUpdateWithoutUserInput>
+  }
+
+  export type contractsUpdateManyWithWhereWithoutUserInput = {
+    where: contractsScalarWhereInput
+    data: XOR<contractsUpdateManyMutationInput, contractsUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type contractsScalarWhereInput = {
+    AND?: contractsScalarWhereInput | contractsScalarWhereInput[]
+    OR?: contractsScalarWhereInput[]
+    NOT?: contractsScalarWhereInput | contractsScalarWhereInput[]
+    id?: IntFilter<"contracts"> | number
+    userID?: IntFilter<"contracts"> | number
+    companyID?: IntFilter<"contracts"> | number
+    contractType?: EnumContractTypeNullableFilter<"contracts"> | $Enums.ContractType | null
+    startDate?: DateTimeFilter<"contracts"> | Date | string
+    endDate?: DateTimeNullableFilter<"contracts"> | Date | string | null
+    isActive?: BoolFilter<"contracts"> | boolean
   }
 
   export type machineryUpsertWithWhereUniqueWithoutClientInput = {
@@ -31091,6 +34486,31 @@ export namespace Prisma {
     companyName?: StringFilter<"machinery"> | string
     companyID?: IntFilter<"machinery"> | number
     serialNumber?: StringFilter<"machinery"> | string
+  }
+
+  export type usersCompaniesUpsertWithWhereUniqueWithoutUserInput = {
+    where: usersCompaniesWhereUniqueInput
+    update: XOR<usersCompaniesUpdateWithoutUserInput, usersCompaniesUncheckedUpdateWithoutUserInput>
+    create: XOR<usersCompaniesCreateWithoutUserInput, usersCompaniesUncheckedCreateWithoutUserInput>
+  }
+
+  export type usersCompaniesUpdateWithWhereUniqueWithoutUserInput = {
+    where: usersCompaniesWhereUniqueInput
+    data: XOR<usersCompaniesUpdateWithoutUserInput, usersCompaniesUncheckedUpdateWithoutUserInput>
+  }
+
+  export type usersCompaniesUpdateManyWithWhereWithoutUserInput = {
+    where: usersCompaniesScalarWhereInput
+    data: XOR<usersCompaniesUpdateManyMutationInput, usersCompaniesUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type usersCompaniesScalarWhereInput = {
+    AND?: usersCompaniesScalarWhereInput | usersCompaniesScalarWhereInput[]
+    OR?: usersCompaniesScalarWhereInput[]
+    NOT?: usersCompaniesScalarWhereInput | usersCompaniesScalarWhereInput[]
+    id?: IntFilter<"usersCompanies"> | number
+    userID?: IntFilter<"usersCompanies"> | number
+    companyID?: IntFilter<"usersCompanies"> | number
   }
 
   export type WorkerCreateWithoutCompanyInput = {
@@ -31415,6 +34835,7 @@ export namespace Prisma {
     machineryID?: number | null
     role?: $Enums.Role
     userCode?: string | null
+    contractID?: number | null
     incidents?: IncidentsCreateNestedOneWithoutUsersInput
     directions?: DirectionsCreateNestedManyWithoutUserInput
     payments?: PaymentsCreateNestedOneWithoutUserInput
@@ -31422,7 +34843,9 @@ export namespace Prisma {
     ClientMachinery?: ClientMachineryCreateNestedManyWithoutUserInput
     Incidents?: IncidentsCreateNestedManyWithoutUserInput
     Budget?: BudgetCreateNestedManyWithoutUserInput
+    contracts?: contractsCreateNestedManyWithoutUserInput
     machinery?: machineryCreateNestedManyWithoutClientInput
+    usersCompanies?: usersCompaniesCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCompanyInput = {
@@ -31435,13 +34858,16 @@ export namespace Prisma {
     machineryID?: number | null
     role?: $Enums.Role
     userCode?: string | null
+    contractID?: number | null
     directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
     ClientMachinery?: ClientMachineryUncheckedCreateNestedManyWithoutUserInput
     Incidents?: IncidentsUncheckedCreateNestedManyWithoutUserInput
     Budget?: BudgetUncheckedCreateNestedManyWithoutUserInput
+    contracts?: contractsUncheckedCreateNestedManyWithoutUserInput
     machinery?: machineryUncheckedCreateNestedManyWithoutClientInput
+    usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCompanyInput = {
@@ -31451,6 +34877,33 @@ export namespace Prisma {
 
   export type UserCreateManyCompanyInputEnvelope = {
     data: UserCreateManyCompanyInput | UserCreateManyCompanyInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type contractsCreateWithoutCompanyInput = {
+    contractType?: $Enums.ContractType | null
+    startDate?: Date | string
+    endDate?: Date | string | null
+    isActive?: boolean
+    user: UserCreateNestedOneWithoutContractsInput
+  }
+
+  export type contractsUncheckedCreateWithoutCompanyInput = {
+    id?: number
+    userID: number
+    contractType?: $Enums.ContractType | null
+    startDate?: Date | string
+    endDate?: Date | string | null
+    isActive?: boolean
+  }
+
+  export type contractsCreateOrConnectWithoutCompanyInput = {
+    where: contractsWhereUniqueInput
+    create: XOR<contractsCreateWithoutCompanyInput, contractsUncheckedCreateWithoutCompanyInput>
+  }
+
+  export type contractsCreateManyCompanyInputEnvelope = {
+    data: contractsCreateManyCompanyInput | contractsCreateManyCompanyInput[]
     skipDuplicates?: boolean
   }
 
@@ -31489,6 +34942,25 @@ export namespace Prisma {
 
   export type workersCompaniesCreateManyCompanyInputEnvelope = {
     data: workersCompaniesCreateManyCompanyInput | workersCompaniesCreateManyCompanyInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type usersCompaniesCreateWithoutCompanyInput = {
+    User: UserCreateNestedOneWithoutUsersCompaniesInput
+  }
+
+  export type usersCompaniesUncheckedCreateWithoutCompanyInput = {
+    id?: number
+    userID: number
+  }
+
+  export type usersCompaniesCreateOrConnectWithoutCompanyInput = {
+    where: usersCompaniesWhereUniqueInput
+    create: XOR<usersCompaniesCreateWithoutCompanyInput, usersCompaniesUncheckedCreateWithoutCompanyInput>
+  }
+
+  export type usersCompaniesCreateManyCompanyInputEnvelope = {
+    data: usersCompaniesCreateManyCompanyInput | usersCompaniesCreateManyCompanyInput[]
     skipDuplicates?: boolean
   }
 
@@ -31738,7 +35210,24 @@ export namespace Prisma {
     machineryID?: IntNullableFilter<"User"> | number | null
     role?: EnumRoleFilter<"User"> | $Enums.Role
     userCode?: StringNullableFilter<"User"> | string | null
+    contractID?: IntNullableFilter<"User"> | number | null
     companyID?: IntNullableFilter<"User"> | number | null
+  }
+
+  export type contractsUpsertWithWhereUniqueWithoutCompanyInput = {
+    where: contractsWhereUniqueInput
+    update: XOR<contractsUpdateWithoutCompanyInput, contractsUncheckedUpdateWithoutCompanyInput>
+    create: XOR<contractsCreateWithoutCompanyInput, contractsUncheckedCreateWithoutCompanyInput>
+  }
+
+  export type contractsUpdateWithWhereUniqueWithoutCompanyInput = {
+    where: contractsWhereUniqueInput
+    data: XOR<contractsUpdateWithoutCompanyInput, contractsUncheckedUpdateWithoutCompanyInput>
+  }
+
+  export type contractsUpdateManyWithWhereWithoutCompanyInput = {
+    where: contractsScalarWhereInput
+    data: XOR<contractsUpdateManyMutationInput, contractsUncheckedUpdateManyWithoutCompanyInput>
   }
 
   export type AdminsCompaniesUpsertWithWhereUniqueWithoutCompanyInput = {
@@ -31791,6 +35280,22 @@ export namespace Prisma {
     companyID?: IntFilter<"workersCompanies"> | number
   }
 
+  export type usersCompaniesUpsertWithWhereUniqueWithoutCompanyInput = {
+    where: usersCompaniesWhereUniqueInput
+    update: XOR<usersCompaniesUpdateWithoutCompanyInput, usersCompaniesUncheckedUpdateWithoutCompanyInput>
+    create: XOR<usersCompaniesCreateWithoutCompanyInput, usersCompaniesUncheckedCreateWithoutCompanyInput>
+  }
+
+  export type usersCompaniesUpdateWithWhereUniqueWithoutCompanyInput = {
+    where: usersCompaniesWhereUniqueInput
+    data: XOR<usersCompaniesUpdateWithoutCompanyInput, usersCompaniesUncheckedUpdateWithoutCompanyInput>
+  }
+
+  export type usersCompaniesUpdateManyWithWhereWithoutCompanyInput = {
+    where: usersCompaniesScalarWhereInput
+    data: XOR<usersCompaniesUpdateManyMutationInput, usersCompaniesUncheckedUpdateManyWithoutCompanyInput>
+  }
+
   export type AdminCreateWithoutCompaniesInput = {
     email: string
     password: string
@@ -31830,7 +35335,9 @@ export namespace Prisma {
     machinery?: machineryCreateNestedManyWithoutCompanyInput
     Budget?: BudgetCreateNestedManyWithoutCompanyInput
     User?: UserCreateNestedManyWithoutCompanyInput
+    contracts?: contractsCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
+    usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutAdminsInput = {
@@ -31855,7 +35362,9 @@ export namespace Prisma {
     machinery?: machineryUncheckedCreateNestedManyWithoutCompanyInput
     Budget?: BudgetUncheckedCreateNestedManyWithoutCompanyInput
     User?: UserUncheckedCreateNestedManyWithoutCompanyInput
+    contracts?: contractsUncheckedCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
+    usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutAdminsInput = {
@@ -31919,7 +35428,9 @@ export namespace Prisma {
     machinery?: machineryUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUpdateManyWithoutCompanyNestedInput
     User?: UserUpdateManyWithoutCompanyNestedInput
+    contracts?: contractsUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
+    usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutAdminsInput = {
@@ -31944,7 +35455,9 @@ export namespace Prisma {
     machinery?: machineryUncheckedUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUncheckedUpdateManyWithoutCompanyNestedInput
     User?: UserUncheckedUpdateManyWithoutCompanyNestedInput
+    contracts?: contractsUncheckedUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
+    usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyCreateWithoutWorkersInput = {
@@ -31967,8 +35480,10 @@ export namespace Prisma {
     machinery?: machineryCreateNestedManyWithoutCompanyInput
     Budget?: BudgetCreateNestedManyWithoutCompanyInput
     User?: UserCreateNestedManyWithoutCompanyInput
+    contracts?: contractsCreateNestedManyWithoutCompanyInput
     admins?: AdminsCompaniesCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
+    usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutWorkersInput = {
@@ -31992,8 +35507,10 @@ export namespace Prisma {
     machinery?: machineryUncheckedCreateNestedManyWithoutCompanyInput
     Budget?: BudgetUncheckedCreateNestedManyWithoutCompanyInput
     User?: UserUncheckedCreateNestedManyWithoutCompanyInput
+    contracts?: contractsUncheckedCreateNestedManyWithoutCompanyInput
     admins?: AdminsCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
+    usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutWorkersInput = {
@@ -32167,8 +35684,10 @@ export namespace Prisma {
     machinery?: machineryUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUpdateManyWithoutCompanyNestedInput
     User?: UserUpdateManyWithoutCompanyNestedInput
+    contracts?: contractsUpdateManyWithoutCompanyNestedInput
     admins?: AdminsCompaniesUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
+    usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutWorkersInput = {
@@ -32192,8 +35711,10 @@ export namespace Prisma {
     machinery?: machineryUncheckedUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUncheckedUpdateManyWithoutCompanyNestedInput
     User?: UserUncheckedUpdateManyWithoutCompanyNestedInput
+    contracts?: contractsUncheckedUpdateManyWithoutCompanyNestedInput
     admins?: AdminsCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
+    usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type ShiftWorkerUpsertWithWhereUniqueWithoutWorkerInput = {
@@ -32332,6 +35853,454 @@ export namespace Prisma {
     data: XOR<AdminsCompaniesUpdateManyMutationInput, AdminsCompaniesUncheckedUpdateManyWithoutAdminInput>
   }
 
+  export type UserCreateWithoutUsersCompaniesInput = {
+    name?: string | null
+    email: string
+    password: string
+    paymentsID?: number | null
+    machineryID?: number | null
+    role?: $Enums.Role
+    userCode?: string | null
+    contractID?: number | null
+    incidents?: IncidentsCreateNestedOneWithoutUsersInput
+    directions?: DirectionsCreateNestedManyWithoutUserInput
+    payments?: PaymentsCreateNestedOneWithoutUserInput
+    IncidentHistory?: IncidentHistoryCreateNestedManyWithoutUserInput
+    ClientMachinery?: ClientMachineryCreateNestedManyWithoutUserInput
+    Incidents?: IncidentsCreateNestedManyWithoutUserInput
+    Budget?: BudgetCreateNestedManyWithoutUserInput
+    Company?: CompanyCreateNestedOneWithoutUserInput
+    contracts?: contractsCreateNestedManyWithoutUserInput
+    machinery?: machineryCreateNestedManyWithoutClientInput
+  }
+
+  export type UserUncheckedCreateWithoutUsersCompaniesInput = {
+    userID?: number
+    name?: string | null
+    email: string
+    password: string
+    incidentsID?: number | null
+    paymentsID?: number | null
+    machineryID?: number | null
+    role?: $Enums.Role
+    userCode?: string | null
+    contractID?: number | null
+    companyID?: number | null
+    directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
+    payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
+    IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
+    ClientMachinery?: ClientMachineryUncheckedCreateNestedManyWithoutUserInput
+    Incidents?: IncidentsUncheckedCreateNestedManyWithoutUserInput
+    Budget?: BudgetUncheckedCreateNestedManyWithoutUserInput
+    contracts?: contractsUncheckedCreateNestedManyWithoutUserInput
+    machinery?: machineryUncheckedCreateNestedManyWithoutClientInput
+  }
+
+  export type UserCreateOrConnectWithoutUsersCompaniesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutUsersCompaniesInput, UserUncheckedCreateWithoutUsersCompaniesInput>
+  }
+
+  export type CompanyCreateWithoutUsersCompaniesInput = {
+    name: string
+    phone: string
+    password: string
+    suspended?: boolean
+    suspendedUntil?: Date | string | null
+    role?: $Enums.Role
+    userID?: number | null
+    companyCode?: string | null
+    email: string
+    workers?: WorkerCreateNestedManyWithoutCompanyInput
+    receivedPayments?: PaymentsCreateNestedManyWithoutReceivedByInput
+    incidents?: IncidentsCreateNestedManyWithoutCompanyInput
+    incidentHistory?: IncidentHistoryCreateNestedManyWithoutCompanyInput
+    budget?: BudgetCreateNestedOneWithoutCompanyInput
+    directions?: DirectionsCreateNestedManyWithoutCompanyInput
+    shiftWorkers?: ShiftWorkerCreateNestedManyWithoutCompanyInput
+    payments?: PaymentsCreateNestedManyWithoutCompanyInput
+    machinery?: machineryCreateNestedManyWithoutCompanyInput
+    Budget?: BudgetCreateNestedManyWithoutCompanyInput
+    User?: UserCreateNestedManyWithoutCompanyInput
+    contracts?: contractsCreateNestedManyWithoutCompanyInput
+    admins?: AdminsCompaniesCreateNestedManyWithoutCompanyInput
+    workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
+  }
+
+  export type CompanyUncheckedCreateWithoutUsersCompaniesInput = {
+    companyID?: number
+    name: string
+    phone: string
+    password: string
+    budgetID?: number | null
+    suspended?: boolean
+    suspendedUntil?: Date | string | null
+    role?: $Enums.Role
+    userID?: number | null
+    companyCode?: string | null
+    email: string
+    workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
+    receivedPayments?: PaymentsUncheckedCreateNestedManyWithoutReceivedByInput
+    incidents?: IncidentsUncheckedCreateNestedManyWithoutCompanyInput
+    incidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutCompanyInput
+    directions?: DirectionsUncheckedCreateNestedManyWithoutCompanyInput
+    shiftWorkers?: ShiftWorkerUncheckedCreateNestedManyWithoutCompanyInput
+    payments?: PaymentsUncheckedCreateNestedManyWithoutCompanyInput
+    machinery?: machineryUncheckedCreateNestedManyWithoutCompanyInput
+    Budget?: BudgetUncheckedCreateNestedManyWithoutCompanyInput
+    User?: UserUncheckedCreateNestedManyWithoutCompanyInput
+    contracts?: contractsUncheckedCreateNestedManyWithoutCompanyInput
+    admins?: AdminsCompaniesUncheckedCreateNestedManyWithoutCompanyInput
+    workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
+  }
+
+  export type CompanyCreateOrConnectWithoutUsersCompaniesInput = {
+    where: CompanyWhereUniqueInput
+    create: XOR<CompanyCreateWithoutUsersCompaniesInput, CompanyUncheckedCreateWithoutUsersCompaniesInput>
+  }
+
+  export type UserUpsertWithoutUsersCompaniesInput = {
+    update: XOR<UserUpdateWithoutUsersCompaniesInput, UserUncheckedUpdateWithoutUsersCompaniesInput>
+    create: XOR<UserCreateWithoutUsersCompaniesInput, UserUncheckedCreateWithoutUsersCompaniesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutUsersCompaniesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutUsersCompaniesInput, UserUncheckedUpdateWithoutUsersCompaniesInput>
+  }
+
+  export type UserUpdateWithoutUsersCompaniesInput = {
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    paymentsID?: NullableIntFieldUpdateOperationsInput | number | null
+    machineryID?: NullableIntFieldUpdateOperationsInput | number | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userCode?: NullableStringFieldUpdateOperationsInput | string | null
+    contractID?: NullableIntFieldUpdateOperationsInput | number | null
+    incidents?: IncidentsUpdateOneWithoutUsersNestedInput
+    directions?: DirectionsUpdateManyWithoutUserNestedInput
+    payments?: PaymentsUpdateOneWithoutUserNestedInput
+    IncidentHistory?: IncidentHistoryUpdateManyWithoutUserNestedInput
+    ClientMachinery?: ClientMachineryUpdateManyWithoutUserNestedInput
+    Incidents?: IncidentsUpdateManyWithoutUserNestedInput
+    Budget?: BudgetUpdateManyWithoutUserNestedInput
+    Company?: CompanyUpdateOneWithoutUserNestedInput
+    contracts?: contractsUpdateManyWithoutUserNestedInput
+    machinery?: machineryUpdateManyWithoutClientNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutUsersCompaniesInput = {
+    userID?: IntFieldUpdateOperationsInput | number
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    incidentsID?: NullableIntFieldUpdateOperationsInput | number | null
+    paymentsID?: NullableIntFieldUpdateOperationsInput | number | null
+    machineryID?: NullableIntFieldUpdateOperationsInput | number | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userCode?: NullableStringFieldUpdateOperationsInput | string | null
+    contractID?: NullableIntFieldUpdateOperationsInput | number | null
+    companyID?: NullableIntFieldUpdateOperationsInput | number | null
+    directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
+    payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
+    IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
+    ClientMachinery?: ClientMachineryUncheckedUpdateManyWithoutUserNestedInput
+    Incidents?: IncidentsUncheckedUpdateManyWithoutUserNestedInput
+    Budget?: BudgetUncheckedUpdateManyWithoutUserNestedInput
+    contracts?: contractsUncheckedUpdateManyWithoutUserNestedInput
+    machinery?: machineryUncheckedUpdateManyWithoutClientNestedInput
+  }
+
+  export type CompanyUpsertWithoutUsersCompaniesInput = {
+    update: XOR<CompanyUpdateWithoutUsersCompaniesInput, CompanyUncheckedUpdateWithoutUsersCompaniesInput>
+    create: XOR<CompanyCreateWithoutUsersCompaniesInput, CompanyUncheckedCreateWithoutUsersCompaniesInput>
+    where?: CompanyWhereInput
+  }
+
+  export type CompanyUpdateToOneWithWhereWithoutUsersCompaniesInput = {
+    where?: CompanyWhereInput
+    data: XOR<CompanyUpdateWithoutUsersCompaniesInput, CompanyUncheckedUpdateWithoutUsersCompaniesInput>
+  }
+
+  export type CompanyUpdateWithoutUsersCompaniesInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    suspended?: BoolFieldUpdateOperationsInput | boolean
+    suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userID?: NullableIntFieldUpdateOperationsInput | number | null
+    companyCode?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    workers?: WorkerUpdateManyWithoutCompanyNestedInput
+    receivedPayments?: PaymentsUpdateManyWithoutReceivedByNestedInput
+    incidents?: IncidentsUpdateManyWithoutCompanyNestedInput
+    incidentHistory?: IncidentHistoryUpdateManyWithoutCompanyNestedInput
+    budget?: BudgetUpdateOneWithoutCompanyNestedInput
+    directions?: DirectionsUpdateManyWithoutCompanyNestedInput
+    shiftWorkers?: ShiftWorkerUpdateManyWithoutCompanyNestedInput
+    payments?: PaymentsUpdateManyWithoutCompanyNestedInput
+    machinery?: machineryUpdateManyWithoutCompanyNestedInput
+    Budget?: BudgetUpdateManyWithoutCompanyNestedInput
+    User?: UserUpdateManyWithoutCompanyNestedInput
+    contracts?: contractsUpdateManyWithoutCompanyNestedInput
+    admins?: AdminsCompaniesUpdateManyWithoutCompanyNestedInput
+    workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
+  }
+
+  export type CompanyUncheckedUpdateWithoutUsersCompaniesInput = {
+    companyID?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    budgetID?: NullableIntFieldUpdateOperationsInput | number | null
+    suspended?: BoolFieldUpdateOperationsInput | boolean
+    suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userID?: NullableIntFieldUpdateOperationsInput | number | null
+    companyCode?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
+    receivedPayments?: PaymentsUncheckedUpdateManyWithoutReceivedByNestedInput
+    incidents?: IncidentsUncheckedUpdateManyWithoutCompanyNestedInput
+    incidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutCompanyNestedInput
+    directions?: DirectionsUncheckedUpdateManyWithoutCompanyNestedInput
+    shiftWorkers?: ShiftWorkerUncheckedUpdateManyWithoutCompanyNestedInput
+    payments?: PaymentsUncheckedUpdateManyWithoutCompanyNestedInput
+    machinery?: machineryUncheckedUpdateManyWithoutCompanyNestedInput
+    Budget?: BudgetUncheckedUpdateManyWithoutCompanyNestedInput
+    User?: UserUncheckedUpdateManyWithoutCompanyNestedInput
+    contracts?: contractsUncheckedUpdateManyWithoutCompanyNestedInput
+    admins?: AdminsCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
+    workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
+  }
+
+  export type UserCreateWithoutContractsInput = {
+    name?: string | null
+    email: string
+    password: string
+    paymentsID?: number | null
+    machineryID?: number | null
+    role?: $Enums.Role
+    userCode?: string | null
+    contractID?: number | null
+    incidents?: IncidentsCreateNestedOneWithoutUsersInput
+    directions?: DirectionsCreateNestedManyWithoutUserInput
+    payments?: PaymentsCreateNestedOneWithoutUserInput
+    IncidentHistory?: IncidentHistoryCreateNestedManyWithoutUserInput
+    ClientMachinery?: ClientMachineryCreateNestedManyWithoutUserInput
+    Incidents?: IncidentsCreateNestedManyWithoutUserInput
+    Budget?: BudgetCreateNestedManyWithoutUserInput
+    Company?: CompanyCreateNestedOneWithoutUserInput
+    machinery?: machineryCreateNestedManyWithoutClientInput
+    usersCompanies?: usersCompaniesCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutContractsInput = {
+    userID?: number
+    name?: string | null
+    email: string
+    password: string
+    incidentsID?: number | null
+    paymentsID?: number | null
+    machineryID?: number | null
+    role?: $Enums.Role
+    userCode?: string | null
+    contractID?: number | null
+    companyID?: number | null
+    directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
+    payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
+    IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
+    ClientMachinery?: ClientMachineryUncheckedCreateNestedManyWithoutUserInput
+    Incidents?: IncidentsUncheckedCreateNestedManyWithoutUserInput
+    Budget?: BudgetUncheckedCreateNestedManyWithoutUserInput
+    machinery?: machineryUncheckedCreateNestedManyWithoutClientInput
+    usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutContractsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutContractsInput, UserUncheckedCreateWithoutContractsInput>
+  }
+
+  export type CompanyCreateWithoutContractsInput = {
+    name: string
+    phone: string
+    password: string
+    suspended?: boolean
+    suspendedUntil?: Date | string | null
+    role?: $Enums.Role
+    userID?: number | null
+    companyCode?: string | null
+    email: string
+    workers?: WorkerCreateNestedManyWithoutCompanyInput
+    receivedPayments?: PaymentsCreateNestedManyWithoutReceivedByInput
+    incidents?: IncidentsCreateNestedManyWithoutCompanyInput
+    incidentHistory?: IncidentHistoryCreateNestedManyWithoutCompanyInput
+    budget?: BudgetCreateNestedOneWithoutCompanyInput
+    directions?: DirectionsCreateNestedManyWithoutCompanyInput
+    shiftWorkers?: ShiftWorkerCreateNestedManyWithoutCompanyInput
+    payments?: PaymentsCreateNestedManyWithoutCompanyInput
+    machinery?: machineryCreateNestedManyWithoutCompanyInput
+    Budget?: BudgetCreateNestedManyWithoutCompanyInput
+    User?: UserCreateNestedManyWithoutCompanyInput
+    admins?: AdminsCompaniesCreateNestedManyWithoutCompanyInput
+    workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
+    usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
+  }
+
+  export type CompanyUncheckedCreateWithoutContractsInput = {
+    companyID?: number
+    name: string
+    phone: string
+    password: string
+    budgetID?: number | null
+    suspended?: boolean
+    suspendedUntil?: Date | string | null
+    role?: $Enums.Role
+    userID?: number | null
+    companyCode?: string | null
+    email: string
+    workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
+    receivedPayments?: PaymentsUncheckedCreateNestedManyWithoutReceivedByInput
+    incidents?: IncidentsUncheckedCreateNestedManyWithoutCompanyInput
+    incidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutCompanyInput
+    directions?: DirectionsUncheckedCreateNestedManyWithoutCompanyInput
+    shiftWorkers?: ShiftWorkerUncheckedCreateNestedManyWithoutCompanyInput
+    payments?: PaymentsUncheckedCreateNestedManyWithoutCompanyInput
+    machinery?: machineryUncheckedCreateNestedManyWithoutCompanyInput
+    Budget?: BudgetUncheckedCreateNestedManyWithoutCompanyInput
+    User?: UserUncheckedCreateNestedManyWithoutCompanyInput
+    admins?: AdminsCompaniesUncheckedCreateNestedManyWithoutCompanyInput
+    workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
+    usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
+  }
+
+  export type CompanyCreateOrConnectWithoutContractsInput = {
+    where: CompanyWhereUniqueInput
+    create: XOR<CompanyCreateWithoutContractsInput, CompanyUncheckedCreateWithoutContractsInput>
+  }
+
+  export type UserUpsertWithoutContractsInput = {
+    update: XOR<UserUpdateWithoutContractsInput, UserUncheckedUpdateWithoutContractsInput>
+    create: XOR<UserCreateWithoutContractsInput, UserUncheckedCreateWithoutContractsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutContractsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutContractsInput, UserUncheckedUpdateWithoutContractsInput>
+  }
+
+  export type UserUpdateWithoutContractsInput = {
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    paymentsID?: NullableIntFieldUpdateOperationsInput | number | null
+    machineryID?: NullableIntFieldUpdateOperationsInput | number | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userCode?: NullableStringFieldUpdateOperationsInput | string | null
+    contractID?: NullableIntFieldUpdateOperationsInput | number | null
+    incidents?: IncidentsUpdateOneWithoutUsersNestedInput
+    directions?: DirectionsUpdateManyWithoutUserNestedInput
+    payments?: PaymentsUpdateOneWithoutUserNestedInput
+    IncidentHistory?: IncidentHistoryUpdateManyWithoutUserNestedInput
+    ClientMachinery?: ClientMachineryUpdateManyWithoutUserNestedInput
+    Incidents?: IncidentsUpdateManyWithoutUserNestedInput
+    Budget?: BudgetUpdateManyWithoutUserNestedInput
+    Company?: CompanyUpdateOneWithoutUserNestedInput
+    machinery?: machineryUpdateManyWithoutClientNestedInput
+    usersCompanies?: usersCompaniesUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutContractsInput = {
+    userID?: IntFieldUpdateOperationsInput | number
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    incidentsID?: NullableIntFieldUpdateOperationsInput | number | null
+    paymentsID?: NullableIntFieldUpdateOperationsInput | number | null
+    machineryID?: NullableIntFieldUpdateOperationsInput | number | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userCode?: NullableStringFieldUpdateOperationsInput | string | null
+    contractID?: NullableIntFieldUpdateOperationsInput | number | null
+    companyID?: NullableIntFieldUpdateOperationsInput | number | null
+    directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
+    payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
+    IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
+    ClientMachinery?: ClientMachineryUncheckedUpdateManyWithoutUserNestedInput
+    Incidents?: IncidentsUncheckedUpdateManyWithoutUserNestedInput
+    Budget?: BudgetUncheckedUpdateManyWithoutUserNestedInput
+    machinery?: machineryUncheckedUpdateManyWithoutClientNestedInput
+    usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type CompanyUpsertWithoutContractsInput = {
+    update: XOR<CompanyUpdateWithoutContractsInput, CompanyUncheckedUpdateWithoutContractsInput>
+    create: XOR<CompanyCreateWithoutContractsInput, CompanyUncheckedCreateWithoutContractsInput>
+    where?: CompanyWhereInput
+  }
+
+  export type CompanyUpdateToOneWithWhereWithoutContractsInput = {
+    where?: CompanyWhereInput
+    data: XOR<CompanyUpdateWithoutContractsInput, CompanyUncheckedUpdateWithoutContractsInput>
+  }
+
+  export type CompanyUpdateWithoutContractsInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    suspended?: BoolFieldUpdateOperationsInput | boolean
+    suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userID?: NullableIntFieldUpdateOperationsInput | number | null
+    companyCode?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    workers?: WorkerUpdateManyWithoutCompanyNestedInput
+    receivedPayments?: PaymentsUpdateManyWithoutReceivedByNestedInput
+    incidents?: IncidentsUpdateManyWithoutCompanyNestedInput
+    incidentHistory?: IncidentHistoryUpdateManyWithoutCompanyNestedInput
+    budget?: BudgetUpdateOneWithoutCompanyNestedInput
+    directions?: DirectionsUpdateManyWithoutCompanyNestedInput
+    shiftWorkers?: ShiftWorkerUpdateManyWithoutCompanyNestedInput
+    payments?: PaymentsUpdateManyWithoutCompanyNestedInput
+    machinery?: machineryUpdateManyWithoutCompanyNestedInput
+    Budget?: BudgetUpdateManyWithoutCompanyNestedInput
+    User?: UserUpdateManyWithoutCompanyNestedInput
+    admins?: AdminsCompaniesUpdateManyWithoutCompanyNestedInput
+    workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
+    usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
+  }
+
+  export type CompanyUncheckedUpdateWithoutContractsInput = {
+    companyID?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    budgetID?: NullableIntFieldUpdateOperationsInput | number | null
+    suspended?: BoolFieldUpdateOperationsInput | boolean
+    suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userID?: NullableIntFieldUpdateOperationsInput | number | null
+    companyCode?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
+    receivedPayments?: PaymentsUncheckedUpdateManyWithoutReceivedByNestedInput
+    incidents?: IncidentsUncheckedUpdateManyWithoutCompanyNestedInput
+    incidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutCompanyNestedInput
+    directions?: DirectionsUncheckedUpdateManyWithoutCompanyNestedInput
+    shiftWorkers?: ShiftWorkerUncheckedUpdateManyWithoutCompanyNestedInput
+    payments?: PaymentsUncheckedUpdateManyWithoutCompanyNestedInput
+    machinery?: machineryUncheckedUpdateManyWithoutCompanyNestedInput
+    Budget?: BudgetUncheckedUpdateManyWithoutCompanyNestedInput
+    User?: UserUncheckedUpdateManyWithoutCompanyNestedInput
+    admins?: AdminsCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
+    workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
+    usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
+  }
+
   export type WorkerCreateWithoutWorkersCompaniesInput = {
     name: string
     email: string
@@ -32385,7 +36354,9 @@ export namespace Prisma {
     machinery?: machineryCreateNestedManyWithoutCompanyInput
     Budget?: BudgetCreateNestedManyWithoutCompanyInput
     User?: UserCreateNestedManyWithoutCompanyInput
+    contracts?: contractsCreateNestedManyWithoutCompanyInput
     admins?: AdminsCompaniesCreateNestedManyWithoutCompanyInput
+    usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutWorkersCompaniesInput = {
@@ -32410,7 +36381,9 @@ export namespace Prisma {
     machinery?: machineryUncheckedCreateNestedManyWithoutCompanyInput
     Budget?: BudgetUncheckedCreateNestedManyWithoutCompanyInput
     User?: UserUncheckedCreateNestedManyWithoutCompanyInput
+    contracts?: contractsUncheckedCreateNestedManyWithoutCompanyInput
     admins?: AdminsCompaniesUncheckedCreateNestedManyWithoutCompanyInput
+    usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutWorkersCompaniesInput = {
@@ -32488,7 +36461,9 @@ export namespace Prisma {
     machinery?: machineryUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUpdateManyWithoutCompanyNestedInput
     User?: UserUpdateManyWithoutCompanyNestedInput
+    contracts?: contractsUpdateManyWithoutCompanyNestedInput
     admins?: AdminsCompaniesUpdateManyWithoutCompanyNestedInput
+    usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutWorkersCompaniesInput = {
@@ -32513,7 +36488,9 @@ export namespace Prisma {
     machinery?: machineryUncheckedUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUncheckedUpdateManyWithoutCompanyNestedInput
     User?: UserUncheckedUpdateManyWithoutCompanyNestedInput
+    contracts?: contractsUncheckedUpdateManyWithoutCompanyNestedInput
     admins?: AdminsCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
+    usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyCreateWithoutIncidentsInput = {
@@ -32536,8 +36513,10 @@ export namespace Prisma {
     machinery?: machineryCreateNestedManyWithoutCompanyInput
     Budget?: BudgetCreateNestedManyWithoutCompanyInput
     User?: UserCreateNestedManyWithoutCompanyInput
+    contracts?: contractsCreateNestedManyWithoutCompanyInput
     admins?: AdminsCompaniesCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
+    usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutIncidentsInput = {
@@ -32561,8 +36540,10 @@ export namespace Prisma {
     machinery?: machineryUncheckedCreateNestedManyWithoutCompanyInput
     Budget?: BudgetUncheckedCreateNestedManyWithoutCompanyInput
     User?: UserUncheckedCreateNestedManyWithoutCompanyInput
+    contracts?: contractsUncheckedCreateNestedManyWithoutCompanyInput
     admins?: AdminsCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
+    usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutIncidentsInput = {
@@ -32638,6 +36619,7 @@ export namespace Prisma {
     machineryID?: number | null
     role?: $Enums.Role
     userCode?: string | null
+    contractID?: number | null
     incidents?: IncidentsCreateNestedOneWithoutUsersInput
     directions?: DirectionsCreateNestedManyWithoutUserInput
     payments?: PaymentsCreateNestedOneWithoutUserInput
@@ -32645,7 +36627,9 @@ export namespace Prisma {
     ClientMachinery?: ClientMachineryCreateNestedManyWithoutUserInput
     Budget?: BudgetCreateNestedManyWithoutUserInput
     Company?: CompanyCreateNestedOneWithoutUserInput
+    contracts?: contractsCreateNestedManyWithoutUserInput
     machinery?: machineryCreateNestedManyWithoutClientInput
+    usersCompanies?: usersCompaniesCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutIncidentsInput = {
@@ -32658,13 +36642,16 @@ export namespace Prisma {
     machineryID?: number | null
     role?: $Enums.Role
     userCode?: string | null
+    contractID?: number | null
     companyID?: number | null
     directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
     ClientMachinery?: ClientMachineryUncheckedCreateNestedManyWithoutUserInput
     Budget?: BudgetUncheckedCreateNestedManyWithoutUserInput
+    contracts?: contractsUncheckedCreateNestedManyWithoutUserInput
     machinery?: machineryUncheckedCreateNestedManyWithoutClientInput
+    usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutIncidentsInput = {
@@ -32680,6 +36667,7 @@ export namespace Prisma {
     machineryID?: number | null
     role?: $Enums.Role
     userCode?: string | null
+    contractID?: number | null
     directions?: DirectionsCreateNestedManyWithoutUserInput
     payments?: PaymentsCreateNestedOneWithoutUserInput
     IncidentHistory?: IncidentHistoryCreateNestedManyWithoutUserInput
@@ -32687,7 +36675,9 @@ export namespace Prisma {
     Incidents?: IncidentsCreateNestedManyWithoutUserInput
     Budget?: BudgetCreateNestedManyWithoutUserInput
     Company?: CompanyCreateNestedOneWithoutUserInput
+    contracts?: contractsCreateNestedManyWithoutUserInput
     machinery?: machineryCreateNestedManyWithoutClientInput
+    usersCompanies?: usersCompaniesCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutIncidentsInput = {
@@ -32699,6 +36689,7 @@ export namespace Prisma {
     machineryID?: number | null
     role?: $Enums.Role
     userCode?: string | null
+    contractID?: number | null
     companyID?: number | null
     directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
@@ -32706,7 +36697,9 @@ export namespace Prisma {
     ClientMachinery?: ClientMachineryUncheckedCreateNestedManyWithoutUserInput
     Incidents?: IncidentsUncheckedCreateNestedManyWithoutUserInput
     Budget?: BudgetUncheckedCreateNestedManyWithoutUserInput
+    contracts?: contractsUncheckedCreateNestedManyWithoutUserInput
     machinery?: machineryUncheckedCreateNestedManyWithoutClientInput
+    usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateManyIncidentsInputEnvelope = {
@@ -32801,8 +36794,10 @@ export namespace Prisma {
     machinery?: machineryUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUpdateManyWithoutCompanyNestedInput
     User?: UserUpdateManyWithoutCompanyNestedInput
+    contracts?: contractsUpdateManyWithoutCompanyNestedInput
     admins?: AdminsCompaniesUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
+    usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutIncidentsInput = {
@@ -32826,8 +36821,10 @@ export namespace Prisma {
     machinery?: machineryUncheckedUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUncheckedUpdateManyWithoutCompanyNestedInput
     User?: UserUncheckedUpdateManyWithoutCompanyNestedInput
+    contracts?: contractsUncheckedUpdateManyWithoutCompanyNestedInput
     admins?: AdminsCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
+    usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type WorkerUpsertWithoutAssignedIncidentsInput = {
@@ -32921,6 +36918,7 @@ export namespace Prisma {
     machineryID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
+    contractID?: NullableIntFieldUpdateOperationsInput | number | null
     incidents?: IncidentsUpdateOneWithoutUsersNestedInput
     directions?: DirectionsUpdateManyWithoutUserNestedInput
     payments?: PaymentsUpdateOneWithoutUserNestedInput
@@ -32928,7 +36926,9 @@ export namespace Prisma {
     ClientMachinery?: ClientMachineryUpdateManyWithoutUserNestedInput
     Budget?: BudgetUpdateManyWithoutUserNestedInput
     Company?: CompanyUpdateOneWithoutUserNestedInput
+    contracts?: contractsUpdateManyWithoutUserNestedInput
     machinery?: machineryUpdateManyWithoutClientNestedInput
+    usersCompanies?: usersCompaniesUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutIncidentsInput = {
@@ -32941,13 +36941,16 @@ export namespace Prisma {
     machineryID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
+    contractID?: NullableIntFieldUpdateOperationsInput | number | null
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
     directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
     ClientMachinery?: ClientMachineryUncheckedUpdateManyWithoutUserNestedInput
     Budget?: BudgetUncheckedUpdateManyWithoutUserNestedInput
+    contracts?: contractsUncheckedUpdateManyWithoutUserNestedInput
     machinery?: machineryUncheckedUpdateManyWithoutClientNestedInput
+    usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithWhereUniqueWithoutIncidentsInput = {
@@ -33006,6 +37009,7 @@ export namespace Prisma {
     machineryID?: number | null
     role?: $Enums.Role
     userCode?: string | null
+    contractID?: number | null
     incidents?: IncidentsCreateNestedOneWithoutUsersInput
     directions?: DirectionsCreateNestedManyWithoutUserInput
     IncidentHistory?: IncidentHistoryCreateNestedManyWithoutUserInput
@@ -33013,7 +37017,9 @@ export namespace Prisma {
     Incidents?: IncidentsCreateNestedManyWithoutUserInput
     Budget?: BudgetCreateNestedManyWithoutUserInput
     Company?: CompanyCreateNestedOneWithoutUserInput
+    contracts?: contractsCreateNestedManyWithoutUserInput
     machinery?: machineryCreateNestedManyWithoutClientInput
+    usersCompanies?: usersCompaniesCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPaymentsInput = {
@@ -33026,13 +37032,16 @@ export namespace Prisma {
     machineryID?: number | null
     role?: $Enums.Role
     userCode?: string | null
+    contractID?: number | null
     companyID?: number | null
     directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
     ClientMachinery?: ClientMachineryUncheckedCreateNestedManyWithoutUserInput
     Incidents?: IncidentsUncheckedCreateNestedManyWithoutUserInput
     Budget?: BudgetUncheckedCreateNestedManyWithoutUserInput
+    contracts?: contractsUncheckedCreateNestedManyWithoutUserInput
     machinery?: machineryUncheckedCreateNestedManyWithoutClientInput
+    usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPaymentsInput = {
@@ -33060,8 +37069,10 @@ export namespace Prisma {
     machinery?: machineryCreateNestedManyWithoutCompanyInput
     Budget?: BudgetCreateNestedManyWithoutCompanyInput
     User?: UserCreateNestedManyWithoutCompanyInput
+    contracts?: contractsCreateNestedManyWithoutCompanyInput
     admins?: AdminsCompaniesCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
+    usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutPaymentsInput = {
@@ -33085,8 +37096,10 @@ export namespace Prisma {
     machinery?: machineryUncheckedCreateNestedManyWithoutCompanyInput
     Budget?: BudgetUncheckedCreateNestedManyWithoutCompanyInput
     User?: UserUncheckedCreateNestedManyWithoutCompanyInput
+    contracts?: contractsUncheckedCreateNestedManyWithoutCompanyInput
     admins?: AdminsCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
+    usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutPaymentsInput = {
@@ -33114,8 +37127,10 @@ export namespace Prisma {
     machinery?: machineryCreateNestedManyWithoutCompanyInput
     Budget?: BudgetCreateNestedManyWithoutCompanyInput
     User?: UserCreateNestedManyWithoutCompanyInput
+    contracts?: contractsCreateNestedManyWithoutCompanyInput
     admins?: AdminsCompaniesCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
+    usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutReceivedPaymentsInput = {
@@ -33139,8 +37154,10 @@ export namespace Prisma {
     machinery?: machineryUncheckedCreateNestedManyWithoutCompanyInput
     Budget?: BudgetUncheckedCreateNestedManyWithoutCompanyInput
     User?: UserUncheckedCreateNestedManyWithoutCompanyInput
+    contracts?: contractsUncheckedCreateNestedManyWithoutCompanyInput
     admins?: AdminsCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
+    usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutReceivedPaymentsInput = {
@@ -33189,12 +37206,12 @@ export namespace Prisma {
   }
 
   export type paymentStatusCreateWithoutPaymentInput = {
-    status: string
+    status: $Enums.paymentStatusEnum
   }
 
   export type paymentStatusUncheckedCreateWithoutPaymentInput = {
     id?: number
-    status: string
+    status: $Enums.paymentStatusEnum
   }
 
   export type paymentStatusCreateOrConnectWithoutPaymentInput = {
@@ -33226,6 +37243,7 @@ export namespace Prisma {
     machineryID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
+    contractID?: NullableIntFieldUpdateOperationsInput | number | null
     incidents?: IncidentsUpdateOneWithoutUsersNestedInput
     directions?: DirectionsUpdateManyWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUpdateManyWithoutUserNestedInput
@@ -33233,7 +37251,9 @@ export namespace Prisma {
     Incidents?: IncidentsUpdateManyWithoutUserNestedInput
     Budget?: BudgetUpdateManyWithoutUserNestedInput
     Company?: CompanyUpdateOneWithoutUserNestedInput
+    contracts?: contractsUpdateManyWithoutUserNestedInput
     machinery?: machineryUpdateManyWithoutClientNestedInput
+    usersCompanies?: usersCompaniesUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPaymentsInput = {
@@ -33246,13 +37266,16 @@ export namespace Prisma {
     machineryID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
+    contractID?: NullableIntFieldUpdateOperationsInput | number | null
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
     directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
     ClientMachinery?: ClientMachineryUncheckedUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUncheckedUpdateManyWithoutUserNestedInput
     Budget?: BudgetUncheckedUpdateManyWithoutUserNestedInput
+    contracts?: contractsUncheckedUpdateManyWithoutUserNestedInput
     machinery?: machineryUncheckedUpdateManyWithoutClientNestedInput
+    usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CompanyUpsertWithoutPaymentsInput = {
@@ -33286,8 +37309,10 @@ export namespace Prisma {
     machinery?: machineryUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUpdateManyWithoutCompanyNestedInput
     User?: UserUpdateManyWithoutCompanyNestedInput
+    contracts?: contractsUpdateManyWithoutCompanyNestedInput
     admins?: AdminsCompaniesUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
+    usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutPaymentsInput = {
@@ -33311,8 +37336,10 @@ export namespace Prisma {
     machinery?: machineryUncheckedUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUncheckedUpdateManyWithoutCompanyNestedInput
     User?: UserUncheckedUpdateManyWithoutCompanyNestedInput
+    contracts?: contractsUncheckedUpdateManyWithoutCompanyNestedInput
     admins?: AdminsCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
+    usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUpsertWithoutReceivedPaymentsInput = {
@@ -33346,8 +37373,10 @@ export namespace Prisma {
     machinery?: machineryUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUpdateManyWithoutCompanyNestedInput
     User?: UserUpdateManyWithoutCompanyNestedInput
+    contracts?: contractsUpdateManyWithoutCompanyNestedInput
     admins?: AdminsCompaniesUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
+    usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutReceivedPaymentsInput = {
@@ -33371,8 +37400,10 @@ export namespace Prisma {
     machinery?: machineryUncheckedUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUncheckedUpdateManyWithoutCompanyNestedInput
     User?: UserUncheckedUpdateManyWithoutCompanyNestedInput
+    contracts?: contractsUncheckedUpdateManyWithoutCompanyNestedInput
     admins?: AdminsCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
+    usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type IncidentsUpsertWithoutPaymentsInput = {
@@ -33442,7 +37473,7 @@ export namespace Prisma {
     OR?: paymentStatusScalarWhereInput[]
     NOT?: paymentStatusScalarWhereInput | paymentStatusScalarWhereInput[]
     id?: IntFilter<"paymentStatus"> | number
-    status?: StringFilter<"paymentStatus"> | string
+    status?: EnumpaymentStatusEnumFilter<"paymentStatus"> | $Enums.paymentStatusEnum
     paymentID?: IntFilter<"paymentStatus"> | number
   }
 
@@ -33524,8 +37555,10 @@ export namespace Prisma {
     payments?: PaymentsCreateNestedManyWithoutCompanyInput
     machinery?: machineryCreateNestedManyWithoutCompanyInput
     User?: UserCreateNestedManyWithoutCompanyInput
+    contracts?: contractsCreateNestedManyWithoutCompanyInput
     admins?: AdminsCompaniesCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
+    usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutBudgetInput = {
@@ -33549,8 +37582,10 @@ export namespace Prisma {
     payments?: PaymentsUncheckedCreateNestedManyWithoutCompanyInput
     machinery?: machineryUncheckedCreateNestedManyWithoutCompanyInput
     User?: UserUncheckedCreateNestedManyWithoutCompanyInput
+    contracts?: contractsUncheckedCreateNestedManyWithoutCompanyInput
     admins?: AdminsCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
+    usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutBudgetInput = {
@@ -33606,6 +37641,7 @@ export namespace Prisma {
     machineryID?: number | null
     role?: $Enums.Role
     userCode?: string | null
+    contractID?: number | null
     incidents?: IncidentsCreateNestedOneWithoutUsersInput
     directions?: DirectionsCreateNestedManyWithoutUserInput
     payments?: PaymentsCreateNestedOneWithoutUserInput
@@ -33613,7 +37649,9 @@ export namespace Prisma {
     ClientMachinery?: ClientMachineryCreateNestedManyWithoutUserInput
     Incidents?: IncidentsCreateNestedManyWithoutUserInput
     Company?: CompanyCreateNestedOneWithoutUserInput
+    contracts?: contractsCreateNestedManyWithoutUserInput
     machinery?: machineryCreateNestedManyWithoutClientInput
+    usersCompanies?: usersCompaniesCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutBudgetInput = {
@@ -33626,13 +37664,16 @@ export namespace Prisma {
     machineryID?: number | null
     role?: $Enums.Role
     userCode?: string | null
+    contractID?: number | null
     companyID?: number | null
     directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
     ClientMachinery?: ClientMachineryUncheckedCreateNestedManyWithoutUserInput
     Incidents?: IncidentsUncheckedCreateNestedManyWithoutUserInput
+    contracts?: contractsUncheckedCreateNestedManyWithoutUserInput
     machinery?: machineryUncheckedCreateNestedManyWithoutClientInput
+    usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutBudgetInput = {
@@ -33660,8 +37701,10 @@ export namespace Prisma {
     machinery?: machineryCreateNestedManyWithoutCompanyInput
     Budget?: BudgetCreateNestedManyWithoutCompanyInput
     User?: UserCreateNestedManyWithoutCompanyInput
+    contracts?: contractsCreateNestedManyWithoutCompanyInput
     admins?: AdminsCompaniesCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
+    usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutBudgetInput = {
@@ -33685,8 +37728,10 @@ export namespace Prisma {
     machinery?: machineryUncheckedCreateNestedManyWithoutCompanyInput
     Budget?: BudgetUncheckedCreateNestedManyWithoutCompanyInput
     User?: UserUncheckedCreateNestedManyWithoutCompanyInput
+    contracts?: contractsUncheckedCreateNestedManyWithoutCompanyInput
     admins?: AdminsCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
+    usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateManyBudgetInputEnvelope = {
@@ -33725,8 +37770,10 @@ export namespace Prisma {
     payments?: PaymentsUpdateManyWithoutCompanyNestedInput
     machinery?: machineryUpdateManyWithoutCompanyNestedInput
     User?: UserUpdateManyWithoutCompanyNestedInput
+    contracts?: contractsUpdateManyWithoutCompanyNestedInput
     admins?: AdminsCompaniesUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
+    usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutBudgetInput = {
@@ -33750,8 +37797,10 @@ export namespace Prisma {
     payments?: PaymentsUncheckedUpdateManyWithoutCompanyNestedInput
     machinery?: machineryUncheckedUpdateManyWithoutCompanyNestedInput
     User?: UserUncheckedUpdateManyWithoutCompanyNestedInput
+    contracts?: contractsUncheckedUpdateManyWithoutCompanyNestedInput
     admins?: AdminsCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
+    usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type IncidentsUpsertWithoutBudgetInput = {
@@ -33819,6 +37868,7 @@ export namespace Prisma {
     machineryID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
+    contractID?: NullableIntFieldUpdateOperationsInput | number | null
     incidents?: IncidentsUpdateOneWithoutUsersNestedInput
     directions?: DirectionsUpdateManyWithoutUserNestedInput
     payments?: PaymentsUpdateOneWithoutUserNestedInput
@@ -33826,7 +37876,9 @@ export namespace Prisma {
     ClientMachinery?: ClientMachineryUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUpdateManyWithoutUserNestedInput
     Company?: CompanyUpdateOneWithoutUserNestedInput
+    contracts?: contractsUpdateManyWithoutUserNestedInput
     machinery?: machineryUpdateManyWithoutClientNestedInput
+    usersCompanies?: usersCompaniesUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBudgetInput = {
@@ -33839,13 +37891,16 @@ export namespace Prisma {
     machineryID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
+    contractID?: NullableIntFieldUpdateOperationsInput | number | null
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
     directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
     ClientMachinery?: ClientMachineryUncheckedUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUncheckedUpdateManyWithoutUserNestedInput
+    contracts?: contractsUncheckedUpdateManyWithoutUserNestedInput
     machinery?: machineryUncheckedUpdateManyWithoutClientNestedInput
+    usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CompanyUpsertWithWhereUniqueWithoutBudgetInput = {
@@ -33941,8 +37996,10 @@ export namespace Prisma {
     machinery?: machineryCreateNestedManyWithoutCompanyInput
     Budget?: BudgetCreateNestedManyWithoutCompanyInput
     User?: UserCreateNestedManyWithoutCompanyInput
+    contracts?: contractsCreateNestedManyWithoutCompanyInput
     admins?: AdminsCompaniesCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
+    usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutIncidentHistoryInput = {
@@ -33966,8 +38023,10 @@ export namespace Prisma {
     machinery?: machineryUncheckedCreateNestedManyWithoutCompanyInput
     Budget?: BudgetUncheckedCreateNestedManyWithoutCompanyInput
     User?: UserUncheckedCreateNestedManyWithoutCompanyInput
+    contracts?: contractsUncheckedCreateNestedManyWithoutCompanyInput
     admins?: AdminsCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
+    usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutIncidentHistoryInput = {
@@ -33983,6 +38042,7 @@ export namespace Prisma {
     machineryID?: number | null
     role?: $Enums.Role
     userCode?: string | null
+    contractID?: number | null
     incidents?: IncidentsCreateNestedOneWithoutUsersInput
     directions?: DirectionsCreateNestedManyWithoutUserInput
     payments?: PaymentsCreateNestedOneWithoutUserInput
@@ -33990,7 +38050,9 @@ export namespace Prisma {
     Incidents?: IncidentsCreateNestedManyWithoutUserInput
     Budget?: BudgetCreateNestedManyWithoutUserInput
     Company?: CompanyCreateNestedOneWithoutUserInput
+    contracts?: contractsCreateNestedManyWithoutUserInput
     machinery?: machineryCreateNestedManyWithoutClientInput
+    usersCompanies?: usersCompaniesCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutIncidentHistoryInput = {
@@ -34003,13 +38065,16 @@ export namespace Prisma {
     machineryID?: number | null
     role?: $Enums.Role
     userCode?: string | null
+    contractID?: number | null
     companyID?: number | null
     directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
     ClientMachinery?: ClientMachineryUncheckedCreateNestedManyWithoutUserInput
     Incidents?: IncidentsUncheckedCreateNestedManyWithoutUserInput
     Budget?: BudgetUncheckedCreateNestedManyWithoutUserInput
+    contracts?: contractsUncheckedCreateNestedManyWithoutUserInput
     machinery?: machineryUncheckedCreateNestedManyWithoutClientInput
+    usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutIncidentHistoryInput = {
@@ -34094,8 +38159,10 @@ export namespace Prisma {
     machinery?: machineryUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUpdateManyWithoutCompanyNestedInput
     User?: UserUpdateManyWithoutCompanyNestedInput
+    contracts?: contractsUpdateManyWithoutCompanyNestedInput
     admins?: AdminsCompaniesUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
+    usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutIncidentHistoryInput = {
@@ -34119,8 +38186,10 @@ export namespace Prisma {
     machinery?: machineryUncheckedUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUncheckedUpdateManyWithoutCompanyNestedInput
     User?: UserUncheckedUpdateManyWithoutCompanyNestedInput
+    contracts?: contractsUncheckedUpdateManyWithoutCompanyNestedInput
     admins?: AdminsCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
+    usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type UserUpsertWithoutIncidentHistoryInput = {
@@ -34142,6 +38211,7 @@ export namespace Prisma {
     machineryID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
+    contractID?: NullableIntFieldUpdateOperationsInput | number | null
     incidents?: IncidentsUpdateOneWithoutUsersNestedInput
     directions?: DirectionsUpdateManyWithoutUserNestedInput
     payments?: PaymentsUpdateOneWithoutUserNestedInput
@@ -34149,7 +38219,9 @@ export namespace Prisma {
     Incidents?: IncidentsUpdateManyWithoutUserNestedInput
     Budget?: BudgetUpdateManyWithoutUserNestedInput
     Company?: CompanyUpdateOneWithoutUserNestedInput
+    contracts?: contractsUpdateManyWithoutUserNestedInput
     machinery?: machineryUpdateManyWithoutClientNestedInput
+    usersCompanies?: usersCompaniesUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutIncidentHistoryInput = {
@@ -34162,13 +38234,16 @@ export namespace Prisma {
     machineryID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
+    contractID?: NullableIntFieldUpdateOperationsInput | number | null
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
     directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
     ClientMachinery?: ClientMachineryUncheckedUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUncheckedUpdateManyWithoutUserNestedInput
     Budget?: BudgetUncheckedUpdateManyWithoutUserNestedInput
+    contracts?: contractsUncheckedUpdateManyWithoutUserNestedInput
     machinery?: machineryUncheckedUpdateManyWithoutClientNestedInput
+    usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CompanyCreateWithoutShiftWorkersInput = {
@@ -34191,8 +38266,10 @@ export namespace Prisma {
     machinery?: machineryCreateNestedManyWithoutCompanyInput
     Budget?: BudgetCreateNestedManyWithoutCompanyInput
     User?: UserCreateNestedManyWithoutCompanyInput
+    contracts?: contractsCreateNestedManyWithoutCompanyInput
     admins?: AdminsCompaniesCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
+    usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutShiftWorkersInput = {
@@ -34216,8 +38293,10 @@ export namespace Prisma {
     machinery?: machineryUncheckedCreateNestedManyWithoutCompanyInput
     Budget?: BudgetUncheckedCreateNestedManyWithoutCompanyInput
     User?: UserUncheckedCreateNestedManyWithoutCompanyInput
+    contracts?: contractsUncheckedCreateNestedManyWithoutCompanyInput
     admins?: AdminsCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
+    usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutShiftWorkersInput = {
@@ -34306,8 +38385,10 @@ export namespace Prisma {
     machinery?: machineryUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUpdateManyWithoutCompanyNestedInput
     User?: UserUpdateManyWithoutCompanyNestedInput
+    contracts?: contractsUpdateManyWithoutCompanyNestedInput
     admins?: AdminsCompaniesUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
+    usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutShiftWorkersInput = {
@@ -34331,8 +38412,10 @@ export namespace Prisma {
     machinery?: machineryUncheckedUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUncheckedUpdateManyWithoutCompanyNestedInput
     User?: UserUncheckedUpdateManyWithoutCompanyNestedInput
+    contracts?: contractsUncheckedUpdateManyWithoutCompanyNestedInput
     admins?: AdminsCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
+    usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type WorkerUpsertWithoutShiftWorkersInput = {
@@ -34586,6 +38669,7 @@ export namespace Prisma {
     machineryID?: number | null
     role?: $Enums.Role
     userCode?: string | null
+    contractID?: number | null
     incidents?: IncidentsCreateNestedOneWithoutUsersInput
     payments?: PaymentsCreateNestedOneWithoutUserInput
     IncidentHistory?: IncidentHistoryCreateNestedManyWithoutUserInput
@@ -34593,7 +38677,9 @@ export namespace Prisma {
     Incidents?: IncidentsCreateNestedManyWithoutUserInput
     Budget?: BudgetCreateNestedManyWithoutUserInput
     Company?: CompanyCreateNestedOneWithoutUserInput
+    contracts?: contractsCreateNestedManyWithoutUserInput
     machinery?: machineryCreateNestedManyWithoutClientInput
+    usersCompanies?: usersCompaniesCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutDirectionsInput = {
@@ -34606,13 +38692,16 @@ export namespace Prisma {
     machineryID?: number | null
     role?: $Enums.Role
     userCode?: string | null
+    contractID?: number | null
     companyID?: number | null
     payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
     ClientMachinery?: ClientMachineryUncheckedCreateNestedManyWithoutUserInput
     Incidents?: IncidentsUncheckedCreateNestedManyWithoutUserInput
     Budget?: BudgetUncheckedCreateNestedManyWithoutUserInput
+    contracts?: contractsUncheckedCreateNestedManyWithoutUserInput
     machinery?: machineryUncheckedCreateNestedManyWithoutClientInput
+    usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutDirectionsInput = {
@@ -34640,8 +38729,10 @@ export namespace Prisma {
     machinery?: machineryCreateNestedManyWithoutCompanyInput
     Budget?: BudgetCreateNestedManyWithoutCompanyInput
     User?: UserCreateNestedManyWithoutCompanyInput
+    contracts?: contractsCreateNestedManyWithoutCompanyInput
     admins?: AdminsCompaniesCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
+    usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutDirectionsInput = {
@@ -34665,8 +38756,10 @@ export namespace Prisma {
     machinery?: machineryUncheckedCreateNestedManyWithoutCompanyInput
     Budget?: BudgetUncheckedCreateNestedManyWithoutCompanyInput
     User?: UserUncheckedCreateNestedManyWithoutCompanyInput
+    contracts?: contractsUncheckedCreateNestedManyWithoutCompanyInput
     admins?: AdminsCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
+    usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutDirectionsInput = {
@@ -34693,6 +38786,7 @@ export namespace Prisma {
     machineryID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
+    contractID?: NullableIntFieldUpdateOperationsInput | number | null
     incidents?: IncidentsUpdateOneWithoutUsersNestedInput
     payments?: PaymentsUpdateOneWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUpdateManyWithoutUserNestedInput
@@ -34700,7 +38794,9 @@ export namespace Prisma {
     Incidents?: IncidentsUpdateManyWithoutUserNestedInput
     Budget?: BudgetUpdateManyWithoutUserNestedInput
     Company?: CompanyUpdateOneWithoutUserNestedInput
+    contracts?: contractsUpdateManyWithoutUserNestedInput
     machinery?: machineryUpdateManyWithoutClientNestedInput
+    usersCompanies?: usersCompaniesUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDirectionsInput = {
@@ -34713,13 +38809,16 @@ export namespace Prisma {
     machineryID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
+    contractID?: NullableIntFieldUpdateOperationsInput | number | null
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
     payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
     ClientMachinery?: ClientMachineryUncheckedUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUncheckedUpdateManyWithoutUserNestedInput
     Budget?: BudgetUncheckedUpdateManyWithoutUserNestedInput
+    contracts?: contractsUncheckedUpdateManyWithoutUserNestedInput
     machinery?: machineryUncheckedUpdateManyWithoutClientNestedInput
+    usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CompanyUpsertWithoutDirectionsInput = {
@@ -34753,8 +38852,10 @@ export namespace Prisma {
     machinery?: machineryUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUpdateManyWithoutCompanyNestedInput
     User?: UserUpdateManyWithoutCompanyNestedInput
+    contracts?: contractsUpdateManyWithoutCompanyNestedInput
     admins?: AdminsCompaniesUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
+    usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutDirectionsInput = {
@@ -34778,8 +38879,10 @@ export namespace Prisma {
     machinery?: machineryUncheckedUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUncheckedUpdateManyWithoutCompanyNestedInput
     User?: UserUncheckedUpdateManyWithoutCompanyNestedInput
+    contracts?: contractsUncheckedUpdateManyWithoutCompanyNestedInput
     admins?: AdminsCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
+    usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type UserCreateWithoutMachineryInput = {
@@ -34790,6 +38893,7 @@ export namespace Prisma {
     machineryID?: number | null
     role?: $Enums.Role
     userCode?: string | null
+    contractID?: number | null
     incidents?: IncidentsCreateNestedOneWithoutUsersInput
     directions?: DirectionsCreateNestedManyWithoutUserInput
     payments?: PaymentsCreateNestedOneWithoutUserInput
@@ -34798,6 +38902,8 @@ export namespace Prisma {
     Incidents?: IncidentsCreateNestedManyWithoutUserInput
     Budget?: BudgetCreateNestedManyWithoutUserInput
     Company?: CompanyCreateNestedOneWithoutUserInput
+    contracts?: contractsCreateNestedManyWithoutUserInput
+    usersCompanies?: usersCompaniesCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutMachineryInput = {
@@ -34810,6 +38916,7 @@ export namespace Prisma {
     machineryID?: number | null
     role?: $Enums.Role
     userCode?: string | null
+    contractID?: number | null
     companyID?: number | null
     directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
@@ -34817,6 +38924,8 @@ export namespace Prisma {
     ClientMachinery?: ClientMachineryUncheckedCreateNestedManyWithoutUserInput
     Incidents?: IncidentsUncheckedCreateNestedManyWithoutUserInput
     Budget?: BudgetUncheckedCreateNestedManyWithoutUserInput
+    contracts?: contractsUncheckedCreateNestedManyWithoutUserInput
+    usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutMachineryInput = {
@@ -34844,8 +38953,10 @@ export namespace Prisma {
     payments?: PaymentsCreateNestedManyWithoutCompanyInput
     Budget?: BudgetCreateNestedManyWithoutCompanyInput
     User?: UserCreateNestedManyWithoutCompanyInput
+    contracts?: contractsCreateNestedManyWithoutCompanyInput
     admins?: AdminsCompaniesCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
+    usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutMachineryInput = {
@@ -34869,8 +38980,10 @@ export namespace Prisma {
     payments?: PaymentsUncheckedCreateNestedManyWithoutCompanyInput
     Budget?: BudgetUncheckedCreateNestedManyWithoutCompanyInput
     User?: UserUncheckedCreateNestedManyWithoutCompanyInput
+    contracts?: contractsUncheckedCreateNestedManyWithoutCompanyInput
     admins?: AdminsCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
+    usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutMachineryInput = {
@@ -34915,6 +39028,7 @@ export namespace Prisma {
     machineryID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
+    contractID?: NullableIntFieldUpdateOperationsInput | number | null
     incidents?: IncidentsUpdateOneWithoutUsersNestedInput
     directions?: DirectionsUpdateManyWithoutUserNestedInput
     payments?: PaymentsUpdateOneWithoutUserNestedInput
@@ -34923,6 +39037,8 @@ export namespace Prisma {
     Incidents?: IncidentsUpdateManyWithoutUserNestedInput
     Budget?: BudgetUpdateManyWithoutUserNestedInput
     Company?: CompanyUpdateOneWithoutUserNestedInput
+    contracts?: contractsUpdateManyWithoutUserNestedInput
+    usersCompanies?: usersCompaniesUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMachineryInput = {
@@ -34935,6 +39051,7 @@ export namespace Prisma {
     machineryID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
+    contractID?: NullableIntFieldUpdateOperationsInput | number | null
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
     directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
@@ -34942,6 +39059,8 @@ export namespace Prisma {
     ClientMachinery?: ClientMachineryUncheckedUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUncheckedUpdateManyWithoutUserNestedInput
     Budget?: BudgetUncheckedUpdateManyWithoutUserNestedInput
+    contracts?: contractsUncheckedUpdateManyWithoutUserNestedInput
+    usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CompanyUpsertWithoutMachineryInput = {
@@ -34975,8 +39094,10 @@ export namespace Prisma {
     payments?: PaymentsUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUpdateManyWithoutCompanyNestedInput
     User?: UserUpdateManyWithoutCompanyNestedInput
+    contracts?: contractsUpdateManyWithoutCompanyNestedInput
     admins?: AdminsCompaniesUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
+    usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutMachineryInput = {
@@ -35000,8 +39121,10 @@ export namespace Prisma {
     payments?: PaymentsUncheckedUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUncheckedUpdateManyWithoutCompanyNestedInput
     User?: UserUncheckedUpdateManyWithoutCompanyNestedInput
+    contracts?: contractsUncheckedUpdateManyWithoutCompanyNestedInput
     admins?: AdminsCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
+    usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type ClientMachineryUpsertWithWhereUniqueWithoutMachineryInput = {
@@ -35028,6 +39151,7 @@ export namespace Prisma {
     machineryID?: number | null
     role?: $Enums.Role
     userCode?: string | null
+    contractID?: number | null
     incidents?: IncidentsCreateNestedOneWithoutUsersInput
     directions?: DirectionsCreateNestedManyWithoutUserInput
     payments?: PaymentsCreateNestedOneWithoutUserInput
@@ -35035,7 +39159,9 @@ export namespace Prisma {
     Incidents?: IncidentsCreateNestedManyWithoutUserInput
     Budget?: BudgetCreateNestedManyWithoutUserInput
     Company?: CompanyCreateNestedOneWithoutUserInput
+    contracts?: contractsCreateNestedManyWithoutUserInput
     machinery?: machineryCreateNestedManyWithoutClientInput
+    usersCompanies?: usersCompaniesCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutClientMachineryInput = {
@@ -35048,13 +39174,16 @@ export namespace Prisma {
     machineryID?: number | null
     role?: $Enums.Role
     userCode?: string | null
+    contractID?: number | null
     companyID?: number | null
     directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
     Incidents?: IncidentsUncheckedCreateNestedManyWithoutUserInput
     Budget?: BudgetUncheckedCreateNestedManyWithoutUserInput
+    contracts?: contractsUncheckedCreateNestedManyWithoutUserInput
     machinery?: machineryUncheckedCreateNestedManyWithoutClientInput
+    usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutClientMachineryInput = {
@@ -35113,6 +39242,7 @@ export namespace Prisma {
     machineryID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
+    contractID?: NullableIntFieldUpdateOperationsInput | number | null
     incidents?: IncidentsUpdateOneWithoutUsersNestedInput
     directions?: DirectionsUpdateManyWithoutUserNestedInput
     payments?: PaymentsUpdateOneWithoutUserNestedInput
@@ -35120,7 +39250,9 @@ export namespace Prisma {
     Incidents?: IncidentsUpdateManyWithoutUserNestedInput
     Budget?: BudgetUpdateManyWithoutUserNestedInput
     Company?: CompanyUpdateOneWithoutUserNestedInput
+    contracts?: contractsUpdateManyWithoutUserNestedInput
     machinery?: machineryUpdateManyWithoutClientNestedInput
+    usersCompanies?: usersCompaniesUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutClientMachineryInput = {
@@ -35133,13 +39265,16 @@ export namespace Prisma {
     machineryID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
+    contractID?: NullableIntFieldUpdateOperationsInput | number | null
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
     directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUncheckedUpdateManyWithoutUserNestedInput
     Budget?: BudgetUncheckedUpdateManyWithoutUserNestedInput
+    contracts?: contractsUncheckedUpdateManyWithoutUserNestedInput
     machinery?: machineryUncheckedUpdateManyWithoutClientNestedInput
+    usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type machineryUpsertWithoutClientMachineryInput = {
@@ -35226,6 +39361,15 @@ export namespace Prisma {
     workerID: number
   }
 
+  export type contractsCreateManyUserInput = {
+    id?: number
+    companyID: number
+    contractType?: $Enums.ContractType | null
+    startDate?: Date | string
+    endDate?: Date | string | null
+    isActive?: boolean
+  }
+
   export type machineryCreateManyClientInput = {
     id?: number
     name: string
@@ -35237,6 +39381,11 @@ export namespace Prisma {
     companyName: string
     companyID: number
     serialNumber: string
+  }
+
+  export type usersCompaniesCreateManyUserInput = {
+    id?: number
+    companyID: number
   }
 
   export type DirectionsUpdateWithoutUserInput = {
@@ -35383,6 +39532,32 @@ export namespace Prisma {
     workerID?: IntFieldUpdateOperationsInput | number
   }
 
+  export type contractsUpdateWithoutUserInput = {
+    contractType?: NullableEnumContractTypeFieldUpdateOperationsInput | $Enums.ContractType | null
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    company?: CompanyUpdateOneRequiredWithoutContractsNestedInput
+  }
+
+  export type contractsUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    companyID?: IntFieldUpdateOperationsInput | number
+    contractType?: NullableEnumContractTypeFieldUpdateOperationsInput | $Enums.ContractType | null
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type contractsUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    companyID?: IntFieldUpdateOperationsInput | number
+    contractType?: NullableEnumContractTypeFieldUpdateOperationsInput | $Enums.ContractType | null
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+  }
+
   export type machineryUpdateWithoutClientInput = {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
@@ -35421,6 +39596,20 @@ export namespace Prisma {
     companyName?: StringFieldUpdateOperationsInput | string
     companyID?: IntFieldUpdateOperationsInput | number
     serialNumber?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type usersCompaniesUpdateWithoutUserInput = {
+    Company?: CompanyUpdateOneRequiredWithoutUsersCompaniesNestedInput
+  }
+
+  export type usersCompaniesUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    companyID?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type usersCompaniesUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    companyID?: IntFieldUpdateOperationsInput | number
   }
 
   export type WorkerCreateManyCompanyInput = {
@@ -35525,6 +39714,16 @@ export namespace Prisma {
     machineryID?: number | null
     role?: $Enums.Role
     userCode?: string | null
+    contractID?: number | null
+  }
+
+  export type contractsCreateManyCompanyInput = {
+    id?: number
+    userID: number
+    contractType?: $Enums.ContractType | null
+    startDate?: Date | string
+    endDate?: Date | string | null
+    isActive?: boolean
   }
 
   export type AdminsCompaniesCreateManyCompanyInput = {
@@ -35535,6 +39734,11 @@ export namespace Prisma {
   export type workersCompaniesCreateManyCompanyInput = {
     id?: number
     workerID: number
+  }
+
+  export type usersCompaniesCreateManyCompanyInput = {
+    id?: number
+    userID: number
   }
 
   export type WorkerUpdateWithoutCompanyInput = {
@@ -35838,6 +40042,7 @@ export namespace Prisma {
     machineryID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
+    contractID?: NullableIntFieldUpdateOperationsInput | number | null
     incidents?: IncidentsUpdateOneWithoutUsersNestedInput
     directions?: DirectionsUpdateManyWithoutUserNestedInput
     payments?: PaymentsUpdateOneWithoutUserNestedInput
@@ -35845,7 +40050,9 @@ export namespace Prisma {
     ClientMachinery?: ClientMachineryUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUpdateManyWithoutUserNestedInput
     Budget?: BudgetUpdateManyWithoutUserNestedInput
+    contracts?: contractsUpdateManyWithoutUserNestedInput
     machinery?: machineryUpdateManyWithoutClientNestedInput
+    usersCompanies?: usersCompaniesUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCompanyInput = {
@@ -35858,13 +40065,16 @@ export namespace Prisma {
     machineryID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
+    contractID?: NullableIntFieldUpdateOperationsInput | number | null
     directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
     ClientMachinery?: ClientMachineryUncheckedUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUncheckedUpdateManyWithoutUserNestedInput
     Budget?: BudgetUncheckedUpdateManyWithoutUserNestedInput
+    contracts?: contractsUncheckedUpdateManyWithoutUserNestedInput
     machinery?: machineryUncheckedUpdateManyWithoutClientNestedInput
+    usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutCompanyInput = {
@@ -35877,6 +40087,33 @@ export namespace Prisma {
     machineryID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
+    contractID?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type contractsUpdateWithoutCompanyInput = {
+    contractType?: NullableEnumContractTypeFieldUpdateOperationsInput | $Enums.ContractType | null
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    user?: UserUpdateOneRequiredWithoutContractsNestedInput
+  }
+
+  export type contractsUncheckedUpdateWithoutCompanyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userID?: IntFieldUpdateOperationsInput | number
+    contractType?: NullableEnumContractTypeFieldUpdateOperationsInput | $Enums.ContractType | null
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type contractsUncheckedUpdateManyWithoutCompanyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userID?: IntFieldUpdateOperationsInput | number
+    contractType?: NullableEnumContractTypeFieldUpdateOperationsInput | $Enums.ContractType | null
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type AdminsCompaniesUpdateWithoutCompanyInput = {
@@ -35905,6 +40142,20 @@ export namespace Prisma {
   export type workersCompaniesUncheckedUpdateManyWithoutCompanyInput = {
     id?: IntFieldUpdateOperationsInput | number
     workerID?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type usersCompaniesUpdateWithoutCompanyInput = {
+    User?: UserUpdateOneRequiredWithoutUsersCompaniesNestedInput
+  }
+
+  export type usersCompaniesUncheckedUpdateWithoutCompanyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userID?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type usersCompaniesUncheckedUpdateManyWithoutCompanyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userID?: IntFieldUpdateOperationsInput | number
   }
 
   export type ShiftWorkerCreateManyWorkerInput = {
@@ -36102,6 +40353,7 @@ export namespace Prisma {
     machineryID?: number | null
     role?: $Enums.Role
     userCode?: string | null
+    contractID?: number | null
     companyID?: number | null
   }
 
@@ -36131,6 +40383,7 @@ export namespace Prisma {
     machineryID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
+    contractID?: NullableIntFieldUpdateOperationsInput | number | null
     directions?: DirectionsUpdateManyWithoutUserNestedInput
     payments?: PaymentsUpdateOneWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUpdateManyWithoutUserNestedInput
@@ -36138,7 +40391,9 @@ export namespace Prisma {
     Incidents?: IncidentsUpdateManyWithoutUserNestedInput
     Budget?: BudgetUpdateManyWithoutUserNestedInput
     Company?: CompanyUpdateOneWithoutUserNestedInput
+    contracts?: contractsUpdateManyWithoutUserNestedInput
     machinery?: machineryUpdateManyWithoutClientNestedInput
+    usersCompanies?: usersCompaniesUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutIncidentsInput = {
@@ -36150,6 +40405,7 @@ export namespace Prisma {
     machineryID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
+    contractID?: NullableIntFieldUpdateOperationsInput | number | null
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
     directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
@@ -36157,7 +40413,9 @@ export namespace Prisma {
     ClientMachinery?: ClientMachineryUncheckedUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUncheckedUpdateManyWithoutUserNestedInput
     Budget?: BudgetUncheckedUpdateManyWithoutUserNestedInput
+    contracts?: contractsUncheckedUpdateManyWithoutUserNestedInput
     machinery?: machineryUncheckedUpdateManyWithoutClientNestedInput
+    usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutIncidentsInput = {
@@ -36169,6 +40427,7 @@ export namespace Prisma {
     machineryID?: NullableIntFieldUpdateOperationsInput | number | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
+    contractID?: NullableIntFieldUpdateOperationsInput | number | null
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
@@ -36228,21 +40487,21 @@ export namespace Prisma {
 
   export type paymentStatusCreateManyPaymentInput = {
     id?: number
-    status: string
+    status: $Enums.paymentStatusEnum
   }
 
   export type paymentStatusUpdateWithoutPaymentInput = {
-    status?: StringFieldUpdateOperationsInput | string
+    status?: EnumpaymentStatusEnumFieldUpdateOperationsInput | $Enums.paymentStatusEnum
   }
 
   export type paymentStatusUncheckedUpdateWithoutPaymentInput = {
     id?: IntFieldUpdateOperationsInput | number
-    status?: StringFieldUpdateOperationsInput | string
+    status?: EnumpaymentStatusEnumFieldUpdateOperationsInput | $Enums.paymentStatusEnum
   }
 
   export type paymentStatusUncheckedUpdateManyWithoutPaymentInput = {
     id?: IntFieldUpdateOperationsInput | number
-    status?: StringFieldUpdateOperationsInput | string
+    status?: EnumpaymentStatusEnumFieldUpdateOperationsInput | $Enums.paymentStatusEnum
   }
 
   export type CompanyCreateManyBudgetInput = {
@@ -36278,8 +40537,10 @@ export namespace Prisma {
     machinery?: machineryUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUpdateManyWithoutCompanyNestedInput
     User?: UserUpdateManyWithoutCompanyNestedInput
+    contracts?: contractsUpdateManyWithoutCompanyNestedInput
     admins?: AdminsCompaniesUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
+    usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutBudgetInput = {
@@ -36303,8 +40564,10 @@ export namespace Prisma {
     machinery?: machineryUncheckedUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUncheckedUpdateManyWithoutCompanyNestedInput
     User?: UserUncheckedUpdateManyWithoutCompanyNestedInput
+    contracts?: contractsUncheckedUpdateManyWithoutCompanyNestedInput
     admins?: AdminsCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
+    usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateManyWithoutBudgetInput = {

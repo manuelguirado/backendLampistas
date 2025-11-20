@@ -12,6 +12,7 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '../auth/auth.guard';
 import { CompanyGuard } from './company.guard';
+
 @Controller('company')
 export class CompanyController {
   constructor(private readonly companyService: CompanyService) {}
@@ -65,21 +66,54 @@ export class CompanyController {
     return this.companyService.validateCode(userType, code);
   }
   @UseGuards(AuthGuard, CompanyGuard)
-  @Patch('editWorker')
+  @Patch('editWorker/:workerID')
   editWorker(
+    @Param('workerID') workerID: string,
     @Body()
     body: {
-      workerID: number;
       data: { email?: string; name?: string; password?: string };
     },
   ) {
-    const { workerID, data } = body;
-    return this.companyService.editWorker(workerID, data);
+    const workerIDNumber = Number(workerID);
+    const { data } = body;
+    return this.companyService.editWorker(workerIDNumber, data);
   }
   @UseGuards(AuthGuard, CompanyGuard)
-  @Delete('deleteWorker')
-  deleteWorker(@Body() body: { workerID: number }) {
-    return this.companyService.eliminateWorker(body.workerID);
+  @Post('companyCreateUser')
+  companyCreateUser(
+    @Request() req: any,
+    @Body()
+    createUserDto: { name: string; email: string; password: string },
+  ) {
+    const companyID = req.user.companyID;
+    return this.companyService.companyCreateUser(
+      companyID,
+      createUserDto.name,
+      createUserDto.email,
+      createUserDto.password,
+    );
+  }
+  @UseGuards(AuthGuard, CompanyGuard)
+  @Delete('deleteWorker/:workerID')
+  deleteWorker(@Param('workerID') workerID: string) {
+    return this.companyService.eliminateWorker(Number(workerID));
+  }
+  @UseGuards(AuthGuard, CompanyGuard)
+  @Get('listClients')
+  listClients(
+    @Request() req: any,
+    @Query('limit') limit?: string,
+    @Query('offset') offset?: string,
+  ) {
+    const { companyID } = req.user;
+
+    const parsedLimit = limit ? Number(limit) : 5;
+    const parsedOffset = offset ? Number(offset) : 0;
+    return this.companyService.listClients(
+      companyID,
+      parsedLimit,
+      parsedOffset,
+    );
   }
   @UseGuards(AuthGuard, CompanyGuard)
   @Post('CreateBudget')
@@ -200,6 +234,21 @@ export class CompanyController {
       workerID,
       shiftSchedule,
       shiftType,
+    );
+  }
+  @Post('createUser')
+  @UseGuards(AuthGuard, CompanyGuard)
+  createUser(
+    @Request() req,
+    @Body() createUserDto: { name: string; email: string; password: string },
+  ) {
+    const companyID = req.user.companyID; // Del JWT
+
+    return this.companyService.companyCreateUser(
+      companyID,
+      createUserDto.name,
+      createUserDto.email,
+      createUserDto.password,
     );
   }
 }

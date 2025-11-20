@@ -10,6 +10,8 @@ import { assignIncident } from '../modules/incidents/assignIncident';
 import { createMachinery } from '../modules/machinery/createMachinery';
 import { assignShiftWorker } from '../modules/companies/assignShiftWorker';
 import { validateCode } from '../utils/validateCode';
+import { listClients } from '../modules/companies/listClients';
+import { companyCreateUser } from '../modules/companies/createUser';
 @Injectable()
 export class CompanyService {
   async companyLogin(email: string, password: string) {
@@ -34,7 +36,17 @@ export class CompanyService {
   ) {
     return registerWorker(email, password, name, companyID);
   }
-
+  async listClients(companyID: number, limit: number = 5, offset: number = 0) {
+    return listClients(companyID, limit, offset);
+  }
+  async companyCreateUser(
+    companyID: number,
+    name: string,
+    email: string,
+    password: string,
+  ) {
+    return companyCreateUser(companyID, name, email, password);
+  }
   async editWorker(
     workerID: number,
     data: { email?: string; name?: string; password?: string },
