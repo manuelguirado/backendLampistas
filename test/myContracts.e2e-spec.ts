@@ -1,11 +1,13 @@
+import { myContracts } from '../src/modules/users/Mycontracts';
+import { userRegister } from '../src/modules/users/userRegister';
+import { registerCompany } from '../src/modules/companies/registerCompany';
+import { registerDirections } from '../src/modules/directions/registerDirections';
 import { createContract } from '../src/modules/companies/updateTypeContractType';
 import registerAdmin from '../src/modules/admin/registerAdmin';
-import { registerCompany } from '../src/modules/companies/registerCompany';
-import { userRegister } from '../src/modules/users/userRegister';
-import { registerDirections } from '../src/modules/directions/registerDirections';
 import { PrismaClient } from '../generated/prisma';
 const prisma = new PrismaClient();
-describe('update contract type', () => {
+
+describe('My Contracts', () => {
   beforeAll(async () => {
     await prisma.$connect();
     await prisma.user.deleteMany({});
@@ -14,6 +16,7 @@ describe('update contract type', () => {
     await prisma.company.deleteMany({});
     await prisma.admin.deleteMany({});
   });
+
   afterAll(async () => {
     await prisma.user.deleteMany({});
     await prisma.contracts.deleteMany({});
@@ -22,32 +25,40 @@ describe('update contract type', () => {
     await prisma.admin.deleteMany({});
     await prisma.$disconnect();
   });
-  it('should update contract type', async () => {
-    const admin = await registerAdmin('admin@test.com', 'password123');
+
+  it('should retrieve user contracts', async () => {
+    const admin = await registerAdmin(
+      'admin-test-${Date.now()}@test.com',
+      'password123',
+    );
     const directions = await registerDirections(
-      '123 main st',
-      'new york',
-      'metropolis',
-      '123123',
+      '456 another st',
+      'los angeles',
+      'california',
+      '456456',
     );
     const company = await registerCompany(
-      'Company Test',
-      '2523422',
-      'company@test.com',
+      'Test Company ' + Date.now(),
+      '555-6789',
+      `company-test-${Date.now()}@test.com`,
       'password123',
       admin.adminID,
       directions,
     );
     const user = await userRegister(
-      'User Test',
-      'user@test.com',
+      'USER',
+      `user-test-${Date.now()}@test.com`,
       'password123',
     );
-    const updatedContract = await createContract(
+    const contract = await createContract(
       company.companyID,
       'contract',
       user.userID,
     );
-    expect(updatedContract.contractType).toBe('contract');
+    expect(contract).toBeDefined();
+    expect(contract.contractType).toBe('contract');
+    const contracts = await myContracts(user.userID);
+    expect(contracts).toHaveProperty('token');
+    expect(contracts).toHaveProperty('contracts');
   });
 });

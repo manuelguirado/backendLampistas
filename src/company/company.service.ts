@@ -12,6 +12,8 @@ import { assignShiftWorker } from '../modules/companies/assignShiftWorker';
 import { validateCode } from '../utils/validateCode';
 import { listClients } from '../modules/companies/listClients';
 import { companyCreateUser } from '../modules/companies/createUser';
+import { ContractType } from '../../generated/prisma';
+import { createContract } from '../modules/companies/updateTypeContractType';
 @Injectable()
 export class CompanyService {
   async companyLogin(email: string, password: string) {
@@ -23,6 +25,13 @@ export class CompanyService {
     } else if (userID !== undefined) {
       return assignCode('user', undefined, undefined, userID);
     }
+  }
+  async createContract(
+    companyID: number,
+    contractType: ContractType,
+    userID: number,
+  ) {
+    return createContract(companyID, contractType, userID);
   }
   async validateCode(userType: 'company' | 'user' | 'worker', code: string) {
     return validateCode(userType, code);

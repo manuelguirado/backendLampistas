@@ -12,6 +12,7 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '../auth/auth.guard';
 import { CompanyGuard } from './company.guard';
+import type { ContractType } from '../../generated/prisma';
 
 @Controller('company')
 export class CompanyController {
@@ -52,6 +53,20 @@ export class CompanyController {
     const { email, password, name } = body;
     const companyID = req.user.companyID;
     return this.companyService.registerWorker(email, password, name, companyID);
+  }
+  @UseGuards(AuthGuard, CompanyGuard)
+  @Post('createContract')
+  createContract(
+    @Request() req: any,
+    @Body()
+    body: {
+      contractType: ContractType;
+      userID: number;
+    },
+  ) {
+    const { contractType, userID } = body;
+    const companyID = req.user.companyID;
+    return this.companyService.createContract(companyID, contractType, userID);
   }
 
   @Post('validateCode')
