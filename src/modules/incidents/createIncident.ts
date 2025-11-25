@@ -18,7 +18,7 @@ export async function createIncident(
   }
 
   const foundCompany = await prisma.company.findUnique({
-    where: { companyID },
+    where: { companyID: companyID },
   });
   if (!foundCompany) {
     throw new Error('Company not found');

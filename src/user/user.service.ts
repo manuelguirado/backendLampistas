@@ -2,6 +2,7 @@ import { userRegister } from '../modules/users/userRegister';
 import { userLogin } from '../modules/users/userLogin';
 import { createIncident } from '../modules/incidents/createIncident';
 import { findMyMachinery } from '../modules/machinery/findMymachinery';
+import { myContracts } from '../modules/users/Mycontracts';
 import { Injectable } from '@nestjs/common';
 @Injectable()
 export class UserService {
@@ -32,5 +33,8 @@ export class UserService {
   }
   async findMyMachinery(userID: number) {
     return findMyMachinery(userID);
+  }
+  async myContracts(userID: number) {
+    return myContracts(userID);
   }
 }

@@ -4,6 +4,7 @@ import { registerWorker } from '../modules/workers/registerWorker';
 import { eliminateWorker } from '../modules/workers/eliminateWorker';
 import { createBudget } from '../modules/budgets/createbudget';
 import { assignCode } from '../utils/assingCode';
+import { getClientContracts } from '../modules/companies/getClientContracts';
 import { companyLogin } from '../modules/companies/companyLogin';
 import { listWorkers } from '../modules/companies/listWorkers';
 import { assignIncident } from '../modules/incidents/assignIncident';
@@ -122,5 +123,8 @@ export class CompanyService {
     shiftType: string,
   ) {
     return assignShiftWorker(workerID, shiftSchedule, shiftType);
+  }
+  async getClientContracts(companyID: number, userID: number) {
+    return getClientContracts(companyID, userID);
   }
 }

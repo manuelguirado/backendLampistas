@@ -66,6 +66,7 @@ export class CompanyController {
   ) {
     const { contractType, userID } = body;
     const companyID = req.user.companyID;
+    console.log('companyID in controller:', companyID);
     return this.companyService.createContract(companyID, contractType, userID);
   }
 
@@ -265,5 +266,11 @@ export class CompanyController {
       createUserDto.email,
       createUserDto.password,
     );
+  }
+  @UseGuards(AuthGuard, CompanyGuard)
+  @Get('getClientContracts/:userID')
+  getClientContracts(@Request() req: any, @Param('userID') userID: string) {
+    const { companyID } = req.user;
+    return this.companyService.getClientContracts(companyID, Number(userID));
   }
 }

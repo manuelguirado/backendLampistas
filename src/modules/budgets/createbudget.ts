@@ -10,10 +10,9 @@ export async function createBudget(
   description: string,
   userID: number,
   companyID: number,
-  workerID: number,
   items?: string[],
 ) {
-  if (!incidentID || !amount || !description || !companyID || !workerID) {
+  if (!incidentID || !amount || !description || !companyID || !userID) {
     throw new Error('All fields are required');
   }
 
@@ -31,12 +30,6 @@ export async function createBudget(
     throw new Error('Company not found');
   }
 
-  const foundWorker = await prisma.worker.findUnique({
-    where: { workerid: workerID },
-  });
-  if (!foundWorker) {
-    throw new Error('Worker not found');
-  }
   const foundUser = await prisma.user.findUnique({
     where: { userID },
   });
@@ -45,7 +38,6 @@ export async function createBudget(
   }
 
   const item = items ? items.join(', ') : '';
-
   const budget = await prisma.budget.create({
     data: {
       incidentID,
@@ -53,7 +45,6 @@ export async function createBudget(
       description,
       userID: userID,
       companyID,
-      workerID,
       items: item,
     },
   });

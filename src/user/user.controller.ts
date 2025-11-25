@@ -52,4 +52,10 @@ export class UserController {
       urgency,
     );
   }
+  @UseGuards(AuthGuard, UserGuard)
+  @Get('myContracts/:userID')
+  async myContracts(@Query('userID') userID: string) {
+    const userIDNum = parseInt(userID, 10);
+    return this.userService.myContracts(userIDNum);
+  }
 }

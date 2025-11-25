@@ -202,7 +202,6 @@ model Budget {
   company     Company    @relation("CompanyBudget", fields: [companyID], references: [companyID])
   incidentID  Int?
   incident    Incidents? @relation("BudgetIncidents")
-  workerID    Int
   userID      Int
   user        User       @relation(fields: [userID], references: [userID])
   Company     Company[]

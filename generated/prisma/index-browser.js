@@ -234,7 +234,6 @@ exports.Prisma.BudgetScalarFieldEnum = {
   companyID: 'companyID',
   description: 'description',
   incidentID: 'incidentID',
-  workerID: 'workerID',
   userID: 'userID'
 };
 
