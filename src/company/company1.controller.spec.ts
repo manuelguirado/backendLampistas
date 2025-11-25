@@ -1,7 +1,7 @@
 import { registerCompany } from '../modules/companies/registerCompany';
 import { registerDirections } from '../modules/directions/registerDirections';
 import registerAdmin from '../modules/admin/registerAdmin';
-
+import { createIncident } from '../modules/incidents/createIncident';
 import { PrismaClient } from '../../generated/prisma';
 import { userRegister } from '../modules/users/userRegister';
 import supertest from 'supertest';
@@ -38,9 +38,8 @@ describe('CompanyController', () => {
     await prisma.company.deleteMany({});
     await prisma.$disconnect();
   });
-  it('should create a contract with an user successfully', async () => {
-    const request = supertest('http://localhost:3000/company/createContract');
-
+  it('should create a budget successfully', async () => {
+    const request = supertest('http://localhost:3000/company/CreateBudget');
     const directions = await registerDirections(
       '123 Test St, Test City, TS 12345',
       'Test City',
@@ -48,21 +47,30 @@ describe('CompanyController', () => {
       '12345',
     );
     const admin = await registerAdmin(
-      `admin-create-contract-${Date.now()}@test.com`,
+      `admin-${Date.now()}@test.com`,
       'adminPassword',
     );
     const company = await registerCompany(
-      `company to assign code-${Date.now()}`,
+      `company with budget-${Date.now()}`,
       '1234567890',
-      `company-create-contract-${Date.now()}@test.com`,
+      `company-${Date.now()}@test.com`,
       'securePassword',
       admin.adminID,
       directions,
     );
+
     const user = await userRegister(
-      'Test User',
-      `user-create-contract-${Date.now()}@example.com`,
+      `user-${Date.now()}@example.com`,
       'userPassword',
+      'Test User',
+    );
+    const incident = await createIncident(
+      'Incident Title',
+      'Incident Description',
+      user.userID,
+      company.companyID,
+      'OPEN',
+      'HIGH',
     );
     const companyLogin = await supertest(
       'http://localhost:3000/company/CompanyLogin',
@@ -72,14 +80,25 @@ describe('CompanyController', () => {
       .expect(201);
     const body = companyLogin.body as { token: string };
     const token: string = body.token;
-    await request
+
+    const response = await request
       .post('')
       .send({
         companyID: company.companyID,
-        contractType: 'contract',
+        totalAmount: 10000,
+        description: 'This is a test budget',
+        incidentID: incident?.IncidentsID || 0,
         userID: user.userID,
+        items: [
+          { itemName: 'Item 1', quantity: 2, price: 100 },
+          { itemName: 'Item 2', quantity: 3, price: 200 },
+        ],
+        subtotal: 800,
+        tax: 160,
+        budgetNumber: `BUDGET-${Date.now()}`,
       })
       .set('Authorization', `Bearer ${token}`)
       .expect(201);
+    expect(response.body).toBeDefined();
   });
 });

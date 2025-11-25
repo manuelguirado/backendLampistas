@@ -13,6 +13,7 @@ import {
 import { AuthGuard } from '../auth/auth.guard';
 import { CompanyGuard } from './company.guard';
 import type { ContractType } from '../../generated/prisma';
+import type { ItemType } from '../utils/types/itemType';
 
 @Controller('company')
 export class CompanyController {
@@ -66,7 +67,6 @@ export class CompanyController {
   ) {
     const { contractType, userID } = body;
     const companyID = req.user.companyID;
-    console.log('companyID in controller:', companyID);
     return this.companyService.createContract(companyID, contractType, userID);
   }
 
@@ -133,35 +133,33 @@ export class CompanyController {
   }
   @UseGuards(AuthGuard, CompanyGuard)
   @Post('CreateBudget')
-  createBudget(
+  async createBudget(
+    @Request() req,
     @Body()
-    body: {
-      incidentID: number;
-      amount: number;
-      description: string;
+    createBudgetDto: {
+      budgetNumber: string;
       userID: number;
       companyID: number;
-      workerID: number;
-      items?: string[];
+      items: ItemType[];
+      subtotal: number;
+      tax: number;
+      totalAmount: number;
+      incidentID?: number;
+      description?: string;
     },
   ) {
-    const {
-      incidentID,
-      amount,
-      description,
-      userID,
-      companyID,
-      workerID,
-      items,
-    } = body;
+    const companyID = req.user.companyID;
+
     return this.companyService.createBudget(
-      incidentID,
-      amount,
-      description,
-      userID,
+      createBudgetDto.budgetNumber,
+      createBudgetDto.userID,
       companyID,
-      workerID,
-      items,
+      createBudgetDto.items,
+      createBudgetDto.subtotal,
+      createBudgetDto.tax,
+      createBudgetDto.totalAmount,
+      createBudgetDto.incidentID,
+      createBudgetDto.description ?? '',
     );
   }
   @UseGuards(AuthGuard, CompanyGuard)

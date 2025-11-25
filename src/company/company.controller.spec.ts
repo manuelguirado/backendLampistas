@@ -510,12 +510,6 @@ it('should create a budget successfully', async () => {
     admin.adminID,
     directions,
   );
-  const worker = await registerWorker(
-    `worker-${Date.now()}@example.com`,
-    'workerPassword',
-    'Test Worker',
-    company.companyID,
-  );
 
   const user = await userRegister(
     `user-${Date.now()}@example.com`,
@@ -543,11 +537,17 @@ it('should create a budget successfully', async () => {
     .post('')
     .send({
       companyID: company.companyID,
-      amount: 10000,
+      totalAmount: 10000,
       description: 'This is a test budget',
       incidentID: incident?.IncidentsID || 0,
       userID: user.userID,
-      workerID: worker.workerid,
+      items: [
+        { itemName: 'Item 1', quantity: 2, price: 100 },
+        { itemName: 'Item 2', quantity: 3, price: 200 },
+      ],
+      subtotal: 800,
+      tax: 160,
+      budgetNumber: `BUDGET-${Date.now()}`,
     })
     .set('Authorization', `Bearer ${token}`)
     .expect(201);

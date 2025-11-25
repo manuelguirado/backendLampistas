@@ -10,12 +10,7 @@ export async function createContract(
   if (!companyID || !contractType) {
     throw new Error('companyID and contractType are required');
   }
-  console.log(
-    'Creating contract for companyID:',
-    companyID,
-    'with contractType:',
-    contractType,
-  );
+
   const company = await prisma.company.findUnique({
     where: { companyID },
   });

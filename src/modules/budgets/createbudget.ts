@@ -1,26 +1,23 @@
 import { PrismaClient } from '../../../generated/prisma';
+import type { ItemType } from '../../utils/types/itemType';
 import jwt, { SignOptions } from 'jsonwebtoken';
 import dotenv from 'dotenv';
 dotenv.config({ path: '../../../.env' });
 const prisma = new PrismaClient();
 
 export async function createBudget(
-  incidentID: number,
-  amount: number,
-  description: string,
+  budgetNumber: string,
   userID: number,
   companyID: number,
-  items?: string[],
+  items: ItemType[],
+  subtotal: number,
+  tax: number,
+  totalAmount: number,
+  incidentID?: number,
+  description?: string,
 ) {
-  if (!incidentID || !amount || !description || !companyID || !userID) {
-    throw new Error('All fields are required');
-  }
-
-  const foundIncident = await prisma.incidents.findUnique({
-    where: { IncidentsID: incidentID },
-  });
-  if (!foundIncident) {
-    throw new Error('Incident not found');
+  if (!budgetNumber || !userID || !companyID || !items || items.length === 0) {
+    throw new Error('Budget number, user, company and items are required');
   }
 
   const foundCompany = await prisma.company.findUnique({
@@ -37,15 +34,26 @@ export async function createBudget(
     throw new Error('User not found');
   }
 
-  const item = items ? items.join(', ') : '';
+  if (incidentID) {
+    const foundIncident = await prisma.incidents.findUnique({
+      where: { IncidentsID: incidentID },
+    });
+    if (!foundIncident) {
+      throw new Error('Incident not found');
+    }
+  }
+
   const budget = await prisma.budget.create({
     data: {
-      incidentID,
-      totalAmount: amount,
-      description,
-      userID: userID,
+      budgetNumber,
+      userID,
       companyID,
-      items: item,
+      items: items,
+      subtotal,
+      tax,
+      totalAmount,
+      incidentID,
+      description,
     },
   });
 
@@ -58,7 +66,13 @@ export async function createBudget(
     const secret = process.env.JWT_SECRET as string;
     const options: SignOptions = { expiresIn: '1h' };
     const token = jwt.sign(payload, secret, options);
-    return { token, ...budget };
+    return {
+      token,
+      budget: {
+        ...budget,
+        items: budget.items as ItemType[],
+      },
+    };
   } catch (error) {
     throw new Error(`Error generating token ${error}`);
   }

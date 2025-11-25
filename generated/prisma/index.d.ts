@@ -16649,6 +16649,8 @@ export namespace Prisma {
   export type BudgetAvgAggregateOutputType = {
     budgetID: number | null
     totalAmount: Decimal | null
+    subtotal: Decimal | null
+    tax: Decimal | null
     companyID: number | null
     incidentID: number | null
     userID: number | null
@@ -16657,6 +16659,8 @@ export namespace Prisma {
   export type BudgetSumAggregateOutputType = {
     budgetID: number | null
     totalAmount: Decimal | null
+    subtotal: Decimal | null
+    tax: Decimal | null
     companyID: number | null
     incidentID: number | null
     userID: number | null
@@ -16664,32 +16668,42 @@ export namespace Prisma {
 
   export type BudgetMinAggregateOutputType = {
     budgetID: number | null
+    budgetNumber: string | null
     totalAmount: Decimal | null
-    items: string | null
+    subtotal: Decimal | null
+    tax: Decimal | null
     companyID: number | null
     description: string | null
     incidentID: number | null
     userID: number | null
+    createdAt: Date | null
   }
 
   export type BudgetMaxAggregateOutputType = {
     budgetID: number | null
+    budgetNumber: string | null
     totalAmount: Decimal | null
-    items: string | null
+    subtotal: Decimal | null
+    tax: Decimal | null
     companyID: number | null
     description: string | null
     incidentID: number | null
     userID: number | null
+    createdAt: Date | null
   }
 
   export type BudgetCountAggregateOutputType = {
     budgetID: number
+    budgetNumber: number
     totalAmount: number
+    subtotal: number
+    tax: number
     items: number
     companyID: number
     description: number
     incidentID: number
     userID: number
+    createdAt: number
     _all: number
   }
 
@@ -16697,6 +16711,8 @@ export namespace Prisma {
   export type BudgetAvgAggregateInputType = {
     budgetID?: true
     totalAmount?: true
+    subtotal?: true
+    tax?: true
     companyID?: true
     incidentID?: true
     userID?: true
@@ -16705,6 +16721,8 @@ export namespace Prisma {
   export type BudgetSumAggregateInputType = {
     budgetID?: true
     totalAmount?: true
+    subtotal?: true
+    tax?: true
     companyID?: true
     incidentID?: true
     userID?: true
@@ -16712,32 +16730,42 @@ export namespace Prisma {
 
   export type BudgetMinAggregateInputType = {
     budgetID?: true
+    budgetNumber?: true
     totalAmount?: true
-    items?: true
+    subtotal?: true
+    tax?: true
     companyID?: true
     description?: true
     incidentID?: true
     userID?: true
+    createdAt?: true
   }
 
   export type BudgetMaxAggregateInputType = {
     budgetID?: true
+    budgetNumber?: true
     totalAmount?: true
-    items?: true
+    subtotal?: true
+    tax?: true
     companyID?: true
     description?: true
     incidentID?: true
     userID?: true
+    createdAt?: true
   }
 
   export type BudgetCountAggregateInputType = {
     budgetID?: true
+    budgetNumber?: true
     totalAmount?: true
+    subtotal?: true
+    tax?: true
     items?: true
     companyID?: true
     description?: true
     incidentID?: true
     userID?: true
+    createdAt?: true
     _all?: true
   }
 
@@ -16829,12 +16857,16 @@ export namespace Prisma {
 
   export type BudgetGroupByOutputType = {
     budgetID: number
+    budgetNumber: string
     totalAmount: Decimal
-    items: string
+    subtotal: Decimal
+    tax: Decimal
+    items: JsonValue
     companyID: number
-    description: string
+    description: string | null
     incidentID: number | null
     userID: number
+    createdAt: Date
     _count: BudgetCountAggregateOutputType | null
     _avg: BudgetAvgAggregateOutputType | null
     _sum: BudgetSumAggregateOutputType | null
@@ -16858,12 +16890,16 @@ export namespace Prisma {
 
   export type BudgetSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     budgetID?: boolean
+    budgetNumber?: boolean
     totalAmount?: boolean
+    subtotal?: boolean
+    tax?: boolean
     items?: boolean
     companyID?: boolean
     description?: boolean
     incidentID?: boolean
     userID?: boolean
+    createdAt?: boolean
     company?: boolean | CompanyDefaultArgs<ExtArgs>
     incident?: boolean | Budget$incidentArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -16873,39 +16909,51 @@ export namespace Prisma {
 
   export type BudgetSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     budgetID?: boolean
+    budgetNumber?: boolean
     totalAmount?: boolean
+    subtotal?: boolean
+    tax?: boolean
     items?: boolean
     companyID?: boolean
     description?: boolean
     incidentID?: boolean
     userID?: boolean
+    createdAt?: boolean
     company?: boolean | CompanyDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["budget"]>
 
   export type BudgetSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     budgetID?: boolean
+    budgetNumber?: boolean
     totalAmount?: boolean
+    subtotal?: boolean
+    tax?: boolean
     items?: boolean
     companyID?: boolean
     description?: boolean
     incidentID?: boolean
     userID?: boolean
+    createdAt?: boolean
     company?: boolean | CompanyDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["budget"]>
 
   export type BudgetSelectScalar = {
     budgetID?: boolean
+    budgetNumber?: boolean
     totalAmount?: boolean
+    subtotal?: boolean
+    tax?: boolean
     items?: boolean
     companyID?: boolean
     description?: boolean
     incidentID?: boolean
     userID?: boolean
+    createdAt?: boolean
   }
 
-  export type BudgetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"budgetID" | "totalAmount" | "items" | "companyID" | "description" | "incidentID" | "userID", ExtArgs["result"]["budget"]>
+  export type BudgetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"budgetID" | "budgetNumber" | "totalAmount" | "subtotal" | "tax" | "items" | "companyID" | "description" | "incidentID" | "userID" | "createdAt", ExtArgs["result"]["budget"]>
   export type BudgetInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     company?: boolean | CompanyDefaultArgs<ExtArgs>
     incident?: boolean | Budget$incidentArgs<ExtArgs>
@@ -16932,12 +16980,16 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       budgetID: number
+      budgetNumber: string
       totalAmount: Prisma.Decimal
-      items: string
+      subtotal: Prisma.Decimal
+      tax: Prisma.Decimal
+      items: Prisma.JsonValue
       companyID: number
-      description: string
+      description: string | null
       incidentID: number | null
       userID: number
+      createdAt: Date
     }, ExtArgs["result"]["budget"]>
     composites: {}
   }
@@ -17366,12 +17418,16 @@ export namespace Prisma {
    */
   interface BudgetFieldRefs {
     readonly budgetID: FieldRef<"Budget", 'Int'>
+    readonly budgetNumber: FieldRef<"Budget", 'String'>
     readonly totalAmount: FieldRef<"Budget", 'Decimal'>
-    readonly items: FieldRef<"Budget", 'String'>
+    readonly subtotal: FieldRef<"Budget", 'Decimal'>
+    readonly tax: FieldRef<"Budget", 'Decimal'>
+    readonly items: FieldRef<"Budget", 'Json'>
     readonly companyID: FieldRef<"Budget", 'Int'>
     readonly description: FieldRef<"Budget", 'String'>
     readonly incidentID: FieldRef<"Budget", 'Int'>
     readonly userID: FieldRef<"Budget", 'Int'>
+    readonly createdAt: FieldRef<"Budget", 'DateTime'>
   }
     
 
@@ -26928,12 +26984,16 @@ export namespace Prisma {
 
   export const BudgetScalarFieldEnum: {
     budgetID: 'budgetID',
+    budgetNumber: 'budgetNumber',
     totalAmount: 'totalAmount',
+    subtotal: 'subtotal',
+    tax: 'tax',
     items: 'items',
     companyID: 'companyID',
     description: 'description',
     incidentID: 'incidentID',
-    userID: 'userID'
+    userID: 'userID',
+    createdAt: 'createdAt'
   };
 
   export type BudgetScalarFieldEnum = (typeof BudgetScalarFieldEnum)[keyof typeof BudgetScalarFieldEnum]
@@ -27040,6 +27100,13 @@ export namespace Prisma {
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+  export const JsonNullValueInput: {
+    JsonNull: typeof JsonNull
+  };
+
+  export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+
+
   export const QueryMode: {
     default: 'default',
     insensitive: 'insensitive'
@@ -27054,6 +27121,15 @@ export namespace Prisma {
   };
 
   export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+  export const JsonNullValueFilter: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull,
+    AnyNull: typeof AnyNull
+  };
+
+  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
   /**
@@ -27163,6 +27239,20 @@ export namespace Prisma {
    * Reference to a field of type 'paymentStatusEnum[]'
    */
   export type ListEnumpaymentStatusEnumFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'paymentStatusEnum[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Json'
+   */
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+  /**
+   * Reference to a field of type 'QueryMode'
+   */
+  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
     
 
 
@@ -28038,12 +28128,16 @@ export namespace Prisma {
     OR?: BudgetWhereInput[]
     NOT?: BudgetWhereInput | BudgetWhereInput[]
     budgetID?: IntFilter<"Budget"> | number
+    budgetNumber?: StringFilter<"Budget"> | string
     totalAmount?: DecimalFilter<"Budget"> | Decimal | DecimalJsLike | number | string
-    items?: StringFilter<"Budget"> | string
+    subtotal?: DecimalFilter<"Budget"> | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFilter<"Budget"> | Decimal | DecimalJsLike | number | string
+    items?: JsonFilter<"Budget">
     companyID?: IntFilter<"Budget"> | number
-    description?: StringFilter<"Budget"> | string
+    description?: StringNullableFilter<"Budget"> | string | null
     incidentID?: IntNullableFilter<"Budget"> | number | null
     userID?: IntFilter<"Budget"> | number
+    createdAt?: DateTimeFilter<"Budget"> | Date | string
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
     incident?: XOR<IncidentsNullableScalarRelationFilter, IncidentsWhereInput> | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -28052,12 +28146,16 @@ export namespace Prisma {
 
   export type BudgetOrderByWithRelationInput = {
     budgetID?: SortOrder
+    budgetNumber?: SortOrder
     totalAmount?: SortOrder
+    subtotal?: SortOrder
+    tax?: SortOrder
     items?: SortOrder
     companyID?: SortOrder
-    description?: SortOrder
+    description?: SortOrderInput | SortOrder
     incidentID?: SortOrderInput | SortOrder
     userID?: SortOrder
+    createdAt?: SortOrder
     company?: CompanyOrderByWithRelationInput
     incident?: IncidentsOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
@@ -28066,29 +28164,37 @@ export namespace Prisma {
 
   export type BudgetWhereUniqueInput = Prisma.AtLeast<{
     budgetID?: number
+    incidentID?: number
     AND?: BudgetWhereInput | BudgetWhereInput[]
     OR?: BudgetWhereInput[]
     NOT?: BudgetWhereInput | BudgetWhereInput[]
+    budgetNumber?: StringFilter<"Budget"> | string
     totalAmount?: DecimalFilter<"Budget"> | Decimal | DecimalJsLike | number | string
-    items?: StringFilter<"Budget"> | string
+    subtotal?: DecimalFilter<"Budget"> | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFilter<"Budget"> | Decimal | DecimalJsLike | number | string
+    items?: JsonFilter<"Budget">
     companyID?: IntFilter<"Budget"> | number
-    description?: StringFilter<"Budget"> | string
-    incidentID?: IntNullableFilter<"Budget"> | number | null
+    description?: StringNullableFilter<"Budget"> | string | null
     userID?: IntFilter<"Budget"> | number
+    createdAt?: DateTimeFilter<"Budget"> | Date | string
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
     incident?: XOR<IncidentsNullableScalarRelationFilter, IncidentsWhereInput> | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     Company?: CompanyListRelationFilter
-  }, "budgetID">
+  }, "budgetID" | "incidentID">
 
   export type BudgetOrderByWithAggregationInput = {
     budgetID?: SortOrder
+    budgetNumber?: SortOrder
     totalAmount?: SortOrder
+    subtotal?: SortOrder
+    tax?: SortOrder
     items?: SortOrder
     companyID?: SortOrder
-    description?: SortOrder
+    description?: SortOrderInput | SortOrder
     incidentID?: SortOrderInput | SortOrder
     userID?: SortOrder
+    createdAt?: SortOrder
     _count?: BudgetCountOrderByAggregateInput
     _avg?: BudgetAvgOrderByAggregateInput
     _max?: BudgetMaxOrderByAggregateInput
@@ -28101,12 +28207,16 @@ export namespace Prisma {
     OR?: BudgetScalarWhereWithAggregatesInput[]
     NOT?: BudgetScalarWhereWithAggregatesInput | BudgetScalarWhereWithAggregatesInput[]
     budgetID?: IntWithAggregatesFilter<"Budget"> | number
+    budgetNumber?: StringWithAggregatesFilter<"Budget"> | string
     totalAmount?: DecimalWithAggregatesFilter<"Budget"> | Decimal | DecimalJsLike | number | string
-    items?: StringWithAggregatesFilter<"Budget"> | string
+    subtotal?: DecimalWithAggregatesFilter<"Budget"> | Decimal | DecimalJsLike | number | string
+    tax?: DecimalWithAggregatesFilter<"Budget"> | Decimal | DecimalJsLike | number | string
+    items?: JsonWithAggregatesFilter<"Budget">
     companyID?: IntWithAggregatesFilter<"Budget"> | number
-    description?: StringWithAggregatesFilter<"Budget"> | string
+    description?: StringNullableWithAggregatesFilter<"Budget"> | string | null
     incidentID?: IntNullableWithAggregatesFilter<"Budget"> | number | null
     userID?: IntWithAggregatesFilter<"Budget"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"Budget"> | Date | string
   }
 
   export type SubscriptionWhereInput = {
@@ -29439,10 +29549,14 @@ export namespace Prisma {
   }
 
   export type BudgetCreateInput = {
+    budgetNumber: string
     totalAmount: Decimal | DecimalJsLike | number | string
-    items: string
-    description: string
+    subtotal: Decimal | DecimalJsLike | number | string
+    tax: Decimal | DecimalJsLike | number | string
+    items: JsonNullValueInput | InputJsonValue
+    description?: string | null
     incidentID?: number | null
+    createdAt?: Date | string
     company: CompanyCreateNestedOneWithoutBudgetInput
     incident?: IncidentsCreateNestedOneWithoutBudgetInput
     user: UserCreateNestedOneWithoutBudgetInput
@@ -29451,21 +29565,29 @@ export namespace Prisma {
 
   export type BudgetUncheckedCreateInput = {
     budgetID?: number
+    budgetNumber: string
     totalAmount: Decimal | DecimalJsLike | number | string
-    items: string
+    subtotal: Decimal | DecimalJsLike | number | string
+    tax: Decimal | DecimalJsLike | number | string
+    items: JsonNullValueInput | InputJsonValue
     companyID: number
-    description: string
+    description?: string | null
     incidentID?: number | null
     userID: number
+    createdAt?: Date | string
     incident?: IncidentsUncheckedCreateNestedOneWithoutBudgetInput
     Company?: CompanyUncheckedCreateNestedManyWithoutBudgetInput
   }
 
   export type BudgetUpdateInput = {
+    budgetNumber?: StringFieldUpdateOperationsInput | string
     totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    items?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    items?: JsonNullValueInput | InputJsonValue
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     incidentID?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     company?: CompanyUpdateOneRequiredWithoutBudgetNestedInput
     incident?: IncidentsUpdateOneWithoutBudgetNestedInput
     user?: UserUpdateOneRequiredWithoutBudgetNestedInput
@@ -29474,41 +29596,57 @@ export namespace Prisma {
 
   export type BudgetUncheckedUpdateInput = {
     budgetID?: IntFieldUpdateOperationsInput | number
+    budgetNumber?: StringFieldUpdateOperationsInput | string
     totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    items?: StringFieldUpdateOperationsInput | string
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    items?: JsonNullValueInput | InputJsonValue
     companyID?: IntFieldUpdateOperationsInput | number
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     incidentID?: NullableIntFieldUpdateOperationsInput | number | null
     userID?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     incident?: IncidentsUncheckedUpdateOneWithoutBudgetNestedInput
     Company?: CompanyUncheckedUpdateManyWithoutBudgetNestedInput
   }
 
   export type BudgetCreateManyInput = {
     budgetID?: number
+    budgetNumber: string
     totalAmount: Decimal | DecimalJsLike | number | string
-    items: string
+    subtotal: Decimal | DecimalJsLike | number | string
+    tax: Decimal | DecimalJsLike | number | string
+    items: JsonNullValueInput | InputJsonValue
     companyID: number
-    description: string
+    description?: string | null
     incidentID?: number | null
     userID: number
+    createdAt?: Date | string
   }
 
   export type BudgetUpdateManyMutationInput = {
+    budgetNumber?: StringFieldUpdateOperationsInput | string
     totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    items?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    items?: JsonNullValueInput | InputJsonValue
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     incidentID?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type BudgetUncheckedUpdateManyInput = {
     budgetID?: IntFieldUpdateOperationsInput | number
+    budgetNumber?: StringFieldUpdateOperationsInput | string
     totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    items?: StringFieldUpdateOperationsInput | string
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    items?: JsonNullValueInput | InputJsonValue
     companyID?: IntFieldUpdateOperationsInput | number
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     incidentID?: NullableIntFieldUpdateOperationsInput | number | null
     userID?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SubscriptionCreateInput = {
@@ -30952,6 +31090,29 @@ export namespace Prisma {
     _min?: NestedEnumpaymentStatusEnumFilter<$PrismaModel>
     _max?: NestedEnumpaymentStatusEnumFilter<$PrismaModel>
   }
+  export type JsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
 
   export type CompanyListRelationFilter = {
     every?: CompanyWhereInput
@@ -30965,17 +31126,23 @@ export namespace Prisma {
 
   export type BudgetCountOrderByAggregateInput = {
     budgetID?: SortOrder
+    budgetNumber?: SortOrder
     totalAmount?: SortOrder
+    subtotal?: SortOrder
+    tax?: SortOrder
     items?: SortOrder
     companyID?: SortOrder
     description?: SortOrder
     incidentID?: SortOrder
     userID?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type BudgetAvgOrderByAggregateInput = {
     budgetID?: SortOrder
     totalAmount?: SortOrder
+    subtotal?: SortOrder
+    tax?: SortOrder
     companyID?: SortOrder
     incidentID?: SortOrder
     userID?: SortOrder
@@ -30983,30 +31150,64 @@ export namespace Prisma {
 
   export type BudgetMaxOrderByAggregateInput = {
     budgetID?: SortOrder
+    budgetNumber?: SortOrder
     totalAmount?: SortOrder
-    items?: SortOrder
+    subtotal?: SortOrder
+    tax?: SortOrder
     companyID?: SortOrder
     description?: SortOrder
     incidentID?: SortOrder
     userID?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type BudgetMinOrderByAggregateInput = {
     budgetID?: SortOrder
+    budgetNumber?: SortOrder
     totalAmount?: SortOrder
-    items?: SortOrder
+    subtotal?: SortOrder
+    tax?: SortOrder
     companyID?: SortOrder
     description?: SortOrder
     incidentID?: SortOrder
     userID?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type BudgetSumOrderByAggregateInput = {
     budgetID?: SortOrder
     totalAmount?: SortOrder
+    subtotal?: SortOrder
+    tax?: SortOrder
     companyID?: SortOrder
     incidentID?: SortOrder
     userID?: SortOrder
+  }
+  export type JsonWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedJsonFilter<$PrismaModel>
+    _max?: NestedJsonFilter<$PrismaModel>
   }
 
   export type SubscriptionCountOrderByAggregateInput = {
@@ -33747,6 +33948,29 @@ export namespace Prisma {
     _min?: NestedEnumpaymentStatusEnumFilter<$PrismaModel>
     _max?: NestedEnumpaymentStatusEnumFilter<$PrismaModel>
   }
+  export type NestedJsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
 
   export type IncidentsCreateWithoutUsersInput = {
     title: string
@@ -33930,10 +34154,14 @@ export namespace Prisma {
   }
 
   export type BudgetCreateWithoutUserInput = {
+    budgetNumber: string
     totalAmount: Decimal | DecimalJsLike | number | string
-    items: string
-    description: string
+    subtotal: Decimal | DecimalJsLike | number | string
+    tax: Decimal | DecimalJsLike | number | string
+    items: JsonNullValueInput | InputJsonValue
+    description?: string | null
     incidentID?: number | null
+    createdAt?: Date | string
     company: CompanyCreateNestedOneWithoutBudgetInput
     incident?: IncidentsCreateNestedOneWithoutBudgetInput
     Company?: CompanyCreateNestedManyWithoutBudgetInput
@@ -33941,11 +34169,15 @@ export namespace Prisma {
 
   export type BudgetUncheckedCreateWithoutUserInput = {
     budgetID?: number
+    budgetNumber: string
     totalAmount: Decimal | DecimalJsLike | number | string
-    items: string
+    subtotal: Decimal | DecimalJsLike | number | string
+    tax: Decimal | DecimalJsLike | number | string
+    items: JsonNullValueInput | InputJsonValue
     companyID: number
-    description: string
+    description?: string | null
     incidentID?: number | null
+    createdAt?: Date | string
     incident?: IncidentsUncheckedCreateNestedOneWithoutBudgetInput
     Company?: CompanyUncheckedCreateNestedManyWithoutBudgetInput
   }
@@ -34316,12 +34548,16 @@ export namespace Prisma {
     OR?: BudgetScalarWhereInput[]
     NOT?: BudgetScalarWhereInput | BudgetScalarWhereInput[]
     budgetID?: IntFilter<"Budget"> | number
+    budgetNumber?: StringFilter<"Budget"> | string
     totalAmount?: DecimalFilter<"Budget"> | Decimal | DecimalJsLike | number | string
-    items?: StringFilter<"Budget"> | string
+    subtotal?: DecimalFilter<"Budget"> | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFilter<"Budget"> | Decimal | DecimalJsLike | number | string
+    items?: JsonFilter<"Budget">
     companyID?: IntFilter<"Budget"> | number
-    description?: StringFilter<"Budget"> | string
+    description?: StringNullableFilter<"Budget"> | string | null
     incidentID?: IntNullableFilter<"Budget"> | number | null
     userID?: IntFilter<"Budget"> | number
+    createdAt?: DateTimeFilter<"Budget"> | Date | string
   }
 
   export type CompanyUpsertWithoutUserInput = {
@@ -34614,10 +34850,14 @@ export namespace Prisma {
   }
 
   export type BudgetCreateWithoutCompanyInput = {
+    budgetNumber: string
     totalAmount: Decimal | DecimalJsLike | number | string
-    items: string
-    description: string
+    subtotal: Decimal | DecimalJsLike | number | string
+    tax: Decimal | DecimalJsLike | number | string
+    items: JsonNullValueInput | InputJsonValue
+    description?: string | null
     incidentID?: number | null
+    createdAt?: Date | string
     company: CompanyCreateNestedOneWithoutBudgetInput
     incident?: IncidentsCreateNestedOneWithoutBudgetInput
     user: UserCreateNestedOneWithoutBudgetInput
@@ -34625,12 +34865,16 @@ export namespace Prisma {
 
   export type BudgetUncheckedCreateWithoutCompanyInput = {
     budgetID?: number
+    budgetNumber: string
     totalAmount: Decimal | DecimalJsLike | number | string
-    items: string
+    subtotal: Decimal | DecimalJsLike | number | string
+    tax: Decimal | DecimalJsLike | number | string
+    items: JsonNullValueInput | InputJsonValue
     companyID: number
-    description: string
+    description?: string | null
     incidentID?: number | null
     userID: number
+    createdAt?: Date | string
     incident?: IncidentsUncheckedCreateNestedOneWithoutBudgetInput
   }
 
@@ -34760,10 +35004,14 @@ export namespace Prisma {
   }
 
   export type BudgetCreateWithoutCompanyInput = {
+    budgetNumber: string
     totalAmount: Decimal | DecimalJsLike | number | string
-    items: string
-    description: string
+    subtotal: Decimal | DecimalJsLike | number | string
+    tax: Decimal | DecimalJsLike | number | string
+    items: JsonNullValueInput | InputJsonValue
+    description?: string | null
     incidentID?: number | null
+    createdAt?: Date | string
     incident?: IncidentsCreateNestedOneWithoutBudgetInput
     user: UserCreateNestedOneWithoutBudgetInput
     Company?: CompanyCreateNestedManyWithoutBudgetInput
@@ -34771,11 +35019,15 @@ export namespace Prisma {
 
   export type BudgetUncheckedCreateWithoutCompanyInput = {
     budgetID?: number
+    budgetNumber: string
     totalAmount: Decimal | DecimalJsLike | number | string
-    items: string
-    description: string
+    subtotal: Decimal | DecimalJsLike | number | string
+    tax: Decimal | DecimalJsLike | number | string
+    items: JsonNullValueInput | InputJsonValue
+    description?: string | null
     incidentID?: number | null
     userID: number
+    createdAt?: Date | string
     incident?: IncidentsUncheckedCreateNestedOneWithoutBudgetInput
     Company?: CompanyUncheckedCreateNestedManyWithoutBudgetInput
   }
@@ -35025,10 +35277,14 @@ export namespace Prisma {
   }
 
   export type BudgetUpdateWithoutCompanyInput = {
+    budgetNumber?: StringFieldUpdateOperationsInput | string
     totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    items?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    items?: JsonNullValueInput | InputJsonValue
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     incidentID?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     company?: CompanyUpdateOneRequiredWithoutBudgetNestedInput
     incident?: IncidentsUpdateOneWithoutBudgetNestedInput
     user?: UserUpdateOneRequiredWithoutBudgetNestedInput
@@ -35036,12 +35292,16 @@ export namespace Prisma {
 
   export type BudgetUncheckedUpdateWithoutCompanyInput = {
     budgetID?: IntFieldUpdateOperationsInput | number
+    budgetNumber?: StringFieldUpdateOperationsInput | string
     totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    items?: StringFieldUpdateOperationsInput | string
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    items?: JsonNullValueInput | InputJsonValue
     companyID?: IntFieldUpdateOperationsInput | number
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     incidentID?: NullableIntFieldUpdateOperationsInput | number | null
     userID?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     incident?: IncidentsUncheckedUpdateOneWithoutBudgetNestedInput
   }
 
@@ -36540,10 +36800,14 @@ export namespace Prisma {
   }
 
   export type BudgetCreateWithoutIncidentInput = {
+    budgetNumber: string
     totalAmount: Decimal | DecimalJsLike | number | string
-    items: string
-    description: string
+    subtotal: Decimal | DecimalJsLike | number | string
+    tax: Decimal | DecimalJsLike | number | string
+    items: JsonNullValueInput | InputJsonValue
+    description?: string | null
     incidentID?: number | null
+    createdAt?: Date | string
     company: CompanyCreateNestedOneWithoutBudgetInput
     user: UserCreateNestedOneWithoutBudgetInput
     Company?: CompanyCreateNestedManyWithoutBudgetInput
@@ -36551,12 +36815,16 @@ export namespace Prisma {
 
   export type BudgetUncheckedCreateWithoutIncidentInput = {
     budgetID?: number
+    budgetNumber: string
     totalAmount: Decimal | DecimalJsLike | number | string
-    items: string
+    subtotal: Decimal | DecimalJsLike | number | string
+    tax: Decimal | DecimalJsLike | number | string
+    items: JsonNullValueInput | InputJsonValue
     companyID: number
-    description: string
+    description?: string | null
     incidentID?: number | null
     userID: number
+    createdAt?: Date | string
     Company?: CompanyUncheckedCreateNestedManyWithoutBudgetInput
   }
 
@@ -36831,10 +37099,14 @@ export namespace Prisma {
   }
 
   export type BudgetUpdateWithoutIncidentInput = {
+    budgetNumber?: StringFieldUpdateOperationsInput | string
     totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    items?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    items?: JsonNullValueInput | InputJsonValue
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     incidentID?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     company?: CompanyUpdateOneRequiredWithoutBudgetNestedInput
     user?: UserUpdateOneRequiredWithoutBudgetNestedInput
     Company?: CompanyUpdateManyWithoutBudgetNestedInput
@@ -36842,12 +37114,16 @@ export namespace Prisma {
 
   export type BudgetUncheckedUpdateWithoutIncidentInput = {
     budgetID?: IntFieldUpdateOperationsInput | number
+    budgetNumber?: StringFieldUpdateOperationsInput | string
     totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    items?: StringFieldUpdateOperationsInput | string
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    items?: JsonNullValueInput | InputJsonValue
     companyID?: IntFieldUpdateOperationsInput | number
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     incidentID?: NullableIntFieldUpdateOperationsInput | number | null
     userID?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Company?: CompanyUncheckedUpdateManyWithoutBudgetNestedInput
   }
 
@@ -39305,11 +39581,15 @@ export namespace Prisma {
 
   export type BudgetCreateManyUserInput = {
     budgetID?: number
+    budgetNumber: string
     totalAmount: Decimal | DecimalJsLike | number | string
-    items: string
+    subtotal: Decimal | DecimalJsLike | number | string
+    tax: Decimal | DecimalJsLike | number | string
+    items: JsonNullValueInput | InputJsonValue
     companyID: number
-    description: string
+    description?: string | null
     incidentID?: number | null
+    createdAt?: Date | string
   }
 
   export type contractsCreateManyUserInput = {
@@ -39451,10 +39731,14 @@ export namespace Prisma {
   }
 
   export type BudgetUpdateWithoutUserInput = {
+    budgetNumber?: StringFieldUpdateOperationsInput | string
     totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    items?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    items?: JsonNullValueInput | InputJsonValue
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     incidentID?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     company?: CompanyUpdateOneRequiredWithoutBudgetNestedInput
     incident?: IncidentsUpdateOneWithoutBudgetNestedInput
     Company?: CompanyUpdateManyWithoutBudgetNestedInput
@@ -39462,22 +39746,30 @@ export namespace Prisma {
 
   export type BudgetUncheckedUpdateWithoutUserInput = {
     budgetID?: IntFieldUpdateOperationsInput | number
+    budgetNumber?: StringFieldUpdateOperationsInput | string
     totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    items?: StringFieldUpdateOperationsInput | string
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    items?: JsonNullValueInput | InputJsonValue
     companyID?: IntFieldUpdateOperationsInput | number
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     incidentID?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     incident?: IncidentsUncheckedUpdateOneWithoutBudgetNestedInput
     Company?: CompanyUncheckedUpdateManyWithoutBudgetNestedInput
   }
 
   export type BudgetUncheckedUpdateManyWithoutUserInput = {
     budgetID?: IntFieldUpdateOperationsInput | number
+    budgetNumber?: StringFieldUpdateOperationsInput | string
     totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    items?: StringFieldUpdateOperationsInput | string
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    items?: JsonNullValueInput | InputJsonValue
     companyID?: IntFieldUpdateOperationsInput | number
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     incidentID?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type contractsUpdateWithoutUserInput = {
@@ -39644,11 +39936,15 @@ export namespace Prisma {
 
   export type BudgetCreateManyCompanyInput = {
     budgetID?: number
+    budgetNumber: string
     totalAmount: Decimal | DecimalJsLike | number | string
-    items: string
-    description: string
+    subtotal: Decimal | DecimalJsLike | number | string
+    tax: Decimal | DecimalJsLike | number | string
+    items: JsonNullValueInput | InputJsonValue
+    description?: string | null
     incidentID?: number | null
     userID: number
+    createdAt?: Date | string
   }
 
   export type UserCreateManyCompanyInput = {
@@ -39949,10 +40245,14 @@ export namespace Prisma {
   }
 
   export type BudgetUpdateWithoutCompanyInput = {
+    budgetNumber?: StringFieldUpdateOperationsInput | string
     totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    items?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    items?: JsonNullValueInput | InputJsonValue
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     incidentID?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     incident?: IncidentsUpdateOneWithoutBudgetNestedInput
     user?: UserUpdateOneRequiredWithoutBudgetNestedInput
     Company?: CompanyUpdateManyWithoutBudgetNestedInput
@@ -39960,22 +40260,30 @@ export namespace Prisma {
 
   export type BudgetUncheckedUpdateWithoutCompanyInput = {
     budgetID?: IntFieldUpdateOperationsInput | number
+    budgetNumber?: StringFieldUpdateOperationsInput | string
     totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    items?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    items?: JsonNullValueInput | InputJsonValue
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     incidentID?: NullableIntFieldUpdateOperationsInput | number | null
     userID?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     incident?: IncidentsUncheckedUpdateOneWithoutBudgetNestedInput
     Company?: CompanyUncheckedUpdateManyWithoutBudgetNestedInput
   }
 
   export type BudgetUncheckedUpdateManyWithoutCompanyInput = {
     budgetID?: IntFieldUpdateOperationsInput | number
+    budgetNumber?: StringFieldUpdateOperationsInput | string
     totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    items?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    items?: JsonNullValueInput | InputJsonValue
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     incidentID?: NullableIntFieldUpdateOperationsInput | number | null
     userID?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserUpdateWithoutCompanyInput = {

@@ -14,6 +14,7 @@ import { validateCode } from '../utils/validateCode';
 import { listClients } from '../modules/companies/listClients';
 import { companyCreateUser } from '../modules/companies/createUser';
 import { ContractType } from '../../generated/prisma';
+import type { ItemType } from '../utils/types/itemType';
 import { createContract } from '../modules/companies/updateTypeContractType';
 @Injectable()
 export class CompanyService {
@@ -68,22 +69,26 @@ export class CompanyService {
     return eliminateWorker(workerID);
   }
   async createBudget(
-    incidentID: number,
-    amount: number,
-    description: string,
+    budgetNumber: string,
     userID: number,
     companyID: number,
-    workerID: number,
-    items?: string[],
+    items: ItemType[],
+    subtotal: number,
+    tax: number,
+    totalAmount: number,
+    incidentID?: number,
+    description?: string,
   ) {
     return createBudget(
-      incidentID,
-      amount,
-      description,
+      budgetNumber,
       userID,
       companyID,
-      workerID,
       items,
+      subtotal,
+      tax,
+      totalAmount,
+      incidentID,
+      description,
     );
   }
   async listWorkers(companyID: number, limit: number = 5, offset: number = 0) {

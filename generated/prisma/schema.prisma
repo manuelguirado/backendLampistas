@@ -194,17 +194,21 @@ model paymentStatus {
 }
 
 model Budget {
-  budgetID    Int        @id @default(autoincrement())
-  totalAmount Decimal    @db.Decimal(10, 2)
-  items       String     @db.Text
-  companyID   Int
-  description String     @db.Text
-  company     Company    @relation("CompanyBudget", fields: [companyID], references: [companyID])
-  incidentID  Int?
-  incident    Incidents? @relation("BudgetIncidents")
-  userID      Int
-  user        User       @relation(fields: [userID], references: [userID])
-  Company     Company[]
+  budgetID     Int        @id @default(autoincrement())
+  budgetNumber String     @db.VarChar(50) // ✅ Agregar este campo
+  totalAmount  Decimal    @db.Decimal(10, 2)
+  subtotal     Decimal    @db.Decimal(10, 2) // ✅ Agregar
+  tax          Decimal    @db.Decimal(10, 2) // ✅ Agregar
+  items        Json // ✅ Cambiar de String a Json
+  companyID    Int
+  description  String?    @db.Text
+  company      Company    @relation("CompanyBudget", fields: [companyID], references: [companyID])
+  incidentID   Int?       @unique
+  incident     Incidents? @relation("BudgetIncidents")
+  userID       Int
+  user         User       @relation(fields: [userID], references: [userID])
+  createdAt    DateTime   @default(now()) @db.Timestamp(6) // ✅ Agregar
+  Company      Company[]
 }
 
 model Subscription {

@@ -58,4 +58,10 @@ export class UserController {
     const userIDNum = parseInt(userID, 10);
     return this.userService.myContracts(userIDNum);
   }
+  @UseGuards(AuthGuard, UserGuard)
+  @Get('recievedBudgets/:userID')
+  async recievedBudgets(@Query('userID') userID: string) {
+    const userIDNum = parseInt(userID, 10);
+    return this.userService.recievedBudgets(userIDNum);
+  }
 }

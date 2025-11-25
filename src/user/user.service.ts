@@ -3,6 +3,7 @@ import { userLogin } from '../modules/users/userLogin';
 import { createIncident } from '../modules/incidents/createIncident';
 import { findMyMachinery } from '../modules/machinery/findMymachinery';
 import { myContracts } from '../modules/users/Mycontracts';
+import { recievedBudgets } from '../modules/users/recievedBudgets';
 import { Injectable } from '@nestjs/common';
 @Injectable()
 export class UserService {
@@ -36,5 +37,8 @@ export class UserService {
   }
   async myContracts(userID: number) {
     return myContracts(userID);
+  }
+  async recievedBudgets(userID: number) {
+    return recievedBudgets(userID);
   }
 }
