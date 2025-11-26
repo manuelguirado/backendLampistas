@@ -3188,6 +3188,7 @@ export namespace Prisma {
     userCode: string | null
     contractID: number | null
     companyID: number | null
+    refreshToken: string | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -3202,6 +3203,7 @@ export namespace Prisma {
     userCode: string | null
     contractID: number | null
     companyID: number | null
+    refreshToken: string | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -3216,6 +3218,7 @@ export namespace Prisma {
     userCode: number
     contractID: number
     companyID: number
+    refreshToken: number
     _all: number
   }
 
@@ -3250,6 +3253,7 @@ export namespace Prisma {
     userCode?: true
     contractID?: true
     companyID?: true
+    refreshToken?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -3264,6 +3268,7 @@ export namespace Prisma {
     userCode?: true
     contractID?: true
     companyID?: true
+    refreshToken?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -3278,6 +3283,7 @@ export namespace Prisma {
     userCode?: true
     contractID?: true
     companyID?: true
+    refreshToken?: true
     _all?: true
   }
 
@@ -3379,6 +3385,7 @@ export namespace Prisma {
     userCode: string | null
     contractID: number | null
     companyID: number | null
+    refreshToken: string | null
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
     _sum: UserSumAggregateOutputType | null
@@ -3412,6 +3419,7 @@ export namespace Prisma {
     userCode?: boolean
     contractID?: boolean
     companyID?: boolean
+    refreshToken?: boolean
     incidents?: boolean | User$incidentsArgs<ExtArgs>
     directions?: boolean | User$directionsArgs<ExtArgs>
     payments?: boolean | User$paymentsArgs<ExtArgs>
@@ -3438,6 +3446,7 @@ export namespace Prisma {
     userCode?: boolean
     contractID?: boolean
     companyID?: boolean
+    refreshToken?: boolean
     incidents?: boolean | User$incidentsArgs<ExtArgs>
     Company?: boolean | User$CompanyArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
@@ -3454,6 +3463,7 @@ export namespace Prisma {
     userCode?: boolean
     contractID?: boolean
     companyID?: boolean
+    refreshToken?: boolean
     incidents?: boolean | User$incidentsArgs<ExtArgs>
     Company?: boolean | User$CompanyArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
@@ -3470,9 +3480,10 @@ export namespace Prisma {
     userCode?: boolean
     contractID?: boolean
     companyID?: boolean
+    refreshToken?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"userID" | "name" | "email" | "password" | "incidentsID" | "paymentsID" | "machineryID" | "role" | "userCode" | "contractID" | "companyID", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"userID" | "name" | "email" | "password" | "incidentsID" | "paymentsID" | "machineryID" | "role" | "userCode" | "contractID" | "companyID" | "refreshToken", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     incidents?: boolean | User$incidentsArgs<ExtArgs>
     directions?: boolean | User$directionsArgs<ExtArgs>
@@ -3523,6 +3534,7 @@ export namespace Prisma {
       userCode: string | null
       contractID: number | null
       companyID: number | null
+      refreshToken: string | null
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -3968,6 +3980,7 @@ export namespace Prisma {
     readonly userCode: FieldRef<"User", 'String'>
     readonly contractID: FieldRef<"User", 'Int'>
     readonly companyID: FieldRef<"User", 'Int'>
+    readonly refreshToken: FieldRef<"User", 'String'>
   }
     
 
@@ -4667,6 +4680,7 @@ export namespace Prisma {
     userID: number | null
     companyCode: string | null
     email: string | null
+    refreshToken: string | null
   }
 
   export type CompanyMaxAggregateOutputType = {
@@ -4681,6 +4695,7 @@ export namespace Prisma {
     userID: number | null
     companyCode: string | null
     email: string | null
+    refreshToken: string | null
   }
 
   export type CompanyCountAggregateOutputType = {
@@ -4695,6 +4710,7 @@ export namespace Prisma {
     userID: number
     companyCode: number
     email: number
+    refreshToken: number
     _all: number
   }
 
@@ -4723,6 +4739,7 @@ export namespace Prisma {
     userID?: true
     companyCode?: true
     email?: true
+    refreshToken?: true
   }
 
   export type CompanyMaxAggregateInputType = {
@@ -4737,6 +4754,7 @@ export namespace Prisma {
     userID?: true
     companyCode?: true
     email?: true
+    refreshToken?: true
   }
 
   export type CompanyCountAggregateInputType = {
@@ -4751,6 +4769,7 @@ export namespace Prisma {
     userID?: true
     companyCode?: true
     email?: true
+    refreshToken?: true
     _all?: true
   }
 
@@ -4852,6 +4871,7 @@ export namespace Prisma {
     userID: number | null
     companyCode: string | null
     email: string
+    refreshToken: string | null
     _count: CompanyCountAggregateOutputType | null
     _avg: CompanyAvgAggregateOutputType | null
     _sum: CompanySumAggregateOutputType | null
@@ -4885,6 +4905,7 @@ export namespace Prisma {
     userID?: boolean
     companyCode?: boolean
     email?: boolean
+    refreshToken?: boolean
     workers?: boolean | Company$workersArgs<ExtArgs>
     receivedPayments?: boolean | Company$receivedPaymentsArgs<ExtArgs>
     incidents?: boolean | Company$incidentsArgs<ExtArgs>
@@ -4915,6 +4936,7 @@ export namespace Prisma {
     userID?: boolean
     companyCode?: boolean
     email?: boolean
+    refreshToken?: boolean
     budget?: boolean | Company$budgetArgs<ExtArgs>
   }, ExtArgs["result"]["company"]>
 
@@ -4930,6 +4952,7 @@ export namespace Prisma {
     userID?: boolean
     companyCode?: boolean
     email?: boolean
+    refreshToken?: boolean
     budget?: boolean | Company$budgetArgs<ExtArgs>
   }, ExtArgs["result"]["company"]>
 
@@ -4945,9 +4968,10 @@ export namespace Prisma {
     userID?: boolean
     companyCode?: boolean
     email?: boolean
+    refreshToken?: boolean
   }
 
-  export type CompanyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"companyID" | "name" | "phone" | "password" | "budgetID" | "suspended" | "suspendedUntil" | "role" | "userID" | "companyCode" | "email", ExtArgs["result"]["company"]>
+  export type CompanyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"companyID" | "name" | "phone" | "password" | "budgetID" | "suspended" | "suspendedUntil" | "role" | "userID" | "companyCode" | "email" | "refreshToken", ExtArgs["result"]["company"]>
   export type CompanyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     workers?: boolean | Company$workersArgs<ExtArgs>
     receivedPayments?: boolean | Company$receivedPaymentsArgs<ExtArgs>
@@ -5004,6 +5028,7 @@ export namespace Prisma {
       userID: number | null
       companyCode: string | null
       email: string
+      refreshToken: string | null
     }, ExtArgs["result"]["company"]>
     composites: {}
   }
@@ -5453,6 +5478,7 @@ export namespace Prisma {
     readonly userID: FieldRef<"Company", 'Int'>
     readonly companyCode: FieldRef<"Company", 'String'>
     readonly email: FieldRef<"Company", 'String'>
+    readonly refreshToken: FieldRef<"Company", 'String'>
   }
     
 
@@ -7334,6 +7360,7 @@ export namespace Prisma {
     companyID: number | null
     role: $Enums.Role | null
     workerCode: string | null
+    refreshToken: string | null
   }
 
   export type WorkerMaxAggregateOutputType = {
@@ -7344,6 +7371,7 @@ export namespace Prisma {
     companyID: number | null
     role: $Enums.Role | null
     workerCode: string | null
+    refreshToken: string | null
   }
 
   export type WorkerCountAggregateOutputType = {
@@ -7354,6 +7382,7 @@ export namespace Prisma {
     companyID: number
     role: number
     workerCode: number
+    refreshToken: number
     _all: number
   }
 
@@ -7376,6 +7405,7 @@ export namespace Prisma {
     companyID?: true
     role?: true
     workerCode?: true
+    refreshToken?: true
   }
 
   export type WorkerMaxAggregateInputType = {
@@ -7386,6 +7416,7 @@ export namespace Prisma {
     companyID?: true
     role?: true
     workerCode?: true
+    refreshToken?: true
   }
 
   export type WorkerCountAggregateInputType = {
@@ -7396,6 +7427,7 @@ export namespace Prisma {
     companyID?: true
     role?: true
     workerCode?: true
+    refreshToken?: true
     _all?: true
   }
 
@@ -7493,6 +7525,7 @@ export namespace Prisma {
     companyID: number
     role: $Enums.Role
     workerCode: string | null
+    refreshToken: string | null
     _count: WorkerCountAggregateOutputType | null
     _avg: WorkerAvgAggregateOutputType | null
     _sum: WorkerSumAggregateOutputType | null
@@ -7522,6 +7555,7 @@ export namespace Prisma {
     companyID?: boolean
     role?: boolean
     workerCode?: boolean
+    refreshToken?: boolean
     company?: boolean | CompanyDefaultArgs<ExtArgs>
     shiftWorkers?: boolean | Worker$shiftWorkersArgs<ExtArgs>
     assignedIncidents?: boolean | Worker$assignedIncidentsArgs<ExtArgs>
@@ -7539,6 +7573,7 @@ export namespace Prisma {
     companyID?: boolean
     role?: boolean
     workerCode?: boolean
+    refreshToken?: boolean
     company?: boolean | CompanyDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["worker"]>
 
@@ -7550,6 +7585,7 @@ export namespace Prisma {
     companyID?: boolean
     role?: boolean
     workerCode?: boolean
+    refreshToken?: boolean
     company?: boolean | CompanyDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["worker"]>
 
@@ -7561,9 +7597,10 @@ export namespace Prisma {
     companyID?: boolean
     role?: boolean
     workerCode?: boolean
+    refreshToken?: boolean
   }
 
-  export type WorkerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"workerid" | "name" | "email" | "password" | "companyID" | "role" | "workerCode", ExtArgs["result"]["worker"]>
+  export type WorkerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"workerid" | "name" | "email" | "password" | "companyID" | "role" | "workerCode" | "refreshToken", ExtArgs["result"]["worker"]>
   export type WorkerInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     company?: boolean | CompanyDefaultArgs<ExtArgs>
     shiftWorkers?: boolean | Worker$shiftWorkersArgs<ExtArgs>
@@ -7598,6 +7635,7 @@ export namespace Prisma {
       companyID: number
       role: $Enums.Role
       workerCode: string | null
+      refreshToken: string | null
     }, ExtArgs["result"]["worker"]>
     composites: {}
   }
@@ -8034,6 +8072,7 @@ export namespace Prisma {
     readonly companyID: FieldRef<"Worker", 'Int'>
     readonly role: FieldRef<"Worker", 'Role'>
     readonly workerCode: FieldRef<"Worker", 'String'>
+    readonly refreshToken: FieldRef<"Worker", 'String'>
   }
     
 
@@ -8593,6 +8632,7 @@ export namespace Prisma {
     email: string | null
     password: string | null
     role: $Enums.Role | null
+    refreshToken: string | null
   }
 
   export type AdminMaxAggregateOutputType = {
@@ -8600,6 +8640,7 @@ export namespace Prisma {
     email: string | null
     password: string | null
     role: $Enums.Role | null
+    refreshToken: string | null
   }
 
   export type AdminCountAggregateOutputType = {
@@ -8607,6 +8648,7 @@ export namespace Prisma {
     email: number
     password: number
     role: number
+    refreshToken: number
     _all: number
   }
 
@@ -8624,6 +8666,7 @@ export namespace Prisma {
     email?: true
     password?: true
     role?: true
+    refreshToken?: true
   }
 
   export type AdminMaxAggregateInputType = {
@@ -8631,6 +8674,7 @@ export namespace Prisma {
     email?: true
     password?: true
     role?: true
+    refreshToken?: true
   }
 
   export type AdminCountAggregateInputType = {
@@ -8638,6 +8682,7 @@ export namespace Prisma {
     email?: true
     password?: true
     role?: true
+    refreshToken?: true
     _all?: true
   }
 
@@ -8732,6 +8777,7 @@ export namespace Prisma {
     email: string
     password: string
     role: $Enums.Role
+    refreshToken: string | null
     _count: AdminCountAggregateOutputType | null
     _avg: AdminAvgAggregateOutputType | null
     _sum: AdminSumAggregateOutputType | null
@@ -8758,6 +8804,7 @@ export namespace Prisma {
     email?: boolean
     password?: boolean
     role?: boolean
+    refreshToken?: boolean
     companies?: boolean | Admin$companiesArgs<ExtArgs>
     _count?: boolean | AdminCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["admin"]>
@@ -8767,6 +8814,7 @@ export namespace Prisma {
     email?: boolean
     password?: boolean
     role?: boolean
+    refreshToken?: boolean
   }, ExtArgs["result"]["admin"]>
 
   export type AdminSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -8774,6 +8822,7 @@ export namespace Prisma {
     email?: boolean
     password?: boolean
     role?: boolean
+    refreshToken?: boolean
   }, ExtArgs["result"]["admin"]>
 
   export type AdminSelectScalar = {
@@ -8781,9 +8830,10 @@ export namespace Prisma {
     email?: boolean
     password?: boolean
     role?: boolean
+    refreshToken?: boolean
   }
 
-  export type AdminOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"adminID" | "email" | "password" | "role", ExtArgs["result"]["admin"]>
+  export type AdminOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"adminID" | "email" | "password" | "role" | "refreshToken", ExtArgs["result"]["admin"]>
   export type AdminInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     companies?: boolean | Admin$companiesArgs<ExtArgs>
     _count?: boolean | AdminCountOutputTypeDefaultArgs<ExtArgs>
@@ -8801,6 +8851,7 @@ export namespace Prisma {
       email: string
       password: string
       role: $Enums.Role
+      refreshToken: string | null
     }, ExtArgs["result"]["admin"]>
     composites: {}
   }
@@ -9229,6 +9280,7 @@ export namespace Prisma {
     readonly email: FieldRef<"Admin", 'String'>
     readonly password: FieldRef<"Admin", 'String'>
     readonly role: FieldRef<"Admin", 'Role'>
+    readonly refreshToken: FieldRef<"Admin", 'String'>
   }
     
 
@@ -26854,7 +26906,8 @@ export namespace Prisma {
     role: 'role',
     userCode: 'userCode',
     contractID: 'contractID',
-    companyID: 'companyID'
+    companyID: 'companyID',
+    refreshToken: 'refreshToken'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -26871,7 +26924,8 @@ export namespace Prisma {
     role: 'role',
     userID: 'userID',
     companyCode: 'companyCode',
-    email: 'email'
+    email: 'email',
+    refreshToken: 'refreshToken'
   };
 
   export type CompanyScalarFieldEnum = (typeof CompanyScalarFieldEnum)[keyof typeof CompanyScalarFieldEnum]
@@ -26893,7 +26947,8 @@ export namespace Prisma {
     password: 'password',
     companyID: 'companyID',
     role: 'role',
-    workerCode: 'workerCode'
+    workerCode: 'workerCode',
+    refreshToken: 'refreshToken'
   };
 
   export type WorkerScalarFieldEnum = (typeof WorkerScalarFieldEnum)[keyof typeof WorkerScalarFieldEnum]
@@ -26903,7 +26958,8 @@ export namespace Prisma {
     adminID: 'adminID',
     email: 'email',
     password: 'password',
-    role: 'role'
+    role: 'role',
+    refreshToken: 'refreshToken'
   };
 
   export type AdminScalarFieldEnum = (typeof AdminScalarFieldEnum)[keyof typeof AdminScalarFieldEnum]
@@ -27288,6 +27344,7 @@ export namespace Prisma {
     userCode?: StringNullableFilter<"User"> | string | null
     contractID?: IntNullableFilter<"User"> | number | null
     companyID?: IntNullableFilter<"User"> | number | null
+    refreshToken?: StringNullableFilter<"User"> | string | null
     incidents?: XOR<IncidentsNullableScalarRelationFilter, IncidentsWhereInput> | null
     directions?: DirectionsListRelationFilter
     payments?: XOR<PaymentsNullableScalarRelationFilter, PaymentsWhereInput> | null
@@ -27313,6 +27370,7 @@ export namespace Prisma {
     userCode?: SortOrderInput | SortOrder
     contractID?: SortOrderInput | SortOrder
     companyID?: SortOrderInput | SortOrder
+    refreshToken?: SortOrderInput | SortOrder
     incidents?: IncidentsOrderByWithRelationInput
     directions?: DirectionsOrderByRelationAggregateInput
     payments?: PaymentsOrderByWithRelationInput
@@ -27341,6 +27399,7 @@ export namespace Prisma {
     userCode?: StringNullableFilter<"User"> | string | null
     contractID?: IntNullableFilter<"User"> | number | null
     companyID?: IntNullableFilter<"User"> | number | null
+    refreshToken?: StringNullableFilter<"User"> | string | null
     incidents?: XOR<IncidentsNullableScalarRelationFilter, IncidentsWhereInput> | null
     directions?: DirectionsListRelationFilter
     payments?: XOR<PaymentsNullableScalarRelationFilter, PaymentsWhereInput> | null
@@ -27366,6 +27425,7 @@ export namespace Prisma {
     userCode?: SortOrderInput | SortOrder
     contractID?: SortOrderInput | SortOrder
     companyID?: SortOrderInput | SortOrder
+    refreshToken?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
     _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
@@ -27388,6 +27448,7 @@ export namespace Prisma {
     userCode?: StringNullableWithAggregatesFilter<"User"> | string | null
     contractID?: IntNullableWithAggregatesFilter<"User"> | number | null
     companyID?: IntNullableWithAggregatesFilter<"User"> | number | null
+    refreshToken?: StringNullableWithAggregatesFilter<"User"> | string | null
   }
 
   export type CompanyWhereInput = {
@@ -27405,6 +27466,7 @@ export namespace Prisma {
     userID?: IntNullableFilter<"Company"> | number | null
     companyCode?: StringNullableFilter<"Company"> | string | null
     email?: StringFilter<"Company"> | string
+    refreshToken?: StringNullableFilter<"Company"> | string | null
     workers?: WorkerListRelationFilter
     receivedPayments?: PaymentsListRelationFilter
     incidents?: IncidentsListRelationFilter
@@ -27434,6 +27496,7 @@ export namespace Prisma {
     userID?: SortOrderInput | SortOrder
     companyCode?: SortOrderInput | SortOrder
     email?: SortOrder
+    refreshToken?: SortOrderInput | SortOrder
     workers?: WorkerOrderByRelationAggregateInput
     receivedPayments?: PaymentsOrderByRelationAggregateInput
     incidents?: IncidentsOrderByRelationAggregateInput
@@ -27466,6 +27529,7 @@ export namespace Prisma {
     suspendedUntil?: DateTimeNullableFilter<"Company"> | Date | string | null
     role?: EnumRoleFilter<"Company"> | $Enums.Role
     companyCode?: StringNullableFilter<"Company"> | string | null
+    refreshToken?: StringNullableFilter<"Company"> | string | null
     workers?: WorkerListRelationFilter
     receivedPayments?: PaymentsListRelationFilter
     incidents?: IncidentsListRelationFilter
@@ -27495,6 +27559,7 @@ export namespace Prisma {
     userID?: SortOrderInput | SortOrder
     companyCode?: SortOrderInput | SortOrder
     email?: SortOrder
+    refreshToken?: SortOrderInput | SortOrder
     _count?: CompanyCountOrderByAggregateInput
     _avg?: CompanyAvgOrderByAggregateInput
     _max?: CompanyMaxOrderByAggregateInput
@@ -27517,6 +27582,7 @@ export namespace Prisma {
     userID?: IntNullableWithAggregatesFilter<"Company"> | number | null
     companyCode?: StringNullableWithAggregatesFilter<"Company"> | string | null
     email?: StringWithAggregatesFilter<"Company"> | string
+    refreshToken?: StringNullableWithAggregatesFilter<"Company"> | string | null
   }
 
   export type AdminsCompaniesWhereInput = {
@@ -27581,6 +27647,7 @@ export namespace Prisma {
     companyID?: IntFilter<"Worker"> | number
     role?: EnumRoleFilter<"Worker"> | $Enums.Role
     workerCode?: StringNullableFilter<"Worker"> | string | null
+    refreshToken?: StringNullableFilter<"Worker"> | string | null
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
     shiftWorkers?: ShiftWorkerListRelationFilter
     assignedIncidents?: IncidentsListRelationFilter
@@ -27597,6 +27664,7 @@ export namespace Prisma {
     companyID?: SortOrder
     role?: SortOrder
     workerCode?: SortOrderInput | SortOrder
+    refreshToken?: SortOrderInput | SortOrder
     company?: CompanyOrderByWithRelationInput
     shiftWorkers?: ShiftWorkerOrderByRelationAggregateInput
     assignedIncidents?: IncidentsOrderByRelationAggregateInput
@@ -27616,6 +27684,7 @@ export namespace Prisma {
     companyID?: IntFilter<"Worker"> | number
     role?: EnumRoleFilter<"Worker"> | $Enums.Role
     workerCode?: StringNullableFilter<"Worker"> | string | null
+    refreshToken?: StringNullableFilter<"Worker"> | string | null
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
     shiftWorkers?: ShiftWorkerListRelationFilter
     assignedIncidents?: IncidentsListRelationFilter
@@ -27632,6 +27701,7 @@ export namespace Prisma {
     companyID?: SortOrder
     role?: SortOrder
     workerCode?: SortOrderInput | SortOrder
+    refreshToken?: SortOrderInput | SortOrder
     _count?: WorkerCountOrderByAggregateInput
     _avg?: WorkerAvgOrderByAggregateInput
     _max?: WorkerMaxOrderByAggregateInput
@@ -27650,6 +27720,7 @@ export namespace Prisma {
     companyID?: IntWithAggregatesFilter<"Worker"> | number
     role?: EnumRoleWithAggregatesFilter<"Worker"> | $Enums.Role
     workerCode?: StringNullableWithAggregatesFilter<"Worker"> | string | null
+    refreshToken?: StringNullableWithAggregatesFilter<"Worker"> | string | null
   }
 
   export type AdminWhereInput = {
@@ -27660,6 +27731,7 @@ export namespace Prisma {
     email?: StringFilter<"Admin"> | string
     password?: StringFilter<"Admin"> | string
     role?: EnumRoleFilter<"Admin"> | $Enums.Role
+    refreshToken?: StringNullableFilter<"Admin"> | string | null
     companies?: AdminsCompaniesListRelationFilter
   }
 
@@ -27668,6 +27740,7 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     role?: SortOrder
+    refreshToken?: SortOrderInput | SortOrder
     companies?: AdminsCompaniesOrderByRelationAggregateInput
   }
 
@@ -27679,6 +27752,7 @@ export namespace Prisma {
     NOT?: AdminWhereInput | AdminWhereInput[]
     password?: StringFilter<"Admin"> | string
     role?: EnumRoleFilter<"Admin"> | $Enums.Role
+    refreshToken?: StringNullableFilter<"Admin"> | string | null
     companies?: AdminsCompaniesListRelationFilter
   }, "adminID" | "email">
 
@@ -27687,6 +27761,7 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     role?: SortOrder
+    refreshToken?: SortOrderInput | SortOrder
     _count?: AdminCountOrderByAggregateInput
     _avg?: AdminAvgOrderByAggregateInput
     _max?: AdminMaxOrderByAggregateInput
@@ -27702,6 +27777,7 @@ export namespace Prisma {
     email?: StringWithAggregatesFilter<"Admin"> | string
     password?: StringWithAggregatesFilter<"Admin"> | string
     role?: EnumRoleWithAggregatesFilter<"Admin"> | $Enums.Role
+    refreshToken?: StringNullableWithAggregatesFilter<"Admin"> | string | null
   }
 
   export type usersCompaniesWhereInput = {
@@ -28734,6 +28810,7 @@ export namespace Prisma {
     role?: $Enums.Role
     userCode?: string | null
     contractID?: number | null
+    refreshToken?: string | null
     incidents?: IncidentsCreateNestedOneWithoutUsersInput
     directions?: DirectionsCreateNestedManyWithoutUserInput
     payments?: PaymentsCreateNestedOneWithoutUserInput
@@ -28759,6 +28836,7 @@ export namespace Prisma {
     userCode?: string | null
     contractID?: number | null
     companyID?: number | null
+    refreshToken?: string | null
     directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
@@ -28779,6 +28857,7 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     contractID?: NullableIntFieldUpdateOperationsInput | number | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     incidents?: IncidentsUpdateOneWithoutUsersNestedInput
     directions?: DirectionsUpdateManyWithoutUserNestedInput
     payments?: PaymentsUpdateOneWithoutUserNestedInput
@@ -28804,6 +28883,7 @@ export namespace Prisma {
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     contractID?: NullableIntFieldUpdateOperationsInput | number | null
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
@@ -28827,6 +28907,7 @@ export namespace Prisma {
     userCode?: string | null
     contractID?: number | null
     companyID?: number | null
+    refreshToken?: string | null
   }
 
   export type UserUpdateManyMutationInput = {
@@ -28838,6 +28919,7 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     contractID?: NullableIntFieldUpdateOperationsInput | number | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -28852,6 +28934,7 @@ export namespace Prisma {
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     contractID?: NullableIntFieldUpdateOperationsInput | number | null
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CompanyCreateInput = {
@@ -28864,6 +28947,7 @@ export namespace Prisma {
     userID?: number | null
     companyCode?: string | null
     email: string
+    refreshToken?: string | null
     workers?: WorkerCreateNestedManyWithoutCompanyInput
     receivedPayments?: PaymentsCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsCreateNestedManyWithoutCompanyInput
@@ -28893,6 +28977,7 @@ export namespace Prisma {
     userID?: number | null
     companyCode?: string | null
     email: string
+    refreshToken?: string | null
     workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
     receivedPayments?: PaymentsUncheckedCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsUncheckedCreateNestedManyWithoutCompanyInput
@@ -28919,6 +29004,7 @@ export namespace Prisma {
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUpdateManyWithoutCompanyNestedInput
     receivedPayments?: PaymentsUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUpdateManyWithoutCompanyNestedInput
@@ -28948,6 +29034,7 @@ export namespace Prisma {
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
     receivedPayments?: PaymentsUncheckedUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUncheckedUpdateManyWithoutCompanyNestedInput
@@ -28976,6 +29063,7 @@ export namespace Prisma {
     userID?: number | null
     companyCode?: string | null
     email: string
+    refreshToken?: string | null
   }
 
   export type CompanyUpdateManyMutationInput = {
@@ -28988,6 +29076,7 @@ export namespace Prisma {
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CompanyUncheckedUpdateManyInput = {
@@ -29002,6 +29091,7 @@ export namespace Prisma {
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type AdminsCompaniesCreateInput = {
@@ -29048,6 +29138,7 @@ export namespace Prisma {
     password: string
     role?: $Enums.Role
     workerCode?: string | null
+    refreshToken?: string | null
     company: CompanyCreateNestedOneWithoutWorkersInput
     shiftWorkers?: ShiftWorkerCreateNestedManyWithoutWorkerInput
     assignedIncidents?: IncidentsCreateNestedManyWithoutAssignedWorkerInput
@@ -29064,6 +29155,7 @@ export namespace Prisma {
     companyID: number
     role?: $Enums.Role
     workerCode?: string | null
+    refreshToken?: string | null
     shiftWorkers?: ShiftWorkerUncheckedCreateNestedManyWithoutWorkerInput
     assignedIncidents?: IncidentsUncheckedCreateNestedManyWithoutAssignedWorkerInput
     jobHistory?: JobHistoryUncheckedCreateNestedManyWithoutWorkerInput
@@ -29077,6 +29169,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     workerCode?: NullableStringFieldUpdateOperationsInput | string | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     company?: CompanyUpdateOneRequiredWithoutWorkersNestedInput
     shiftWorkers?: ShiftWorkerUpdateManyWithoutWorkerNestedInput
     assignedIncidents?: IncidentsUpdateManyWithoutAssignedWorkerNestedInput
@@ -29093,6 +29186,7 @@ export namespace Prisma {
     companyID?: IntFieldUpdateOperationsInput | number
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     workerCode?: NullableStringFieldUpdateOperationsInput | string | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     shiftWorkers?: ShiftWorkerUncheckedUpdateManyWithoutWorkerNestedInput
     assignedIncidents?: IncidentsUncheckedUpdateManyWithoutAssignedWorkerNestedInput
     jobHistory?: JobHistoryUncheckedUpdateManyWithoutWorkerNestedInput
@@ -29108,6 +29202,7 @@ export namespace Prisma {
     companyID: number
     role?: $Enums.Role
     workerCode?: string | null
+    refreshToken?: string | null
   }
 
   export type WorkerUpdateManyMutationInput = {
@@ -29116,6 +29211,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     workerCode?: NullableStringFieldUpdateOperationsInput | string | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type WorkerUncheckedUpdateManyInput = {
@@ -29126,12 +29222,14 @@ export namespace Prisma {
     companyID?: IntFieldUpdateOperationsInput | number
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     workerCode?: NullableStringFieldUpdateOperationsInput | string | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type AdminCreateInput = {
     email: string
     password: string
     role?: $Enums.Role
+    refreshToken?: string | null
     companies?: AdminsCompaniesCreateNestedManyWithoutAdminInput
   }
 
@@ -29140,6 +29238,7 @@ export namespace Prisma {
     email: string
     password: string
     role?: $Enums.Role
+    refreshToken?: string | null
     companies?: AdminsCompaniesUncheckedCreateNestedManyWithoutAdminInput
   }
 
@@ -29147,6 +29246,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     companies?: AdminsCompaniesUpdateManyWithoutAdminNestedInput
   }
 
@@ -29155,6 +29255,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     companies?: AdminsCompaniesUncheckedUpdateManyWithoutAdminNestedInput
   }
 
@@ -29163,12 +29264,14 @@ export namespace Prisma {
     email: string
     password: string
     role?: $Enums.Role
+    refreshToken?: string | null
   }
 
   export type AdminUpdateManyMutationInput = {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type AdminUncheckedUpdateManyInput = {
@@ -29176,6 +29279,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type usersCompaniesCreateInput = {
@@ -30277,6 +30381,7 @@ export namespace Prisma {
     userCode?: SortOrder
     contractID?: SortOrder
     companyID?: SortOrder
+    refreshToken?: SortOrder
   }
 
   export type UserAvgOrderByAggregateInput = {
@@ -30300,6 +30405,7 @@ export namespace Prisma {
     userCode?: SortOrder
     contractID?: SortOrder
     companyID?: SortOrder
+    refreshToken?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -30314,6 +30420,7 @@ export namespace Prisma {
     userCode?: SortOrder
     contractID?: SortOrder
     companyID?: SortOrder
+    refreshToken?: SortOrder
   }
 
   export type UserSumOrderByAggregateInput = {
@@ -30496,6 +30603,7 @@ export namespace Prisma {
     userID?: SortOrder
     companyCode?: SortOrder
     email?: SortOrder
+    refreshToken?: SortOrder
   }
 
   export type CompanyAvgOrderByAggregateInput = {
@@ -30516,6 +30624,7 @@ export namespace Prisma {
     userID?: SortOrder
     companyCode?: SortOrder
     email?: SortOrder
+    refreshToken?: SortOrder
   }
 
   export type CompanyMinOrderByAggregateInput = {
@@ -30530,6 +30639,7 @@ export namespace Prisma {
     userID?: SortOrder
     companyCode?: SortOrder
     email?: SortOrder
+    refreshToken?: SortOrder
   }
 
   export type CompanySumOrderByAggregateInput = {
@@ -30633,6 +30743,7 @@ export namespace Prisma {
     companyID?: SortOrder
     role?: SortOrder
     workerCode?: SortOrder
+    refreshToken?: SortOrder
   }
 
   export type WorkerAvgOrderByAggregateInput = {
@@ -30648,6 +30759,7 @@ export namespace Prisma {
     companyID?: SortOrder
     role?: SortOrder
     workerCode?: SortOrder
+    refreshToken?: SortOrder
   }
 
   export type WorkerMinOrderByAggregateInput = {
@@ -30658,6 +30770,7 @@ export namespace Prisma {
     companyID?: SortOrder
     role?: SortOrder
     workerCode?: SortOrder
+    refreshToken?: SortOrder
   }
 
   export type WorkerSumOrderByAggregateInput = {
@@ -30670,6 +30783,7 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     role?: SortOrder
+    refreshToken?: SortOrder
   }
 
   export type AdminAvgOrderByAggregateInput = {
@@ -30681,6 +30795,7 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     role?: SortOrder
+    refreshToken?: SortOrder
   }
 
   export type AdminMinOrderByAggregateInput = {
@@ -30688,6 +30803,7 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     role?: SortOrder
+    refreshToken?: SortOrder
   }
 
   export type AdminSumOrderByAggregateInput = {
@@ -34202,6 +34318,7 @@ export namespace Prisma {
     userID?: number | null
     companyCode?: string | null
     email: string
+    refreshToken?: string | null
     workers?: WorkerCreateNestedManyWithoutCompanyInput
     receivedPayments?: PaymentsCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsCreateNestedManyWithoutCompanyInput
@@ -34230,6 +34347,7 @@ export namespace Prisma {
     userID?: number | null
     companyCode?: string | null
     email: string
+    refreshToken?: string | null
     workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
     receivedPayments?: PaymentsUncheckedCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsUncheckedCreateNestedManyWithoutCompanyInput
@@ -34581,6 +34699,7 @@ export namespace Prisma {
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUpdateManyWithoutCompanyNestedInput
     receivedPayments?: PaymentsUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUpdateManyWithoutCompanyNestedInput
@@ -34609,6 +34728,7 @@ export namespace Prisma {
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
     receivedPayments?: PaymentsUncheckedUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUncheckedUpdateManyWithoutCompanyNestedInput
@@ -34717,6 +34837,7 @@ export namespace Prisma {
     password: string
     role?: $Enums.Role
     workerCode?: string | null
+    refreshToken?: string | null
     shiftWorkers?: ShiftWorkerCreateNestedManyWithoutWorkerInput
     assignedIncidents?: IncidentsCreateNestedManyWithoutAssignedWorkerInput
     jobHistory?: JobHistoryCreateNestedManyWithoutWorkerInput
@@ -34731,6 +34852,7 @@ export namespace Prisma {
     password: string
     role?: $Enums.Role
     workerCode?: string | null
+    refreshToken?: string | null
     shiftWorkers?: ShiftWorkerUncheckedCreateNestedManyWithoutWorkerInput
     assignedIncidents?: IncidentsUncheckedCreateNestedManyWithoutAssignedWorkerInput
     jobHistory?: JobHistoryUncheckedCreateNestedManyWithoutWorkerInput
@@ -35046,6 +35168,7 @@ export namespace Prisma {
     role?: $Enums.Role
     userCode?: string | null
     contractID?: number | null
+    refreshToken?: string | null
     incidents?: IncidentsCreateNestedOneWithoutUsersInput
     directions?: DirectionsCreateNestedManyWithoutUserInput
     payments?: PaymentsCreateNestedOneWithoutUserInput
@@ -35069,6 +35192,7 @@ export namespace Prisma {
     role?: $Enums.Role
     userCode?: string | null
     contractID?: number | null
+    refreshToken?: string | null
     directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
@@ -35201,6 +35325,7 @@ export namespace Prisma {
     companyID?: IntFilter<"Worker"> | number
     role?: EnumRoleFilter<"Worker"> | $Enums.Role
     workerCode?: StringNullableFilter<"Worker"> | string | null
+    refreshToken?: StringNullableFilter<"Worker"> | string | null
   }
 
   export type PaymentsUpsertWithWhereUniqueWithoutReceivedByInput = {
@@ -35428,6 +35553,7 @@ export namespace Prisma {
     userCode?: StringNullableFilter<"User"> | string | null
     contractID?: IntNullableFilter<"User"> | number | null
     companyID?: IntNullableFilter<"User"> | number | null
+    refreshToken?: StringNullableFilter<"User"> | string | null
   }
 
   export type contractsUpsertWithWhereUniqueWithoutCompanyInput = {
@@ -35516,6 +35642,7 @@ export namespace Prisma {
     email: string
     password: string
     role?: $Enums.Role
+    refreshToken?: string | null
   }
 
   export type AdminUncheckedCreateWithoutCompaniesInput = {
@@ -35523,6 +35650,7 @@ export namespace Prisma {
     email: string
     password: string
     role?: $Enums.Role
+    refreshToken?: string | null
   }
 
   export type AdminCreateOrConnectWithoutCompaniesInput = {
@@ -35540,6 +35668,7 @@ export namespace Prisma {
     userID?: number | null
     companyCode?: string | null
     email: string
+    refreshToken?: string | null
     workers?: WorkerCreateNestedManyWithoutCompanyInput
     receivedPayments?: PaymentsCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsCreateNestedManyWithoutCompanyInput
@@ -35568,6 +35697,7 @@ export namespace Prisma {
     userID?: number | null
     companyCode?: string | null
     email: string
+    refreshToken?: string | null
     workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
     receivedPayments?: PaymentsUncheckedCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsUncheckedCreateNestedManyWithoutCompanyInput
@@ -35603,6 +35733,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type AdminUncheckedUpdateWithoutCompaniesInput = {
@@ -35610,6 +35741,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CompanyUpsertWithoutAdminsInput = {
@@ -35633,6 +35765,7 @@ export namespace Prisma {
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUpdateManyWithoutCompanyNestedInput
     receivedPayments?: PaymentsUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUpdateManyWithoutCompanyNestedInput
@@ -35661,6 +35794,7 @@ export namespace Prisma {
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
     receivedPayments?: PaymentsUncheckedUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUncheckedUpdateManyWithoutCompanyNestedInput
@@ -35686,6 +35820,7 @@ export namespace Prisma {
     userID?: number | null
     companyCode?: string | null
     email: string
+    refreshToken?: string | null
     receivedPayments?: PaymentsCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsCreateNestedManyWithoutCompanyInput
     incidentHistory?: IncidentHistoryCreateNestedManyWithoutCompanyInput
@@ -35714,6 +35849,7 @@ export namespace Prisma {
     userID?: number | null
     companyCode?: string | null
     email: string
+    refreshToken?: string | null
     receivedPayments?: PaymentsUncheckedCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsUncheckedCreateNestedManyWithoutCompanyInput
     incidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutCompanyInput
@@ -35890,6 +36026,7 @@ export namespace Prisma {
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     receivedPayments?: PaymentsUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUpdateManyWithoutCompanyNestedInput
     incidentHistory?: IncidentHistoryUpdateManyWithoutCompanyNestedInput
@@ -35918,6 +36055,7 @@ export namespace Prisma {
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     receivedPayments?: PaymentsUncheckedUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUncheckedUpdateManyWithoutCompanyNestedInput
     incidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutCompanyNestedInput
@@ -36078,6 +36216,7 @@ export namespace Prisma {
     role?: $Enums.Role
     userCode?: string | null
     contractID?: number | null
+    refreshToken?: string | null
     incidents?: IncidentsCreateNestedOneWithoutUsersInput
     directions?: DirectionsCreateNestedManyWithoutUserInput
     payments?: PaymentsCreateNestedOneWithoutUserInput
@@ -36102,6 +36241,7 @@ export namespace Prisma {
     userCode?: string | null
     contractID?: number | null
     companyID?: number | null
+    refreshToken?: string | null
     directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
@@ -36127,6 +36267,7 @@ export namespace Prisma {
     userID?: number | null
     companyCode?: string | null
     email: string
+    refreshToken?: string | null
     workers?: WorkerCreateNestedManyWithoutCompanyInput
     receivedPayments?: PaymentsCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsCreateNestedManyWithoutCompanyInput
@@ -36155,6 +36296,7 @@ export namespace Prisma {
     userID?: number | null
     companyCode?: string | null
     email: string
+    refreshToken?: string | null
     workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
     receivedPayments?: PaymentsUncheckedCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsUncheckedCreateNestedManyWithoutCompanyInput
@@ -36195,6 +36337,7 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     contractID?: NullableIntFieldUpdateOperationsInput | number | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     incidents?: IncidentsUpdateOneWithoutUsersNestedInput
     directions?: DirectionsUpdateManyWithoutUserNestedInput
     payments?: PaymentsUpdateOneWithoutUserNestedInput
@@ -36219,6 +36362,7 @@ export namespace Prisma {
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     contractID?: NullableIntFieldUpdateOperationsInput | number | null
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
@@ -36250,6 +36394,7 @@ export namespace Prisma {
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUpdateManyWithoutCompanyNestedInput
     receivedPayments?: PaymentsUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUpdateManyWithoutCompanyNestedInput
@@ -36278,6 +36423,7 @@ export namespace Prisma {
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
     receivedPayments?: PaymentsUncheckedUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUncheckedUpdateManyWithoutCompanyNestedInput
@@ -36302,6 +36448,7 @@ export namespace Prisma {
     role?: $Enums.Role
     userCode?: string | null
     contractID?: number | null
+    refreshToken?: string | null
     incidents?: IncidentsCreateNestedOneWithoutUsersInput
     directions?: DirectionsCreateNestedManyWithoutUserInput
     payments?: PaymentsCreateNestedOneWithoutUserInput
@@ -36326,6 +36473,7 @@ export namespace Prisma {
     userCode?: string | null
     contractID?: number | null
     companyID?: number | null
+    refreshToken?: string | null
     directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
@@ -36351,6 +36499,7 @@ export namespace Prisma {
     userID?: number | null
     companyCode?: string | null
     email: string
+    refreshToken?: string | null
     workers?: WorkerCreateNestedManyWithoutCompanyInput
     receivedPayments?: PaymentsCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsCreateNestedManyWithoutCompanyInput
@@ -36379,6 +36528,7 @@ export namespace Prisma {
     userID?: number | null
     companyCode?: string | null
     email: string
+    refreshToken?: string | null
     workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
     receivedPayments?: PaymentsUncheckedCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsUncheckedCreateNestedManyWithoutCompanyInput
@@ -36419,6 +36569,7 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     contractID?: NullableIntFieldUpdateOperationsInput | number | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     incidents?: IncidentsUpdateOneWithoutUsersNestedInput
     directions?: DirectionsUpdateManyWithoutUserNestedInput
     payments?: PaymentsUpdateOneWithoutUserNestedInput
@@ -36443,6 +36594,7 @@ export namespace Prisma {
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     contractID?: NullableIntFieldUpdateOperationsInput | number | null
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
@@ -36474,6 +36626,7 @@ export namespace Prisma {
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUpdateManyWithoutCompanyNestedInput
     receivedPayments?: PaymentsUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUpdateManyWithoutCompanyNestedInput
@@ -36502,6 +36655,7 @@ export namespace Prisma {
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
     receivedPayments?: PaymentsUncheckedUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUncheckedUpdateManyWithoutCompanyNestedInput
@@ -36523,6 +36677,7 @@ export namespace Prisma {
     password: string
     role?: $Enums.Role
     workerCode?: string | null
+    refreshToken?: string | null
     company: CompanyCreateNestedOneWithoutWorkersInput
     shiftWorkers?: ShiftWorkerCreateNestedManyWithoutWorkerInput
     assignedIncidents?: IncidentsCreateNestedManyWithoutAssignedWorkerInput
@@ -36538,6 +36693,7 @@ export namespace Prisma {
     companyID: number
     role?: $Enums.Role
     workerCode?: string | null
+    refreshToken?: string | null
     shiftWorkers?: ShiftWorkerUncheckedCreateNestedManyWithoutWorkerInput
     assignedIncidents?: IncidentsUncheckedCreateNestedManyWithoutAssignedWorkerInput
     jobHistory?: JobHistoryUncheckedCreateNestedManyWithoutWorkerInput
@@ -36559,6 +36715,7 @@ export namespace Prisma {
     userID?: number | null
     companyCode?: string | null
     email: string
+    refreshToken?: string | null
     workers?: WorkerCreateNestedManyWithoutCompanyInput
     receivedPayments?: PaymentsCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsCreateNestedManyWithoutCompanyInput
@@ -36587,6 +36744,7 @@ export namespace Prisma {
     userID?: number | null
     companyCode?: string | null
     email: string
+    refreshToken?: string | null
     workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
     receivedPayments?: PaymentsUncheckedCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsUncheckedCreateNestedManyWithoutCompanyInput
@@ -36624,6 +36782,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     workerCode?: NullableStringFieldUpdateOperationsInput | string | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     company?: CompanyUpdateOneRequiredWithoutWorkersNestedInput
     shiftWorkers?: ShiftWorkerUpdateManyWithoutWorkerNestedInput
     assignedIncidents?: IncidentsUpdateManyWithoutAssignedWorkerNestedInput
@@ -36639,6 +36798,7 @@ export namespace Prisma {
     companyID?: IntFieldUpdateOperationsInput | number
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     workerCode?: NullableStringFieldUpdateOperationsInput | string | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     shiftWorkers?: ShiftWorkerUncheckedUpdateManyWithoutWorkerNestedInput
     assignedIncidents?: IncidentsUncheckedUpdateManyWithoutAssignedWorkerNestedInput
     jobHistory?: JobHistoryUncheckedUpdateManyWithoutWorkerNestedInput
@@ -36666,6 +36826,7 @@ export namespace Prisma {
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUpdateManyWithoutCompanyNestedInput
     receivedPayments?: PaymentsUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUpdateManyWithoutCompanyNestedInput
@@ -36694,6 +36855,7 @@ export namespace Prisma {
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
     receivedPayments?: PaymentsUncheckedUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUncheckedUpdateManyWithoutCompanyNestedInput
@@ -36719,6 +36881,7 @@ export namespace Prisma {
     userID?: number | null
     companyCode?: string | null
     email: string
+    refreshToken?: string | null
     workers?: WorkerCreateNestedManyWithoutCompanyInput
     receivedPayments?: PaymentsCreateNestedManyWithoutReceivedByInput
     incidentHistory?: IncidentHistoryCreateNestedManyWithoutCompanyInput
@@ -36747,6 +36910,7 @@ export namespace Prisma {
     userID?: number | null
     companyCode?: string | null
     email: string
+    refreshToken?: string | null
     workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
     receivedPayments?: PaymentsUncheckedCreateNestedManyWithoutReceivedByInput
     incidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutCompanyInput
@@ -36773,6 +36937,7 @@ export namespace Prisma {
     password: string
     role?: $Enums.Role
     workerCode?: string | null
+    refreshToken?: string | null
     company: CompanyCreateNestedOneWithoutWorkersInput
     shiftWorkers?: ShiftWorkerCreateNestedManyWithoutWorkerInput
     jobHistory?: JobHistoryCreateNestedManyWithoutWorkerInput
@@ -36788,6 +36953,7 @@ export namespace Prisma {
     companyID: number
     role?: $Enums.Role
     workerCode?: string | null
+    refreshToken?: string | null
     shiftWorkers?: ShiftWorkerUncheckedCreateNestedManyWithoutWorkerInput
     jobHistory?: JobHistoryUncheckedCreateNestedManyWithoutWorkerInput
     shiftSchedules?: ShiftScheduleUncheckedCreateNestedManyWithoutWorkerInput
@@ -36842,6 +37008,7 @@ export namespace Prisma {
     role?: $Enums.Role
     userCode?: string | null
     contractID?: number | null
+    refreshToken?: string | null
     incidents?: IncidentsCreateNestedOneWithoutUsersInput
     directions?: DirectionsCreateNestedManyWithoutUserInput
     payments?: PaymentsCreateNestedOneWithoutUserInput
@@ -36866,6 +37033,7 @@ export namespace Prisma {
     userCode?: string | null
     contractID?: number | null
     companyID?: number | null
+    refreshToken?: string | null
     directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
@@ -36890,6 +37058,7 @@ export namespace Prisma {
     role?: $Enums.Role
     userCode?: string | null
     contractID?: number | null
+    refreshToken?: string | null
     directions?: DirectionsCreateNestedManyWithoutUserInput
     payments?: PaymentsCreateNestedOneWithoutUserInput
     IncidentHistory?: IncidentHistoryCreateNestedManyWithoutUserInput
@@ -36913,6 +37082,7 @@ export namespace Prisma {
     userCode?: string | null
     contractID?: number | null
     companyID?: number | null
+    refreshToken?: string | null
     directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
@@ -37006,6 +37176,7 @@ export namespace Prisma {
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUpdateManyWithoutCompanyNestedInput
     receivedPayments?: PaymentsUpdateManyWithoutReceivedByNestedInput
     incidentHistory?: IncidentHistoryUpdateManyWithoutCompanyNestedInput
@@ -37034,6 +37205,7 @@ export namespace Prisma {
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
     receivedPayments?: PaymentsUncheckedUpdateManyWithoutReceivedByNestedInput
     incidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutCompanyNestedInput
@@ -37066,6 +37238,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     workerCode?: NullableStringFieldUpdateOperationsInput | string | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     company?: CompanyUpdateOneRequiredWithoutWorkersNestedInput
     shiftWorkers?: ShiftWorkerUpdateManyWithoutWorkerNestedInput
     jobHistory?: JobHistoryUpdateManyWithoutWorkerNestedInput
@@ -37081,6 +37254,7 @@ export namespace Prisma {
     companyID?: IntFieldUpdateOperationsInput | number
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     workerCode?: NullableStringFieldUpdateOperationsInput | string | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     shiftWorkers?: ShiftWorkerUncheckedUpdateManyWithoutWorkerNestedInput
     jobHistory?: JobHistoryUncheckedUpdateManyWithoutWorkerNestedInput
     shiftSchedules?: ShiftScheduleUncheckedUpdateManyWithoutWorkerNestedInput
@@ -37147,6 +37321,7 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     contractID?: NullableIntFieldUpdateOperationsInput | number | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     incidents?: IncidentsUpdateOneWithoutUsersNestedInput
     directions?: DirectionsUpdateManyWithoutUserNestedInput
     payments?: PaymentsUpdateOneWithoutUserNestedInput
@@ -37171,6 +37346,7 @@ export namespace Prisma {
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     contractID?: NullableIntFieldUpdateOperationsInput | number | null
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
@@ -37238,6 +37414,7 @@ export namespace Prisma {
     role?: $Enums.Role
     userCode?: string | null
     contractID?: number | null
+    refreshToken?: string | null
     incidents?: IncidentsCreateNestedOneWithoutUsersInput
     directions?: DirectionsCreateNestedManyWithoutUserInput
     IncidentHistory?: IncidentHistoryCreateNestedManyWithoutUserInput
@@ -37262,6 +37439,7 @@ export namespace Prisma {
     userCode?: string | null
     contractID?: number | null
     companyID?: number | null
+    refreshToken?: string | null
     directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
     ClientMachinery?: ClientMachineryUncheckedCreateNestedManyWithoutUserInput
@@ -37287,6 +37465,7 @@ export namespace Prisma {
     userID?: number | null
     companyCode?: string | null
     email: string
+    refreshToken?: string | null
     workers?: WorkerCreateNestedManyWithoutCompanyInput
     receivedPayments?: PaymentsCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsCreateNestedManyWithoutCompanyInput
@@ -37315,6 +37494,7 @@ export namespace Prisma {
     userID?: number | null
     companyCode?: string | null
     email: string
+    refreshToken?: string | null
     workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
     receivedPayments?: PaymentsUncheckedCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsUncheckedCreateNestedManyWithoutCompanyInput
@@ -37345,6 +37525,7 @@ export namespace Prisma {
     userID?: number | null
     companyCode?: string | null
     email: string
+    refreshToken?: string | null
     workers?: WorkerCreateNestedManyWithoutCompanyInput
     incidents?: IncidentsCreateNestedManyWithoutCompanyInput
     incidentHistory?: IncidentHistoryCreateNestedManyWithoutCompanyInput
@@ -37373,6 +37554,7 @@ export namespace Prisma {
     userID?: number | null
     companyCode?: string | null
     email: string
+    refreshToken?: string | null
     workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
     incidents?: IncidentsUncheckedCreateNestedManyWithoutCompanyInput
     incidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutCompanyInput
@@ -37472,6 +37654,7 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     contractID?: NullableIntFieldUpdateOperationsInput | number | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     incidents?: IncidentsUpdateOneWithoutUsersNestedInput
     directions?: DirectionsUpdateManyWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUpdateManyWithoutUserNestedInput
@@ -37496,6 +37679,7 @@ export namespace Prisma {
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     contractID?: NullableIntFieldUpdateOperationsInput | number | null
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
     ClientMachinery?: ClientMachineryUncheckedUpdateManyWithoutUserNestedInput
@@ -37527,6 +37711,7 @@ export namespace Prisma {
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUpdateManyWithoutCompanyNestedInput
     receivedPayments?: PaymentsUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUpdateManyWithoutCompanyNestedInput
@@ -37555,6 +37740,7 @@ export namespace Prisma {
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
     receivedPayments?: PaymentsUncheckedUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUncheckedUpdateManyWithoutCompanyNestedInput
@@ -37591,6 +37777,7 @@ export namespace Prisma {
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUpdateManyWithoutCompanyNestedInput
     incidents?: IncidentsUpdateManyWithoutCompanyNestedInput
     incidentHistory?: IncidentHistoryUpdateManyWithoutCompanyNestedInput
@@ -37619,6 +37806,7 @@ export namespace Prisma {
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
     incidents?: IncidentsUncheckedUpdateManyWithoutCompanyNestedInput
     incidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutCompanyNestedInput
@@ -37773,6 +37961,7 @@ export namespace Prisma {
     userID?: number | null
     companyCode?: string | null
     email: string
+    refreshToken?: string | null
     workers?: WorkerCreateNestedManyWithoutCompanyInput
     receivedPayments?: PaymentsCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsCreateNestedManyWithoutCompanyInput
@@ -37801,6 +37990,7 @@ export namespace Prisma {
     userID?: number | null
     companyCode?: string | null
     email: string
+    refreshToken?: string | null
     workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
     receivedPayments?: PaymentsUncheckedCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsUncheckedCreateNestedManyWithoutCompanyInput
@@ -37870,6 +38060,7 @@ export namespace Prisma {
     role?: $Enums.Role
     userCode?: string | null
     contractID?: number | null
+    refreshToken?: string | null
     incidents?: IncidentsCreateNestedOneWithoutUsersInput
     directions?: DirectionsCreateNestedManyWithoutUserInput
     payments?: PaymentsCreateNestedOneWithoutUserInput
@@ -37894,6 +38085,7 @@ export namespace Prisma {
     userCode?: string | null
     contractID?: number | null
     companyID?: number | null
+    refreshToken?: string | null
     directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
@@ -37919,6 +38111,7 @@ export namespace Prisma {
     userID?: number | null
     companyCode?: string | null
     email: string
+    refreshToken?: string | null
     workers?: WorkerCreateNestedManyWithoutCompanyInput
     receivedPayments?: PaymentsCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsCreateNestedManyWithoutCompanyInput
@@ -37946,6 +38139,7 @@ export namespace Prisma {
     userID?: number | null
     companyCode?: string | null
     email: string
+    refreshToken?: string | null
     workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
     receivedPayments?: PaymentsUncheckedCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsUncheckedCreateNestedManyWithoutCompanyInput
@@ -37988,6 +38182,7 @@ export namespace Prisma {
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUpdateManyWithoutCompanyNestedInput
     receivedPayments?: PaymentsUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUpdateManyWithoutCompanyNestedInput
@@ -38016,6 +38211,7 @@ export namespace Prisma {
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
     receivedPayments?: PaymentsUncheckedUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUncheckedUpdateManyWithoutCompanyNestedInput
@@ -38097,6 +38293,7 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     contractID?: NullableIntFieldUpdateOperationsInput | number | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     incidents?: IncidentsUpdateOneWithoutUsersNestedInput
     directions?: DirectionsUpdateManyWithoutUserNestedInput
     payments?: PaymentsUpdateOneWithoutUserNestedInput
@@ -38121,6 +38318,7 @@ export namespace Prisma {
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     contractID?: NullableIntFieldUpdateOperationsInput | number | null
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
@@ -38162,6 +38360,7 @@ export namespace Prisma {
     userID?: IntNullableFilter<"Company"> | number | null
     companyCode?: StringNullableFilter<"Company"> | string | null
     email?: StringFilter<"Company"> | string
+    refreshToken?: StringNullableFilter<"Company"> | string | null
   }
 
   export type IncidentsCreateWithoutIncidentHistoryInput = {
@@ -38214,6 +38413,7 @@ export namespace Prisma {
     userID?: number | null
     companyCode?: string | null
     email: string
+    refreshToken?: string | null
     workers?: WorkerCreateNestedManyWithoutCompanyInput
     receivedPayments?: PaymentsCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsCreateNestedManyWithoutCompanyInput
@@ -38242,6 +38442,7 @@ export namespace Prisma {
     userID?: number | null
     companyCode?: string | null
     email: string
+    refreshToken?: string | null
     workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
     receivedPayments?: PaymentsUncheckedCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsUncheckedCreateNestedManyWithoutCompanyInput
@@ -38271,6 +38472,7 @@ export namespace Prisma {
     role?: $Enums.Role
     userCode?: string | null
     contractID?: number | null
+    refreshToken?: string | null
     incidents?: IncidentsCreateNestedOneWithoutUsersInput
     directions?: DirectionsCreateNestedManyWithoutUserInput
     payments?: PaymentsCreateNestedOneWithoutUserInput
@@ -38295,6 +38497,7 @@ export namespace Prisma {
     userCode?: string | null
     contractID?: number | null
     companyID?: number | null
+    refreshToken?: string | null
     directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
     ClientMachinery?: ClientMachineryUncheckedCreateNestedManyWithoutUserInput
@@ -38377,6 +38580,7 @@ export namespace Prisma {
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUpdateManyWithoutCompanyNestedInput
     receivedPayments?: PaymentsUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUpdateManyWithoutCompanyNestedInput
@@ -38405,6 +38609,7 @@ export namespace Prisma {
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
     receivedPayments?: PaymentsUncheckedUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUncheckedUpdateManyWithoutCompanyNestedInput
@@ -38440,6 +38645,7 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     contractID?: NullableIntFieldUpdateOperationsInput | number | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     incidents?: IncidentsUpdateOneWithoutUsersNestedInput
     directions?: DirectionsUpdateManyWithoutUserNestedInput
     payments?: PaymentsUpdateOneWithoutUserNestedInput
@@ -38464,6 +38670,7 @@ export namespace Prisma {
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     contractID?: NullableIntFieldUpdateOperationsInput | number | null
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
     ClientMachinery?: ClientMachineryUncheckedUpdateManyWithoutUserNestedInput
@@ -38484,6 +38691,7 @@ export namespace Prisma {
     userID?: number | null
     companyCode?: string | null
     email: string
+    refreshToken?: string | null
     workers?: WorkerCreateNestedManyWithoutCompanyInput
     receivedPayments?: PaymentsCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsCreateNestedManyWithoutCompanyInput
@@ -38512,6 +38720,7 @@ export namespace Prisma {
     userID?: number | null
     companyCode?: string | null
     email: string
+    refreshToken?: string | null
     workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
     receivedPayments?: PaymentsUncheckedCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsUncheckedCreateNestedManyWithoutCompanyInput
@@ -38538,6 +38747,7 @@ export namespace Prisma {
     password: string
     role?: $Enums.Role
     workerCode?: string | null
+    refreshToken?: string | null
     company: CompanyCreateNestedOneWithoutWorkersInput
     assignedIncidents?: IncidentsCreateNestedManyWithoutAssignedWorkerInput
     jobHistory?: JobHistoryCreateNestedManyWithoutWorkerInput
@@ -38553,6 +38763,7 @@ export namespace Prisma {
     companyID: number
     role?: $Enums.Role
     workerCode?: string | null
+    refreshToken?: string | null
     assignedIncidents?: IncidentsUncheckedCreateNestedManyWithoutAssignedWorkerInput
     jobHistory?: JobHistoryUncheckedCreateNestedManyWithoutWorkerInput
     shiftSchedules?: ShiftScheduleUncheckedCreateNestedManyWithoutWorkerInput
@@ -38603,6 +38814,7 @@ export namespace Prisma {
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUpdateManyWithoutCompanyNestedInput
     receivedPayments?: PaymentsUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUpdateManyWithoutCompanyNestedInput
@@ -38631,6 +38843,7 @@ export namespace Prisma {
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
     receivedPayments?: PaymentsUncheckedUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUncheckedUpdateManyWithoutCompanyNestedInput
@@ -38663,6 +38876,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     workerCode?: NullableStringFieldUpdateOperationsInput | string | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     company?: CompanyUpdateOneRequiredWithoutWorkersNestedInput
     assignedIncidents?: IncidentsUpdateManyWithoutAssignedWorkerNestedInput
     jobHistory?: JobHistoryUpdateManyWithoutWorkerNestedInput
@@ -38678,6 +38892,7 @@ export namespace Prisma {
     companyID?: IntFieldUpdateOperationsInput | number
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     workerCode?: NullableStringFieldUpdateOperationsInput | string | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     assignedIncidents?: IncidentsUncheckedUpdateManyWithoutAssignedWorkerNestedInput
     jobHistory?: JobHistoryUncheckedUpdateManyWithoutWorkerNestedInput
     shiftSchedules?: ShiftScheduleUncheckedUpdateManyWithoutWorkerNestedInput
@@ -38714,6 +38929,7 @@ export namespace Prisma {
     password: string
     role?: $Enums.Role
     workerCode?: string | null
+    refreshToken?: string | null
     company: CompanyCreateNestedOneWithoutWorkersInput
     shiftWorkers?: ShiftWorkerCreateNestedManyWithoutWorkerInput
     assignedIncidents?: IncidentsCreateNestedManyWithoutAssignedWorkerInput
@@ -38729,6 +38945,7 @@ export namespace Prisma {
     companyID: number
     role?: $Enums.Role
     workerCode?: string | null
+    refreshToken?: string | null
     shiftWorkers?: ShiftWorkerUncheckedCreateNestedManyWithoutWorkerInput
     assignedIncidents?: IncidentsUncheckedCreateNestedManyWithoutAssignedWorkerInput
     shiftSchedules?: ShiftScheduleUncheckedCreateNestedManyWithoutWorkerInput
@@ -38757,6 +38974,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     workerCode?: NullableStringFieldUpdateOperationsInput | string | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     company?: CompanyUpdateOneRequiredWithoutWorkersNestedInput
     shiftWorkers?: ShiftWorkerUpdateManyWithoutWorkerNestedInput
     assignedIncidents?: IncidentsUpdateManyWithoutAssignedWorkerNestedInput
@@ -38772,6 +38990,7 @@ export namespace Prisma {
     companyID?: IntFieldUpdateOperationsInput | number
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     workerCode?: NullableStringFieldUpdateOperationsInput | string | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     shiftWorkers?: ShiftWorkerUncheckedUpdateManyWithoutWorkerNestedInput
     assignedIncidents?: IncidentsUncheckedUpdateManyWithoutAssignedWorkerNestedInput
     shiftSchedules?: ShiftScheduleUncheckedUpdateManyWithoutWorkerNestedInput
@@ -38784,6 +39003,7 @@ export namespace Prisma {
     password: string
     role?: $Enums.Role
     workerCode?: string | null
+    refreshToken?: string | null
     company: CompanyCreateNestedOneWithoutWorkersInput
     shiftWorkers?: ShiftWorkerCreateNestedManyWithoutWorkerInput
     assignedIncidents?: IncidentsCreateNestedManyWithoutAssignedWorkerInput
@@ -38799,6 +39019,7 @@ export namespace Prisma {
     companyID: number
     role?: $Enums.Role
     workerCode?: string | null
+    refreshToken?: string | null
     shiftWorkers?: ShiftWorkerUncheckedCreateNestedManyWithoutWorkerInput
     assignedIncidents?: IncidentsUncheckedCreateNestedManyWithoutAssignedWorkerInput
     jobHistory?: JobHistoryUncheckedCreateNestedManyWithoutWorkerInput
@@ -38852,6 +39073,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     workerCode?: NullableStringFieldUpdateOperationsInput | string | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     company?: CompanyUpdateOneRequiredWithoutWorkersNestedInput
     shiftWorkers?: ShiftWorkerUpdateManyWithoutWorkerNestedInput
     assignedIncidents?: IncidentsUpdateManyWithoutAssignedWorkerNestedInput
@@ -38867,6 +39089,7 @@ export namespace Prisma {
     companyID?: IntFieldUpdateOperationsInput | number
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     workerCode?: NullableStringFieldUpdateOperationsInput | string | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     shiftWorkers?: ShiftWorkerUncheckedUpdateManyWithoutWorkerNestedInput
     assignedIncidents?: IncidentsUncheckedUpdateManyWithoutAssignedWorkerNestedInput
     jobHistory?: JobHistoryUncheckedUpdateManyWithoutWorkerNestedInput
@@ -38898,6 +39121,7 @@ export namespace Prisma {
     role?: $Enums.Role
     userCode?: string | null
     contractID?: number | null
+    refreshToken?: string | null
     incidents?: IncidentsCreateNestedOneWithoutUsersInput
     payments?: PaymentsCreateNestedOneWithoutUserInput
     IncidentHistory?: IncidentHistoryCreateNestedManyWithoutUserInput
@@ -38922,6 +39146,7 @@ export namespace Prisma {
     userCode?: string | null
     contractID?: number | null
     companyID?: number | null
+    refreshToken?: string | null
     payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
     ClientMachinery?: ClientMachineryUncheckedCreateNestedManyWithoutUserInput
@@ -38947,6 +39172,7 @@ export namespace Prisma {
     userID?: number | null
     companyCode?: string | null
     email: string
+    refreshToken?: string | null
     workers?: WorkerCreateNestedManyWithoutCompanyInput
     receivedPayments?: PaymentsCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsCreateNestedManyWithoutCompanyInput
@@ -38975,6 +39201,7 @@ export namespace Prisma {
     userID?: number | null
     companyCode?: string | null
     email: string
+    refreshToken?: string | null
     workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
     receivedPayments?: PaymentsUncheckedCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsUncheckedCreateNestedManyWithoutCompanyInput
@@ -39015,6 +39242,7 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     contractID?: NullableIntFieldUpdateOperationsInput | number | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     incidents?: IncidentsUpdateOneWithoutUsersNestedInput
     payments?: PaymentsUpdateOneWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUpdateManyWithoutUserNestedInput
@@ -39039,6 +39267,7 @@ export namespace Prisma {
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     contractID?: NullableIntFieldUpdateOperationsInput | number | null
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
     ClientMachinery?: ClientMachineryUncheckedUpdateManyWithoutUserNestedInput
@@ -39070,6 +39299,7 @@ export namespace Prisma {
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUpdateManyWithoutCompanyNestedInput
     receivedPayments?: PaymentsUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUpdateManyWithoutCompanyNestedInput
@@ -39098,6 +39328,7 @@ export namespace Prisma {
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
     receivedPayments?: PaymentsUncheckedUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUncheckedUpdateManyWithoutCompanyNestedInput
@@ -39122,6 +39353,7 @@ export namespace Prisma {
     role?: $Enums.Role
     userCode?: string | null
     contractID?: number | null
+    refreshToken?: string | null
     incidents?: IncidentsCreateNestedOneWithoutUsersInput
     directions?: DirectionsCreateNestedManyWithoutUserInput
     payments?: PaymentsCreateNestedOneWithoutUserInput
@@ -39146,6 +39378,7 @@ export namespace Prisma {
     userCode?: string | null
     contractID?: number | null
     companyID?: number | null
+    refreshToken?: string | null
     directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
@@ -39171,6 +39404,7 @@ export namespace Prisma {
     userID?: number | null
     companyCode?: string | null
     email: string
+    refreshToken?: string | null
     workers?: WorkerCreateNestedManyWithoutCompanyInput
     receivedPayments?: PaymentsCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsCreateNestedManyWithoutCompanyInput
@@ -39199,6 +39433,7 @@ export namespace Prisma {
     userID?: number | null
     companyCode?: string | null
     email: string
+    refreshToken?: string | null
     workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
     receivedPayments?: PaymentsUncheckedCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsUncheckedCreateNestedManyWithoutCompanyInput
@@ -39257,6 +39492,7 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     contractID?: NullableIntFieldUpdateOperationsInput | number | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     incidents?: IncidentsUpdateOneWithoutUsersNestedInput
     directions?: DirectionsUpdateManyWithoutUserNestedInput
     payments?: PaymentsUpdateOneWithoutUserNestedInput
@@ -39281,6 +39517,7 @@ export namespace Prisma {
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     contractID?: NullableIntFieldUpdateOperationsInput | number | null
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
@@ -39312,6 +39549,7 @@ export namespace Prisma {
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUpdateManyWithoutCompanyNestedInput
     receivedPayments?: PaymentsUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUpdateManyWithoutCompanyNestedInput
@@ -39340,6 +39578,7 @@ export namespace Prisma {
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
     receivedPayments?: PaymentsUncheckedUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUncheckedUpdateManyWithoutCompanyNestedInput
@@ -39380,6 +39619,7 @@ export namespace Prisma {
     role?: $Enums.Role
     userCode?: string | null
     contractID?: number | null
+    refreshToken?: string | null
     incidents?: IncidentsCreateNestedOneWithoutUsersInput
     directions?: DirectionsCreateNestedManyWithoutUserInput
     payments?: PaymentsCreateNestedOneWithoutUserInput
@@ -39404,6 +39644,7 @@ export namespace Prisma {
     userCode?: string | null
     contractID?: number | null
     companyID?: number | null
+    refreshToken?: string | null
     directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
@@ -39471,6 +39712,7 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     contractID?: NullableIntFieldUpdateOperationsInput | number | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     incidents?: IncidentsUpdateOneWithoutUsersNestedInput
     directions?: DirectionsUpdateManyWithoutUserNestedInput
     payments?: PaymentsUpdateOneWithoutUserNestedInput
@@ -39495,6 +39737,7 @@ export namespace Prisma {
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     contractID?: NullableIntFieldUpdateOperationsInput | number | null
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
@@ -39859,6 +40102,7 @@ export namespace Prisma {
     password: string
     role?: $Enums.Role
     workerCode?: string | null
+    refreshToken?: string | null
   }
 
   export type PaymentsCreateManyReceivedByInput = {
@@ -39958,6 +40202,7 @@ export namespace Prisma {
     role?: $Enums.Role
     userCode?: string | null
     contractID?: number | null
+    refreshToken?: string | null
   }
 
   export type contractsCreateManyCompanyInput = {
@@ -39990,6 +40235,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     workerCode?: NullableStringFieldUpdateOperationsInput | string | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     shiftWorkers?: ShiftWorkerUpdateManyWithoutWorkerNestedInput
     assignedIncidents?: IncidentsUpdateManyWithoutAssignedWorkerNestedInput
     jobHistory?: JobHistoryUpdateManyWithoutWorkerNestedInput
@@ -40004,6 +40250,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     workerCode?: NullableStringFieldUpdateOperationsInput | string | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     shiftWorkers?: ShiftWorkerUncheckedUpdateManyWithoutWorkerNestedInput
     assignedIncidents?: IncidentsUncheckedUpdateManyWithoutAssignedWorkerNestedInput
     jobHistory?: JobHistoryUncheckedUpdateManyWithoutWorkerNestedInput
@@ -40018,6 +40265,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     workerCode?: NullableStringFieldUpdateOperationsInput | string | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type PaymentsUpdateWithoutReceivedByInput = {
@@ -40295,6 +40543,7 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     contractID?: NullableIntFieldUpdateOperationsInput | number | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     incidents?: IncidentsUpdateOneWithoutUsersNestedInput
     directions?: DirectionsUpdateManyWithoutUserNestedInput
     payments?: PaymentsUpdateOneWithoutUserNestedInput
@@ -40318,6 +40567,7 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     contractID?: NullableIntFieldUpdateOperationsInput | number | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
@@ -40340,6 +40590,7 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     contractID?: NullableIntFieldUpdateOperationsInput | number | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type contractsUpdateWithoutCompanyInput = {
@@ -40607,6 +40858,7 @@ export namespace Prisma {
     userCode?: string | null
     contractID?: number | null
     companyID?: number | null
+    refreshToken?: string | null
   }
 
   export type IncidentHistoryCreateManyIncidentInput = {
@@ -40636,6 +40888,7 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     contractID?: NullableIntFieldUpdateOperationsInput | number | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     directions?: DirectionsUpdateManyWithoutUserNestedInput
     payments?: PaymentsUpdateOneWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUpdateManyWithoutUserNestedInput
@@ -40659,6 +40912,7 @@ export namespace Prisma {
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     contractID?: NullableIntFieldUpdateOperationsInput | number | null
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
@@ -40681,6 +40935,7 @@ export namespace Prisma {
     userCode?: NullableStringFieldUpdateOperationsInput | string | null
     contractID?: NullableIntFieldUpdateOperationsInput | number | null
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type IncidentHistoryUpdateWithoutIncidentInput = {
@@ -40767,6 +41022,7 @@ export namespace Prisma {
     userID?: number | null
     companyCode?: string | null
     email: string
+    refreshToken?: string | null
   }
 
   export type CompanyUpdateWithoutBudgetInput = {
@@ -40779,6 +41035,7 @@ export namespace Prisma {
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUpdateManyWithoutCompanyNestedInput
     receivedPayments?: PaymentsUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUpdateManyWithoutCompanyNestedInput
@@ -40806,6 +41063,7 @@ export namespace Prisma {
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
     receivedPayments?: PaymentsUncheckedUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUncheckedUpdateManyWithoutCompanyNestedInput
@@ -40833,6 +41091,7 @@ export namespace Prisma {
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ShiftWorkerCreateManyShiftInput = {

@@ -41,6 +41,7 @@ model User {
   contracts      contracts[]      @relation("CompanyToContracts")
   machinery      machinery[]
   usersCompanies usersCompanies[]
+  refreshToken   String?          @db.Text
 }
 
 model Company {
@@ -71,6 +72,7 @@ model Company {
   admins           AdminsCompanies[]  @relation("CompanyToAdminsCompanies")
   workersCompanies workersCompanies[]
   usersCompanies   usersCompanies[]
+  refreshToken     String?            @db.Text
 }
 
 model AdminsCompanies {
@@ -98,15 +100,16 @@ model Worker {
   role              Role               @default(WORKER)
   workerCode        String?            @db.VarChar(100)
   workersCompanies  workersCompanies[]
+  refreshToken      String?            @db.Text
 }
 
 model Admin {
-  adminID  Int    @id @default(autoincrement())
-  email    String @unique @db.VarChar(255)
-  password String @db.VarChar(255)
-  role     Role   @default(ADMIN)
-
-  companies AdminsCompanies[]
+  adminID      Int               @id @default(autoincrement())
+  email        String            @unique @db.VarChar(255)
+  password     String            @db.VarChar(255)
+  role         Role              @default(ADMIN)
+  refreshToken String?           @db.Text
+  companies    AdminsCompanies[]
 }
 
 model usersCompanies {

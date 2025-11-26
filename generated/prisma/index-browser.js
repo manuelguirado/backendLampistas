@@ -132,7 +132,8 @@ exports.Prisma.UserScalarFieldEnum = {
   role: 'role',
   userCode: 'userCode',
   contractID: 'contractID',
-  companyID: 'companyID'
+  companyID: 'companyID',
+  refreshToken: 'refreshToken'
 };
 
 exports.Prisma.CompanyScalarFieldEnum = {
@@ -146,7 +147,8 @@ exports.Prisma.CompanyScalarFieldEnum = {
   role: 'role',
   userID: 'userID',
   companyCode: 'companyCode',
-  email: 'email'
+  email: 'email',
+  refreshToken: 'refreshToken'
 };
 
 exports.Prisma.AdminsCompaniesScalarFieldEnum = {
@@ -162,14 +164,16 @@ exports.Prisma.WorkerScalarFieldEnum = {
   password: 'password',
   companyID: 'companyID',
   role: 'role',
-  workerCode: 'workerCode'
+  workerCode: 'workerCode',
+  refreshToken: 'refreshToken'
 };
 
 exports.Prisma.AdminScalarFieldEnum = {
   adminID: 'adminID',
   email: 'email',
   password: 'password',
-  role: 'role'
+  role: 'role',
+  refreshToken: 'refreshToken'
 };
 
 exports.Prisma.UsersCompaniesScalarFieldEnum = {
