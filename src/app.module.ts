@@ -5,7 +5,7 @@ import { AdminController } from './admin/admin.controller';
 import { CompanyController } from './company/company.controller';
 import { UserController } from './user/user.controller';
 import { WorkerController } from './worker/worker.controller';
-
+import { AuthController } from './auth/auth.controller';
 import { AuthModule } from './auth/auth.module';
 import { AdminModule } from './admin/admin.module';
 import { CompanyModule } from './company/company.module';
@@ -19,6 +19,7 @@ import { WorkerModule } from './worker/worker.module';
     CompanyController,
     UserController,
     WorkerController,
+    AuthController,
   ],
   providers: [AppService],
 })
