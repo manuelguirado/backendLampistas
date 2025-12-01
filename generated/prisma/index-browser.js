@@ -266,7 +266,8 @@ exports.Prisma.ShiftWorkerScalarFieldEnum = {
   companyID: 'companyID',
   workerID: 'workerID',
   shiftID: 'shiftID',
-  shiftSchedule: 'shiftSchedule',
+  startDate: 'startDate',
+  endDate: 'endDate',
   shiftType: 'shiftType'
 };
 
@@ -281,7 +282,8 @@ exports.Prisma.JobHistoryScalarFieldEnum = {
 exports.Prisma.ShiftScheduleScalarFieldEnum = {
   ShiftID: 'ShiftID',
   workerID: 'workerID',
-  shiftSchedule: 'shiftSchedule',
+  startDate: 'startDate',
+  endDate: 'endDate',
   shiftType: 'shiftType'
 };
 

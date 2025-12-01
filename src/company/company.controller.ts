@@ -256,14 +256,17 @@ export class CompanyController {
     @Body()
     body: {
       workerID: number;
-      shiftSchedule: Date;
+      startDate: string;
+      endDate: string;
       shiftType: string;
     },
   ) {
-    const { workerID, shiftSchedule, shiftType } = body;
+    const { workerID, startDate, endDate, shiftType } = body;
+
     return this.companyService.assignShiftWorker(
       workerID,
-      shiftSchedule,
+      new Date(startDate),
+      new Date(endDate),
       shiftType,
     );
   }

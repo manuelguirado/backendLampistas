@@ -6,7 +6,8 @@ const prisma = new PrismaClient();
 
 export async function myShifts(
   workerID: number,
-  shiftSchedule?: Date,
+  startDate?: Date,
+  endDate?: Date,
   shiftType?: string,
 ) {
   if (!workerID) {
@@ -22,7 +23,8 @@ export async function myShifts(
   const shifts = await prisma.shiftSchedule.findMany({
     where: {
       workerID: workerID,
-      shiftSchedule: shiftSchedule,
+      startDate: startDate,
+      endDate: endDate,
       shiftType: shiftType,
     },
   });
@@ -32,9 +34,15 @@ export async function myShifts(
   }
 
   const mappedShifts = shifts.map(
-    (shift: { workerID: number; shiftSchedule: Date; shiftType: string }) => ({
+    (shift: {
+      workerID: number;
+      startDate: Date;
+      endDate: Date;
+      shiftType: string;
+    }) => ({
       workerID: shift.workerID,
-      shiftSchedule: shift.shiftSchedule,
+      startDate: shift.startDate,
+      endDate: shift.endDate,
       shiftType: shift.shiftType,
     }),
   );

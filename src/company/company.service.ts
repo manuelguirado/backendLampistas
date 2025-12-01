@@ -132,10 +132,11 @@ export class CompanyService {
   }
   async assignShiftWorker(
     workerID: number,
-    shiftSchedule: Date,
+    startDate: Date,
+    endDate: Date,
     shiftType: string,
   ) {
-    return assignShiftWorker(workerID, shiftSchedule, shiftType);
+    return assignShiftWorker(workerID, startDate, endDate, shiftType);
   }
   async getClientContracts(companyID: number, userID: number) {
     return getClientContracts(companyID, userID);

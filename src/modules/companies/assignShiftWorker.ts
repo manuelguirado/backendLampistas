@@ -6,10 +6,11 @@ const prisma = new PrismaClient();
 
 export async function assignShiftWorker(
   workerID: number,
-  shiftSchedule: Date,
+  startDate: Date,
+  endDate: Date,
   shiftType: string,
 ) {
-  if (!workerID || !shiftSchedule || !shiftType) {
+  if (!workerID || !startDate || !endDate || !shiftType) {
     throw new Error(
       'shiftID, workerID, shiftSchedule and shiftType are required',
     );
@@ -24,7 +25,8 @@ export async function assignShiftWorker(
   const assignedShift = await prisma.shiftSchedule.create({
     data: {
       workerID,
-      shiftSchedule,
+      startDate,
+      endDate,
       shiftType,
     },
   });

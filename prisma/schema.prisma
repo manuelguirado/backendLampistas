@@ -72,7 +72,7 @@ model Company {
   admins           AdminsCompanies[]  @relation("CompanyToAdminsCompanies")
   workersCompanies workersCompanies[]
   usersCompanies   usersCompanies[]
-  refreshToken      String?            @db.Text
+  refreshToken     String?            @db.Text
 }
 
 model AdminsCompanies {
@@ -104,12 +104,12 @@ model Worker {
 }
 
 model Admin {
-  adminID  Int    @id @default(autoincrement())
-  email    String @unique @db.VarChar(255)
-  password String @db.VarChar(255)
-  role     Role   @default(ADMIN)
-  refreshToken   String?          @db.Text
-  companies AdminsCompanies[]
+  adminID      Int               @id @default(autoincrement())
+  email        String            @unique @db.VarChar(255)
+  password     String            @db.VarChar(255)
+  role         Role              @default(ADMIN)
+  refreshToken String?           @db.Text
+  companies    AdminsCompanies[]
 }
 
 model usersCompanies {
@@ -234,15 +234,16 @@ model IncidentHistory {
 }
 
 model ShiftWorker {
-  id            Int           @id @default(autoincrement())
-  companyID     Int
-  company       Company       @relation("CompanyShiftWorkers", fields: [companyID], references: [companyID])
-  workerID      Int
-  worker        Worker        @relation("WorkerShiftWorkers", fields: [workerID], references: [workerid])
-  shiftID       Int
-  shift         ShiftSchedule @relation(fields: [shiftID], references: [ShiftID])
-  shiftSchedule DateTime?     @db.Timestamp(6)
-  shiftType     String?       @db.VarChar(50)
+  id        Int           @id @default(autoincrement())
+  companyID Int
+  company   Company       @relation("CompanyShiftWorkers", fields: [companyID], references: [companyID])
+  workerID  Int
+  worker    Worker        @relation("WorkerShiftWorkers", fields: [workerID], references: [workerid])
+  shiftID   Int
+  shift     ShiftSchedule @relation(fields: [shiftID], references: [ShiftID])
+  startDate DateTime?     @db.Timestamp(6)
+  endDate   DateTime?     @db.Timestamp(6)
+  shiftType String?       @db.VarChar(50)
 }
 
 model JobHistory {
@@ -255,11 +256,12 @@ model JobHistory {
 }
 
 model ShiftSchedule {
-  ShiftID       Int      @id @default(autoincrement())
-  workerID      Int
-  worker        Worker   @relation("WorkerShiftSchedules", fields: [workerID], references: [workerid])
-  shiftSchedule DateTime @db.Timestamp(6)
-  shiftType     String   @db.VarChar(50)
+  ShiftID   Int      @id @default(autoincrement())
+  workerID  Int
+  worker    Worker   @relation("WorkerShiftSchedules", fields: [workerID], references: [workerid])
+  startDate DateTime @db.Timestamp()
+  endDate   DateTime @db.Timestamp()
+  shiftType String   @db.VarChar(50)
 
   shiftWorkers ShiftWorker[]
 }

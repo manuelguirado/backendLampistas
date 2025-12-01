@@ -20117,7 +20117,8 @@ export namespace Prisma {
     companyID: number | null
     workerID: number | null
     shiftID: number | null
-    shiftSchedule: Date | null
+    startDate: Date | null
+    endDate: Date | null
     shiftType: string | null
   }
 
@@ -20126,7 +20127,8 @@ export namespace Prisma {
     companyID: number | null
     workerID: number | null
     shiftID: number | null
-    shiftSchedule: Date | null
+    startDate: Date | null
+    endDate: Date | null
     shiftType: string | null
   }
 
@@ -20135,7 +20137,8 @@ export namespace Prisma {
     companyID: number
     workerID: number
     shiftID: number
-    shiftSchedule: number
+    startDate: number
+    endDate: number
     shiftType: number
     _all: number
   }
@@ -20160,7 +20163,8 @@ export namespace Prisma {
     companyID?: true
     workerID?: true
     shiftID?: true
-    shiftSchedule?: true
+    startDate?: true
+    endDate?: true
     shiftType?: true
   }
 
@@ -20169,7 +20173,8 @@ export namespace Prisma {
     companyID?: true
     workerID?: true
     shiftID?: true
-    shiftSchedule?: true
+    startDate?: true
+    endDate?: true
     shiftType?: true
   }
 
@@ -20178,7 +20183,8 @@ export namespace Prisma {
     companyID?: true
     workerID?: true
     shiftID?: true
-    shiftSchedule?: true
+    startDate?: true
+    endDate?: true
     shiftType?: true
     _all?: true
   }
@@ -20274,7 +20280,8 @@ export namespace Prisma {
     companyID: number
     workerID: number
     shiftID: number
-    shiftSchedule: Date | null
+    startDate: Date | null
+    endDate: Date | null
     shiftType: string | null
     _count: ShiftWorkerCountAggregateOutputType | null
     _avg: ShiftWorkerAvgAggregateOutputType | null
@@ -20302,7 +20309,8 @@ export namespace Prisma {
     companyID?: boolean
     workerID?: boolean
     shiftID?: boolean
-    shiftSchedule?: boolean
+    startDate?: boolean
+    endDate?: boolean
     shiftType?: boolean
     company?: boolean | CompanyDefaultArgs<ExtArgs>
     worker?: boolean | WorkerDefaultArgs<ExtArgs>
@@ -20314,7 +20322,8 @@ export namespace Prisma {
     companyID?: boolean
     workerID?: boolean
     shiftID?: boolean
-    shiftSchedule?: boolean
+    startDate?: boolean
+    endDate?: boolean
     shiftType?: boolean
     company?: boolean | CompanyDefaultArgs<ExtArgs>
     worker?: boolean | WorkerDefaultArgs<ExtArgs>
@@ -20326,7 +20335,8 @@ export namespace Prisma {
     companyID?: boolean
     workerID?: boolean
     shiftID?: boolean
-    shiftSchedule?: boolean
+    startDate?: boolean
+    endDate?: boolean
     shiftType?: boolean
     company?: boolean | CompanyDefaultArgs<ExtArgs>
     worker?: boolean | WorkerDefaultArgs<ExtArgs>
@@ -20338,11 +20348,12 @@ export namespace Prisma {
     companyID?: boolean
     workerID?: boolean
     shiftID?: boolean
-    shiftSchedule?: boolean
+    startDate?: boolean
+    endDate?: boolean
     shiftType?: boolean
   }
 
-  export type ShiftWorkerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "companyID" | "workerID" | "shiftID" | "shiftSchedule" | "shiftType", ExtArgs["result"]["shiftWorker"]>
+  export type ShiftWorkerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "companyID" | "workerID" | "shiftID" | "startDate" | "endDate" | "shiftType", ExtArgs["result"]["shiftWorker"]>
   export type ShiftWorkerInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     company?: boolean | CompanyDefaultArgs<ExtArgs>
     worker?: boolean | WorkerDefaultArgs<ExtArgs>
@@ -20371,7 +20382,8 @@ export namespace Prisma {
       companyID: number
       workerID: number
       shiftID: number
-      shiftSchedule: Date | null
+      startDate: Date | null
+      endDate: Date | null
       shiftType: string | null
     }, ExtArgs["result"]["shiftWorker"]>
     composites: {}
@@ -20803,7 +20815,8 @@ export namespace Prisma {
     readonly companyID: FieldRef<"ShiftWorker", 'Int'>
     readonly workerID: FieldRef<"ShiftWorker", 'Int'>
     readonly shiftID: FieldRef<"ShiftWorker", 'Int'>
-    readonly shiftSchedule: FieldRef<"ShiftWorker", 'DateTime'>
+    readonly startDate: FieldRef<"ShiftWorker", 'DateTime'>
+    readonly endDate: FieldRef<"ShiftWorker", 'DateTime'>
     readonly shiftType: FieldRef<"ShiftWorker", 'String'>
   }
     
@@ -22340,21 +22353,24 @@ export namespace Prisma {
   export type ShiftScheduleMinAggregateOutputType = {
     ShiftID: number | null
     workerID: number | null
-    shiftSchedule: Date | null
+    startDate: Date | null
+    endDate: Date | null
     shiftType: string | null
   }
 
   export type ShiftScheduleMaxAggregateOutputType = {
     ShiftID: number | null
     workerID: number | null
-    shiftSchedule: Date | null
+    startDate: Date | null
+    endDate: Date | null
     shiftType: string | null
   }
 
   export type ShiftScheduleCountAggregateOutputType = {
     ShiftID: number
     workerID: number
-    shiftSchedule: number
+    startDate: number
+    endDate: number
     shiftType: number
     _all: number
   }
@@ -22373,21 +22389,24 @@ export namespace Prisma {
   export type ShiftScheduleMinAggregateInputType = {
     ShiftID?: true
     workerID?: true
-    shiftSchedule?: true
+    startDate?: true
+    endDate?: true
     shiftType?: true
   }
 
   export type ShiftScheduleMaxAggregateInputType = {
     ShiftID?: true
     workerID?: true
-    shiftSchedule?: true
+    startDate?: true
+    endDate?: true
     shiftType?: true
   }
 
   export type ShiftScheduleCountAggregateInputType = {
     ShiftID?: true
     workerID?: true
-    shiftSchedule?: true
+    startDate?: true
+    endDate?: true
     shiftType?: true
     _all?: true
   }
@@ -22481,7 +22500,8 @@ export namespace Prisma {
   export type ShiftScheduleGroupByOutputType = {
     ShiftID: number
     workerID: number
-    shiftSchedule: Date
+    startDate: Date
+    endDate: Date
     shiftType: string
     _count: ShiftScheduleCountAggregateOutputType | null
     _avg: ShiftScheduleAvgAggregateOutputType | null
@@ -22507,7 +22527,8 @@ export namespace Prisma {
   export type ShiftScheduleSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     ShiftID?: boolean
     workerID?: boolean
-    shiftSchedule?: boolean
+    startDate?: boolean
+    endDate?: boolean
     shiftType?: boolean
     worker?: boolean | WorkerDefaultArgs<ExtArgs>
     shiftWorkers?: boolean | ShiftSchedule$shiftWorkersArgs<ExtArgs>
@@ -22517,7 +22538,8 @@ export namespace Prisma {
   export type ShiftScheduleSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     ShiftID?: boolean
     workerID?: boolean
-    shiftSchedule?: boolean
+    startDate?: boolean
+    endDate?: boolean
     shiftType?: boolean
     worker?: boolean | WorkerDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["shiftSchedule"]>
@@ -22525,7 +22547,8 @@ export namespace Prisma {
   export type ShiftScheduleSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     ShiftID?: boolean
     workerID?: boolean
-    shiftSchedule?: boolean
+    startDate?: boolean
+    endDate?: boolean
     shiftType?: boolean
     worker?: boolean | WorkerDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["shiftSchedule"]>
@@ -22533,11 +22556,12 @@ export namespace Prisma {
   export type ShiftScheduleSelectScalar = {
     ShiftID?: boolean
     workerID?: boolean
-    shiftSchedule?: boolean
+    startDate?: boolean
+    endDate?: boolean
     shiftType?: boolean
   }
 
-  export type ShiftScheduleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"ShiftID" | "workerID" | "shiftSchedule" | "shiftType", ExtArgs["result"]["shiftSchedule"]>
+  export type ShiftScheduleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"ShiftID" | "workerID" | "startDate" | "endDate" | "shiftType", ExtArgs["result"]["shiftSchedule"]>
   export type ShiftScheduleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     worker?: boolean | WorkerDefaultArgs<ExtArgs>
     shiftWorkers?: boolean | ShiftSchedule$shiftWorkersArgs<ExtArgs>
@@ -22559,7 +22583,8 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       ShiftID: number
       workerID: number
-      shiftSchedule: Date
+      startDate: Date
+      endDate: Date
       shiftType: string
     }, ExtArgs["result"]["shiftSchedule"]>
     composites: {}
@@ -22988,7 +23013,8 @@ export namespace Prisma {
   interface ShiftScheduleFieldRefs {
     readonly ShiftID: FieldRef<"ShiftSchedule", 'Int'>
     readonly workerID: FieldRef<"ShiftSchedule", 'Int'>
-    readonly shiftSchedule: FieldRef<"ShiftSchedule", 'DateTime'>
+    readonly startDate: FieldRef<"ShiftSchedule", 'DateTime'>
+    readonly endDate: FieldRef<"ShiftSchedule", 'DateTime'>
     readonly shiftType: FieldRef<"ShiftSchedule", 'String'>
   }
     
@@ -27082,7 +27108,8 @@ export namespace Prisma {
     companyID: 'companyID',
     workerID: 'workerID',
     shiftID: 'shiftID',
-    shiftSchedule: 'shiftSchedule',
+    startDate: 'startDate',
+    endDate: 'endDate',
     shiftType: 'shiftType'
   };
 
@@ -27103,7 +27130,8 @@ export namespace Prisma {
   export const ShiftScheduleScalarFieldEnum: {
     ShiftID: 'ShiftID',
     workerID: 'workerID',
-    shiftSchedule: 'shiftSchedule',
+    startDate: 'startDate',
+    endDate: 'endDate',
     shiftType: 'shiftType'
   };
 
@@ -28420,7 +28448,8 @@ export namespace Prisma {
     companyID?: IntFilter<"ShiftWorker"> | number
     workerID?: IntFilter<"ShiftWorker"> | number
     shiftID?: IntFilter<"ShiftWorker"> | number
-    shiftSchedule?: DateTimeNullableFilter<"ShiftWorker"> | Date | string | null
+    startDate?: DateTimeNullableFilter<"ShiftWorker"> | Date | string | null
+    endDate?: DateTimeNullableFilter<"ShiftWorker"> | Date | string | null
     shiftType?: StringNullableFilter<"ShiftWorker"> | string | null
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
     worker?: XOR<WorkerScalarRelationFilter, WorkerWhereInput>
@@ -28432,7 +28461,8 @@ export namespace Prisma {
     companyID?: SortOrder
     workerID?: SortOrder
     shiftID?: SortOrder
-    shiftSchedule?: SortOrderInput | SortOrder
+    startDate?: SortOrderInput | SortOrder
+    endDate?: SortOrderInput | SortOrder
     shiftType?: SortOrderInput | SortOrder
     company?: CompanyOrderByWithRelationInput
     worker?: WorkerOrderByWithRelationInput
@@ -28447,7 +28477,8 @@ export namespace Prisma {
     companyID?: IntFilter<"ShiftWorker"> | number
     workerID?: IntFilter<"ShiftWorker"> | number
     shiftID?: IntFilter<"ShiftWorker"> | number
-    shiftSchedule?: DateTimeNullableFilter<"ShiftWorker"> | Date | string | null
+    startDate?: DateTimeNullableFilter<"ShiftWorker"> | Date | string | null
+    endDate?: DateTimeNullableFilter<"ShiftWorker"> | Date | string | null
     shiftType?: StringNullableFilter<"ShiftWorker"> | string | null
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
     worker?: XOR<WorkerScalarRelationFilter, WorkerWhereInput>
@@ -28459,7 +28490,8 @@ export namespace Prisma {
     companyID?: SortOrder
     workerID?: SortOrder
     shiftID?: SortOrder
-    shiftSchedule?: SortOrderInput | SortOrder
+    startDate?: SortOrderInput | SortOrder
+    endDate?: SortOrderInput | SortOrder
     shiftType?: SortOrderInput | SortOrder
     _count?: ShiftWorkerCountOrderByAggregateInput
     _avg?: ShiftWorkerAvgOrderByAggregateInput
@@ -28476,7 +28508,8 @@ export namespace Prisma {
     companyID?: IntWithAggregatesFilter<"ShiftWorker"> | number
     workerID?: IntWithAggregatesFilter<"ShiftWorker"> | number
     shiftID?: IntWithAggregatesFilter<"ShiftWorker"> | number
-    shiftSchedule?: DateTimeNullableWithAggregatesFilter<"ShiftWorker"> | Date | string | null
+    startDate?: DateTimeNullableWithAggregatesFilter<"ShiftWorker"> | Date | string | null
+    endDate?: DateTimeNullableWithAggregatesFilter<"ShiftWorker"> | Date | string | null
     shiftType?: StringNullableWithAggregatesFilter<"ShiftWorker"> | string | null
   }
 
@@ -28543,7 +28576,8 @@ export namespace Prisma {
     NOT?: ShiftScheduleWhereInput | ShiftScheduleWhereInput[]
     ShiftID?: IntFilter<"ShiftSchedule"> | number
     workerID?: IntFilter<"ShiftSchedule"> | number
-    shiftSchedule?: DateTimeFilter<"ShiftSchedule"> | Date | string
+    startDate?: DateTimeFilter<"ShiftSchedule"> | Date | string
+    endDate?: DateTimeFilter<"ShiftSchedule"> | Date | string
     shiftType?: StringFilter<"ShiftSchedule"> | string
     worker?: XOR<WorkerScalarRelationFilter, WorkerWhereInput>
     shiftWorkers?: ShiftWorkerListRelationFilter
@@ -28552,7 +28586,8 @@ export namespace Prisma {
   export type ShiftScheduleOrderByWithRelationInput = {
     ShiftID?: SortOrder
     workerID?: SortOrder
-    shiftSchedule?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
     shiftType?: SortOrder
     worker?: WorkerOrderByWithRelationInput
     shiftWorkers?: ShiftWorkerOrderByRelationAggregateInput
@@ -28564,7 +28599,8 @@ export namespace Prisma {
     OR?: ShiftScheduleWhereInput[]
     NOT?: ShiftScheduleWhereInput | ShiftScheduleWhereInput[]
     workerID?: IntFilter<"ShiftSchedule"> | number
-    shiftSchedule?: DateTimeFilter<"ShiftSchedule"> | Date | string
+    startDate?: DateTimeFilter<"ShiftSchedule"> | Date | string
+    endDate?: DateTimeFilter<"ShiftSchedule"> | Date | string
     shiftType?: StringFilter<"ShiftSchedule"> | string
     worker?: XOR<WorkerScalarRelationFilter, WorkerWhereInput>
     shiftWorkers?: ShiftWorkerListRelationFilter
@@ -28573,7 +28609,8 @@ export namespace Prisma {
   export type ShiftScheduleOrderByWithAggregationInput = {
     ShiftID?: SortOrder
     workerID?: SortOrder
-    shiftSchedule?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
     shiftType?: SortOrder
     _count?: ShiftScheduleCountOrderByAggregateInput
     _avg?: ShiftScheduleAvgOrderByAggregateInput
@@ -28588,7 +28625,8 @@ export namespace Prisma {
     NOT?: ShiftScheduleScalarWhereWithAggregatesInput | ShiftScheduleScalarWhereWithAggregatesInput[]
     ShiftID?: IntWithAggregatesFilter<"ShiftSchedule"> | number
     workerID?: IntWithAggregatesFilter<"ShiftSchedule"> | number
-    shiftSchedule?: DateTimeWithAggregatesFilter<"ShiftSchedule"> | Date | string
+    startDate?: DateTimeWithAggregatesFilter<"ShiftSchedule"> | Date | string
+    endDate?: DateTimeWithAggregatesFilter<"ShiftSchedule"> | Date | string
     shiftType?: StringWithAggregatesFilter<"ShiftSchedule"> | string
   }
 
@@ -29857,7 +29895,8 @@ export namespace Prisma {
   }
 
   export type ShiftWorkerCreateInput = {
-    shiftSchedule?: Date | string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
     shiftType?: string | null
     company: CompanyCreateNestedOneWithoutShiftWorkersInput
     worker: WorkerCreateNestedOneWithoutShiftWorkersInput
@@ -29869,12 +29908,14 @@ export namespace Prisma {
     companyID: number
     workerID: number
     shiftID: number
-    shiftSchedule?: Date | string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
     shiftType?: string | null
   }
 
   export type ShiftWorkerUpdateInput = {
-    shiftSchedule?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     shiftType?: NullableStringFieldUpdateOperationsInput | string | null
     company?: CompanyUpdateOneRequiredWithoutShiftWorkersNestedInput
     worker?: WorkerUpdateOneRequiredWithoutShiftWorkersNestedInput
@@ -29886,7 +29927,8 @@ export namespace Prisma {
     companyID?: IntFieldUpdateOperationsInput | number
     workerID?: IntFieldUpdateOperationsInput | number
     shiftID?: IntFieldUpdateOperationsInput | number
-    shiftSchedule?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     shiftType?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -29895,12 +29937,14 @@ export namespace Prisma {
     companyID: number
     workerID: number
     shiftID: number
-    shiftSchedule?: Date | string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
     shiftType?: string | null
   }
 
   export type ShiftWorkerUpdateManyMutationInput = {
-    shiftSchedule?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     shiftType?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -29909,7 +29953,8 @@ export namespace Prisma {
     companyID?: IntFieldUpdateOperationsInput | number
     workerID?: IntFieldUpdateOperationsInput | number
     shiftID?: IntFieldUpdateOperationsInput | number
-    shiftSchedule?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     shiftType?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -29966,7 +30011,8 @@ export namespace Prisma {
   }
 
   export type ShiftScheduleCreateInput = {
-    shiftSchedule: Date | string
+    startDate: Date | string
+    endDate: Date | string
     shiftType: string
     worker: WorkerCreateNestedOneWithoutShiftSchedulesInput
     shiftWorkers?: ShiftWorkerCreateNestedManyWithoutShiftInput
@@ -29975,13 +30021,15 @@ export namespace Prisma {
   export type ShiftScheduleUncheckedCreateInput = {
     ShiftID?: number
     workerID: number
-    shiftSchedule: Date | string
+    startDate: Date | string
+    endDate: Date | string
     shiftType: string
     shiftWorkers?: ShiftWorkerUncheckedCreateNestedManyWithoutShiftInput
   }
 
   export type ShiftScheduleUpdateInput = {
-    shiftSchedule?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     shiftType?: StringFieldUpdateOperationsInput | string
     worker?: WorkerUpdateOneRequiredWithoutShiftSchedulesNestedInput
     shiftWorkers?: ShiftWorkerUpdateManyWithoutShiftNestedInput
@@ -29990,7 +30038,8 @@ export namespace Prisma {
   export type ShiftScheduleUncheckedUpdateInput = {
     ShiftID?: IntFieldUpdateOperationsInput | number
     workerID?: IntFieldUpdateOperationsInput | number
-    shiftSchedule?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     shiftType?: StringFieldUpdateOperationsInput | string
     shiftWorkers?: ShiftWorkerUncheckedUpdateManyWithoutShiftNestedInput
   }
@@ -29998,19 +30047,22 @@ export namespace Prisma {
   export type ShiftScheduleCreateManyInput = {
     ShiftID?: number
     workerID: number
-    shiftSchedule: Date | string
+    startDate: Date | string
+    endDate: Date | string
     shiftType: string
   }
 
   export type ShiftScheduleUpdateManyMutationInput = {
-    shiftSchedule?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     shiftType?: StringFieldUpdateOperationsInput | string
   }
 
   export type ShiftScheduleUncheckedUpdateManyInput = {
     ShiftID?: IntFieldUpdateOperationsInput | number
     workerID?: IntFieldUpdateOperationsInput | number
-    shiftSchedule?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     shiftType?: StringFieldUpdateOperationsInput | string
   }
 
@@ -31411,7 +31463,8 @@ export namespace Prisma {
     companyID?: SortOrder
     workerID?: SortOrder
     shiftID?: SortOrder
-    shiftSchedule?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
     shiftType?: SortOrder
   }
 
@@ -31427,7 +31480,8 @@ export namespace Prisma {
     companyID?: SortOrder
     workerID?: SortOrder
     shiftID?: SortOrder
-    shiftSchedule?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
     shiftType?: SortOrder
   }
 
@@ -31436,7 +31490,8 @@ export namespace Prisma {
     companyID?: SortOrder
     workerID?: SortOrder
     shiftID?: SortOrder
-    shiftSchedule?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
     shiftType?: SortOrder
   }
 
@@ -31484,7 +31539,8 @@ export namespace Prisma {
   export type ShiftScheduleCountOrderByAggregateInput = {
     ShiftID?: SortOrder
     workerID?: SortOrder
-    shiftSchedule?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
     shiftType?: SortOrder
   }
 
@@ -31496,14 +31552,16 @@ export namespace Prisma {
   export type ShiftScheduleMaxOrderByAggregateInput = {
     ShiftID?: SortOrder
     workerID?: SortOrder
-    shiftSchedule?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
     shiftType?: SortOrder
   }
 
   export type ShiftScheduleMinOrderByAggregateInput = {
     ShiftID?: SortOrder
     workerID?: SortOrder
-    shiftSchedule?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
     shiftType?: SortOrder
   }
 
@@ -35033,7 +35091,8 @@ export namespace Prisma {
   }
 
   export type ShiftWorkerCreateWithoutCompanyInput = {
-    shiftSchedule?: Date | string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
     shiftType?: string | null
     worker: WorkerCreateNestedOneWithoutShiftWorkersInput
     shift: ShiftScheduleCreateNestedOneWithoutShiftWorkersInput
@@ -35043,7 +35102,8 @@ export namespace Prisma {
     id?: number
     workerID: number
     shiftID: number
-    shiftSchedule?: Date | string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
     shiftType?: string | null
   }
 
@@ -35470,7 +35530,8 @@ export namespace Prisma {
     companyID?: IntFilter<"ShiftWorker"> | number
     workerID?: IntFilter<"ShiftWorker"> | number
     shiftID?: IntFilter<"ShiftWorker"> | number
-    shiftSchedule?: DateTimeNullableFilter<"ShiftWorker"> | Date | string | null
+    startDate?: DateTimeNullableFilter<"ShiftWorker"> | Date | string | null
+    endDate?: DateTimeNullableFilter<"ShiftWorker"> | Date | string | null
     shiftType?: StringNullableFilter<"ShiftWorker"> | string | null
   }
 
@@ -35871,7 +35932,8 @@ export namespace Prisma {
   }
 
   export type ShiftWorkerCreateWithoutWorkerInput = {
-    shiftSchedule?: Date | string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
     shiftType?: string | null
     company: CompanyCreateNestedOneWithoutShiftWorkersInput
     shift: ShiftScheduleCreateNestedOneWithoutShiftWorkersInput
@@ -35881,7 +35943,8 @@ export namespace Prisma {
     id?: number
     companyID: number
     shiftID: number
-    shiftSchedule?: Date | string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
     shiftType?: string | null
   }
 
@@ -35964,14 +36027,16 @@ export namespace Prisma {
   }
 
   export type ShiftScheduleCreateWithoutWorkerInput = {
-    shiftSchedule: Date | string
+    startDate: Date | string
+    endDate: Date | string
     shiftType: string
     shiftWorkers?: ShiftWorkerCreateNestedManyWithoutShiftInput
   }
 
   export type ShiftScheduleUncheckedCreateWithoutWorkerInput = {
     ShiftID?: number
-    shiftSchedule: Date | string
+    startDate: Date | string
+    endDate: Date | string
     shiftType: string
     shiftWorkers?: ShiftWorkerUncheckedCreateNestedManyWithoutShiftInput
   }
@@ -36152,7 +36217,8 @@ export namespace Prisma {
     NOT?: ShiftScheduleScalarWhereInput | ShiftScheduleScalarWhereInput[]
     ShiftID?: IntFilter<"ShiftSchedule"> | number
     workerID?: IntFilter<"ShiftSchedule"> | number
-    shiftSchedule?: DateTimeFilter<"ShiftSchedule"> | Date | string
+    startDate?: DateTimeFilter<"ShiftSchedule"> | Date | string
+    endDate?: DateTimeFilter<"ShiftSchedule"> | Date | string
     shiftType?: StringFilter<"ShiftSchedule"> | string
   }
 
@@ -38776,7 +38842,8 @@ export namespace Prisma {
   }
 
   export type ShiftScheduleCreateWithoutShiftWorkersInput = {
-    shiftSchedule: Date | string
+    startDate: Date | string
+    endDate: Date | string
     shiftType: string
     worker: WorkerCreateNestedOneWithoutShiftSchedulesInput
   }
@@ -38784,7 +38851,8 @@ export namespace Prisma {
   export type ShiftScheduleUncheckedCreateWithoutShiftWorkersInput = {
     ShiftID?: number
     workerID: number
-    shiftSchedule: Date | string
+    startDate: Date | string
+    endDate: Date | string
     shiftType: string
   }
 
@@ -38911,7 +38979,8 @@ export namespace Prisma {
   }
 
   export type ShiftScheduleUpdateWithoutShiftWorkersInput = {
-    shiftSchedule?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     shiftType?: StringFieldUpdateOperationsInput | string
     worker?: WorkerUpdateOneRequiredWithoutShiftSchedulesNestedInput
   }
@@ -38919,7 +38988,8 @@ export namespace Prisma {
   export type ShiftScheduleUncheckedUpdateWithoutShiftWorkersInput = {
     ShiftID?: IntFieldUpdateOperationsInput | number
     workerID?: IntFieldUpdateOperationsInput | number
-    shiftSchedule?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     shiftType?: StringFieldUpdateOperationsInput | string
   }
 
@@ -39032,7 +39102,8 @@ export namespace Prisma {
   }
 
   export type ShiftWorkerCreateWithoutShiftInput = {
-    shiftSchedule?: Date | string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
     shiftType?: string | null
     company: CompanyCreateNestedOneWithoutShiftWorkersInput
     worker: WorkerCreateNestedOneWithoutShiftWorkersInput
@@ -39042,7 +39113,8 @@ export namespace Prisma {
     id?: number
     companyID: number
     workerID: number
-    shiftSchedule?: Date | string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
     shiftType?: string | null
   }
 
@@ -40151,7 +40223,8 @@ export namespace Prisma {
     id?: number
     workerID: number
     shiftID: number
-    shiftSchedule?: Date | string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
     shiftType?: string | null
   }
 
@@ -40399,7 +40472,8 @@ export namespace Prisma {
   }
 
   export type ShiftWorkerUpdateWithoutCompanyInput = {
-    shiftSchedule?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     shiftType?: NullableStringFieldUpdateOperationsInput | string | null
     worker?: WorkerUpdateOneRequiredWithoutShiftWorkersNestedInput
     shift?: ShiftScheduleUpdateOneRequiredWithoutShiftWorkersNestedInput
@@ -40409,7 +40483,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     workerID?: IntFieldUpdateOperationsInput | number
     shiftID?: IntFieldUpdateOperationsInput | number
-    shiftSchedule?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     shiftType?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -40417,7 +40492,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     workerID?: IntFieldUpdateOperationsInput | number
     shiftID?: IntFieldUpdateOperationsInput | number
-    shiftSchedule?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     shiftType?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -40665,7 +40741,8 @@ export namespace Prisma {
     id?: number
     companyID: number
     shiftID: number
-    shiftSchedule?: Date | string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
     shiftType?: string | null
   }
 
@@ -40693,7 +40770,8 @@ export namespace Prisma {
 
   export type ShiftScheduleCreateManyWorkerInput = {
     ShiftID?: number
-    shiftSchedule: Date | string
+    startDate: Date | string
+    endDate: Date | string
     shiftType: string
   }
 
@@ -40703,7 +40781,8 @@ export namespace Prisma {
   }
 
   export type ShiftWorkerUpdateWithoutWorkerInput = {
-    shiftSchedule?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     shiftType?: NullableStringFieldUpdateOperationsInput | string | null
     company?: CompanyUpdateOneRequiredWithoutShiftWorkersNestedInput
     shift?: ShiftScheduleUpdateOneRequiredWithoutShiftWorkersNestedInput
@@ -40713,7 +40792,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     companyID?: IntFieldUpdateOperationsInput | number
     shiftID?: IntFieldUpdateOperationsInput | number
-    shiftSchedule?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     shiftType?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -40721,7 +40801,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     companyID?: IntFieldUpdateOperationsInput | number
     shiftID?: IntFieldUpdateOperationsInput | number
-    shiftSchedule?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     shiftType?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -40796,21 +40877,24 @@ export namespace Prisma {
   }
 
   export type ShiftScheduleUpdateWithoutWorkerInput = {
-    shiftSchedule?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     shiftType?: StringFieldUpdateOperationsInput | string
     shiftWorkers?: ShiftWorkerUpdateManyWithoutShiftNestedInput
   }
 
   export type ShiftScheduleUncheckedUpdateWithoutWorkerInput = {
     ShiftID?: IntFieldUpdateOperationsInput | number
-    shiftSchedule?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     shiftType?: StringFieldUpdateOperationsInput | string
     shiftWorkers?: ShiftWorkerUncheckedUpdateManyWithoutShiftNestedInput
   }
 
   export type ShiftScheduleUncheckedUpdateManyWithoutWorkerInput = {
     ShiftID?: IntFieldUpdateOperationsInput | number
-    shiftSchedule?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     shiftType?: StringFieldUpdateOperationsInput | string
   }
 
@@ -41098,12 +41182,14 @@ export namespace Prisma {
     id?: number
     companyID: number
     workerID: number
-    shiftSchedule?: Date | string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
     shiftType?: string | null
   }
 
   export type ShiftWorkerUpdateWithoutShiftInput = {
-    shiftSchedule?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     shiftType?: NullableStringFieldUpdateOperationsInput | string | null
     company?: CompanyUpdateOneRequiredWithoutShiftWorkersNestedInput
     worker?: WorkerUpdateOneRequiredWithoutShiftWorkersNestedInput
@@ -41113,7 +41199,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     companyID?: IntFieldUpdateOperationsInput | number
     workerID?: IntFieldUpdateOperationsInput | number
-    shiftSchedule?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     shiftType?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -41121,7 +41208,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     companyID?: IntFieldUpdateOperationsInput | number
     workerID?: IntFieldUpdateOperationsInput | number
-    shiftSchedule?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     shiftType?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
