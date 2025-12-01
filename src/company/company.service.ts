@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { editWorker } from '../modules/workers/editWorker';
 import { registerWorker } from '../modules/workers/registerWorker';
+import { listIncidents } from '../modules/companies/listIncidents';
 import { eliminateWorker } from '../modules/workers/eliminateWorker';
 import { createBudget } from '../modules/budgets/createbudget';
 import { assignCode } from '../utils/assingCode';
@@ -67,6 +68,13 @@ export class CompanyService {
 
   async eliminateWorker(workerID: number) {
     return eliminateWorker(workerID);
+  }
+  async listIncidents(
+    companyID: number,
+    limit: number = 5,
+    offset: number = 0,
+  ) {
+    return listIncidents(companyID, limit, offset);
   }
   async createBudget(
     budgetNumber: string,

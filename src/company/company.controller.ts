@@ -180,6 +180,23 @@ export class CompanyController {
     );
   }
   @UseGuards(AuthGuard, CompanyGuard)
+  @Get('listIncidents')
+  listIncidents(
+    @Request() req: any,
+    @Query('limit') limit?: string,
+    @Query('offset') offset?: string,
+  ) {
+    const { companyID } = req.user;
+
+    const parsedLimit = limit ? Number(limit) : 5;
+    const parsedOffset = offset ? Number(offset) : 0;
+    return this.companyService.listIncidents(
+      companyID,
+      parsedLimit,
+      parsedOffset,
+    );
+  }
+  @UseGuards(AuthGuard, CompanyGuard)
   @Post('assignIncident')
   assignIncident(
     @Body()

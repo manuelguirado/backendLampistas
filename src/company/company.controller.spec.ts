@@ -12,6 +12,7 @@ describe('CompanyController', () => {
   jest.setTimeout(40000);
   beforeAll(async () => {
     await prisma.$connect();
+    await prisma.machinery.deleteMany({});
     await prisma.contracts.deleteMany({});
     await prisma.shiftSchedule.deleteMany({});
     await prisma.budget.deleteMany({});
@@ -661,5 +662,40 @@ it('should assign a shift to a worker successfully', async () => {
     .set('Authorization', `Bearer ${token}`)
     .expect(201);
 
+  expect(response.body).toBeDefined();
+});
+it('should list incidents for a company', async () => {
+  const request = supertest('http://localhost:3000/company/listIncidents');
+  const directions = await registerDirections(
+    '123 Test St, Test City, TS 12345',
+    'Test City',
+    'TS',
+    '12345',
+  );
+  const admin = await registerAdmin(
+    `admin-${Date.now()}@test.com`,
+    'adminPassword',
+  );
+  const company = await registerCompany(
+    `company with incidents-${Date.now()}`,
+    '1234567890',
+    `company-${Date.now()}@test.com`,
+    'securePassword',
+    admin.adminID,
+    directions,
+  );
+  const companyLogin = await supertest(
+    'http://localhost:3000/company/CompanyLogin',
+  )
+    .post('')
+    .send({ email: company.email, password: 'securePassword' })
+    .expect(201);
+  const body = companyLogin.body as { token: string };
+  const token: string = body.token;
+
+  const response = await request
+    .get(`?companyID=${company.companyID}`)
+    .set('Authorization', `Bearer ${token}`)
+    .expect(201);
   expect(response.body).toBeDefined();
 });

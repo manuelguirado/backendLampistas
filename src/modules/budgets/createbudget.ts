@@ -19,6 +19,7 @@ export async function createBudget(
   if (!budgetNumber || !userID || !companyID || !items || items.length === 0) {
     throw new Error('Budget number, user, company and items are required');
   }
+  console.log('incidentID after search', incidentID);
 
   const foundCompany = await prisma.company.findUnique({
     where: { companyID },
@@ -38,10 +39,12 @@ export async function createBudget(
     const foundIncident = await prisma.incidents.findUnique({
       where: { IncidentsID: incidentID },
     });
+    console.log('foundIncident', foundIncident);
     if (!foundIncident) {
       throw new Error('Incident not found');
     }
   }
+  console.log('incidentID before search', incidentID);
 
   const budget = await prisma.budget.create({
     data: {
@@ -52,10 +55,11 @@ export async function createBudget(
       subtotal,
       tax,
       totalAmount,
-      incidentID,
+      incidentID: incidentID || null,
       description,
     },
   });
+  console.log('budget created', budget);
 
   try {
     const payload = {
