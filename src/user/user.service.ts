@@ -5,6 +5,7 @@ import { findMyMachinery } from '../modules/machinery/findMymachinery';
 import { myContracts } from '../modules/users/Mycontracts';
 import { recievedBudgets } from '../modules/users/recievedBudgets';
 import { Injectable } from '@nestjs/common';
+import type { incidentStatus } from '../utils/types/incidentStatus';
 @Injectable()
 export class UserService {
   async userRegister(name: string, email: string, password: string) {
@@ -18,7 +19,7 @@ export class UserService {
     description: string,
     userID: number,
     companyID: number,
-    status?: string,
+    status?: incidentStatus,
     priority?: string,
     urgency?: boolean,
   ) {

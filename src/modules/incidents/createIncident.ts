@@ -1,5 +1,6 @@
 import { PrismaClient } from '../../../generated/prisma';
 import jwt, { SignOptions } from 'jsonwebtoken';
+import type { incidentStatus } from '../../utils/types/incidentStatus';
 import dotenv from 'dotenv';
 dotenv.config({ path: '../../../.env' });
 const prisma = new PrismaClient();
@@ -9,7 +10,7 @@ export async function createIncident(
   description: string,
   userID: number,
   companyID: number,
-  status?: string,
+  status?: incidentStatus,
   priority?: string,
   urgency?: boolean,
 ) {
@@ -44,7 +45,7 @@ export async function createIncident(
       description,
       userID, // ✅ Changed to userId to match Prisma schema
       companyID,
-      status: finalStatus,
+      status: finalStatus.toLowerCase() as incidentStatus,
       priority: priority || (urgency ? 'HIGH' : 'MEDIUM'),
       urgency: urgency || false,
     },

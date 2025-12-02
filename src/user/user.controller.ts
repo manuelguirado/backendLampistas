@@ -2,6 +2,7 @@ import { Controller, Post, Get, UseGuards, Body, Query } from '@nestjs/common';
 import { UserService } from './user.service';
 import { AuthGuard } from '../auth/auth.guard';
 import { UserGuard } from './user.guard';
+import type { incidentStatus } from '../utils/types/incidentStatus';
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
@@ -35,7 +36,7 @@ export class UserController {
       description: string;
       userID: number;
       companyID: number;
-      status?: string;
+      status?: incidentStatus;
       priority?: string;
       urgency?: boolean;
     },

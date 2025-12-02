@@ -154,7 +154,7 @@ model Incidents {
   IncidentsID      Int               @id @default(autoincrement())
   title            String            @db.VarChar(255)
   description      String            @db.Text
-  status           String            @db.VarChar(50)
+  status           incidentStatus    @default(open)
   priority         String            @db.VarChar(50)
   createdAt        DateTime          @default(now()) @db.Timestamp(6)
   updatedAt        DateTime          @updatedAt @db.Timestamp(6)
@@ -324,4 +324,11 @@ enum paymentStatusEnum {
 enum ContractType {
   contract
   freeChoice
+}
+
+enum incidentStatus {
+  open
+  in_progress
+  resolved
+  closed
 }

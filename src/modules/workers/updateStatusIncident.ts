@@ -1,15 +1,20 @@
 import { PrismaClient } from '../../../generated/prisma';
 import jwt, { SignOptions } from 'jsonwebtoken';
+import type { incidentStatus } from '../../utils/types/incidentStatus';
 import dotenv from 'dotenv';
 dotenv.config({ path: '../../../.env' });
 const prisma = new PrismaClient();
-export async function updateStatusIncident(incidentID: number, status: string) {
+export async function updateStatusIncident(
+  incidentID: number,
+  status: incidentStatus,
+) {
   if (!incidentID || !status) {
     throw new Error('Incident ID and status are required');
   }
   const incident = await prisma.incidents.findUnique({
     where: { IncidentsID: incidentID },
   });
+
   if (!incident) {
     throw new Error('Incident not found');
   }

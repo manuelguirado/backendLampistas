@@ -7,8 +7,10 @@ import {
   Query,
   BadRequestException,
   UseGuards,
+  Req,
 } from '@nestjs/common';
 import { WorkerService } from './worker.services';
+import type { incidentStatus } from '../utils/types/incidentStatus';
 import { WorkerGuard } from './worker.guard';
 import { AuthGuard } from '../auth/auth.guard';
 @Controller('worker')
@@ -22,28 +24,28 @@ export class WorkerController {
 
   @UseGuards(AuthGuard, WorkerGuard)
   @Get('assignedIncidents')
-  async listAssignedIncidents(@Query('workerID') workerID: string) {
-    const workerIDNum = parseInt(workerID, 10);
-    if (isNaN(workerIDNum)) {
-      throw new BadRequestException('workerID must be a valid number');
-    }
-    return this.workerService.listAssignedIncidents(workerIDNum);
+  async listAssignedIncidents(@Req() req) {
+    const workerID = req.user?.workerid;
+    return this.workerService.listAssignedIncidents(workerID);
   }
   @UseGuards(AuthGuard, WorkerGuard)
   @Patch('updateIncidentStatus')
   async updateIncidentStatus(
-    @Body() body: { incidentID: number; status: string },
+    @Body() body: { incidentID: number; status: incidentStatus },
   ) {
     const { incidentID, status } = body;
     return this.workerService.updateStatusIncident(incidentID, status);
   }
+
+  @Post('validateCode')
+  async validateWorkerCode(@Body() body: { userType: 'worker'; code: string }) {
+    const { userType, code } = body;
+    return this.workerService.validateWorkerCode(userType, code);
+  }
   @UseGuards(AuthGuard, WorkerGuard)
   @Get('myShifts')
-  async myShifts(@Query('workerID') workerID: string) {
-    const WorkerIDNum = parseInt(workerID, 10);
-    if (isNaN(WorkerIDNum)) {
-      throw new BadRequestException('workerID must be a valid number');
-    }
-    return this.workerService.myShifts(WorkerIDNum);
+  async myShifts(@Req() req) {
+    const workerid = req.user?.workerid;
+    return this.workerService.myShifts(workerid);
   }
 }

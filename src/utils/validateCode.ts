@@ -57,9 +57,9 @@ export async function validateCode(userType: UserType, code: string) {
       }
       const payload = {
         workerID: worker.workerid,
-        companyID: worker.companyID,
-        role: 'WORKER',
+        role: worker.role,
       };
+   
       const token = generateToken(payload);
       return { worker: true, token };
     }

@@ -352,6 +352,13 @@ exports.ContractType = exports.$Enums.ContractType = {
   freeChoice: 'freeChoice'
 };
 
+exports.incidentStatus = exports.$Enums.incidentStatus = {
+  open: 'open',
+  in_progress: 'in_progress',
+  resolved: 'resolved',
+  closed: 'closed'
+};
+
 exports.paymentStatusEnum = exports.$Enums.paymentStatusEnum = {
   PENDING: 'PENDING',
   COMPLETED: 'COMPLETED',

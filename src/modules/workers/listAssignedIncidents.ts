@@ -8,6 +8,7 @@ export async function listAssignedIncidents(workerid: number) {
   if (!workerid) {
     throw new Error('Worker ID is required');
   }
+
   const company = await prisma.company.findFirst({
     where: { workers: { some: { workerid: workerid } } },
   });
@@ -31,14 +32,14 @@ export async function listAssignedIncidents(workerid: number) {
     return [];
   }
   const mappedIncidents = incidents.map((incident) => ({
-    incidentID: incident.IncidentsID,
+    IncidentsID: incident.IncidentsID,
     title: incident.title,
     description: incident.description,
     dateReported: incident.createdAt,
     status: incident.status,
     companyID: incident.companyID,
     reportedByUserID: incident.userID,
-    assignedWorkerID: incident.assignedWorkerID,
+    priority: incident.priority,
   }));
   try {
     const payload = { workerid: worker.workerid, role: worker.role };

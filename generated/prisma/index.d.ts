@@ -144,6 +144,16 @@ export const ContractType: {
 
 export type ContractType = (typeof ContractType)[keyof typeof ContractType]
 
+
+export const incidentStatus: {
+  open: 'open',
+  in_progress: 'in_progress',
+  resolved: 'resolved',
+  closed: 'closed'
+};
+
+export type incidentStatus = (typeof incidentStatus)[keyof typeof incidentStatus]
+
 }
 
 export type Role = $Enums.Role
@@ -157,6 +167,10 @@ export const paymentStatusEnum: typeof $Enums.paymentStatusEnum
 export type ContractType = $Enums.ContractType
 
 export const ContractType: typeof $Enums.ContractType
+
+export type incidentStatus = $Enums.incidentStatus
+
+export const incidentStatus: typeof $Enums.incidentStatus
 
 /**
  * ##  Prisma Client ʲˢ
@@ -13043,7 +13057,7 @@ export namespace Prisma {
     IncidentsID: number | null
     title: string | null
     description: string | null
-    status: string | null
+    status: $Enums.incidentStatus | null
     priority: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -13059,7 +13073,7 @@ export namespace Prisma {
     IncidentsID: number | null
     title: string | null
     description: string | null
-    status: string | null
+    status: $Enums.incidentStatus | null
     priority: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -13246,7 +13260,7 @@ export namespace Prisma {
     IncidentsID: number
     title: string
     description: string
-    status: string
+    status: $Enums.incidentStatus
     priority: string
     createdAt: Date
     updatedAt: Date
@@ -13396,7 +13410,7 @@ export namespace Prisma {
       IncidentsID: number
       title: string
       description: string
-      status: string
+      status: $Enums.incidentStatus
       priority: string
       createdAt: Date
       updatedAt: Date
@@ -13839,7 +13853,7 @@ export namespace Prisma {
     readonly IncidentsID: FieldRef<"Incidents", 'Int'>
     readonly title: FieldRef<"Incidents", 'String'>
     readonly description: FieldRef<"Incidents", 'String'>
-    readonly status: FieldRef<"Incidents", 'String'>
+    readonly status: FieldRef<"Incidents", 'incidentStatus'>
     readonly priority: FieldRef<"Incidents", 'String'>
     readonly createdAt: FieldRef<"Incidents", 'DateTime'>
     readonly updatedAt: FieldRef<"Incidents", 'DateTime'>
@@ -27299,6 +27313,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'incidentStatus'
+   */
+  export type EnumincidentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'incidentStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'incidentStatus[]'
+   */
+  export type ListEnumincidentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'incidentStatus[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Decimal'
    */
   export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
@@ -27988,7 +28016,7 @@ export namespace Prisma {
     IncidentsID?: IntFilter<"Incidents"> | number
     title?: StringFilter<"Incidents"> | string
     description?: StringFilter<"Incidents"> | string
-    status?: StringFilter<"Incidents"> | string
+    status?: EnumincidentStatusFilter<"Incidents"> | $Enums.incidentStatus
     priority?: StringFilter<"Incidents"> | string
     createdAt?: DateTimeFilter<"Incidents"> | Date | string
     updatedAt?: DateTimeFilter<"Incidents"> | Date | string
@@ -28038,7 +28066,7 @@ export namespace Prisma {
     NOT?: IncidentsWhereInput | IncidentsWhereInput[]
     title?: StringFilter<"Incidents"> | string
     description?: StringFilter<"Incidents"> | string
-    status?: StringFilter<"Incidents"> | string
+    status?: EnumincidentStatusFilter<"Incidents"> | $Enums.incidentStatus
     priority?: StringFilter<"Incidents"> | string
     createdAt?: DateTimeFilter<"Incidents"> | Date | string
     updatedAt?: DateTimeFilter<"Incidents"> | Date | string
@@ -28084,7 +28112,7 @@ export namespace Prisma {
     IncidentsID?: IntWithAggregatesFilter<"Incidents"> | number
     title?: StringWithAggregatesFilter<"Incidents"> | string
     description?: StringWithAggregatesFilter<"Incidents"> | string
-    status?: StringWithAggregatesFilter<"Incidents"> | string
+    status?: EnumincidentStatusWithAggregatesFilter<"Incidents"> | $Enums.incidentStatus
     priority?: StringWithAggregatesFilter<"Incidents"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Incidents"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Incidents"> | Date | string
@@ -29464,7 +29492,7 @@ export namespace Prisma {
   export type IncidentsCreateInput = {
     title: string
     description: string
-    status: string
+    status?: $Enums.incidentStatus
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -29483,7 +29511,7 @@ export namespace Prisma {
     IncidentsID?: number
     title: string
     description: string
-    status: string
+    status?: $Enums.incidentStatus
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -29501,7 +29529,7 @@ export namespace Prisma {
   export type IncidentsUpdateInput = {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
+    status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29520,7 +29548,7 @@ export namespace Prisma {
     IncidentsID?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
+    status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29539,7 +29567,7 @@ export namespace Prisma {
     IncidentsID?: number
     title: string
     description: string
-    status: string
+    status?: $Enums.incidentStatus
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -29554,7 +29582,7 @@ export namespace Prisma {
   export type IncidentsUpdateManyMutationInput = {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
+    status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29566,7 +29594,7 @@ export namespace Prisma {
     IncidentsID?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
+    status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -31032,6 +31060,13 @@ export namespace Prisma {
     companyID?: SortOrder
   }
 
+  export type EnumincidentStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.incidentStatus | EnumincidentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.incidentStatus[] | ListEnumincidentStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.incidentStatus[] | ListEnumincidentStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumincidentStatusFilter<$PrismaModel> | $Enums.incidentStatus
+  }
+
   export type BoolNullableFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
     not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
@@ -31111,6 +31146,16 @@ export namespace Prisma {
     budgetID?: SortOrder
     userID?: SortOrder
     workerID?: SortOrder
+  }
+
+  export type EnumincidentStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.incidentStatus | EnumincidentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.incidentStatus[] | ListEnumincidentStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.incidentStatus[] | ListEnumincidentStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumincidentStatusWithAggregatesFilter<$PrismaModel> | $Enums.incidentStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumincidentStatusFilter<$PrismaModel>
+    _max?: NestedEnumincidentStatusFilter<$PrismaModel>
   }
 
   export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -33193,6 +33238,10 @@ export namespace Prisma {
     connect?: PaymentsWhereUniqueInput | PaymentsWhereUniqueInput[]
   }
 
+  export type EnumincidentStatusFieldUpdateOperationsInput = {
+    set?: $Enums.incidentStatus
+  }
+
   export type NullableBoolFieldUpdateOperationsInput = {
     set?: boolean | null
   }
@@ -34066,9 +34115,26 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedEnumincidentStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.incidentStatus | EnumincidentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.incidentStatus[] | ListEnumincidentStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.incidentStatus[] | ListEnumincidentStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumincidentStatusFilter<$PrismaModel> | $Enums.incidentStatus
+  }
+
   export type NestedBoolNullableFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
     not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
+  export type NestedEnumincidentStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.incidentStatus | EnumincidentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.incidentStatus[] | ListEnumincidentStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.incidentStatus[] | ListEnumincidentStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumincidentStatusWithAggregatesFilter<$PrismaModel> | $Enums.incidentStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumincidentStatusFilter<$PrismaModel>
+    _max?: NestedEnumincidentStatusFilter<$PrismaModel>
   }
 
   export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -34149,7 +34215,7 @@ export namespace Prisma {
   export type IncidentsCreateWithoutUsersInput = {
     title: string
     description: string
-    status: string
+    status?: $Enums.incidentStatus
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -34167,7 +34233,7 @@ export namespace Prisma {
     IncidentsID?: number
     title: string
     description: string
-    status: string
+    status?: $Enums.incidentStatus
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -34285,7 +34351,7 @@ export namespace Prisma {
   export type IncidentsCreateWithoutUserInput = {
     title: string
     description: string
-    status: string
+    status?: $Enums.incidentStatus
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -34303,7 +34369,7 @@ export namespace Prisma {
     IncidentsID?: number
     title: string
     description: string
-    status: string
+    status?: $Enums.incidentStatus
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -34523,7 +34589,7 @@ export namespace Prisma {
   export type IncidentsUpdateWithoutUsersInput = {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
+    status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -34541,7 +34607,7 @@ export namespace Prisma {
     IncidentsID?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
+    status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -34691,7 +34757,7 @@ export namespace Prisma {
     IncidentsID?: IntFilter<"Incidents"> | number
     title?: StringFilter<"Incidents"> | string
     description?: StringFilter<"Incidents"> | string
-    status?: StringFilter<"Incidents"> | string
+    status?: EnumincidentStatusFilter<"Incidents"> | $Enums.incidentStatus
     priority?: StringFilter<"Incidents"> | string
     createdAt?: DateTimeFilter<"Incidents"> | Date | string
     updatedAt?: DateTimeFilter<"Incidents"> | Date | string
@@ -34962,7 +35028,7 @@ export namespace Prisma {
   export type IncidentsCreateWithoutCompanyInput = {
     title: string
     description: string
-    status: string
+    status?: $Enums.incidentStatus
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -34980,7 +35046,7 @@ export namespace Prisma {
     IncidentsID?: number
     title: string
     description: string
-    status: string
+    status?: $Enums.incidentStatus
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -35961,7 +36027,7 @@ export namespace Prisma {
   export type IncidentsCreateWithoutAssignedWorkerInput = {
     title: string
     description: string
-    status: string
+    status?: $Enums.incidentStatus
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -35979,7 +36045,7 @@ export namespace Prisma {
     IncidentsID?: number
     title: string
     description: string
-    status: string
+    status?: $Enums.incidentStatus
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -37644,7 +37710,7 @@ export namespace Prisma {
   export type IncidentsCreateWithoutPaymentsInput = {
     title: string
     description: string
-    status: string
+    status?: $Enums.incidentStatus
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -37662,7 +37728,7 @@ export namespace Prisma {
     IncidentsID?: number
     title: string
     description: string
-    status: string
+    status?: $Enums.incidentStatus
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -37902,7 +37968,7 @@ export namespace Prisma {
   export type IncidentsUpdateWithoutPaymentsInput = {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
+    status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -37920,7 +37986,7 @@ export namespace Prisma {
     IncidentsID?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
+    status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -38080,7 +38146,7 @@ export namespace Prisma {
   export type IncidentsCreateWithoutBudgetInput = {
     title: string
     description: string
-    status: string
+    status?: $Enums.incidentStatus
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -38098,7 +38164,7 @@ export namespace Prisma {
     IncidentsID?: number
     title: string
     description: string
-    status: string
+    status?: $Enums.incidentStatus
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -38307,7 +38373,7 @@ export namespace Prisma {
   export type IncidentsUpdateWithoutBudgetInput = {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
+    status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -38325,7 +38391,7 @@ export namespace Prisma {
     IncidentsID?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
+    status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -38432,7 +38498,7 @@ export namespace Prisma {
   export type IncidentsCreateWithoutIncidentHistoryInput = {
     title: string
     description: string
-    status: string
+    status?: $Enums.incidentStatus
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -38450,7 +38516,7 @@ export namespace Prisma {
     IncidentsID?: number
     title: string
     description: string
-    status: string
+    status?: $Enums.incidentStatus
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -38593,7 +38659,7 @@ export namespace Prisma {
   export type IncidentsUpdateWithoutIncidentHistoryInput = {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
+    status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -38611,7 +38677,7 @@ export namespace Prisma {
     IncidentsID?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
+    status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -39883,7 +39949,7 @@ export namespace Prisma {
     IncidentsID?: number
     title: string
     description: string
-    status: string
+    status?: $Enums.incidentStatus
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -39998,7 +40064,7 @@ export namespace Prisma {
   export type IncidentsUpdateWithoutUserInput = {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
+    status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -40016,7 +40082,7 @@ export namespace Prisma {
     IncidentsID?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
+    status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -40034,7 +40100,7 @@ export namespace Prisma {
     IncidentsID?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
+    status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -40191,7 +40257,7 @@ export namespace Prisma {
     IncidentsID?: number
     title: string
     description: string
-    status: string
+    status?: $Enums.incidentStatus
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -40375,7 +40441,7 @@ export namespace Prisma {
   export type IncidentsUpdateWithoutCompanyInput = {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
+    status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -40393,7 +40459,7 @@ export namespace Prisma {
     IncidentsID?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
+    status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -40411,7 +40477,7 @@ export namespace Prisma {
     IncidentsID?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
+    status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -40750,7 +40816,7 @@ export namespace Prisma {
     IncidentsID?: number
     title: string
     description: string
-    status: string
+    status?: $Enums.incidentStatus
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -40809,7 +40875,7 @@ export namespace Prisma {
   export type IncidentsUpdateWithoutAssignedWorkerInput = {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
+    status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -40827,7 +40893,7 @@ export namespace Prisma {
     IncidentsID?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
+    status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -40845,7 +40911,7 @@ export namespace Prisma {
     IncidentsID?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
+    status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
