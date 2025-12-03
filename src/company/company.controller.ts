@@ -35,7 +35,7 @@ export class CompanyController {
   }
   @UseGuards(AuthGuard, CompanyGuard)
   @Get('assignUserCode/:userID')
-  assignUserCode(@Request() req: any, @Param('userID') userID: string) {
+  asignCode(@Request() req: any, @Param('userID') userID: string) {
     const { companyID } = req.user;
     return this.companyService.assignCode(companyID, undefined, Number(userID));
   }

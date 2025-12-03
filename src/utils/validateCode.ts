@@ -52,6 +52,7 @@ export async function validateCode(userType: UserType, code: string) {
           workerCode: code,
         },
       });
+
       if (!worker) {
         throw new Error('Invalid worker code');
       }
@@ -59,7 +60,7 @@ export async function validateCode(userType: UserType, code: string) {
         workerID: worker.workerid,
         role: worker.role,
       };
-   
+
       const token = generateToken(payload);
       return { worker: true, token };
     }

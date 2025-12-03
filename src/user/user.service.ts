@@ -4,6 +4,7 @@ import { createIncident } from '../modules/incidents/createIncident';
 import { findMyMachinery } from '../modules/machinery/findMymachinery';
 import { myContracts } from '../modules/users/Mycontracts';
 import { recievedBudgets } from '../modules/users/recievedBudgets';
+import { validateCode } from '../utils/validateCode';
 import { Injectable } from '@nestjs/common';
 import type { incidentStatus } from '../utils/types/incidentStatus';
 @Injectable()
@@ -41,5 +42,8 @@ export class UserService {
   }
   async recievedBudgets(userID: number) {
     return recievedBudgets(userID);
+  }
+  async validateCode(userType: 'user', code: string) {
+    return validateCode(userType, code);
   }
 }

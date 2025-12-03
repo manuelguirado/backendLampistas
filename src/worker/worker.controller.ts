@@ -38,9 +38,10 @@ export class WorkerController {
   }
 
   @Post('validateCode')
-  async validateWorkerCode(@Body() body: { userType: 'worker'; code: string }) {
+  async validateCode(@Body() body: { userType: 'worker'; code: string }) {
+    console.log(body);
     const { userType, code } = body;
-    return this.workerService.validateWorkerCode(userType, code);
+    return this.workerService.validateCode(userType, code);
   }
   @UseGuards(AuthGuard, WorkerGuard)
   @Get('myShifts')

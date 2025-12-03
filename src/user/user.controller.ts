@@ -21,6 +21,11 @@ export class UserController {
     const { email, password } = body;
     return this.userService.userLogin(email, password);
   }
+  @Post('validateCode')
+  async validateCode(@Body() body: { userType: 'user'; code: string }) {
+    const { userType, code } = body;
+    return this.userService.validateCode(userType, code);
+  }
   @UseGuards(AuthGuard, UserGuard)
   @Get('userMachinery')
   async findMyMachinery(@Query('userID') userID: string) {

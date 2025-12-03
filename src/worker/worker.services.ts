@@ -12,7 +12,7 @@ export class WorkerService {
   async workerLogin(email: string, password: string) {
     return workerLogin(email, password);
   }
-  async validateWorkerCode(userType: UserType, code: string) {
+  async validateCode(userType: UserType, code: string) {
     return validateCode(userType, code);
   }
 
