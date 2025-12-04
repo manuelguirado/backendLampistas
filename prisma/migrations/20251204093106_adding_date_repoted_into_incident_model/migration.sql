@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Incidents" ADD COLUMN     "dateReported" TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP;

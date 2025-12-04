@@ -1,4 +1,4 @@
-import { Controller, Delete } from '@nestjs/common';
+import { Controller, Delete, Req } from '@nestjs/common';
 import { CompanyService } from './company.service';
 import {
   Body,
@@ -14,6 +14,7 @@ import { AuthGuard } from '../auth/auth.guard';
 import { CompanyGuard } from './company.guard';
 import type { ContractType } from '../../generated/prisma';
 import type { ItemType } from '../utils/types/itemType';
+import { MachineryType } from '../utils/types/machineType';
 
 @Controller('company')
 export class CompanyController {
@@ -211,44 +212,30 @@ export class CompanyController {
   @UseGuards(AuthGuard, CompanyGuard)
   @Post('createMachinery')
   createMachinery(
+    @Request() req: any, // ✅ @Request() primero
     @Body()
     body: {
       name: string;
-      description: string;
-      maintanceDate: Date;
-      lastInspectionDate: Date;
-      InstalledAT: Date;
-      clientId: number;
-      companyName: string;
+      description?: string;
       machineType: string;
-      companyID: number;
+      brand?: string;
+      model: string;
+      companyName: string;
       serialNumber: string;
     },
   ) {
-    const {
-      name,
-      description,
-      maintanceDate,
-      lastInspectionDate,
-      InstalledAT,
-      clientId,
-      companyName,
-      machineType,
-      companyID,
-      serialNumber,
-    } = body;
-    return this.companyService.createMachinery(
-      name,
-      description,
-      maintanceDate,
-      lastInspectionDate,
-      InstalledAT,
-      clientId,
-      companyName,
-      machineType,
-      companyID,
-      serialNumber,
-    );
+    const companyID = req.user.companyID; // ✅ Ahora sí existe
+
+    return this.companyService.createMachinery({
+      name: body.name,
+      description: body.description ?? '',
+      machineType: body.machineType,
+      model: body.model,
+      serialNumber: body.serialNumber,
+      companyID, // Del JWT
+      companyName: body.companyName, // Del JWT
+      brand: body.brand ?? 'UNKNOWN',
+    });
   }
   @UseGuards(AuthGuard, CompanyGuard)
   @Post('assignShiftWorker')

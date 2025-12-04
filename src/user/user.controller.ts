@@ -1,4 +1,12 @@
-import { Controller, Post, Get, UseGuards, Body, Query } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Get,
+  UseGuards,
+  Body,
+  Query,
+  Req,
+} from '@nestjs/common';
 import { UserService } from './user.service';
 import { AuthGuard } from '../auth/auth.guard';
 import { UserGuard } from './user.guard';
@@ -35,22 +43,32 @@ export class UserController {
   @UseGuards(AuthGuard, UserGuard)
   @Post('createIncident')
   async createIncident(
+    @Req() req: any,
     @Body()
     body: {
       title: string;
       description: string;
-      userID: number;
-      companyID: number;
+      location: string;
       status?: incidentStatus;
       priority?: string;
       urgency?: boolean;
     },
   ) {
-    const { title, description, userID, companyID, status, priority, urgency } =
-      body;
+    console.log('Request Body:', body);
+    const userID = req.user.userID;
+    const companyID = req.user.companyID;
+    console.log('UserID from token:', userID);
+    console.log('CompanyID from token:', companyID);
+
+    if (!companyID) {
+      throw new Error('El usuario no está asignado a ninguna empresa');
+    }
+
+    const { title, description, location, status, priority, urgency } = body;
     return this.userService.createIncident(
       title,
       description,
+      location,
       userID,
       companyID,
       status,
@@ -69,5 +87,12 @@ export class UserController {
   async recievedBudgets(@Query('userID') userID: string) {
     const userIDNum = parseInt(userID, 10);
     return this.userService.recievedBudgets(userIDNum);
+  }
+  @UseGuards(AuthGuard, UserGuard)
+  @Get('myIncidents')
+  async myIncidents(@Req() req: any) {
+    const userID = req.user.userID;
+
+    return this.userService.myIncidents(userID);
   }
 }

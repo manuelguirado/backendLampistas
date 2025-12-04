@@ -3,6 +3,7 @@ import { userLogin } from '../modules/users/userLogin';
 import { createIncident } from '../modules/incidents/createIncident';
 import { findMyMachinery } from '../modules/machinery/findMymachinery';
 import { myContracts } from '../modules/users/Mycontracts';
+import { myIncidents } from '../modules/users/myIncidents';
 import { recievedBudgets } from '../modules/users/recievedBudgets';
 import { validateCode } from '../utils/validateCode';
 import { Injectable } from '@nestjs/common';
@@ -18,6 +19,7 @@ export class UserService {
   async createIncident(
     title: string,
     description: string,
+    location: string,
     userID: number,
     companyID: number,
     status?: incidentStatus,
@@ -27,6 +29,7 @@ export class UserService {
     return createIncident(
       title,
       description,
+      location,
       userID,
       companyID,
       status,
@@ -45,5 +48,8 @@ export class UserService {
   }
   async validateCode(userType: 'user', code: string) {
     return validateCode(userType, code);
+  }
+  async myIncidents(userID: number) {
+    return myIncidents(userID);
   }
 }

@@ -8,12 +8,23 @@ const prisma = new PrismaClient();
 export async function createIncident(
   title: string,
   description: string,
+  location: string,
   userID: number,
   companyID: number,
   status?: incidentStatus,
   priority?: string,
   urgency?: boolean,
 ) {
+  console.log('Creating incident with:', {
+    title,
+    description,
+    location,
+    userID,
+    companyID,
+    status,
+    priority,
+    urgency,
+  });
   if (!title || !description || !companyID) {
     throw new Error('Title, description, companyID, and workerID are required');
   }
@@ -33,16 +44,14 @@ export async function createIncident(
     throw new Error('User not found');
   }
 
-  let finalStatus = status || 'OPEN';
-  if (urgency) {
-    finalStatus = 'URGENT';
-  }
+  const finalStatus = status || 'OPEN';
 
   // ✅ Crear incidencia
   const incident = await prisma.incidents.create({
     data: {
       title,
       description,
+      location,
       userID, // ✅ Changed to userId to match Prisma schema
       companyID,
       status: finalStatus.toLowerCase() as incidentStatus,

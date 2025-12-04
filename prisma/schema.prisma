@@ -151,15 +151,18 @@ model workersCompanies {
 }
 
 model Incidents {
-  IncidentsID      Int               @id @default(autoincrement())
-  title            String            @db.VarChar(255)
-  description      String            @db.Text
-  status           incidentStatus   @default(open)
+  IncidentsID Int            @id @default(autoincrement())
+  title       String         @db.VarChar(255)
+  description String         @db.Text
+  status      incidentStatus @default(open)
+  location    String         @db.VarChar(255)
+
   priority         String            @db.VarChar(50)
   createdAt        DateTime          @default(now()) @db.Timestamp(6)
   updatedAt        DateTime          @updatedAt @db.Timestamp(6)
   companyID        Int
   company          Company           @relation("CompanyIncidents", fields: [companyID], references: [companyID])
+  dateReported     DateTime          @default(now()) @db.Timestamp(6)
   assignedWorkerID Int?
   assignedWorker   Worker?           @relation("WorkerIncidents", fields: [assignedWorkerID], references: [workerid])
   budgetID         Int?              @unique
@@ -294,7 +297,8 @@ model machinery {
   companyID          Int
   company            Company  @relation("CompanyMachinery", fields: [companyID], references: [companyID])
   serialNumber       String   @unique
-
+  model             String
+  brand             String
   ClientMachinery ClientMachinery[]
 }
 
@@ -325,6 +329,7 @@ enum ContractType {
   contract
   freeChoice
 }
+
 enum incidentStatus {
   open
   in_progress

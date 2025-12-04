@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 function generateToken(payload: object) {
   try {
     const secret = process.env.JWT_SECRET as string;
-    const options: SignOptions = { expiresIn: '1h' };
+    const options: SignOptions = { expiresIn: '15m' };
     const token = jwt.sign(payload, secret, options);
     return token;
   } catch (error) {
@@ -42,7 +42,11 @@ export async function validateCode(userType: UserType, code: string) {
       if (!user) {
         throw new Error('Invalid user code');
       }
-      const payload = { userID: user.userID, role: user.role };
+      const payload = {
+        userID: user.userID,
+        role: user.role,
+        companyID: user.companyID,
+      };
       const token = generateToken(payload);
       return { user: true, token };
     }

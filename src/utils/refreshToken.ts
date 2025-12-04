@@ -104,7 +104,12 @@ export async function refreshToken(
         );
         if (!isValid) throw new Error('Invalid refresh token');
 
-        payload = { userID: id, role: entity.role, userType: 'user' };
+        payload = {
+          userID: id,
+          role: entity.role,
+          userType: 'user',
+          companyID: entity.companyID,
+        };
         break;
       }
       case 'worker': {

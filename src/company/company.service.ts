@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { editWorker } from '../modules/workers/editWorker';
+import { MachineryType } from '../utils/types/machineType';
 import { registerWorker } from '../modules/workers/registerWorker';
 import { listIncidents } from '../modules/companies/listIncidents';
 import { eliminateWorker } from '../modules/workers/eliminateWorker';
@@ -105,30 +106,8 @@ export class CompanyService {
   async assignIncident(incidentID: number, workerID: number) {
     return assignIncident(incidentID, workerID);
   }
-  createMachinery(
-    name: string,
-    description: string,
-    maintanceDate: Date,
-    lastInspectionDate: Date,
-    InstalledAT: Date,
-    clientId: number,
-    companyName: string,
-    machineType: string,
-    companyID: number,
-    serialNumber: string,
-  ) {
-    return createMachinery(
-      name,
-      description,
-      maintanceDate,
-      lastInspectionDate,
-      InstalledAT,
-      clientId,
-      companyName,
-      machineType,
-      companyID,
-      serialNumber,
-    );
+  createMachinery(machineryType: MachineryType) {
+    return createMachinery(machineryType);
   }
   async assignShiftWorker(
     workerID: number,

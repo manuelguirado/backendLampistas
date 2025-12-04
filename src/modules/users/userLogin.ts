@@ -41,9 +41,13 @@ export async function userLogin(email: string, password: string) {
     throw new Error('Unauthorized');
   }
   try {
-    const payload = { userID: user.userID, role: user.role };
+    const payload = {
+      userID: user.userID,
+      role: user.role,
+      companyID: user.companyID,
+    };
     const secret = process.env.JWT_SECRET as string;
-    const options: SignOptions = { expiresIn: '1h' };
+    const options: SignOptions = { expiresIn: '15m' };
     const token = jwt.sign(payload, secret, options);
     loginAttempts.delete(email);
     return { token, ...user };

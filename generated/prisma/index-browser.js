@@ -203,10 +203,12 @@ exports.Prisma.IncidentsScalarFieldEnum = {
   title: 'title',
   description: 'description',
   status: 'status',
+  location: 'location',
   priority: 'priority',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   companyID: 'companyID',
+  dateReported: 'dateReported',
   assignedWorkerID: 'assignedWorkerID',
   budgetID: 'budgetID',
   userID: 'userID',
@@ -308,7 +310,9 @@ exports.Prisma.MachineryScalarFieldEnum = {
   clientID: 'clientID',
   companyName: 'companyName',
   companyID: 'companyID',
-  serialNumber: 'serialNumber'
+  serialNumber: 'serialNumber',
+  model: 'model',
+  brand: 'brand'
 };
 
 exports.Prisma.ClientMachineryScalarFieldEnum = {

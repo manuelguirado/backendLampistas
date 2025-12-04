@@ -13058,10 +13058,12 @@ export namespace Prisma {
     title: string | null
     description: string | null
     status: $Enums.incidentStatus | null
+    location: string | null
     priority: string | null
     createdAt: Date | null
     updatedAt: Date | null
     companyID: number | null
+    dateReported: Date | null
     assignedWorkerID: number | null
     budgetID: number | null
     userID: number | null
@@ -13074,10 +13076,12 @@ export namespace Prisma {
     title: string | null
     description: string | null
     status: $Enums.incidentStatus | null
+    location: string | null
     priority: string | null
     createdAt: Date | null
     updatedAt: Date | null
     companyID: number | null
+    dateReported: Date | null
     assignedWorkerID: number | null
     budgetID: number | null
     userID: number | null
@@ -13090,10 +13094,12 @@ export namespace Prisma {
     title: number
     description: number
     status: number
+    location: number
     priority: number
     createdAt: number
     updatedAt: number
     companyID: number
+    dateReported: number
     assignedWorkerID: number
     budgetID: number
     userID: number
@@ -13126,10 +13132,12 @@ export namespace Prisma {
     title?: true
     description?: true
     status?: true
+    location?: true
     priority?: true
     createdAt?: true
     updatedAt?: true
     companyID?: true
+    dateReported?: true
     assignedWorkerID?: true
     budgetID?: true
     userID?: true
@@ -13142,10 +13150,12 @@ export namespace Prisma {
     title?: true
     description?: true
     status?: true
+    location?: true
     priority?: true
     createdAt?: true
     updatedAt?: true
     companyID?: true
+    dateReported?: true
     assignedWorkerID?: true
     budgetID?: true
     userID?: true
@@ -13158,10 +13168,12 @@ export namespace Prisma {
     title?: true
     description?: true
     status?: true
+    location?: true
     priority?: true
     createdAt?: true
     updatedAt?: true
     companyID?: true
+    dateReported?: true
     assignedWorkerID?: true
     budgetID?: true
     userID?: true
@@ -13261,10 +13273,12 @@ export namespace Prisma {
     title: string
     description: string
     status: $Enums.incidentStatus
+    location: string
     priority: string
     createdAt: Date
     updatedAt: Date
     companyID: number
+    dateReported: Date
     assignedWorkerID: number | null
     budgetID: number | null
     userID: number | null
@@ -13296,10 +13310,12 @@ export namespace Prisma {
     title?: boolean
     description?: boolean
     status?: boolean
+    location?: boolean
     priority?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     companyID?: boolean
+    dateReported?: boolean
     assignedWorkerID?: boolean
     budgetID?: boolean
     userID?: boolean
@@ -13320,10 +13336,12 @@ export namespace Prisma {
     title?: boolean
     description?: boolean
     status?: boolean
+    location?: boolean
     priority?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     companyID?: boolean
+    dateReported?: boolean
     assignedWorkerID?: boolean
     budgetID?: boolean
     userID?: boolean
@@ -13340,10 +13358,12 @@ export namespace Prisma {
     title?: boolean
     description?: boolean
     status?: boolean
+    location?: boolean
     priority?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     companyID?: boolean
+    dateReported?: boolean
     assignedWorkerID?: boolean
     budgetID?: boolean
     userID?: boolean
@@ -13360,10 +13380,12 @@ export namespace Prisma {
     title?: boolean
     description?: boolean
     status?: boolean
+    location?: boolean
     priority?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     companyID?: boolean
+    dateReported?: boolean
     assignedWorkerID?: boolean
     budgetID?: boolean
     userID?: boolean
@@ -13371,7 +13393,7 @@ export namespace Prisma {
     workerID?: boolean
   }
 
-  export type IncidentsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"IncidentsID" | "title" | "description" | "status" | "priority" | "createdAt" | "updatedAt" | "companyID" | "assignedWorkerID" | "budgetID" | "userID" | "urgency" | "workerID", ExtArgs["result"]["incidents"]>
+  export type IncidentsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"IncidentsID" | "title" | "description" | "status" | "location" | "priority" | "createdAt" | "updatedAt" | "companyID" | "dateReported" | "assignedWorkerID" | "budgetID" | "userID" | "urgency" | "workerID", ExtArgs["result"]["incidents"]>
   export type IncidentsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     company?: boolean | CompanyDefaultArgs<ExtArgs>
     assignedWorker?: boolean | Incidents$assignedWorkerArgs<ExtArgs>
@@ -13411,10 +13433,12 @@ export namespace Prisma {
       title: string
       description: string
       status: $Enums.incidentStatus
+      location: string
       priority: string
       createdAt: Date
       updatedAt: Date
       companyID: number
+      dateReported: Date
       assignedWorkerID: number | null
       budgetID: number | null
       userID: number | null
@@ -13854,10 +13878,12 @@ export namespace Prisma {
     readonly title: FieldRef<"Incidents", 'String'>
     readonly description: FieldRef<"Incidents", 'String'>
     readonly status: FieldRef<"Incidents", 'incidentStatus'>
+    readonly location: FieldRef<"Incidents", 'String'>
     readonly priority: FieldRef<"Incidents", 'String'>
     readonly createdAt: FieldRef<"Incidents", 'DateTime'>
     readonly updatedAt: FieldRef<"Incidents", 'DateTime'>
     readonly companyID: FieldRef<"Incidents", 'Int'>
+    readonly dateReported: FieldRef<"Incidents", 'DateTime'>
     readonly assignedWorkerID: FieldRef<"Incidents", 'Int'>
     readonly budgetID: FieldRef<"Incidents", 'Int'>
     readonly userID: FieldRef<"Incidents", 'Int'>
@@ -24676,6 +24702,8 @@ export namespace Prisma {
     companyName: string | null
     companyID: number | null
     serialNumber: string | null
+    model: string | null
+    brand: string | null
   }
 
   export type MachineryMaxAggregateOutputType = {
@@ -24690,6 +24718,8 @@ export namespace Prisma {
     companyName: string | null
     companyID: number | null
     serialNumber: string | null
+    model: string | null
+    brand: string | null
   }
 
   export type MachineryCountAggregateOutputType = {
@@ -24704,6 +24734,8 @@ export namespace Prisma {
     companyName: number
     companyID: number
     serialNumber: number
+    model: number
+    brand: number
     _all: number
   }
 
@@ -24732,6 +24764,8 @@ export namespace Prisma {
     companyName?: true
     companyID?: true
     serialNumber?: true
+    model?: true
+    brand?: true
   }
 
   export type MachineryMaxAggregateInputType = {
@@ -24746,6 +24780,8 @@ export namespace Prisma {
     companyName?: true
     companyID?: true
     serialNumber?: true
+    model?: true
+    brand?: true
   }
 
   export type MachineryCountAggregateInputType = {
@@ -24760,6 +24796,8 @@ export namespace Prisma {
     companyName?: true
     companyID?: true
     serialNumber?: true
+    model?: true
+    brand?: true
     _all?: true
   }
 
@@ -24861,6 +24899,8 @@ export namespace Prisma {
     companyName: string
     companyID: number
     serialNumber: string
+    model: string
+    brand: string
     _count: MachineryCountAggregateOutputType | null
     _avg: MachineryAvgAggregateOutputType | null
     _sum: MachinerySumAggregateOutputType | null
@@ -24894,6 +24934,8 @@ export namespace Prisma {
     companyName?: boolean
     companyID?: boolean
     serialNumber?: boolean
+    model?: boolean
+    brand?: boolean
     client?: boolean | UserDefaultArgs<ExtArgs>
     company?: boolean | CompanyDefaultArgs<ExtArgs>
     ClientMachinery?: boolean | machinery$ClientMachineryArgs<ExtArgs>
@@ -24912,6 +24954,8 @@ export namespace Prisma {
     companyName?: boolean
     companyID?: boolean
     serialNumber?: boolean
+    model?: boolean
+    brand?: boolean
     client?: boolean | UserDefaultArgs<ExtArgs>
     company?: boolean | CompanyDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["machinery"]>
@@ -24928,6 +24972,8 @@ export namespace Prisma {
     companyName?: boolean
     companyID?: boolean
     serialNumber?: boolean
+    model?: boolean
+    brand?: boolean
     client?: boolean | UserDefaultArgs<ExtArgs>
     company?: boolean | CompanyDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["machinery"]>
@@ -24944,9 +24990,11 @@ export namespace Prisma {
     companyName?: boolean
     companyID?: boolean
     serialNumber?: boolean
+    model?: boolean
+    brand?: boolean
   }
 
-  export type machineryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "maintenanceDate" | "lastInspectionDate" | "installedAt" | "machineType" | "clientID" | "companyName" | "companyID" | "serialNumber", ExtArgs["result"]["machinery"]>
+  export type machineryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "maintenanceDate" | "lastInspectionDate" | "installedAt" | "machineType" | "clientID" | "companyName" | "companyID" | "serialNumber" | "model" | "brand", ExtArgs["result"]["machinery"]>
   export type machineryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     client?: boolean | UserDefaultArgs<ExtArgs>
     company?: boolean | CompanyDefaultArgs<ExtArgs>
@@ -24981,6 +25029,8 @@ export namespace Prisma {
       companyName: string
       companyID: number
       serialNumber: string
+      model: string
+      brand: string
     }, ExtArgs["result"]["machinery"]>
     composites: {}
   }
@@ -25418,6 +25468,8 @@ export namespace Prisma {
     readonly companyName: FieldRef<"machinery", 'String'>
     readonly companyID: FieldRef<"machinery", 'Int'>
     readonly serialNumber: FieldRef<"machinery", 'String'>
+    readonly model: FieldRef<"machinery", 'String'>
+    readonly brand: FieldRef<"machinery", 'String'>
   }
     
 
@@ -27041,10 +27093,12 @@ export namespace Prisma {
     title: 'title',
     description: 'description',
     status: 'status',
+    location: 'location',
     priority: 'priority',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     companyID: 'companyID',
+    dateReported: 'dateReported',
     assignedWorkerID: 'assignedWorkerID',
     budgetID: 'budgetID',
     userID: 'userID',
@@ -27176,7 +27230,9 @@ export namespace Prisma {
     clientID: 'clientID',
     companyName: 'companyName',
     companyID: 'companyID',
-    serialNumber: 'serialNumber'
+    serialNumber: 'serialNumber',
+    model: 'model',
+    brand: 'brand'
   };
 
   export type MachineryScalarFieldEnum = (typeof MachineryScalarFieldEnum)[keyof typeof MachineryScalarFieldEnum]
@@ -28017,10 +28073,12 @@ export namespace Prisma {
     title?: StringFilter<"Incidents"> | string
     description?: StringFilter<"Incidents"> | string
     status?: EnumincidentStatusFilter<"Incidents"> | $Enums.incidentStatus
+    location?: StringFilter<"Incidents"> | string
     priority?: StringFilter<"Incidents"> | string
     createdAt?: DateTimeFilter<"Incidents"> | Date | string
     updatedAt?: DateTimeFilter<"Incidents"> | Date | string
     companyID?: IntFilter<"Incidents"> | number
+    dateReported?: DateTimeFilter<"Incidents"> | Date | string
     assignedWorkerID?: IntNullableFilter<"Incidents"> | number | null
     budgetID?: IntNullableFilter<"Incidents"> | number | null
     userID?: IntNullableFilter<"Incidents"> | number | null
@@ -28040,10 +28098,12 @@ export namespace Prisma {
     title?: SortOrder
     description?: SortOrder
     status?: SortOrder
+    location?: SortOrder
     priority?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     companyID?: SortOrder
+    dateReported?: SortOrder
     assignedWorkerID?: SortOrderInput | SortOrder
     budgetID?: SortOrderInput | SortOrder
     userID?: SortOrderInput | SortOrder
@@ -28067,10 +28127,12 @@ export namespace Prisma {
     title?: StringFilter<"Incidents"> | string
     description?: StringFilter<"Incidents"> | string
     status?: EnumincidentStatusFilter<"Incidents"> | $Enums.incidentStatus
+    location?: StringFilter<"Incidents"> | string
     priority?: StringFilter<"Incidents"> | string
     createdAt?: DateTimeFilter<"Incidents"> | Date | string
     updatedAt?: DateTimeFilter<"Incidents"> | Date | string
     companyID?: IntFilter<"Incidents"> | number
+    dateReported?: DateTimeFilter<"Incidents"> | Date | string
     assignedWorkerID?: IntNullableFilter<"Incidents"> | number | null
     userID?: IntNullableFilter<"Incidents"> | number | null
     urgency?: BoolNullableFilter<"Incidents"> | boolean | null
@@ -28089,10 +28151,12 @@ export namespace Prisma {
     title?: SortOrder
     description?: SortOrder
     status?: SortOrder
+    location?: SortOrder
     priority?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     companyID?: SortOrder
+    dateReported?: SortOrder
     assignedWorkerID?: SortOrderInput | SortOrder
     budgetID?: SortOrderInput | SortOrder
     userID?: SortOrderInput | SortOrder
@@ -28113,10 +28177,12 @@ export namespace Prisma {
     title?: StringWithAggregatesFilter<"Incidents"> | string
     description?: StringWithAggregatesFilter<"Incidents"> | string
     status?: EnumincidentStatusWithAggregatesFilter<"Incidents"> | $Enums.incidentStatus
+    location?: StringWithAggregatesFilter<"Incidents"> | string
     priority?: StringWithAggregatesFilter<"Incidents"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Incidents"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Incidents"> | Date | string
     companyID?: IntWithAggregatesFilter<"Incidents"> | number
+    dateReported?: DateTimeWithAggregatesFilter<"Incidents"> | Date | string
     assignedWorkerID?: IntNullableWithAggregatesFilter<"Incidents"> | number | null
     budgetID?: IntNullableWithAggregatesFilter<"Incidents"> | number | null
     userID?: IntNullableWithAggregatesFilter<"Incidents"> | number | null
@@ -28743,6 +28809,8 @@ export namespace Prisma {
     companyName?: StringFilter<"machinery"> | string
     companyID?: IntFilter<"machinery"> | number
     serialNumber?: StringFilter<"machinery"> | string
+    model?: StringFilter<"machinery"> | string
+    brand?: StringFilter<"machinery"> | string
     client?: XOR<UserScalarRelationFilter, UserWhereInput>
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
     ClientMachinery?: ClientMachineryListRelationFilter
@@ -28760,6 +28828,8 @@ export namespace Prisma {
     companyName?: SortOrder
     companyID?: SortOrder
     serialNumber?: SortOrder
+    model?: SortOrder
+    brand?: SortOrder
     client?: UserOrderByWithRelationInput
     company?: CompanyOrderByWithRelationInput
     ClientMachinery?: ClientMachineryOrderByRelationAggregateInput
@@ -28780,6 +28850,8 @@ export namespace Prisma {
     clientID?: IntFilter<"machinery"> | number
     companyName?: StringFilter<"machinery"> | string
     companyID?: IntFilter<"machinery"> | number
+    model?: StringFilter<"machinery"> | string
+    brand?: StringFilter<"machinery"> | string
     client?: XOR<UserScalarRelationFilter, UserWhereInput>
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
     ClientMachinery?: ClientMachineryListRelationFilter
@@ -28797,6 +28869,8 @@ export namespace Prisma {
     companyName?: SortOrder
     companyID?: SortOrder
     serialNumber?: SortOrder
+    model?: SortOrder
+    brand?: SortOrder
     _count?: machineryCountOrderByAggregateInput
     _avg?: machineryAvgOrderByAggregateInput
     _max?: machineryMaxOrderByAggregateInput
@@ -28819,6 +28893,8 @@ export namespace Prisma {
     companyName?: StringWithAggregatesFilter<"machinery"> | string
     companyID?: IntWithAggregatesFilter<"machinery"> | number
     serialNumber?: StringWithAggregatesFilter<"machinery"> | string
+    model?: StringWithAggregatesFilter<"machinery"> | string
+    brand?: StringWithAggregatesFilter<"machinery"> | string
   }
 
   export type ClientMachineryWhereInput = {
@@ -29493,9 +29569,11 @@ export namespace Prisma {
     title: string
     description: string
     status?: $Enums.incidentStatus
+    location: string
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    dateReported?: Date | string
     urgency?: boolean | null
     workerID?: number | null
     company: CompanyCreateNestedOneWithoutIncidentsInput
@@ -29512,10 +29590,12 @@ export namespace Prisma {
     title: string
     description: string
     status?: $Enums.incidentStatus
+    location: string
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
     companyID: number
+    dateReported?: Date | string
     assignedWorkerID?: number | null
     budgetID?: number | null
     userID?: number | null
@@ -29530,9 +29610,11 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
+    location?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateReported?: DateTimeFieldUpdateOperationsInput | Date | string
     urgency?: NullableBoolFieldUpdateOperationsInput | boolean | null
     workerID?: NullableIntFieldUpdateOperationsInput | number | null
     company?: CompanyUpdateOneRequiredWithoutIncidentsNestedInput
@@ -29549,10 +29631,12 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
+    location?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     companyID?: IntFieldUpdateOperationsInput | number
+    dateReported?: DateTimeFieldUpdateOperationsInput | Date | string
     assignedWorkerID?: NullableIntFieldUpdateOperationsInput | number | null
     budgetID?: NullableIntFieldUpdateOperationsInput | number | null
     userID?: NullableIntFieldUpdateOperationsInput | number | null
@@ -29568,10 +29652,12 @@ export namespace Prisma {
     title: string
     description: string
     status?: $Enums.incidentStatus
+    location: string
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
     companyID: number
+    dateReported?: Date | string
     assignedWorkerID?: number | null
     budgetID?: number | null
     userID?: number | null
@@ -29583,9 +29669,11 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
+    location?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateReported?: DateTimeFieldUpdateOperationsInput | Date | string
     urgency?: NullableBoolFieldUpdateOperationsInput | boolean | null
     workerID?: NullableIntFieldUpdateOperationsInput | number | null
   }
@@ -29595,10 +29683,12 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
+    location?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     companyID?: IntFieldUpdateOperationsInput | number
+    dateReported?: DateTimeFieldUpdateOperationsInput | Date | string
     assignedWorkerID?: NullableIntFieldUpdateOperationsInput | number | null
     budgetID?: NullableIntFieldUpdateOperationsInput | number | null
     userID?: NullableIntFieldUpdateOperationsInput | number | null
@@ -30168,6 +30258,8 @@ export namespace Prisma {
     machineType: string
     companyName: string
     serialNumber: string
+    model: string
+    brand: string
     client: UserCreateNestedOneWithoutMachineryInput
     company: CompanyCreateNestedOneWithoutMachineryInput
     ClientMachinery?: ClientMachineryCreateNestedManyWithoutMachineryInput
@@ -30185,6 +30277,8 @@ export namespace Prisma {
     companyName: string
     companyID: number
     serialNumber: string
+    model: string
+    brand: string
     ClientMachinery?: ClientMachineryUncheckedCreateNestedManyWithoutMachineryInput
   }
 
@@ -30197,6 +30291,8 @@ export namespace Prisma {
     machineType?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     serialNumber?: StringFieldUpdateOperationsInput | string
+    model?: StringFieldUpdateOperationsInput | string
+    brand?: StringFieldUpdateOperationsInput | string
     client?: UserUpdateOneRequiredWithoutMachineryNestedInput
     company?: CompanyUpdateOneRequiredWithoutMachineryNestedInput
     ClientMachinery?: ClientMachineryUpdateManyWithoutMachineryNestedInput
@@ -30214,6 +30310,8 @@ export namespace Prisma {
     companyName?: StringFieldUpdateOperationsInput | string
     companyID?: IntFieldUpdateOperationsInput | number
     serialNumber?: StringFieldUpdateOperationsInput | string
+    model?: StringFieldUpdateOperationsInput | string
+    brand?: StringFieldUpdateOperationsInput | string
     ClientMachinery?: ClientMachineryUncheckedUpdateManyWithoutMachineryNestedInput
   }
 
@@ -30229,6 +30327,8 @@ export namespace Prisma {
     companyName: string
     companyID: number
     serialNumber: string
+    model: string
+    brand: string
   }
 
   export type machineryUpdateManyMutationInput = {
@@ -30240,6 +30340,8 @@ export namespace Prisma {
     machineType?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     serialNumber?: StringFieldUpdateOperationsInput | string
+    model?: StringFieldUpdateOperationsInput | string
+    brand?: StringFieldUpdateOperationsInput | string
   }
 
   export type machineryUncheckedUpdateManyInput = {
@@ -30254,6 +30356,8 @@ export namespace Prisma {
     companyName?: StringFieldUpdateOperationsInput | string
     companyID?: IntFieldUpdateOperationsInput | number
     serialNumber?: StringFieldUpdateOperationsInput | string
+    model?: StringFieldUpdateOperationsInput | string
+    brand?: StringFieldUpdateOperationsInput | string
   }
 
   export type ClientMachineryCreateInput = {
@@ -31087,10 +31191,12 @@ export namespace Prisma {
     title?: SortOrder
     description?: SortOrder
     status?: SortOrder
+    location?: SortOrder
     priority?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     companyID?: SortOrder
+    dateReported?: SortOrder
     assignedWorkerID?: SortOrder
     budgetID?: SortOrder
     userID?: SortOrder
@@ -31112,10 +31218,12 @@ export namespace Prisma {
     title?: SortOrder
     description?: SortOrder
     status?: SortOrder
+    location?: SortOrder
     priority?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     companyID?: SortOrder
+    dateReported?: SortOrder
     assignedWorkerID?: SortOrder
     budgetID?: SortOrder
     userID?: SortOrder
@@ -31128,10 +31236,12 @@ export namespace Prisma {
     title?: SortOrder
     description?: SortOrder
     status?: SortOrder
+    location?: SortOrder
     priority?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     companyID?: SortOrder
+    dateReported?: SortOrder
     assignedWorkerID?: SortOrder
     budgetID?: SortOrder
     userID?: SortOrder
@@ -31669,6 +31779,8 @@ export namespace Prisma {
     companyName?: SortOrder
     companyID?: SortOrder
     serialNumber?: SortOrder
+    model?: SortOrder
+    brand?: SortOrder
   }
 
   export type machineryAvgOrderByAggregateInput = {
@@ -31689,6 +31801,8 @@ export namespace Prisma {
     companyName?: SortOrder
     companyID?: SortOrder
     serialNumber?: SortOrder
+    model?: SortOrder
+    brand?: SortOrder
   }
 
   export type machineryMinOrderByAggregateInput = {
@@ -31703,6 +31817,8 @@ export namespace Prisma {
     companyName?: SortOrder
     companyID?: SortOrder
     serialNumber?: SortOrder
+    model?: SortOrder
+    brand?: SortOrder
   }
 
   export type machinerySumOrderByAggregateInput = {
@@ -34216,9 +34332,11 @@ export namespace Prisma {
     title: string
     description: string
     status?: $Enums.incidentStatus
+    location: string
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    dateReported?: Date | string
     urgency?: boolean | null
     workerID?: number | null
     company: CompanyCreateNestedOneWithoutIncidentsInput
@@ -34234,10 +34352,12 @@ export namespace Prisma {
     title: string
     description: string
     status?: $Enums.incidentStatus
+    location: string
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
     companyID: number
+    dateReported?: Date | string
     assignedWorkerID?: number | null
     budgetID?: number | null
     userID?: number | null
@@ -34352,9 +34472,11 @@ export namespace Prisma {
     title: string
     description: string
     status?: $Enums.incidentStatus
+    location: string
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    dateReported?: Date | string
     urgency?: boolean | null
     workerID?: number | null
     company: CompanyCreateNestedOneWithoutIncidentsInput
@@ -34370,10 +34492,12 @@ export namespace Prisma {
     title: string
     description: string
     status?: $Enums.incidentStatus
+    location: string
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
     companyID: number
+    dateReported?: Date | string
     assignedWorkerID?: number | null
     budgetID?: number | null
     urgency?: boolean | null
@@ -34528,6 +34652,8 @@ export namespace Prisma {
     machineType: string
     companyName: string
     serialNumber: string
+    model: string
+    brand: string
     company: CompanyCreateNestedOneWithoutMachineryInput
     ClientMachinery?: ClientMachineryCreateNestedManyWithoutMachineryInput
   }
@@ -34543,6 +34669,8 @@ export namespace Prisma {
     companyName: string
     companyID: number
     serialNumber: string
+    model: string
+    brand: string
     ClientMachinery?: ClientMachineryUncheckedCreateNestedManyWithoutMachineryInput
   }
 
@@ -34590,9 +34718,11 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
+    location?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateReported?: DateTimeFieldUpdateOperationsInput | Date | string
     urgency?: NullableBoolFieldUpdateOperationsInput | boolean | null
     workerID?: NullableIntFieldUpdateOperationsInput | number | null
     company?: CompanyUpdateOneRequiredWithoutIncidentsNestedInput
@@ -34608,10 +34738,12 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
+    location?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     companyID?: IntFieldUpdateOperationsInput | number
+    dateReported?: DateTimeFieldUpdateOperationsInput | Date | string
     assignedWorkerID?: NullableIntFieldUpdateOperationsInput | number | null
     budgetID?: NullableIntFieldUpdateOperationsInput | number | null
     userID?: NullableIntFieldUpdateOperationsInput | number | null
@@ -34758,10 +34890,12 @@ export namespace Prisma {
     title?: StringFilter<"Incidents"> | string
     description?: StringFilter<"Incidents"> | string
     status?: EnumincidentStatusFilter<"Incidents"> | $Enums.incidentStatus
+    location?: StringFilter<"Incidents"> | string
     priority?: StringFilter<"Incidents"> | string
     createdAt?: DateTimeFilter<"Incidents"> | Date | string
     updatedAt?: DateTimeFilter<"Incidents"> | Date | string
     companyID?: IntFilter<"Incidents"> | number
+    dateReported?: DateTimeFilter<"Incidents"> | Date | string
     assignedWorkerID?: IntNullableFilter<"Incidents"> | number | null
     budgetID?: IntNullableFilter<"Incidents"> | number | null
     userID?: IntNullableFilter<"Incidents"> | number | null
@@ -34928,6 +35062,8 @@ export namespace Prisma {
     companyName?: StringFilter<"machinery"> | string
     companyID?: IntFilter<"machinery"> | number
     serialNumber?: StringFilter<"machinery"> | string
+    model?: StringFilter<"machinery"> | string
+    brand?: StringFilter<"machinery"> | string
   }
 
   export type usersCompaniesUpsertWithWhereUniqueWithoutUserInput = {
@@ -35029,9 +35165,11 @@ export namespace Prisma {
     title: string
     description: string
     status?: $Enums.incidentStatus
+    location: string
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    dateReported?: Date | string
     urgency?: boolean | null
     workerID?: number | null
     assignedWorker?: WorkerCreateNestedOneWithoutAssignedIncidentsInput
@@ -35047,9 +35185,11 @@ export namespace Prisma {
     title: string
     description: string
     status?: $Enums.incidentStatus
+    location: string
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    dateReported?: Date | string
     assignedWorkerID?: number | null
     budgetID?: number | null
     userID?: number | null
@@ -35223,6 +35363,8 @@ export namespace Prisma {
     machineType: string
     companyName: string
     serialNumber: string
+    model: string
+    brand: string
     client: UserCreateNestedOneWithoutMachineryInput
     ClientMachinery?: ClientMachineryCreateNestedManyWithoutMachineryInput
   }
@@ -35238,6 +35380,8 @@ export namespace Prisma {
     clientID: number
     companyName: string
     serialNumber: string
+    model: string
+    brand: string
     ClientMachinery?: ClientMachineryUncheckedCreateNestedManyWithoutMachineryInput
   }
 
@@ -36028,9 +36172,11 @@ export namespace Prisma {
     title: string
     description: string
     status?: $Enums.incidentStatus
+    location: string
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    dateReported?: Date | string
     urgency?: boolean | null
     workerID?: number | null
     company: CompanyCreateNestedOneWithoutIncidentsInput
@@ -36046,10 +36192,12 @@ export namespace Prisma {
     title: string
     description: string
     status?: $Enums.incidentStatus
+    location: string
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
     companyID: number
+    dateReported?: Date | string
     budgetID?: number | null
     userID?: number | null
     urgency?: boolean | null
@@ -37711,9 +37859,11 @@ export namespace Prisma {
     title: string
     description: string
     status?: $Enums.incidentStatus
+    location: string
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    dateReported?: Date | string
     urgency?: boolean | null
     workerID?: number | null
     company: CompanyCreateNestedOneWithoutIncidentsInput
@@ -37729,10 +37879,12 @@ export namespace Prisma {
     title: string
     description: string
     status?: $Enums.incidentStatus
+    location: string
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
     companyID: number
+    dateReported?: Date | string
     assignedWorkerID?: number | null
     budgetID?: number | null
     userID?: number | null
@@ -37969,9 +38121,11 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
+    location?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateReported?: DateTimeFieldUpdateOperationsInput | Date | string
     urgency?: NullableBoolFieldUpdateOperationsInput | boolean | null
     workerID?: NullableIntFieldUpdateOperationsInput | number | null
     company?: CompanyUpdateOneRequiredWithoutIncidentsNestedInput
@@ -37987,10 +38141,12 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
+    location?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     companyID?: IntFieldUpdateOperationsInput | number
+    dateReported?: DateTimeFieldUpdateOperationsInput | Date | string
     assignedWorkerID?: NullableIntFieldUpdateOperationsInput | number | null
     budgetID?: NullableIntFieldUpdateOperationsInput | number | null
     userID?: NullableIntFieldUpdateOperationsInput | number | null
@@ -38147,9 +38303,11 @@ export namespace Prisma {
     title: string
     description: string
     status?: $Enums.incidentStatus
+    location: string
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    dateReported?: Date | string
     urgency?: boolean | null
     workerID?: number | null
     company: CompanyCreateNestedOneWithoutIncidentsInput
@@ -38165,10 +38323,12 @@ export namespace Prisma {
     title: string
     description: string
     status?: $Enums.incidentStatus
+    location: string
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
     companyID: number
+    dateReported?: Date | string
     assignedWorkerID?: number | null
     userID?: number | null
     urgency?: boolean | null
@@ -38374,9 +38534,11 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
+    location?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateReported?: DateTimeFieldUpdateOperationsInput | Date | string
     urgency?: NullableBoolFieldUpdateOperationsInput | boolean | null
     workerID?: NullableIntFieldUpdateOperationsInput | number | null
     company?: CompanyUpdateOneRequiredWithoutIncidentsNestedInput
@@ -38392,10 +38554,12 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
+    location?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     companyID?: IntFieldUpdateOperationsInput | number
+    dateReported?: DateTimeFieldUpdateOperationsInput | Date | string
     assignedWorkerID?: NullableIntFieldUpdateOperationsInput | number | null
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     urgency?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -38499,9 +38663,11 @@ export namespace Prisma {
     title: string
     description: string
     status?: $Enums.incidentStatus
+    location: string
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    dateReported?: Date | string
     urgency?: boolean | null
     workerID?: number | null
     company: CompanyCreateNestedOneWithoutIncidentsInput
@@ -38517,10 +38683,12 @@ export namespace Prisma {
     title: string
     description: string
     status?: $Enums.incidentStatus
+    location: string
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
     companyID: number
+    dateReported?: Date | string
     assignedWorkerID?: number | null
     budgetID?: number | null
     userID?: number | null
@@ -38660,9 +38828,11 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
+    location?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateReported?: DateTimeFieldUpdateOperationsInput | Date | string
     urgency?: NullableBoolFieldUpdateOperationsInput | boolean | null
     workerID?: NullableIntFieldUpdateOperationsInput | number | null
     company?: CompanyUpdateOneRequiredWithoutIncidentsNestedInput
@@ -38678,10 +38848,12 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
+    location?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     companyID?: IntFieldUpdateOperationsInput | number
+    dateReported?: DateTimeFieldUpdateOperationsInput | Date | string
     assignedWorkerID?: NullableIntFieldUpdateOperationsInput | number | null
     budgetID?: NullableIntFieldUpdateOperationsInput | number | null
     userID?: NullableIntFieldUpdateOperationsInput | number | null
@@ -39807,6 +39979,8 @@ export namespace Prisma {
     machineType: string
     companyName: string
     serialNumber: string
+    model: string
+    brand: string
     client: UserCreateNestedOneWithoutMachineryInput
     company: CompanyCreateNestedOneWithoutMachineryInput
   }
@@ -39823,6 +39997,8 @@ export namespace Prisma {
     companyName: string
     companyID: number
     serialNumber: string
+    model: string
+    brand: string
   }
 
   export type machineryCreateOrConnectWithoutClientMachineryInput = {
@@ -39906,6 +40082,8 @@ export namespace Prisma {
     machineType?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     serialNumber?: StringFieldUpdateOperationsInput | string
+    model?: StringFieldUpdateOperationsInput | string
+    brand?: StringFieldUpdateOperationsInput | string
     client?: UserUpdateOneRequiredWithoutMachineryNestedInput
     company?: CompanyUpdateOneRequiredWithoutMachineryNestedInput
   }
@@ -39922,6 +40100,8 @@ export namespace Prisma {
     companyName?: StringFieldUpdateOperationsInput | string
     companyID?: IntFieldUpdateOperationsInput | number
     serialNumber?: StringFieldUpdateOperationsInput | string
+    model?: StringFieldUpdateOperationsInput | string
+    brand?: StringFieldUpdateOperationsInput | string
   }
 
   export type DirectionsCreateManyUserInput = {
@@ -39950,10 +40130,12 @@ export namespace Prisma {
     title: string
     description: string
     status?: $Enums.incidentStatus
+    location: string
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
     companyID: number
+    dateReported?: Date | string
     assignedWorkerID?: number | null
     budgetID?: number | null
     urgency?: boolean | null
@@ -39993,6 +40175,8 @@ export namespace Prisma {
     companyName: string
     companyID: number
     serialNumber: string
+    model: string
+    brand: string
   }
 
   export type usersCompaniesCreateManyUserInput = {
@@ -40065,9 +40249,11 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
+    location?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateReported?: DateTimeFieldUpdateOperationsInput | Date | string
     urgency?: NullableBoolFieldUpdateOperationsInput | boolean | null
     workerID?: NullableIntFieldUpdateOperationsInput | number | null
     company?: CompanyUpdateOneRequiredWithoutIncidentsNestedInput
@@ -40083,10 +40269,12 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
+    location?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     companyID?: IntFieldUpdateOperationsInput | number
+    dateReported?: DateTimeFieldUpdateOperationsInput | Date | string
     assignedWorkerID?: NullableIntFieldUpdateOperationsInput | number | null
     budgetID?: NullableIntFieldUpdateOperationsInput | number | null
     urgency?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -40101,10 +40289,12 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
+    location?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     companyID?: IntFieldUpdateOperationsInput | number
+    dateReported?: DateTimeFieldUpdateOperationsInput | Date | string
     assignedWorkerID?: NullableIntFieldUpdateOperationsInput | number | null
     budgetID?: NullableIntFieldUpdateOperationsInput | number | null
     urgency?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -40188,6 +40378,8 @@ export namespace Prisma {
     machineType?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     serialNumber?: StringFieldUpdateOperationsInput | string
+    model?: StringFieldUpdateOperationsInput | string
+    brand?: StringFieldUpdateOperationsInput | string
     company?: CompanyUpdateOneRequiredWithoutMachineryNestedInput
     ClientMachinery?: ClientMachineryUpdateManyWithoutMachineryNestedInput
   }
@@ -40203,6 +40395,8 @@ export namespace Prisma {
     companyName?: StringFieldUpdateOperationsInput | string
     companyID?: IntFieldUpdateOperationsInput | number
     serialNumber?: StringFieldUpdateOperationsInput | string
+    model?: StringFieldUpdateOperationsInput | string
+    brand?: StringFieldUpdateOperationsInput | string
     ClientMachinery?: ClientMachineryUncheckedUpdateManyWithoutMachineryNestedInput
   }
 
@@ -40217,6 +40411,8 @@ export namespace Prisma {
     companyName?: StringFieldUpdateOperationsInput | string
     companyID?: IntFieldUpdateOperationsInput | number
     serialNumber?: StringFieldUpdateOperationsInput | string
+    model?: StringFieldUpdateOperationsInput | string
+    brand?: StringFieldUpdateOperationsInput | string
   }
 
   export type usersCompaniesUpdateWithoutUserInput = {
@@ -40258,9 +40454,11 @@ export namespace Prisma {
     title: string
     description: string
     status?: $Enums.incidentStatus
+    location: string
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    dateReported?: Date | string
     assignedWorkerID?: number | null
     budgetID?: number | null
     userID?: number | null
@@ -40315,6 +40513,8 @@ export namespace Prisma {
     clientID: number
     companyName: string
     serialNumber: string
+    model: string
+    brand: string
   }
 
   export type BudgetCreateManyCompanyInput = {
@@ -40442,9 +40642,11 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
+    location?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateReported?: DateTimeFieldUpdateOperationsInput | Date | string
     urgency?: NullableBoolFieldUpdateOperationsInput | boolean | null
     workerID?: NullableIntFieldUpdateOperationsInput | number | null
     assignedWorker?: WorkerUpdateOneWithoutAssignedIncidentsNestedInput
@@ -40460,9 +40662,11 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
+    location?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateReported?: DateTimeFieldUpdateOperationsInput | Date | string
     assignedWorkerID?: NullableIntFieldUpdateOperationsInput | number | null
     budgetID?: NullableIntFieldUpdateOperationsInput | number | null
     userID?: NullableIntFieldUpdateOperationsInput | number | null
@@ -40478,9 +40682,11 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
+    location?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateReported?: DateTimeFieldUpdateOperationsInput | Date | string
     assignedWorkerID?: NullableIntFieldUpdateOperationsInput | number | null
     budgetID?: NullableIntFieldUpdateOperationsInput | number | null
     userID?: NullableIntFieldUpdateOperationsInput | number | null
@@ -40603,6 +40809,8 @@ export namespace Prisma {
     machineType?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     serialNumber?: StringFieldUpdateOperationsInput | string
+    model?: StringFieldUpdateOperationsInput | string
+    brand?: StringFieldUpdateOperationsInput | string
     client?: UserUpdateOneRequiredWithoutMachineryNestedInput
     ClientMachinery?: ClientMachineryUpdateManyWithoutMachineryNestedInput
   }
@@ -40618,6 +40826,8 @@ export namespace Prisma {
     clientID?: IntFieldUpdateOperationsInput | number
     companyName?: StringFieldUpdateOperationsInput | string
     serialNumber?: StringFieldUpdateOperationsInput | string
+    model?: StringFieldUpdateOperationsInput | string
+    brand?: StringFieldUpdateOperationsInput | string
     ClientMachinery?: ClientMachineryUncheckedUpdateManyWithoutMachineryNestedInput
   }
 
@@ -40632,6 +40842,8 @@ export namespace Prisma {
     clientID?: IntFieldUpdateOperationsInput | number
     companyName?: StringFieldUpdateOperationsInput | string
     serialNumber?: StringFieldUpdateOperationsInput | string
+    model?: StringFieldUpdateOperationsInput | string
+    brand?: StringFieldUpdateOperationsInput | string
   }
 
   export type BudgetUpdateWithoutCompanyInput = {
@@ -40817,10 +41029,12 @@ export namespace Prisma {
     title: string
     description: string
     status?: $Enums.incidentStatus
+    location: string
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
     companyID: number
+    dateReported?: Date | string
     budgetID?: number | null
     userID?: number | null
     urgency?: boolean | null
@@ -40876,9 +41090,11 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
+    location?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateReported?: DateTimeFieldUpdateOperationsInput | Date | string
     urgency?: NullableBoolFieldUpdateOperationsInput | boolean | null
     workerID?: NullableIntFieldUpdateOperationsInput | number | null
     company?: CompanyUpdateOneRequiredWithoutIncidentsNestedInput
@@ -40894,10 +41110,12 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
+    location?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     companyID?: IntFieldUpdateOperationsInput | number
+    dateReported?: DateTimeFieldUpdateOperationsInput | Date | string
     budgetID?: NullableIntFieldUpdateOperationsInput | number | null
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     urgency?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -40912,10 +41130,12 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
+    location?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     companyID?: IntFieldUpdateOperationsInput | number
+    dateReported?: DateTimeFieldUpdateOperationsInput | Date | string
     budgetID?: NullableIntFieldUpdateOperationsInput | number | null
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     urgency?: NullableBoolFieldUpdateOperationsInput | boolean | null

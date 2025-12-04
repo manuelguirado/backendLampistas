@@ -158,3 +158,24 @@ it('should retrieve received budgets for a user successfully', async () => {
     .expect(200);
   expect(response.body).toBeDefined();
 });
+it('should retrieve user incidents successfully', async () => {
+  const userLogin = supertest('http://localhost:3000/user/userLogin');
+  const user = await userRegister(
+    `IncidentUser-${Date.now()}`,
+    `incidentuser-${Date.now()}@example.com`,
+    'incidentPassword',
+  );
+  const loginResponse = await userLogin
+    .post('')
+    .send({ email: user.email, password: 'incidentPassword' })
+    .expect(201);
+  const body = loginResponse.body as { token: string; userID: number };
+  const token = body.token;
+  const userID = body.userID;
+  const request = supertest('http://localhost:3000/user/myIncidents');
+  const response = await request
+    .get(`?userID=${userID}`)
+    .set('Authorization', `Bearer ${token}`)
+    .expect(200);
+  expect(response.body).toBeDefined();
+});
