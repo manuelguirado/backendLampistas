@@ -352,7 +352,7 @@ it('should register machinery successfully', async () => {
     `user-for-machinery-${Date.now()}@test.com`,
     'userPassword',
   );
-
+  console.log('Registered user:', user);
   const directions = await registerDirections(
     '123 Test St, Test City, TS 12345',
     'Test City',
@@ -678,6 +678,85 @@ it('should list incidents for a company', async () => {
   );
   const company = await registerCompany(
     `company with incidents-${Date.now()}`,
+    '1234567890',
+    `company-${Date.now()}@test.com`,
+    'securePassword',
+    admin.adminID,
+    directions,
+  );
+  const companyLogin = await supertest(
+    'http://localhost:3000/company/CompanyLogin',
+  )
+    .post('')
+    .send({ email: company.email, password: 'securePassword' })
+    .expect(201);
+  const body = companyLogin.body as { token: string };
+  const token: string = body.token;
+
+  const response = await request
+    .get(`?companyID=${company.companyID}`)
+    .set('Authorization', `Bearer ${token}`)
+    .expect(201);
+  expect(response.body).toBeDefined();
+});
+it('should assign machinery to a user successfully', async () => {
+  const request = supertest(
+    'http://localhost:3000/company/assignMachineToUser',
+  );
+  const directions = await registerDirections(
+    '123 Test St, Test City, TS 12345',
+    'Test City',
+    'TS',
+    '12345',
+  );
+  const admin = await registerAdmin(
+    `admin-${Date.now()}@test.com`,
+    'adminPassword',
+  );
+  const company = await registerCompany(
+    `company to assign machinery-${Date.now()}`,
+    '1234567890',
+    `company-${Date.now()}@test.com`,
+    'securePassword',
+    admin.adminID,
+    directions,
+  );
+  const user = await userRegister(
+    `Test User-${Date.now()}`,
+    `user-for-machinery-assign-${Date.now()}@test.com`,
+    'userPassword',
+  );
+  const companyLogin = await supertest(
+    'http://localhost:3000/company/CompanyLogin',
+  )
+    .post('')
+    .send({ email: company.email, password: 'securePassword' })
+    .expect(201);
+  const body = companyLogin.body as { token: string };
+  const token: string = body.token;
+  const response = await request
+    .post('')
+    .send({
+      userID: user.userID,
+    })
+    .set('Authorization', `Bearer ${token}`)
+    .expect(201);
+  expect(response.body).toBeDefined();
+});
+it('should list machinery for a company', async () => {
+  const request = supertest('http://localhost:3000/company/listMachinery');
+  const directions = await registerDirections(
+    '123 Test St, Test City, TS 12345',
+    'Test City',
+    'TS',
+    '12345',
+  );
+  const admin = await registerAdmin(
+    `admin-${Date.now()}@test.com`,
+    'adminPassword',
+  );
+  const company = await registerCompany(
+    `company with machinery-${Date.now()}`,
     '1234567890',
     `company-${Date.now()}@test.com`,
     'securePassword',

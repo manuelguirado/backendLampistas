@@ -287,9 +287,9 @@ model machinery {
   id                 Int               @id @default(autoincrement())
   name               String
   description        String
-  maintenanceDate    DateTime          @db.Timestamp(6)
-  lastInspectionDate DateTime          @db.Timestamp(6)
-  installedAt        DateTime          @db.Timestamp(6)
+  maintenanceDate    DateTime?         @db.Timestamp(6)
+  lastInspectionDate DateTime?         @db.Timestamp(6)
+  installedAt        DateTime?         @db.Timestamp(6)
   machineType        String
   clientID           Int
   client             User              @relation(fields: [clientID], references: [userID])

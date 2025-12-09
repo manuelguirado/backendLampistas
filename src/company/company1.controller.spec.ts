@@ -38,8 +38,14 @@ describe('CompanyController', () => {
     await prisma.company.deleteMany({});
     await prisma.$disconnect();
   });
-  it('should create a budget successfully', async () => {
-    const request = supertest('http://localhost:3000/company/CreateBudget');
+  it('should register machinery successfully', async () => {
+    const request = supertest('http://localhost:3000/company/createMachinery');
+    const user = await userRegister(
+      'Test User',
+      `user-for-machinery-${Date.now()}@test.com`,
+      'userPassword',
+    );
+
     const directions = await registerDirections(
       '123 Test St, Test City, TS 12345',
       'Test City',
@@ -50,8 +56,9 @@ describe('CompanyController', () => {
       `admin-${Date.now()}@test.com`,
       'adminPassword',
     );
+
     const company = await registerCompany(
-      `company with budget-${Date.now()}`,
+      `company to register machinery-${Date.now()}`,
       '1234567890',
       `company-${Date.now()}@test.com`,
       'securePassword',
@@ -59,19 +66,7 @@ describe('CompanyController', () => {
       directions,
     );
 
-    const user = await userRegister(
-      `user-${Date.now()}@example.com`,
-      'userPassword',
-      'Test User',
-    );
-    const incident = await createIncident(
-      'Incident Title',
-      'Incident Description',
-      user.userID,
-      company.companyID,
-      'OPEN',
-      'HIGH',
-    );
+    // Move the following code inside the test block so 'company' is defined
     const companyLogin = await supertest(
       'http://localhost:3000/company/CompanyLogin',
     )
@@ -84,18 +79,18 @@ describe('CompanyController', () => {
     const response = await request
       .post('')
       .send({
+        name: 'Excavator',
+        description: 'Heavy duty excavator',
+        maintanceDate: new Date(),
+        lastInspectionDate: new Date(),
+        InstalledAT: new Date(), // corregido el nombre del campo
+        clientId: user.userID,
+        brand: 'Caterpillar',
+        model: 'CAT320',
+        companyName: company.name,
+        machineType: 'ExcavatorType',
         companyID: company.companyID,
-        totalAmount: 10000,
-        description: 'This is a test budget',
-        incidentID: incident?.IncidentsID || 0,
-        userID: user.userID,
-        items: [
-          { itemName: 'Item 1', quantity: 2, price: 100 },
-          { itemName: 'Item 2', quantity: 3, price: 200 },
-        ],
-        subtotal: 800,
-        tax: 160,
-        budgetNumber: `BUDGET-${Date.now()}`,
+        serialNumber: `SN12345${Date.now()}`,
       })
       .set('Authorization', `Bearer ${token}`)
       .expect(201);

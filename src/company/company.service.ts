@@ -18,6 +18,9 @@ import { companyCreateUser } from '../modules/companies/createUser';
 import { ContractType } from '../../generated/prisma';
 import type { ItemType } from '../utils/types/itemType';
 import { createContract } from '../modules/companies/updateTypeContractType';
+import { listMachinery } from '../modules/machinery/listMachinery';
+import { editMachinery } from '../modules/machinery/editMachinery';
+import { updateMaintenceDate } from '../modules/machinery/updateMaintenceDate';
 @Injectable()
 export class CompanyService {
   async companyLogin(email: string, password: string) {
@@ -106,8 +109,8 @@ export class CompanyService {
   async assignIncident(incidentID: number, workerID: number) {
     return assignIncident(incidentID, workerID);
   }
-  createMachinery(machineryType: MachineryType) {
-    return createMachinery(machineryType);
+  createMachinery(machineryType: MachineryType, userID: number) {
+    return createMachinery(machineryType, userID);
   }
   async assignShiftWorker(
     workerID: number,
@@ -119,5 +122,31 @@ export class CompanyService {
   }
   async getClientContracts(companyID: number, userID: number) {
     return getClientContracts(companyID, userID);
+  }
+  async listMachinery(
+    companyID: number,
+    limit: number = 5,
+    offset: number = 0,
+  ) {
+    return listMachinery(companyID, limit, offset);
+  }
+  async editMachinery(
+    machineryID: number,
+    companyID: number,
+    data: {
+      name?: string;
+      model?: string;
+      serialNumber?: string;
+      machineType?: string;
+      brand?: string;
+      description?: string;
+      installedAt?: Date;
+      companyName?: string;
+    },
+  ) {
+    return editMachinery(machineryID, companyID, data);
+  }
+  async updateMaintenceDate(machineryID: number, newMaintenceDate: Date) {
+    return updateMaintenceDate(machineryID, newMaintenceDate);
   }
 }

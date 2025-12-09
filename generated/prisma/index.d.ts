@@ -24891,9 +24891,9 @@ export namespace Prisma {
     id: number
     name: string
     description: string
-    maintenanceDate: Date
-    lastInspectionDate: Date
-    installedAt: Date
+    maintenanceDate: Date | null
+    lastInspectionDate: Date | null
+    installedAt: Date | null
     machineType: string
     clientID: number
     companyName: string
@@ -25021,9 +25021,9 @@ export namespace Prisma {
       id: number
       name: string
       description: string
-      maintenanceDate: Date
-      lastInspectionDate: Date
-      installedAt: Date
+      maintenanceDate: Date | null
+      lastInspectionDate: Date | null
+      installedAt: Date | null
       machineType: string
       clientID: number
       companyName: string
@@ -28801,9 +28801,9 @@ export namespace Prisma {
     id?: IntFilter<"machinery"> | number
     name?: StringFilter<"machinery"> | string
     description?: StringFilter<"machinery"> | string
-    maintenanceDate?: DateTimeFilter<"machinery"> | Date | string
-    lastInspectionDate?: DateTimeFilter<"machinery"> | Date | string
-    installedAt?: DateTimeFilter<"machinery"> | Date | string
+    maintenanceDate?: DateTimeNullableFilter<"machinery"> | Date | string | null
+    lastInspectionDate?: DateTimeNullableFilter<"machinery"> | Date | string | null
+    installedAt?: DateTimeNullableFilter<"machinery"> | Date | string | null
     machineType?: StringFilter<"machinery"> | string
     clientID?: IntFilter<"machinery"> | number
     companyName?: StringFilter<"machinery"> | string
@@ -28820,9 +28820,9 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     description?: SortOrder
-    maintenanceDate?: SortOrder
-    lastInspectionDate?: SortOrder
-    installedAt?: SortOrder
+    maintenanceDate?: SortOrderInput | SortOrder
+    lastInspectionDate?: SortOrderInput | SortOrder
+    installedAt?: SortOrderInput | SortOrder
     machineType?: SortOrder
     clientID?: SortOrder
     companyName?: SortOrder
@@ -28843,9 +28843,9 @@ export namespace Prisma {
     NOT?: machineryWhereInput | machineryWhereInput[]
     name?: StringFilter<"machinery"> | string
     description?: StringFilter<"machinery"> | string
-    maintenanceDate?: DateTimeFilter<"machinery"> | Date | string
-    lastInspectionDate?: DateTimeFilter<"machinery"> | Date | string
-    installedAt?: DateTimeFilter<"machinery"> | Date | string
+    maintenanceDate?: DateTimeNullableFilter<"machinery"> | Date | string | null
+    lastInspectionDate?: DateTimeNullableFilter<"machinery"> | Date | string | null
+    installedAt?: DateTimeNullableFilter<"machinery"> | Date | string | null
     machineType?: StringFilter<"machinery"> | string
     clientID?: IntFilter<"machinery"> | number
     companyName?: StringFilter<"machinery"> | string
@@ -28861,9 +28861,9 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     description?: SortOrder
-    maintenanceDate?: SortOrder
-    lastInspectionDate?: SortOrder
-    installedAt?: SortOrder
+    maintenanceDate?: SortOrderInput | SortOrder
+    lastInspectionDate?: SortOrderInput | SortOrder
+    installedAt?: SortOrderInput | SortOrder
     machineType?: SortOrder
     clientID?: SortOrder
     companyName?: SortOrder
@@ -28885,9 +28885,9 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"machinery"> | number
     name?: StringWithAggregatesFilter<"machinery"> | string
     description?: StringWithAggregatesFilter<"machinery"> | string
-    maintenanceDate?: DateTimeWithAggregatesFilter<"machinery"> | Date | string
-    lastInspectionDate?: DateTimeWithAggregatesFilter<"machinery"> | Date | string
-    installedAt?: DateTimeWithAggregatesFilter<"machinery"> | Date | string
+    maintenanceDate?: DateTimeNullableWithAggregatesFilter<"machinery"> | Date | string | null
+    lastInspectionDate?: DateTimeNullableWithAggregatesFilter<"machinery"> | Date | string | null
+    installedAt?: DateTimeNullableWithAggregatesFilter<"machinery"> | Date | string | null
     machineType?: StringWithAggregatesFilter<"machinery"> | string
     clientID?: IntWithAggregatesFilter<"machinery"> | number
     companyName?: StringWithAggregatesFilter<"machinery"> | string
@@ -30252,9 +30252,9 @@ export namespace Prisma {
   export type machineryCreateInput = {
     name: string
     description: string
-    maintenanceDate: Date | string
-    lastInspectionDate: Date | string
-    installedAt: Date | string
+    maintenanceDate?: Date | string | null
+    lastInspectionDate?: Date | string | null
+    installedAt?: Date | string | null
     machineType: string
     companyName: string
     serialNumber: string
@@ -30269,9 +30269,9 @@ export namespace Prisma {
     id?: number
     name: string
     description: string
-    maintenanceDate: Date | string
-    lastInspectionDate: Date | string
-    installedAt: Date | string
+    maintenanceDate?: Date | string | null
+    lastInspectionDate?: Date | string | null
+    installedAt?: Date | string | null
     machineType: string
     clientID: number
     companyName: string
@@ -30285,9 +30285,9 @@ export namespace Prisma {
   export type machineryUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    maintenanceDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    lastInspectionDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    installedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    maintenanceDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInspectionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    installedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     machineType?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     serialNumber?: StringFieldUpdateOperationsInput | string
@@ -30302,9 +30302,9 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    maintenanceDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    lastInspectionDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    installedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    maintenanceDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInspectionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    installedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     machineType?: StringFieldUpdateOperationsInput | string
     clientID?: IntFieldUpdateOperationsInput | number
     companyName?: StringFieldUpdateOperationsInput | string
@@ -30319,9 +30319,9 @@ export namespace Prisma {
     id?: number
     name: string
     description: string
-    maintenanceDate: Date | string
-    lastInspectionDate: Date | string
-    installedAt: Date | string
+    maintenanceDate?: Date | string | null
+    lastInspectionDate?: Date | string | null
+    installedAt?: Date | string | null
     machineType: string
     clientID: number
     companyName: string
@@ -30334,9 +30334,9 @@ export namespace Prisma {
   export type machineryUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    maintenanceDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    lastInspectionDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    installedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    maintenanceDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInspectionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    installedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     machineType?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     serialNumber?: StringFieldUpdateOperationsInput | string
@@ -30348,9 +30348,9 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    maintenanceDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    lastInspectionDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    installedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    maintenanceDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInspectionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    installedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     machineType?: StringFieldUpdateOperationsInput | string
     clientID?: IntFieldUpdateOperationsInput | number
     companyName?: StringFieldUpdateOperationsInput | string
@@ -34646,9 +34646,9 @@ export namespace Prisma {
   export type machineryCreateWithoutClientInput = {
     name: string
     description: string
-    maintenanceDate: Date | string
-    lastInspectionDate: Date | string
-    installedAt: Date | string
+    maintenanceDate?: Date | string | null
+    lastInspectionDate?: Date | string | null
+    installedAt?: Date | string | null
     machineType: string
     companyName: string
     serialNumber: string
@@ -34662,9 +34662,9 @@ export namespace Prisma {
     id?: number
     name: string
     description: string
-    maintenanceDate: Date | string
-    lastInspectionDate: Date | string
-    installedAt: Date | string
+    maintenanceDate?: Date | string | null
+    lastInspectionDate?: Date | string | null
+    installedAt?: Date | string | null
     machineType: string
     companyName: string
     companyID: number
@@ -35054,9 +35054,9 @@ export namespace Prisma {
     id?: IntFilter<"machinery"> | number
     name?: StringFilter<"machinery"> | string
     description?: StringFilter<"machinery"> | string
-    maintenanceDate?: DateTimeFilter<"machinery"> | Date | string
-    lastInspectionDate?: DateTimeFilter<"machinery"> | Date | string
-    installedAt?: DateTimeFilter<"machinery"> | Date | string
+    maintenanceDate?: DateTimeNullableFilter<"machinery"> | Date | string | null
+    lastInspectionDate?: DateTimeNullableFilter<"machinery"> | Date | string | null
+    installedAt?: DateTimeNullableFilter<"machinery"> | Date | string | null
     machineType?: StringFilter<"machinery"> | string
     clientID?: IntFilter<"machinery"> | number
     companyName?: StringFilter<"machinery"> | string
@@ -35357,9 +35357,9 @@ export namespace Prisma {
   export type machineryCreateWithoutCompanyInput = {
     name: string
     description: string
-    maintenanceDate: Date | string
-    lastInspectionDate: Date | string
-    installedAt: Date | string
+    maintenanceDate?: Date | string | null
+    lastInspectionDate?: Date | string | null
+    installedAt?: Date | string | null
     machineType: string
     companyName: string
     serialNumber: string
@@ -35373,9 +35373,9 @@ export namespace Prisma {
     id?: number
     name: string
     description: string
-    maintenanceDate: Date | string
-    lastInspectionDate: Date | string
-    installedAt: Date | string
+    maintenanceDate?: Date | string | null
+    lastInspectionDate?: Date | string | null
+    installedAt?: Date | string | null
     machineType: string
     clientID: number
     companyName: string
@@ -39973,9 +39973,9 @@ export namespace Prisma {
   export type machineryCreateWithoutClientMachineryInput = {
     name: string
     description: string
-    maintenanceDate: Date | string
-    lastInspectionDate: Date | string
-    installedAt: Date | string
+    maintenanceDate?: Date | string | null
+    lastInspectionDate?: Date | string | null
+    installedAt?: Date | string | null
     machineType: string
     companyName: string
     serialNumber: string
@@ -39989,9 +39989,9 @@ export namespace Prisma {
     id?: number
     name: string
     description: string
-    maintenanceDate: Date | string
-    lastInspectionDate: Date | string
-    installedAt: Date | string
+    maintenanceDate?: Date | string | null
+    lastInspectionDate?: Date | string | null
+    installedAt?: Date | string | null
     machineType: string
     clientID: number
     companyName: string
@@ -40076,9 +40076,9 @@ export namespace Prisma {
   export type machineryUpdateWithoutClientMachineryInput = {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    maintenanceDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    lastInspectionDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    installedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    maintenanceDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInspectionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    installedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     machineType?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     serialNumber?: StringFieldUpdateOperationsInput | string
@@ -40092,9 +40092,9 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    maintenanceDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    lastInspectionDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    installedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    maintenanceDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInspectionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    installedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     machineType?: StringFieldUpdateOperationsInput | string
     clientID?: IntFieldUpdateOperationsInput | number
     companyName?: StringFieldUpdateOperationsInput | string
@@ -40168,9 +40168,9 @@ export namespace Prisma {
     id?: number
     name: string
     description: string
-    maintenanceDate: Date | string
-    lastInspectionDate: Date | string
-    installedAt: Date | string
+    maintenanceDate?: Date | string | null
+    lastInspectionDate?: Date | string | null
+    installedAt?: Date | string | null
     machineType: string
     companyName: string
     companyID: number
@@ -40372,9 +40372,9 @@ export namespace Prisma {
   export type machineryUpdateWithoutClientInput = {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    maintenanceDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    lastInspectionDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    installedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    maintenanceDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInspectionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    installedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     machineType?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     serialNumber?: StringFieldUpdateOperationsInput | string
@@ -40388,9 +40388,9 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    maintenanceDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    lastInspectionDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    installedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    maintenanceDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInspectionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    installedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     machineType?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyID?: IntFieldUpdateOperationsInput | number
@@ -40404,9 +40404,9 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    maintenanceDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    lastInspectionDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    installedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    maintenanceDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInspectionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    installedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     machineType?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     companyID?: IntFieldUpdateOperationsInput | number
@@ -40506,9 +40506,9 @@ export namespace Prisma {
     id?: number
     name: string
     description: string
-    maintenanceDate: Date | string
-    lastInspectionDate: Date | string
-    installedAt: Date | string
+    maintenanceDate?: Date | string | null
+    lastInspectionDate?: Date | string | null
+    installedAt?: Date | string | null
     machineType: string
     clientID: number
     companyName: string
@@ -40803,9 +40803,9 @@ export namespace Prisma {
   export type machineryUpdateWithoutCompanyInput = {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    maintenanceDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    lastInspectionDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    installedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    maintenanceDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInspectionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    installedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     machineType?: StringFieldUpdateOperationsInput | string
     companyName?: StringFieldUpdateOperationsInput | string
     serialNumber?: StringFieldUpdateOperationsInput | string
@@ -40819,9 +40819,9 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    maintenanceDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    lastInspectionDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    installedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    maintenanceDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInspectionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    installedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     machineType?: StringFieldUpdateOperationsInput | string
     clientID?: IntFieldUpdateOperationsInput | number
     companyName?: StringFieldUpdateOperationsInput | string
@@ -40835,9 +40835,9 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    maintenanceDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    lastInspectionDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    installedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    maintenanceDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInspectionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    installedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     machineType?: StringFieldUpdateOperationsInput | string
     clientID?: IntFieldUpdateOperationsInput | number
     companyName?: StringFieldUpdateOperationsInput | string

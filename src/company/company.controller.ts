@@ -212,30 +212,38 @@ export class CompanyController {
   @UseGuards(AuthGuard, CompanyGuard)
   @Post('createMachinery')
   createMachinery(
-    @Request() req: any, // ✅ @Request() primero
+    @Request() req: any,
     @Body()
     body: {
       name: string;
       description?: string;
       machineType: string;
       brand?: string;
+      installedAt?: Date;
       model: string;
-      companyName: string;
       serialNumber: string;
+      companyName?: string;
+      clientID?: number; // ✅ Agregar clientID al body
     },
   ) {
-    const companyID = req.user.companyID; // ✅ Ahora sí existe
+    const companyID = req.user.companyID;
 
-    return this.companyService.createMachinery({
-      name: body.name,
-      description: body.description ?? '',
-      machineType: body.machineType,
-      model: body.model,
-      serialNumber: body.serialNumber,
-      companyID, // Del JWT
-      companyName: body.companyName, // Del JWT
-      brand: body.brand ?? 'UNKNOWN',
-    });
+    return this.companyService.createMachinery(
+      {
+        name: body.name,
+        description: body.description || '',
+        machineType: body.machineType,
+        model: body.model,
+        installedAT: body.installedAt || new Date(),
+        serialNumber: body.serialNumber,
+        companyName: body.companyName || '',
+        companyID,
+
+        brand: body.brand || 'UNKNOWN',
+        clientID: body.clientID || 0, // ✅ Manejar clientID opcional
+      },
+      req.user.userID,
+    );
   }
   @UseGuards(AuthGuard, CompanyGuard)
   @Post('assignShiftWorker')
@@ -277,5 +285,66 @@ export class CompanyController {
   getClientContracts(@Request() req: any, @Param('userID') userID: string) {
     const { companyID } = req.user;
     return this.companyService.getClientContracts(companyID, Number(userID));
+  }
+  @UseGuards(AuthGuard, CompanyGuard)
+  @Get('listMachinery')
+  listMachinery(
+    @Request() req: any,
+    @Query('limit') limit?: string,
+    @Query('offset') offset?: string,
+  ) {
+    const { companyID } = req.user;
+
+    const parsedLimit = limit ? Number(limit) : 5;
+    const parsedOffset = offset ? Number(offset) : 0;
+    return this.companyService.listMachinery(
+      companyID,
+      parsedLimit,
+      parsedOffset,
+    );
+  }
+  @UseGuards(AuthGuard, CompanyGuard)
+  @Patch('editMachinery/:machineryID')
+  editMachinery(
+    @Req() req: any,
+    @Param('machineryID') machineryID: string,
+
+    @Body()
+    body: {
+      name?: string;
+      description?: string;
+      machineType?: string;
+      brand?: string;
+      model?: string;
+      serialNumber?: string;
+    },
+  ) {
+    const machineryIDNumber = req.user.machineryID;
+    const companyID = req.user.companyID;
+    const { name, description, machineType, brand, model, serialNumber } = body;
+    return this.companyService.editMachinery(machineryIDNumber, companyID, {
+      name,
+      description,
+      machineType,
+      brand,
+      model,
+      serialNumber,
+    });
+  }
+  @UseGuards(AuthGuard, CompanyGuard)
+  @Patch('updateMaintenceDate/:machineryID')
+  updateMaintenceDate(
+    @Param('machineryID') machineryID: string,
+    @Body()
+    body: {
+      newMaintenceDate: string;
+    },
+  ) {
+    const machineryIDNumber = Number(machineryID);
+    const { newMaintenceDate } = body;
+    return this.companyService.updateMaintenceDate(
+      machineryIDNumber,
+      new Date(newMaintenceDate),
+    );
   }
 }
