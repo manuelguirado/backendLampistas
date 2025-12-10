@@ -80,10 +80,10 @@ export class UserController {
     return this.userService.myContracts(userIDNum);
   }
   @UseGuards(AuthGuard, UserGuard)
-  @Get('recievedBudgets/:userID')
-  async recievedBudgets(@Query('userID') userID: string) {
-    const userIDNum = parseInt(userID, 10);
-    return this.userService.recievedBudgets(userIDNum);
+  @Get('recievedBudgets')
+  async recievedBudgets(@Req() req: any) {
+    const userID = req.user.userID;
+    return this.userService.recievedBudgets(userID);
   }
   @UseGuards(AuthGuard, UserGuard)
   @Get('myIncidents')

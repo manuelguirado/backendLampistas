@@ -43,7 +43,7 @@ export async function findMyMachinery(userID: number) {
         clientID: machinery.clientID,
       }),
     );
-    console.log('Mapped Machinery:', mapMachinery);
+
     return { machinery: mapMachinery, token };
   } catch (error) {
     console.error('Error generating JWT:', error);

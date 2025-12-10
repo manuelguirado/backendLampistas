@@ -39,6 +39,7 @@ export async function recievedBudgets(
     return {
       budgetID: budget.budgetID,
       incidentID: budget.incidentID,
+      createdAt: budget.createdAt,
       totalAmount: budget.totalAmount,
       description: budget.description,
       userID: budget.userID,
