@@ -21,6 +21,7 @@ import { createContract } from '../modules/companies/updateTypeContractType';
 import { listMachinery } from '../modules/machinery/listMachinery';
 import { editMachinery } from '../modules/machinery/editMachinery';
 import { updateMaintenceDate } from '../modules/machinery/updateMaintenceDate';
+import { eliminateMachinery } from '../modules/machinery/eliminateMachinery';
 @Injectable()
 export class CompanyService {
   async companyLogin(email: string, password: string) {
@@ -148,5 +149,8 @@ export class CompanyService {
   }
   async updateMaintenceDate(machineryID: number, newMaintenceDate: Date) {
     return updateMaintenceDate(machineryID, newMaintenceDate);
+  }
+  async eliminateMachinery(machineryID: number) {
+    return eliminateMachinery(machineryID);
   }
 }

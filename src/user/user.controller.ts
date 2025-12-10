@@ -36,9 +36,9 @@ export class UserController {
   }
   @UseGuards(AuthGuard, UserGuard)
   @Get('userMachinery')
-  async findMyMachinery(@Query('userID') userID: string) {
-    const userIDNum = parseInt(userID, 10);
-    return this.userService.findMyMachinery(userIDNum);
+  async findMyMachinery(@Req() req: any) {
+    const userID = req.user.userID;
+    return this.userService.findMyMachinery(userID);
   }
   @UseGuards(AuthGuard, UserGuard)
   @Post('createIncident')
@@ -54,11 +54,8 @@ export class UserController {
       urgency?: boolean;
     },
   ) {
-    console.log('Request Body:', body);
     const userID = req.user.userID;
     const companyID = req.user.companyID;
-    console.log('UserID from token:', userID);
-    console.log('CompanyID from token:', companyID);
 
     if (!companyID) {
       throw new Error('El usuario no está asignado a ninguna empresa');

@@ -334,17 +334,24 @@ export class CompanyController {
   @UseGuards(AuthGuard, CompanyGuard)
   @Patch('updateMaintenceDate/:machineryID')
   updateMaintenceDate(
-    @Param('machineryID') machineryID: string,
+    @Param('machineryID') machineryID: number,
     @Body()
     body: {
-      newMaintenceDate: string;
+      lastInspectionDate: string;
     },
   ) {
-    const machineryIDNumber = Number(machineryID);
-    const { newMaintenceDate } = body;
+    const { lastInspectionDate } = body;
+
+    const parseMachineryID = Number(machineryID);
     return this.companyService.updateMaintenceDate(
-      machineryIDNumber,
-      new Date(newMaintenceDate),
+      parseMachineryID,
+      new Date(lastInspectionDate),
     );
+  }
+  @UseGuards(AuthGuard, CompanyGuard)
+  @Delete('eliminateMachinery/:machineryID')
+  eliminateMachinery(@Param('machineryID') machineryID: string) {
+    const parseMachineryID = Number(machineryID);
+    return this.companyService.eliminateMachinery(parseMachineryID);
   }
 }

@@ -3,13 +3,9 @@ import jwt, { SignOptions } from 'jsonwebtoken';
 import dotenv from 'dotenv';
 dotenv.config({ path: '../../../.env' });
 const prisma = new PrismaClient();
-
-export async function updateMaintenceDate(
-  machineryID: number,
-  lastInspectionDate: Date,
-) {
-  if (!machineryID || !lastInspectionDate) {
-    throw new Error('machineryID and lastInspectionDate are required');
+export async function eliminateMachinery(machineryID: number) {
+  if (!machineryID) {
+    throw new Error('machineryID is required');
   }
   const machinery = await prisma.machinery.findUnique({
     where: { id: machineryID },
@@ -18,19 +14,22 @@ export async function updateMaintenceDate(
     throw new Error('Machinery does not exist');
   }
 
-  const updatedMachinery = await prisma.machinery.update({
+  const deletedMachinery = await prisma.machinery.delete({
     where: { id: machineryID },
-    data: { lastInspectionDate: lastInspectionDate },
   });
+
+  if (!deletedMachinery) {
+    throw new Error('Failed  eliminate machinery');
+  }
   try {
     const payload = {
-      machineryID: updatedMachinery.id,
-      companyID: updatedMachinery.companyID,
+      machineryID: machineryID,
+      companyID: machinery.companyID,
     };
     const secret = process.env.JWT_SECRET as string;
     const options: SignOptions = { expiresIn: '1h' };
     const token = jwt.sign(payload, secret, options);
-    return { updatedMachinery, token };
+    return { message: 'Machinery eliminated successfully', token };
   } catch (error) {
     throw new Error(`Error generating token ${error}`);
   }
