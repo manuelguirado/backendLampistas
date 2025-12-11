@@ -1,6 +1,9 @@
 import { PrismaClient } from '../../../generated/prisma';
 const prisma = new PrismaClient();
 import { hashPassword } from '../../utils/hash/hashPassword';
+import jwt, { SignOptions } from 'jsonwebtoken';
+import dotenv from 'dotenv';
+dotenv.config({ path: '../../../.env' });
 
 export default async function registerAdmin(
   email: string,
@@ -17,6 +20,9 @@ export default async function registerAdmin(
   });
   if (existingAdmin) {
     throw new Error('Admin already exists');
+  }
+  if (password.length < 6) {
+    throw new Error('Password must be at least 6 characters long');
   }
 
   // ✅ Verificar que el email no esté en uso en NINGUNA tabla
@@ -47,9 +53,21 @@ export default async function registerAdmin(
     data: {
       email,
       password: hashedPassword,
-      role: 'ADMIN', // Explícito
+      role: 'ADMIN',
     },
   });
 
-  return admin;
+  try {
+    const payload = {
+      adminID: admin.adminID,
+      role: admin.role,
+      email: admin.email,
+    };
+    const secret = process.env.JWT_SECRET as string;
+    const options: SignOptions = { expiresIn: '1h' };
+    const token = jwt.sign(payload, secret, options);
+    return { token, ...admin };
+  } catch (error) {
+    throw new Error('Error generating JWT' + (error as Error).message);
+  }
 }

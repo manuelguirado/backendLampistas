@@ -18,15 +18,31 @@ import { adminServices } from './admin.services';
 export class AdminController {
   constructor(private readonly adminService: adminServices) {}
   @Post('adminLogin')
-  adminLogin(@Body() body: { email: string; password: string }) {
+  async adminLogin(@Body() body: { email: string; password: string }) {
     const { email, password } = body;
-    return this.adminService.adminLogin(email, password);
+    try {
+      return await this.adminService.adminLogin(email, password);
+    } catch (error) {
+      // ✅ Devolver el mensaje de error específico
+      return {
+        success: false,
+        message: error.message || 'Error al iniciar sesión',
+      };
+    }
   }
 
   @Post('adminRegister')
-  registerAdmin(@Body() body: { email: string; password: string }) {
-    const { email, password } = body;
-    return this.adminService.registerAdmin(email, password);
+  async registerAdmin(@Body() body: { email: string; password: string }) {
+    try {
+      const { email, password } = body;
+      return await this.adminService.registerAdmin(email, password);
+    } catch (error) {
+      // ✅ Devolver el mensaje de error específico
+      return {
+        success: false,
+        message: error.message || 'Error al registrar administrador',
+      };
+    }
   }
   @UseGuards(AuthGuard, AdminGuard)
   @Get('consultStatus/:companyID')
@@ -91,6 +107,7 @@ export class AdminController {
   @UseGuards(AuthGuard, AdminGuard)
   @Post('registerCompany')
   registerCompany(
+    @Request() req: any,
     @Body()
     body: {
       name: string;
@@ -106,14 +123,23 @@ export class AdminController {
       };
     },
   ) {
-    const { name, phone, email, password, admin, directions } = body;
-    return this.adminService.registerCompany(
-      name,
-      phone,
-      email,
-      password,
-      admin,
-      directions,
-    );
+    const admin = req.user.adminID;
+    const { name, phone, email, password, directions } = body;
+    try {
+      return this.adminService.registerCompany(
+        name,
+        phone,
+        email,
+        password,
+        admin,
+        directions,
+      );
+    } catch (error) {
+      // ✅ Devolver el mensaje de error específico
+      return {
+        success: false,
+        message: error.message || 'Error al registrar la empresa',
+      };
+    }
   }
 }

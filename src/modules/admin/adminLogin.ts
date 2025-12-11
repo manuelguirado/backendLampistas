@@ -18,10 +18,14 @@ export async function adminLogin(email: string, password: string) {
   if (!admin) {
     throw new Error('Admin does not exist');
   }
+  if (password.length < 6) {
+    throw new Error('Password must be at least 6 characters long');
+  }
   const passwordIsValid = await bcrypt.compare(password, admin.password);
   if (user || company || worker) {
     throw new Error('Email is associated with another account type');
   }
+
   if (!passwordIsValid) {
     throw new Error('Invalid password');
   }
