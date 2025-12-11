@@ -75,7 +75,7 @@ describe('getClientContracts', () => {
       'contract',
       user1.userID,
     );
-    console.log('Created contracts:', contract, contract3);
+
     const response = await getClientContracts(company.companyID, user.userID);
     expect(response).toBeDefined();
     expect(contract).toBeDefined();

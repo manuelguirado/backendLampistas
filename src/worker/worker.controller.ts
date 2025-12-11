@@ -25,7 +25,12 @@ export class WorkerController {
   @UseGuards(AuthGuard, WorkerGuard)
   @Get('assignedIncidents')
   async listAssignedIncidents(@Req() req) {
-    const workerID = req.user?.workerid;
+    const workerID = req.user?.workerID; // ✅ Cambiar a workerID mayúscula
+
+    if (!workerID) {
+      throw new BadRequestException('Worker ID not found in token');
+    }
+
     return this.workerService.listAssignedIncidents(workerID);
   }
   @UseGuards(AuthGuard, WorkerGuard)
@@ -38,9 +43,12 @@ export class WorkerController {
   }
 
   @Post('validateCode')
-  async validateCode(@Body() body: { userType: 'worker'; code: string }) {
-    console.log(body);
+  async validateCode(
+    @Req() req,
+    @Body() body: { userType: 'worker'; code: string },
+  ) {
     const { userType, code } = body;
+
     return this.workerService.validateCode(userType, code);
   }
   @UseGuards(AuthGuard, WorkerGuard)

@@ -1,6 +1,7 @@
 import { PrismaClient } from '../../../generated/prisma';
 import jwt, { SignOptions } from 'jsonwebtoken';
 import dotenv from 'dotenv';
+
 dotenv.config({ path: '../../../.env' });
 const prisma = new PrismaClient();
 
@@ -38,12 +39,15 @@ export async function recievedBudgets(
   const mappedBudgets = budgets.map((budget) => {
     return {
       budgetID: budget.budgetID,
-      incidentID: budget.incidentID,
+      title: budget.title,
+      incidentID: budget.incidentID ?? 0,
       createdAt: budget.createdAt,
-      totalAmount: budget.totalAmount,
-      description: budget.description,
-      userID: budget.userID,
-      companyID: budget.companyID,
+      totalAmount:
+        typeof budget.totalAmount === 'object' &&
+        'toNumber' in budget.totalAmount
+          ? budget.totalAmount.toNumber()
+          : budget.totalAmount,
+      description: budget.description ?? '',
       items: budget.items,
     };
   });

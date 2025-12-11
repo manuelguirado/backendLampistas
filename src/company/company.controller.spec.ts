@@ -352,7 +352,7 @@ it('should register machinery successfully', async () => {
     `user-for-machinery-${Date.now()}@test.com`,
     'userPassword',
   );
-  console.log('Registered user:', user);
+
   const directions = await registerDirections(
     '123 Test St, Test City, TS 12345',
     'Test City',

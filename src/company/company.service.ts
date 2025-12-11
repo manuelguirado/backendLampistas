@@ -29,9 +29,9 @@ export class CompanyService {
   }
   async assignCode(companyID: number, workerid?: number, userID?: number) {
     if (workerid !== undefined) {
-      return assignCode('worker', undefined, workerid, undefined);
+      return assignCode('worker', workerid);
     } else if (userID !== undefined) {
-      return assignCode('user', undefined, undefined, userID);
+      return assignCode('user', userID);
     }
   }
   async createContract(
@@ -85,6 +85,7 @@ export class CompanyService {
     budgetNumber: string,
     userID: number,
     companyID: number,
+    title: string,
     items: ItemType[],
     subtotal: number,
     tax: number,
@@ -96,6 +97,7 @@ export class CompanyService {
       budgetNumber,
       userID,
       companyID,
+      title,
       items,
       subtotal,
       tax,

@@ -244,7 +244,8 @@ exports.Prisma.BudgetScalarFieldEnum = {
   description: 'description',
   incidentID: 'incidentID',
   userID: 'userID',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  title: 'title'
 };
 
 exports.Prisma.SubscriptionScalarFieldEnum = {

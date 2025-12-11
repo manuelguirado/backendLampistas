@@ -41,7 +41,12 @@ export async function companyLogin(email: string, password: string) {
     throw new Error('Invalid password');
   }
   try {
-    const payload = { companyID: company.companyID, role: company.role };
+    const payload = {
+      companyID: company.companyID,
+      role: company.role,
+      email: company.email,
+      name: company.name,
+    };
     const secret = process.env.JWT_SECRET as string;
     const options: SignOptions = { expiresIn: '1h' };
     const token = jwt.sign(payload, secret, options);

@@ -44,6 +44,8 @@ export async function userLogin(email: string, password: string) {
     const payload = {
       userID: user.userID,
       role: user.role,
+      email: user.email,
+      username: user.name,
       companyID: user.companyID,
     };
     const secret = process.env.JWT_SECRET as string;

@@ -60,7 +60,7 @@ describe('Recieved Budgets E2E', () => {
       user.userID,
       company.companyID,
     );
-    console.log('Created Incident:', incident);
+   
     const budget1 = await createBudget(
       incident?.IncidentsID || 0,
       1000,
@@ -68,7 +68,7 @@ describe('Recieved Budgets E2E', () => {
       user.userID,
       company.companyID,
     );
-    console.log('Created Budget 1:', budget1);
+
     const budget2 = await createBudget(
       incident?.IncidentsID || 0,
       2000,

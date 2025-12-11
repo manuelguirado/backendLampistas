@@ -27,6 +27,7 @@ export async function listAssignedIncidents(workerid: number) {
 
   const incidents = await prisma.incidents.findMany({
     where: { assignedWorkerID: workerid },
+    orderBy: { createdAt: 'asc' },
   });
   if (!incidents || incidents.length === 0) {
     return [];

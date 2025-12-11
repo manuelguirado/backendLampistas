@@ -33,7 +33,12 @@ export async function workerLogin(email: string, password: string) {
   }
 
   try {
-    const payload = { workerid: worker.workerid, role: worker.role };
+    const payload = {
+      workerID: worker.workerid,
+      role: worker.role,
+      workerEmail: worker.email,
+      workerName: worker.name,
+    };
     const secret = process.env.JWT_SECRET as string;
     const options: SignOptions = { expiresIn: '1h' };
     const token = jwt.sign(payload, secret, options);

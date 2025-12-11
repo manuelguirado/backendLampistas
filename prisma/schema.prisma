@@ -215,6 +215,7 @@ model Budget {
   user         User       @relation(fields: [userID], references: [userID])
   createdAt    DateTime   @default(now()) @db.Timestamp(6) // ✅ Agregar
   Company      Company[]
+  title        String     @db.VarChar(255)
 }
 
 model Subscription {

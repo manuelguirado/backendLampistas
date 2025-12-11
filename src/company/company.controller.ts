@@ -141,6 +141,7 @@ export class CompanyController {
       budgetNumber: string;
       userID: number;
       companyID: number;
+      title: string;
       items: ItemType[];
       subtotal: number;
       tax: number;
@@ -155,6 +156,7 @@ export class CompanyController {
       createBudgetDto.budgetNumber,
       createBudgetDto.userID,
       companyID,
+      createBudgetDto.title,
       createBudgetDto.items,
       createBudgetDto.subtotal,
       createBudgetDto.tax,

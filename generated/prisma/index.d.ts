@@ -16769,6 +16769,7 @@ export namespace Prisma {
     incidentID: number | null
     userID: number | null
     createdAt: Date | null
+    title: string | null
   }
 
   export type BudgetMaxAggregateOutputType = {
@@ -16782,6 +16783,7 @@ export namespace Prisma {
     incidentID: number | null
     userID: number | null
     createdAt: Date | null
+    title: string | null
   }
 
   export type BudgetCountAggregateOutputType = {
@@ -16796,6 +16798,7 @@ export namespace Prisma {
     incidentID: number
     userID: number
     createdAt: number
+    title: number
     _all: number
   }
 
@@ -16831,6 +16834,7 @@ export namespace Prisma {
     incidentID?: true
     userID?: true
     createdAt?: true
+    title?: true
   }
 
   export type BudgetMaxAggregateInputType = {
@@ -16844,6 +16848,7 @@ export namespace Prisma {
     incidentID?: true
     userID?: true
     createdAt?: true
+    title?: true
   }
 
   export type BudgetCountAggregateInputType = {
@@ -16858,6 +16863,7 @@ export namespace Prisma {
     incidentID?: true
     userID?: true
     createdAt?: true
+    title?: true
     _all?: true
   }
 
@@ -16959,6 +16965,7 @@ export namespace Prisma {
     incidentID: number | null
     userID: number
     createdAt: Date
+    title: string
     _count: BudgetCountAggregateOutputType | null
     _avg: BudgetAvgAggregateOutputType | null
     _sum: BudgetSumAggregateOutputType | null
@@ -16992,6 +16999,7 @@ export namespace Prisma {
     incidentID?: boolean
     userID?: boolean
     createdAt?: boolean
+    title?: boolean
     company?: boolean | CompanyDefaultArgs<ExtArgs>
     incident?: boolean | Budget$incidentArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -17011,6 +17019,7 @@ export namespace Prisma {
     incidentID?: boolean
     userID?: boolean
     createdAt?: boolean
+    title?: boolean
     company?: boolean | CompanyDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["budget"]>
@@ -17027,6 +17036,7 @@ export namespace Prisma {
     incidentID?: boolean
     userID?: boolean
     createdAt?: boolean
+    title?: boolean
     company?: boolean | CompanyDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["budget"]>
@@ -17043,9 +17053,10 @@ export namespace Prisma {
     incidentID?: boolean
     userID?: boolean
     createdAt?: boolean
+    title?: boolean
   }
 
-  export type BudgetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"budgetID" | "budgetNumber" | "totalAmount" | "subtotal" | "tax" | "items" | "companyID" | "description" | "incidentID" | "userID" | "createdAt", ExtArgs["result"]["budget"]>
+  export type BudgetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"budgetID" | "budgetNumber" | "totalAmount" | "subtotal" | "tax" | "items" | "companyID" | "description" | "incidentID" | "userID" | "createdAt" | "title", ExtArgs["result"]["budget"]>
   export type BudgetInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     company?: boolean | CompanyDefaultArgs<ExtArgs>
     incident?: boolean | Budget$incidentArgs<ExtArgs>
@@ -17082,6 +17093,7 @@ export namespace Prisma {
       incidentID: number | null
       userID: number
       createdAt: Date
+      title: string
     }, ExtArgs["result"]["budget"]>
     composites: {}
   }
@@ -17520,6 +17532,7 @@ export namespace Prisma {
     readonly incidentID: FieldRef<"Budget", 'Int'>
     readonly userID: FieldRef<"Budget", 'Int'>
     readonly createdAt: FieldRef<"Budget", 'DateTime'>
+    readonly title: FieldRef<"Budget", 'String'>
   }
     
 
@@ -27143,7 +27156,8 @@ export namespace Prisma {
     description: 'description',
     incidentID: 'incidentID',
     userID: 'userID',
-    createdAt: 'createdAt'
+    createdAt: 'createdAt',
+    title: 'title'
   };
 
   export type BudgetScalarFieldEnum = (typeof BudgetScalarFieldEnum)[keyof typeof BudgetScalarFieldEnum]
@@ -28336,6 +28350,7 @@ export namespace Prisma {
     incidentID?: IntNullableFilter<"Budget"> | number | null
     userID?: IntFilter<"Budget"> | number
     createdAt?: DateTimeFilter<"Budget"> | Date | string
+    title?: StringFilter<"Budget"> | string
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
     incident?: XOR<IncidentsNullableScalarRelationFilter, IncidentsWhereInput> | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -28354,6 +28369,7 @@ export namespace Prisma {
     incidentID?: SortOrderInput | SortOrder
     userID?: SortOrder
     createdAt?: SortOrder
+    title?: SortOrder
     company?: CompanyOrderByWithRelationInput
     incident?: IncidentsOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
@@ -28375,6 +28391,7 @@ export namespace Prisma {
     description?: StringNullableFilter<"Budget"> | string | null
     userID?: IntFilter<"Budget"> | number
     createdAt?: DateTimeFilter<"Budget"> | Date | string
+    title?: StringFilter<"Budget"> | string
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
     incident?: XOR<IncidentsNullableScalarRelationFilter, IncidentsWhereInput> | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -28393,6 +28410,7 @@ export namespace Prisma {
     incidentID?: SortOrderInput | SortOrder
     userID?: SortOrder
     createdAt?: SortOrder
+    title?: SortOrder
     _count?: BudgetCountOrderByAggregateInput
     _avg?: BudgetAvgOrderByAggregateInput
     _max?: BudgetMaxOrderByAggregateInput
@@ -28415,6 +28433,7 @@ export namespace Prisma {
     incidentID?: IntNullableWithAggregatesFilter<"Budget"> | number | null
     userID?: IntWithAggregatesFilter<"Budget"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Budget"> | Date | string
+    title?: StringWithAggregatesFilter<"Budget"> | string
   }
 
   export type SubscriptionWhereInput = {
@@ -29817,6 +29836,7 @@ export namespace Prisma {
     description?: string | null
     incidentID?: number | null
     createdAt?: Date | string
+    title: string
     company: CompanyCreateNestedOneWithoutBudgetInput
     incident?: IncidentsCreateNestedOneWithoutBudgetInput
     user: UserCreateNestedOneWithoutBudgetInput
@@ -29835,6 +29855,7 @@ export namespace Prisma {
     incidentID?: number | null
     userID: number
     createdAt?: Date | string
+    title: string
     incident?: IncidentsUncheckedCreateNestedOneWithoutBudgetInput
     Company?: CompanyUncheckedCreateNestedManyWithoutBudgetInput
   }
@@ -29848,6 +29869,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     incidentID?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: StringFieldUpdateOperationsInput | string
     company?: CompanyUpdateOneRequiredWithoutBudgetNestedInput
     incident?: IncidentsUpdateOneWithoutBudgetNestedInput
     user?: UserUpdateOneRequiredWithoutBudgetNestedInput
@@ -29866,6 +29888,7 @@ export namespace Prisma {
     incidentID?: NullableIntFieldUpdateOperationsInput | number | null
     userID?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: StringFieldUpdateOperationsInput | string
     incident?: IncidentsUncheckedUpdateOneWithoutBudgetNestedInput
     Company?: CompanyUncheckedUpdateManyWithoutBudgetNestedInput
   }
@@ -29882,6 +29905,7 @@ export namespace Prisma {
     incidentID?: number | null
     userID: number
     createdAt?: Date | string
+    title: string
   }
 
   export type BudgetUpdateManyMutationInput = {
@@ -29893,6 +29917,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     incidentID?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: StringFieldUpdateOperationsInput | string
   }
 
   export type BudgetUncheckedUpdateManyInput = {
@@ -29907,6 +29932,7 @@ export namespace Prisma {
     incidentID?: NullableIntFieldUpdateOperationsInput | number | null
     userID?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: StringFieldUpdateOperationsInput | string
   }
 
   export type SubscriptionCreateInput = {
@@ -31459,6 +31485,7 @@ export namespace Prisma {
     incidentID?: SortOrder
     userID?: SortOrder
     createdAt?: SortOrder
+    title?: SortOrder
   }
 
   export type BudgetAvgOrderByAggregateInput = {
@@ -31482,6 +31509,7 @@ export namespace Prisma {
     incidentID?: SortOrder
     userID?: SortOrder
     createdAt?: SortOrder
+    title?: SortOrder
   }
 
   export type BudgetMinOrderByAggregateInput = {
@@ -31495,6 +31523,7 @@ export namespace Prisma {
     incidentID?: SortOrder
     userID?: SortOrder
     createdAt?: SortOrder
+    title?: SortOrder
   }
 
   export type BudgetSumOrderByAggregateInput = {
@@ -34526,6 +34555,7 @@ export namespace Prisma {
     description?: string | null
     incidentID?: number | null
     createdAt?: Date | string
+    title: string
     company: CompanyCreateNestedOneWithoutBudgetInput
     incident?: IncidentsCreateNestedOneWithoutBudgetInput
     Company?: CompanyCreateNestedManyWithoutBudgetInput
@@ -34542,6 +34572,7 @@ export namespace Prisma {
     description?: string | null
     incidentID?: number | null
     createdAt?: Date | string
+    title: string
     incident?: IncidentsUncheckedCreateNestedOneWithoutBudgetInput
     Company?: CompanyUncheckedCreateNestedManyWithoutBudgetInput
   }
@@ -34934,6 +34965,7 @@ export namespace Prisma {
     incidentID?: IntNullableFilter<"Budget"> | number | null
     userID?: IntFilter<"Budget"> | number
     createdAt?: DateTimeFilter<"Budget"> | Date | string
+    title?: StringFilter<"Budget"> | string
   }
 
   export type CompanyUpsertWithoutUserInput = {
@@ -35244,6 +35276,7 @@ export namespace Prisma {
     description?: string | null
     incidentID?: number | null
     createdAt?: Date | string
+    title: string
     company: CompanyCreateNestedOneWithoutBudgetInput
     incident?: IncidentsCreateNestedOneWithoutBudgetInput
     user: UserCreateNestedOneWithoutBudgetInput
@@ -35261,6 +35294,7 @@ export namespace Prisma {
     incidentID?: number | null
     userID: number
     createdAt?: Date | string
+    title: string
     incident?: IncidentsUncheckedCreateNestedOneWithoutBudgetInput
   }
 
@@ -35404,6 +35438,7 @@ export namespace Prisma {
     description?: string | null
     incidentID?: number | null
     createdAt?: Date | string
+    title: string
     incident?: IncidentsCreateNestedOneWithoutBudgetInput
     user: UserCreateNestedOneWithoutBudgetInput
     Company?: CompanyCreateNestedManyWithoutBudgetInput
@@ -35420,6 +35455,7 @@ export namespace Prisma {
     incidentID?: number | null
     userID: number
     createdAt?: Date | string
+    title: string
     incident?: IncidentsUncheckedCreateNestedOneWithoutBudgetInput
     Company?: CompanyUncheckedCreateNestedManyWithoutBudgetInput
   }
@@ -35680,6 +35716,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     incidentID?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: StringFieldUpdateOperationsInput | string
     company?: CompanyUpdateOneRequiredWithoutBudgetNestedInput
     incident?: IncidentsUpdateOneWithoutBudgetNestedInput
     user?: UserUpdateOneRequiredWithoutBudgetNestedInput
@@ -35697,6 +35734,7 @@ export namespace Prisma {
     incidentID?: NullableIntFieldUpdateOperationsInput | number | null
     userID?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: StringFieldUpdateOperationsInput | string
     incident?: IncidentsUncheckedUpdateOneWithoutBudgetNestedInput
   }
 
@@ -37254,6 +37292,7 @@ export namespace Prisma {
     description?: string | null
     incidentID?: number | null
     createdAt?: Date | string
+    title: string
     company: CompanyCreateNestedOneWithoutBudgetInput
     user: UserCreateNestedOneWithoutBudgetInput
     Company?: CompanyCreateNestedManyWithoutBudgetInput
@@ -37271,6 +37310,7 @@ export namespace Prisma {
     incidentID?: number | null
     userID: number
     createdAt?: Date | string
+    title: string
     Company?: CompanyUncheckedCreateNestedManyWithoutBudgetInput
   }
 
@@ -37561,6 +37601,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     incidentID?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: StringFieldUpdateOperationsInput | string
     company?: CompanyUpdateOneRequiredWithoutBudgetNestedInput
     user?: UserUpdateOneRequiredWithoutBudgetNestedInput
     Company?: CompanyUpdateManyWithoutBudgetNestedInput
@@ -37578,6 +37619,7 @@ export namespace Prisma {
     incidentID?: NullableIntFieldUpdateOperationsInput | number | null
     userID?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: StringFieldUpdateOperationsInput | string
     Company?: CompanyUncheckedUpdateManyWithoutBudgetNestedInput
   }
 
@@ -40153,6 +40195,7 @@ export namespace Prisma {
     description?: string | null
     incidentID?: number | null
     createdAt?: Date | string
+    title: string
   }
 
   export type contractsCreateManyUserInput = {
@@ -40310,6 +40353,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     incidentID?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: StringFieldUpdateOperationsInput | string
     company?: CompanyUpdateOneRequiredWithoutBudgetNestedInput
     incident?: IncidentsUpdateOneWithoutBudgetNestedInput
     Company?: CompanyUpdateManyWithoutBudgetNestedInput
@@ -40326,6 +40370,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     incidentID?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: StringFieldUpdateOperationsInput | string
     incident?: IncidentsUncheckedUpdateOneWithoutBudgetNestedInput
     Company?: CompanyUncheckedUpdateManyWithoutBudgetNestedInput
   }
@@ -40341,6 +40386,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     incidentID?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: StringFieldUpdateOperationsInput | string
   }
 
   export type contractsUpdateWithoutUserInput = {
@@ -40528,6 +40574,7 @@ export namespace Prisma {
     incidentID?: number | null
     userID: number
     createdAt?: Date | string
+    title: string
   }
 
   export type UserCreateManyCompanyInput = {
@@ -40855,6 +40902,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     incidentID?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: StringFieldUpdateOperationsInput | string
     incident?: IncidentsUpdateOneWithoutBudgetNestedInput
     user?: UserUpdateOneRequiredWithoutBudgetNestedInput
     Company?: CompanyUpdateManyWithoutBudgetNestedInput
@@ -40871,6 +40919,7 @@ export namespace Prisma {
     incidentID?: NullableIntFieldUpdateOperationsInput | number | null
     userID?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: StringFieldUpdateOperationsInput | string
     incident?: IncidentsUncheckedUpdateOneWithoutBudgetNestedInput
     Company?: CompanyUncheckedUpdateManyWithoutBudgetNestedInput
   }
@@ -40886,6 +40935,7 @@ export namespace Prisma {
     incidentID?: NullableIntFieldUpdateOperationsInput | number | null
     userID?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserUpdateWithoutCompanyInput = {

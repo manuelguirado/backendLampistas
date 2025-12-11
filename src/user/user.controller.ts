@@ -10,7 +10,7 @@ import {
 import { UserService } from './user.service';
 import { AuthGuard } from '../auth/auth.guard';
 import { UserGuard } from './user.guard';
-import type { incidentStatus } from '../utils/types/incidentStatus';
+
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
@@ -49,7 +49,7 @@ export class UserController {
       title: string;
       description: string;
       location: string;
-      status?: incidentStatus;
+
       priority?: string;
       urgency?: boolean;
     },
@@ -61,14 +61,13 @@ export class UserController {
       throw new Error('El usuario no está asignado a ninguna empresa');
     }
 
-    const { title, description, location, status, priority, urgency } = body;
+    const { title, description, location, priority, urgency } = body;
     return this.userService.createIncident(
       title,
       description,
       location,
       userID,
       companyID,
-      status,
       priority,
       urgency,
     );

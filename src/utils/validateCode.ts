@@ -66,6 +66,7 @@ export async function validateCode(userType: UserType, code: string) {
       };
 
       const token = generateToken(payload);
+
       return { worker: true, token };
     }
     default:
