@@ -54,7 +54,8 @@ export class WorkerController {
   @UseGuards(AuthGuard, WorkerGuard)
   @Get('myShifts')
   async myShifts(@Req() req) {
-    const workerid = req.user?.workerid;
-    return this.workerService.myShifts(workerid);
+    const workerID = req.user.workerID;
+
+    return this.workerService.myShifts(workerID);
   }
 }

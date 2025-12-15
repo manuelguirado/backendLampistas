@@ -15,6 +15,7 @@ export async function editWorker(
   const existingWorker = await prisma.worker.findUnique({
     where: { workerid: workerID },
   });
+
   if (!existingWorker) {
     throw new Error('Worker not found');
   }
@@ -22,6 +23,7 @@ export async function editWorker(
     where: { workerid: workerID },
     data: update,
   });
+
   try {
     const payload = {
       workerID: updateWorker.workerid,

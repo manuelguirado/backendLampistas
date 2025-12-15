@@ -11,7 +11,6 @@ const loginAttempts = new Map<string, { count: number; lockUntil: number }>();
 
 export async function companyLogin(email: string, password: string) {
   if (!email || !password) throw new Error('Email and password are required');
-
   const now = Date.now();
   const attempt = loginAttempts.get(email);
 

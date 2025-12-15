@@ -25,8 +25,8 @@ export async function assignShiftWorker(
   const assignedShift = await prisma.shiftSchedule.create({
     data: {
       workerID,
-      startDate,
-      endDate,
+      startDate: new Date(startDate),
+      endDate: new Date(endDate),
       shiftType,
     },
   });

@@ -92,6 +92,7 @@ export class CompanyController {
     },
   ) {
     const workerIDNumber = Number(workerID);
+
     const { data } = body;
     return this.companyService.editWorker(workerIDNumber, data);
   }
@@ -253,18 +254,32 @@ export class CompanyController {
     @Body()
     body: {
       workerID: number;
-      startDate: string;
-      endDate: string;
-      shiftType: string;
+      data: {
+        startDate: string;
+        endDate: string;
+        shiftType: string;
+        notes?: string;
+      };
     },
   ) {
-    const { workerID, startDate, endDate, shiftType } = body;
+    const { workerID, data } = body;
+ 
+
+    // Parsear fechas ISO string a Date objects
+    const startDate = new Date(data.startDate);
+    const endDate = new Date(data.endDate);
+
+    console.log('Parsed dates:', {
+      startDate,
+      endDate,
+      shiftType: data.shiftType,
+    });
 
     return this.companyService.assignShiftWorker(
       workerID,
-      new Date(startDate),
-      new Date(endDate),
-      shiftType,
+      startDate,
+      endDate,
+      data.shiftType,
     );
   }
   @Post('createUser')
