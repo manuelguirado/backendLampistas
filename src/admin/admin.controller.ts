@@ -142,4 +142,11 @@ export class AdminController {
       };
     }
   }
+  @UseGuards(AuthGuard, AdminGuard)
+  @Post('refreshToken')
+  refreshToken(@Request() req: any, @Body() body: { token: string }) {
+    const adminID = req.user.adminID;
+    const { token } = body;
+    return this.adminService.refreshToken(token, adminID);
+  }
 }

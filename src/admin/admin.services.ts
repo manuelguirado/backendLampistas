@@ -3,6 +3,7 @@ import { adminLogin } from '../modules/admin/adminLogin';
 import { suspendCompany } from '../modules/admin/suspendCompany';
 import { editCompany } from '../modules/admin/editCompany';
 import { listCompany } from '../modules/admin/listCompany';
+import { refreshToken } from '../utils/refreshToken';
 import { activateCompany } from '../modules/admin/activateCompany';
 import { assignCode } from '../utils/assingCode';
 import { consultStatus } from '../modules/admin/consultStatus';
@@ -66,5 +67,8 @@ export class adminServices {
     },
   ) {
     return registerCompany(name, phone, email, password, admin, directions);
+  }
+  async refreshToken(token: string, adminID: number) {
+    return refreshToken(token, 'admin', adminID);
   }
 }
