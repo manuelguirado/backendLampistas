@@ -176,6 +176,30 @@ exports.Prisma.AdminScalarFieldEnum = {
   refreshToken: 'refreshToken'
 };
 
+exports.Prisma.UserFilesScalarFieldEnum = {
+  id: 'id',
+  userID: 'userID',
+  fileURL: 'fileURL',
+  objectKey: 'objectKey',
+  uploadedAt: 'uploadedAt'
+};
+
+exports.Prisma.WorkerFilesScalarFieldEnum = {
+  id: 'id',
+  workerID: 'workerID',
+  fileURL: 'fileURL',
+  objectKey: 'objectKey',
+  uploadedAt: 'uploadedAt'
+};
+
+exports.Prisma.CompanyFilesScalarFieldEnum = {
+  id: 'id',
+  companyID: 'companyID',
+  fileURL: 'fileURL',
+  objectKey: 'objectKey',
+  uploadedAt: 'uploadedAt'
+};
+
 exports.Prisma.UsersCompaniesScalarFieldEnum = {
   id: 'id',
   userID: 'userID',
@@ -376,6 +400,9 @@ exports.Prisma.ModelName = {
   AdminsCompanies: 'AdminsCompanies',
   Worker: 'Worker',
   Admin: 'Admin',
+  userFiles: 'userFiles',
+  workerFiles: 'workerFiles',
+  companyFiles: 'companyFiles',
   usersCompanies: 'usersCompanies',
   contracts: 'contracts',
   workersCompanies: 'workersCompanies',

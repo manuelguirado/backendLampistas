@@ -39,6 +39,21 @@ export type Worker = $Result.DefaultSelection<Prisma.$WorkerPayload>
  */
 export type Admin = $Result.DefaultSelection<Prisma.$AdminPayload>
 /**
+ * Model userFiles
+ * 
+ */
+export type userFiles = $Result.DefaultSelection<Prisma.$userFilesPayload>
+/**
+ * Model workerFiles
+ * 
+ */
+export type workerFiles = $Result.DefaultSelection<Prisma.$workerFilesPayload>
+/**
+ * Model companyFiles
+ * 
+ */
+export type companyFiles = $Result.DefaultSelection<Prisma.$companyFilesPayload>
+/**
  * Model usersCompanies
  * 
  */
@@ -339,6 +354,36 @@ export class PrismaClient<
     * ```
     */
   get admin(): Prisma.AdminDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.userFiles`: Exposes CRUD operations for the **userFiles** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more UserFiles
+    * const userFiles = await prisma.userFiles.findMany()
+    * ```
+    */
+  get userFiles(): Prisma.userFilesDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.workerFiles`: Exposes CRUD operations for the **workerFiles** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more WorkerFiles
+    * const workerFiles = await prisma.workerFiles.findMany()
+    * ```
+    */
+  get workerFiles(): Prisma.workerFilesDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.companyFiles`: Exposes CRUD operations for the **companyFiles** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more CompanyFiles
+    * const companyFiles = await prisma.companyFiles.findMany()
+    * ```
+    */
+  get companyFiles(): Prisma.companyFilesDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.usersCompanies`: Exposes CRUD operations for the **usersCompanies** model.
@@ -935,6 +980,9 @@ export namespace Prisma {
     AdminsCompanies: 'AdminsCompanies',
     Worker: 'Worker',
     Admin: 'Admin',
+    userFiles: 'userFiles',
+    workerFiles: 'workerFiles',
+    companyFiles: 'companyFiles',
     usersCompanies: 'usersCompanies',
     contracts: 'contracts',
     workersCompanies: 'workersCompanies',
@@ -968,7 +1016,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "company" | "adminsCompanies" | "worker" | "admin" | "usersCompanies" | "contracts" | "workersCompanies" | "incidents" | "payments" | "paymentStatus" | "budget" | "subscription" | "incidentHistory" | "shiftWorker" | "jobHistory" | "shiftSchedule" | "directions" | "machinery" | "clientMachinery"
+      modelProps: "user" | "company" | "adminsCompanies" | "worker" | "admin" | "userFiles" | "workerFiles" | "companyFiles" | "usersCompanies" | "contracts" | "workersCompanies" | "incidents" | "payments" | "paymentStatus" | "budget" | "subscription" | "incidentHistory" | "shiftWorker" | "jobHistory" | "shiftSchedule" | "directions" | "machinery" | "clientMachinery"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1339,6 +1387,228 @@ export namespace Prisma {
           count: {
             args: Prisma.AdminCountArgs<ExtArgs>
             result: $Utils.Optional<AdminCountAggregateOutputType> | number
+          }
+        }
+      }
+      userFiles: {
+        payload: Prisma.$userFilesPayload<ExtArgs>
+        fields: Prisma.userFilesFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.userFilesFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$userFilesPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.userFilesFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$userFilesPayload>
+          }
+          findFirst: {
+            args: Prisma.userFilesFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$userFilesPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.userFilesFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$userFilesPayload>
+          }
+          findMany: {
+            args: Prisma.userFilesFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$userFilesPayload>[]
+          }
+          create: {
+            args: Prisma.userFilesCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$userFilesPayload>
+          }
+          createMany: {
+            args: Prisma.userFilesCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.userFilesCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$userFilesPayload>[]
+          }
+          delete: {
+            args: Prisma.userFilesDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$userFilesPayload>
+          }
+          update: {
+            args: Prisma.userFilesUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$userFilesPayload>
+          }
+          deleteMany: {
+            args: Prisma.userFilesDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.userFilesUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.userFilesUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$userFilesPayload>[]
+          }
+          upsert: {
+            args: Prisma.userFilesUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$userFilesPayload>
+          }
+          aggregate: {
+            args: Prisma.UserFilesAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUserFiles>
+          }
+          groupBy: {
+            args: Prisma.userFilesGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UserFilesGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.userFilesCountArgs<ExtArgs>
+            result: $Utils.Optional<UserFilesCountAggregateOutputType> | number
+          }
+        }
+      }
+      workerFiles: {
+        payload: Prisma.$workerFilesPayload<ExtArgs>
+        fields: Prisma.workerFilesFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.workerFilesFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$workerFilesPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.workerFilesFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$workerFilesPayload>
+          }
+          findFirst: {
+            args: Prisma.workerFilesFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$workerFilesPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.workerFilesFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$workerFilesPayload>
+          }
+          findMany: {
+            args: Prisma.workerFilesFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$workerFilesPayload>[]
+          }
+          create: {
+            args: Prisma.workerFilesCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$workerFilesPayload>
+          }
+          createMany: {
+            args: Prisma.workerFilesCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.workerFilesCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$workerFilesPayload>[]
+          }
+          delete: {
+            args: Prisma.workerFilesDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$workerFilesPayload>
+          }
+          update: {
+            args: Prisma.workerFilesUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$workerFilesPayload>
+          }
+          deleteMany: {
+            args: Prisma.workerFilesDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.workerFilesUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.workerFilesUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$workerFilesPayload>[]
+          }
+          upsert: {
+            args: Prisma.workerFilesUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$workerFilesPayload>
+          }
+          aggregate: {
+            args: Prisma.WorkerFilesAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateWorkerFiles>
+          }
+          groupBy: {
+            args: Prisma.workerFilesGroupByArgs<ExtArgs>
+            result: $Utils.Optional<WorkerFilesGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.workerFilesCountArgs<ExtArgs>
+            result: $Utils.Optional<WorkerFilesCountAggregateOutputType> | number
+          }
+        }
+      }
+      companyFiles: {
+        payload: Prisma.$companyFilesPayload<ExtArgs>
+        fields: Prisma.companyFilesFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.companyFilesFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$companyFilesPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.companyFilesFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$companyFilesPayload>
+          }
+          findFirst: {
+            args: Prisma.companyFilesFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$companyFilesPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.companyFilesFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$companyFilesPayload>
+          }
+          findMany: {
+            args: Prisma.companyFilesFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$companyFilesPayload>[]
+          }
+          create: {
+            args: Prisma.companyFilesCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$companyFilesPayload>
+          }
+          createMany: {
+            args: Prisma.companyFilesCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.companyFilesCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$companyFilesPayload>[]
+          }
+          delete: {
+            args: Prisma.companyFilesDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$companyFilesPayload>
+          }
+          update: {
+            args: Prisma.companyFilesUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$companyFilesPayload>
+          }
+          deleteMany: {
+            args: Prisma.companyFilesDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.companyFilesUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.companyFilesUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$companyFilesPayload>[]
+          }
+          upsert: {
+            args: Prisma.companyFilesUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$companyFilesPayload>
+          }
+          aggregate: {
+            args: Prisma.CompanyFilesAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCompanyFiles>
+          }
+          groupBy: {
+            args: Prisma.companyFilesGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CompanyFilesGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.companyFilesCountArgs<ExtArgs>
+            result: $Utils.Optional<CompanyFilesCountAggregateOutputType> | number
           }
         }
       }
@@ -2553,6 +2823,9 @@ export namespace Prisma {
     adminsCompanies?: AdminsCompaniesOmit
     worker?: WorkerOmit
     admin?: AdminOmit
+    userFiles?: userFilesOmit
+    workerFiles?: workerFilesOmit
+    companyFiles?: companyFilesOmit
     usersCompanies?: usersCompaniesOmit
     contracts?: contractsOmit
     workersCompanies?: workersCompaniesOmit
@@ -2656,6 +2929,7 @@ export namespace Prisma {
     contracts: number
     machinery: number
     usersCompanies: number
+    userFiles: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2667,6 +2941,7 @@ export namespace Prisma {
     contracts?: boolean | UserCountOutputTypeCountContractsArgs
     machinery?: boolean | UserCountOutputTypeCountMachineryArgs
     usersCompanies?: boolean | UserCountOutputTypeCountUsersCompaniesArgs
+    userFiles?: boolean | UserCountOutputTypeCountUserFilesArgs
   }
 
   // Custom InputTypes
@@ -2736,6 +3011,13 @@ export namespace Prisma {
     where?: usersCompaniesWhereInput
   }
 
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountUserFilesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: userFilesWhereInput
+  }
+
 
   /**
    * Count Type CompanyCountOutputType
@@ -2756,6 +3038,7 @@ export namespace Prisma {
     admins: number
     workersCompanies: number
     usersCompanies: number
+    companyFiles: number
   }
 
   export type CompanyCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2773,6 +3056,7 @@ export namespace Prisma {
     admins?: boolean | CompanyCountOutputTypeCountAdminsArgs
     workersCompanies?: boolean | CompanyCountOutputTypeCountWorkersCompaniesArgs
     usersCompanies?: boolean | CompanyCountOutputTypeCountUsersCompaniesArgs
+    companyFiles?: boolean | CompanyCountOutputTypeCountCompanyFilesArgs
   }
 
   // Custom InputTypes
@@ -2884,6 +3168,13 @@ export namespace Prisma {
     where?: usersCompaniesWhereInput
   }
 
+  /**
+   * CompanyCountOutputType without action
+   */
+  export type CompanyCountOutputTypeCountCompanyFilesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: companyFilesWhereInput
+  }
+
 
   /**
    * Count Type WorkerCountOutputType
@@ -2895,6 +3186,7 @@ export namespace Prisma {
     jobHistory: number
     shiftSchedules: number
     workersCompanies: number
+    workerFiles: number
   }
 
   export type WorkerCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2903,6 +3195,7 @@ export namespace Prisma {
     jobHistory?: boolean | WorkerCountOutputTypeCountJobHistoryArgs
     shiftSchedules?: boolean | WorkerCountOutputTypeCountShiftSchedulesArgs
     workersCompanies?: boolean | WorkerCountOutputTypeCountWorkersCompaniesArgs
+    workerFiles?: boolean | WorkerCountOutputTypeCountWorkerFilesArgs
   }
 
   // Custom InputTypes
@@ -2949,6 +3242,13 @@ export namespace Prisma {
    */
   export type WorkerCountOutputTypeCountWorkersCompaniesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: workersCompaniesWhereInput
+  }
+
+  /**
+   * WorkerCountOutputType without action
+   */
+  export type WorkerCountOutputTypeCountWorkerFilesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: workerFilesWhereInput
   }
 
 
@@ -3445,6 +3745,7 @@ export namespace Prisma {
     contracts?: boolean | User$contractsArgs<ExtArgs>
     machinery?: boolean | User$machineryArgs<ExtArgs>
     usersCompanies?: boolean | User$usersCompaniesArgs<ExtArgs>
+    userFiles?: boolean | User$userFilesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -3510,6 +3811,7 @@ export namespace Prisma {
     contracts?: boolean | User$contractsArgs<ExtArgs>
     machinery?: boolean | User$machineryArgs<ExtArgs>
     usersCompanies?: boolean | User$usersCompaniesArgs<ExtArgs>
+    userFiles?: boolean | User$userFilesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3535,6 +3837,7 @@ export namespace Prisma {
       contracts: Prisma.$contractsPayload<ExtArgs>[]
       machinery: Prisma.$machineryPayload<ExtArgs>[]
       usersCompanies: Prisma.$usersCompaniesPayload<ExtArgs>[]
+      userFiles: Prisma.$userFilesPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       userID: number
@@ -3954,6 +4257,7 @@ export namespace Prisma {
     contracts<T extends User$contractsArgs<ExtArgs> = {}>(args?: Subset<T, User$contractsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$contractsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     machinery<T extends User$machineryArgs<ExtArgs> = {}>(args?: Subset<T, User$machineryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$machineryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     usersCompanies<T extends User$usersCompaniesArgs<ExtArgs> = {}>(args?: Subset<T, User$usersCompaniesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$usersCompaniesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    userFiles<T extends User$userFilesArgs<ExtArgs> = {}>(args?: Subset<T, User$userFilesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$userFilesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4640,6 +4944,30 @@ export namespace Prisma {
   }
 
   /**
+   * User.userFiles
+   */
+  export type User$userFilesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the userFiles
+     */
+    select?: userFilesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the userFiles
+     */
+    omit?: userFilesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userFilesInclude<ExtArgs> | null
+    where?: userFilesWhereInput
+    orderBy?: userFilesOrderByWithRelationInput | userFilesOrderByWithRelationInput[]
+    cursor?: userFilesWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserFilesScalarFieldEnum | UserFilesScalarFieldEnum[]
+  }
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4935,6 +5263,7 @@ export namespace Prisma {
     admins?: boolean | Company$adminsArgs<ExtArgs>
     workersCompanies?: boolean | Company$workersCompaniesArgs<ExtArgs>
     usersCompanies?: boolean | Company$usersCompaniesArgs<ExtArgs>
+    companyFiles?: boolean | Company$companyFilesArgs<ExtArgs>
     _count?: boolean | CompanyCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["company"]>
 
@@ -5002,6 +5331,7 @@ export namespace Prisma {
     admins?: boolean | Company$adminsArgs<ExtArgs>
     workersCompanies?: boolean | Company$workersCompaniesArgs<ExtArgs>
     usersCompanies?: boolean | Company$usersCompaniesArgs<ExtArgs>
+    companyFiles?: boolean | Company$companyFilesArgs<ExtArgs>
     _count?: boolean | CompanyCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CompanyIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5029,6 +5359,7 @@ export namespace Prisma {
       admins: Prisma.$AdminsCompaniesPayload<ExtArgs>[]
       workersCompanies: Prisma.$workersCompaniesPayload<ExtArgs>[]
       usersCompanies: Prisma.$usersCompaniesPayload<ExtArgs>[]
+      companyFiles: Prisma.$companyFilesPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       companyID: number
@@ -5452,6 +5783,7 @@ export namespace Prisma {
     admins<T extends Company$adminsArgs<ExtArgs> = {}>(args?: Subset<T, Company$adminsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdminsCompaniesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     workersCompanies<T extends Company$workersCompaniesArgs<ExtArgs> = {}>(args?: Subset<T, Company$workersCompaniesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$workersCompaniesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     usersCompanies<T extends Company$usersCompaniesArgs<ExtArgs> = {}>(args?: Subset<T, Company$usersCompaniesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$usersCompaniesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    companyFiles<T extends Company$companyFilesArgs<ExtArgs> = {}>(args?: Subset<T, Company$companyFilesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$companyFilesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6241,6 +6573,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: UsersCompaniesScalarFieldEnum | UsersCompaniesScalarFieldEnum[]
+  }
+
+  /**
+   * Company.companyFiles
+   */
+  export type Company$companyFilesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the companyFiles
+     */
+    select?: companyFilesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the companyFiles
+     */
+    omit?: companyFilesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: companyFilesInclude<ExtArgs> | null
+    where?: companyFilesWhereInput
+    orderBy?: companyFilesOrderByWithRelationInput | companyFilesOrderByWithRelationInput[]
+    cursor?: companyFilesWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CompanyFilesScalarFieldEnum | CompanyFilesScalarFieldEnum[]
   }
 
   /**
@@ -7576,6 +7932,7 @@ export namespace Prisma {
     jobHistory?: boolean | Worker$jobHistoryArgs<ExtArgs>
     shiftSchedules?: boolean | Worker$shiftSchedulesArgs<ExtArgs>
     workersCompanies?: boolean | Worker$workersCompaniesArgs<ExtArgs>
+    workerFiles?: boolean | Worker$workerFilesArgs<ExtArgs>
     _count?: boolean | WorkerCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["worker"]>
 
@@ -7622,6 +7979,7 @@ export namespace Prisma {
     jobHistory?: boolean | Worker$jobHistoryArgs<ExtArgs>
     shiftSchedules?: boolean | Worker$shiftSchedulesArgs<ExtArgs>
     workersCompanies?: boolean | Worker$workersCompaniesArgs<ExtArgs>
+    workerFiles?: boolean | Worker$workerFilesArgs<ExtArgs>
     _count?: boolean | WorkerCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type WorkerIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7640,6 +7998,7 @@ export namespace Prisma {
       jobHistory: Prisma.$JobHistoryPayload<ExtArgs>[]
       shiftSchedules: Prisma.$ShiftSchedulePayload<ExtArgs>[]
       workersCompanies: Prisma.$workersCompaniesPayload<ExtArgs>[]
+      workerFiles: Prisma.$workerFilesPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       workerid: number
@@ -8050,6 +8409,7 @@ export namespace Prisma {
     jobHistory<T extends Worker$jobHistoryArgs<ExtArgs> = {}>(args?: Subset<T, Worker$jobHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$JobHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     shiftSchedules<T extends Worker$shiftSchedulesArgs<ExtArgs> = {}>(args?: Subset<T, Worker$shiftSchedulesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ShiftSchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     workersCompanies<T extends Worker$workersCompaniesArgs<ExtArgs> = {}>(args?: Subset<T, Worker$workersCompaniesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$workersCompaniesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    workerFiles<T extends Worker$workerFilesArgs<ExtArgs> = {}>(args?: Subset<T, Worker$workerFilesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$workerFilesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8600,6 +8960,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: WorkersCompaniesScalarFieldEnum | WorkersCompaniesScalarFieldEnum[]
+  }
+
+  /**
+   * Worker.workerFiles
+   */
+  export type Worker$workerFilesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the workerFiles
+     */
+    select?: workerFilesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the workerFiles
+     */
+    omit?: workerFilesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: workerFilesInclude<ExtArgs> | null
+    where?: workerFilesWhereInput
+    orderBy?: workerFilesOrderByWithRelationInput | workerFilesOrderByWithRelationInput[]
+    cursor?: workerFilesWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: WorkerFilesScalarFieldEnum | WorkerFilesScalarFieldEnum[]
   }
 
   /**
@@ -9722,6 +10106,3294 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: AdminInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model userFiles
+   */
+
+  export type AggregateUserFiles = {
+    _count: UserFilesCountAggregateOutputType | null
+    _avg: UserFilesAvgAggregateOutputType | null
+    _sum: UserFilesSumAggregateOutputType | null
+    _min: UserFilesMinAggregateOutputType | null
+    _max: UserFilesMaxAggregateOutputType | null
+  }
+
+  export type UserFilesAvgAggregateOutputType = {
+    id: number | null
+    userID: number | null
+  }
+
+  export type UserFilesSumAggregateOutputType = {
+    id: number | null
+    userID: number | null
+  }
+
+  export type UserFilesMinAggregateOutputType = {
+    id: number | null
+    userID: number | null
+    fileURL: string | null
+    objectKey: string | null
+    uploadedAt: Date | null
+  }
+
+  export type UserFilesMaxAggregateOutputType = {
+    id: number | null
+    userID: number | null
+    fileURL: string | null
+    objectKey: string | null
+    uploadedAt: Date | null
+  }
+
+  export type UserFilesCountAggregateOutputType = {
+    id: number
+    userID: number
+    fileURL: number
+    objectKey: number
+    uploadedAt: number
+    _all: number
+  }
+
+
+  export type UserFilesAvgAggregateInputType = {
+    id?: true
+    userID?: true
+  }
+
+  export type UserFilesSumAggregateInputType = {
+    id?: true
+    userID?: true
+  }
+
+  export type UserFilesMinAggregateInputType = {
+    id?: true
+    userID?: true
+    fileURL?: true
+    objectKey?: true
+    uploadedAt?: true
+  }
+
+  export type UserFilesMaxAggregateInputType = {
+    id?: true
+    userID?: true
+    fileURL?: true
+    objectKey?: true
+    uploadedAt?: true
+  }
+
+  export type UserFilesCountAggregateInputType = {
+    id?: true
+    userID?: true
+    fileURL?: true
+    objectKey?: true
+    uploadedAt?: true
+    _all?: true
+  }
+
+  export type UserFilesAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which userFiles to aggregate.
+     */
+    where?: userFilesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of userFiles to fetch.
+     */
+    orderBy?: userFilesOrderByWithRelationInput | userFilesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: userFilesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` userFiles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` userFiles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned userFiles
+    **/
+    _count?: true | UserFilesCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: UserFilesAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UserFilesSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UserFilesMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UserFilesMaxAggregateInputType
+  }
+
+  export type GetUserFilesAggregateType<T extends UserFilesAggregateArgs> = {
+        [P in keyof T & keyof AggregateUserFiles]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUserFiles[P]>
+      : GetScalarType<T[P], AggregateUserFiles[P]>
+  }
+
+
+
+
+  export type userFilesGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: userFilesWhereInput
+    orderBy?: userFilesOrderByWithAggregationInput | userFilesOrderByWithAggregationInput[]
+    by: UserFilesScalarFieldEnum[] | UserFilesScalarFieldEnum
+    having?: userFilesScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UserFilesCountAggregateInputType | true
+    _avg?: UserFilesAvgAggregateInputType
+    _sum?: UserFilesSumAggregateInputType
+    _min?: UserFilesMinAggregateInputType
+    _max?: UserFilesMaxAggregateInputType
+  }
+
+  export type UserFilesGroupByOutputType = {
+    id: number
+    userID: number
+    fileURL: string
+    objectKey: string
+    uploadedAt: Date
+    _count: UserFilesCountAggregateOutputType | null
+    _avg: UserFilesAvgAggregateOutputType | null
+    _sum: UserFilesSumAggregateOutputType | null
+    _min: UserFilesMinAggregateOutputType | null
+    _max: UserFilesMaxAggregateOutputType | null
+  }
+
+  type GetUserFilesGroupByPayload<T extends userFilesGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserFilesGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UserFilesGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UserFilesGroupByOutputType[P]>
+            : GetScalarType<T[P], UserFilesGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type userFilesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userID?: boolean
+    fileURL?: boolean
+    objectKey?: boolean
+    uploadedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userFiles"]>
+
+  export type userFilesSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userID?: boolean
+    fileURL?: boolean
+    objectKey?: boolean
+    uploadedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userFiles"]>
+
+  export type userFilesSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userID?: boolean
+    fileURL?: boolean
+    objectKey?: boolean
+    uploadedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userFiles"]>
+
+  export type userFilesSelectScalar = {
+    id?: boolean
+    userID?: boolean
+    fileURL?: boolean
+    objectKey?: boolean
+    uploadedAt?: boolean
+  }
+
+  export type userFilesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userID" | "fileURL" | "objectKey" | "uploadedAt", ExtArgs["result"]["userFiles"]>
+  export type userFilesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type userFilesIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type userFilesIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $userFilesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "userFiles"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      userID: number
+      fileURL: string
+      objectKey: string
+      uploadedAt: Date
+    }, ExtArgs["result"]["userFiles"]>
+    composites: {}
+  }
+
+  type userFilesGetPayload<S extends boolean | null | undefined | userFilesDefaultArgs> = $Result.GetResult<Prisma.$userFilesPayload, S>
+
+  type userFilesCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<userFilesFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UserFilesCountAggregateInputType | true
+    }
+
+  export interface userFilesDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['userFiles'], meta: { name: 'userFiles' } }
+    /**
+     * Find zero or one UserFiles that matches the filter.
+     * @param {userFilesFindUniqueArgs} args - Arguments to find a UserFiles
+     * @example
+     * // Get one UserFiles
+     * const userFiles = await prisma.userFiles.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends userFilesFindUniqueArgs>(args: SelectSubset<T, userFilesFindUniqueArgs<ExtArgs>>): Prisma__userFilesClient<$Result.GetResult<Prisma.$userFilesPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one UserFiles that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {userFilesFindUniqueOrThrowArgs} args - Arguments to find a UserFiles
+     * @example
+     * // Get one UserFiles
+     * const userFiles = await prisma.userFiles.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends userFilesFindUniqueOrThrowArgs>(args: SelectSubset<T, userFilesFindUniqueOrThrowArgs<ExtArgs>>): Prisma__userFilesClient<$Result.GetResult<Prisma.$userFilesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserFiles that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {userFilesFindFirstArgs} args - Arguments to find a UserFiles
+     * @example
+     * // Get one UserFiles
+     * const userFiles = await prisma.userFiles.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends userFilesFindFirstArgs>(args?: SelectSubset<T, userFilesFindFirstArgs<ExtArgs>>): Prisma__userFilesClient<$Result.GetResult<Prisma.$userFilesPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserFiles that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {userFilesFindFirstOrThrowArgs} args - Arguments to find a UserFiles
+     * @example
+     * // Get one UserFiles
+     * const userFiles = await prisma.userFiles.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends userFilesFindFirstOrThrowArgs>(args?: SelectSubset<T, userFilesFindFirstOrThrowArgs<ExtArgs>>): Prisma__userFilesClient<$Result.GetResult<Prisma.$userFilesPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more UserFiles that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {userFilesFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UserFiles
+     * const userFiles = await prisma.userFiles.findMany()
+     * 
+     * // Get first 10 UserFiles
+     * const userFiles = await prisma.userFiles.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const userFilesWithIdOnly = await prisma.userFiles.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends userFilesFindManyArgs>(args?: SelectSubset<T, userFilesFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$userFilesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a UserFiles.
+     * @param {userFilesCreateArgs} args - Arguments to create a UserFiles.
+     * @example
+     * // Create one UserFiles
+     * const UserFiles = await prisma.userFiles.create({
+     *   data: {
+     *     // ... data to create a UserFiles
+     *   }
+     * })
+     * 
+     */
+    create<T extends userFilesCreateArgs>(args: SelectSubset<T, userFilesCreateArgs<ExtArgs>>): Prisma__userFilesClient<$Result.GetResult<Prisma.$userFilesPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many UserFiles.
+     * @param {userFilesCreateManyArgs} args - Arguments to create many UserFiles.
+     * @example
+     * // Create many UserFiles
+     * const userFiles = await prisma.userFiles.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends userFilesCreateManyArgs>(args?: SelectSubset<T, userFilesCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many UserFiles and returns the data saved in the database.
+     * @param {userFilesCreateManyAndReturnArgs} args - Arguments to create many UserFiles.
+     * @example
+     * // Create many UserFiles
+     * const userFiles = await prisma.userFiles.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many UserFiles and only return the `id`
+     * const userFilesWithIdOnly = await prisma.userFiles.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends userFilesCreateManyAndReturnArgs>(args?: SelectSubset<T, userFilesCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$userFilesPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a UserFiles.
+     * @param {userFilesDeleteArgs} args - Arguments to delete one UserFiles.
+     * @example
+     * // Delete one UserFiles
+     * const UserFiles = await prisma.userFiles.delete({
+     *   where: {
+     *     // ... filter to delete one UserFiles
+     *   }
+     * })
+     * 
+     */
+    delete<T extends userFilesDeleteArgs>(args: SelectSubset<T, userFilesDeleteArgs<ExtArgs>>): Prisma__userFilesClient<$Result.GetResult<Prisma.$userFilesPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one UserFiles.
+     * @param {userFilesUpdateArgs} args - Arguments to update one UserFiles.
+     * @example
+     * // Update one UserFiles
+     * const userFiles = await prisma.userFiles.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends userFilesUpdateArgs>(args: SelectSubset<T, userFilesUpdateArgs<ExtArgs>>): Prisma__userFilesClient<$Result.GetResult<Prisma.$userFilesPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more UserFiles.
+     * @param {userFilesDeleteManyArgs} args - Arguments to filter UserFiles to delete.
+     * @example
+     * // Delete a few UserFiles
+     * const { count } = await prisma.userFiles.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends userFilesDeleteManyArgs>(args?: SelectSubset<T, userFilesDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserFiles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {userFilesUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UserFiles
+     * const userFiles = await prisma.userFiles.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends userFilesUpdateManyArgs>(args: SelectSubset<T, userFilesUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserFiles and returns the data updated in the database.
+     * @param {userFilesUpdateManyAndReturnArgs} args - Arguments to update many UserFiles.
+     * @example
+     * // Update many UserFiles
+     * const userFiles = await prisma.userFiles.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more UserFiles and only return the `id`
+     * const userFilesWithIdOnly = await prisma.userFiles.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends userFilesUpdateManyAndReturnArgs>(args: SelectSubset<T, userFilesUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$userFilesPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one UserFiles.
+     * @param {userFilesUpsertArgs} args - Arguments to update or create a UserFiles.
+     * @example
+     * // Update or create a UserFiles
+     * const userFiles = await prisma.userFiles.upsert({
+     *   create: {
+     *     // ... data to create a UserFiles
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UserFiles we want to update
+     *   }
+     * })
+     */
+    upsert<T extends userFilesUpsertArgs>(args: SelectSubset<T, userFilesUpsertArgs<ExtArgs>>): Prisma__userFilesClient<$Result.GetResult<Prisma.$userFilesPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of UserFiles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {userFilesCountArgs} args - Arguments to filter UserFiles to count.
+     * @example
+     * // Count the number of UserFiles
+     * const count = await prisma.userFiles.count({
+     *   where: {
+     *     // ... the filter for the UserFiles we want to count
+     *   }
+     * })
+    **/
+    count<T extends userFilesCountArgs>(
+      args?: Subset<T, userFilesCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserFilesCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a UserFiles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserFilesAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UserFilesAggregateArgs>(args: Subset<T, UserFilesAggregateArgs>): Prisma.PrismaPromise<GetUserFilesAggregateType<T>>
+
+    /**
+     * Group by UserFiles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {userFilesGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends userFilesGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: userFilesGroupByArgs['orderBy'] }
+        : { orderBy?: userFilesGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, userFilesGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserFilesGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the userFiles model
+   */
+  readonly fields: userFilesFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for userFiles.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__userFilesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the userFiles model
+   */
+  interface userFilesFieldRefs {
+    readonly id: FieldRef<"userFiles", 'Int'>
+    readonly userID: FieldRef<"userFiles", 'Int'>
+    readonly fileURL: FieldRef<"userFiles", 'String'>
+    readonly objectKey: FieldRef<"userFiles", 'String'>
+    readonly uploadedAt: FieldRef<"userFiles", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * userFiles findUnique
+   */
+  export type userFilesFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the userFiles
+     */
+    select?: userFilesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the userFiles
+     */
+    omit?: userFilesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userFilesInclude<ExtArgs> | null
+    /**
+     * Filter, which userFiles to fetch.
+     */
+    where: userFilesWhereUniqueInput
+  }
+
+  /**
+   * userFiles findUniqueOrThrow
+   */
+  export type userFilesFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the userFiles
+     */
+    select?: userFilesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the userFiles
+     */
+    omit?: userFilesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userFilesInclude<ExtArgs> | null
+    /**
+     * Filter, which userFiles to fetch.
+     */
+    where: userFilesWhereUniqueInput
+  }
+
+  /**
+   * userFiles findFirst
+   */
+  export type userFilesFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the userFiles
+     */
+    select?: userFilesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the userFiles
+     */
+    omit?: userFilesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userFilesInclude<ExtArgs> | null
+    /**
+     * Filter, which userFiles to fetch.
+     */
+    where?: userFilesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of userFiles to fetch.
+     */
+    orderBy?: userFilesOrderByWithRelationInput | userFilesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for userFiles.
+     */
+    cursor?: userFilesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` userFiles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` userFiles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of userFiles.
+     */
+    distinct?: UserFilesScalarFieldEnum | UserFilesScalarFieldEnum[]
+  }
+
+  /**
+   * userFiles findFirstOrThrow
+   */
+  export type userFilesFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the userFiles
+     */
+    select?: userFilesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the userFiles
+     */
+    omit?: userFilesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userFilesInclude<ExtArgs> | null
+    /**
+     * Filter, which userFiles to fetch.
+     */
+    where?: userFilesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of userFiles to fetch.
+     */
+    orderBy?: userFilesOrderByWithRelationInput | userFilesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for userFiles.
+     */
+    cursor?: userFilesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` userFiles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` userFiles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of userFiles.
+     */
+    distinct?: UserFilesScalarFieldEnum | UserFilesScalarFieldEnum[]
+  }
+
+  /**
+   * userFiles findMany
+   */
+  export type userFilesFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the userFiles
+     */
+    select?: userFilesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the userFiles
+     */
+    omit?: userFilesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userFilesInclude<ExtArgs> | null
+    /**
+     * Filter, which userFiles to fetch.
+     */
+    where?: userFilesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of userFiles to fetch.
+     */
+    orderBy?: userFilesOrderByWithRelationInput | userFilesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing userFiles.
+     */
+    cursor?: userFilesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` userFiles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` userFiles.
+     */
+    skip?: number
+    distinct?: UserFilesScalarFieldEnum | UserFilesScalarFieldEnum[]
+  }
+
+  /**
+   * userFiles create
+   */
+  export type userFilesCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the userFiles
+     */
+    select?: userFilesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the userFiles
+     */
+    omit?: userFilesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userFilesInclude<ExtArgs> | null
+    /**
+     * The data needed to create a userFiles.
+     */
+    data: XOR<userFilesCreateInput, userFilesUncheckedCreateInput>
+  }
+
+  /**
+   * userFiles createMany
+   */
+  export type userFilesCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many userFiles.
+     */
+    data: userFilesCreateManyInput | userFilesCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * userFiles createManyAndReturn
+   */
+  export type userFilesCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the userFiles
+     */
+    select?: userFilesSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the userFiles
+     */
+    omit?: userFilesOmit<ExtArgs> | null
+    /**
+     * The data used to create many userFiles.
+     */
+    data: userFilesCreateManyInput | userFilesCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userFilesIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * userFiles update
+   */
+  export type userFilesUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the userFiles
+     */
+    select?: userFilesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the userFiles
+     */
+    omit?: userFilesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userFilesInclude<ExtArgs> | null
+    /**
+     * The data needed to update a userFiles.
+     */
+    data: XOR<userFilesUpdateInput, userFilesUncheckedUpdateInput>
+    /**
+     * Choose, which userFiles to update.
+     */
+    where: userFilesWhereUniqueInput
+  }
+
+  /**
+   * userFiles updateMany
+   */
+  export type userFilesUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update userFiles.
+     */
+    data: XOR<userFilesUpdateManyMutationInput, userFilesUncheckedUpdateManyInput>
+    /**
+     * Filter which userFiles to update
+     */
+    where?: userFilesWhereInput
+    /**
+     * Limit how many userFiles to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * userFiles updateManyAndReturn
+   */
+  export type userFilesUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the userFiles
+     */
+    select?: userFilesSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the userFiles
+     */
+    omit?: userFilesOmit<ExtArgs> | null
+    /**
+     * The data used to update userFiles.
+     */
+    data: XOR<userFilesUpdateManyMutationInput, userFilesUncheckedUpdateManyInput>
+    /**
+     * Filter which userFiles to update
+     */
+    where?: userFilesWhereInput
+    /**
+     * Limit how many userFiles to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userFilesIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * userFiles upsert
+   */
+  export type userFilesUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the userFiles
+     */
+    select?: userFilesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the userFiles
+     */
+    omit?: userFilesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userFilesInclude<ExtArgs> | null
+    /**
+     * The filter to search for the userFiles to update in case it exists.
+     */
+    where: userFilesWhereUniqueInput
+    /**
+     * In case the userFiles found by the `where` argument doesn't exist, create a new userFiles with this data.
+     */
+    create: XOR<userFilesCreateInput, userFilesUncheckedCreateInput>
+    /**
+     * In case the userFiles was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<userFilesUpdateInput, userFilesUncheckedUpdateInput>
+  }
+
+  /**
+   * userFiles delete
+   */
+  export type userFilesDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the userFiles
+     */
+    select?: userFilesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the userFiles
+     */
+    omit?: userFilesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userFilesInclude<ExtArgs> | null
+    /**
+     * Filter which userFiles to delete.
+     */
+    where: userFilesWhereUniqueInput
+  }
+
+  /**
+   * userFiles deleteMany
+   */
+  export type userFilesDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which userFiles to delete
+     */
+    where?: userFilesWhereInput
+    /**
+     * Limit how many userFiles to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * userFiles without action
+   */
+  export type userFilesDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the userFiles
+     */
+    select?: userFilesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the userFiles
+     */
+    omit?: userFilesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userFilesInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model workerFiles
+   */
+
+  export type AggregateWorkerFiles = {
+    _count: WorkerFilesCountAggregateOutputType | null
+    _avg: WorkerFilesAvgAggregateOutputType | null
+    _sum: WorkerFilesSumAggregateOutputType | null
+    _min: WorkerFilesMinAggregateOutputType | null
+    _max: WorkerFilesMaxAggregateOutputType | null
+  }
+
+  export type WorkerFilesAvgAggregateOutputType = {
+    id: number | null
+    workerID: number | null
+  }
+
+  export type WorkerFilesSumAggregateOutputType = {
+    id: number | null
+    workerID: number | null
+  }
+
+  export type WorkerFilesMinAggregateOutputType = {
+    id: number | null
+    workerID: number | null
+    fileURL: string | null
+    objectKey: string | null
+    uploadedAt: Date | null
+  }
+
+  export type WorkerFilesMaxAggregateOutputType = {
+    id: number | null
+    workerID: number | null
+    fileURL: string | null
+    objectKey: string | null
+    uploadedAt: Date | null
+  }
+
+  export type WorkerFilesCountAggregateOutputType = {
+    id: number
+    workerID: number
+    fileURL: number
+    objectKey: number
+    uploadedAt: number
+    _all: number
+  }
+
+
+  export type WorkerFilesAvgAggregateInputType = {
+    id?: true
+    workerID?: true
+  }
+
+  export type WorkerFilesSumAggregateInputType = {
+    id?: true
+    workerID?: true
+  }
+
+  export type WorkerFilesMinAggregateInputType = {
+    id?: true
+    workerID?: true
+    fileURL?: true
+    objectKey?: true
+    uploadedAt?: true
+  }
+
+  export type WorkerFilesMaxAggregateInputType = {
+    id?: true
+    workerID?: true
+    fileURL?: true
+    objectKey?: true
+    uploadedAt?: true
+  }
+
+  export type WorkerFilesCountAggregateInputType = {
+    id?: true
+    workerID?: true
+    fileURL?: true
+    objectKey?: true
+    uploadedAt?: true
+    _all?: true
+  }
+
+  export type WorkerFilesAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which workerFiles to aggregate.
+     */
+    where?: workerFilesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of workerFiles to fetch.
+     */
+    orderBy?: workerFilesOrderByWithRelationInput | workerFilesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: workerFilesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` workerFiles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` workerFiles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned workerFiles
+    **/
+    _count?: true | WorkerFilesCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: WorkerFilesAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: WorkerFilesSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: WorkerFilesMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: WorkerFilesMaxAggregateInputType
+  }
+
+  export type GetWorkerFilesAggregateType<T extends WorkerFilesAggregateArgs> = {
+        [P in keyof T & keyof AggregateWorkerFiles]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateWorkerFiles[P]>
+      : GetScalarType<T[P], AggregateWorkerFiles[P]>
+  }
+
+
+
+
+  export type workerFilesGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: workerFilesWhereInput
+    orderBy?: workerFilesOrderByWithAggregationInput | workerFilesOrderByWithAggregationInput[]
+    by: WorkerFilesScalarFieldEnum[] | WorkerFilesScalarFieldEnum
+    having?: workerFilesScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: WorkerFilesCountAggregateInputType | true
+    _avg?: WorkerFilesAvgAggregateInputType
+    _sum?: WorkerFilesSumAggregateInputType
+    _min?: WorkerFilesMinAggregateInputType
+    _max?: WorkerFilesMaxAggregateInputType
+  }
+
+  export type WorkerFilesGroupByOutputType = {
+    id: number
+    workerID: number
+    fileURL: string
+    objectKey: string
+    uploadedAt: Date
+    _count: WorkerFilesCountAggregateOutputType | null
+    _avg: WorkerFilesAvgAggregateOutputType | null
+    _sum: WorkerFilesSumAggregateOutputType | null
+    _min: WorkerFilesMinAggregateOutputType | null
+    _max: WorkerFilesMaxAggregateOutputType | null
+  }
+
+  type GetWorkerFilesGroupByPayload<T extends workerFilesGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<WorkerFilesGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof WorkerFilesGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], WorkerFilesGroupByOutputType[P]>
+            : GetScalarType<T[P], WorkerFilesGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type workerFilesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    workerID?: boolean
+    fileURL?: boolean
+    objectKey?: boolean
+    uploadedAt?: boolean
+    worker?: boolean | WorkerDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["workerFiles"]>
+
+  export type workerFilesSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    workerID?: boolean
+    fileURL?: boolean
+    objectKey?: boolean
+    uploadedAt?: boolean
+    worker?: boolean | WorkerDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["workerFiles"]>
+
+  export type workerFilesSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    workerID?: boolean
+    fileURL?: boolean
+    objectKey?: boolean
+    uploadedAt?: boolean
+    worker?: boolean | WorkerDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["workerFiles"]>
+
+  export type workerFilesSelectScalar = {
+    id?: boolean
+    workerID?: boolean
+    fileURL?: boolean
+    objectKey?: boolean
+    uploadedAt?: boolean
+  }
+
+  export type workerFilesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "workerID" | "fileURL" | "objectKey" | "uploadedAt", ExtArgs["result"]["workerFiles"]>
+  export type workerFilesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    worker?: boolean | WorkerDefaultArgs<ExtArgs>
+  }
+  export type workerFilesIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    worker?: boolean | WorkerDefaultArgs<ExtArgs>
+  }
+  export type workerFilesIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    worker?: boolean | WorkerDefaultArgs<ExtArgs>
+  }
+
+  export type $workerFilesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "workerFiles"
+    objects: {
+      worker: Prisma.$WorkerPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      workerID: number
+      fileURL: string
+      objectKey: string
+      uploadedAt: Date
+    }, ExtArgs["result"]["workerFiles"]>
+    composites: {}
+  }
+
+  type workerFilesGetPayload<S extends boolean | null | undefined | workerFilesDefaultArgs> = $Result.GetResult<Prisma.$workerFilesPayload, S>
+
+  type workerFilesCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<workerFilesFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: WorkerFilesCountAggregateInputType | true
+    }
+
+  export interface workerFilesDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['workerFiles'], meta: { name: 'workerFiles' } }
+    /**
+     * Find zero or one WorkerFiles that matches the filter.
+     * @param {workerFilesFindUniqueArgs} args - Arguments to find a WorkerFiles
+     * @example
+     * // Get one WorkerFiles
+     * const workerFiles = await prisma.workerFiles.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends workerFilesFindUniqueArgs>(args: SelectSubset<T, workerFilesFindUniqueArgs<ExtArgs>>): Prisma__workerFilesClient<$Result.GetResult<Prisma.$workerFilesPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one WorkerFiles that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {workerFilesFindUniqueOrThrowArgs} args - Arguments to find a WorkerFiles
+     * @example
+     * // Get one WorkerFiles
+     * const workerFiles = await prisma.workerFiles.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends workerFilesFindUniqueOrThrowArgs>(args: SelectSubset<T, workerFilesFindUniqueOrThrowArgs<ExtArgs>>): Prisma__workerFilesClient<$Result.GetResult<Prisma.$workerFilesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first WorkerFiles that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {workerFilesFindFirstArgs} args - Arguments to find a WorkerFiles
+     * @example
+     * // Get one WorkerFiles
+     * const workerFiles = await prisma.workerFiles.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends workerFilesFindFirstArgs>(args?: SelectSubset<T, workerFilesFindFirstArgs<ExtArgs>>): Prisma__workerFilesClient<$Result.GetResult<Prisma.$workerFilesPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first WorkerFiles that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {workerFilesFindFirstOrThrowArgs} args - Arguments to find a WorkerFiles
+     * @example
+     * // Get one WorkerFiles
+     * const workerFiles = await prisma.workerFiles.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends workerFilesFindFirstOrThrowArgs>(args?: SelectSubset<T, workerFilesFindFirstOrThrowArgs<ExtArgs>>): Prisma__workerFilesClient<$Result.GetResult<Prisma.$workerFilesPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more WorkerFiles that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {workerFilesFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all WorkerFiles
+     * const workerFiles = await prisma.workerFiles.findMany()
+     * 
+     * // Get first 10 WorkerFiles
+     * const workerFiles = await prisma.workerFiles.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const workerFilesWithIdOnly = await prisma.workerFiles.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends workerFilesFindManyArgs>(args?: SelectSubset<T, workerFilesFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$workerFilesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a WorkerFiles.
+     * @param {workerFilesCreateArgs} args - Arguments to create a WorkerFiles.
+     * @example
+     * // Create one WorkerFiles
+     * const WorkerFiles = await prisma.workerFiles.create({
+     *   data: {
+     *     // ... data to create a WorkerFiles
+     *   }
+     * })
+     * 
+     */
+    create<T extends workerFilesCreateArgs>(args: SelectSubset<T, workerFilesCreateArgs<ExtArgs>>): Prisma__workerFilesClient<$Result.GetResult<Prisma.$workerFilesPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many WorkerFiles.
+     * @param {workerFilesCreateManyArgs} args - Arguments to create many WorkerFiles.
+     * @example
+     * // Create many WorkerFiles
+     * const workerFiles = await prisma.workerFiles.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends workerFilesCreateManyArgs>(args?: SelectSubset<T, workerFilesCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many WorkerFiles and returns the data saved in the database.
+     * @param {workerFilesCreateManyAndReturnArgs} args - Arguments to create many WorkerFiles.
+     * @example
+     * // Create many WorkerFiles
+     * const workerFiles = await prisma.workerFiles.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many WorkerFiles and only return the `id`
+     * const workerFilesWithIdOnly = await prisma.workerFiles.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends workerFilesCreateManyAndReturnArgs>(args?: SelectSubset<T, workerFilesCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$workerFilesPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a WorkerFiles.
+     * @param {workerFilesDeleteArgs} args - Arguments to delete one WorkerFiles.
+     * @example
+     * // Delete one WorkerFiles
+     * const WorkerFiles = await prisma.workerFiles.delete({
+     *   where: {
+     *     // ... filter to delete one WorkerFiles
+     *   }
+     * })
+     * 
+     */
+    delete<T extends workerFilesDeleteArgs>(args: SelectSubset<T, workerFilesDeleteArgs<ExtArgs>>): Prisma__workerFilesClient<$Result.GetResult<Prisma.$workerFilesPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one WorkerFiles.
+     * @param {workerFilesUpdateArgs} args - Arguments to update one WorkerFiles.
+     * @example
+     * // Update one WorkerFiles
+     * const workerFiles = await prisma.workerFiles.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends workerFilesUpdateArgs>(args: SelectSubset<T, workerFilesUpdateArgs<ExtArgs>>): Prisma__workerFilesClient<$Result.GetResult<Prisma.$workerFilesPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more WorkerFiles.
+     * @param {workerFilesDeleteManyArgs} args - Arguments to filter WorkerFiles to delete.
+     * @example
+     * // Delete a few WorkerFiles
+     * const { count } = await prisma.workerFiles.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends workerFilesDeleteManyArgs>(args?: SelectSubset<T, workerFilesDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more WorkerFiles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {workerFilesUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many WorkerFiles
+     * const workerFiles = await prisma.workerFiles.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends workerFilesUpdateManyArgs>(args: SelectSubset<T, workerFilesUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more WorkerFiles and returns the data updated in the database.
+     * @param {workerFilesUpdateManyAndReturnArgs} args - Arguments to update many WorkerFiles.
+     * @example
+     * // Update many WorkerFiles
+     * const workerFiles = await prisma.workerFiles.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more WorkerFiles and only return the `id`
+     * const workerFilesWithIdOnly = await prisma.workerFiles.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends workerFilesUpdateManyAndReturnArgs>(args: SelectSubset<T, workerFilesUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$workerFilesPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one WorkerFiles.
+     * @param {workerFilesUpsertArgs} args - Arguments to update or create a WorkerFiles.
+     * @example
+     * // Update or create a WorkerFiles
+     * const workerFiles = await prisma.workerFiles.upsert({
+     *   create: {
+     *     // ... data to create a WorkerFiles
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the WorkerFiles we want to update
+     *   }
+     * })
+     */
+    upsert<T extends workerFilesUpsertArgs>(args: SelectSubset<T, workerFilesUpsertArgs<ExtArgs>>): Prisma__workerFilesClient<$Result.GetResult<Prisma.$workerFilesPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of WorkerFiles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {workerFilesCountArgs} args - Arguments to filter WorkerFiles to count.
+     * @example
+     * // Count the number of WorkerFiles
+     * const count = await prisma.workerFiles.count({
+     *   where: {
+     *     // ... the filter for the WorkerFiles we want to count
+     *   }
+     * })
+    **/
+    count<T extends workerFilesCountArgs>(
+      args?: Subset<T, workerFilesCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], WorkerFilesCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a WorkerFiles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WorkerFilesAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends WorkerFilesAggregateArgs>(args: Subset<T, WorkerFilesAggregateArgs>): Prisma.PrismaPromise<GetWorkerFilesAggregateType<T>>
+
+    /**
+     * Group by WorkerFiles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {workerFilesGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends workerFilesGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: workerFilesGroupByArgs['orderBy'] }
+        : { orderBy?: workerFilesGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, workerFilesGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetWorkerFilesGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the workerFiles model
+   */
+  readonly fields: workerFilesFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for workerFiles.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__workerFilesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    worker<T extends WorkerDefaultArgs<ExtArgs> = {}>(args?: Subset<T, WorkerDefaultArgs<ExtArgs>>): Prisma__WorkerClient<$Result.GetResult<Prisma.$WorkerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the workerFiles model
+   */
+  interface workerFilesFieldRefs {
+    readonly id: FieldRef<"workerFiles", 'Int'>
+    readonly workerID: FieldRef<"workerFiles", 'Int'>
+    readonly fileURL: FieldRef<"workerFiles", 'String'>
+    readonly objectKey: FieldRef<"workerFiles", 'String'>
+    readonly uploadedAt: FieldRef<"workerFiles", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * workerFiles findUnique
+   */
+  export type workerFilesFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the workerFiles
+     */
+    select?: workerFilesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the workerFiles
+     */
+    omit?: workerFilesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: workerFilesInclude<ExtArgs> | null
+    /**
+     * Filter, which workerFiles to fetch.
+     */
+    where: workerFilesWhereUniqueInput
+  }
+
+  /**
+   * workerFiles findUniqueOrThrow
+   */
+  export type workerFilesFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the workerFiles
+     */
+    select?: workerFilesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the workerFiles
+     */
+    omit?: workerFilesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: workerFilesInclude<ExtArgs> | null
+    /**
+     * Filter, which workerFiles to fetch.
+     */
+    where: workerFilesWhereUniqueInput
+  }
+
+  /**
+   * workerFiles findFirst
+   */
+  export type workerFilesFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the workerFiles
+     */
+    select?: workerFilesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the workerFiles
+     */
+    omit?: workerFilesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: workerFilesInclude<ExtArgs> | null
+    /**
+     * Filter, which workerFiles to fetch.
+     */
+    where?: workerFilesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of workerFiles to fetch.
+     */
+    orderBy?: workerFilesOrderByWithRelationInput | workerFilesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for workerFiles.
+     */
+    cursor?: workerFilesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` workerFiles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` workerFiles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of workerFiles.
+     */
+    distinct?: WorkerFilesScalarFieldEnum | WorkerFilesScalarFieldEnum[]
+  }
+
+  /**
+   * workerFiles findFirstOrThrow
+   */
+  export type workerFilesFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the workerFiles
+     */
+    select?: workerFilesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the workerFiles
+     */
+    omit?: workerFilesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: workerFilesInclude<ExtArgs> | null
+    /**
+     * Filter, which workerFiles to fetch.
+     */
+    where?: workerFilesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of workerFiles to fetch.
+     */
+    orderBy?: workerFilesOrderByWithRelationInput | workerFilesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for workerFiles.
+     */
+    cursor?: workerFilesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` workerFiles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` workerFiles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of workerFiles.
+     */
+    distinct?: WorkerFilesScalarFieldEnum | WorkerFilesScalarFieldEnum[]
+  }
+
+  /**
+   * workerFiles findMany
+   */
+  export type workerFilesFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the workerFiles
+     */
+    select?: workerFilesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the workerFiles
+     */
+    omit?: workerFilesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: workerFilesInclude<ExtArgs> | null
+    /**
+     * Filter, which workerFiles to fetch.
+     */
+    where?: workerFilesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of workerFiles to fetch.
+     */
+    orderBy?: workerFilesOrderByWithRelationInput | workerFilesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing workerFiles.
+     */
+    cursor?: workerFilesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` workerFiles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` workerFiles.
+     */
+    skip?: number
+    distinct?: WorkerFilesScalarFieldEnum | WorkerFilesScalarFieldEnum[]
+  }
+
+  /**
+   * workerFiles create
+   */
+  export type workerFilesCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the workerFiles
+     */
+    select?: workerFilesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the workerFiles
+     */
+    omit?: workerFilesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: workerFilesInclude<ExtArgs> | null
+    /**
+     * The data needed to create a workerFiles.
+     */
+    data: XOR<workerFilesCreateInput, workerFilesUncheckedCreateInput>
+  }
+
+  /**
+   * workerFiles createMany
+   */
+  export type workerFilesCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many workerFiles.
+     */
+    data: workerFilesCreateManyInput | workerFilesCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * workerFiles createManyAndReturn
+   */
+  export type workerFilesCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the workerFiles
+     */
+    select?: workerFilesSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the workerFiles
+     */
+    omit?: workerFilesOmit<ExtArgs> | null
+    /**
+     * The data used to create many workerFiles.
+     */
+    data: workerFilesCreateManyInput | workerFilesCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: workerFilesIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * workerFiles update
+   */
+  export type workerFilesUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the workerFiles
+     */
+    select?: workerFilesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the workerFiles
+     */
+    omit?: workerFilesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: workerFilesInclude<ExtArgs> | null
+    /**
+     * The data needed to update a workerFiles.
+     */
+    data: XOR<workerFilesUpdateInput, workerFilesUncheckedUpdateInput>
+    /**
+     * Choose, which workerFiles to update.
+     */
+    where: workerFilesWhereUniqueInput
+  }
+
+  /**
+   * workerFiles updateMany
+   */
+  export type workerFilesUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update workerFiles.
+     */
+    data: XOR<workerFilesUpdateManyMutationInput, workerFilesUncheckedUpdateManyInput>
+    /**
+     * Filter which workerFiles to update
+     */
+    where?: workerFilesWhereInput
+    /**
+     * Limit how many workerFiles to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * workerFiles updateManyAndReturn
+   */
+  export type workerFilesUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the workerFiles
+     */
+    select?: workerFilesSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the workerFiles
+     */
+    omit?: workerFilesOmit<ExtArgs> | null
+    /**
+     * The data used to update workerFiles.
+     */
+    data: XOR<workerFilesUpdateManyMutationInput, workerFilesUncheckedUpdateManyInput>
+    /**
+     * Filter which workerFiles to update
+     */
+    where?: workerFilesWhereInput
+    /**
+     * Limit how many workerFiles to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: workerFilesIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * workerFiles upsert
+   */
+  export type workerFilesUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the workerFiles
+     */
+    select?: workerFilesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the workerFiles
+     */
+    omit?: workerFilesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: workerFilesInclude<ExtArgs> | null
+    /**
+     * The filter to search for the workerFiles to update in case it exists.
+     */
+    where: workerFilesWhereUniqueInput
+    /**
+     * In case the workerFiles found by the `where` argument doesn't exist, create a new workerFiles with this data.
+     */
+    create: XOR<workerFilesCreateInput, workerFilesUncheckedCreateInput>
+    /**
+     * In case the workerFiles was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<workerFilesUpdateInput, workerFilesUncheckedUpdateInput>
+  }
+
+  /**
+   * workerFiles delete
+   */
+  export type workerFilesDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the workerFiles
+     */
+    select?: workerFilesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the workerFiles
+     */
+    omit?: workerFilesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: workerFilesInclude<ExtArgs> | null
+    /**
+     * Filter which workerFiles to delete.
+     */
+    where: workerFilesWhereUniqueInput
+  }
+
+  /**
+   * workerFiles deleteMany
+   */
+  export type workerFilesDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which workerFiles to delete
+     */
+    where?: workerFilesWhereInput
+    /**
+     * Limit how many workerFiles to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * workerFiles without action
+   */
+  export type workerFilesDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the workerFiles
+     */
+    select?: workerFilesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the workerFiles
+     */
+    omit?: workerFilesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: workerFilesInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model companyFiles
+   */
+
+  export type AggregateCompanyFiles = {
+    _count: CompanyFilesCountAggregateOutputType | null
+    _avg: CompanyFilesAvgAggregateOutputType | null
+    _sum: CompanyFilesSumAggregateOutputType | null
+    _min: CompanyFilesMinAggregateOutputType | null
+    _max: CompanyFilesMaxAggregateOutputType | null
+  }
+
+  export type CompanyFilesAvgAggregateOutputType = {
+    id: number | null
+    companyID: number | null
+  }
+
+  export type CompanyFilesSumAggregateOutputType = {
+    id: number | null
+    companyID: number | null
+  }
+
+  export type CompanyFilesMinAggregateOutputType = {
+    id: number | null
+    companyID: number | null
+    fileURL: string | null
+    objectKey: string | null
+    uploadedAt: Date | null
+  }
+
+  export type CompanyFilesMaxAggregateOutputType = {
+    id: number | null
+    companyID: number | null
+    fileURL: string | null
+    objectKey: string | null
+    uploadedAt: Date | null
+  }
+
+  export type CompanyFilesCountAggregateOutputType = {
+    id: number
+    companyID: number
+    fileURL: number
+    objectKey: number
+    uploadedAt: number
+    _all: number
+  }
+
+
+  export type CompanyFilesAvgAggregateInputType = {
+    id?: true
+    companyID?: true
+  }
+
+  export type CompanyFilesSumAggregateInputType = {
+    id?: true
+    companyID?: true
+  }
+
+  export type CompanyFilesMinAggregateInputType = {
+    id?: true
+    companyID?: true
+    fileURL?: true
+    objectKey?: true
+    uploadedAt?: true
+  }
+
+  export type CompanyFilesMaxAggregateInputType = {
+    id?: true
+    companyID?: true
+    fileURL?: true
+    objectKey?: true
+    uploadedAt?: true
+  }
+
+  export type CompanyFilesCountAggregateInputType = {
+    id?: true
+    companyID?: true
+    fileURL?: true
+    objectKey?: true
+    uploadedAt?: true
+    _all?: true
+  }
+
+  export type CompanyFilesAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which companyFiles to aggregate.
+     */
+    where?: companyFilesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of companyFiles to fetch.
+     */
+    orderBy?: companyFilesOrderByWithRelationInput | companyFilesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: companyFilesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` companyFiles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` companyFiles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned companyFiles
+    **/
+    _count?: true | CompanyFilesCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: CompanyFilesAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: CompanyFilesSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CompanyFilesMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CompanyFilesMaxAggregateInputType
+  }
+
+  export type GetCompanyFilesAggregateType<T extends CompanyFilesAggregateArgs> = {
+        [P in keyof T & keyof AggregateCompanyFiles]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCompanyFiles[P]>
+      : GetScalarType<T[P], AggregateCompanyFiles[P]>
+  }
+
+
+
+
+  export type companyFilesGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: companyFilesWhereInput
+    orderBy?: companyFilesOrderByWithAggregationInput | companyFilesOrderByWithAggregationInput[]
+    by: CompanyFilesScalarFieldEnum[] | CompanyFilesScalarFieldEnum
+    having?: companyFilesScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CompanyFilesCountAggregateInputType | true
+    _avg?: CompanyFilesAvgAggregateInputType
+    _sum?: CompanyFilesSumAggregateInputType
+    _min?: CompanyFilesMinAggregateInputType
+    _max?: CompanyFilesMaxAggregateInputType
+  }
+
+  export type CompanyFilesGroupByOutputType = {
+    id: number
+    companyID: number
+    fileURL: string
+    objectKey: string
+    uploadedAt: Date
+    _count: CompanyFilesCountAggregateOutputType | null
+    _avg: CompanyFilesAvgAggregateOutputType | null
+    _sum: CompanyFilesSumAggregateOutputType | null
+    _min: CompanyFilesMinAggregateOutputType | null
+    _max: CompanyFilesMaxAggregateOutputType | null
+  }
+
+  type GetCompanyFilesGroupByPayload<T extends companyFilesGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CompanyFilesGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CompanyFilesGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CompanyFilesGroupByOutputType[P]>
+            : GetScalarType<T[P], CompanyFilesGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type companyFilesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    companyID?: boolean
+    fileURL?: boolean
+    objectKey?: boolean
+    uploadedAt?: boolean
+    company?: boolean | CompanyDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["companyFiles"]>
+
+  export type companyFilesSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    companyID?: boolean
+    fileURL?: boolean
+    objectKey?: boolean
+    uploadedAt?: boolean
+    company?: boolean | CompanyDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["companyFiles"]>
+
+  export type companyFilesSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    companyID?: boolean
+    fileURL?: boolean
+    objectKey?: boolean
+    uploadedAt?: boolean
+    company?: boolean | CompanyDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["companyFiles"]>
+
+  export type companyFilesSelectScalar = {
+    id?: boolean
+    companyID?: boolean
+    fileURL?: boolean
+    objectKey?: boolean
+    uploadedAt?: boolean
+  }
+
+  export type companyFilesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "companyID" | "fileURL" | "objectKey" | "uploadedAt", ExtArgs["result"]["companyFiles"]>
+  export type companyFilesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    company?: boolean | CompanyDefaultArgs<ExtArgs>
+  }
+  export type companyFilesIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    company?: boolean | CompanyDefaultArgs<ExtArgs>
+  }
+  export type companyFilesIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    company?: boolean | CompanyDefaultArgs<ExtArgs>
+  }
+
+  export type $companyFilesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "companyFiles"
+    objects: {
+      company: Prisma.$CompanyPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      companyID: number
+      fileURL: string
+      objectKey: string
+      uploadedAt: Date
+    }, ExtArgs["result"]["companyFiles"]>
+    composites: {}
+  }
+
+  type companyFilesGetPayload<S extends boolean | null | undefined | companyFilesDefaultArgs> = $Result.GetResult<Prisma.$companyFilesPayload, S>
+
+  type companyFilesCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<companyFilesFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CompanyFilesCountAggregateInputType | true
+    }
+
+  export interface companyFilesDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['companyFiles'], meta: { name: 'companyFiles' } }
+    /**
+     * Find zero or one CompanyFiles that matches the filter.
+     * @param {companyFilesFindUniqueArgs} args - Arguments to find a CompanyFiles
+     * @example
+     * // Get one CompanyFiles
+     * const companyFiles = await prisma.companyFiles.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends companyFilesFindUniqueArgs>(args: SelectSubset<T, companyFilesFindUniqueArgs<ExtArgs>>): Prisma__companyFilesClient<$Result.GetResult<Prisma.$companyFilesPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one CompanyFiles that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {companyFilesFindUniqueOrThrowArgs} args - Arguments to find a CompanyFiles
+     * @example
+     * // Get one CompanyFiles
+     * const companyFiles = await prisma.companyFiles.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends companyFilesFindUniqueOrThrowArgs>(args: SelectSubset<T, companyFilesFindUniqueOrThrowArgs<ExtArgs>>): Prisma__companyFilesClient<$Result.GetResult<Prisma.$companyFilesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first CompanyFiles that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {companyFilesFindFirstArgs} args - Arguments to find a CompanyFiles
+     * @example
+     * // Get one CompanyFiles
+     * const companyFiles = await prisma.companyFiles.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends companyFilesFindFirstArgs>(args?: SelectSubset<T, companyFilesFindFirstArgs<ExtArgs>>): Prisma__companyFilesClient<$Result.GetResult<Prisma.$companyFilesPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first CompanyFiles that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {companyFilesFindFirstOrThrowArgs} args - Arguments to find a CompanyFiles
+     * @example
+     * // Get one CompanyFiles
+     * const companyFiles = await prisma.companyFiles.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends companyFilesFindFirstOrThrowArgs>(args?: SelectSubset<T, companyFilesFindFirstOrThrowArgs<ExtArgs>>): Prisma__companyFilesClient<$Result.GetResult<Prisma.$companyFilesPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more CompanyFiles that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {companyFilesFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all CompanyFiles
+     * const companyFiles = await prisma.companyFiles.findMany()
+     * 
+     * // Get first 10 CompanyFiles
+     * const companyFiles = await prisma.companyFiles.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const companyFilesWithIdOnly = await prisma.companyFiles.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends companyFilesFindManyArgs>(args?: SelectSubset<T, companyFilesFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$companyFilesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a CompanyFiles.
+     * @param {companyFilesCreateArgs} args - Arguments to create a CompanyFiles.
+     * @example
+     * // Create one CompanyFiles
+     * const CompanyFiles = await prisma.companyFiles.create({
+     *   data: {
+     *     // ... data to create a CompanyFiles
+     *   }
+     * })
+     * 
+     */
+    create<T extends companyFilesCreateArgs>(args: SelectSubset<T, companyFilesCreateArgs<ExtArgs>>): Prisma__companyFilesClient<$Result.GetResult<Prisma.$companyFilesPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many CompanyFiles.
+     * @param {companyFilesCreateManyArgs} args - Arguments to create many CompanyFiles.
+     * @example
+     * // Create many CompanyFiles
+     * const companyFiles = await prisma.companyFiles.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends companyFilesCreateManyArgs>(args?: SelectSubset<T, companyFilesCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many CompanyFiles and returns the data saved in the database.
+     * @param {companyFilesCreateManyAndReturnArgs} args - Arguments to create many CompanyFiles.
+     * @example
+     * // Create many CompanyFiles
+     * const companyFiles = await prisma.companyFiles.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many CompanyFiles and only return the `id`
+     * const companyFilesWithIdOnly = await prisma.companyFiles.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends companyFilesCreateManyAndReturnArgs>(args?: SelectSubset<T, companyFilesCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$companyFilesPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a CompanyFiles.
+     * @param {companyFilesDeleteArgs} args - Arguments to delete one CompanyFiles.
+     * @example
+     * // Delete one CompanyFiles
+     * const CompanyFiles = await prisma.companyFiles.delete({
+     *   where: {
+     *     // ... filter to delete one CompanyFiles
+     *   }
+     * })
+     * 
+     */
+    delete<T extends companyFilesDeleteArgs>(args: SelectSubset<T, companyFilesDeleteArgs<ExtArgs>>): Prisma__companyFilesClient<$Result.GetResult<Prisma.$companyFilesPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one CompanyFiles.
+     * @param {companyFilesUpdateArgs} args - Arguments to update one CompanyFiles.
+     * @example
+     * // Update one CompanyFiles
+     * const companyFiles = await prisma.companyFiles.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends companyFilesUpdateArgs>(args: SelectSubset<T, companyFilesUpdateArgs<ExtArgs>>): Prisma__companyFilesClient<$Result.GetResult<Prisma.$companyFilesPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more CompanyFiles.
+     * @param {companyFilesDeleteManyArgs} args - Arguments to filter CompanyFiles to delete.
+     * @example
+     * // Delete a few CompanyFiles
+     * const { count } = await prisma.companyFiles.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends companyFilesDeleteManyArgs>(args?: SelectSubset<T, companyFilesDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CompanyFiles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {companyFilesUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many CompanyFiles
+     * const companyFiles = await prisma.companyFiles.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends companyFilesUpdateManyArgs>(args: SelectSubset<T, companyFilesUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CompanyFiles and returns the data updated in the database.
+     * @param {companyFilesUpdateManyAndReturnArgs} args - Arguments to update many CompanyFiles.
+     * @example
+     * // Update many CompanyFiles
+     * const companyFiles = await prisma.companyFiles.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more CompanyFiles and only return the `id`
+     * const companyFilesWithIdOnly = await prisma.companyFiles.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends companyFilesUpdateManyAndReturnArgs>(args: SelectSubset<T, companyFilesUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$companyFilesPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one CompanyFiles.
+     * @param {companyFilesUpsertArgs} args - Arguments to update or create a CompanyFiles.
+     * @example
+     * // Update or create a CompanyFiles
+     * const companyFiles = await prisma.companyFiles.upsert({
+     *   create: {
+     *     // ... data to create a CompanyFiles
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the CompanyFiles we want to update
+     *   }
+     * })
+     */
+    upsert<T extends companyFilesUpsertArgs>(args: SelectSubset<T, companyFilesUpsertArgs<ExtArgs>>): Prisma__companyFilesClient<$Result.GetResult<Prisma.$companyFilesPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of CompanyFiles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {companyFilesCountArgs} args - Arguments to filter CompanyFiles to count.
+     * @example
+     * // Count the number of CompanyFiles
+     * const count = await prisma.companyFiles.count({
+     *   where: {
+     *     // ... the filter for the CompanyFiles we want to count
+     *   }
+     * })
+    **/
+    count<T extends companyFilesCountArgs>(
+      args?: Subset<T, companyFilesCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CompanyFilesCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a CompanyFiles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CompanyFilesAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CompanyFilesAggregateArgs>(args: Subset<T, CompanyFilesAggregateArgs>): Prisma.PrismaPromise<GetCompanyFilesAggregateType<T>>
+
+    /**
+     * Group by CompanyFiles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {companyFilesGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends companyFilesGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: companyFilesGroupByArgs['orderBy'] }
+        : { orderBy?: companyFilesGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, companyFilesGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCompanyFilesGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the companyFiles model
+   */
+  readonly fields: companyFilesFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for companyFiles.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__companyFilesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    company<T extends CompanyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CompanyDefaultArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the companyFiles model
+   */
+  interface companyFilesFieldRefs {
+    readonly id: FieldRef<"companyFiles", 'Int'>
+    readonly companyID: FieldRef<"companyFiles", 'Int'>
+    readonly fileURL: FieldRef<"companyFiles", 'String'>
+    readonly objectKey: FieldRef<"companyFiles", 'String'>
+    readonly uploadedAt: FieldRef<"companyFiles", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * companyFiles findUnique
+   */
+  export type companyFilesFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the companyFiles
+     */
+    select?: companyFilesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the companyFiles
+     */
+    omit?: companyFilesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: companyFilesInclude<ExtArgs> | null
+    /**
+     * Filter, which companyFiles to fetch.
+     */
+    where: companyFilesWhereUniqueInput
+  }
+
+  /**
+   * companyFiles findUniqueOrThrow
+   */
+  export type companyFilesFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the companyFiles
+     */
+    select?: companyFilesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the companyFiles
+     */
+    omit?: companyFilesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: companyFilesInclude<ExtArgs> | null
+    /**
+     * Filter, which companyFiles to fetch.
+     */
+    where: companyFilesWhereUniqueInput
+  }
+
+  /**
+   * companyFiles findFirst
+   */
+  export type companyFilesFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the companyFiles
+     */
+    select?: companyFilesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the companyFiles
+     */
+    omit?: companyFilesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: companyFilesInclude<ExtArgs> | null
+    /**
+     * Filter, which companyFiles to fetch.
+     */
+    where?: companyFilesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of companyFiles to fetch.
+     */
+    orderBy?: companyFilesOrderByWithRelationInput | companyFilesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for companyFiles.
+     */
+    cursor?: companyFilesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` companyFiles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` companyFiles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of companyFiles.
+     */
+    distinct?: CompanyFilesScalarFieldEnum | CompanyFilesScalarFieldEnum[]
+  }
+
+  /**
+   * companyFiles findFirstOrThrow
+   */
+  export type companyFilesFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the companyFiles
+     */
+    select?: companyFilesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the companyFiles
+     */
+    omit?: companyFilesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: companyFilesInclude<ExtArgs> | null
+    /**
+     * Filter, which companyFiles to fetch.
+     */
+    where?: companyFilesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of companyFiles to fetch.
+     */
+    orderBy?: companyFilesOrderByWithRelationInput | companyFilesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for companyFiles.
+     */
+    cursor?: companyFilesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` companyFiles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` companyFiles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of companyFiles.
+     */
+    distinct?: CompanyFilesScalarFieldEnum | CompanyFilesScalarFieldEnum[]
+  }
+
+  /**
+   * companyFiles findMany
+   */
+  export type companyFilesFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the companyFiles
+     */
+    select?: companyFilesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the companyFiles
+     */
+    omit?: companyFilesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: companyFilesInclude<ExtArgs> | null
+    /**
+     * Filter, which companyFiles to fetch.
+     */
+    where?: companyFilesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of companyFiles to fetch.
+     */
+    orderBy?: companyFilesOrderByWithRelationInput | companyFilesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing companyFiles.
+     */
+    cursor?: companyFilesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` companyFiles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` companyFiles.
+     */
+    skip?: number
+    distinct?: CompanyFilesScalarFieldEnum | CompanyFilesScalarFieldEnum[]
+  }
+
+  /**
+   * companyFiles create
+   */
+  export type companyFilesCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the companyFiles
+     */
+    select?: companyFilesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the companyFiles
+     */
+    omit?: companyFilesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: companyFilesInclude<ExtArgs> | null
+    /**
+     * The data needed to create a companyFiles.
+     */
+    data: XOR<companyFilesCreateInput, companyFilesUncheckedCreateInput>
+  }
+
+  /**
+   * companyFiles createMany
+   */
+  export type companyFilesCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many companyFiles.
+     */
+    data: companyFilesCreateManyInput | companyFilesCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * companyFiles createManyAndReturn
+   */
+  export type companyFilesCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the companyFiles
+     */
+    select?: companyFilesSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the companyFiles
+     */
+    omit?: companyFilesOmit<ExtArgs> | null
+    /**
+     * The data used to create many companyFiles.
+     */
+    data: companyFilesCreateManyInput | companyFilesCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: companyFilesIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * companyFiles update
+   */
+  export type companyFilesUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the companyFiles
+     */
+    select?: companyFilesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the companyFiles
+     */
+    omit?: companyFilesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: companyFilesInclude<ExtArgs> | null
+    /**
+     * The data needed to update a companyFiles.
+     */
+    data: XOR<companyFilesUpdateInput, companyFilesUncheckedUpdateInput>
+    /**
+     * Choose, which companyFiles to update.
+     */
+    where: companyFilesWhereUniqueInput
+  }
+
+  /**
+   * companyFiles updateMany
+   */
+  export type companyFilesUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update companyFiles.
+     */
+    data: XOR<companyFilesUpdateManyMutationInput, companyFilesUncheckedUpdateManyInput>
+    /**
+     * Filter which companyFiles to update
+     */
+    where?: companyFilesWhereInput
+    /**
+     * Limit how many companyFiles to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * companyFiles updateManyAndReturn
+   */
+  export type companyFilesUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the companyFiles
+     */
+    select?: companyFilesSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the companyFiles
+     */
+    omit?: companyFilesOmit<ExtArgs> | null
+    /**
+     * The data used to update companyFiles.
+     */
+    data: XOR<companyFilesUpdateManyMutationInput, companyFilesUncheckedUpdateManyInput>
+    /**
+     * Filter which companyFiles to update
+     */
+    where?: companyFilesWhereInput
+    /**
+     * Limit how many companyFiles to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: companyFilesIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * companyFiles upsert
+   */
+  export type companyFilesUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the companyFiles
+     */
+    select?: companyFilesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the companyFiles
+     */
+    omit?: companyFilesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: companyFilesInclude<ExtArgs> | null
+    /**
+     * The filter to search for the companyFiles to update in case it exists.
+     */
+    where: companyFilesWhereUniqueInput
+    /**
+     * In case the companyFiles found by the `where` argument doesn't exist, create a new companyFiles with this data.
+     */
+    create: XOR<companyFilesCreateInput, companyFilesUncheckedCreateInput>
+    /**
+     * In case the companyFiles was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<companyFilesUpdateInput, companyFilesUncheckedUpdateInput>
+  }
+
+  /**
+   * companyFiles delete
+   */
+  export type companyFilesDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the companyFiles
+     */
+    select?: companyFilesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the companyFiles
+     */
+    omit?: companyFilesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: companyFilesInclude<ExtArgs> | null
+    /**
+     * Filter which companyFiles to delete.
+     */
+    where: companyFilesWhereUniqueInput
+  }
+
+  /**
+   * companyFiles deleteMany
+   */
+  export type companyFilesDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which companyFiles to delete
+     */
+    where?: companyFilesWhereInput
+    /**
+     * Limit how many companyFiles to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * companyFiles without action
+   */
+  export type companyFilesDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the companyFiles
+     */
+    select?: companyFilesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the companyFiles
+     */
+    omit?: companyFilesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: companyFilesInclude<ExtArgs> | null
   }
 
 
@@ -27070,6 +30742,39 @@ export namespace Prisma {
   export type AdminScalarFieldEnum = (typeof AdminScalarFieldEnum)[keyof typeof AdminScalarFieldEnum]
 
 
+  export const UserFilesScalarFieldEnum: {
+    id: 'id',
+    userID: 'userID',
+    fileURL: 'fileURL',
+    objectKey: 'objectKey',
+    uploadedAt: 'uploadedAt'
+  };
+
+  export type UserFilesScalarFieldEnum = (typeof UserFilesScalarFieldEnum)[keyof typeof UserFilesScalarFieldEnum]
+
+
+  export const WorkerFilesScalarFieldEnum: {
+    id: 'id',
+    workerID: 'workerID',
+    fileURL: 'fileURL',
+    objectKey: 'objectKey',
+    uploadedAt: 'uploadedAt'
+  };
+
+  export type WorkerFilesScalarFieldEnum = (typeof WorkerFilesScalarFieldEnum)[keyof typeof WorkerFilesScalarFieldEnum]
+
+
+  export const CompanyFilesScalarFieldEnum: {
+    id: 'id',
+    companyID: 'companyID',
+    fileURL: 'fileURL',
+    objectKey: 'objectKey',
+    uploadedAt: 'uploadedAt'
+  };
+
+  export type CompanyFilesScalarFieldEnum = (typeof CompanyFilesScalarFieldEnum)[keyof typeof CompanyFilesScalarFieldEnum]
+
+
   export const UsersCompaniesScalarFieldEnum: {
     id: 'id',
     userID: 'userID',
@@ -27482,6 +31187,7 @@ export namespace Prisma {
     contracts?: ContractsListRelationFilter
     machinery?: MachineryListRelationFilter
     usersCompanies?: UsersCompaniesListRelationFilter
+    userFiles?: UserFilesListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -27508,6 +31214,7 @@ export namespace Prisma {
     contracts?: contractsOrderByRelationAggregateInput
     machinery?: machineryOrderByRelationAggregateInput
     usersCompanies?: usersCompaniesOrderByRelationAggregateInput
+    userFiles?: userFilesOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -27537,6 +31244,7 @@ export namespace Prisma {
     contracts?: ContractsListRelationFilter
     machinery?: MachineryListRelationFilter
     usersCompanies?: UsersCompaniesListRelationFilter
+    userFiles?: UserFilesListRelationFilter
   }, "userID" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -27608,6 +31316,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesListRelationFilter
     workersCompanies?: WorkersCompaniesListRelationFilter
     usersCompanies?: UsersCompaniesListRelationFilter
+    companyFiles?: CompanyFilesListRelationFilter
   }
 
   export type CompanyOrderByWithRelationInput = {
@@ -27638,6 +31347,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesOrderByRelationAggregateInput
     workersCompanies?: workersCompaniesOrderByRelationAggregateInput
     usersCompanies?: usersCompaniesOrderByRelationAggregateInput
+    companyFiles?: companyFilesOrderByRelationAggregateInput
   }
 
   export type CompanyWhereUniqueInput = Prisma.AtLeast<{
@@ -27671,6 +31381,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesListRelationFilter
     workersCompanies?: WorkersCompaniesListRelationFilter
     usersCompanies?: UsersCompaniesListRelationFilter
+    companyFiles?: CompanyFilesListRelationFilter
   }, "companyID" | "userID" | "email">
 
   export type CompanyOrderByWithAggregationInput = {
@@ -27780,6 +31491,7 @@ export namespace Prisma {
     jobHistory?: JobHistoryListRelationFilter
     shiftSchedules?: ShiftScheduleListRelationFilter
     workersCompanies?: WorkersCompaniesListRelationFilter
+    workerFiles?: WorkerFilesListRelationFilter
   }
 
   export type WorkerOrderByWithRelationInput = {
@@ -27797,6 +31509,7 @@ export namespace Prisma {
     jobHistory?: JobHistoryOrderByRelationAggregateInput
     shiftSchedules?: ShiftScheduleOrderByRelationAggregateInput
     workersCompanies?: workersCompaniesOrderByRelationAggregateInput
+    workerFiles?: workerFilesOrderByRelationAggregateInput
   }
 
   export type WorkerWhereUniqueInput = Prisma.AtLeast<{
@@ -27817,6 +31530,7 @@ export namespace Prisma {
     jobHistory?: JobHistoryListRelationFilter
     shiftSchedules?: ShiftScheduleListRelationFilter
     workersCompanies?: WorkersCompaniesListRelationFilter
+    workerFiles?: WorkerFilesListRelationFilter
   }, "workerid" | "email">
 
   export type WorkerOrderByWithAggregationInput = {
@@ -27904,6 +31618,177 @@ export namespace Prisma {
     password?: StringWithAggregatesFilter<"Admin"> | string
     role?: EnumRoleWithAggregatesFilter<"Admin"> | $Enums.Role
     refreshToken?: StringNullableWithAggregatesFilter<"Admin"> | string | null
+  }
+
+  export type userFilesWhereInput = {
+    AND?: userFilesWhereInput | userFilesWhereInput[]
+    OR?: userFilesWhereInput[]
+    NOT?: userFilesWhereInput | userFilesWhereInput[]
+    id?: IntFilter<"userFiles"> | number
+    userID?: IntFilter<"userFiles"> | number
+    fileURL?: StringFilter<"userFiles"> | string
+    objectKey?: StringFilter<"userFiles"> | string
+    uploadedAt?: DateTimeFilter<"userFiles"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type userFilesOrderByWithRelationInput = {
+    id?: SortOrder
+    userID?: SortOrder
+    fileURL?: SortOrder
+    objectKey?: SortOrder
+    uploadedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type userFilesWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: userFilesWhereInput | userFilesWhereInput[]
+    OR?: userFilesWhereInput[]
+    NOT?: userFilesWhereInput | userFilesWhereInput[]
+    userID?: IntFilter<"userFiles"> | number
+    fileURL?: StringFilter<"userFiles"> | string
+    objectKey?: StringFilter<"userFiles"> | string
+    uploadedAt?: DateTimeFilter<"userFiles"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type userFilesOrderByWithAggregationInput = {
+    id?: SortOrder
+    userID?: SortOrder
+    fileURL?: SortOrder
+    objectKey?: SortOrder
+    uploadedAt?: SortOrder
+    _count?: userFilesCountOrderByAggregateInput
+    _avg?: userFilesAvgOrderByAggregateInput
+    _max?: userFilesMaxOrderByAggregateInput
+    _min?: userFilesMinOrderByAggregateInput
+    _sum?: userFilesSumOrderByAggregateInput
+  }
+
+  export type userFilesScalarWhereWithAggregatesInput = {
+    AND?: userFilesScalarWhereWithAggregatesInput | userFilesScalarWhereWithAggregatesInput[]
+    OR?: userFilesScalarWhereWithAggregatesInput[]
+    NOT?: userFilesScalarWhereWithAggregatesInput | userFilesScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"userFiles"> | number
+    userID?: IntWithAggregatesFilter<"userFiles"> | number
+    fileURL?: StringWithAggregatesFilter<"userFiles"> | string
+    objectKey?: StringWithAggregatesFilter<"userFiles"> | string
+    uploadedAt?: DateTimeWithAggregatesFilter<"userFiles"> | Date | string
+  }
+
+  export type workerFilesWhereInput = {
+    AND?: workerFilesWhereInput | workerFilesWhereInput[]
+    OR?: workerFilesWhereInput[]
+    NOT?: workerFilesWhereInput | workerFilesWhereInput[]
+    id?: IntFilter<"workerFiles"> | number
+    workerID?: IntFilter<"workerFiles"> | number
+    fileURL?: StringFilter<"workerFiles"> | string
+    objectKey?: StringFilter<"workerFiles"> | string
+    uploadedAt?: DateTimeFilter<"workerFiles"> | Date | string
+    worker?: XOR<WorkerScalarRelationFilter, WorkerWhereInput>
+  }
+
+  export type workerFilesOrderByWithRelationInput = {
+    id?: SortOrder
+    workerID?: SortOrder
+    fileURL?: SortOrder
+    objectKey?: SortOrder
+    uploadedAt?: SortOrder
+    worker?: WorkerOrderByWithRelationInput
+  }
+
+  export type workerFilesWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: workerFilesWhereInput | workerFilesWhereInput[]
+    OR?: workerFilesWhereInput[]
+    NOT?: workerFilesWhereInput | workerFilesWhereInput[]
+    workerID?: IntFilter<"workerFiles"> | number
+    fileURL?: StringFilter<"workerFiles"> | string
+    objectKey?: StringFilter<"workerFiles"> | string
+    uploadedAt?: DateTimeFilter<"workerFiles"> | Date | string
+    worker?: XOR<WorkerScalarRelationFilter, WorkerWhereInput>
+  }, "id">
+
+  export type workerFilesOrderByWithAggregationInput = {
+    id?: SortOrder
+    workerID?: SortOrder
+    fileURL?: SortOrder
+    objectKey?: SortOrder
+    uploadedAt?: SortOrder
+    _count?: workerFilesCountOrderByAggregateInput
+    _avg?: workerFilesAvgOrderByAggregateInput
+    _max?: workerFilesMaxOrderByAggregateInput
+    _min?: workerFilesMinOrderByAggregateInput
+    _sum?: workerFilesSumOrderByAggregateInput
+  }
+
+  export type workerFilesScalarWhereWithAggregatesInput = {
+    AND?: workerFilesScalarWhereWithAggregatesInput | workerFilesScalarWhereWithAggregatesInput[]
+    OR?: workerFilesScalarWhereWithAggregatesInput[]
+    NOT?: workerFilesScalarWhereWithAggregatesInput | workerFilesScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"workerFiles"> | number
+    workerID?: IntWithAggregatesFilter<"workerFiles"> | number
+    fileURL?: StringWithAggregatesFilter<"workerFiles"> | string
+    objectKey?: StringWithAggregatesFilter<"workerFiles"> | string
+    uploadedAt?: DateTimeWithAggregatesFilter<"workerFiles"> | Date | string
+  }
+
+  export type companyFilesWhereInput = {
+    AND?: companyFilesWhereInput | companyFilesWhereInput[]
+    OR?: companyFilesWhereInput[]
+    NOT?: companyFilesWhereInput | companyFilesWhereInput[]
+    id?: IntFilter<"companyFiles"> | number
+    companyID?: IntFilter<"companyFiles"> | number
+    fileURL?: StringFilter<"companyFiles"> | string
+    objectKey?: StringFilter<"companyFiles"> | string
+    uploadedAt?: DateTimeFilter<"companyFiles"> | Date | string
+    company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
+  }
+
+  export type companyFilesOrderByWithRelationInput = {
+    id?: SortOrder
+    companyID?: SortOrder
+    fileURL?: SortOrder
+    objectKey?: SortOrder
+    uploadedAt?: SortOrder
+    company?: CompanyOrderByWithRelationInput
+  }
+
+  export type companyFilesWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: companyFilesWhereInput | companyFilesWhereInput[]
+    OR?: companyFilesWhereInput[]
+    NOT?: companyFilesWhereInput | companyFilesWhereInput[]
+    companyID?: IntFilter<"companyFiles"> | number
+    fileURL?: StringFilter<"companyFiles"> | string
+    objectKey?: StringFilter<"companyFiles"> | string
+    uploadedAt?: DateTimeFilter<"companyFiles"> | Date | string
+    company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
+  }, "id">
+
+  export type companyFilesOrderByWithAggregationInput = {
+    id?: SortOrder
+    companyID?: SortOrder
+    fileURL?: SortOrder
+    objectKey?: SortOrder
+    uploadedAt?: SortOrder
+    _count?: companyFilesCountOrderByAggregateInput
+    _avg?: companyFilesAvgOrderByAggregateInput
+    _max?: companyFilesMaxOrderByAggregateInput
+    _min?: companyFilesMinOrderByAggregateInput
+    _sum?: companyFilesSumOrderByAggregateInput
+  }
+
+  export type companyFilesScalarWhereWithAggregatesInput = {
+    AND?: companyFilesScalarWhereWithAggregatesInput | companyFilesScalarWhereWithAggregatesInput[]
+    OR?: companyFilesScalarWhereWithAggregatesInput[]
+    NOT?: companyFilesScalarWhereWithAggregatesInput | companyFilesScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"companyFiles"> | number
+    companyID?: IntWithAggregatesFilter<"companyFiles"> | number
+    fileURL?: StringWithAggregatesFilter<"companyFiles"> | string
+    objectKey?: StringWithAggregatesFilter<"companyFiles"> | string
+    uploadedAt?: DateTimeWithAggregatesFilter<"companyFiles"> | Date | string
   }
 
   export type usersCompaniesWhereInput = {
@@ -28983,6 +32868,7 @@ export namespace Prisma {
     contracts?: contractsCreateNestedManyWithoutUserInput
     machinery?: machineryCreateNestedManyWithoutClientInput
     usersCompanies?: usersCompaniesCreateNestedManyWithoutUserInput
+    userFiles?: userFilesCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -29007,6 +32893,7 @@ export namespace Prisma {
     contracts?: contractsUncheckedCreateNestedManyWithoutUserInput
     machinery?: machineryUncheckedCreateNestedManyWithoutClientInput
     usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutUserInput
+    userFiles?: userFilesUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -29030,6 +32917,7 @@ export namespace Prisma {
     contracts?: contractsUpdateManyWithoutUserNestedInput
     machinery?: machineryUpdateManyWithoutClientNestedInput
     usersCompanies?: usersCompaniesUpdateManyWithoutUserNestedInput
+    userFiles?: userFilesUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -29054,6 +32942,7 @@ export namespace Prisma {
     contracts?: contractsUncheckedUpdateManyWithoutUserNestedInput
     machinery?: machineryUncheckedUpdateManyWithoutClientNestedInput
     usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutUserNestedInput
+    userFiles?: userFilesUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -29124,6 +33013,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
+    companyFiles?: companyFilesCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateInput = {
@@ -29153,6 +33043,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
+    companyFiles?: companyFilesUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUpdateInput = {
@@ -29181,6 +33072,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
+    companyFiles?: companyFilesUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateInput = {
@@ -29210,6 +33102,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
+    companyFiles?: companyFilesUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyCreateManyInput = {
@@ -29306,6 +33199,7 @@ export namespace Prisma {
     jobHistory?: JobHistoryCreateNestedManyWithoutWorkerInput
     shiftSchedules?: ShiftScheduleCreateNestedManyWithoutWorkerInput
     workersCompanies?: workersCompaniesCreateNestedManyWithoutWorkerInput
+    workerFiles?: workerFilesCreateNestedManyWithoutWorkerInput
   }
 
   export type WorkerUncheckedCreateInput = {
@@ -29322,6 +33216,7 @@ export namespace Prisma {
     jobHistory?: JobHistoryUncheckedCreateNestedManyWithoutWorkerInput
     shiftSchedules?: ShiftScheduleUncheckedCreateNestedManyWithoutWorkerInput
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutWorkerInput
+    workerFiles?: workerFilesUncheckedCreateNestedManyWithoutWorkerInput
   }
 
   export type WorkerUpdateInput = {
@@ -29337,6 +33232,7 @@ export namespace Prisma {
     jobHistory?: JobHistoryUpdateManyWithoutWorkerNestedInput
     shiftSchedules?: ShiftScheduleUpdateManyWithoutWorkerNestedInput
     workersCompanies?: workersCompaniesUpdateManyWithoutWorkerNestedInput
+    workerFiles?: workerFilesUpdateManyWithoutWorkerNestedInput
   }
 
   export type WorkerUncheckedUpdateInput = {
@@ -29353,6 +33249,7 @@ export namespace Prisma {
     jobHistory?: JobHistoryUncheckedUpdateManyWithoutWorkerNestedInput
     shiftSchedules?: ShiftScheduleUncheckedUpdateManyWithoutWorkerNestedInput
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutWorkerNestedInput
+    workerFiles?: workerFilesUncheckedUpdateManyWithoutWorkerNestedInput
   }
 
   export type WorkerCreateManyInput = {
@@ -29441,6 +33338,162 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type userFilesCreateInput = {
+    fileURL: string
+    objectKey: string
+    uploadedAt?: Date | string
+    user: UserCreateNestedOneWithoutUserFilesInput
+  }
+
+  export type userFilesUncheckedCreateInput = {
+    id?: number
+    userID: number
+    fileURL: string
+    objectKey: string
+    uploadedAt?: Date | string
+  }
+
+  export type userFilesUpdateInput = {
+    fileURL?: StringFieldUpdateOperationsInput | string
+    objectKey?: StringFieldUpdateOperationsInput | string
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutUserFilesNestedInput
+  }
+
+  export type userFilesUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userID?: IntFieldUpdateOperationsInput | number
+    fileURL?: StringFieldUpdateOperationsInput | string
+    objectKey?: StringFieldUpdateOperationsInput | string
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type userFilesCreateManyInput = {
+    id?: number
+    userID: number
+    fileURL: string
+    objectKey: string
+    uploadedAt?: Date | string
+  }
+
+  export type userFilesUpdateManyMutationInput = {
+    fileURL?: StringFieldUpdateOperationsInput | string
+    objectKey?: StringFieldUpdateOperationsInput | string
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type userFilesUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userID?: IntFieldUpdateOperationsInput | number
+    fileURL?: StringFieldUpdateOperationsInput | string
+    objectKey?: StringFieldUpdateOperationsInput | string
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type workerFilesCreateInput = {
+    fileURL: string
+    objectKey: string
+    uploadedAt?: Date | string
+    worker: WorkerCreateNestedOneWithoutWorkerFilesInput
+  }
+
+  export type workerFilesUncheckedCreateInput = {
+    id?: number
+    workerID: number
+    fileURL: string
+    objectKey: string
+    uploadedAt?: Date | string
+  }
+
+  export type workerFilesUpdateInput = {
+    fileURL?: StringFieldUpdateOperationsInput | string
+    objectKey?: StringFieldUpdateOperationsInput | string
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    worker?: WorkerUpdateOneRequiredWithoutWorkerFilesNestedInput
+  }
+
+  export type workerFilesUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    workerID?: IntFieldUpdateOperationsInput | number
+    fileURL?: StringFieldUpdateOperationsInput | string
+    objectKey?: StringFieldUpdateOperationsInput | string
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type workerFilesCreateManyInput = {
+    id?: number
+    workerID: number
+    fileURL: string
+    objectKey: string
+    uploadedAt?: Date | string
+  }
+
+  export type workerFilesUpdateManyMutationInput = {
+    fileURL?: StringFieldUpdateOperationsInput | string
+    objectKey?: StringFieldUpdateOperationsInput | string
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type workerFilesUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    workerID?: IntFieldUpdateOperationsInput | number
+    fileURL?: StringFieldUpdateOperationsInput | string
+    objectKey?: StringFieldUpdateOperationsInput | string
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type companyFilesCreateInput = {
+    fileURL: string
+    objectKey: string
+    uploadedAt?: Date | string
+    company: CompanyCreateNestedOneWithoutCompanyFilesInput
+  }
+
+  export type companyFilesUncheckedCreateInput = {
+    id?: number
+    companyID: number
+    fileURL: string
+    objectKey: string
+    uploadedAt?: Date | string
+  }
+
+  export type companyFilesUpdateInput = {
+    fileURL?: StringFieldUpdateOperationsInput | string
+    objectKey?: StringFieldUpdateOperationsInput | string
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    company?: CompanyUpdateOneRequiredWithoutCompanyFilesNestedInput
+  }
+
+  export type companyFilesUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    companyID?: IntFieldUpdateOperationsInput | number
+    fileURL?: StringFieldUpdateOperationsInput | string
+    objectKey?: StringFieldUpdateOperationsInput | string
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type companyFilesCreateManyInput = {
+    id?: number
+    companyID: number
+    fileURL: string
+    objectKey: string
+    uploadedAt?: Date | string
+  }
+
+  export type companyFilesUpdateManyMutationInput = {
+    fileURL?: StringFieldUpdateOperationsInput | string
+    objectKey?: StringFieldUpdateOperationsInput | string
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type companyFilesUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    companyID?: IntFieldUpdateOperationsInput | number
+    fileURL?: StringFieldUpdateOperationsInput | string
+    objectKey?: StringFieldUpdateOperationsInput | string
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type usersCompaniesCreateInput = {
@@ -30542,6 +34595,12 @@ export namespace Prisma {
     none?: usersCompaniesWhereInput
   }
 
+  export type UserFilesListRelationFilter = {
+    every?: userFilesWhereInput
+    some?: userFilesWhereInput
+    none?: userFilesWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -30576,6 +34635,10 @@ export namespace Prisma {
   }
 
   export type usersCompaniesOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type userFilesOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -30777,6 +34840,12 @@ export namespace Prisma {
     none?: workersCompaniesWhereInput
   }
 
+  export type CompanyFilesListRelationFilter = {
+    every?: companyFilesWhereInput
+    some?: companyFilesWhereInput
+    none?: companyFilesWhereInput
+  }
+
   export type WorkerOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -30798,6 +34867,10 @@ export namespace Prisma {
   }
 
   export type workersCompaniesOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type companyFilesOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -30937,11 +35010,21 @@ export namespace Prisma {
     none?: ShiftScheduleWhereInput
   }
 
+  export type WorkerFilesListRelationFilter = {
+    every?: workerFilesWhereInput
+    some?: workerFilesWhereInput
+    none?: workerFilesWhereInput
+  }
+
   export type JobHistoryOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type ShiftScheduleOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type workerFilesOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -31020,9 +35103,141 @@ export namespace Prisma {
     adminID?: SortOrder
   }
 
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
   export type UserScalarRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
+  }
+
+  export type userFilesCountOrderByAggregateInput = {
+    id?: SortOrder
+    userID?: SortOrder
+    fileURL?: SortOrder
+    objectKey?: SortOrder
+    uploadedAt?: SortOrder
+  }
+
+  export type userFilesAvgOrderByAggregateInput = {
+    id?: SortOrder
+    userID?: SortOrder
+  }
+
+  export type userFilesMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userID?: SortOrder
+    fileURL?: SortOrder
+    objectKey?: SortOrder
+    uploadedAt?: SortOrder
+  }
+
+  export type userFilesMinOrderByAggregateInput = {
+    id?: SortOrder
+    userID?: SortOrder
+    fileURL?: SortOrder
+    objectKey?: SortOrder
+    uploadedAt?: SortOrder
+  }
+
+  export type userFilesSumOrderByAggregateInput = {
+    id?: SortOrder
+    userID?: SortOrder
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type WorkerScalarRelationFilter = {
+    is?: WorkerWhereInput
+    isNot?: WorkerWhereInput
+  }
+
+  export type workerFilesCountOrderByAggregateInput = {
+    id?: SortOrder
+    workerID?: SortOrder
+    fileURL?: SortOrder
+    objectKey?: SortOrder
+    uploadedAt?: SortOrder
+  }
+
+  export type workerFilesAvgOrderByAggregateInput = {
+    id?: SortOrder
+    workerID?: SortOrder
+  }
+
+  export type workerFilesMaxOrderByAggregateInput = {
+    id?: SortOrder
+    workerID?: SortOrder
+    fileURL?: SortOrder
+    objectKey?: SortOrder
+    uploadedAt?: SortOrder
+  }
+
+  export type workerFilesMinOrderByAggregateInput = {
+    id?: SortOrder
+    workerID?: SortOrder
+    fileURL?: SortOrder
+    objectKey?: SortOrder
+    uploadedAt?: SortOrder
+  }
+
+  export type workerFilesSumOrderByAggregateInput = {
+    id?: SortOrder
+    workerID?: SortOrder
+  }
+
+  export type companyFilesCountOrderByAggregateInput = {
+    id?: SortOrder
+    companyID?: SortOrder
+    fileURL?: SortOrder
+    objectKey?: SortOrder
+    uploadedAt?: SortOrder
+  }
+
+  export type companyFilesAvgOrderByAggregateInput = {
+    id?: SortOrder
+    companyID?: SortOrder
+  }
+
+  export type companyFilesMaxOrderByAggregateInput = {
+    id?: SortOrder
+    companyID?: SortOrder
+    fileURL?: SortOrder
+    objectKey?: SortOrder
+    uploadedAt?: SortOrder
+  }
+
+  export type companyFilesMinOrderByAggregateInput = {
+    id?: SortOrder
+    companyID?: SortOrder
+    fileURL?: SortOrder
+    objectKey?: SortOrder
+    uploadedAt?: SortOrder
+  }
+
+  export type companyFilesSumOrderByAggregateInput = {
+    id?: SortOrder
+    companyID?: SortOrder
   }
 
   export type usersCompaniesUserIDCompanyIDCompoundUniqueInput = {
@@ -31065,17 +35280,6 @@ export namespace Prisma {
     in?: $Enums.ContractType[] | ListEnumContractTypeFieldRefInput<$PrismaModel> | null
     notIn?: $Enums.ContractType[] | ListEnumContractTypeFieldRefInput<$PrismaModel> | null
     not?: NestedEnumContractTypeNullableFilter<$PrismaModel> | $Enums.ContractType | null
-  }
-
-  export type DateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type contractsUserIDCompanyIDContractTypeCompoundUniqueInput = {
@@ -31134,25 +35338,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedEnumContractTypeNullableFilter<$PrismaModel>
     _max?: NestedEnumContractTypeNullableFilter<$PrismaModel>
-  }
-
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
-  export type WorkerScalarRelationFilter = {
-    is?: WorkerWhereInput
-    isNot?: WorkerWhereInput
   }
 
   export type workersCompaniesWorkerIDCompanyIDCompoundUniqueInput = {
@@ -31965,6 +36150,13 @@ export namespace Prisma {
     connect?: usersCompaniesWhereUniqueInput | usersCompaniesWhereUniqueInput[]
   }
 
+  export type userFilesCreateNestedManyWithoutUserInput = {
+    create?: XOR<userFilesCreateWithoutUserInput, userFilesUncheckedCreateWithoutUserInput> | userFilesCreateWithoutUserInput[] | userFilesUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: userFilesCreateOrConnectWithoutUserInput | userFilesCreateOrConnectWithoutUserInput[]
+    createMany?: userFilesCreateManyUserInputEnvelope
+    connect?: userFilesWhereUniqueInput | userFilesWhereUniqueInput[]
+  }
+
   export type DirectionsUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<DirectionsCreateWithoutUserInput, DirectionsUncheckedCreateWithoutUserInput> | DirectionsCreateWithoutUserInput[] | DirectionsUncheckedCreateWithoutUserInput[]
     connectOrCreate?: DirectionsCreateOrConnectWithoutUserInput | DirectionsCreateOrConnectWithoutUserInput[]
@@ -32025,6 +36217,13 @@ export namespace Prisma {
     connectOrCreate?: usersCompaniesCreateOrConnectWithoutUserInput | usersCompaniesCreateOrConnectWithoutUserInput[]
     createMany?: usersCompaniesCreateManyUserInputEnvelope
     connect?: usersCompaniesWhereUniqueInput | usersCompaniesWhereUniqueInput[]
+  }
+
+  export type userFilesUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<userFilesCreateWithoutUserInput, userFilesUncheckedCreateWithoutUserInput> | userFilesCreateWithoutUserInput[] | userFilesUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: userFilesCreateOrConnectWithoutUserInput | userFilesCreateOrConnectWithoutUserInput[]
+    createMany?: userFilesCreateManyUserInputEnvelope
+    connect?: userFilesWhereUniqueInput | userFilesWhereUniqueInput[]
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
@@ -32189,6 +36388,20 @@ export namespace Prisma {
     deleteMany?: usersCompaniesScalarWhereInput | usersCompaniesScalarWhereInput[]
   }
 
+  export type userFilesUpdateManyWithoutUserNestedInput = {
+    create?: XOR<userFilesCreateWithoutUserInput, userFilesUncheckedCreateWithoutUserInput> | userFilesCreateWithoutUserInput[] | userFilesUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: userFilesCreateOrConnectWithoutUserInput | userFilesCreateOrConnectWithoutUserInput[]
+    upsert?: userFilesUpsertWithWhereUniqueWithoutUserInput | userFilesUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: userFilesCreateManyUserInputEnvelope
+    set?: userFilesWhereUniqueInput | userFilesWhereUniqueInput[]
+    disconnect?: userFilesWhereUniqueInput | userFilesWhereUniqueInput[]
+    delete?: userFilesWhereUniqueInput | userFilesWhereUniqueInput[]
+    connect?: userFilesWhereUniqueInput | userFilesWhereUniqueInput[]
+    update?: userFilesUpdateWithWhereUniqueWithoutUserInput | userFilesUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: userFilesUpdateManyWithWhereWithoutUserInput | userFilesUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: userFilesScalarWhereInput | userFilesScalarWhereInput[]
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -32319,6 +36532,20 @@ export namespace Prisma {
     deleteMany?: usersCompaniesScalarWhereInput | usersCompaniesScalarWhereInput[]
   }
 
+  export type userFilesUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<userFilesCreateWithoutUserInput, userFilesUncheckedCreateWithoutUserInput> | userFilesCreateWithoutUserInput[] | userFilesUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: userFilesCreateOrConnectWithoutUserInput | userFilesCreateOrConnectWithoutUserInput[]
+    upsert?: userFilesUpsertWithWhereUniqueWithoutUserInput | userFilesUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: userFilesCreateManyUserInputEnvelope
+    set?: userFilesWhereUniqueInput | userFilesWhereUniqueInput[]
+    disconnect?: userFilesWhereUniqueInput | userFilesWhereUniqueInput[]
+    delete?: userFilesWhereUniqueInput | userFilesWhereUniqueInput[]
+    connect?: userFilesWhereUniqueInput | userFilesWhereUniqueInput[]
+    update?: userFilesUpdateWithWhereUniqueWithoutUserInput | userFilesUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: userFilesUpdateManyWithWhereWithoutUserInput | userFilesUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: userFilesScalarWhereInput | userFilesScalarWhereInput[]
+  }
+
   export type WorkerCreateNestedManyWithoutCompanyInput = {
     create?: XOR<WorkerCreateWithoutCompanyInput, WorkerUncheckedCreateWithoutCompanyInput> | WorkerCreateWithoutCompanyInput[] | WorkerUncheckedCreateWithoutCompanyInput[]
     connectOrCreate?: WorkerCreateOrConnectWithoutCompanyInput | WorkerCreateOrConnectWithoutCompanyInput[]
@@ -32423,6 +36650,13 @@ export namespace Prisma {
     connect?: usersCompaniesWhereUniqueInput | usersCompaniesWhereUniqueInput[]
   }
 
+  export type companyFilesCreateNestedManyWithoutCompanyInput = {
+    create?: XOR<companyFilesCreateWithoutCompanyInput, companyFilesUncheckedCreateWithoutCompanyInput> | companyFilesCreateWithoutCompanyInput[] | companyFilesUncheckedCreateWithoutCompanyInput[]
+    connectOrCreate?: companyFilesCreateOrConnectWithoutCompanyInput | companyFilesCreateOrConnectWithoutCompanyInput[]
+    createMany?: companyFilesCreateManyCompanyInputEnvelope
+    connect?: companyFilesWhereUniqueInput | companyFilesWhereUniqueInput[]
+  }
+
   export type WorkerUncheckedCreateNestedManyWithoutCompanyInput = {
     create?: XOR<WorkerCreateWithoutCompanyInput, WorkerUncheckedCreateWithoutCompanyInput> | WorkerCreateWithoutCompanyInput[] | WorkerUncheckedCreateWithoutCompanyInput[]
     connectOrCreate?: WorkerCreateOrConnectWithoutCompanyInput | WorkerCreateOrConnectWithoutCompanyInput[]
@@ -32519,6 +36753,13 @@ export namespace Prisma {
     connectOrCreate?: usersCompaniesCreateOrConnectWithoutCompanyInput | usersCompaniesCreateOrConnectWithoutCompanyInput[]
     createMany?: usersCompaniesCreateManyCompanyInputEnvelope
     connect?: usersCompaniesWhereUniqueInput | usersCompaniesWhereUniqueInput[]
+  }
+
+  export type companyFilesUncheckedCreateNestedManyWithoutCompanyInput = {
+    create?: XOR<companyFilesCreateWithoutCompanyInput, companyFilesUncheckedCreateWithoutCompanyInput> | companyFilesCreateWithoutCompanyInput[] | companyFilesUncheckedCreateWithoutCompanyInput[]
+    connectOrCreate?: companyFilesCreateOrConnectWithoutCompanyInput | companyFilesCreateOrConnectWithoutCompanyInput[]
+    createMany?: companyFilesCreateManyCompanyInputEnvelope
+    connect?: companyFilesWhereUniqueInput | companyFilesWhereUniqueInput[]
   }
 
   export type BoolFieldUpdateOperationsInput = {
@@ -32735,6 +36976,20 @@ export namespace Prisma {
     deleteMany?: usersCompaniesScalarWhereInput | usersCompaniesScalarWhereInput[]
   }
 
+  export type companyFilesUpdateManyWithoutCompanyNestedInput = {
+    create?: XOR<companyFilesCreateWithoutCompanyInput, companyFilesUncheckedCreateWithoutCompanyInput> | companyFilesCreateWithoutCompanyInput[] | companyFilesUncheckedCreateWithoutCompanyInput[]
+    connectOrCreate?: companyFilesCreateOrConnectWithoutCompanyInput | companyFilesCreateOrConnectWithoutCompanyInput[]
+    upsert?: companyFilesUpsertWithWhereUniqueWithoutCompanyInput | companyFilesUpsertWithWhereUniqueWithoutCompanyInput[]
+    createMany?: companyFilesCreateManyCompanyInputEnvelope
+    set?: companyFilesWhereUniqueInput | companyFilesWhereUniqueInput[]
+    disconnect?: companyFilesWhereUniqueInput | companyFilesWhereUniqueInput[]
+    delete?: companyFilesWhereUniqueInput | companyFilesWhereUniqueInput[]
+    connect?: companyFilesWhereUniqueInput | companyFilesWhereUniqueInput[]
+    update?: companyFilesUpdateWithWhereUniqueWithoutCompanyInput | companyFilesUpdateWithWhereUniqueWithoutCompanyInput[]
+    updateMany?: companyFilesUpdateManyWithWhereWithoutCompanyInput | companyFilesUpdateManyWithWhereWithoutCompanyInput[]
+    deleteMany?: companyFilesScalarWhereInput | companyFilesScalarWhereInput[]
+  }
+
   export type WorkerUncheckedUpdateManyWithoutCompanyNestedInput = {
     create?: XOR<WorkerCreateWithoutCompanyInput, WorkerUncheckedCreateWithoutCompanyInput> | WorkerCreateWithoutCompanyInput[] | WorkerUncheckedCreateWithoutCompanyInput[]
     connectOrCreate?: WorkerCreateOrConnectWithoutCompanyInput | WorkerCreateOrConnectWithoutCompanyInput[]
@@ -32931,6 +37186,20 @@ export namespace Prisma {
     deleteMany?: usersCompaniesScalarWhereInput | usersCompaniesScalarWhereInput[]
   }
 
+  export type companyFilesUncheckedUpdateManyWithoutCompanyNestedInput = {
+    create?: XOR<companyFilesCreateWithoutCompanyInput, companyFilesUncheckedCreateWithoutCompanyInput> | companyFilesCreateWithoutCompanyInput[] | companyFilesUncheckedCreateWithoutCompanyInput[]
+    connectOrCreate?: companyFilesCreateOrConnectWithoutCompanyInput | companyFilesCreateOrConnectWithoutCompanyInput[]
+    upsert?: companyFilesUpsertWithWhereUniqueWithoutCompanyInput | companyFilesUpsertWithWhereUniqueWithoutCompanyInput[]
+    createMany?: companyFilesCreateManyCompanyInputEnvelope
+    set?: companyFilesWhereUniqueInput | companyFilesWhereUniqueInput[]
+    disconnect?: companyFilesWhereUniqueInput | companyFilesWhereUniqueInput[]
+    delete?: companyFilesWhereUniqueInput | companyFilesWhereUniqueInput[]
+    connect?: companyFilesWhereUniqueInput | companyFilesWhereUniqueInput[]
+    update?: companyFilesUpdateWithWhereUniqueWithoutCompanyInput | companyFilesUpdateWithWhereUniqueWithoutCompanyInput[]
+    updateMany?: companyFilesUpdateManyWithWhereWithoutCompanyInput | companyFilesUpdateManyWithWhereWithoutCompanyInput[]
+    deleteMany?: companyFilesScalarWhereInput | companyFilesScalarWhereInput[]
+  }
+
   export type AdminCreateNestedOneWithoutCompaniesInput = {
     create?: XOR<AdminCreateWithoutCompaniesInput, AdminUncheckedCreateWithoutCompaniesInput>
     connectOrCreate?: AdminCreateOrConnectWithoutCompaniesInput
@@ -33000,6 +37269,13 @@ export namespace Prisma {
     connect?: workersCompaniesWhereUniqueInput | workersCompaniesWhereUniqueInput[]
   }
 
+  export type workerFilesCreateNestedManyWithoutWorkerInput = {
+    create?: XOR<workerFilesCreateWithoutWorkerInput, workerFilesUncheckedCreateWithoutWorkerInput> | workerFilesCreateWithoutWorkerInput[] | workerFilesUncheckedCreateWithoutWorkerInput[]
+    connectOrCreate?: workerFilesCreateOrConnectWithoutWorkerInput | workerFilesCreateOrConnectWithoutWorkerInput[]
+    createMany?: workerFilesCreateManyWorkerInputEnvelope
+    connect?: workerFilesWhereUniqueInput | workerFilesWhereUniqueInput[]
+  }
+
   export type ShiftWorkerUncheckedCreateNestedManyWithoutWorkerInput = {
     create?: XOR<ShiftWorkerCreateWithoutWorkerInput, ShiftWorkerUncheckedCreateWithoutWorkerInput> | ShiftWorkerCreateWithoutWorkerInput[] | ShiftWorkerUncheckedCreateWithoutWorkerInput[]
     connectOrCreate?: ShiftWorkerCreateOrConnectWithoutWorkerInput | ShiftWorkerCreateOrConnectWithoutWorkerInput[]
@@ -33033,6 +37309,13 @@ export namespace Prisma {
     connectOrCreate?: workersCompaniesCreateOrConnectWithoutWorkerInput | workersCompaniesCreateOrConnectWithoutWorkerInput[]
     createMany?: workersCompaniesCreateManyWorkerInputEnvelope
     connect?: workersCompaniesWhereUniqueInput | workersCompaniesWhereUniqueInput[]
+  }
+
+  export type workerFilesUncheckedCreateNestedManyWithoutWorkerInput = {
+    create?: XOR<workerFilesCreateWithoutWorkerInput, workerFilesUncheckedCreateWithoutWorkerInput> | workerFilesCreateWithoutWorkerInput[] | workerFilesUncheckedCreateWithoutWorkerInput[]
+    connectOrCreate?: workerFilesCreateOrConnectWithoutWorkerInput | workerFilesCreateOrConnectWithoutWorkerInput[]
+    createMany?: workerFilesCreateManyWorkerInputEnvelope
+    connect?: workerFilesWhereUniqueInput | workerFilesWhereUniqueInput[]
   }
 
   export type CompanyUpdateOneRequiredWithoutWorkersNestedInput = {
@@ -33113,6 +37396,20 @@ export namespace Prisma {
     deleteMany?: workersCompaniesScalarWhereInput | workersCompaniesScalarWhereInput[]
   }
 
+  export type workerFilesUpdateManyWithoutWorkerNestedInput = {
+    create?: XOR<workerFilesCreateWithoutWorkerInput, workerFilesUncheckedCreateWithoutWorkerInput> | workerFilesCreateWithoutWorkerInput[] | workerFilesUncheckedCreateWithoutWorkerInput[]
+    connectOrCreate?: workerFilesCreateOrConnectWithoutWorkerInput | workerFilesCreateOrConnectWithoutWorkerInput[]
+    upsert?: workerFilesUpsertWithWhereUniqueWithoutWorkerInput | workerFilesUpsertWithWhereUniqueWithoutWorkerInput[]
+    createMany?: workerFilesCreateManyWorkerInputEnvelope
+    set?: workerFilesWhereUniqueInput | workerFilesWhereUniqueInput[]
+    disconnect?: workerFilesWhereUniqueInput | workerFilesWhereUniqueInput[]
+    delete?: workerFilesWhereUniqueInput | workerFilesWhereUniqueInput[]
+    connect?: workerFilesWhereUniqueInput | workerFilesWhereUniqueInput[]
+    update?: workerFilesUpdateWithWhereUniqueWithoutWorkerInput | workerFilesUpdateWithWhereUniqueWithoutWorkerInput[]
+    updateMany?: workerFilesUpdateManyWithWhereWithoutWorkerInput | workerFilesUpdateManyWithWhereWithoutWorkerInput[]
+    deleteMany?: workerFilesScalarWhereInput | workerFilesScalarWhereInput[]
+  }
+
   export type ShiftWorkerUncheckedUpdateManyWithoutWorkerNestedInput = {
     create?: XOR<ShiftWorkerCreateWithoutWorkerInput, ShiftWorkerUncheckedCreateWithoutWorkerInput> | ShiftWorkerCreateWithoutWorkerInput[] | ShiftWorkerUncheckedCreateWithoutWorkerInput[]
     connectOrCreate?: ShiftWorkerCreateOrConnectWithoutWorkerInput | ShiftWorkerCreateOrConnectWithoutWorkerInput[]
@@ -33183,6 +37480,20 @@ export namespace Prisma {
     deleteMany?: workersCompaniesScalarWhereInput | workersCompaniesScalarWhereInput[]
   }
 
+  export type workerFilesUncheckedUpdateManyWithoutWorkerNestedInput = {
+    create?: XOR<workerFilesCreateWithoutWorkerInput, workerFilesUncheckedCreateWithoutWorkerInput> | workerFilesCreateWithoutWorkerInput[] | workerFilesUncheckedCreateWithoutWorkerInput[]
+    connectOrCreate?: workerFilesCreateOrConnectWithoutWorkerInput | workerFilesCreateOrConnectWithoutWorkerInput[]
+    upsert?: workerFilesUpsertWithWhereUniqueWithoutWorkerInput | workerFilesUpsertWithWhereUniqueWithoutWorkerInput[]
+    createMany?: workerFilesCreateManyWorkerInputEnvelope
+    set?: workerFilesWhereUniqueInput | workerFilesWhereUniqueInput[]
+    disconnect?: workerFilesWhereUniqueInput | workerFilesWhereUniqueInput[]
+    delete?: workerFilesWhereUniqueInput | workerFilesWhereUniqueInput[]
+    connect?: workerFilesWhereUniqueInput | workerFilesWhereUniqueInput[]
+    update?: workerFilesUpdateWithWhereUniqueWithoutWorkerInput | workerFilesUpdateWithWhereUniqueWithoutWorkerInput[]
+    updateMany?: workerFilesUpdateManyWithWhereWithoutWorkerInput | workerFilesUpdateManyWithWhereWithoutWorkerInput[]
+    deleteMany?: workerFilesScalarWhereInput | workerFilesScalarWhereInput[]
+  }
+
   export type AdminsCompaniesCreateNestedManyWithoutAdminInput = {
     create?: XOR<AdminsCompaniesCreateWithoutAdminInput, AdminsCompaniesUncheckedCreateWithoutAdminInput> | AdminsCompaniesCreateWithoutAdminInput[] | AdminsCompaniesUncheckedCreateWithoutAdminInput[]
     connectOrCreate?: AdminsCompaniesCreateOrConnectWithoutAdminInput | AdminsCompaniesCreateOrConnectWithoutAdminInput[]
@@ -33223,6 +37534,52 @@ export namespace Prisma {
     update?: AdminsCompaniesUpdateWithWhereUniqueWithoutAdminInput | AdminsCompaniesUpdateWithWhereUniqueWithoutAdminInput[]
     updateMany?: AdminsCompaniesUpdateManyWithWhereWithoutAdminInput | AdminsCompaniesUpdateManyWithWhereWithoutAdminInput[]
     deleteMany?: AdminsCompaniesScalarWhereInput | AdminsCompaniesScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutUserFilesInput = {
+    create?: XOR<UserCreateWithoutUserFilesInput, UserUncheckedCreateWithoutUserFilesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUserFilesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
+  export type UserUpdateOneRequiredWithoutUserFilesNestedInput = {
+    create?: XOR<UserCreateWithoutUserFilesInput, UserUncheckedCreateWithoutUserFilesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUserFilesInput
+    upsert?: UserUpsertWithoutUserFilesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutUserFilesInput, UserUpdateWithoutUserFilesInput>, UserUncheckedUpdateWithoutUserFilesInput>
+  }
+
+  export type WorkerCreateNestedOneWithoutWorkerFilesInput = {
+    create?: XOR<WorkerCreateWithoutWorkerFilesInput, WorkerUncheckedCreateWithoutWorkerFilesInput>
+    connectOrCreate?: WorkerCreateOrConnectWithoutWorkerFilesInput
+    connect?: WorkerWhereUniqueInput
+  }
+
+  export type WorkerUpdateOneRequiredWithoutWorkerFilesNestedInput = {
+    create?: XOR<WorkerCreateWithoutWorkerFilesInput, WorkerUncheckedCreateWithoutWorkerFilesInput>
+    connectOrCreate?: WorkerCreateOrConnectWithoutWorkerFilesInput
+    upsert?: WorkerUpsertWithoutWorkerFilesInput
+    connect?: WorkerWhereUniqueInput
+    update?: XOR<XOR<WorkerUpdateToOneWithWhereWithoutWorkerFilesInput, WorkerUpdateWithoutWorkerFilesInput>, WorkerUncheckedUpdateWithoutWorkerFilesInput>
+  }
+
+  export type CompanyCreateNestedOneWithoutCompanyFilesInput = {
+    create?: XOR<CompanyCreateWithoutCompanyFilesInput, CompanyUncheckedCreateWithoutCompanyFilesInput>
+    connectOrCreate?: CompanyCreateOrConnectWithoutCompanyFilesInput
+    connect?: CompanyWhereUniqueInput
+  }
+
+  export type CompanyUpdateOneRequiredWithoutCompanyFilesNestedInput = {
+    create?: XOR<CompanyCreateWithoutCompanyFilesInput, CompanyUncheckedCreateWithoutCompanyFilesInput>
+    connectOrCreate?: CompanyCreateOrConnectWithoutCompanyFilesInput
+    upsert?: CompanyUpsertWithoutCompanyFilesInput
+    connect?: CompanyWhereUniqueInput
+    update?: XOR<XOR<CompanyUpdateToOneWithWhereWithoutCompanyFilesInput, CompanyUpdateWithoutCompanyFilesInput>, CompanyUncheckedUpdateWithoutCompanyFilesInput>
   }
 
   export type UserCreateNestedOneWithoutUsersCompaniesInput = {
@@ -33267,10 +37624,6 @@ export namespace Prisma {
 
   export type NullableEnumContractTypeFieldUpdateOperationsInput = {
     set?: $Enums.ContractType | null
-  }
-
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
   }
 
   export type UserUpdateOneRequiredWithoutContractsNestedInput = {
@@ -34218,13 +38571,6 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
-  export type NestedEnumContractTypeNullableFilter<$PrismaModel = never> = {
-    equals?: $Enums.ContractType | EnumContractTypeFieldRefInput<$PrismaModel> | null
-    in?: $Enums.ContractType[] | ListEnumContractTypeFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.ContractType[] | ListEnumContractTypeFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumContractTypeNullableFilter<$PrismaModel> | $Enums.ContractType | null
-  }
-
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -34234,16 +38580,6 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
-  export type NestedEnumContractTypeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.ContractType | EnumContractTypeFieldRefInput<$PrismaModel> | null
-    in?: $Enums.ContractType[] | ListEnumContractTypeFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.ContractType[] | ListEnumContractTypeFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumContractTypeNullableWithAggregatesFilter<$PrismaModel> | $Enums.ContractType | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedEnumContractTypeNullableFilter<$PrismaModel>
-    _max?: NestedEnumContractTypeNullableFilter<$PrismaModel>
   }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -34258,6 +38594,23 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumContractTypeNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.ContractType | EnumContractTypeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.ContractType[] | ListEnumContractTypeFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.ContractType[] | ListEnumContractTypeFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumContractTypeNullableFilter<$PrismaModel> | $Enums.ContractType | null
+  }
+
+  export type NestedEnumContractTypeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ContractType | EnumContractTypeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.ContractType[] | ListEnumContractTypeFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.ContractType[] | ListEnumContractTypeFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumContractTypeNullableWithAggregatesFilter<$PrismaModel> | $Enums.ContractType | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumContractTypeNullableFilter<$PrismaModel>
+    _max?: NestedEnumContractTypeNullableFilter<$PrismaModel>
   }
 
   export type NestedEnumincidentStatusFilter<$PrismaModel = never> = {
@@ -34612,6 +38965,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
+    companyFiles?: companyFilesCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutUserInput = {
@@ -34640,6 +38994,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
+    companyFiles?: companyFilesUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutUserInput = {
@@ -34731,6 +39086,29 @@ export namespace Prisma {
 
   export type usersCompaniesCreateManyUserInputEnvelope = {
     data: usersCompaniesCreateManyUserInput | usersCompaniesCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type userFilesCreateWithoutUserInput = {
+    fileURL: string
+    objectKey: string
+    uploadedAt?: Date | string
+  }
+
+  export type userFilesUncheckedCreateWithoutUserInput = {
+    id?: number
+    fileURL: string
+    objectKey: string
+    uploadedAt?: Date | string
+  }
+
+  export type userFilesCreateOrConnectWithoutUserInput = {
+    where: userFilesWhereUniqueInput
+    create: XOR<userFilesCreateWithoutUserInput, userFilesUncheckedCreateWithoutUserInput>
+  }
+
+  export type userFilesCreateManyUserInputEnvelope = {
+    data: userFilesCreateManyUserInput | userFilesCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -35004,6 +39382,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
+    companyFiles?: companyFilesUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutUserInput = {
@@ -35032,6 +39411,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
+    companyFiles?: companyFilesUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type contractsUpsertWithWhereUniqueWithoutUserInput = {
@@ -35123,6 +39503,33 @@ export namespace Prisma {
     companyID?: IntFilter<"usersCompanies"> | number
   }
 
+  export type userFilesUpsertWithWhereUniqueWithoutUserInput = {
+    where: userFilesWhereUniqueInput
+    update: XOR<userFilesUpdateWithoutUserInput, userFilesUncheckedUpdateWithoutUserInput>
+    create: XOR<userFilesCreateWithoutUserInput, userFilesUncheckedCreateWithoutUserInput>
+  }
+
+  export type userFilesUpdateWithWhereUniqueWithoutUserInput = {
+    where: userFilesWhereUniqueInput
+    data: XOR<userFilesUpdateWithoutUserInput, userFilesUncheckedUpdateWithoutUserInput>
+  }
+
+  export type userFilesUpdateManyWithWhereWithoutUserInput = {
+    where: userFilesScalarWhereInput
+    data: XOR<userFilesUpdateManyMutationInput, userFilesUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type userFilesScalarWhereInput = {
+    AND?: userFilesScalarWhereInput | userFilesScalarWhereInput[]
+    OR?: userFilesScalarWhereInput[]
+    NOT?: userFilesScalarWhereInput | userFilesScalarWhereInput[]
+    id?: IntFilter<"userFiles"> | number
+    userID?: IntFilter<"userFiles"> | number
+    fileURL?: StringFilter<"userFiles"> | string
+    objectKey?: StringFilter<"userFiles"> | string
+    uploadedAt?: DateTimeFilter<"userFiles"> | Date | string
+  }
+
   export type WorkerCreateWithoutCompanyInput = {
     name: string
     email: string
@@ -35135,6 +39542,7 @@ export namespace Prisma {
     jobHistory?: JobHistoryCreateNestedManyWithoutWorkerInput
     shiftSchedules?: ShiftScheduleCreateNestedManyWithoutWorkerInput
     workersCompanies?: workersCompaniesCreateNestedManyWithoutWorkerInput
+    workerFiles?: workerFilesCreateNestedManyWithoutWorkerInput
   }
 
   export type WorkerUncheckedCreateWithoutCompanyInput = {
@@ -35150,6 +39558,7 @@ export namespace Prisma {
     jobHistory?: JobHistoryUncheckedCreateNestedManyWithoutWorkerInput
     shiftSchedules?: ShiftScheduleUncheckedCreateNestedManyWithoutWorkerInput
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutWorkerInput
+    workerFiles?: workerFilesUncheckedCreateNestedManyWithoutWorkerInput
   }
 
   export type WorkerCreateOrConnectWithoutCompanyInput = {
@@ -35485,6 +39894,7 @@ export namespace Prisma {
     contracts?: contractsCreateNestedManyWithoutUserInput
     machinery?: machineryCreateNestedManyWithoutClientInput
     usersCompanies?: usersCompaniesCreateNestedManyWithoutUserInput
+    userFiles?: userFilesCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCompanyInput = {
@@ -35508,6 +39918,7 @@ export namespace Prisma {
     contracts?: contractsUncheckedCreateNestedManyWithoutUserInput
     machinery?: machineryUncheckedCreateNestedManyWithoutClientInput
     usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutUserInput
+    userFiles?: userFilesUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCompanyInput = {
@@ -35601,6 +40012,29 @@ export namespace Prisma {
 
   export type usersCompaniesCreateManyCompanyInputEnvelope = {
     data: usersCompaniesCreateManyCompanyInput | usersCompaniesCreateManyCompanyInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type companyFilesCreateWithoutCompanyInput = {
+    fileURL: string
+    objectKey: string
+    uploadedAt?: Date | string
+  }
+
+  export type companyFilesUncheckedCreateWithoutCompanyInput = {
+    id?: number
+    fileURL: string
+    objectKey: string
+    uploadedAt?: Date | string
+  }
+
+  export type companyFilesCreateOrConnectWithoutCompanyInput = {
+    where: companyFilesWhereUniqueInput
+    create: XOR<companyFilesCreateWithoutCompanyInput, companyFilesUncheckedCreateWithoutCompanyInput>
+  }
+
+  export type companyFilesCreateManyCompanyInputEnvelope = {
+    data: companyFilesCreateManyCompanyInput | companyFilesCreateManyCompanyInput[]
     skipDuplicates?: boolean
   }
 
@@ -35947,6 +40381,33 @@ export namespace Prisma {
     data: XOR<usersCompaniesUpdateManyMutationInput, usersCompaniesUncheckedUpdateManyWithoutCompanyInput>
   }
 
+  export type companyFilesUpsertWithWhereUniqueWithoutCompanyInput = {
+    where: companyFilesWhereUniqueInput
+    update: XOR<companyFilesUpdateWithoutCompanyInput, companyFilesUncheckedUpdateWithoutCompanyInput>
+    create: XOR<companyFilesCreateWithoutCompanyInput, companyFilesUncheckedCreateWithoutCompanyInput>
+  }
+
+  export type companyFilesUpdateWithWhereUniqueWithoutCompanyInput = {
+    where: companyFilesWhereUniqueInput
+    data: XOR<companyFilesUpdateWithoutCompanyInput, companyFilesUncheckedUpdateWithoutCompanyInput>
+  }
+
+  export type companyFilesUpdateManyWithWhereWithoutCompanyInput = {
+    where: companyFilesScalarWhereInput
+    data: XOR<companyFilesUpdateManyMutationInput, companyFilesUncheckedUpdateManyWithoutCompanyInput>
+  }
+
+  export type companyFilesScalarWhereInput = {
+    AND?: companyFilesScalarWhereInput | companyFilesScalarWhereInput[]
+    OR?: companyFilesScalarWhereInput[]
+    NOT?: companyFilesScalarWhereInput | companyFilesScalarWhereInput[]
+    id?: IntFilter<"companyFiles"> | number
+    companyID?: IntFilter<"companyFiles"> | number
+    fileURL?: StringFilter<"companyFiles"> | string
+    objectKey?: StringFilter<"companyFiles"> | string
+    uploadedAt?: DateTimeFilter<"companyFiles"> | Date | string
+  }
+
   export type AdminCreateWithoutCompaniesInput = {
     email: string
     password: string
@@ -35992,6 +40453,7 @@ export namespace Prisma {
     contracts?: contractsCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
+    companyFiles?: companyFilesCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutAdminsInput = {
@@ -36020,6 +40482,7 @@ export namespace Prisma {
     contracts?: contractsUncheckedCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
+    companyFiles?: companyFilesUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutAdminsInput = {
@@ -36089,6 +40552,7 @@ export namespace Prisma {
     contracts?: contractsUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
+    companyFiles?: companyFilesUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutAdminsInput = {
@@ -36117,6 +40581,7 @@ export namespace Prisma {
     contracts?: contractsUncheckedUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
+    companyFiles?: companyFilesUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyCreateWithoutWorkersInput = {
@@ -36144,6 +40609,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
+    companyFiles?: companyFilesCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutWorkersInput = {
@@ -36172,6 +40638,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
+    companyFiles?: companyFilesUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutWorkersInput = {
@@ -36322,6 +40789,29 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type workerFilesCreateWithoutWorkerInput = {
+    fileURL: string
+    objectKey: string
+    uploadedAt?: Date | string
+  }
+
+  export type workerFilesUncheckedCreateWithoutWorkerInput = {
+    id?: number
+    fileURL: string
+    objectKey: string
+    uploadedAt?: Date | string
+  }
+
+  export type workerFilesCreateOrConnectWithoutWorkerInput = {
+    where: workerFilesWhereUniqueInput
+    create: XOR<workerFilesCreateWithoutWorkerInput, workerFilesUncheckedCreateWithoutWorkerInput>
+  }
+
+  export type workerFilesCreateManyWorkerInputEnvelope = {
+    data: workerFilesCreateManyWorkerInput | workerFilesCreateManyWorkerInput[]
+    skipDuplicates?: boolean
+  }
+
   export type CompanyUpsertWithoutWorkersInput = {
     update: XOR<CompanyUpdateWithoutWorkersInput, CompanyUncheckedUpdateWithoutWorkersInput>
     create: XOR<CompanyCreateWithoutWorkersInput, CompanyUncheckedCreateWithoutWorkersInput>
@@ -36358,6 +40848,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
+    companyFiles?: companyFilesUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutWorkersInput = {
@@ -36386,6 +40877,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
+    companyFiles?: companyFilesUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type ShiftWorkerUpsertWithWhereUniqueWithoutWorkerInput = {
@@ -36490,6 +40982,33 @@ export namespace Prisma {
     data: XOR<workersCompaniesUpdateManyMutationInput, workersCompaniesUncheckedUpdateManyWithoutWorkerInput>
   }
 
+  export type workerFilesUpsertWithWhereUniqueWithoutWorkerInput = {
+    where: workerFilesWhereUniqueInput
+    update: XOR<workerFilesUpdateWithoutWorkerInput, workerFilesUncheckedUpdateWithoutWorkerInput>
+    create: XOR<workerFilesCreateWithoutWorkerInput, workerFilesUncheckedCreateWithoutWorkerInput>
+  }
+
+  export type workerFilesUpdateWithWhereUniqueWithoutWorkerInput = {
+    where: workerFilesWhereUniqueInput
+    data: XOR<workerFilesUpdateWithoutWorkerInput, workerFilesUncheckedUpdateWithoutWorkerInput>
+  }
+
+  export type workerFilesUpdateManyWithWhereWithoutWorkerInput = {
+    where: workerFilesScalarWhereInput
+    data: XOR<workerFilesUpdateManyMutationInput, workerFilesUncheckedUpdateManyWithoutWorkerInput>
+  }
+
+  export type workerFilesScalarWhereInput = {
+    AND?: workerFilesScalarWhereInput | workerFilesScalarWhereInput[]
+    OR?: workerFilesScalarWhereInput[]
+    NOT?: workerFilesScalarWhereInput | workerFilesScalarWhereInput[]
+    id?: IntFilter<"workerFiles"> | number
+    workerID?: IntFilter<"workerFiles"> | number
+    fileURL?: StringFilter<"workerFiles"> | string
+    objectKey?: StringFilter<"workerFiles"> | string
+    uploadedAt?: DateTimeFilter<"workerFiles"> | Date | string
+  }
+
   export type AdminsCompaniesCreateWithoutAdminInput = {
     Company: CompanyCreateNestedOneWithoutAdminsInput
   }
@@ -36525,6 +41044,324 @@ export namespace Prisma {
     data: XOR<AdminsCompaniesUpdateManyMutationInput, AdminsCompaniesUncheckedUpdateManyWithoutAdminInput>
   }
 
+  export type UserCreateWithoutUserFilesInput = {
+    name?: string | null
+    email: string
+    password: string
+    paymentsID?: number | null
+    machineryID?: number | null
+    role?: $Enums.Role
+    userCode?: string | null
+    contractID?: number | null
+    refreshToken?: string | null
+    incidents?: IncidentsCreateNestedOneWithoutUsersInput
+    directions?: DirectionsCreateNestedManyWithoutUserInput
+    payments?: PaymentsCreateNestedOneWithoutUserInput
+    IncidentHistory?: IncidentHistoryCreateNestedManyWithoutUserInput
+    ClientMachinery?: ClientMachineryCreateNestedManyWithoutUserInput
+    Incidents?: IncidentsCreateNestedManyWithoutUserInput
+    Budget?: BudgetCreateNestedManyWithoutUserInput
+    Company?: CompanyCreateNestedOneWithoutUserInput
+    contracts?: contractsCreateNestedManyWithoutUserInput
+    machinery?: machineryCreateNestedManyWithoutClientInput
+    usersCompanies?: usersCompaniesCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutUserFilesInput = {
+    userID?: number
+    name?: string | null
+    email: string
+    password: string
+    incidentsID?: number | null
+    paymentsID?: number | null
+    machineryID?: number | null
+    role?: $Enums.Role
+    userCode?: string | null
+    contractID?: number | null
+    companyID?: number | null
+    refreshToken?: string | null
+    directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
+    payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
+    IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
+    ClientMachinery?: ClientMachineryUncheckedCreateNestedManyWithoutUserInput
+    Incidents?: IncidentsUncheckedCreateNestedManyWithoutUserInput
+    Budget?: BudgetUncheckedCreateNestedManyWithoutUserInput
+    contracts?: contractsUncheckedCreateNestedManyWithoutUserInput
+    machinery?: machineryUncheckedCreateNestedManyWithoutClientInput
+    usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutUserFilesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutUserFilesInput, UserUncheckedCreateWithoutUserFilesInput>
+  }
+
+  export type UserUpsertWithoutUserFilesInput = {
+    update: XOR<UserUpdateWithoutUserFilesInput, UserUncheckedUpdateWithoutUserFilesInput>
+    create: XOR<UserCreateWithoutUserFilesInput, UserUncheckedCreateWithoutUserFilesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutUserFilesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutUserFilesInput, UserUncheckedUpdateWithoutUserFilesInput>
+  }
+
+  export type UserUpdateWithoutUserFilesInput = {
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    paymentsID?: NullableIntFieldUpdateOperationsInput | number | null
+    machineryID?: NullableIntFieldUpdateOperationsInput | number | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userCode?: NullableStringFieldUpdateOperationsInput | string | null
+    contractID?: NullableIntFieldUpdateOperationsInput | number | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    incidents?: IncidentsUpdateOneWithoutUsersNestedInput
+    directions?: DirectionsUpdateManyWithoutUserNestedInput
+    payments?: PaymentsUpdateOneWithoutUserNestedInput
+    IncidentHistory?: IncidentHistoryUpdateManyWithoutUserNestedInput
+    ClientMachinery?: ClientMachineryUpdateManyWithoutUserNestedInput
+    Incidents?: IncidentsUpdateManyWithoutUserNestedInput
+    Budget?: BudgetUpdateManyWithoutUserNestedInput
+    Company?: CompanyUpdateOneWithoutUserNestedInput
+    contracts?: contractsUpdateManyWithoutUserNestedInput
+    machinery?: machineryUpdateManyWithoutClientNestedInput
+    usersCompanies?: usersCompaniesUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutUserFilesInput = {
+    userID?: IntFieldUpdateOperationsInput | number
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    incidentsID?: NullableIntFieldUpdateOperationsInput | number | null
+    paymentsID?: NullableIntFieldUpdateOperationsInput | number | null
+    machineryID?: NullableIntFieldUpdateOperationsInput | number | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userCode?: NullableStringFieldUpdateOperationsInput | string | null
+    contractID?: NullableIntFieldUpdateOperationsInput | number | null
+    companyID?: NullableIntFieldUpdateOperationsInput | number | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
+    payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
+    IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
+    ClientMachinery?: ClientMachineryUncheckedUpdateManyWithoutUserNestedInput
+    Incidents?: IncidentsUncheckedUpdateManyWithoutUserNestedInput
+    Budget?: BudgetUncheckedUpdateManyWithoutUserNestedInput
+    contracts?: contractsUncheckedUpdateManyWithoutUserNestedInput
+    machinery?: machineryUncheckedUpdateManyWithoutClientNestedInput
+    usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type WorkerCreateWithoutWorkerFilesInput = {
+    name: string
+    email: string
+    password: string
+    role?: $Enums.Role
+    workerCode?: string | null
+    refreshToken?: string | null
+    company: CompanyCreateNestedOneWithoutWorkersInput
+    shiftWorkers?: ShiftWorkerCreateNestedManyWithoutWorkerInput
+    assignedIncidents?: IncidentsCreateNestedManyWithoutAssignedWorkerInput
+    jobHistory?: JobHistoryCreateNestedManyWithoutWorkerInput
+    shiftSchedules?: ShiftScheduleCreateNestedManyWithoutWorkerInput
+    workersCompanies?: workersCompaniesCreateNestedManyWithoutWorkerInput
+  }
+
+  export type WorkerUncheckedCreateWithoutWorkerFilesInput = {
+    workerid?: number
+    name: string
+    email: string
+    password: string
+    companyID: number
+    role?: $Enums.Role
+    workerCode?: string | null
+    refreshToken?: string | null
+    shiftWorkers?: ShiftWorkerUncheckedCreateNestedManyWithoutWorkerInput
+    assignedIncidents?: IncidentsUncheckedCreateNestedManyWithoutAssignedWorkerInput
+    jobHistory?: JobHistoryUncheckedCreateNestedManyWithoutWorkerInput
+    shiftSchedules?: ShiftScheduleUncheckedCreateNestedManyWithoutWorkerInput
+    workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutWorkerInput
+  }
+
+  export type WorkerCreateOrConnectWithoutWorkerFilesInput = {
+    where: WorkerWhereUniqueInput
+    create: XOR<WorkerCreateWithoutWorkerFilesInput, WorkerUncheckedCreateWithoutWorkerFilesInput>
+  }
+
+  export type WorkerUpsertWithoutWorkerFilesInput = {
+    update: XOR<WorkerUpdateWithoutWorkerFilesInput, WorkerUncheckedUpdateWithoutWorkerFilesInput>
+    create: XOR<WorkerCreateWithoutWorkerFilesInput, WorkerUncheckedCreateWithoutWorkerFilesInput>
+    where?: WorkerWhereInput
+  }
+
+  export type WorkerUpdateToOneWithWhereWithoutWorkerFilesInput = {
+    where?: WorkerWhereInput
+    data: XOR<WorkerUpdateWithoutWorkerFilesInput, WorkerUncheckedUpdateWithoutWorkerFilesInput>
+  }
+
+  export type WorkerUpdateWithoutWorkerFilesInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    workerCode?: NullableStringFieldUpdateOperationsInput | string | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    company?: CompanyUpdateOneRequiredWithoutWorkersNestedInput
+    shiftWorkers?: ShiftWorkerUpdateManyWithoutWorkerNestedInput
+    assignedIncidents?: IncidentsUpdateManyWithoutAssignedWorkerNestedInput
+    jobHistory?: JobHistoryUpdateManyWithoutWorkerNestedInput
+    shiftSchedules?: ShiftScheduleUpdateManyWithoutWorkerNestedInput
+    workersCompanies?: workersCompaniesUpdateManyWithoutWorkerNestedInput
+  }
+
+  export type WorkerUncheckedUpdateWithoutWorkerFilesInput = {
+    workerid?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    companyID?: IntFieldUpdateOperationsInput | number
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    workerCode?: NullableStringFieldUpdateOperationsInput | string | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    shiftWorkers?: ShiftWorkerUncheckedUpdateManyWithoutWorkerNestedInput
+    assignedIncidents?: IncidentsUncheckedUpdateManyWithoutAssignedWorkerNestedInput
+    jobHistory?: JobHistoryUncheckedUpdateManyWithoutWorkerNestedInput
+    shiftSchedules?: ShiftScheduleUncheckedUpdateManyWithoutWorkerNestedInput
+    workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutWorkerNestedInput
+  }
+
+  export type CompanyCreateWithoutCompanyFilesInput = {
+    name: string
+    phone: string
+    password: string
+    suspended?: boolean
+    suspendedUntil?: Date | string | null
+    role?: $Enums.Role
+    userID?: number | null
+    companyCode?: string | null
+    email: string
+    refreshToken?: string | null
+    workers?: WorkerCreateNestedManyWithoutCompanyInput
+    receivedPayments?: PaymentsCreateNestedManyWithoutReceivedByInput
+    incidents?: IncidentsCreateNestedManyWithoutCompanyInput
+    incidentHistory?: IncidentHistoryCreateNestedManyWithoutCompanyInput
+    budget?: BudgetCreateNestedOneWithoutCompanyInput
+    directions?: DirectionsCreateNestedManyWithoutCompanyInput
+    shiftWorkers?: ShiftWorkerCreateNestedManyWithoutCompanyInput
+    payments?: PaymentsCreateNestedManyWithoutCompanyInput
+    machinery?: machineryCreateNestedManyWithoutCompanyInput
+    Budget?: BudgetCreateNestedManyWithoutCompanyInput
+    User?: UserCreateNestedManyWithoutCompanyInput
+    contracts?: contractsCreateNestedManyWithoutCompanyInput
+    admins?: AdminsCompaniesCreateNestedManyWithoutCompanyInput
+    workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
+    usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
+  }
+
+  export type CompanyUncheckedCreateWithoutCompanyFilesInput = {
+    companyID?: number
+    name: string
+    phone: string
+    password: string
+    budgetID?: number | null
+    suspended?: boolean
+    suspendedUntil?: Date | string | null
+    role?: $Enums.Role
+    userID?: number | null
+    companyCode?: string | null
+    email: string
+    refreshToken?: string | null
+    workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
+    receivedPayments?: PaymentsUncheckedCreateNestedManyWithoutReceivedByInput
+    incidents?: IncidentsUncheckedCreateNestedManyWithoutCompanyInput
+    incidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutCompanyInput
+    directions?: DirectionsUncheckedCreateNestedManyWithoutCompanyInput
+    shiftWorkers?: ShiftWorkerUncheckedCreateNestedManyWithoutCompanyInput
+    payments?: PaymentsUncheckedCreateNestedManyWithoutCompanyInput
+    machinery?: machineryUncheckedCreateNestedManyWithoutCompanyInput
+    Budget?: BudgetUncheckedCreateNestedManyWithoutCompanyInput
+    User?: UserUncheckedCreateNestedManyWithoutCompanyInput
+    contracts?: contractsUncheckedCreateNestedManyWithoutCompanyInput
+    admins?: AdminsCompaniesUncheckedCreateNestedManyWithoutCompanyInput
+    workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
+    usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
+  }
+
+  export type CompanyCreateOrConnectWithoutCompanyFilesInput = {
+    where: CompanyWhereUniqueInput
+    create: XOR<CompanyCreateWithoutCompanyFilesInput, CompanyUncheckedCreateWithoutCompanyFilesInput>
+  }
+
+  export type CompanyUpsertWithoutCompanyFilesInput = {
+    update: XOR<CompanyUpdateWithoutCompanyFilesInput, CompanyUncheckedUpdateWithoutCompanyFilesInput>
+    create: XOR<CompanyCreateWithoutCompanyFilesInput, CompanyUncheckedCreateWithoutCompanyFilesInput>
+    where?: CompanyWhereInput
+  }
+
+  export type CompanyUpdateToOneWithWhereWithoutCompanyFilesInput = {
+    where?: CompanyWhereInput
+    data: XOR<CompanyUpdateWithoutCompanyFilesInput, CompanyUncheckedUpdateWithoutCompanyFilesInput>
+  }
+
+  export type CompanyUpdateWithoutCompanyFilesInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    suspended?: BoolFieldUpdateOperationsInput | boolean
+    suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userID?: NullableIntFieldUpdateOperationsInput | number | null
+    companyCode?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    workers?: WorkerUpdateManyWithoutCompanyNestedInput
+    receivedPayments?: PaymentsUpdateManyWithoutReceivedByNestedInput
+    incidents?: IncidentsUpdateManyWithoutCompanyNestedInput
+    incidentHistory?: IncidentHistoryUpdateManyWithoutCompanyNestedInput
+    budget?: BudgetUpdateOneWithoutCompanyNestedInput
+    directions?: DirectionsUpdateManyWithoutCompanyNestedInput
+    shiftWorkers?: ShiftWorkerUpdateManyWithoutCompanyNestedInput
+    payments?: PaymentsUpdateManyWithoutCompanyNestedInput
+    machinery?: machineryUpdateManyWithoutCompanyNestedInput
+    Budget?: BudgetUpdateManyWithoutCompanyNestedInput
+    User?: UserUpdateManyWithoutCompanyNestedInput
+    contracts?: contractsUpdateManyWithoutCompanyNestedInput
+    admins?: AdminsCompaniesUpdateManyWithoutCompanyNestedInput
+    workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
+    usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
+  }
+
+  export type CompanyUncheckedUpdateWithoutCompanyFilesInput = {
+    companyID?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    budgetID?: NullableIntFieldUpdateOperationsInput | number | null
+    suspended?: BoolFieldUpdateOperationsInput | boolean
+    suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userID?: NullableIntFieldUpdateOperationsInput | number | null
+    companyCode?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
+    receivedPayments?: PaymentsUncheckedUpdateManyWithoutReceivedByNestedInput
+    incidents?: IncidentsUncheckedUpdateManyWithoutCompanyNestedInput
+    incidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutCompanyNestedInput
+    directions?: DirectionsUncheckedUpdateManyWithoutCompanyNestedInput
+    shiftWorkers?: ShiftWorkerUncheckedUpdateManyWithoutCompanyNestedInput
+    payments?: PaymentsUncheckedUpdateManyWithoutCompanyNestedInput
+    machinery?: machineryUncheckedUpdateManyWithoutCompanyNestedInput
+    Budget?: BudgetUncheckedUpdateManyWithoutCompanyNestedInput
+    User?: UserUncheckedUpdateManyWithoutCompanyNestedInput
+    contracts?: contractsUncheckedUpdateManyWithoutCompanyNestedInput
+    admins?: AdminsCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
+    workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
+    usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
+  }
+
   export type UserCreateWithoutUsersCompaniesInput = {
     name?: string | null
     email: string
@@ -36545,6 +41382,7 @@ export namespace Prisma {
     Company?: CompanyCreateNestedOneWithoutUserInput
     contracts?: contractsCreateNestedManyWithoutUserInput
     machinery?: machineryCreateNestedManyWithoutClientInput
+    userFiles?: userFilesCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutUsersCompaniesInput = {
@@ -36568,6 +41406,7 @@ export namespace Prisma {
     Budget?: BudgetUncheckedCreateNestedManyWithoutUserInput
     contracts?: contractsUncheckedCreateNestedManyWithoutUserInput
     machinery?: machineryUncheckedCreateNestedManyWithoutClientInput
+    userFiles?: userFilesUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutUsersCompaniesInput = {
@@ -36600,6 +41439,7 @@ export namespace Prisma {
     contracts?: contractsCreateNestedManyWithoutCompanyInput
     admins?: AdminsCompaniesCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
+    companyFiles?: companyFilesCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutUsersCompaniesInput = {
@@ -36628,6 +41468,7 @@ export namespace Prisma {
     contracts?: contractsUncheckedCreateNestedManyWithoutCompanyInput
     admins?: AdminsCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
+    companyFiles?: companyFilesUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutUsersCompaniesInput = {
@@ -36666,6 +41507,7 @@ export namespace Prisma {
     Company?: CompanyUpdateOneWithoutUserNestedInput
     contracts?: contractsUpdateManyWithoutUserNestedInput
     machinery?: machineryUpdateManyWithoutClientNestedInput
+    userFiles?: userFilesUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUsersCompaniesInput = {
@@ -36689,6 +41531,7 @@ export namespace Prisma {
     Budget?: BudgetUncheckedUpdateManyWithoutUserNestedInput
     contracts?: contractsUncheckedUpdateManyWithoutUserNestedInput
     machinery?: machineryUncheckedUpdateManyWithoutClientNestedInput
+    userFiles?: userFilesUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CompanyUpsertWithoutUsersCompaniesInput = {
@@ -36727,6 +41570,7 @@ export namespace Prisma {
     contracts?: contractsUpdateManyWithoutCompanyNestedInput
     admins?: AdminsCompaniesUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
+    companyFiles?: companyFilesUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutUsersCompaniesInput = {
@@ -36755,6 +41599,7 @@ export namespace Prisma {
     contracts?: contractsUncheckedUpdateManyWithoutCompanyNestedInput
     admins?: AdminsCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
+    companyFiles?: companyFilesUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type UserCreateWithoutContractsInput = {
@@ -36777,6 +41622,7 @@ export namespace Prisma {
     Company?: CompanyCreateNestedOneWithoutUserInput
     machinery?: machineryCreateNestedManyWithoutClientInput
     usersCompanies?: usersCompaniesCreateNestedManyWithoutUserInput
+    userFiles?: userFilesCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutContractsInput = {
@@ -36800,6 +41646,7 @@ export namespace Prisma {
     Budget?: BudgetUncheckedCreateNestedManyWithoutUserInput
     machinery?: machineryUncheckedCreateNestedManyWithoutClientInput
     usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutUserInput
+    userFiles?: userFilesUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutContractsInput = {
@@ -36832,6 +41679,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
+    companyFiles?: companyFilesCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutContractsInput = {
@@ -36860,6 +41708,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
+    companyFiles?: companyFilesUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutContractsInput = {
@@ -36898,6 +41747,7 @@ export namespace Prisma {
     Company?: CompanyUpdateOneWithoutUserNestedInput
     machinery?: machineryUpdateManyWithoutClientNestedInput
     usersCompanies?: usersCompaniesUpdateManyWithoutUserNestedInput
+    userFiles?: userFilesUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutContractsInput = {
@@ -36921,6 +41771,7 @@ export namespace Prisma {
     Budget?: BudgetUncheckedUpdateManyWithoutUserNestedInput
     machinery?: machineryUncheckedUpdateManyWithoutClientNestedInput
     usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutUserNestedInput
+    userFiles?: userFilesUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CompanyUpsertWithoutContractsInput = {
@@ -36959,6 +41810,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
+    companyFiles?: companyFilesUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutContractsInput = {
@@ -36987,6 +41839,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
+    companyFiles?: companyFilesUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type WorkerCreateWithoutWorkersCompaniesInput = {
@@ -37001,6 +41854,7 @@ export namespace Prisma {
     assignedIncidents?: IncidentsCreateNestedManyWithoutAssignedWorkerInput
     jobHistory?: JobHistoryCreateNestedManyWithoutWorkerInput
     shiftSchedules?: ShiftScheduleCreateNestedManyWithoutWorkerInput
+    workerFiles?: workerFilesCreateNestedManyWithoutWorkerInput
   }
 
   export type WorkerUncheckedCreateWithoutWorkersCompaniesInput = {
@@ -37016,6 +41870,7 @@ export namespace Prisma {
     assignedIncidents?: IncidentsUncheckedCreateNestedManyWithoutAssignedWorkerInput
     jobHistory?: JobHistoryUncheckedCreateNestedManyWithoutWorkerInput
     shiftSchedules?: ShiftScheduleUncheckedCreateNestedManyWithoutWorkerInput
+    workerFiles?: workerFilesUncheckedCreateNestedManyWithoutWorkerInput
   }
 
   export type WorkerCreateOrConnectWithoutWorkersCompaniesInput = {
@@ -37048,6 +41903,7 @@ export namespace Prisma {
     contracts?: contractsCreateNestedManyWithoutCompanyInput
     admins?: AdminsCompaniesCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
+    companyFiles?: companyFilesCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutWorkersCompaniesInput = {
@@ -37076,6 +41932,7 @@ export namespace Prisma {
     contracts?: contractsUncheckedCreateNestedManyWithoutCompanyInput
     admins?: AdminsCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
+    companyFiles?: companyFilesUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutWorkersCompaniesInput = {
@@ -37106,6 +41963,7 @@ export namespace Prisma {
     assignedIncidents?: IncidentsUpdateManyWithoutAssignedWorkerNestedInput
     jobHistory?: JobHistoryUpdateManyWithoutWorkerNestedInput
     shiftSchedules?: ShiftScheduleUpdateManyWithoutWorkerNestedInput
+    workerFiles?: workerFilesUpdateManyWithoutWorkerNestedInput
   }
 
   export type WorkerUncheckedUpdateWithoutWorkersCompaniesInput = {
@@ -37121,6 +41979,7 @@ export namespace Prisma {
     assignedIncidents?: IncidentsUncheckedUpdateManyWithoutAssignedWorkerNestedInput
     jobHistory?: JobHistoryUncheckedUpdateManyWithoutWorkerNestedInput
     shiftSchedules?: ShiftScheduleUncheckedUpdateManyWithoutWorkerNestedInput
+    workerFiles?: workerFilesUncheckedUpdateManyWithoutWorkerNestedInput
   }
 
   export type CompanyUpsertWithoutWorkersCompaniesInput = {
@@ -37159,6 +42018,7 @@ export namespace Prisma {
     contracts?: contractsUpdateManyWithoutCompanyNestedInput
     admins?: AdminsCompaniesUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
+    companyFiles?: companyFilesUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutWorkersCompaniesInput = {
@@ -37187,6 +42047,7 @@ export namespace Prisma {
     contracts?: contractsUncheckedUpdateManyWithoutCompanyNestedInput
     admins?: AdminsCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
+    companyFiles?: companyFilesUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyCreateWithoutIncidentsInput = {
@@ -37214,6 +42075,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
+    companyFiles?: companyFilesCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutIncidentsInput = {
@@ -37242,6 +42104,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
+    companyFiles?: companyFilesUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutIncidentsInput = {
@@ -37261,6 +42124,7 @@ export namespace Prisma {
     jobHistory?: JobHistoryCreateNestedManyWithoutWorkerInput
     shiftSchedules?: ShiftScheduleCreateNestedManyWithoutWorkerInput
     workersCompanies?: workersCompaniesCreateNestedManyWithoutWorkerInput
+    workerFiles?: workerFilesCreateNestedManyWithoutWorkerInput
   }
 
   export type WorkerUncheckedCreateWithoutAssignedIncidentsInput = {
@@ -37276,6 +42140,7 @@ export namespace Prisma {
     jobHistory?: JobHistoryUncheckedCreateNestedManyWithoutWorkerInput
     shiftSchedules?: ShiftScheduleUncheckedCreateNestedManyWithoutWorkerInput
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutWorkerInput
+    workerFiles?: workerFilesUncheckedCreateNestedManyWithoutWorkerInput
   }
 
   export type WorkerCreateOrConnectWithoutAssignedIncidentsInput = {
@@ -37339,6 +42204,7 @@ export namespace Prisma {
     contracts?: contractsCreateNestedManyWithoutUserInput
     machinery?: machineryCreateNestedManyWithoutClientInput
     usersCompanies?: usersCompaniesCreateNestedManyWithoutUserInput
+    userFiles?: userFilesCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutIncidentsInput = {
@@ -37362,6 +42228,7 @@ export namespace Prisma {
     contracts?: contractsUncheckedCreateNestedManyWithoutUserInput
     machinery?: machineryUncheckedCreateNestedManyWithoutClientInput
     usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutUserInput
+    userFiles?: userFilesUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutIncidentsInput = {
@@ -37389,6 +42256,7 @@ export namespace Prisma {
     contracts?: contractsCreateNestedManyWithoutUserInput
     machinery?: machineryCreateNestedManyWithoutClientInput
     usersCompanies?: usersCompaniesCreateNestedManyWithoutUserInput
+    userFiles?: userFilesCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutIncidentsInput = {
@@ -37412,6 +42280,7 @@ export namespace Prisma {
     contracts?: contractsUncheckedCreateNestedManyWithoutUserInput
     machinery?: machineryUncheckedCreateNestedManyWithoutClientInput
     usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutUserInput
+    userFiles?: userFilesUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateManyIncidentsInputEnvelope = {
@@ -37511,6 +42380,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
+    companyFiles?: companyFilesUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutIncidentsInput = {
@@ -37539,6 +42409,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
+    companyFiles?: companyFilesUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type WorkerUpsertWithoutAssignedIncidentsInput = {
@@ -37564,6 +42435,7 @@ export namespace Prisma {
     jobHistory?: JobHistoryUpdateManyWithoutWorkerNestedInput
     shiftSchedules?: ShiftScheduleUpdateManyWithoutWorkerNestedInput
     workersCompanies?: workersCompaniesUpdateManyWithoutWorkerNestedInput
+    workerFiles?: workerFilesUpdateManyWithoutWorkerNestedInput
   }
 
   export type WorkerUncheckedUpdateWithoutAssignedIncidentsInput = {
@@ -37579,6 +42451,7 @@ export namespace Prisma {
     jobHistory?: JobHistoryUncheckedUpdateManyWithoutWorkerNestedInput
     shiftSchedules?: ShiftScheduleUncheckedUpdateManyWithoutWorkerNestedInput
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutWorkerNestedInput
+    workerFiles?: workerFilesUncheckedUpdateManyWithoutWorkerNestedInput
   }
 
   export type BudgetUpsertWithoutIncidentInput = {
@@ -37654,6 +42527,7 @@ export namespace Prisma {
     contracts?: contractsUpdateManyWithoutUserNestedInput
     machinery?: machineryUpdateManyWithoutClientNestedInput
     usersCompanies?: usersCompaniesUpdateManyWithoutUserNestedInput
+    userFiles?: userFilesUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutIncidentsInput = {
@@ -37677,6 +42551,7 @@ export namespace Prisma {
     contracts?: contractsUncheckedUpdateManyWithoutUserNestedInput
     machinery?: machineryUncheckedUpdateManyWithoutClientNestedInput
     usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutUserNestedInput
+    userFiles?: userFilesUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithWhereUniqueWithoutIncidentsInput = {
@@ -37747,6 +42622,7 @@ export namespace Prisma {
     contracts?: contractsCreateNestedManyWithoutUserInput
     machinery?: machineryCreateNestedManyWithoutClientInput
     usersCompanies?: usersCompaniesCreateNestedManyWithoutUserInput
+    userFiles?: userFilesCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPaymentsInput = {
@@ -37770,6 +42646,7 @@ export namespace Prisma {
     contracts?: contractsUncheckedCreateNestedManyWithoutUserInput
     machinery?: machineryUncheckedCreateNestedManyWithoutClientInput
     usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutUserInput
+    userFiles?: userFilesUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPaymentsInput = {
@@ -37802,6 +42679,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
+    companyFiles?: companyFilesCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutPaymentsInput = {
@@ -37830,6 +42708,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
+    companyFiles?: companyFilesUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutPaymentsInput = {
@@ -37862,6 +42741,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
+    companyFiles?: companyFilesCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutReceivedPaymentsInput = {
@@ -37890,6 +42770,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
+    companyFiles?: companyFilesUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutReceivedPaymentsInput = {
@@ -37991,6 +42872,7 @@ export namespace Prisma {
     contracts?: contractsUpdateManyWithoutUserNestedInput
     machinery?: machineryUpdateManyWithoutClientNestedInput
     usersCompanies?: usersCompaniesUpdateManyWithoutUserNestedInput
+    userFiles?: userFilesUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPaymentsInput = {
@@ -38014,6 +42896,7 @@ export namespace Prisma {
     contracts?: contractsUncheckedUpdateManyWithoutUserNestedInput
     machinery?: machineryUncheckedUpdateManyWithoutClientNestedInput
     usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutUserNestedInput
+    userFiles?: userFilesUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CompanyUpsertWithoutPaymentsInput = {
@@ -38052,6 +42935,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
+    companyFiles?: companyFilesUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutPaymentsInput = {
@@ -38080,6 +42964,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
+    companyFiles?: companyFilesUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUpsertWithoutReceivedPaymentsInput = {
@@ -38118,6 +43003,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
+    companyFiles?: companyFilesUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutReceivedPaymentsInput = {
@@ -38146,6 +43032,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
+    companyFiles?: companyFilesUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type IncidentsUpsertWithoutPaymentsInput = {
@@ -38306,6 +43193,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
+    companyFiles?: companyFilesCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutBudgetInput = {
@@ -38334,6 +43222,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
+    companyFiles?: companyFilesUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutBudgetInput = {
@@ -38405,6 +43294,7 @@ export namespace Prisma {
     contracts?: contractsCreateNestedManyWithoutUserInput
     machinery?: machineryCreateNestedManyWithoutClientInput
     usersCompanies?: usersCompaniesCreateNestedManyWithoutUserInput
+    userFiles?: userFilesCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutBudgetInput = {
@@ -38428,6 +43318,7 @@ export namespace Prisma {
     contracts?: contractsUncheckedCreateNestedManyWithoutUserInput
     machinery?: machineryUncheckedCreateNestedManyWithoutClientInput
     usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutUserInput
+    userFiles?: userFilesUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutBudgetInput = {
@@ -38460,6 +43351,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
+    companyFiles?: companyFilesCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutBudgetInput = {
@@ -38488,6 +43380,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
+    companyFiles?: companyFilesUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateManyBudgetInputEnvelope = {
@@ -38531,6 +43424,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
+    companyFiles?: companyFilesUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutBudgetInput = {
@@ -38559,6 +43453,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
+    companyFiles?: companyFilesUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type IncidentsUpsertWithoutBudgetInput = {
@@ -38642,6 +43537,7 @@ export namespace Prisma {
     contracts?: contractsUpdateManyWithoutUserNestedInput
     machinery?: machineryUpdateManyWithoutClientNestedInput
     usersCompanies?: usersCompaniesUpdateManyWithoutUserNestedInput
+    userFiles?: userFilesUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBudgetInput = {
@@ -38665,6 +43561,7 @@ export namespace Prisma {
     contracts?: contractsUncheckedUpdateManyWithoutUserNestedInput
     machinery?: machineryUncheckedUpdateManyWithoutClientNestedInput
     usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutUserNestedInput
+    userFiles?: userFilesUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CompanyUpsertWithWhereUniqueWithoutBudgetInput = {
@@ -38770,6 +43667,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
+    companyFiles?: companyFilesCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutIncidentHistoryInput = {
@@ -38798,6 +43696,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
+    companyFiles?: companyFilesUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutIncidentHistoryInput = {
@@ -38825,6 +43724,7 @@ export namespace Prisma {
     contracts?: contractsCreateNestedManyWithoutUserInput
     machinery?: machineryCreateNestedManyWithoutClientInput
     usersCompanies?: usersCompaniesCreateNestedManyWithoutUserInput
+    userFiles?: userFilesCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutIncidentHistoryInput = {
@@ -38848,6 +43748,7 @@ export namespace Prisma {
     contracts?: contractsUncheckedCreateNestedManyWithoutUserInput
     machinery?: machineryUncheckedCreateNestedManyWithoutClientInput
     usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutUserInput
+    userFiles?: userFilesUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutIncidentHistoryInput = {
@@ -38941,6 +43842,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
+    companyFiles?: companyFilesUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutIncidentHistoryInput = {
@@ -38969,6 +43871,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
+    companyFiles?: companyFilesUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type UserUpsertWithoutIncidentHistoryInput = {
@@ -39002,6 +43905,7 @@ export namespace Prisma {
     contracts?: contractsUpdateManyWithoutUserNestedInput
     machinery?: machineryUpdateManyWithoutClientNestedInput
     usersCompanies?: usersCompaniesUpdateManyWithoutUserNestedInput
+    userFiles?: userFilesUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutIncidentHistoryInput = {
@@ -39025,6 +43929,7 @@ export namespace Prisma {
     contracts?: contractsUncheckedUpdateManyWithoutUserNestedInput
     machinery?: machineryUncheckedUpdateManyWithoutClientNestedInput
     usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutUserNestedInput
+    userFiles?: userFilesUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CompanyCreateWithoutShiftWorkersInput = {
@@ -39052,6 +43957,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
+    companyFiles?: companyFilesCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutShiftWorkersInput = {
@@ -39080,6 +43986,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
+    companyFiles?: companyFilesUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutShiftWorkersInput = {
@@ -39099,6 +44006,7 @@ export namespace Prisma {
     jobHistory?: JobHistoryCreateNestedManyWithoutWorkerInput
     shiftSchedules?: ShiftScheduleCreateNestedManyWithoutWorkerInput
     workersCompanies?: workersCompaniesCreateNestedManyWithoutWorkerInput
+    workerFiles?: workerFilesCreateNestedManyWithoutWorkerInput
   }
 
   export type WorkerUncheckedCreateWithoutShiftWorkersInput = {
@@ -39114,6 +44022,7 @@ export namespace Prisma {
     jobHistory?: JobHistoryUncheckedCreateNestedManyWithoutWorkerInput
     shiftSchedules?: ShiftScheduleUncheckedCreateNestedManyWithoutWorkerInput
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutWorkerInput
+    workerFiles?: workerFilesUncheckedCreateNestedManyWithoutWorkerInput
   }
 
   export type WorkerCreateOrConnectWithoutShiftWorkersInput = {
@@ -39177,6 +44086,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
+    companyFiles?: companyFilesUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutShiftWorkersInput = {
@@ -39205,6 +44115,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
+    companyFiles?: companyFilesUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type WorkerUpsertWithoutShiftWorkersInput = {
@@ -39230,6 +44141,7 @@ export namespace Prisma {
     jobHistory?: JobHistoryUpdateManyWithoutWorkerNestedInput
     shiftSchedules?: ShiftScheduleUpdateManyWithoutWorkerNestedInput
     workersCompanies?: workersCompaniesUpdateManyWithoutWorkerNestedInput
+    workerFiles?: workerFilesUpdateManyWithoutWorkerNestedInput
   }
 
   export type WorkerUncheckedUpdateWithoutShiftWorkersInput = {
@@ -39245,6 +44157,7 @@ export namespace Prisma {
     jobHistory?: JobHistoryUncheckedUpdateManyWithoutWorkerNestedInput
     shiftSchedules?: ShiftScheduleUncheckedUpdateManyWithoutWorkerNestedInput
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutWorkerNestedInput
+    workerFiles?: workerFilesUncheckedUpdateManyWithoutWorkerNestedInput
   }
 
   export type ShiftScheduleUpsertWithoutShiftWorkersInput = {
@@ -39285,6 +44198,7 @@ export namespace Prisma {
     assignedIncidents?: IncidentsCreateNestedManyWithoutAssignedWorkerInput
     shiftSchedules?: ShiftScheduleCreateNestedManyWithoutWorkerInput
     workersCompanies?: workersCompaniesCreateNestedManyWithoutWorkerInput
+    workerFiles?: workerFilesCreateNestedManyWithoutWorkerInput
   }
 
   export type WorkerUncheckedCreateWithoutJobHistoryInput = {
@@ -39300,6 +44214,7 @@ export namespace Prisma {
     assignedIncidents?: IncidentsUncheckedCreateNestedManyWithoutAssignedWorkerInput
     shiftSchedules?: ShiftScheduleUncheckedCreateNestedManyWithoutWorkerInput
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutWorkerInput
+    workerFiles?: workerFilesUncheckedCreateNestedManyWithoutWorkerInput
   }
 
   export type WorkerCreateOrConnectWithoutJobHistoryInput = {
@@ -39330,6 +44245,7 @@ export namespace Prisma {
     assignedIncidents?: IncidentsUpdateManyWithoutAssignedWorkerNestedInput
     shiftSchedules?: ShiftScheduleUpdateManyWithoutWorkerNestedInput
     workersCompanies?: workersCompaniesUpdateManyWithoutWorkerNestedInput
+    workerFiles?: workerFilesUpdateManyWithoutWorkerNestedInput
   }
 
   export type WorkerUncheckedUpdateWithoutJobHistoryInput = {
@@ -39345,6 +44261,7 @@ export namespace Prisma {
     assignedIncidents?: IncidentsUncheckedUpdateManyWithoutAssignedWorkerNestedInput
     shiftSchedules?: ShiftScheduleUncheckedUpdateManyWithoutWorkerNestedInput
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutWorkerNestedInput
+    workerFiles?: workerFilesUncheckedUpdateManyWithoutWorkerNestedInput
   }
 
   export type WorkerCreateWithoutShiftSchedulesInput = {
@@ -39359,6 +44276,7 @@ export namespace Prisma {
     assignedIncidents?: IncidentsCreateNestedManyWithoutAssignedWorkerInput
     jobHistory?: JobHistoryCreateNestedManyWithoutWorkerInput
     workersCompanies?: workersCompaniesCreateNestedManyWithoutWorkerInput
+    workerFiles?: workerFilesCreateNestedManyWithoutWorkerInput
   }
 
   export type WorkerUncheckedCreateWithoutShiftSchedulesInput = {
@@ -39374,6 +44292,7 @@ export namespace Prisma {
     assignedIncidents?: IncidentsUncheckedCreateNestedManyWithoutAssignedWorkerInput
     jobHistory?: JobHistoryUncheckedCreateNestedManyWithoutWorkerInput
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutWorkerInput
+    workerFiles?: workerFilesUncheckedCreateNestedManyWithoutWorkerInput
   }
 
   export type WorkerCreateOrConnectWithoutShiftSchedulesInput = {
@@ -39431,6 +44350,7 @@ export namespace Prisma {
     assignedIncidents?: IncidentsUpdateManyWithoutAssignedWorkerNestedInput
     jobHistory?: JobHistoryUpdateManyWithoutWorkerNestedInput
     workersCompanies?: workersCompaniesUpdateManyWithoutWorkerNestedInput
+    workerFiles?: workerFilesUpdateManyWithoutWorkerNestedInput
   }
 
   export type WorkerUncheckedUpdateWithoutShiftSchedulesInput = {
@@ -39446,6 +44366,7 @@ export namespace Prisma {
     assignedIncidents?: IncidentsUncheckedUpdateManyWithoutAssignedWorkerNestedInput
     jobHistory?: JobHistoryUncheckedUpdateManyWithoutWorkerNestedInput
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutWorkerNestedInput
+    workerFiles?: workerFilesUncheckedUpdateManyWithoutWorkerNestedInput
   }
 
   export type ShiftWorkerUpsertWithWhereUniqueWithoutShiftInput = {
@@ -39484,6 +44405,7 @@ export namespace Prisma {
     contracts?: contractsCreateNestedManyWithoutUserInput
     machinery?: machineryCreateNestedManyWithoutClientInput
     usersCompanies?: usersCompaniesCreateNestedManyWithoutUserInput
+    userFiles?: userFilesCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutDirectionsInput = {
@@ -39507,6 +44429,7 @@ export namespace Prisma {
     contracts?: contractsUncheckedCreateNestedManyWithoutUserInput
     machinery?: machineryUncheckedCreateNestedManyWithoutClientInput
     usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutUserInput
+    userFiles?: userFilesUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutDirectionsInput = {
@@ -39539,6 +44462,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
+    companyFiles?: companyFilesCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutDirectionsInput = {
@@ -39567,6 +44491,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
+    companyFiles?: companyFilesUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutDirectionsInput = {
@@ -39605,6 +44530,7 @@ export namespace Prisma {
     contracts?: contractsUpdateManyWithoutUserNestedInput
     machinery?: machineryUpdateManyWithoutClientNestedInput
     usersCompanies?: usersCompaniesUpdateManyWithoutUserNestedInput
+    userFiles?: userFilesUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDirectionsInput = {
@@ -39628,6 +44554,7 @@ export namespace Prisma {
     contracts?: contractsUncheckedUpdateManyWithoutUserNestedInput
     machinery?: machineryUncheckedUpdateManyWithoutClientNestedInput
     usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutUserNestedInput
+    userFiles?: userFilesUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CompanyUpsertWithoutDirectionsInput = {
@@ -39666,6 +44593,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
+    companyFiles?: companyFilesUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutDirectionsInput = {
@@ -39694,6 +44622,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
+    companyFiles?: companyFilesUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type UserCreateWithoutMachineryInput = {
@@ -39716,6 +44645,7 @@ export namespace Prisma {
     Company?: CompanyCreateNestedOneWithoutUserInput
     contracts?: contractsCreateNestedManyWithoutUserInput
     usersCompanies?: usersCompaniesCreateNestedManyWithoutUserInput
+    userFiles?: userFilesCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutMachineryInput = {
@@ -39739,6 +44669,7 @@ export namespace Prisma {
     Budget?: BudgetUncheckedCreateNestedManyWithoutUserInput
     contracts?: contractsUncheckedCreateNestedManyWithoutUserInput
     usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutUserInput
+    userFiles?: userFilesUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutMachineryInput = {
@@ -39771,6 +44702,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
+    companyFiles?: companyFilesCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutMachineryInput = {
@@ -39799,6 +44731,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
+    companyFiles?: companyFilesUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutMachineryInput = {
@@ -39855,6 +44788,7 @@ export namespace Prisma {
     Company?: CompanyUpdateOneWithoutUserNestedInput
     contracts?: contractsUpdateManyWithoutUserNestedInput
     usersCompanies?: usersCompaniesUpdateManyWithoutUserNestedInput
+    userFiles?: userFilesUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMachineryInput = {
@@ -39878,6 +44812,7 @@ export namespace Prisma {
     Budget?: BudgetUncheckedUpdateManyWithoutUserNestedInput
     contracts?: contractsUncheckedUpdateManyWithoutUserNestedInput
     usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutUserNestedInput
+    userFiles?: userFilesUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CompanyUpsertWithoutMachineryInput = {
@@ -39916,6 +44851,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
+    companyFiles?: companyFilesUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutMachineryInput = {
@@ -39944,6 +44880,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
+    companyFiles?: companyFilesUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type ClientMachineryUpsertWithWhereUniqueWithoutMachineryInput = {
@@ -39982,6 +44919,7 @@ export namespace Prisma {
     contracts?: contractsCreateNestedManyWithoutUserInput
     machinery?: machineryCreateNestedManyWithoutClientInput
     usersCompanies?: usersCompaniesCreateNestedManyWithoutUserInput
+    userFiles?: userFilesCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutClientMachineryInput = {
@@ -40005,6 +44943,7 @@ export namespace Prisma {
     contracts?: contractsUncheckedCreateNestedManyWithoutUserInput
     machinery?: machineryUncheckedCreateNestedManyWithoutClientInput
     usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutUserInput
+    userFiles?: userFilesUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutClientMachineryInput = {
@@ -40079,6 +45018,7 @@ export namespace Prisma {
     contracts?: contractsUpdateManyWithoutUserNestedInput
     machinery?: machineryUpdateManyWithoutClientNestedInput
     usersCompanies?: usersCompaniesUpdateManyWithoutUserNestedInput
+    userFiles?: userFilesUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutClientMachineryInput = {
@@ -40102,6 +45042,7 @@ export namespace Prisma {
     contracts?: contractsUncheckedUpdateManyWithoutUserNestedInput
     machinery?: machineryUncheckedUpdateManyWithoutClientNestedInput
     usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutUserNestedInput
+    userFiles?: userFilesUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type machineryUpsertWithoutClientMachineryInput = {
@@ -40225,6 +45166,13 @@ export namespace Prisma {
   export type usersCompaniesCreateManyUserInput = {
     id?: number
     companyID: number
+  }
+
+  export type userFilesCreateManyUserInput = {
+    id?: number
+    fileURL: string
+    objectKey: string
+    uploadedAt?: Date | string
   }
 
   export type DirectionsUpdateWithoutUserInput = {
@@ -40475,6 +45423,26 @@ export namespace Prisma {
     companyID?: IntFieldUpdateOperationsInput | number
   }
 
+  export type userFilesUpdateWithoutUserInput = {
+    fileURL?: StringFieldUpdateOperationsInput | string
+    objectKey?: StringFieldUpdateOperationsInput | string
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type userFilesUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    fileURL?: StringFieldUpdateOperationsInput | string
+    objectKey?: StringFieldUpdateOperationsInput | string
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type userFilesUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    fileURL?: StringFieldUpdateOperationsInput | string
+    objectKey?: StringFieldUpdateOperationsInput | string
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type WorkerCreateManyCompanyInput = {
     workerid?: number
     name: string
@@ -40615,6 +45583,13 @@ export namespace Prisma {
     userID: number
   }
 
+  export type companyFilesCreateManyCompanyInput = {
+    id?: number
+    fileURL: string
+    objectKey: string
+    uploadedAt?: Date | string
+  }
+
   export type WorkerUpdateWithoutCompanyInput = {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -40627,6 +45602,7 @@ export namespace Prisma {
     jobHistory?: JobHistoryUpdateManyWithoutWorkerNestedInput
     shiftSchedules?: ShiftScheduleUpdateManyWithoutWorkerNestedInput
     workersCompanies?: workersCompaniesUpdateManyWithoutWorkerNestedInput
+    workerFiles?: workerFilesUpdateManyWithoutWorkerNestedInput
   }
 
   export type WorkerUncheckedUpdateWithoutCompanyInput = {
@@ -40642,6 +45618,7 @@ export namespace Prisma {
     jobHistory?: JobHistoryUncheckedUpdateManyWithoutWorkerNestedInput
     shiftSchedules?: ShiftScheduleUncheckedUpdateManyWithoutWorkerNestedInput
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutWorkerNestedInput
+    workerFiles?: workerFilesUncheckedUpdateManyWithoutWorkerNestedInput
   }
 
   export type WorkerUncheckedUpdateManyWithoutCompanyInput = {
@@ -40958,6 +45935,7 @@ export namespace Prisma {
     contracts?: contractsUpdateManyWithoutUserNestedInput
     machinery?: machineryUpdateManyWithoutClientNestedInput
     usersCompanies?: usersCompaniesUpdateManyWithoutUserNestedInput
+    userFiles?: userFilesUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCompanyInput = {
@@ -40981,6 +45959,7 @@ export namespace Prisma {
     contracts?: contractsUncheckedUpdateManyWithoutUserNestedInput
     machinery?: machineryUncheckedUpdateManyWithoutClientNestedInput
     usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutUserNestedInput
+    userFiles?: userFilesUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutCompanyInput = {
@@ -41065,6 +46044,26 @@ export namespace Prisma {
     userID?: IntFieldUpdateOperationsInput | number
   }
 
+  export type companyFilesUpdateWithoutCompanyInput = {
+    fileURL?: StringFieldUpdateOperationsInput | string
+    objectKey?: StringFieldUpdateOperationsInput | string
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type companyFilesUncheckedUpdateWithoutCompanyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    fileURL?: StringFieldUpdateOperationsInput | string
+    objectKey?: StringFieldUpdateOperationsInput | string
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type companyFilesUncheckedUpdateManyWithoutCompanyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    fileURL?: StringFieldUpdateOperationsInput | string
+    objectKey?: StringFieldUpdateOperationsInput | string
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type ShiftWorkerCreateManyWorkerInput = {
     id?: number
     companyID: number
@@ -41108,6 +46107,13 @@ export namespace Prisma {
   export type workersCompaniesCreateManyWorkerInput = {
     id?: number
     companyID: number
+  }
+
+  export type workerFilesCreateManyWorkerInput = {
+    id?: number
+    fileURL: string
+    objectKey: string
+    uploadedAt?: Date | string
   }
 
   export type ShiftWorkerUpdateWithoutWorkerInput = {
@@ -41248,6 +46254,26 @@ export namespace Prisma {
     companyID?: IntFieldUpdateOperationsInput | number
   }
 
+  export type workerFilesUpdateWithoutWorkerInput = {
+    fileURL?: StringFieldUpdateOperationsInput | string
+    objectKey?: StringFieldUpdateOperationsInput | string
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type workerFilesUncheckedUpdateWithoutWorkerInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    fileURL?: StringFieldUpdateOperationsInput | string
+    objectKey?: StringFieldUpdateOperationsInput | string
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type workerFilesUncheckedUpdateManyWithoutWorkerInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    fileURL?: StringFieldUpdateOperationsInput | string
+    objectKey?: StringFieldUpdateOperationsInput | string
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type AdminsCompaniesCreateManyAdminInput = {
     id?: number
     companyID: number
@@ -41319,6 +46345,7 @@ export namespace Prisma {
     contracts?: contractsUpdateManyWithoutUserNestedInput
     machinery?: machineryUpdateManyWithoutClientNestedInput
     usersCompanies?: usersCompaniesUpdateManyWithoutUserNestedInput
+    userFiles?: userFilesUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutIncidentsInput = {
@@ -41342,6 +46369,7 @@ export namespace Prisma {
     contracts?: contractsUncheckedUpdateManyWithoutUserNestedInput
     machinery?: machineryUncheckedUpdateManyWithoutClientNestedInput
     usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutUserNestedInput
+    userFiles?: userFilesUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutIncidentsInput = {
@@ -41470,6 +46498,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
+    companyFiles?: companyFilesUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutBudgetInput = {
@@ -41498,6 +46527,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
+    companyFiles?: companyFilesUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateManyWithoutBudgetInput = {
