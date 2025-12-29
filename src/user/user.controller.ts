@@ -6,11 +6,15 @@ import {
   Body,
   Query,
   Req,
+  UseInterceptors,
+  UploadedFile,
+  Param,
 } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { UserService } from './user.service';
 import { AuthGuard } from '../auth/auth.guard';
 import { UserGuard } from './user.guard';
-
+import { UserType } from '../utils/types/userType';
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
@@ -62,6 +66,7 @@ export class UserController {
     }
 
     const { title, description, location, priority, urgency } = body;
+
     return this.userService.createIncident(
       title,
       description,
@@ -90,5 +95,23 @@ export class UserController {
     const userID = req.user.userID;
 
     return this.userService.myIncidents(userID);
+  }
+  @UseGuards(AuthGuard, UserGuard)
+  @UseInterceptors(FileInterceptor('file'))
+  @Post('uploadFile')
+  async uploadFile(@Req() req: any, @UploadedFile() file: Express.Multer.File) {
+    const id = req.user.userID;
+    const userType: UserType = 'user';
+
+    return this.userService.uploadFile([file], id, userType);
+  }
+  @UseGuards(AuthGuard, UserGuard)
+  @Get('listFiles/:incidentID')
+  async listFiles(@Req() req: any, @Param('incidentID') incidentID?: string) {
+    const id = req.user.userID;
+    const userType: UserType = 'user';
+    const incidentIDNum = incidentID ? parseInt(incidentID, 10) : undefined;
+
+    return this.userService.listFiles(id, userType, incidentIDNum);
   }
 }

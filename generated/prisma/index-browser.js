@@ -21,12 +21,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.19.0
- * Query Engine version: 2ba551f319ab1df4bc874a89965d8b3641056773
+ * Prisma Client JS version: 6.19.1
+ * Query Engine version: c2990dca591cba766e3b7ef5d9e8a84796e47ab7
  */
 Prisma.prismaVersion = {
-  client: "6.19.0",
-  engine: "2ba551f319ab1df4bc874a89965d8b3641056773"
+  client: "6.19.1",
+  engine: "c2990dca591cba766e3b7ef5d9e8a84796e47ab7"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -176,27 +176,17 @@ exports.Prisma.AdminScalarFieldEnum = {
   refreshToken: 'refreshToken'
 };
 
-exports.Prisma.UserFilesScalarFieldEnum = {
+exports.Prisma.FileScalarFieldEnum = {
   id: 'id',
+  objectKey: 'objectKey',
+  fileURL: 'fileURL',
+  incidentID: 'incidentID',
+  ownerType: 'ownerType',
+  ownerId: 'ownerId',
   userID: 'userID',
-  fileURL: 'fileURL',
-  objectKey: 'objectKey',
-  uploadedAt: 'uploadedAt'
-};
-
-exports.Prisma.WorkerFilesScalarFieldEnum = {
-  id: 'id',
-  workerID: 'workerID',
-  fileURL: 'fileURL',
-  objectKey: 'objectKey',
-  uploadedAt: 'uploadedAt'
-};
-
-exports.Prisma.CompanyFilesScalarFieldEnum = {
-  id: 'id',
   companyID: 'companyID',
-  fileURL: 'fileURL',
-  objectKey: 'objectKey',
+  workerID: 'workerID',
+  adminID: 'adminID',
   uploadedAt: 'uploadedAt'
 };
 
@@ -400,9 +390,7 @@ exports.Prisma.ModelName = {
   AdminsCompanies: 'AdminsCompanies',
   Worker: 'Worker',
   Admin: 'Admin',
-  userFiles: 'userFiles',
-  workerFiles: 'workerFiles',
-  companyFiles: 'companyFiles',
+  File: 'File',
   usersCompanies: 'usersCompanies',
   contracts: 'contracts',
   workersCompanies: 'workersCompanies',

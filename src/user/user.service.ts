@@ -7,6 +7,8 @@ import { myIncidents } from '../modules/users/myIncidents';
 import { recievedBudgets } from '../modules/users/recievedBudgets';
 import { validateCode } from '../utils/validateCode';
 import { Injectable } from '@nestjs/common';
+import { uploadFile } from '../s3/uploadFile';
+import { listFiles } from '../s3/listFiles';
 
 @Injectable()
 export class UserService {
@@ -49,5 +51,15 @@ export class UserService {
   }
   async myIncidents(userID: number) {
     return myIncidents(userID);
+  }
+  async uploadFile(
+    file: Array<Express.Multer.File>,
+    id: number,
+    userType: 'user',
+  ) {
+    return uploadFile(file, id, userType);
+  }
+  async listFiles(id: number, userType: 'user', incidentID?: number) {
+    return listFiles(id, userType, incidentID);
   }
 }

@@ -1,13 +1,13 @@
 import dotenv from 'dotenv';
-import { S3Client } from '@aws-sdk/client-s3';
 
 dotenv.config({ path: '../../../.env' });
 
-export const s3Config = new S3Client({
+export const s3Config = {
   region: 'auto',
   endpoint: process.env.S3_API || 'https://s3.amazonaws.com',
   credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID || '',
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || '',
+    accessKeyId: process.env.CLOUDFLARE_ACCESS_KEY_ID || '',
+    secretAccessKey: process.env.CLOUDFLARE_SECRET_ACCESS_KEY || '',
   },
-});
+  forcePathStyle: true, // Required for Cloudflare R2
+};

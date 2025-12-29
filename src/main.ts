@@ -9,7 +9,7 @@ async function bootstrap() {
       'http://localhost:5173', // Vite dev
       'http://localhost:4173', // Vite preview
       'https://lampistas.vercel.app', // Vercel production
-      'https://*.vercel.app', // Cualquier preview de Vercel
+      'https://*.vercel.app', // Cualquier preview de Vercelu
     ],
     credentials: true,
   });

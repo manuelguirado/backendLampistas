@@ -42,7 +42,7 @@ model User {
   machinery      machinery[]
   usersCompanies usersCompanies[]
   refreshToken   String?          @db.Text
-  userFiles      userFiles[]
+  userFiles      File[]
 }
 
 model Company {
@@ -74,7 +74,7 @@ model Company {
   workersCompanies workersCompanies[]
   usersCompanies   usersCompanies[]
   refreshToken     String?            @db.Text
-  companyFiles     companyFiles[]
+  companyFiles     File[]
 }
 
 model AdminsCompanies {
@@ -103,7 +103,7 @@ model Worker {
   workerCode        String?            @db.VarChar(100)
   workersCompanies  workersCompanies[]
   refreshToken      String?            @db.Text
-  workerFiles       workerFiles[]
+  workerFiles       File[]
 }
 
 model Admin {
@@ -113,33 +113,33 @@ model Admin {
   role         Role              @default(ADMIN)
   refreshToken String?           @db.Text
   companies    AdminsCompanies[]
+  adminFiles   File[]
 }
 
-model userFiles {
-  id         Int      @id @default(autoincrement())
-  userID     Int
-  user       User     @relation(fields: [userID], references: [userID])
-  fileURL     String   @db.VarChar(255)
-  objectKey  String   @db.VarChar(255)
-  uploadedAt DateTime @default(now()) @db.Timestamp(6)
-}
+model File {
+  id         Int        @id @default(autoincrement())
+  objectKey  String     @unique
+  fileURL    String     @db.Text
+  incidentID Int?
+  incident   Incidents? @relation(fields: [incidentID], references: [IncidentsID])
 
-model workerFiles {
-  id         Int      @id @default(autoincrement())
-  workerID   Int
-  worker     Worker   @relation(fields: [workerID], references: [workerid])
-  fileURL     String   @db.VarChar(255)
-  objectKey  String   @db.VarChar(255)
-  uploadedAt DateTime @default(now()) @db.Timestamp(6)
-}
+  ownerType Role
+  ownerId   Int
 
-model companyFiles {
-  id         Int      @id @default(autoincrement())
-  companyID  Int
-  company    Company  @relation(fields: [companyID], references: [companyID])
-  fileURL     String   @db.VarChar(255)
-  objectKey  String   @db.VarChar(255)
-  uploadedAt DateTime @default(now()) @db.Timestamp(6)
+  // Relations to different owner types
+  userID    Int?
+  user      User?    @relation(fields: [userID], references: [userID])
+  companyID Int?
+  company   Company? @relation(fields: [companyID], references: [companyID])
+  workerID  Int?
+  worker    Worker?  @relation(fields: [workerID], references: [workerid])
+  adminID   Int?
+  admin     Admin?   @relation(fields: [adminID], references: [adminID])
+
+  uploadedAt DateTime @default(now())
+
+  @@index([ownerType, ownerId])
+  @@index([incidentID])
 }
 
 model usersCompanies {
@@ -204,6 +204,7 @@ model Incidents {
   urgency          Boolean?          @default(false)
   workerID         Int?
   Payments         Payments[]        @relation("IncidentPayments")
+  files            File[]
 }
 
 model Payments {
