@@ -18,9 +18,9 @@ async function saveDataInDB(
   id: number,
   userType: UserType,
   fileURL: string,
-
   objectKey: string,
   uploadedAt: Date,
+  incidentID?: number, // Nuevo parámetro
 ) {
   {
     //valiate user and incident in parallel
@@ -48,6 +48,7 @@ async function saveDataInDB(
             ownerType: 'USER',
             ownerId: id,
             uploadedAt: uploadedAt,
+            incidentID, // ✅ Incluir incidentID
           },
         });
         break;
@@ -73,7 +74,9 @@ export async function uploadFile(
   file: Array<Express.Multer.File>,
   id: number,
   userType: UserType,
+  incidentID?: number, // Nuevo parámetro opcional
 ) {
+  console.log('Uploading file for:', { id, userType, incidentID });
   if (!file) {
     throw new Error('File is required');
   }
@@ -108,7 +111,14 @@ export async function uploadFile(
       fileUrl,
       file[0].mimetype,
     );
-    await saveDataInDB(id, userType, generateURL, params.Key, uploadedAt);
+    await saveDataInDB(
+      id,
+      userType,
+      generateURL,
+      params.Key,
+      uploadedAt,
+      incidentID,
+    );
 
     const payload = { id, userType, role: user.role };
     const secret = process.env.JWT_SECRET as string;

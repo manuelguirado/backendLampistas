@@ -35,7 +35,7 @@ export async function downloadFile(
     }
     const params = {
       Bucket: process.env.CLOUDFLARE_BUCKET_NAME as string,
-      Key: fileURL.objectKey,
+      Key: fileURL[0].objectKey,
     };
 
     const command = new GetObjectCommand(params);

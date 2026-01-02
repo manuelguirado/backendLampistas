@@ -8,13 +8,15 @@ import {
   Req,
   UseInterceptors,
   UploadedFile,
+  UploadedFiles,
   Param,
 } from '@nestjs/common';
-import { FileInterceptor } from '@nestjs/platform-express';
+import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { UserService } from './user.service';
 import { AuthGuard } from '../auth/auth.guard';
 import { UserGuard } from './user.guard';
 import { UserType } from '../utils/types/userType';
+
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
@@ -45,6 +47,7 @@ export class UserController {
     return this.userService.findMyMachinery(userID);
   }
   @UseGuards(AuthGuard, UserGuard)
+  @UseInterceptors(FilesInterceptor('files', 10)) // Hasta 10 archivos
   @Post('createIncident')
   async createIncident(
     @Req() req: any,
@@ -53,10 +56,10 @@ export class UserController {
       title: string;
       description: string;
       location: string;
-
       priority?: string;
       urgency?: boolean;
     },
+    @UploadedFiles() files?: Express.Multer.File[], // Cambiar a UploadedFiles
   ) {
     const userID = req.user.userID;
     const companyID = req.user.companyID;
@@ -75,6 +78,7 @@ export class UserController {
       companyID,
       priority,
       urgency,
+      files, // Pasar archivos
     );
   }
   @UseGuards(AuthGuard, UserGuard)
@@ -108,6 +112,7 @@ export class UserController {
   @UseGuards(AuthGuard, UserGuard)
   @Get('listFiles/:incidentID')
   async listFiles(@Req() req: any, @Param('incidentID') incidentID?: string) {
+    console.log('Received incidentID param:', incidentID);
     const id = req.user.userID;
     const userType: UserType = 'user';
     const incidentIDNum = incidentID ? parseInt(incidentID, 10) : undefined;

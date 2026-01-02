@@ -26,6 +26,7 @@ export class UserService {
     companyID: number,
     priority?: string,
     urgency?: boolean,
+    files?: Express.Multer.File[], // Añadir parámetro de archivos
   ) {
     return createIncident(
       title,
@@ -35,6 +36,7 @@ export class UserService {
       companyID,
       priority,
       urgency,
+      files, // Pasar archivos
     );
   }
   async findMyMachinery(userID: number) {

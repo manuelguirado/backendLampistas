@@ -204,7 +204,7 @@ model Incidents {
   urgency          Boolean?          @default(false)
   workerID         Int?
   Payments         Payments[]        @relation("IncidentPayments")
-  files            File[]
+  files            File[]      
 }
 
 model Payments {
