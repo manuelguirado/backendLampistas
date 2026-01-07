@@ -1,5 +1,6 @@
-import { Controller, Delete, Req } from '@nestjs/common';
+import { Controller, Delete, Req, Res } from '@nestjs/common';
 import { CompanyService } from './company.service';
+import { generateBudgetPDF } from '../utils/generatePDF';
 import {
   Body,
   Post,
@@ -9,12 +10,16 @@ import {
   Param,
   Get,
   Query,
+  UseInterceptors,
+  UploadedFile,
+  UploadedFiles,
 } from '@nestjs/common';
 import { AuthGuard } from '../auth/auth.guard';
+import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { CompanyGuard } from './company.guard';
 import type { ContractType } from '../../generated/prisma';
 import type { ItemType } from '../utils/types/itemType';
-import { MachineryType } from '../utils/types/machineType';
+import { BudgetData } from '../utils/types/budgetData';
 
 @Controller('company')
 export class CompanyController {
@@ -125,7 +130,7 @@ export class CompanyController {
   ) {
     const { companyID } = req.user;
 
-    const parsedLimit = limit ? Number(limit) : 5;
+    const parsedLimit = limit ? Number(limit) : 100;
     const parsedOffset = offset ? Number(offset) : 0;
     return this.companyService.listClients(
       companyID,
@@ -134,6 +139,7 @@ export class CompanyController {
     );
   }
   @UseGuards(AuthGuard, CompanyGuard)
+  @UseInterceptors(FileInterceptor('file'))
   @Post('CreateBudget')
   async createBudget(
     @Request() req,
@@ -149,22 +155,104 @@ export class CompanyController {
       totalAmount: number;
       incidentID?: number;
       description?: string;
+      companyName: string;
+      date: string;
+      clientName?: string;
+      clientEmail?: string;
+      clientPhone?: string;
+      clientAddress?: string;
+      file?: Express.Multer.File;
     },
+    @Res() res: any,
   ) {
-    const companyID = req.user.companyID;
+    try {
+      const companyID = req.user.companyID;
+      console.log('Creating budget for companyID:', companyID);
 
-    return this.companyService.createBudget(
-      createBudgetDto.budgetNumber,
-      createBudgetDto.userID,
-      companyID,
-      createBudgetDto.title,
-      createBudgetDto.items,
-      createBudgetDto.subtotal,
-      createBudgetDto.tax,
-      createBudgetDto.totalAmount,
-      createBudgetDto.incidentID,
-      createBudgetDto.description ?? '',
-    );
+      // 1. Crear presupuesto en BD
+      const budget = await this.companyService.createBudget(
+        createBudgetDto.budgetNumber,
+        createBudgetDto.userID,
+        companyID,
+        createBudgetDto.title,
+        createBudgetDto.items,
+        createBudgetDto.subtotal,
+        createBudgetDto.tax,
+        createBudgetDto.totalAmount,
+        createBudgetDto.incidentID,
+        createBudgetDto.description ?? '',
+      );
+
+      console.log('Budget saved to DB:', budget);
+
+      // 2. Preparar datos para el PDF
+      const pdfData = {
+        budgetNumber: createBudgetDto.budgetNumber,
+        companyName: createBudgetDto.companyName,
+        budgetTitle: createBudgetDto.title,
+        date: createBudgetDto.date,
+        items: createBudgetDto.items,
+        subtotal: createBudgetDto.subtotal,
+        tax: createBudgetDto.tax,
+        total: createBudgetDto.totalAmount,
+        clientName: createBudgetDto.clientName || 'Cliente',
+        clientAddress: createBudgetDto.clientAddress || '',
+        clientPhone: createBudgetDto.clientPhone || '',
+        clientEmail: createBudgetDto.clientEmail || '',
+      };
+
+      console.log('Generating PDF with data:', pdfData);
+
+      // 3. Generar PDF
+      const pdfBuffer = await generateBudgetPDF(pdfData);
+
+      console.log('PDF generated, size:', pdfBuffer.length);
+
+      // 4. Crear archivo PDF simulado para subir a Cloudflare
+      const pdfFileName = `presupuesto_${createBudgetDto.budgetNumber}.pdf`;
+      const pdfFile: Express.Multer.File = {
+        fieldname: 'pdf',
+        originalname: pdfFileName,
+        encoding: '7bit',
+        mimetype: 'application/pdf',
+        size: pdfBuffer.length,
+        buffer: pdfBuffer,
+        stream: undefined as any,
+        destination: '',
+        filename: pdfFileName,
+        path: '',
+      };
+
+      // 5. Subir PDF y archivos adicionales a Cloudflare
+      const filesToUpload = [pdfFile];
+      if (createBudgetDto.file) {
+        filesToUpload.push(createBudgetDto.file);
+      }
+
+      const uploadResult = await this.companyService.uploadFile(
+        filesToUpload,
+        companyID,
+        'company',
+        createBudgetDto.incidentID,
+      );
+      console.log('Files uploaded to Cloudflare:', uploadResult);
+
+      // 6. Configurar headers y enviar PDF
+      res.set({
+        'Content-Type': 'application/pdf',
+        'Content-Length': pdfBuffer.length.toString(),
+        'Content-Disposition': `attachment; filename=${pdfFileName}`,
+        'Cache-Control': 'no-cache',
+      });
+
+      res.send(pdfBuffer);
+    } catch (error) {
+      console.error('Error creating budget:', error);
+      res.status(500).json({
+        message: 'Error creating budget',
+        error: error.message,
+      });
+    }
   }
   @UseGuards(AuthGuard, CompanyGuard)
   @Get('listWorkers')
@@ -189,15 +277,17 @@ export class CompanyController {
     @Request() req: any,
     @Query('limit') limit?: string,
     @Query('offset') offset?: string,
+    @Query('search') search?: string,
   ) {
     const { companyID } = req.user;
 
-    const parsedLimit = limit ? Number(limit) : 5;
+    const parsedLimit = limit ? Number(limit) : 100;
     const parsedOffset = offset ? Number(offset) : 0;
     return this.companyService.listIncidents(
       companyID,
       parsedLimit,
       parsedOffset,
+      search,
     );
   }
   @UseGuards(AuthGuard, CompanyGuard)
@@ -263,7 +353,6 @@ export class CompanyController {
     },
   ) {
     const { workerID, data } = body;
- 
 
     // Parsear fechas ISO string a Date objects
     const startDate = new Date(data.startDate);
@@ -370,5 +459,52 @@ export class CompanyController {
   eliminateMachinery(@Param('machineryID') machineryID: string) {
     const parseMachineryID = Number(machineryID);
     return this.companyService.eliminateMachinery(parseMachineryID);
+  }
+  @UseGuards(AuthGuard, CompanyGuard)
+  @UseInterceptors(FilesInterceptor('files', 10)) // Hasta 10 archivos
+  @Post('uploadFile')
+  async uploadFile(
+    @UploadedFiles() files: Array<Express.Multer.File>,
+    @Req() req: any,
+  ) {
+    console.log('Received files:', files);
+    console.log('User from token:', req.user);
+    console.log('CompanyID from token:', req.user.companyID);
+    const companyID = req.user.companyID;
+    return this.companyService.uploadFile(files, companyID, 'company');
+  }
+  @UseGuards(AuthGuard, CompanyGuard)
+  @Get('listFiles')
+  async listFiles(@Req() req: any, @Query('incidentID') incidentID?: string) {
+    const companyID = req.user.companyID;
+    const incidentIDNum = incidentID ? Number(incidentID) : undefined;
+    return this.companyService.listFiles(companyID, 'company', incidentIDNum);
+  }
+  @UseGuards(AuthGuard, CompanyGuard)
+  @Post('generatePDF')
+  async generatePDF(@Body() body: { budgetData: BudgetData }, @Res() res: any) {
+    const pdfData = {
+      budgetNumber: body.budgetData.budgetNumber,
+      companyName: body.budgetData.companyName,
+      budgetTitle: body.budgetData.budgetTitle,
+      date: body.budgetData.date,
+      items: body.budgetData.items,
+      subtotal: body.budgetData.subtotal,
+      tax: body.budgetData.tax,
+      total: body.budgetData.total,
+      clientName: body.budgetData.clientName,
+      clientAddress: body.budgetData.clientAddress,
+      clientPhone: body.budgetData.clientPhone,
+      clientEmail: body.budgetData.clientEmail,
+    };
+    res.set({
+      'Content-Type': 'application/pdf',
+      'Content-Disposition': 'attachment; filename=budget.pdf',
+      'Content-Length': (await this.companyService.generatePDF(body.budgetData))
+        .length,
+    });
+    const pdfBuffer = await this.companyService.generatePDF(body.budgetData);
+    res.send(pdfBuffer);
+    //
   }
 }

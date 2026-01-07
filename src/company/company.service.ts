@@ -22,6 +22,10 @@ import { listMachinery } from '../modules/machinery/listMachinery';
 import { editMachinery } from '../modules/machinery/editMachinery';
 import { updateMaintenceDate } from '../modules/machinery/updateMaintenceDate';
 import { eliminateMachinery } from '../modules/machinery/eliminateMachinery';
+import { uploadFile } from '../s3/uploadFile';
+import { listFiles } from '../s3/listFiles';
+import { generatePDF } from '../utils/generatePDF';
+import { BudgetData } from '../utils/types/budgetData';
 @Injectable()
 export class CompanyService {
   async companyLogin(email: string, password: string) {
@@ -78,8 +82,9 @@ export class CompanyService {
     companyID: number,
     limit: number = 5,
     offset: number = 0,
+    search?: string,
   ) {
-    return listIncidents(companyID, limit, offset);
+    return listIncidents(companyID, search, limit, offset);
   }
   async createBudget(
     budgetNumber: string,
@@ -154,5 +159,19 @@ export class CompanyService {
   }
   async eliminateMachinery(machineryID: number) {
     return eliminateMachinery(machineryID);
+  }
+  async uploadFile(
+    file: Array<Express.Multer.File>,
+    id: number,
+    userType: 'company',
+    incidentID?: number,
+  ) {
+    return uploadFile(file, id, userType, incidentID);
+  }
+  async listFiles(id: number, userType: 'company', incidentID?: number) {
+    return listFiles(id, userType, incidentID);
+  }
+  async generatePDF(budgetData: BudgetData): Promise<Buffer> {
+    return generatePDF(budgetData);
   }
 }

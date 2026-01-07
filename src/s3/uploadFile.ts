@@ -14,6 +14,38 @@ dotenv.config({ path: '../../../.env' });
 const s3Client = new S3Client(s3Config);
 const prisma = new PrismaClient();
 export const upload = multer({ storage: multer.memoryStorage() });
+async function searchIncident(
+  incidentID: number,
+  userType: UserType,
+  id: number,
+) {
+  console.log('Searching incident for:', { incidentID, userType, id });
+  switch (userType) {
+    case 'company':
+      return prisma.incidents.findFirst({
+        where: {
+          IncidentsID: incidentID,
+          companyID: id,
+        },
+      });
+    case 'user':
+      return prisma.incidents.findFirst({
+        where: {
+          IncidentsID: incidentID,
+          userID: id,
+        },
+      });
+    case 'worker':
+      return prisma.incidents.findFirst({
+        where: {
+          IncidentsID: incidentID,
+          workerID: id,
+        },
+      });
+    default:
+      throw new Error('Invalid user type');
+  }
+}
 async function saveDataInDB(
   id: number,
   userType: UserType,
@@ -24,7 +56,14 @@ async function saveDataInDB(
 ) {
   {
     //valiate user and incident in parallel
-    const user = await getUserID(userType, id);
+    const [user, incident] = await Promise.all([
+      getUserID(userType, id),
+      incidentID
+        ? searchIncident(incidentID, userType, id)
+        : Promise.resolve(null),
+    ]);
+    console.log('incident:', incident);
+
     if (!user) throw new Error('User not found');
     switch (userType) {
       case 'company':
@@ -36,8 +75,10 @@ async function saveDataInDB(
             ownerType: 'COMPANY',
             ownerId: id,
             uploadedAt: uploadedAt,
+            incidentID, // ✅ Incluir incidentID
           },
         });
+
         break;
       case 'user':
         await prisma.file.create({
@@ -51,6 +92,8 @@ async function saveDataInDB(
             incidentID, // ✅ Incluir incidentID
           },
         });
+        console.log('File data saved for user:', { id, incidentID });
+
         break;
       case 'worker':
         await prisma.file.create({
@@ -60,7 +103,7 @@ async function saveDataInDB(
             objectKey,
             ownerType: 'WORKER',
             ownerId: id,
-
+            incidentID, // ✅ Incluir incidentID
             uploadedAt: uploadedAt,
           },
         });
@@ -128,6 +171,7 @@ export async function uploadFile(
       fileURL: generateURL,
       objectKey: params.Key,
       uploadedAt,
+      incidentID,
       token,
     };
   } catch (error) {

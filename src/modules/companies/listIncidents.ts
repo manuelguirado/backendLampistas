@@ -1,4 +1,4 @@
-import { PrismaClient } from '../../../generated/prisma';
+import { PrismaClient, Prisma } from '../../../generated/prisma';
 import jwt, { SignOptions } from 'jsonwebtoken';
 import dotenv from 'dotenv';
 dotenv.config({ path: '../../../.env' });
@@ -6,19 +6,34 @@ const prisma = new PrismaClient();
 
 export async function listIncidents(
   companyID: number,
+  search?: string,
   limit: number = 5,
   offset: number = 0,
 ) {
   if (!companyID) {
     throw new Error('companyID is required');
   }
+  const whereClause = search
+    ? {
+        companyID: companyID,
+        OR: [
+          { title: { contains: search, mode: Prisma.QueryMode.insensitive } },
+          {
+            description: {
+              contains: search,
+              mode: Prisma.QueryMode.insensitive,
+            },
+          },
+        ],
+      }
+    : { companyID: companyID };
 
   const totalIncidents = await prisma.incidents.count({
-    where: { companyID: companyID },
+    where: whereClause,
   });
 
   const incidents = await prisma.incidents.findMany({
-    where: { companyID: companyID },
+    where: whereClause,
     take: limit,
     skip: offset,
     orderBy: { IncidentsID: 'desc' },

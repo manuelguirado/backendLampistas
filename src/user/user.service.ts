@@ -58,8 +58,9 @@ export class UserService {
     file: Array<Express.Multer.File>,
     id: number,
     userType: 'user',
+    incidentID?: number,
   ) {
-    return uploadFile(file, id, userType);
+    return uploadFile(file, id, userType, incidentID);
   }
   async listFiles(id: number, userType: 'user', incidentID?: number) {
     return listFiles(id, userType, incidentID);

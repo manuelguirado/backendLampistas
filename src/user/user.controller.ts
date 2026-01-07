@@ -57,7 +57,7 @@ export class UserController {
       description: string;
       location: string;
       priority?: string;
-      urgency?: boolean;
+      urgency?: string; // Cambiar a string porque FormData envía strings
     },
     @UploadedFiles() files?: Express.Multer.File[], // Cambiar a UploadedFiles
   ) {
@@ -69,6 +69,9 @@ export class UserController {
     }
 
     const { title, description, location, priority, urgency } = body;
+    
+    // Convertir urgency de string a boolean
+    const urgencyBoolean = urgency === 'true' ? true : urgency === 'false' ? false : undefined;
 
     return this.userService.createIncident(
       title,
@@ -77,7 +80,7 @@ export class UserController {
       userID,
       companyID,
       priority,
-      urgency,
+      urgencyBoolean, // Pasar el booleano convertido
       files, // Pasar archivos
     );
   }
@@ -103,11 +106,16 @@ export class UserController {
   @UseGuards(AuthGuard, UserGuard)
   @UseInterceptors(FileInterceptor('file'))
   @Post('uploadFile')
-  async uploadFile(@Req() req: any, @UploadedFile() file: Express.Multer.File) {
+  async uploadFile(
+    @Req() req: any,
+    @UploadedFile() file: Express.Multer.File,
+    @Query('incidentID') incidentID?: string,
+  ) {
     const id = req.user.userID;
     const userType: UserType = 'user';
+    const incidentIDNum = incidentID ? Number(incidentID) : undefined;
 
-    return this.userService.uploadFile([file], id, userType);
+    return this.userService.uploadFile([file], id, userType, incidentIDNum);
   }
   @UseGuards(AuthGuard, UserGuard)
   @Get('listFiles/:incidentID')

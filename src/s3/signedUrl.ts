@@ -1,4 +1,8 @@
-import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
+import {
+  S3Client,
+  PutObjectCommand,
+  GetObjectCommand,
+} from '@aws-sdk/client-s3';
 import { s3Config } from '../shared/s3Config';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 
@@ -16,12 +20,35 @@ export async function generateUploadSignedUrl(
       ContentType: fileType,
     };
     const command = new PutObjectCommand(s3Params);
-
-    const signedUrl = (await getSignedUrl(s3Client, command, {
+    console.log('Generating signed URL with params:', s3Params);
+    console.log('PutObjectCommand:', command);
+    const signedUrl = await getSignedUrl(s3Client, command, {
       expiresIn: 3600,
-    })) as string;
+    });
+    console.log('Generated signed URL:', signedUrl);
     return signedUrl;
   } catch (error) {
     throw new Error(`Error generating upload signed URL: ${error}`);
+  }
+}
+
+export async function generateDownloadSignedUrl(
+  bucketName: string,
+  objectKey: string,
+): Promise<string> {
+  try {
+    const s3Params = {
+      Bucket: bucketName,
+      Key: objectKey,
+    };
+    const command = new GetObjectCommand(s3Params);
+
+    const signedUrl = await getSignedUrl(s3Client, command, {
+      expiresIn: 3600, // 1 hora de expiración
+    });
+
+    return signedUrl;
+  } catch (error) {
+    throw new Error(`Error generating download signed URL: ${error}`);
   }
 }
