@@ -69,9 +69,10 @@ export class UserController {
     }
 
     const { title, description, location, priority, urgency } = body;
-    
+
     // Convertir urgency de string a boolean
-    const urgencyBoolean = urgency === 'true' ? true : urgency === 'false' ? false : undefined;
+    const urgencyBoolean =
+      urgency === 'true' ? true : urgency === 'false' ? false : undefined;
 
     return this.userService.createIncident(
       title,
