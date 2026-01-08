@@ -3,7 +3,6 @@ import puppeteer from 'puppeteer';
 
 // ✅ Función para generar el template HTML del presupuesto
 function generateBudgetHTML(budgetData: BudgetData): string {
-  console.log('Generating HTML for budget data:', budgetData);
   const {
     budgetNumber,
     companyName,
@@ -324,7 +323,6 @@ function generateBudgetHTML(budgetData: BudgetData): string {
 
 // ✅ Función genérica para generar PDFs
 export async function generatePDF(budgetData: BudgetData): Promise<Buffer> {
-  console.log('Generating PDF with budget data:', budgetData);
   let browser;
 
   try {

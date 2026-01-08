@@ -3205,10 +3205,12 @@ export namespace Prisma {
 
   export type BudgetCountOutputType = {
     Company: number
+    files: number
   }
 
   export type BudgetCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Company?: boolean | BudgetCountOutputTypeCountCompanyArgs
+    files?: boolean | BudgetCountOutputTypeCountFilesArgs
   }
 
   // Custom InputTypes
@@ -3227,6 +3229,13 @@ export namespace Prisma {
    */
   export type BudgetCountOutputTypeCountCompanyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: CompanyWhereInput
+  }
+
+  /**
+   * BudgetCountOutputType without action
+   */
+  export type BudgetCountOutputTypeCountFilesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FileWhereInput
   }
 
 
@@ -9993,6 +10002,7 @@ export namespace Prisma {
     companyID: number | null
     workerID: number | null
     adminID: number | null
+    budgetID: number | null
   }
 
   export type FileSumAggregateOutputType = {
@@ -10003,6 +10013,7 @@ export namespace Prisma {
     companyID: number | null
     workerID: number | null
     adminID: number | null
+    budgetID: number | null
   }
 
   export type FileMinAggregateOutputType = {
@@ -10016,6 +10027,7 @@ export namespace Prisma {
     companyID: number | null
     workerID: number | null
     adminID: number | null
+    budgetID: number | null
     uploadedAt: Date | null
   }
 
@@ -10030,6 +10042,7 @@ export namespace Prisma {
     companyID: number | null
     workerID: number | null
     adminID: number | null
+    budgetID: number | null
     uploadedAt: Date | null
   }
 
@@ -10044,6 +10057,7 @@ export namespace Prisma {
     companyID: number
     workerID: number
     adminID: number
+    budgetID: number
     uploadedAt: number
     _all: number
   }
@@ -10057,6 +10071,7 @@ export namespace Prisma {
     companyID?: true
     workerID?: true
     adminID?: true
+    budgetID?: true
   }
 
   export type FileSumAggregateInputType = {
@@ -10067,6 +10082,7 @@ export namespace Prisma {
     companyID?: true
     workerID?: true
     adminID?: true
+    budgetID?: true
   }
 
   export type FileMinAggregateInputType = {
@@ -10080,6 +10096,7 @@ export namespace Prisma {
     companyID?: true
     workerID?: true
     adminID?: true
+    budgetID?: true
     uploadedAt?: true
   }
 
@@ -10094,6 +10111,7 @@ export namespace Prisma {
     companyID?: true
     workerID?: true
     adminID?: true
+    budgetID?: true
     uploadedAt?: true
   }
 
@@ -10108,6 +10126,7 @@ export namespace Prisma {
     companyID?: true
     workerID?: true
     adminID?: true
+    budgetID?: true
     uploadedAt?: true
     _all?: true
   }
@@ -10209,6 +10228,7 @@ export namespace Prisma {
     companyID: number | null
     workerID: number | null
     adminID: number | null
+    budgetID: number | null
     uploadedAt: Date
     _count: FileCountAggregateOutputType | null
     _avg: FileAvgAggregateOutputType | null
@@ -10242,12 +10262,14 @@ export namespace Prisma {
     companyID?: boolean
     workerID?: boolean
     adminID?: boolean
+    budgetID?: boolean
     uploadedAt?: boolean
     incident?: boolean | File$incidentArgs<ExtArgs>
     user?: boolean | File$userArgs<ExtArgs>
     company?: boolean | File$companyArgs<ExtArgs>
     worker?: boolean | File$workerArgs<ExtArgs>
     admin?: boolean | File$adminArgs<ExtArgs>
+    budget?: boolean | File$budgetArgs<ExtArgs>
   }, ExtArgs["result"]["file"]>
 
   export type FileSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -10261,12 +10283,14 @@ export namespace Prisma {
     companyID?: boolean
     workerID?: boolean
     adminID?: boolean
+    budgetID?: boolean
     uploadedAt?: boolean
     incident?: boolean | File$incidentArgs<ExtArgs>
     user?: boolean | File$userArgs<ExtArgs>
     company?: boolean | File$companyArgs<ExtArgs>
     worker?: boolean | File$workerArgs<ExtArgs>
     admin?: boolean | File$adminArgs<ExtArgs>
+    budget?: boolean | File$budgetArgs<ExtArgs>
   }, ExtArgs["result"]["file"]>
 
   export type FileSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -10280,12 +10304,14 @@ export namespace Prisma {
     companyID?: boolean
     workerID?: boolean
     adminID?: boolean
+    budgetID?: boolean
     uploadedAt?: boolean
     incident?: boolean | File$incidentArgs<ExtArgs>
     user?: boolean | File$userArgs<ExtArgs>
     company?: boolean | File$companyArgs<ExtArgs>
     worker?: boolean | File$workerArgs<ExtArgs>
     admin?: boolean | File$adminArgs<ExtArgs>
+    budget?: boolean | File$budgetArgs<ExtArgs>
   }, ExtArgs["result"]["file"]>
 
   export type FileSelectScalar = {
@@ -10299,16 +10325,18 @@ export namespace Prisma {
     companyID?: boolean
     workerID?: boolean
     adminID?: boolean
+    budgetID?: boolean
     uploadedAt?: boolean
   }
 
-  export type FileOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "objectKey" | "fileURL" | "incidentID" | "ownerType" | "ownerId" | "userID" | "companyID" | "workerID" | "adminID" | "uploadedAt", ExtArgs["result"]["file"]>
+  export type FileOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "objectKey" | "fileURL" | "incidentID" | "ownerType" | "ownerId" | "userID" | "companyID" | "workerID" | "adminID" | "budgetID" | "uploadedAt", ExtArgs["result"]["file"]>
   export type FileInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     incident?: boolean | File$incidentArgs<ExtArgs>
     user?: boolean | File$userArgs<ExtArgs>
     company?: boolean | File$companyArgs<ExtArgs>
     worker?: boolean | File$workerArgs<ExtArgs>
     admin?: boolean | File$adminArgs<ExtArgs>
+    budget?: boolean | File$budgetArgs<ExtArgs>
   }
   export type FileIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     incident?: boolean | File$incidentArgs<ExtArgs>
@@ -10316,6 +10344,7 @@ export namespace Prisma {
     company?: boolean | File$companyArgs<ExtArgs>
     worker?: boolean | File$workerArgs<ExtArgs>
     admin?: boolean | File$adminArgs<ExtArgs>
+    budget?: boolean | File$budgetArgs<ExtArgs>
   }
   export type FileIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     incident?: boolean | File$incidentArgs<ExtArgs>
@@ -10323,6 +10352,7 @@ export namespace Prisma {
     company?: boolean | File$companyArgs<ExtArgs>
     worker?: boolean | File$workerArgs<ExtArgs>
     admin?: boolean | File$adminArgs<ExtArgs>
+    budget?: boolean | File$budgetArgs<ExtArgs>
   }
 
   export type $FilePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -10333,6 +10363,7 @@ export namespace Prisma {
       company: Prisma.$CompanyPayload<ExtArgs> | null
       worker: Prisma.$WorkerPayload<ExtArgs> | null
       admin: Prisma.$AdminPayload<ExtArgs> | null
+      budget: Prisma.$BudgetPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -10345,6 +10376,7 @@ export namespace Prisma {
       companyID: number | null
       workerID: number | null
       adminID: number | null
+      budgetID: number | null
       uploadedAt: Date
     }, ExtArgs["result"]["file"]>
     composites: {}
@@ -10745,6 +10777,7 @@ export namespace Prisma {
     company<T extends File$companyArgs<ExtArgs> = {}>(args?: Subset<T, File$companyArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     worker<T extends File$workerArgs<ExtArgs> = {}>(args?: Subset<T, File$workerArgs<ExtArgs>>): Prisma__WorkerClient<$Result.GetResult<Prisma.$WorkerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     admin<T extends File$adminArgs<ExtArgs> = {}>(args?: Subset<T, File$adminArgs<ExtArgs>>): Prisma__AdminClient<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    budget<T extends File$budgetArgs<ExtArgs> = {}>(args?: Subset<T, File$budgetArgs<ExtArgs>>): Prisma__BudgetClient<$Result.GetResult<Prisma.$BudgetPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -10784,6 +10817,7 @@ export namespace Prisma {
     readonly companyID: FieldRef<"File", 'Int'>
     readonly workerID: FieldRef<"File", 'Int'>
     readonly adminID: FieldRef<"File", 'Int'>
+    readonly budgetID: FieldRef<"File", 'Int'>
     readonly uploadedAt: FieldRef<"File", 'DateTime'>
   }
     
@@ -11273,6 +11307,25 @@ export namespace Prisma {
      */
     include?: AdminInclude<ExtArgs> | null
     where?: AdminWhereInput
+  }
+
+  /**
+   * File.budget
+   */
+  export type File$budgetArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Budget
+     */
+    select?: BudgetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Budget
+     */
+    omit?: BudgetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BudgetInclude<ExtArgs> | null
+    where?: BudgetWhereInput
   }
 
   /**
@@ -18601,6 +18654,7 @@ export namespace Prisma {
     incident?: boolean | Budget$incidentArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
     Company?: boolean | Budget$CompanyArgs<ExtArgs>
+    files?: boolean | Budget$filesArgs<ExtArgs>
     _count?: boolean | BudgetCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["budget"]>
 
@@ -18659,6 +18713,7 @@ export namespace Prisma {
     incident?: boolean | Budget$incidentArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
     Company?: boolean | Budget$CompanyArgs<ExtArgs>
+    files?: boolean | Budget$filesArgs<ExtArgs>
     _count?: boolean | BudgetCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type BudgetIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -18677,6 +18732,7 @@ export namespace Prisma {
       incident: Prisma.$IncidentsPayload<ExtArgs> | null
       user: Prisma.$UserPayload<ExtArgs>
       Company: Prisma.$CompanyPayload<ExtArgs>[]
+      files: Prisma.$FilePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       budgetID: number
@@ -19089,6 +19145,7 @@ export namespace Prisma {
     incident<T extends Budget$incidentArgs<ExtArgs> = {}>(args?: Subset<T, Budget$incidentArgs<ExtArgs>>): Prisma__IncidentsClient<$Result.GetResult<Prisma.$IncidentsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     Company<T extends Budget$CompanyArgs<ExtArgs> = {}>(args?: Subset<T, Budget$CompanyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    files<T extends Budget$filesArgs<ExtArgs> = {}>(args?: Subset<T, Budget$filesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -19566,6 +19623,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: CompanyScalarFieldEnum | CompanyScalarFieldEnum[]
+  }
+
+  /**
+   * Budget.files
+   */
+  export type Budget$filesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the File
+     */
+    select?: FileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the File
+     */
+    omit?: FileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FileInclude<ExtArgs> | null
+    where?: FileWhereInput
+    orderBy?: FileOrderByWithRelationInput | FileOrderByWithRelationInput[]
+    cursor?: FileWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FileScalarFieldEnum | FileScalarFieldEnum[]
   }
 
   /**
@@ -28678,6 +28759,7 @@ export namespace Prisma {
     companyID: 'companyID',
     workerID: 'workerID',
     adminID: 'adminID',
+    budgetID: 'budgetID',
     uploadedAt: 'uploadedAt'
   };
 
@@ -29546,12 +29628,14 @@ export namespace Prisma {
     companyID?: IntNullableFilter<"File"> | number | null
     workerID?: IntNullableFilter<"File"> | number | null
     adminID?: IntNullableFilter<"File"> | number | null
+    budgetID?: IntNullableFilter<"File"> | number | null
     uploadedAt?: DateTimeFilter<"File"> | Date | string
     incident?: XOR<IncidentsNullableScalarRelationFilter, IncidentsWhereInput> | null
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     company?: XOR<CompanyNullableScalarRelationFilter, CompanyWhereInput> | null
     worker?: XOR<WorkerNullableScalarRelationFilter, WorkerWhereInput> | null
     admin?: XOR<AdminNullableScalarRelationFilter, AdminWhereInput> | null
+    budget?: XOR<BudgetNullableScalarRelationFilter, BudgetWhereInput> | null
   }
 
   export type FileOrderByWithRelationInput = {
@@ -29565,12 +29649,14 @@ export namespace Prisma {
     companyID?: SortOrderInput | SortOrder
     workerID?: SortOrderInput | SortOrder
     adminID?: SortOrderInput | SortOrder
+    budgetID?: SortOrderInput | SortOrder
     uploadedAt?: SortOrder
     incident?: IncidentsOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
     company?: CompanyOrderByWithRelationInput
     worker?: WorkerOrderByWithRelationInput
     admin?: AdminOrderByWithRelationInput
+    budget?: BudgetOrderByWithRelationInput
   }
 
   export type FileWhereUniqueInput = Prisma.AtLeast<{
@@ -29587,12 +29673,14 @@ export namespace Prisma {
     companyID?: IntNullableFilter<"File"> | number | null
     workerID?: IntNullableFilter<"File"> | number | null
     adminID?: IntNullableFilter<"File"> | number | null
+    budgetID?: IntNullableFilter<"File"> | number | null
     uploadedAt?: DateTimeFilter<"File"> | Date | string
     incident?: XOR<IncidentsNullableScalarRelationFilter, IncidentsWhereInput> | null
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     company?: XOR<CompanyNullableScalarRelationFilter, CompanyWhereInput> | null
     worker?: XOR<WorkerNullableScalarRelationFilter, WorkerWhereInput> | null
     admin?: XOR<AdminNullableScalarRelationFilter, AdminWhereInput> | null
+    budget?: XOR<BudgetNullableScalarRelationFilter, BudgetWhereInput> | null
   }, "id" | "objectKey">
 
   export type FileOrderByWithAggregationInput = {
@@ -29606,6 +29694,7 @@ export namespace Prisma {
     companyID?: SortOrderInput | SortOrder
     workerID?: SortOrderInput | SortOrder
     adminID?: SortOrderInput | SortOrder
+    budgetID?: SortOrderInput | SortOrder
     uploadedAt?: SortOrder
     _count?: FileCountOrderByAggregateInput
     _avg?: FileAvgOrderByAggregateInput
@@ -29628,6 +29717,7 @@ export namespace Prisma {
     companyID?: IntNullableWithAggregatesFilter<"File"> | number | null
     workerID?: IntNullableWithAggregatesFilter<"File"> | number | null
     adminID?: IntNullableWithAggregatesFilter<"File"> | number | null
+    budgetID?: IntNullableWithAggregatesFilter<"File"> | number | null
     uploadedAt?: DateTimeWithAggregatesFilter<"File"> | Date | string
   }
 
@@ -30083,6 +30173,7 @@ export namespace Prisma {
     incident?: XOR<IncidentsNullableScalarRelationFilter, IncidentsWhereInput> | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     Company?: CompanyListRelationFilter
+    files?: FileListRelationFilter
   }
 
   export type BudgetOrderByWithRelationInput = {
@@ -30102,6 +30193,7 @@ export namespace Prisma {
     incident?: IncidentsOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
     Company?: CompanyOrderByRelationAggregateInput
+    files?: FileOrderByRelationAggregateInput
   }
 
   export type BudgetWhereUniqueInput = Prisma.AtLeast<{
@@ -30124,6 +30216,7 @@ export namespace Prisma {
     incident?: XOR<IncidentsNullableScalarRelationFilter, IncidentsWhereInput> | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     Company?: CompanyListRelationFilter
+    files?: FileListRelationFilter
   }, "budgetID" | "incidentID">
 
   export type BudgetOrderByWithAggregationInput = {
@@ -31198,6 +31291,7 @@ export namespace Prisma {
     company?: CompanyCreateNestedOneWithoutCompanyFilesInput
     worker?: WorkerCreateNestedOneWithoutWorkerFilesInput
     admin?: AdminCreateNestedOneWithoutAdminFilesInput
+    budget?: BudgetCreateNestedOneWithoutFilesInput
   }
 
   export type FileUncheckedCreateInput = {
@@ -31211,6 +31305,7 @@ export namespace Prisma {
     companyID?: number | null
     workerID?: number | null
     adminID?: number | null
+    budgetID?: number | null
     uploadedAt?: Date | string
   }
 
@@ -31225,6 +31320,7 @@ export namespace Prisma {
     company?: CompanyUpdateOneWithoutCompanyFilesNestedInput
     worker?: WorkerUpdateOneWithoutWorkerFilesNestedInput
     admin?: AdminUpdateOneWithoutAdminFilesNestedInput
+    budget?: BudgetUpdateOneWithoutFilesNestedInput
   }
 
   export type FileUncheckedUpdateInput = {
@@ -31238,6 +31334,7 @@ export namespace Prisma {
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
     workerID?: NullableIntFieldUpdateOperationsInput | number | null
     adminID?: NullableIntFieldUpdateOperationsInput | number | null
+    budgetID?: NullableIntFieldUpdateOperationsInput | number | null
     uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -31252,6 +31349,7 @@ export namespace Prisma {
     companyID?: number | null
     workerID?: number | null
     adminID?: number | null
+    budgetID?: number | null
     uploadedAt?: Date | string
   }
 
@@ -31274,6 +31372,7 @@ export namespace Prisma {
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
     workerID?: NullableIntFieldUpdateOperationsInput | number | null
     adminID?: NullableIntFieldUpdateOperationsInput | number | null
+    budgetID?: NullableIntFieldUpdateOperationsInput | number | null
     uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -31679,6 +31778,7 @@ export namespace Prisma {
     incident?: IncidentsCreateNestedOneWithoutBudgetInput
     user: UserCreateNestedOneWithoutBudgetInput
     Company?: CompanyCreateNestedManyWithoutBudgetInput
+    files?: FileCreateNestedManyWithoutBudgetInput
   }
 
   export type BudgetUncheckedCreateInput = {
@@ -31696,6 +31796,7 @@ export namespace Prisma {
     title: string
     incident?: IncidentsUncheckedCreateNestedOneWithoutBudgetInput
     Company?: CompanyUncheckedCreateNestedManyWithoutBudgetInput
+    files?: FileUncheckedCreateNestedManyWithoutBudgetInput
   }
 
   export type BudgetUpdateInput = {
@@ -31712,6 +31813,7 @@ export namespace Prisma {
     incident?: IncidentsUpdateOneWithoutBudgetNestedInput
     user?: UserUpdateOneRequiredWithoutBudgetNestedInput
     Company?: CompanyUpdateManyWithoutBudgetNestedInput
+    files?: FileUpdateManyWithoutBudgetNestedInput
   }
 
   export type BudgetUncheckedUpdateInput = {
@@ -31729,6 +31831,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     incident?: IncidentsUncheckedUpdateOneWithoutBudgetNestedInput
     Company?: CompanyUncheckedUpdateManyWithoutBudgetNestedInput
+    files?: FileUncheckedUpdateManyWithoutBudgetNestedInput
   }
 
   export type BudgetCreateManyInput = {
@@ -32905,6 +33008,7 @@ export namespace Prisma {
     companyID?: SortOrder
     workerID?: SortOrder
     adminID?: SortOrder
+    budgetID?: SortOrder
     uploadedAt?: SortOrder
   }
 
@@ -32916,6 +33020,7 @@ export namespace Prisma {
     companyID?: SortOrder
     workerID?: SortOrder
     adminID?: SortOrder
+    budgetID?: SortOrder
   }
 
   export type FileMaxOrderByAggregateInput = {
@@ -32929,6 +33034,7 @@ export namespace Prisma {
     companyID?: SortOrder
     workerID?: SortOrder
     adminID?: SortOrder
+    budgetID?: SortOrder
     uploadedAt?: SortOrder
   }
 
@@ -32943,6 +33049,7 @@ export namespace Prisma {
     companyID?: SortOrder
     workerID?: SortOrder
     adminID?: SortOrder
+    budgetID?: SortOrder
     uploadedAt?: SortOrder
   }
 
@@ -32954,6 +33061,7 @@ export namespace Prisma {
     companyID?: SortOrder
     workerID?: SortOrder
     adminID?: SortOrder
+    budgetID?: SortOrder
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -35338,6 +35446,12 @@ export namespace Prisma {
     connect?: AdminWhereUniqueInput
   }
 
+  export type BudgetCreateNestedOneWithoutFilesInput = {
+    create?: XOR<BudgetCreateWithoutFilesInput, BudgetUncheckedCreateWithoutFilesInput>
+    connectOrCreate?: BudgetCreateOrConnectWithoutFilesInput
+    connect?: BudgetWhereUniqueInput
+  }
+
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
   }
@@ -35390,6 +35504,16 @@ export namespace Prisma {
     delete?: AdminWhereInput | boolean
     connect?: AdminWhereUniqueInput
     update?: XOR<XOR<AdminUpdateToOneWithWhereWithoutAdminFilesInput, AdminUpdateWithoutAdminFilesInput>, AdminUncheckedUpdateWithoutAdminFilesInput>
+  }
+
+  export type BudgetUpdateOneWithoutFilesNestedInput = {
+    create?: XOR<BudgetCreateWithoutFilesInput, BudgetUncheckedCreateWithoutFilesInput>
+    connectOrCreate?: BudgetCreateOrConnectWithoutFilesInput
+    upsert?: BudgetUpsertWithoutFilesInput
+    disconnect?: BudgetWhereInput | boolean
+    delete?: BudgetWhereInput | boolean
+    connect?: BudgetWhereUniqueInput
+    update?: XOR<XOR<BudgetUpdateToOneWithWhereWithoutFilesInput, BudgetUpdateWithoutFilesInput>, BudgetUncheckedUpdateWithoutFilesInput>
   }
 
   export type UserCreateNestedOneWithoutUsersCompaniesInput = {
@@ -35869,6 +35993,13 @@ export namespace Prisma {
     connect?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
   }
 
+  export type FileCreateNestedManyWithoutBudgetInput = {
+    create?: XOR<FileCreateWithoutBudgetInput, FileUncheckedCreateWithoutBudgetInput> | FileCreateWithoutBudgetInput[] | FileUncheckedCreateWithoutBudgetInput[]
+    connectOrCreate?: FileCreateOrConnectWithoutBudgetInput | FileCreateOrConnectWithoutBudgetInput[]
+    createMany?: FileCreateManyBudgetInputEnvelope
+    connect?: FileWhereUniqueInput | FileWhereUniqueInput[]
+  }
+
   export type IncidentsUncheckedCreateNestedOneWithoutBudgetInput = {
     create?: XOR<IncidentsCreateWithoutBudgetInput, IncidentsUncheckedCreateWithoutBudgetInput>
     connectOrCreate?: IncidentsCreateOrConnectWithoutBudgetInput
@@ -35880,6 +36011,13 @@ export namespace Prisma {
     connectOrCreate?: CompanyCreateOrConnectWithoutBudgetInput | CompanyCreateOrConnectWithoutBudgetInput[]
     createMany?: CompanyCreateManyBudgetInputEnvelope
     connect?: CompanyWhereUniqueInput | CompanyWhereUniqueInput[]
+  }
+
+  export type FileUncheckedCreateNestedManyWithoutBudgetInput = {
+    create?: XOR<FileCreateWithoutBudgetInput, FileUncheckedCreateWithoutBudgetInput> | FileCreateWithoutBudgetInput[] | FileUncheckedCreateWithoutBudgetInput[]
+    connectOrCreate?: FileCreateOrConnectWithoutBudgetInput | FileCreateOrConnectWithoutBudgetInput[]
+    createMany?: FileCreateManyBudgetInputEnvelope
+    connect?: FileWhereUniqueInput | FileWhereUniqueInput[]
   }
 
   export type CompanyUpdateOneRequiredWithoutBudgetNestedInput = {
@@ -35922,6 +36060,20 @@ export namespace Prisma {
     deleteMany?: CompanyScalarWhereInput | CompanyScalarWhereInput[]
   }
 
+  export type FileUpdateManyWithoutBudgetNestedInput = {
+    create?: XOR<FileCreateWithoutBudgetInput, FileUncheckedCreateWithoutBudgetInput> | FileCreateWithoutBudgetInput[] | FileUncheckedCreateWithoutBudgetInput[]
+    connectOrCreate?: FileCreateOrConnectWithoutBudgetInput | FileCreateOrConnectWithoutBudgetInput[]
+    upsert?: FileUpsertWithWhereUniqueWithoutBudgetInput | FileUpsertWithWhereUniqueWithoutBudgetInput[]
+    createMany?: FileCreateManyBudgetInputEnvelope
+    set?: FileWhereUniqueInput | FileWhereUniqueInput[]
+    disconnect?: FileWhereUniqueInput | FileWhereUniqueInput[]
+    delete?: FileWhereUniqueInput | FileWhereUniqueInput[]
+    connect?: FileWhereUniqueInput | FileWhereUniqueInput[]
+    update?: FileUpdateWithWhereUniqueWithoutBudgetInput | FileUpdateWithWhereUniqueWithoutBudgetInput[]
+    updateMany?: FileUpdateManyWithWhereWithoutBudgetInput | FileUpdateManyWithWhereWithoutBudgetInput[]
+    deleteMany?: FileScalarWhereInput | FileScalarWhereInput[]
+  }
+
   export type IncidentsUncheckedUpdateOneWithoutBudgetNestedInput = {
     create?: XOR<IncidentsCreateWithoutBudgetInput, IncidentsUncheckedCreateWithoutBudgetInput>
     connectOrCreate?: IncidentsCreateOrConnectWithoutBudgetInput
@@ -35944,6 +36096,20 @@ export namespace Prisma {
     update?: CompanyUpdateWithWhereUniqueWithoutBudgetInput | CompanyUpdateWithWhereUniqueWithoutBudgetInput[]
     updateMany?: CompanyUpdateManyWithWhereWithoutBudgetInput | CompanyUpdateManyWithWhereWithoutBudgetInput[]
     deleteMany?: CompanyScalarWhereInput | CompanyScalarWhereInput[]
+  }
+
+  export type FileUncheckedUpdateManyWithoutBudgetNestedInput = {
+    create?: XOR<FileCreateWithoutBudgetInput, FileUncheckedCreateWithoutBudgetInput> | FileCreateWithoutBudgetInput[] | FileUncheckedCreateWithoutBudgetInput[]
+    connectOrCreate?: FileCreateOrConnectWithoutBudgetInput | FileCreateOrConnectWithoutBudgetInput[]
+    upsert?: FileUpsertWithWhereUniqueWithoutBudgetInput | FileUpsertWithWhereUniqueWithoutBudgetInput[]
+    createMany?: FileCreateManyBudgetInputEnvelope
+    set?: FileWhereUniqueInput | FileWhereUniqueInput[]
+    disconnect?: FileWhereUniqueInput | FileWhereUniqueInput[]
+    delete?: FileWhereUniqueInput | FileWhereUniqueInput[]
+    connect?: FileWhereUniqueInput | FileWhereUniqueInput[]
+    update?: FileUpdateWithWhereUniqueWithoutBudgetInput | FileUpdateWithWhereUniqueWithoutBudgetInput[]
+    updateMany?: FileUpdateManyWithWhereWithoutBudgetInput | FileUpdateManyWithWhereWithoutBudgetInput[]
+    deleteMany?: FileScalarWhereInput | FileScalarWhereInput[]
   }
 
   export type IncidentsCreateNestedOneWithoutIncidentHistoryInput = {
@@ -36768,6 +36934,7 @@ export namespace Prisma {
     company: CompanyCreateNestedOneWithoutBudgetInput
     incident?: IncidentsCreateNestedOneWithoutBudgetInput
     Company?: CompanyCreateNestedManyWithoutBudgetInput
+    files?: FileCreateNestedManyWithoutBudgetInput
   }
 
   export type BudgetUncheckedCreateWithoutUserInput = {
@@ -36784,6 +36951,7 @@ export namespace Prisma {
     title: string
     incident?: IncidentsUncheckedCreateNestedOneWithoutBudgetInput
     Company?: CompanyUncheckedCreateNestedManyWithoutBudgetInput
+    files?: FileUncheckedCreateNestedManyWithoutBudgetInput
   }
 
   export type BudgetCreateOrConnectWithoutUserInput = {
@@ -36955,6 +37123,7 @@ export namespace Prisma {
     company?: CompanyCreateNestedOneWithoutCompanyFilesInput
     worker?: WorkerCreateNestedOneWithoutWorkerFilesInput
     admin?: AdminCreateNestedOneWithoutAdminFilesInput
+    budget?: BudgetCreateNestedOneWithoutFilesInput
   }
 
   export type FileUncheckedCreateWithoutUserInput = {
@@ -36967,6 +37136,7 @@ export namespace Prisma {
     companyID?: number | null
     workerID?: number | null
     adminID?: number | null
+    budgetID?: number | null
     uploadedAt?: Date | string
   }
 
@@ -37403,6 +37573,7 @@ export namespace Prisma {
     companyID?: IntNullableFilter<"File"> | number | null
     workerID?: IntNullableFilter<"File"> | number | null
     adminID?: IntNullableFilter<"File"> | number | null
+    budgetID?: IntNullableFilter<"File"> | number | null
     uploadedAt?: DateTimeFilter<"File"> | Date | string
   }
 
@@ -37567,6 +37738,7 @@ export namespace Prisma {
     company: CompanyCreateNestedOneWithoutBudgetInput
     incident?: IncidentsCreateNestedOneWithoutBudgetInput
     user: UserCreateNestedOneWithoutBudgetInput
+    files?: FileCreateNestedManyWithoutBudgetInput
   }
 
   export type BudgetUncheckedCreateWithoutCompanyInput = {
@@ -37583,6 +37755,7 @@ export namespace Prisma {
     createdAt?: Date | string
     title: string
     incident?: IncidentsUncheckedCreateNestedOneWithoutBudgetInput
+    files?: FileUncheckedCreateNestedManyWithoutBudgetInput
   }
 
   export type BudgetCreateOrConnectWithoutCompanyInput = {
@@ -37729,6 +37902,7 @@ export namespace Prisma {
     incident?: IncidentsCreateNestedOneWithoutBudgetInput
     user: UserCreateNestedOneWithoutBudgetInput
     Company?: CompanyCreateNestedManyWithoutBudgetInput
+    files?: FileCreateNestedManyWithoutBudgetInput
   }
 
   export type BudgetUncheckedCreateWithoutCompanyInput = {
@@ -37745,6 +37919,7 @@ export namespace Prisma {
     title: string
     incident?: IncidentsUncheckedCreateNestedOneWithoutBudgetInput
     Company?: CompanyUncheckedCreateNestedManyWithoutBudgetInput
+    files?: FileUncheckedCreateNestedManyWithoutBudgetInput
   }
 
   export type BudgetCreateManyCompanyInputEnvelope = {
@@ -37903,6 +38078,7 @@ export namespace Prisma {
     user?: UserCreateNestedOneWithoutUserFilesInput
     worker?: WorkerCreateNestedOneWithoutWorkerFilesInput
     admin?: AdminCreateNestedOneWithoutAdminFilesInput
+    budget?: BudgetCreateNestedOneWithoutFilesInput
   }
 
   export type FileUncheckedCreateWithoutCompanyInput = {
@@ -37915,6 +38091,7 @@ export namespace Prisma {
     userID?: number | null
     workerID?: number | null
     adminID?: number | null
+    budgetID?: number | null
     uploadedAt?: Date | string
   }
 
@@ -38044,6 +38221,7 @@ export namespace Prisma {
     company?: CompanyUpdateOneRequiredWithoutBudgetNestedInput
     incident?: IncidentsUpdateOneWithoutBudgetNestedInput
     user?: UserUpdateOneRequiredWithoutBudgetNestedInput
+    files?: FileUpdateManyWithoutBudgetNestedInput
   }
 
   export type BudgetUncheckedUpdateWithoutCompanyInput = {
@@ -38060,6 +38238,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     title?: StringFieldUpdateOperationsInput | string
     incident?: IncidentsUncheckedUpdateOneWithoutBudgetNestedInput
+    files?: FileUncheckedUpdateManyWithoutBudgetNestedInput
   }
 
   export type DirectionsUpsertWithWhereUniqueWithoutCompanyInput = {
@@ -38684,6 +38863,7 @@ export namespace Prisma {
     user?: UserCreateNestedOneWithoutUserFilesInput
     company?: CompanyCreateNestedOneWithoutCompanyFilesInput
     admin?: AdminCreateNestedOneWithoutAdminFilesInput
+    budget?: BudgetCreateNestedOneWithoutFilesInput
   }
 
   export type FileUncheckedCreateWithoutWorkerInput = {
@@ -38696,6 +38876,7 @@ export namespace Prisma {
     userID?: number | null
     companyID?: number | null
     adminID?: number | null
+    budgetID?: number | null
     uploadedAt?: Date | string
   }
 
@@ -38924,6 +39105,7 @@ export namespace Prisma {
     user?: UserCreateNestedOneWithoutUserFilesInput
     company?: CompanyCreateNestedOneWithoutCompanyFilesInput
     worker?: WorkerCreateNestedOneWithoutWorkerFilesInput
+    budget?: BudgetCreateNestedOneWithoutFilesInput
   }
 
   export type FileUncheckedCreateWithoutAdminInput = {
@@ -38936,6 +39118,7 @@ export namespace Prisma {
     userID?: number | null
     companyID?: number | null
     workerID?: number | null
+    budgetID?: number | null
     uploadedAt?: Date | string
   }
 
@@ -39199,6 +39382,44 @@ export namespace Prisma {
     create: XOR<AdminCreateWithoutAdminFilesInput, AdminUncheckedCreateWithoutAdminFilesInput>
   }
 
+  export type BudgetCreateWithoutFilesInput = {
+    budgetNumber: string
+    totalAmount: Decimal | DecimalJsLike | number | string
+    subtotal: Decimal | DecimalJsLike | number | string
+    tax: Decimal | DecimalJsLike | number | string
+    items: JsonNullValueInput | InputJsonValue
+    description?: string | null
+    incidentID?: number | null
+    createdAt?: Date | string
+    title: string
+    company: CompanyCreateNestedOneWithoutBudgetInput
+    incident?: IncidentsCreateNestedOneWithoutBudgetInput
+    user: UserCreateNestedOneWithoutBudgetInput
+    Company?: CompanyCreateNestedManyWithoutBudgetInput
+  }
+
+  export type BudgetUncheckedCreateWithoutFilesInput = {
+    budgetID?: number
+    budgetNumber: string
+    totalAmount: Decimal | DecimalJsLike | number | string
+    subtotal: Decimal | DecimalJsLike | number | string
+    tax: Decimal | DecimalJsLike | number | string
+    items: JsonNullValueInput | InputJsonValue
+    companyID: number
+    description?: string | null
+    incidentID?: number | null
+    userID: number
+    createdAt?: Date | string
+    title: string
+    incident?: IncidentsUncheckedCreateNestedOneWithoutBudgetInput
+    Company?: CompanyUncheckedCreateNestedManyWithoutBudgetInput
+  }
+
+  export type BudgetCreateOrConnectWithoutFilesInput = {
+    where: BudgetWhereUniqueInput
+    create: XOR<BudgetCreateWithoutFilesInput, BudgetUncheckedCreateWithoutFilesInput>
+  }
+
   export type IncidentsUpsertWithoutFilesInput = {
     update: XOR<IncidentsUpdateWithoutFilesInput, IncidentsUncheckedUpdateWithoutFilesInput>
     create: XOR<IncidentsCreateWithoutFilesInput, IncidentsUncheckedCreateWithoutFilesInput>
@@ -39445,6 +39666,50 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     companies?: AdminsCompaniesUncheckedUpdateManyWithoutAdminNestedInput
+  }
+
+  export type BudgetUpsertWithoutFilesInput = {
+    update: XOR<BudgetUpdateWithoutFilesInput, BudgetUncheckedUpdateWithoutFilesInput>
+    create: XOR<BudgetCreateWithoutFilesInput, BudgetUncheckedCreateWithoutFilesInput>
+    where?: BudgetWhereInput
+  }
+
+  export type BudgetUpdateToOneWithWhereWithoutFilesInput = {
+    where?: BudgetWhereInput
+    data: XOR<BudgetUpdateWithoutFilesInput, BudgetUncheckedUpdateWithoutFilesInput>
+  }
+
+  export type BudgetUpdateWithoutFilesInput = {
+    budgetNumber?: StringFieldUpdateOperationsInput | string
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    items?: JsonNullValueInput | InputJsonValue
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    incidentID?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: StringFieldUpdateOperationsInput | string
+    company?: CompanyUpdateOneRequiredWithoutBudgetNestedInput
+    incident?: IncidentsUpdateOneWithoutBudgetNestedInput
+    user?: UserUpdateOneRequiredWithoutBudgetNestedInput
+    Company?: CompanyUpdateManyWithoutBudgetNestedInput
+  }
+
+  export type BudgetUncheckedUpdateWithoutFilesInput = {
+    budgetID?: IntFieldUpdateOperationsInput | number
+    budgetNumber?: StringFieldUpdateOperationsInput | string
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    items?: JsonNullValueInput | InputJsonValue
+    companyID?: IntFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    incidentID?: NullableIntFieldUpdateOperationsInput | number | null
+    userID?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: StringFieldUpdateOperationsInput | string
+    incident?: IncidentsUncheckedUpdateOneWithoutBudgetNestedInput
+    Company?: CompanyUncheckedUpdateManyWithoutBudgetNestedInput
   }
 
   export type UserCreateWithoutUsersCompaniesInput = {
@@ -40246,6 +40511,7 @@ export namespace Prisma {
     company: CompanyCreateNestedOneWithoutBudgetInput
     user: UserCreateNestedOneWithoutBudgetInput
     Company?: CompanyCreateNestedManyWithoutBudgetInput
+    files?: FileCreateNestedManyWithoutBudgetInput
   }
 
   export type BudgetUncheckedCreateWithoutIncidentInput = {
@@ -40262,6 +40528,7 @@ export namespace Prisma {
     createdAt?: Date | string
     title: string
     Company?: CompanyUncheckedCreateNestedManyWithoutBudgetInput
+    files?: FileUncheckedCreateNestedManyWithoutBudgetInput
   }
 
   export type BudgetCreateOrConnectWithoutIncidentInput = {
@@ -40439,6 +40706,7 @@ export namespace Prisma {
     company?: CompanyCreateNestedOneWithoutCompanyFilesInput
     worker?: WorkerCreateNestedOneWithoutWorkerFilesInput
     admin?: AdminCreateNestedOneWithoutAdminFilesInput
+    budget?: BudgetCreateNestedOneWithoutFilesInput
   }
 
   export type FileUncheckedCreateWithoutIncidentInput = {
@@ -40451,6 +40719,7 @@ export namespace Prisma {
     companyID?: number | null
     workerID?: number | null
     adminID?: number | null
+    budgetID?: number | null
     uploadedAt?: Date | string
   }
 
@@ -40598,6 +40867,7 @@ export namespace Prisma {
     company?: CompanyUpdateOneRequiredWithoutBudgetNestedInput
     user?: UserUpdateOneRequiredWithoutBudgetNestedInput
     Company?: CompanyUpdateManyWithoutBudgetNestedInput
+    files?: FileUpdateManyWithoutBudgetNestedInput
   }
 
   export type BudgetUncheckedUpdateWithoutIncidentInput = {
@@ -40614,6 +40884,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     title?: StringFieldUpdateOperationsInput | string
     Company?: CompanyUncheckedUpdateManyWithoutBudgetNestedInput
+    files?: FileUncheckedUpdateManyWithoutBudgetNestedInput
   }
 
   export type UserUpsertWithoutIncidentsInput = {
@@ -41530,6 +41801,43 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type FileCreateWithoutBudgetInput = {
+    objectKey: string
+    fileURL: string
+    ownerType: $Enums.Role
+    ownerId: number
+    uploadedAt?: Date | string
+    incident?: IncidentsCreateNestedOneWithoutFilesInput
+    user?: UserCreateNestedOneWithoutUserFilesInput
+    company?: CompanyCreateNestedOneWithoutCompanyFilesInput
+    worker?: WorkerCreateNestedOneWithoutWorkerFilesInput
+    admin?: AdminCreateNestedOneWithoutAdminFilesInput
+  }
+
+  export type FileUncheckedCreateWithoutBudgetInput = {
+    id?: number
+    objectKey: string
+    fileURL: string
+    incidentID?: number | null
+    ownerType: $Enums.Role
+    ownerId: number
+    userID?: number | null
+    companyID?: number | null
+    workerID?: number | null
+    adminID?: number | null
+    uploadedAt?: Date | string
+  }
+
+  export type FileCreateOrConnectWithoutBudgetInput = {
+    where: FileWhereUniqueInput
+    create: XOR<FileCreateWithoutBudgetInput, FileUncheckedCreateWithoutBudgetInput>
+  }
+
+  export type FileCreateManyBudgetInputEnvelope = {
+    data: FileCreateManyBudgetInput | FileCreateManyBudgetInput[]
+    skipDuplicates?: boolean
+  }
+
   export type CompanyUpsertWithoutBudgetInput = {
     update: XOR<CompanyUpdateWithoutBudgetInput, CompanyUncheckedUpdateWithoutBudgetInput>
     create: XOR<CompanyCreateWithoutBudgetInput, CompanyUncheckedCreateWithoutBudgetInput>
@@ -41740,6 +42048,22 @@ export namespace Prisma {
     companyCode?: StringNullableFilter<"Company"> | string | null
     email?: StringFilter<"Company"> | string
     refreshToken?: StringNullableFilter<"Company"> | string | null
+  }
+
+  export type FileUpsertWithWhereUniqueWithoutBudgetInput = {
+    where: FileWhereUniqueInput
+    update: XOR<FileUpdateWithoutBudgetInput, FileUncheckedUpdateWithoutBudgetInput>
+    create: XOR<FileCreateWithoutBudgetInput, FileUncheckedCreateWithoutBudgetInput>
+  }
+
+  export type FileUpdateWithWhereUniqueWithoutBudgetInput = {
+    where: FileWhereUniqueInput
+    data: XOR<FileUpdateWithoutBudgetInput, FileUncheckedUpdateWithoutBudgetInput>
+  }
+
+  export type FileUpdateManyWithWhereWithoutBudgetInput = {
+    where: FileScalarWhereInput
+    data: XOR<FileUpdateManyMutationInput, FileUncheckedUpdateManyWithoutBudgetInput>
   }
 
   export type IncidentsCreateWithoutIncidentHistoryInput = {
@@ -43326,6 +43650,7 @@ export namespace Prisma {
     companyID?: number | null
     workerID?: number | null
     adminID?: number | null
+    budgetID?: number | null
     uploadedAt?: Date | string
   }
 
@@ -43461,6 +43786,7 @@ export namespace Prisma {
     company?: CompanyUpdateOneRequiredWithoutBudgetNestedInput
     incident?: IncidentsUpdateOneWithoutBudgetNestedInput
     Company?: CompanyUpdateManyWithoutBudgetNestedInput
+    files?: FileUpdateManyWithoutBudgetNestedInput
   }
 
   export type BudgetUncheckedUpdateWithoutUserInput = {
@@ -43477,6 +43803,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     incident?: IncidentsUncheckedUpdateOneWithoutBudgetNestedInput
     Company?: CompanyUncheckedUpdateManyWithoutBudgetNestedInput
+    files?: FileUncheckedUpdateManyWithoutBudgetNestedInput
   }
 
   export type BudgetUncheckedUpdateManyWithoutUserInput = {
@@ -43589,6 +43916,7 @@ export namespace Prisma {
     company?: CompanyUpdateOneWithoutCompanyFilesNestedInput
     worker?: WorkerUpdateOneWithoutWorkerFilesNestedInput
     admin?: AdminUpdateOneWithoutAdminFilesNestedInput
+    budget?: BudgetUpdateOneWithoutFilesNestedInput
   }
 
   export type FileUncheckedUpdateWithoutUserInput = {
@@ -43601,6 +43929,7 @@ export namespace Prisma {
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
     workerID?: NullableIntFieldUpdateOperationsInput | number | null
     adminID?: NullableIntFieldUpdateOperationsInput | number | null
+    budgetID?: NullableIntFieldUpdateOperationsInput | number | null
     uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -43614,6 +43943,7 @@ export namespace Prisma {
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
     workerID?: NullableIntFieldUpdateOperationsInput | number | null
     adminID?: NullableIntFieldUpdateOperationsInput | number | null
+    budgetID?: NullableIntFieldUpdateOperationsInput | number | null
     uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -43767,6 +44097,7 @@ export namespace Prisma {
     userID?: number | null
     workerID?: number | null
     adminID?: number | null
+    budgetID?: number | null
     uploadedAt?: Date | string
   }
 
@@ -44065,6 +44396,7 @@ export namespace Prisma {
     incident?: IncidentsUpdateOneWithoutBudgetNestedInput
     user?: UserUpdateOneRequiredWithoutBudgetNestedInput
     Company?: CompanyUpdateManyWithoutBudgetNestedInput
+    files?: FileUpdateManyWithoutBudgetNestedInput
   }
 
   export type BudgetUncheckedUpdateWithoutCompanyInput = {
@@ -44081,6 +44413,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     incident?: IncidentsUncheckedUpdateOneWithoutBudgetNestedInput
     Company?: CompanyUncheckedUpdateManyWithoutBudgetNestedInput
+    files?: FileUncheckedUpdateManyWithoutBudgetNestedInput
   }
 
   export type BudgetUncheckedUpdateManyWithoutCompanyInput = {
@@ -44236,6 +44569,7 @@ export namespace Prisma {
     user?: UserUpdateOneWithoutUserFilesNestedInput
     worker?: WorkerUpdateOneWithoutWorkerFilesNestedInput
     admin?: AdminUpdateOneWithoutAdminFilesNestedInput
+    budget?: BudgetUpdateOneWithoutFilesNestedInput
   }
 
   export type FileUncheckedUpdateWithoutCompanyInput = {
@@ -44248,6 +44582,7 @@ export namespace Prisma {
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     workerID?: NullableIntFieldUpdateOperationsInput | number | null
     adminID?: NullableIntFieldUpdateOperationsInput | number | null
+    budgetID?: NullableIntFieldUpdateOperationsInput | number | null
     uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -44261,6 +44596,7 @@ export namespace Prisma {
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     workerID?: NullableIntFieldUpdateOperationsInput | number | null
     adminID?: NullableIntFieldUpdateOperationsInput | number | null
+    budgetID?: NullableIntFieldUpdateOperationsInput | number | null
     uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -44319,6 +44655,7 @@ export namespace Prisma {
     userID?: number | null
     companyID?: number | null
     adminID?: number | null
+    budgetID?: number | null
     uploadedAt?: Date | string
   }
 
@@ -44472,6 +44809,7 @@ export namespace Prisma {
     user?: UserUpdateOneWithoutUserFilesNestedInput
     company?: CompanyUpdateOneWithoutCompanyFilesNestedInput
     admin?: AdminUpdateOneWithoutAdminFilesNestedInput
+    budget?: BudgetUpdateOneWithoutFilesNestedInput
   }
 
   export type FileUncheckedUpdateWithoutWorkerInput = {
@@ -44484,6 +44822,7 @@ export namespace Prisma {
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
     adminID?: NullableIntFieldUpdateOperationsInput | number | null
+    budgetID?: NullableIntFieldUpdateOperationsInput | number | null
     uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -44497,6 +44836,7 @@ export namespace Prisma {
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
     adminID?: NullableIntFieldUpdateOperationsInput | number | null
+    budgetID?: NullableIntFieldUpdateOperationsInput | number | null
     uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -44515,6 +44855,7 @@ export namespace Prisma {
     userID?: number | null
     companyID?: number | null
     workerID?: number | null
+    budgetID?: number | null
     uploadedAt?: Date | string
   }
 
@@ -44542,6 +44883,7 @@ export namespace Prisma {
     user?: UserUpdateOneWithoutUserFilesNestedInput
     company?: CompanyUpdateOneWithoutCompanyFilesNestedInput
     worker?: WorkerUpdateOneWithoutWorkerFilesNestedInput
+    budget?: BudgetUpdateOneWithoutFilesNestedInput
   }
 
   export type FileUncheckedUpdateWithoutAdminInput = {
@@ -44554,6 +44896,7 @@ export namespace Prisma {
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
     workerID?: NullableIntFieldUpdateOperationsInput | number | null
+    budgetID?: NullableIntFieldUpdateOperationsInput | number | null
     uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -44567,6 +44910,7 @@ export namespace Prisma {
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
     workerID?: NullableIntFieldUpdateOperationsInput | number | null
+    budgetID?: NullableIntFieldUpdateOperationsInput | number | null
     uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -44612,6 +44956,7 @@ export namespace Prisma {
     companyID?: number | null
     workerID?: number | null
     adminID?: number | null
+    budgetID?: number | null
     uploadedAt?: Date | string
   }
 
@@ -44740,6 +45085,7 @@ export namespace Prisma {
     company?: CompanyUpdateOneWithoutCompanyFilesNestedInput
     worker?: WorkerUpdateOneWithoutWorkerFilesNestedInput
     admin?: AdminUpdateOneWithoutAdminFilesNestedInput
+    budget?: BudgetUpdateOneWithoutFilesNestedInput
   }
 
   export type FileUncheckedUpdateWithoutIncidentInput = {
@@ -44752,6 +45098,7 @@ export namespace Prisma {
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
     workerID?: NullableIntFieldUpdateOperationsInput | number | null
     adminID?: NullableIntFieldUpdateOperationsInput | number | null
+    budgetID?: NullableIntFieldUpdateOperationsInput | number | null
     uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -44765,6 +45112,7 @@ export namespace Prisma {
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
     workerID?: NullableIntFieldUpdateOperationsInput | number | null
     adminID?: NullableIntFieldUpdateOperationsInput | number | null
+    budgetID?: NullableIntFieldUpdateOperationsInput | number | null
     uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -44799,6 +45147,20 @@ export namespace Prisma {
     companyCode?: string | null
     email: string
     refreshToken?: string | null
+  }
+
+  export type FileCreateManyBudgetInput = {
+    id?: number
+    objectKey: string
+    fileURL: string
+    incidentID?: number | null
+    ownerType: $Enums.Role
+    ownerId: number
+    userID?: number | null
+    companyID?: number | null
+    workerID?: number | null
+    adminID?: number | null
+    uploadedAt?: Date | string
   }
 
   export type CompanyUpdateWithoutBudgetInput = {
@@ -44870,6 +45232,47 @@ export namespace Prisma {
     companyCode?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type FileUpdateWithoutBudgetInput = {
+    objectKey?: StringFieldUpdateOperationsInput | string
+    fileURL?: StringFieldUpdateOperationsInput | string
+    ownerType?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    ownerId?: IntFieldUpdateOperationsInput | number
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    incident?: IncidentsUpdateOneWithoutFilesNestedInput
+    user?: UserUpdateOneWithoutUserFilesNestedInput
+    company?: CompanyUpdateOneWithoutCompanyFilesNestedInput
+    worker?: WorkerUpdateOneWithoutWorkerFilesNestedInput
+    admin?: AdminUpdateOneWithoutAdminFilesNestedInput
+  }
+
+  export type FileUncheckedUpdateWithoutBudgetInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    objectKey?: StringFieldUpdateOperationsInput | string
+    fileURL?: StringFieldUpdateOperationsInput | string
+    incidentID?: NullableIntFieldUpdateOperationsInput | number | null
+    ownerType?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    ownerId?: IntFieldUpdateOperationsInput | number
+    userID?: NullableIntFieldUpdateOperationsInput | number | null
+    companyID?: NullableIntFieldUpdateOperationsInput | number | null
+    workerID?: NullableIntFieldUpdateOperationsInput | number | null
+    adminID?: NullableIntFieldUpdateOperationsInput | number | null
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FileUncheckedUpdateManyWithoutBudgetInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    objectKey?: StringFieldUpdateOperationsInput | string
+    fileURL?: StringFieldUpdateOperationsInput | string
+    incidentID?: NullableIntFieldUpdateOperationsInput | number | null
+    ownerType?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    ownerId?: IntFieldUpdateOperationsInput | number
+    userID?: NullableIntFieldUpdateOperationsInput | number | null
+    companyID?: NullableIntFieldUpdateOperationsInput | number | null
+    workerID?: NullableIntFieldUpdateOperationsInput | number | null
+    adminID?: NullableIntFieldUpdateOperationsInput | number | null
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ShiftWorkerCreateManyShiftInput = {

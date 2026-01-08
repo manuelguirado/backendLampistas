@@ -55,9 +55,6 @@ export async function createIncident(
         'user',
         newIncident.IncidentsID,
       );
-      console.log(
-        `Uploaded ${files.length} files for incident ${newIncident.IncidentsID}`,
-      );
     }
 
     return newIncident;

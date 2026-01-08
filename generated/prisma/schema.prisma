@@ -135,6 +135,8 @@ model File {
   worker    Worker?  @relation(fields: [workerID], references: [workerid])
   adminID   Int?
   admin     Admin?   @relation(fields: [adminID], references: [adminID])
+  budgetID  Int?
+  budget    Budget?  @relation(fields: [budgetID], references: [budgetID])
 
   uploadedAt DateTime @default(now())
 
@@ -247,6 +249,7 @@ model Budget {
   createdAt    DateTime   @default(now()) @db.Timestamp(6) // ✅ Agregar
   Company      Company[]
   title        String     @db.VarChar(255)
+  files        File[]
 }
 
 model Subscription {

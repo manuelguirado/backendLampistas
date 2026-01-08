@@ -9,6 +9,7 @@ import { validateCode } from '../utils/validateCode';
 import { Injectable } from '@nestjs/common';
 import { uploadFile } from '../s3/uploadFile';
 import { listFiles } from '../s3/listFiles';
+import { downloadFile } from '../s3/downloadFile';
 
 @Injectable()
 export class UserService {
@@ -51,8 +52,8 @@ export class UserService {
   async validateCode(userType: 'user', code: string) {
     return validateCode(userType, code);
   }
-  async myIncidents(userID: number) {
-    return myIncidents(userID);
+  async myIncidents(userID: number, limit?: number, offset?: number) {
+    return myIncidents(userID, limit, offset);
   }
   async uploadFile(
     file: Array<Express.Multer.File>,
@@ -64,5 +65,8 @@ export class UserService {
   }
   async listFiles(id: number, userType: 'user', incidentID?: number) {
     return listFiles(id, userType, incidentID);
+  }
+  async downloadFile(id: number, userType: 'user', budgetID: number) {
+    return downloadFile(id, userType, budgetID);
   }
 }

@@ -6,6 +6,7 @@ import { myShifts } from '../modules/workers/myShifts';
 import { validateCode } from '../utils/validateCode';
 import type { UserType } from '../utils/types/userType';
 import type { incidentStatus } from '../utils/types/incidentStatus';
+import { uploadFile } from '../s3/uploadFile';
 
 @Injectable()
 export class WorkerService {
@@ -25,5 +26,13 @@ export class WorkerService {
   }
   async myShifts(workerID: number) {
     return myShifts(workerID);
+  }
+  async uploadFile(
+    file: Array<Express.Multer.File>,
+    id: number,
+    userType: 'worker',
+    incidentID?: number,
+  ) {
+    return uploadFile(file, id, userType, incidentID);
   }
 }

@@ -165,8 +165,9 @@ export class CompanyService {
     id: number,
     userType: 'company',
     incidentID?: number,
+    budgetID?: number,
   ) {
-    return uploadFile(file, id, userType, incidentID);
+    return uploadFile(file, id, userType, incidentID, budgetID);
   }
   async listFiles(id: number, userType: 'company', incidentID?: number) {
     return listFiles(id, userType, incidentID);

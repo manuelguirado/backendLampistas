@@ -8,7 +8,10 @@ import {
   BadRequestException,
   UseGuards,
   Req,
+  UseInterceptors,
+  UploadedFiles,
 } from '@nestjs/common';
+import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { WorkerService } from './worker.services';
 import type { incidentStatus } from '../utils/types/incidentStatus';
 import { WorkerGuard } from './worker.guard';
@@ -57,5 +60,19 @@ export class WorkerController {
     const workerID = req.user.workerID;
 
     return this.workerService.myShifts(workerID);
+  }
+  @UseGuards(AuthGuard, WorkerGuard)
+  @UseInterceptors(FilesInterceptor('files', 10)) // Hasta 10 archivos
+  @Post('uploadFile')
+  async uploadFile(
+    @Req() req,
+    @UploadedFiles() files: Array<Express.Multer.File>,
+    @Body() body: { incidentID?: number },
+  ) {
+    const workerID = req.user.workerID;
+    const { incidentID } = body;
+    const parsedIncidentID = incidentID ? Number(incidentID) : undefined;
+
+    return this.workerService.uploadFile(files, workerID, 'worker', parsedIncidentID);
   }
 }

@@ -187,6 +187,7 @@ exports.Prisma.FileScalarFieldEnum = {
   companyID: 'companyID',
   workerID: 'workerID',
   adminID: 'adminID',
+  budgetID: 'budgetID',
   uploadedAt: 'uploadedAt'
 };
 

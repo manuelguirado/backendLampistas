@@ -18,15 +18,13 @@ export async function listFiles(
   userType: UserType,
   incidentID?: number,
 ) {
-  console.log(
-    `Listing files for userType: ${userType}, id: ${id}, incidentID: ${incidentID}`,
-  );
   try {
     const [User, permissions, Files] = await Promise.all([
       getUserID(userType, id),
       userPermissions(id, userType),
       getFileUrl(id, userType, incidentID),
     ]);
+    console.log('Files from DB:', Files);
 
     if (!User) throw new Error('User not found');
     if (!permissions)

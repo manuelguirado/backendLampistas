@@ -167,7 +167,6 @@ export class CompanyController {
   ) {
     try {
       const companyID = req.user.companyID;
-      console.log('Creating budget for companyID:', companyID);
 
       // 1. Crear presupuesto en BD
       const budget = await this.companyService.createBudget(
@@ -182,8 +181,6 @@ export class CompanyController {
         createBudgetDto.incidentID,
         createBudgetDto.description ?? '',
       );
-
-      console.log('Budget saved to DB:', budget);
 
       // 2. Preparar datos para el PDF
       const pdfData = {
@@ -201,12 +198,8 @@ export class CompanyController {
         clientEmail: createBudgetDto.clientEmail || '',
       };
 
-      console.log('Generating PDF with data:', pdfData);
-
       // 3. Generar PDF
       const pdfBuffer = await generateBudgetPDF(pdfData);
-
-      console.log('PDF generated, size:', pdfBuffer.length);
 
       // 4. Crear archivo PDF simulado para subir a Cloudflare
       const pdfFileName = `presupuesto_${createBudgetDto.budgetNumber}.pdf`;
@@ -228,14 +221,15 @@ export class CompanyController {
       if (createBudgetDto.file) {
         filesToUpload.push(createBudgetDto.file);
       }
-
+      const budgetID = budget.budget.budgetID;
+      console.log('budgetID to upload files:', budgetID);
       const uploadResult = await this.companyService.uploadFile(
         filesToUpload,
         companyID,
         'company',
         createBudgetDto.incidentID,
+        budgetID,
       );
-      console.log('Files uploaded to Cloudflare:', uploadResult);
 
       // 6. Configurar headers y enviar PDF
       res.set({
@@ -358,12 +352,6 @@ export class CompanyController {
     const startDate = new Date(data.startDate);
     const endDate = new Date(data.endDate);
 
-    console.log('Parsed dates:', {
-      startDate,
-      endDate,
-      shiftType: data.shiftType,
-    });
-
     return this.companyService.assignShiftWorker(
       workerID,
       startDate,
@@ -467,9 +455,6 @@ export class CompanyController {
     @UploadedFiles() files: Array<Express.Multer.File>,
     @Req() req: any,
   ) {
-    console.log('Received files:', files);
-    console.log('User from token:', req.user);
-    console.log('CompanyID from token:', req.user.companyID);
     const companyID = req.user.companyID;
     return this.companyService.uploadFile(files, companyID, 'company');
   }

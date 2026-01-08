@@ -6,13 +6,8 @@ export async function getFileUrl(
   ownerId: number,
   ownerType: UserType,
   incidentID?: number,
+  budgetID?: number,
 ) {
-  console.log(incidentID);
-  console.log('Getting file URL for:', {
-    ownerId,
-    ownerType,
-    incidentID,
-  });
   const getId = await getUserID(ownerType, ownerId);
   if (!getId) {
     throw new Error('User not found');
@@ -20,22 +15,9 @@ export async function getFileUrl(
   const files = await prisma.file.findMany({
     where: {
       incidentID: incidentID,
+      budgetID: budgetID,
     },
   });
-
-  console.log(`Query: incidentID = ${incidentID}, found ${files.length} files`);
-
-  // Debug: Ver TODOS los archivos para verificar si tienen incidentID
-  const allFiles = await prisma.file.findMany();
-  console.log(
-    'ALL FILES IN DB:',
-    allFiles.map((f) => ({
-      id: f.id,
-      objectKey: f.objectKey,
-      incidentID: f.incidentID,
-      ownerId: f.ownerId,
-    })),
-  );
 
   return files.map((file) => ({
     objectKey: file.objectKey,

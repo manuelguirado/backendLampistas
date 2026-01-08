@@ -14,12 +14,33 @@ dotenv.config({ path: '../../../.env' });
 const s3Client = new S3Client(s3Config);
 const prisma = new PrismaClient();
 export const upload = multer({ storage: multer.memoryStorage() });
+async function searchBudget(budgetID: number, userType: UserType, id: number) {
+  switch (userType) {
+    case 'company':
+      return prisma.budget.findFirst({
+        where: {
+          budgetID: budgetID,
+          companyID: id,
+        },
+      });
+    case 'user':
+      return prisma.budget.findFirst({
+        where: {
+          budgetID: budgetID,
+          userID: id,
+        },
+      });
+
+    default:
+      throw new Error('Invalid user type');
+  }
+}
+
 async function searchIncident(
   incidentID: number,
   userType: UserType,
   id: number,
 ) {
-  console.log('Searching incident for:', { incidentID, userType, id });
   switch (userType) {
     case 'company':
       return prisma.incidents.findFirst({
@@ -52,17 +73,30 @@ async function saveDataInDB(
   fileURL: string,
   objectKey: string,
   uploadedAt: Date,
-  incidentID?: number, // Nuevo parámetro
+  incidentID?: number,
+  budgetID?: number,
 ) {
   {
     //valiate user and incident in parallel
-    const [user, incident] = await Promise.all([
+    const [user, incident, budget] = await Promise.all([
       getUserID(userType, id),
       incidentID
         ? searchIncident(incidentID, userType, id)
         : Promise.resolve(null),
+      budgetID ? searchBudget(budgetID, userType, id) : Promise.resolve(null),
     ]);
-    console.log('incident:', incident);
+
+    if (!incidentID && incident) {
+      throw new Error(
+        'Incident found but no incidentID provided for file association',
+      );
+    }
+
+    if (budget && !budgetID) {
+      throw new Error(
+        'Budget found but no budgetID provided for file association',
+      );
+    }
 
     if (!user) throw new Error('User not found');
     switch (userType) {
@@ -76,6 +110,7 @@ async function saveDataInDB(
             ownerId: id,
             uploadedAt: uploadedAt,
             incidentID, // ✅ Incluir incidentID
+            budgetID, // ✅ Incluir budgetID
           },
         });
 
@@ -90,9 +125,9 @@ async function saveDataInDB(
             ownerId: id,
             uploadedAt: uploadedAt,
             incidentID, // ✅ Incluir incidentID
+            budgetID, // ✅ Incluir budgetID
           },
         });
-        console.log('File data saved for user:', { id, incidentID });
 
         break;
       case 'worker':
@@ -104,6 +139,7 @@ async function saveDataInDB(
             ownerType: 'WORKER',
             ownerId: id,
             incidentID, // ✅ Incluir incidentID
+            budgetID, // ✅ Incluir budgetID
             uploadedAt: uploadedAt,
           },
         });
@@ -118,8 +154,9 @@ export async function uploadFile(
   id: number,
   userType: UserType,
   incidentID?: number, // Nuevo parámetro opcional
+  budgetID?: number, // Nuevo parámetro opcional
 ) {
-  console.log('Uploading file for:', { id, userType, incidentID });
+  console.log('budgetid in uploadFile:', budgetID);
   if (!file) {
     throw new Error('File is required');
   }
@@ -161,6 +198,7 @@ export async function uploadFile(
       params.Key,
       uploadedAt,
       incidentID,
+      budgetID,
     );
 
     const payload = { id, userType, role: user.role };
@@ -172,6 +210,7 @@ export async function uploadFile(
       objectKey: params.Key,
       uploadedAt,
       incidentID,
+      budgetID,
       token,
     };
   } catch (error) {

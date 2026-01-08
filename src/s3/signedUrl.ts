@@ -20,12 +20,11 @@ export async function generateUploadSignedUrl(
       ContentType: fileType,
     };
     const command = new PutObjectCommand(s3Params);
-    console.log('Generating signed URL with params:', s3Params);
-    console.log('PutObjectCommand:', command);
+
     const signedUrl = await getSignedUrl(s3Client, command, {
       expiresIn: 3600,
     });
-    console.log('Generated signed URL:', signedUrl);
+
     return signedUrl;
   } catch (error) {
     throw new Error(`Error generating upload signed URL: ${error}`);
