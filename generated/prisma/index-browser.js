@@ -222,13 +222,13 @@ exports.Prisma.IncidentsScalarFieldEnum = {
   priority: 'priority',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
+  closureDate: 'closureDate',
   companyID: 'companyID',
   dateReported: 'dateReported',
   assignedWorkerID: 'assignedWorkerID',
   budgetID: 'budgetID',
   userID: 'userID',
-  urgency: 'urgency',
-  workerID: 'workerID'
+  urgency: 'urgency'
 };
 
 exports.Prisma.PaymentsScalarFieldEnum = {
@@ -275,8 +275,10 @@ exports.Prisma.IncidentHistoryScalarFieldEnum = {
   incidentID: 'incidentID',
   companyID: 'companyID',
   userID: 'userID',
+  workerID: 'workerID',
   changeLog: 'changeLog',
-  changedAt: 'changedAt'
+  changedAt: 'changedAt',
+  closedAt: 'closedAt'
 };
 
 exports.Prisma.ShiftWorkerScalarFieldEnum = {

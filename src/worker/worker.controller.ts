@@ -16,6 +16,7 @@ import { WorkerService } from './worker.services';
 import type { incidentStatus } from '../utils/types/incidentStatus';
 import { WorkerGuard } from './worker.guard';
 import { AuthGuard } from '../auth/auth.guard';
+import { UserType } from '../utils/types/userType';
 @Controller('worker')
 export class WorkerController {
   constructor(private readonly workerService: WorkerService) {}
@@ -39,10 +40,16 @@ export class WorkerController {
   @UseGuards(AuthGuard, WorkerGuard)
   @Patch('updateIncidentStatus')
   async updateIncidentStatus(
+    @Req() req,
     @Body() body: { incidentID: number; status: incidentStatus },
   ) {
     const { incidentID, status } = body;
-    return this.workerService.updateStatusIncident(incidentID, status);
+    const workerID = req.user?.workerID; // Obtener el workerID del token
+    return this.workerService.updateStatusIncident(
+      incidentID,
+      status,
+      workerID,
+    );
   }
 
   @Post('validateCode')
@@ -73,6 +80,61 @@ export class WorkerController {
     const { incidentID } = body;
     const parsedIncidentID = incidentID ? Number(incidentID) : undefined;
 
-    return this.workerService.uploadFile(files, workerID, 'worker', parsedIncidentID);
+    return this.workerService.uploadFile(
+      files,
+      workerID,
+      'worker',
+      parsedIncidentID,
+    );
+  }
+  @UseGuards(AuthGuard, WorkerGuard)
+  @Get('getIncidentHistory')
+  async getIncidentHistory(
+    @Req() req: any,
+    @Query('workerID') workerID: string,
+  ) {
+    const incidentsIDNum = parseInt(workerID, 10);
+
+    const id = req.user.workerID;
+    const userType: UserType = 'worker';
+
+    console.log('id value from request:', id);
+
+    return this.workerService.getIncidentHistory(id, userType);
+  }
+  @UseGuards(AuthGuard, WorkerGuard)
+  @Post('incidentHistory')
+  async incidentHistory(
+    @Req() req,
+    @Body()
+    body: {
+      incidentsID: number;
+      changeType: string;
+      oldValue?: string;
+      newValue?: string;
+      description?: string;
+      closedAt?: Date;
+    },
+  ) {
+    const workerID = req.user.workerID;
+    const {
+      incidentsID,
+      changeType,
+      oldValue,
+      newValue,
+      description,
+      closedAt,
+    } = body;
+
+    return this.workerService.incidentHistory(
+      workerID,
+      'worker',
+      incidentsID,
+      changeType,
+      oldValue,
+      newValue,
+      description,
+      closedAt,
+    );
   }
 }

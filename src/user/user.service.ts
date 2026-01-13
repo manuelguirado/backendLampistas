@@ -10,7 +10,9 @@ import { Injectable } from '@nestjs/common';
 import { uploadFile } from '../s3/uploadFile';
 import { listFiles } from '../s3/listFiles';
 import { downloadFile } from '../s3/downloadFile';
-
+import { getIncidentHistory } from '../modules/incidents/getIncidentHistory';
+import { incidentHistory } from '../modules/incidents/incidentHistory';
+import { UserType } from '../utils/types/userType';
 @Injectable()
 export class UserService {
   async userRegister(name: string, email: string, password: string) {
@@ -68,5 +70,29 @@ export class UserService {
   }
   async downloadFile(id: number, userType: 'user', budgetID: number) {
     return downloadFile(id, userType, budgetID);
+  }
+  async getIncidentHistory(id: number, userType: UserType) {
+    return getIncidentHistory(id, userType);
+  }
+  async incidentHistory(
+    id: number,
+    userType: 'user',
+    incidentsID: number,
+    changeType: string,
+    oldValue?: string,
+    newValue?: string,
+    description?: string,
+    closedAt?: Date,
+  ) {
+    return incidentHistory(
+      id,
+      userType,
+      incidentsID,
+      changeType,
+      oldValue,
+      newValue,
+      description,
+      closedAt,
+    );
   }
 }

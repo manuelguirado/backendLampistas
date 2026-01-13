@@ -60,7 +60,7 @@ async function searchIncident(
       return prisma.incidents.findFirst({
         where: {
           IncidentsID: incidentID,
-          workerID: id,
+          assignedWorkerID: id,
         },
       });
     default:

@@ -104,6 +104,7 @@ model Worker {
   workersCompanies  workersCompanies[]
   refreshToken      String?            @db.Text
   workerFiles       File[]
+  incidentHistories IncidentHistory[]   @relation( "WorkerIncidentHistory")
 }
 
 model Admin {
@@ -192,6 +193,7 @@ model Incidents {
   priority         String            @db.VarChar(50)
   createdAt        DateTime          @default(now()) @db.Timestamp(6)
   updatedAt        DateTime          @updatedAt @db.Timestamp(6)
+  closureDate     DateTime?         @db.Timestamp(6)
   companyID        Int
   company          Company           @relation("CompanyIncidents", fields: [companyID], references: [companyID])
   dateReported     DateTime          @default(now()) @db.Timestamp(6)
@@ -204,9 +206,11 @@ model Incidents {
   users            User[]            @relation("IncidentUsers")
   IncidentHistory  IncidentHistory[] @relation("IncidentHistory")
   urgency          Boolean?          @default(false)
-  workerID         Int?
+
+
+
   Payments         Payments[]        @relation("IncidentPayments")
-  files            File[]      
+  files            File[]
 }
 
 model Payments {
@@ -263,12 +267,15 @@ model IncidentHistory {
   id         Int       @id @default(autoincrement())
   incidentID Int
   incident   Incidents @relation("IncidentHistory", fields: [incidentID], references: [IncidentsID])
-  companyID  Int
-  company    Company   @relation("CompanyIncidentHistory", fields: [companyID], references: [companyID])
-  userID     Int
-  user       User      @relation(fields: [userID], references: [userID])
+  companyID  Int?
+  company    Company?  @relation("CompanyIncidentHistory", fields: [companyID], references: [companyID])
+  userID     Int?
+  user       User?     @relation(fields: [userID], references: [userID])
+  workerID   Int?
+  worker     Worker?   @relation( "WorkerIncidentHistory", fields: [workerID], references: [workerid])
   changeLog  String    @db.Text
   changedAt  DateTime  @default(now()) @db.Timestamp(6)
+  closedAt   DateTime? @db.Timestamp(6)
 }
 
 model ShiftWorker {

@@ -204,7 +204,55 @@ export class UserController {
       res.send(buffer);
     } catch (error) {
       console.error('Error downloading file:', error);
-      res.status(500).json({ error: 'Error downloading file' });
+      res.status(500).json({ error: 'Error dow  nloading file' });
     }
+  }
+  @UseGuards(AuthGuard, UserGuard)
+  @Get('getIncidentHistory')
+  async getIncidentHistory(@Req() req: any, @Query('userID') userID: string) {
+    const incidentsIDNum = parseInt(userID, 10);
+
+    const id = req.user.userID;
+    const userType: UserType = 'user';
+
+    console.log('id value from request:', id);
+
+    return this.userService.getIncidentHistory(id, userType);
+  }
+  @UseGuards(AuthGuard, UserGuard)
+  @Post('incidentHistory')
+  async incidentHistory(
+    @Req() req: any,
+    @Body()
+    body: {
+      incidentsID: number;
+      changeType: string;
+      oldValue?: string;
+      newValue?: string;
+      description?: string;
+      closedAt?: Date;
+    },
+  ) {
+    const id = req.user.userID;
+    const userType: UserType = 'user';
+    const {
+      incidentsID,
+      changeType,
+      oldValue,
+      newValue,
+      description,
+      closedAt,
+    } = body;
+
+    return this.userService.incidentHistory(
+      id,
+      userType,
+      incidentsID,
+      changeType,
+      oldValue,
+      newValue,
+      description,
+      closedAt,
+    );
   }
 }

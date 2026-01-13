@@ -20,6 +20,7 @@ import { CompanyGuard } from './company.guard';
 import type { ContractType } from '../../generated/prisma';
 import type { ItemType } from '../utils/types/itemType';
 import { BudgetData } from '../utils/types/budgetData';
+import { UserType } from '../utils/types/userType';
 
 @Controller('company')
 export class CompanyController {
@@ -126,7 +127,9 @@ export class CompanyController {
   listClients(
     @Request() req: any,
     @Query('limit') limit?: string,
+
     @Query('offset') offset?: string,
+    @Query('search') search?: string,
   ) {
     const { companyID } = req.user;
 
@@ -136,6 +139,7 @@ export class CompanyController {
       companyID,
       parsedLimit,
       parsedOffset,
+      search,
     );
   }
   @UseGuards(AuthGuard, CompanyGuard)
@@ -351,7 +355,12 @@ export class CompanyController {
     // Parsear fechas ISO string a Date objects
     const startDate = new Date(data.startDate);
     const endDate = new Date(data.endDate);
-
+    console.log('Assigning shift:', {
+      workerID,
+      startDate,
+      endDate,
+      shiftType: data.shiftType,
+    });
     return this.companyService.assignShiftWorker(
       workerID,
       startDate,
@@ -413,8 +422,9 @@ export class CompanyController {
       serialNumber?: string;
     },
   ) {
-    const machineryIDNumber = req.user.machineryID;
+    const machineryIDNumber = Number(machineryID);
     const companyID = req.user.companyID;
+    console.log('Editing machinery ID:', machineryIDNumber);
     const { name, description, machineType, brand, model, serialNumber } = body;
     return this.companyService.editMachinery(machineryIDNumber, companyID, {
       name,
@@ -491,5 +501,20 @@ export class CompanyController {
     const pdfBuffer = await this.companyService.generatePDF(body.budgetData);
     res.send(pdfBuffer);
     //
+  }
+  @UseGuards(AuthGuard, CompanyGuard)
+  @Get('getIncidentHistory')
+  async getIncidentHistory(
+    @Req() req: any,
+    @Query('companyId') companyID: string,
+  ) {
+    const companyIDNum = parseInt(companyID, 10);
+
+    const id = req.user.companyID;
+    const userType: UserType = 'company';
+
+    console.log('id value from request:', id);
+
+    return this.companyService.getIncidentHistory(id, userType);
   }
 }

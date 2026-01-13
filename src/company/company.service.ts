@@ -26,6 +26,8 @@ import { uploadFile } from '../s3/uploadFile';
 import { listFiles } from '../s3/listFiles';
 import { generatePDF } from '../utils/generatePDF';
 import { BudgetData } from '../utils/types/budgetData';
+import { getIncidentHistory } from '../modules/incidents/getIncidentHistory';
+import type { UserType } from '../utils/types/userType';
 @Injectable()
 export class CompanyService {
   async companyLogin(email: string, password: string) {
@@ -57,8 +59,13 @@ export class CompanyService {
   ) {
     return registerWorker(email, password, name, companyID);
   }
-  async listClients(companyID: number, limit: number = 5, offset: number = 0) {
-    return listClients(companyID, limit, offset);
+  async listClients(
+    companyID: number,
+    limit: number = 5,
+    offset: number = 0,
+    search?: string,
+  ) {
+    return listClients(companyID, limit, offset, search);
   }
   async companyCreateUser(
     companyID: number,
@@ -174,5 +181,8 @@ export class CompanyService {
   }
   async generatePDF(budgetData: BudgetData): Promise<Buffer> {
     return generatePDF(budgetData);
+  }
+  async getIncidentHistory(id: number, userType: UserType) {
+    return getIncidentHistory(id, userType);
   }
 }
