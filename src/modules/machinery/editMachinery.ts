@@ -18,7 +18,6 @@ export async function editMachinery(
     installedAT?: Date;
   },
 ) {
-  console.log('editing machinery data', updates);
   if (!machineryID || !companyID) {
     throw new Error('machineryID and companyID are required');
   }

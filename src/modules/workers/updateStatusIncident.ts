@@ -10,7 +10,6 @@ export async function updateStatusIncident(
   status: incidentStatus,
   workerID?: number, // Añadir workerID como parámetro opcional
 ) {
-  console.log('Updating incident status:', { incidentID, status, workerID });
   if (!incidentID || !status) {
     throw new Error('Incident ID and status are required');
   }

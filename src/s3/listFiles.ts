@@ -24,7 +24,7 @@ export async function listFiles(
       userPermissions(id, userType),
       getFileUrl(id, userType, incidentID),
     ]);
-    console.log('Files from DB:', Files);
+ 
 
     if (!User) throw new Error('User not found');
     if (!permissions)

@@ -98,8 +98,6 @@ export class WorkerController {
     const id = req.user.workerID;
     const userType: UserType = 'worker';
 
-    console.log('id value from request:', id);
-
     return this.workerService.getIncidentHistory(id, userType);
   }
   @UseGuards(AuthGuard, WorkerGuard)

@@ -17,16 +17,6 @@ export async function incidentHistory(
   description?: string,
   closedAt?: Date,
 ) {
-  console.log('data received in incidentHistory:', {
-    id,
-    userType,
-    incidentsID,
-    changeType,
-    oldValue,
-    newValue,
-    description,
-    closedAt,
-  });
   try {
     const getID = await getUserID(userType, id);
     if (!getID) {
@@ -36,7 +26,7 @@ export async function incidentHistory(
     const incident = await prisma.incidents.findFirst({
       where: { IncidentsID: incidentsID },
     });
-    console.log('Found incident:', incident);
+
     if (!incident) {
       throw new Error('Incident not found');
     }
@@ -46,12 +36,6 @@ export async function incidentHistory(
     const changeLog =
       description ||
       `${changeType}: ${oldValue ? `${oldValue} → ${newValue}` : newValue || 'Created'}`;
-    console.log('userid && workerid && companyid values:', {
-      userID: incident.userID,
-      workerid: 'workerid' in getID ? getID.workerid : null,
-      assignedWorkerID: incident.assignedWorkerID,
-      companyID: getID.companyID,
-    });
 
     // Para trabajadores, usar el ID del trabajador que está haciendo la acción
     const effectiveWorkerID =
@@ -69,7 +53,6 @@ export async function incidentHistory(
         closedAt: closedAt,
       },
     });
-    console.log('Created incident history entry:', incidentHistory);
 
     const payload = {
       incidentID: incident.IncidentsID,
@@ -78,7 +61,7 @@ export async function incidentHistory(
       workerID: effectiveWorkerID || null,
       role: getID.role,
     };
-    console.log('JWT payload for incidentHistory:', payload);
+
     const secret = process.env.JWT_SECRET as string;
     const options: SignOptions = { expiresIn: '1h' };
     const token = sign(payload, secret, options);

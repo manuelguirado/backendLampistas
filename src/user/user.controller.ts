@@ -215,8 +215,6 @@ export class UserController {
     const id = req.user.userID;
     const userType: UserType = 'user';
 
-    console.log('id value from request:', id);
-
     return this.userService.getIncidentHistory(id, userType);
   }
   @UseGuards(AuthGuard, UserGuard)

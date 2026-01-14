@@ -4,7 +4,6 @@ import dotenv from 'dotenv';
 dotenv.config({ path: '../../../.env' });
 const prisma = new PrismaClient();
 export async function assignIncident(incidentID: number, workerID: number) {
-  console.log('Assigning incident:', { incidentID, workerID });
   if (!incidentID || !workerID) {
     throw new Error('Incident ID and Worker ID are required');
   }

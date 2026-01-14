@@ -156,7 +156,7 @@ export async function uploadFile(
   incidentID?: number, // Nuevo parámetro opcional
   budgetID?: number, // Nuevo parámetro opcional
 ) {
-  console.log('budgetid in uploadFile:', budgetID);
+  
   if (!file) {
     throw new Error('File is required');
   }

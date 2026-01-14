@@ -8,7 +8,7 @@ const prisma = new PrismaClient();
 export async function getIncidentHistory(id: number, userType: UserType) {
   try {
     const getID = await getUserID(userType, id);
-    console.log('getID value:', getID);
+
     if (!getID) {
       throw new Error('User not found');
     }
@@ -36,7 +36,6 @@ export async function getIncidentHistory(id: number, userType: UserType) {
       },
       orderBy: { changedAt: 'desc' },
     });
-    console.log('Fetched incident history:', history);
 
     const mappedIncidentHistory = history.map((entry) => ({
       id: entry.incident.IncidentsID,
@@ -52,7 +51,6 @@ export async function getIncidentHistory(id: number, userType: UserType) {
       workerid: entry.workerID,
       companyName: entry.company ? entry.company.name : null,
     }));
-    console.log('Mapped incident history:', mappedIncidentHistory);
 
     // Crear un payload válido para JWT
     const payload = {
@@ -62,7 +60,6 @@ export async function getIncidentHistory(id: number, userType: UserType) {
       role: userType,
       mappedIncidentHistory,
     };
-    console.log('JWT payload:', payload);
 
     const secret = process.env.JWT_SECRET as string;
     const options: SignOptions = { expiresIn: '1h' };

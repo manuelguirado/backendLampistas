@@ -225,7 +225,7 @@ export class CompanyController {
         filesToUpload.push(createBudgetDto.file);
       }
       const budgetID = budget.budget.budgetID;
-      console.log('budgetID to upload files:', budgetID);
+
       const uploadResult = await this.companyService.uploadFile(
         filesToUpload,
         companyID,
@@ -354,12 +354,7 @@ export class CompanyController {
     // Parsear fechas ISO string a Date objects
     const startDate = new Date(data.startDate);
     const endDate = new Date(data.endDate);
-    console.log('Assigning shift:', {
-      workerID,
-      startDate,
-      endDate,
-      shiftType: data.shiftType,
-    });
+
     return this.companyService.assignShiftWorker(
       workerID,
       startDate,
@@ -423,7 +418,7 @@ export class CompanyController {
   ) {
     const machineryIDNumber = Number(machineryID);
     const companyID = req.user.companyID;
-    console.log('Editing machinery ID:', machineryIDNumber);
+
     const { name, description, machineType, brand, model, serialNumber } = body;
     return this.companyService.editMachinery(machineryIDNumber, companyID, {
       name,
@@ -511,8 +506,6 @@ export class CompanyController {
 
     const id = req.user.companyID;
     const userType: UserType = 'company';
-
-    console.log('id value from request:', id);
 
     return this.companyService.getIncidentHistory(id, userType);
   }
