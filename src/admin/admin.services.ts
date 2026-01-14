@@ -11,6 +11,8 @@ import registerAdmin from '../modules/admin/registerAdmin';
 
 import { eliminateCompany } from '../modules/admin/eliminateCompany';
 import { registerCompany } from '../modules/companies/registerCompany';
+import { uploadFile } from '../s3/uploadFile';
+import { UserType } from '../utils/types/userType';
 @Injectable()
 export class adminServices {
   async registerAdmin(email: string, password: string) {
@@ -70,5 +72,12 @@ export class adminServices {
   }
   async refreshToken(token: string, adminID: number) {
     return refreshToken(token, 'admin', adminID);
+  }
+  async uploadFile(
+    file: Array<Express.Multer.File>,
+    adminID: number,
+    userType: UserType,
+  ) {
+    return uploadFile(file, adminID, userType);
   }
 }

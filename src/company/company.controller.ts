@@ -11,7 +11,6 @@ import {
   Get,
   Query,
   UseInterceptors,
-  UploadedFile,
   UploadedFiles,
 } from '@nestjs/common';
 import { AuthGuard } from '../auth/auth.guard';
