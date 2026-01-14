@@ -21,12 +21,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.19.0
- * Query Engine version: 2ba551f319ab1df4bc874a89965d8b3641056773
+ * Prisma Client JS version: 6.19.1
+ * Query Engine version: c2990dca591cba766e3b7ef5d9e8a84796e47ab7
  */
 Prisma.prismaVersion = {
-  client: "6.19.0",
-  engine: "2ba551f319ab1df4bc874a89965d8b3641056773"
+  client: "6.19.1",
+  engine: "c2990dca591cba766e3b7ef5d9e8a84796e47ab7"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -176,6 +176,21 @@ exports.Prisma.AdminScalarFieldEnum = {
   refreshToken: 'refreshToken'
 };
 
+exports.Prisma.FileScalarFieldEnum = {
+  id: 'id',
+  objectKey: 'objectKey',
+  fileURL: 'fileURL',
+  incidentID: 'incidentID',
+  ownerType: 'ownerType',
+  ownerId: 'ownerId',
+  userID: 'userID',
+  companyID: 'companyID',
+  workerID: 'workerID',
+  adminID: 'adminID',
+  budgetID: 'budgetID',
+  uploadedAt: 'uploadedAt'
+};
+
 exports.Prisma.UsersCompaniesScalarFieldEnum = {
   id: 'id',
   userID: 'userID',
@@ -207,13 +222,13 @@ exports.Prisma.IncidentsScalarFieldEnum = {
   priority: 'priority',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
+  closureDate: 'closureDate',
   companyID: 'companyID',
   dateReported: 'dateReported',
   assignedWorkerID: 'assignedWorkerID',
   budgetID: 'budgetID',
   userID: 'userID',
-  urgency: 'urgency',
-  workerID: 'workerID'
+  urgency: 'urgency'
 };
 
 exports.Prisma.PaymentsScalarFieldEnum = {
@@ -260,8 +275,10 @@ exports.Prisma.IncidentHistoryScalarFieldEnum = {
   incidentID: 'incidentID',
   companyID: 'companyID',
   userID: 'userID',
+  workerID: 'workerID',
   changeLog: 'changeLog',
-  changedAt: 'changedAt'
+  changedAt: 'changedAt',
+  closedAt: 'closedAt'
 };
 
 exports.Prisma.ShiftWorkerScalarFieldEnum = {
@@ -376,6 +393,7 @@ exports.Prisma.ModelName = {
   AdminsCompanies: 'AdminsCompanies',
   Worker: 'Worker',
   Admin: 'Admin',
+  File: 'File',
   usersCompanies: 'usersCompanies',
   contracts: 'contracts',
   workersCompanies: 'workersCompanies',

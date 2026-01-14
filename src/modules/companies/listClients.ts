@@ -7,14 +7,25 @@ export async function listClients(
   companyID: number,
   limit: number,
   offset: number,
+  search?: string,
 ) {
   if (!companyID) {
     throw new Error('companyID is required');
   }
-
+  const whereClause = search
+    ? {
+        companyID: companyID,
+        user: {
+          OR: [
+            { name: { contains: search, mode: 'insensitive' as const } },
+            { email: { contains: search, mode: 'insensitive' as const } },
+          ],
+        },
+      }
+    : { companyID: companyID };
   // Primero obtén los contratos de esta compañía
   const contracts = await prisma.contracts.findMany({
-    where: { companyID },
+    where: whereClause,
     include: {
       user: true, // Incluye la información del usuario
     },

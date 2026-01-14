@@ -1,6 +1,7 @@
 import { PrismaClient } from '../../../generated/prisma';
 import type { ItemType } from '../../utils/types/itemType';
 import jwt, { SignOptions } from 'jsonwebtoken';
+import { uploadFile } from '../../s3/uploadFile';
 import dotenv from 'dotenv';
 dotenv.config({ path: '../../../.env' });
 const prisma = new PrismaClient();
@@ -16,6 +17,7 @@ export async function createBudget(
   totalAmount: number,
   incidentID?: number,
   description?: string,
+  file?: Express.Multer.File,
 ) {
   if (!budgetNumber || !userID || !companyID || !items || items.length === 0) {
     throw new Error('Budget number, user, company and items are required');
@@ -45,19 +47,26 @@ export async function createBudget(
     }
   }
 
-  const budget = await prisma.budget.create({
-    data: {
-      budgetNumber,
-      userID,
-      companyID,
-      title,
-      items: items,
-      subtotal,
-      tax,
-      totalAmount,
-      incidentID: incidentID || null,
-      description,
-    },
+  const budget = await prisma.$transaction(async (tx) => {
+    const newBudget = await tx.budget.create({
+      data: {
+        budgetNumber,
+        userID,
+        companyID,
+        title,
+        items: items,
+        subtotal,
+        tax,
+        totalAmount,
+        incidentID: incidentID || null,
+        description,
+      },
+    });
+
+    const fileUpload = file
+      ? await uploadFile([file], userID, 'user', newBudget.budgetID)
+      : null;
+    return newBudget;
   });
 
   try {

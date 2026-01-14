@@ -6,7 +6,9 @@ import { myShifts } from '../modules/workers/myShifts';
 import { validateCode } from '../utils/validateCode';
 import type { UserType } from '../utils/types/userType';
 import type { incidentStatus } from '../utils/types/incidentStatus';
-
+import { uploadFile } from '../s3/uploadFile';
+import { incidentHistory } from '../modules/incidents/incidentHistory';
+import { getIncidentHistory } from '../modules/incidents/getIncidentHistory';
 @Injectable()
 export class WorkerService {
   async workerLogin(email: string, password: string) {
@@ -20,10 +22,46 @@ export class WorkerService {
     return listAssignedIncidents(workerID);
   }
 
-  async updateStatusIncident(incidentID: number, status: incidentStatus) {
-    return updateStatusIncident(incidentID, status);
+  async updateStatusIncident(
+    incidentID: number,
+    status: incidentStatus,
+    workerID?: number,
+  ) {
+    return updateStatusIncident(incidentID, status, workerID);
   }
   async myShifts(workerID: number) {
     return myShifts(workerID);
+  }
+  async uploadFile(
+    file: Array<Express.Multer.File>,
+    id: number,
+    userType: 'worker',
+    incidentID?: number,
+  ) {
+    return uploadFile(file, id, userType, incidentID);
+  }
+  async getIncidentHistory(id: number, userType: UserType) {
+    return getIncidentHistory(id, userType);
+  }
+  async incidentHistory(
+    id: number,
+    userType: UserType,
+    incidentsID: number,
+    changeType: string,
+    oldValue?: string,
+    newValue?: string,
+    description?: string,
+    closedAt?: Date,
+  ) {
+    return incidentHistory(
+      id,
+      userType,
+      incidentsID,
+      changeType,
+      oldValue,
+      newValue,
+      description,
+      closedAt,
+    );
   }
 }

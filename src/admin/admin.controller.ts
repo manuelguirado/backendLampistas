@@ -10,10 +10,15 @@ import {
   Request,
   Param,
   Query,
+  UploadedFiles,
+  UseInterceptors,
+  UploadedFile,
+  Req,
 } from '@nestjs/common';
 
 import { adminServices } from './admin.services';
-
+import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
+import { UserType } from '../utils/types/userType';
 @Controller('admin')
 export class AdminController {
   constructor(private readonly adminService: adminServices) {}
@@ -105,9 +110,11 @@ export class AdminController {
     return this.adminService.listCompany(adminID, parsedLimit, parsedOffset);
   }
   @UseGuards(AuthGuard, AdminGuard)
+  @UseInterceptors(FileInterceptor('logo'))
   @Post('registerCompany')
-  registerCompany(
+  async registerCompany(
     @Request() req: any,
+    @UploadedFile() logo: Express.Multer.File,
     @Body()
     body: {
       name: string;
@@ -115,25 +122,46 @@ export class AdminController {
       email: string;
       password: string;
       admin: number;
-      directions: {
-        address: string;
-        city: string;
-        state: string;
-        zipCode: string;
-      };
+      directions:
+        | string
+        | {
+            address: string;
+            city: string;
+            state: string;
+            zipCode: string;
+          };
     },
   ) {
-    const admin = req.user.adminID;
-    const { name, phone, email, password, directions } = body;
+    const adminID = req.user.adminID;
+    const { name, phone, email, password } = body;
+
+    // Parsear directions si viene como string (desde FormData)
+    const directions =
+      typeof body.directions === 'string'
+        ? JSON.parse(body.directions)
+        : body.directions;
+
     try {
-      return this.adminService.registerCompany(
+      // Registrar la compañía primero
+      const company = await this.adminService.registerCompany(
         name,
         phone,
         email,
         password,
-        admin,
+        adminID,
         directions,
       );
+
+      // Si hay logo, subirlo asociado a la compañía
+      if (logo && company?.companyID) {
+        await this.adminService.uploadFile(
+          [logo],
+          company.companyID,
+          'company',
+        );
+      }
+
+      return company;
     } catch (error) {
       // ✅ Devolver el mensaje de error específico
       return {
@@ -148,5 +176,18 @@ export class AdminController {
     const adminID = req.user.adminID;
     const { token } = body;
     return this.adminService.refreshToken(token, adminID);
+  }
+  @UseGuards(AuthGuard, AdminGuard)
+  @UseInterceptors(FileInterceptor('file'))
+  @Post('uploadFile')
+  async uploadFile(
+    @Req() req: any,
+    @UploadedFile() file: Express.Multer.File,
+    @Query('incidentID') incidentID?: string,
+  ) {
+    const id = req.user.adminID;
+    const userType: UserType = 'admin';
+
+    return this.adminService.uploadFile([file], id, userType);
   }
 }

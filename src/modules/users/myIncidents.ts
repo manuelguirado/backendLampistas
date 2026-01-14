@@ -4,7 +4,11 @@ import jwt, { SignOptions } from 'jsonwebtoken';
 
 dotenv.config();
 const prisma = new PrismaClient();
-export async function myIncidents(userID: number) {
+export async function myIncidents(
+  userID: number,
+  limit?: number,
+  offset?: number,
+) {
   if (!userID) {
     throw new Error('User ID is required to fetch incidents.');
   }
@@ -17,6 +21,11 @@ export async function myIncidents(userID: number) {
   const incidents = await prisma.incidents.findMany({
     where: {
       userID: userID,
+    },
+    take: limit,
+    skip: offset,
+    orderBy: {
+      dateReported: 'desc',
     },
   });
   const mappedIncidents = incidents.map((incident) => ({

@@ -42,6 +42,7 @@ model User {
   machinery      machinery[]
   usersCompanies usersCompanies[]
   refreshToken   String?          @db.Text
+  userFiles      File[]
 }
 
 model Company {
@@ -73,6 +74,7 @@ model Company {
   workersCompanies workersCompanies[]
   usersCompanies   usersCompanies[]
   refreshToken     String?            @db.Text
+  companyFiles     File[]
 }
 
 model AdminsCompanies {
@@ -101,6 +103,8 @@ model Worker {
   workerCode        String?            @db.VarChar(100)
   workersCompanies  workersCompanies[]
   refreshToken      String?            @db.Text
+  workerFiles       File[]
+  incidentHistories IncidentHistory[]   @relation( "WorkerIncidentHistory")
 }
 
 model Admin {
@@ -110,6 +114,35 @@ model Admin {
   role         Role              @default(ADMIN)
   refreshToken String?           @db.Text
   companies    AdminsCompanies[]
+  adminFiles   File[]
+}
+
+model File {
+  id         Int        @id @default(autoincrement())
+  objectKey  String     @unique
+  fileURL    String     @db.Text
+  incidentID Int?
+  incident   Incidents? @relation(fields: [incidentID], references: [IncidentsID])
+
+  ownerType Role
+  ownerId   Int
+
+  // Relations to different owner types
+  userID    Int?
+  user      User?    @relation(fields: [userID], references: [userID])
+  companyID Int?
+  company   Company? @relation(fields: [companyID], references: [companyID])
+  workerID  Int?
+  worker    Worker?  @relation(fields: [workerID], references: [workerid])
+  adminID   Int?
+  admin     Admin?   @relation(fields: [adminID], references: [adminID])
+  budgetID  Int?
+  budget    Budget?  @relation(fields: [budgetID], references: [budgetID])
+
+  uploadedAt DateTime @default(now())
+
+  @@index([ownerType, ownerId])
+  @@index([incidentID])
 }
 
 model usersCompanies {
@@ -160,6 +193,7 @@ model Incidents {
   priority         String            @db.VarChar(50)
   createdAt        DateTime          @default(now()) @db.Timestamp(6)
   updatedAt        DateTime          @updatedAt @db.Timestamp(6)
+  closureDate     DateTime?         @db.Timestamp(6)
   companyID        Int
   company          Company           @relation("CompanyIncidents", fields: [companyID], references: [companyID])
   dateReported     DateTime          @default(now()) @db.Timestamp(6)
@@ -172,8 +206,11 @@ model Incidents {
   users            User[]            @relation("IncidentUsers")
   IncidentHistory  IncidentHistory[] @relation("IncidentHistory")
   urgency          Boolean?          @default(false)
-  workerID         Int?
+
+
+
   Payments         Payments[]        @relation("IncidentPayments")
+  files            File[]
 }
 
 model Payments {
@@ -216,6 +253,7 @@ model Budget {
   createdAt    DateTime   @default(now()) @db.Timestamp(6) // ✅ Agregar
   Company      Company[]
   title        String     @db.VarChar(255)
+  files        File[]
 }
 
 model Subscription {
@@ -229,12 +267,15 @@ model IncidentHistory {
   id         Int       @id @default(autoincrement())
   incidentID Int
   incident   Incidents @relation("IncidentHistory", fields: [incidentID], references: [IncidentsID])
-  companyID  Int
-  company    Company   @relation("CompanyIncidentHistory", fields: [companyID], references: [companyID])
-  userID     Int
-  user       User      @relation(fields: [userID], references: [userID])
+  companyID  Int?
+  company    Company?  @relation("CompanyIncidentHistory", fields: [companyID], references: [companyID])
+  userID     Int?
+  user       User?     @relation(fields: [userID], references: [userID])
+  workerID   Int?
+  worker     Worker?   @relation( "WorkerIncidentHistory", fields: [workerID], references: [workerid])
   changeLog  String    @db.Text
   changedAt  DateTime  @default(now()) @db.Timestamp(6)
+  closedAt   DateTime? @db.Timestamp(6)
 }
 
 model ShiftWorker {
@@ -285,22 +326,22 @@ model Directions {
 }
 
 model machinery {
-  id                 Int      @id @default(autoincrement())
+  id                 Int               @id @default(autoincrement())
   name               String
   description        String
-  maintenanceDate    DateTime? @db.Timestamp(6)
-  lastInspectionDate DateTime? @db.Timestamp(6)
-  installedAt        DateTime? @db.Timestamp(6)
+  maintenanceDate    DateTime?         @db.Timestamp(6)
+  lastInspectionDate DateTime?         @db.Timestamp(6)
+  installedAt        DateTime?         @db.Timestamp(6)
   machineType        String
   clientID           Int
-  client             User     @relation(fields: [clientID], references: [userID])
+  client             User              @relation(fields: [clientID], references: [userID])
   companyName        String
   companyID          Int
-  company            Company  @relation("CompanyMachinery", fields: [companyID], references: [companyID])
-  serialNumber       String   @unique
-  model             String
-  brand             String
-  ClientMachinery ClientMachinery[]
+  company            Company           @relation("CompanyMachinery", fields: [companyID], references: [companyID])
+  serialNumber       String            @unique
+  model              String
+  brand              String
+  ClientMachinery    ClientMachinery[]
 }
 
 model ClientMachinery {
