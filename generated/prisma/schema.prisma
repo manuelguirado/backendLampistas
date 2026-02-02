@@ -75,6 +75,7 @@ model Company {
   usersCompanies   usersCompanies[]
   refreshToken     String?            @db.Text
   companyFiles     File[]
+  Subscriptions    Subscription[]
 }
 
 model AdminsCompanies {
@@ -212,18 +213,21 @@ model Incidents {
 }
 
 model Payments {
-  id            Int             @id @default(autoincrement())
-  amount        Decimal         @db.Decimal(10, 2)
-  date          DateTime        @default(now()) @db.Timestamp(6)
-  method        String          @db.VarChar(50)
-  userID        Int             @unique
-  user          User            @relation(fields: [userID], references: [userID])
-  companyID     Int
-  company       Company         @relation("CompanyPayments", fields: [companyID], references: [companyID])
-  receivedBy    Company         @relation("ReceivedPayments", fields: [receivedByID], references: [companyID])
-  IncidentsID   Int?
-  incident      Incidents?      @relation("IncidentPayments", fields: [IncidentsID], references: [IncidentsID])
-  receivedByID  Int
+  id           Int        @id @default(autoincrement())
+  amount       Decimal    @db.Decimal(10, 2)
+  date         DateTime   @default(now()) @db.Timestamp(6)
+  method       String     @db.VarChar(50)
+  userID       Int        @unique
+  user         User       @relation(fields: [userID], references: [userID])
+  companyID    Int
+  company      Company    @relation("CompanyPayments", fields: [companyID], references: [companyID])
+  receivedBy   Company    @relation("ReceivedPayments", fields: [receivedByID], references: [companyID])
+  IncidentsID  Int?
+  incident     Incidents? @relation("IncidentPayments", fields: [IncidentsID], references: [IncidentsID])
+  receivedByID Int
+  clientEmail  String     @db.VarChar(255)
+  cardBrand    String     @db.VarChar(50)
+
   paymentStatus paymentStatus[]
 }
 
@@ -255,10 +259,17 @@ model Budget {
 }
 
 model Subscription {
-  id        Int      @id @default(autoincrement())
-  type      String   @db.VarChar(100)
-  startDate DateTime @db.Timestamp(6)
-  endDate   DateTime @db.Timestamp(6)
+  id             Int    @id @default(autoincrement())
+  subscriptionID String @unique @db.VarChar(255)
+
+  companyID    Int?
+  company      Company? @relation(fields: [companyID], references: [companyID])
+  companyemail String   @db.VarChar(255)
+
+  startDate DateTime  @db.Timestamp(6)
+  endDate   DateTime? @db.Timestamp(6)
+
+  active Boolean @default(true)
 }
 
 model IncidentHistory {
@@ -360,6 +371,7 @@ enum Role {
 }
 
 enum paymentStatusEnum {
+  STARTED
   PENDING
   COMPLETED
   FAILED

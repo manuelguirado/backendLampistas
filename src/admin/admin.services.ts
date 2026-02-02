@@ -27,8 +27,8 @@ export class adminServices {
   assignCode(companyID: number) {
     return assignCode('company', companyID);
   }
-  async suspendCompany(companyID: number, until?: Date) {
-    return suspendCompany(companyID, until);
+  async suspendCompany(companyEmail: string, until?: Date) {
+    return suspendCompany(companyEmail, until);
   }
   async editCompany(
     companyID: number,

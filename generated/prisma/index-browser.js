@@ -239,7 +239,9 @@ exports.Prisma.PaymentsScalarFieldEnum = {
   userID: 'userID',
   companyID: 'companyID',
   IncidentsID: 'IncidentsID',
-  receivedByID: 'receivedByID'
+  receivedByID: 'receivedByID',
+  clientEmail: 'clientEmail',
+  cardBrand: 'cardBrand'
 };
 
 exports.Prisma.PaymentStatusScalarFieldEnum = {
@@ -265,9 +267,12 @@ exports.Prisma.BudgetScalarFieldEnum = {
 
 exports.Prisma.SubscriptionScalarFieldEnum = {
   id: 'id',
-  type: 'type',
+  subscriptionID: 'subscriptionID',
+  companyID: 'companyID',
+  companyemail: 'companyemail',
   startDate: 'startDate',
-  endDate: 'endDate'
+  endDate: 'endDate',
+  active: 'active'
 };
 
 exports.Prisma.IncidentHistoryScalarFieldEnum = {
@@ -382,6 +387,7 @@ exports.incidentStatus = exports.$Enums.incidentStatus = {
 };
 
 exports.paymentStatusEnum = exports.$Enums.paymentStatusEnum = {
+  STARTED: 'STARTED',
   PENDING: 'PENDING',
   COMPLETED: 'COMPLETED',
   FAILED: 'FAILED'

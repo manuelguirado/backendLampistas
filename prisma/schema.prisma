@@ -75,6 +75,7 @@ model Company {
   usersCompanies   usersCompanies[]
   refreshToken     String?            @db.Text
   companyFiles     File[]
+  Subscriptions    Subscription[]
 }
 
 model AdminsCompanies {
@@ -226,8 +227,13 @@ model Payments {
   IncidentsID   Int?
   incident      Incidents?      @relation("IncidentPayments", fields: [IncidentsID], references: [IncidentsID])
   receivedByID  Int
+  clientEmail  String          @db.VarChar(255)
+  cardBrand    String          @db.VarChar(50)
+
+
   paymentStatus paymentStatus[]
 }
+
 
 model paymentStatus {
   id        Int               @id @default(autoincrement())
@@ -258,9 +264,16 @@ model Budget {
 
 model Subscription {
   id        Int      @id @default(autoincrement())
-  type      String   @db.VarChar(100)
+  subscriptionID String   @unique @db.VarChar(255)
+   
+  companyID Int?
+  company   Company?  @relation(fields: [companyID], references: [companyID])
+  companyemail String   @db.VarChar(255)
+ 
   startDate DateTime @db.Timestamp(6)
-  endDate   DateTime @db.Timestamp(6)
+  endDate   DateTime? @db.Timestamp(6)
+  
+  active    Boolean  @default(true)
 }
 
 model IncidentHistory {
@@ -362,6 +375,7 @@ enum Role {
 }
 
 enum paymentStatusEnum {
+  STARTED
   PENDING
   COMPLETED
   FAILED

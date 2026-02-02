@@ -62,14 +62,10 @@ export class AdminController {
     return this.adminService.assignCode(parseString);
   }
   @UseGuards(AuthGuard, AdminGuard)
-  @Patch('suspendCompany/:companyID')
-  suspendCompany(
-    @Param('companyID') companyID: string,
-    @Body() body: { until?: Date },
-  ) {
-    const parseCompanyID = Number(companyID);
-    const { until } = body;
-    return this.adminService.suspendCompany(parseCompanyID, until);
+  @Patch('suspendCompany')
+  suspendCompany(@Body() body: { companyEmail: string; until?: Date }) {
+    const { companyEmail, until } = body;
+    return this.adminService.suspendCompany(companyEmail, until);
   }
   @UseGuards(AuthGuard, AdminGuard)
   @Post('eliminateCompany/:companyID')

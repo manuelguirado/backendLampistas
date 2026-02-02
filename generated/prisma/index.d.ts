@@ -134,6 +134,7 @@ export type Role = (typeof Role)[keyof typeof Role]
 
 
 export const paymentStatusEnum: {
+  STARTED: 'STARTED',
   PENDING: 'PENDING',
   COMPLETED: 'COMPLETED',
   FAILED: 'FAILED'
@@ -2857,6 +2858,7 @@ export namespace Prisma {
     workersCompanies: number
     usersCompanies: number
     companyFiles: number
+    Subscriptions: number
   }
 
   export type CompanyCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2875,6 +2877,7 @@ export namespace Prisma {
     workersCompanies?: boolean | CompanyCountOutputTypeCountWorkersCompaniesArgs
     usersCompanies?: boolean | CompanyCountOutputTypeCountUsersCompaniesArgs
     companyFiles?: boolean | CompanyCountOutputTypeCountCompanyFilesArgs
+    Subscriptions?: boolean | CompanyCountOutputTypeCountSubscriptionsArgs
   }
 
   // Custom InputTypes
@@ -2991,6 +2994,13 @@ export namespace Prisma {
    */
   export type CompanyCountOutputTypeCountCompanyFilesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: FileWhereInput
+  }
+
+  /**
+   * CompanyCountOutputType without action
+   */
+  export type CompanyCountOutputTypeCountSubscriptionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SubscriptionWhereInput
   }
 
 
@@ -5118,6 +5128,7 @@ export namespace Prisma {
     workersCompanies?: boolean | Company$workersCompaniesArgs<ExtArgs>
     usersCompanies?: boolean | Company$usersCompaniesArgs<ExtArgs>
     companyFiles?: boolean | Company$companyFilesArgs<ExtArgs>
+    Subscriptions?: boolean | Company$SubscriptionsArgs<ExtArgs>
     _count?: boolean | CompanyCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["company"]>
 
@@ -5186,6 +5197,7 @@ export namespace Prisma {
     workersCompanies?: boolean | Company$workersCompaniesArgs<ExtArgs>
     usersCompanies?: boolean | Company$usersCompaniesArgs<ExtArgs>
     companyFiles?: boolean | Company$companyFilesArgs<ExtArgs>
+    Subscriptions?: boolean | Company$SubscriptionsArgs<ExtArgs>
     _count?: boolean | CompanyCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CompanyIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5214,6 +5226,7 @@ export namespace Prisma {
       workersCompanies: Prisma.$workersCompaniesPayload<ExtArgs>[]
       usersCompanies: Prisma.$usersCompaniesPayload<ExtArgs>[]
       companyFiles: Prisma.$FilePayload<ExtArgs>[]
+      Subscriptions: Prisma.$SubscriptionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       companyID: number
@@ -5638,6 +5651,7 @@ export namespace Prisma {
     workersCompanies<T extends Company$workersCompaniesArgs<ExtArgs> = {}>(args?: Subset<T, Company$workersCompaniesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$workersCompaniesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     usersCompanies<T extends Company$usersCompaniesArgs<ExtArgs> = {}>(args?: Subset<T, Company$usersCompaniesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$usersCompaniesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     companyFiles<T extends Company$companyFilesArgs<ExtArgs> = {}>(args?: Subset<T, Company$companyFilesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Subscriptions<T extends Company$SubscriptionsArgs<ExtArgs> = {}>(args?: Subset<T, Company$SubscriptionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6451,6 +6465,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: FileScalarFieldEnum | FileScalarFieldEnum[]
+  }
+
+  /**
+   * Company.Subscriptions
+   */
+  export type Company$SubscriptionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Subscription
+     */
+    select?: SubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Subscription
+     */
+    omit?: SubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionInclude<ExtArgs> | null
+    where?: SubscriptionWhereInput
+    orderBy?: SubscriptionOrderByWithRelationInput | SubscriptionOrderByWithRelationInput[]
+    cursor?: SubscriptionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SubscriptionScalarFieldEnum | SubscriptionScalarFieldEnum[]
   }
 
   /**
@@ -16154,6 +16192,8 @@ export namespace Prisma {
     companyID: number | null
     IncidentsID: number | null
     receivedByID: number | null
+    clientEmail: string | null
+    cardBrand: string | null
   }
 
   export type PaymentsMaxAggregateOutputType = {
@@ -16165,6 +16205,8 @@ export namespace Prisma {
     companyID: number | null
     IncidentsID: number | null
     receivedByID: number | null
+    clientEmail: string | null
+    cardBrand: string | null
   }
 
   export type PaymentsCountAggregateOutputType = {
@@ -16176,6 +16218,8 @@ export namespace Prisma {
     companyID: number
     IncidentsID: number
     receivedByID: number
+    clientEmail: number
+    cardBrand: number
     _all: number
   }
 
@@ -16207,6 +16251,8 @@ export namespace Prisma {
     companyID?: true
     IncidentsID?: true
     receivedByID?: true
+    clientEmail?: true
+    cardBrand?: true
   }
 
   export type PaymentsMaxAggregateInputType = {
@@ -16218,6 +16264,8 @@ export namespace Prisma {
     companyID?: true
     IncidentsID?: true
     receivedByID?: true
+    clientEmail?: true
+    cardBrand?: true
   }
 
   export type PaymentsCountAggregateInputType = {
@@ -16229,6 +16277,8 @@ export namespace Prisma {
     companyID?: true
     IncidentsID?: true
     receivedByID?: true
+    clientEmail?: true
+    cardBrand?: true
     _all?: true
   }
 
@@ -16327,6 +16377,8 @@ export namespace Prisma {
     companyID: number
     IncidentsID: number | null
     receivedByID: number
+    clientEmail: string
+    cardBrand: string
     _count: PaymentsCountAggregateOutputType | null
     _avg: PaymentsAvgAggregateOutputType | null
     _sum: PaymentsSumAggregateOutputType | null
@@ -16357,6 +16409,8 @@ export namespace Prisma {
     companyID?: boolean
     IncidentsID?: boolean
     receivedByID?: boolean
+    clientEmail?: boolean
+    cardBrand?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     company?: boolean | CompanyDefaultArgs<ExtArgs>
     receivedBy?: boolean | CompanyDefaultArgs<ExtArgs>
@@ -16374,6 +16428,8 @@ export namespace Prisma {
     companyID?: boolean
     IncidentsID?: boolean
     receivedByID?: boolean
+    clientEmail?: boolean
+    cardBrand?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     company?: boolean | CompanyDefaultArgs<ExtArgs>
     receivedBy?: boolean | CompanyDefaultArgs<ExtArgs>
@@ -16389,6 +16445,8 @@ export namespace Prisma {
     companyID?: boolean
     IncidentsID?: boolean
     receivedByID?: boolean
+    clientEmail?: boolean
+    cardBrand?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     company?: boolean | CompanyDefaultArgs<ExtArgs>
     receivedBy?: boolean | CompanyDefaultArgs<ExtArgs>
@@ -16404,9 +16462,11 @@ export namespace Prisma {
     companyID?: boolean
     IncidentsID?: boolean
     receivedByID?: boolean
+    clientEmail?: boolean
+    cardBrand?: boolean
   }
 
-  export type PaymentsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "amount" | "date" | "method" | "userID" | "companyID" | "IncidentsID" | "receivedByID", ExtArgs["result"]["payments"]>
+  export type PaymentsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "amount" | "date" | "method" | "userID" | "companyID" | "IncidentsID" | "receivedByID" | "clientEmail" | "cardBrand", ExtArgs["result"]["payments"]>
   export type PaymentsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     company?: boolean | CompanyDefaultArgs<ExtArgs>
@@ -16446,6 +16506,8 @@ export namespace Prisma {
       companyID: number
       IncidentsID: number | null
       receivedByID: number
+      clientEmail: string
+      cardBrand: string
     }, ExtArgs["result"]["payments"]>
     composites: {}
   }
@@ -16882,6 +16944,8 @@ export namespace Prisma {
     readonly companyID: FieldRef<"Payments", 'Int'>
     readonly IncidentsID: FieldRef<"Payments", 'Int'>
     readonly receivedByID: FieldRef<"Payments", 'Int'>
+    readonly clientEmail: FieldRef<"Payments", 'String'>
+    readonly cardBrand: FieldRef<"Payments", 'String'>
   }
     
 
@@ -19715,62 +19779,84 @@ export namespace Prisma {
 
   export type SubscriptionAvgAggregateOutputType = {
     id: number | null
+    companyID: number | null
   }
 
   export type SubscriptionSumAggregateOutputType = {
     id: number | null
+    companyID: number | null
   }
 
   export type SubscriptionMinAggregateOutputType = {
     id: number | null
-    type: string | null
+    subscriptionID: string | null
+    companyID: number | null
+    companyemail: string | null
     startDate: Date | null
     endDate: Date | null
+    active: boolean | null
   }
 
   export type SubscriptionMaxAggregateOutputType = {
     id: number | null
-    type: string | null
+    subscriptionID: string | null
+    companyID: number | null
+    companyemail: string | null
     startDate: Date | null
     endDate: Date | null
+    active: boolean | null
   }
 
   export type SubscriptionCountAggregateOutputType = {
     id: number
-    type: number
+    subscriptionID: number
+    companyID: number
+    companyemail: number
     startDate: number
     endDate: number
+    active: number
     _all: number
   }
 
 
   export type SubscriptionAvgAggregateInputType = {
     id?: true
+    companyID?: true
   }
 
   export type SubscriptionSumAggregateInputType = {
     id?: true
+    companyID?: true
   }
 
   export type SubscriptionMinAggregateInputType = {
     id?: true
-    type?: true
+    subscriptionID?: true
+    companyID?: true
+    companyemail?: true
     startDate?: true
     endDate?: true
+    active?: true
   }
 
   export type SubscriptionMaxAggregateInputType = {
     id?: true
-    type?: true
+    subscriptionID?: true
+    companyID?: true
+    companyemail?: true
     startDate?: true
     endDate?: true
+    active?: true
   }
 
   export type SubscriptionCountAggregateInputType = {
     id?: true
-    type?: true
+    subscriptionID?: true
+    companyID?: true
+    companyemail?: true
     startDate?: true
     endDate?: true
+    active?: true
     _all?: true
   }
 
@@ -19862,9 +19948,12 @@ export namespace Prisma {
 
   export type SubscriptionGroupByOutputType = {
     id: number
-    type: string
+    subscriptionID: string
+    companyID: number | null
+    companyemail: string
     startDate: Date
-    endDate: Date
+    endDate: Date | null
+    active: boolean
     _count: SubscriptionCountAggregateOutputType | null
     _avg: SubscriptionAvgAggregateOutputType | null
     _sum: SubscriptionSumAggregateOutputType | null
@@ -19888,42 +19977,71 @@ export namespace Prisma {
 
   export type SubscriptionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    type?: boolean
+    subscriptionID?: boolean
+    companyID?: boolean
+    companyemail?: boolean
     startDate?: boolean
     endDate?: boolean
+    active?: boolean
+    company?: boolean | Subscription$companyArgs<ExtArgs>
   }, ExtArgs["result"]["subscription"]>
 
   export type SubscriptionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    type?: boolean
+    subscriptionID?: boolean
+    companyID?: boolean
+    companyemail?: boolean
     startDate?: boolean
     endDate?: boolean
+    active?: boolean
+    company?: boolean | Subscription$companyArgs<ExtArgs>
   }, ExtArgs["result"]["subscription"]>
 
   export type SubscriptionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    type?: boolean
+    subscriptionID?: boolean
+    companyID?: boolean
+    companyemail?: boolean
     startDate?: boolean
     endDate?: boolean
+    active?: boolean
+    company?: boolean | Subscription$companyArgs<ExtArgs>
   }, ExtArgs["result"]["subscription"]>
 
   export type SubscriptionSelectScalar = {
     id?: boolean
-    type?: boolean
+    subscriptionID?: boolean
+    companyID?: boolean
+    companyemail?: boolean
     startDate?: boolean
     endDate?: boolean
+    active?: boolean
   }
 
-  export type SubscriptionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "type" | "startDate" | "endDate", ExtArgs["result"]["subscription"]>
+  export type SubscriptionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "subscriptionID" | "companyID" | "companyemail" | "startDate" | "endDate" | "active", ExtArgs["result"]["subscription"]>
+  export type SubscriptionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    company?: boolean | Subscription$companyArgs<ExtArgs>
+  }
+  export type SubscriptionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    company?: boolean | Subscription$companyArgs<ExtArgs>
+  }
+  export type SubscriptionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    company?: boolean | Subscription$companyArgs<ExtArgs>
+  }
 
   export type $SubscriptionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Subscription"
-    objects: {}
+    objects: {
+      company: Prisma.$CompanyPayload<ExtArgs> | null
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      type: string
+      subscriptionID: string
+      companyID: number | null
+      companyemail: string
       startDate: Date
-      endDate: Date
+      endDate: Date | null
+      active: boolean
     }, ExtArgs["result"]["subscription"]>
     composites: {}
   }
@@ -20318,6 +20436,7 @@ export namespace Prisma {
    */
   export interface Prisma__SubscriptionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    company<T extends Subscription$companyArgs<ExtArgs> = {}>(args?: Subset<T, Subscription$companyArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -20348,9 +20467,12 @@ export namespace Prisma {
    */
   interface SubscriptionFieldRefs {
     readonly id: FieldRef<"Subscription", 'Int'>
-    readonly type: FieldRef<"Subscription", 'String'>
+    readonly subscriptionID: FieldRef<"Subscription", 'String'>
+    readonly companyID: FieldRef<"Subscription", 'Int'>
+    readonly companyemail: FieldRef<"Subscription", 'String'>
     readonly startDate: FieldRef<"Subscription", 'DateTime'>
     readonly endDate: FieldRef<"Subscription", 'DateTime'>
+    readonly active: FieldRef<"Subscription", 'Boolean'>
   }
     
 
@@ -20367,6 +20489,10 @@ export namespace Prisma {
      * Omit specific fields from the Subscription
      */
     omit?: SubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionInclude<ExtArgs> | null
     /**
      * Filter, which Subscription to fetch.
      */
@@ -20386,6 +20512,10 @@ export namespace Prisma {
      */
     omit?: SubscriptionOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionInclude<ExtArgs> | null
+    /**
      * Filter, which Subscription to fetch.
      */
     where: SubscriptionWhereUniqueInput
@@ -20403,6 +20533,10 @@ export namespace Prisma {
      * Omit specific fields from the Subscription
      */
     omit?: SubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionInclude<ExtArgs> | null
     /**
      * Filter, which Subscription to fetch.
      */
@@ -20452,6 +20586,10 @@ export namespace Prisma {
      */
     omit?: SubscriptionOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionInclude<ExtArgs> | null
+    /**
      * Filter, which Subscription to fetch.
      */
     where?: SubscriptionWhereInput
@@ -20500,6 +20638,10 @@ export namespace Prisma {
      */
     omit?: SubscriptionOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionInclude<ExtArgs> | null
+    /**
      * Filter, which Subscriptions to fetch.
      */
     where?: SubscriptionWhereInput
@@ -20543,6 +20685,10 @@ export namespace Prisma {
      */
     omit?: SubscriptionOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionInclude<ExtArgs> | null
+    /**
      * The data needed to create a Subscription.
      */
     data: XOR<SubscriptionCreateInput, SubscriptionUncheckedCreateInput>
@@ -20576,6 +20722,10 @@ export namespace Prisma {
      */
     data: SubscriptionCreateManyInput | SubscriptionCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -20590,6 +20740,10 @@ export namespace Prisma {
      * Omit specific fields from the Subscription
      */
     omit?: SubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionInclude<ExtArgs> | null
     /**
      * The data needed to update a Subscription.
      */
@@ -20642,6 +20796,10 @@ export namespace Prisma {
      * Limit how many Subscriptions to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -20656,6 +20814,10 @@ export namespace Prisma {
      * Omit specific fields from the Subscription
      */
     omit?: SubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionInclude<ExtArgs> | null
     /**
      * The filter to search for the Subscription to update in case it exists.
      */
@@ -20683,6 +20845,10 @@ export namespace Prisma {
      */
     omit?: SubscriptionOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionInclude<ExtArgs> | null
+    /**
      * Filter which Subscription to delete.
      */
     where: SubscriptionWhereUniqueInput
@@ -20703,6 +20869,25 @@ export namespace Prisma {
   }
 
   /**
+   * Subscription.company
+   */
+  export type Subscription$companyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Company
+     */
+    select?: CompanySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Company
+     */
+    omit?: CompanyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompanyInclude<ExtArgs> | null
+    where?: CompanyWhereInput
+  }
+
+  /**
    * Subscription without action
    */
   export type SubscriptionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -20714,6 +20899,10 @@ export namespace Prisma {
      * Omit specific fields from the Subscription
      */
     omit?: SubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionInclude<ExtArgs> | null
   }
 
 
@@ -28954,7 +29143,9 @@ export namespace Prisma {
     userID: 'userID',
     companyID: 'companyID',
     IncidentsID: 'IncidentsID',
-    receivedByID: 'receivedByID'
+    receivedByID: 'receivedByID',
+    clientEmail: 'clientEmail',
+    cardBrand: 'cardBrand'
   };
 
   export type PaymentsScalarFieldEnum = (typeof PaymentsScalarFieldEnum)[keyof typeof PaymentsScalarFieldEnum]
@@ -28989,9 +29180,12 @@ export namespace Prisma {
 
   export const SubscriptionScalarFieldEnum: {
     id: 'id',
-    type: 'type',
+    subscriptionID: 'subscriptionID',
+    companyID: 'companyID',
+    companyemail: 'companyemail',
     startDate: 'startDate',
-    endDate: 'endDate'
+    endDate: 'endDate',
+    active: 'active'
   };
 
   export type SubscriptionScalarFieldEnum = (typeof SubscriptionScalarFieldEnum)[keyof typeof SubscriptionScalarFieldEnum]
@@ -29438,6 +29632,7 @@ export namespace Prisma {
     workersCompanies?: WorkersCompaniesListRelationFilter
     usersCompanies?: UsersCompaniesListRelationFilter
     companyFiles?: FileListRelationFilter
+    Subscriptions?: SubscriptionListRelationFilter
   }
 
   export type CompanyOrderByWithRelationInput = {
@@ -29469,6 +29664,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesOrderByRelationAggregateInput
     usersCompanies?: usersCompaniesOrderByRelationAggregateInput
     companyFiles?: FileOrderByRelationAggregateInput
+    Subscriptions?: SubscriptionOrderByRelationAggregateInput
   }
 
   export type CompanyWhereUniqueInput = Prisma.AtLeast<{
@@ -29503,6 +29699,7 @@ export namespace Prisma {
     workersCompanies?: WorkersCompaniesListRelationFilter
     usersCompanies?: UsersCompaniesListRelationFilter
     companyFiles?: FileListRelationFilter
+    Subscriptions?: SubscriptionListRelationFilter
   }, "companyID" | "userID" | "email">
 
   export type CompanyOrderByWithAggregationInput = {
@@ -30167,6 +30364,8 @@ export namespace Prisma {
     companyID?: IntFilter<"Payments"> | number
     IncidentsID?: IntNullableFilter<"Payments"> | number | null
     receivedByID?: IntFilter<"Payments"> | number
+    clientEmail?: StringFilter<"Payments"> | string
+    cardBrand?: StringFilter<"Payments"> | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
     receivedBy?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
@@ -30183,6 +30382,8 @@ export namespace Prisma {
     companyID?: SortOrder
     IncidentsID?: SortOrderInput | SortOrder
     receivedByID?: SortOrder
+    clientEmail?: SortOrder
+    cardBrand?: SortOrder
     user?: UserOrderByWithRelationInput
     company?: CompanyOrderByWithRelationInput
     receivedBy?: CompanyOrderByWithRelationInput
@@ -30202,6 +30403,8 @@ export namespace Prisma {
     companyID?: IntFilter<"Payments"> | number
     IncidentsID?: IntNullableFilter<"Payments"> | number | null
     receivedByID?: IntFilter<"Payments"> | number
+    clientEmail?: StringFilter<"Payments"> | string
+    cardBrand?: StringFilter<"Payments"> | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
     receivedBy?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
@@ -30218,6 +30421,8 @@ export namespace Prisma {
     companyID?: SortOrder
     IncidentsID?: SortOrderInput | SortOrder
     receivedByID?: SortOrder
+    clientEmail?: SortOrder
+    cardBrand?: SortOrder
     _count?: PaymentsCountOrderByAggregateInput
     _avg?: PaymentsAvgOrderByAggregateInput
     _max?: PaymentsMaxOrderByAggregateInput
@@ -30237,6 +30442,8 @@ export namespace Prisma {
     companyID?: IntWithAggregatesFilter<"Payments"> | number
     IncidentsID?: IntNullableWithAggregatesFilter<"Payments"> | number | null
     receivedByID?: IntWithAggregatesFilter<"Payments"> | number
+    clientEmail?: StringWithAggregatesFilter<"Payments"> | string
+    cardBrand?: StringWithAggregatesFilter<"Payments"> | string
   }
 
   export type paymentStatusWhereInput = {
@@ -30395,33 +30602,48 @@ export namespace Prisma {
     OR?: SubscriptionWhereInput[]
     NOT?: SubscriptionWhereInput | SubscriptionWhereInput[]
     id?: IntFilter<"Subscription"> | number
-    type?: StringFilter<"Subscription"> | string
+    subscriptionID?: StringFilter<"Subscription"> | string
+    companyID?: IntNullableFilter<"Subscription"> | number | null
+    companyemail?: StringFilter<"Subscription"> | string
     startDate?: DateTimeFilter<"Subscription"> | Date | string
-    endDate?: DateTimeFilter<"Subscription"> | Date | string
+    endDate?: DateTimeNullableFilter<"Subscription"> | Date | string | null
+    active?: BoolFilter<"Subscription"> | boolean
+    company?: XOR<CompanyNullableScalarRelationFilter, CompanyWhereInput> | null
   }
 
   export type SubscriptionOrderByWithRelationInput = {
     id?: SortOrder
-    type?: SortOrder
+    subscriptionID?: SortOrder
+    companyID?: SortOrderInput | SortOrder
+    companyemail?: SortOrder
     startDate?: SortOrder
-    endDate?: SortOrder
+    endDate?: SortOrderInput | SortOrder
+    active?: SortOrder
+    company?: CompanyOrderByWithRelationInput
   }
 
   export type SubscriptionWhereUniqueInput = Prisma.AtLeast<{
     id?: number
+    subscriptionID?: string
     AND?: SubscriptionWhereInput | SubscriptionWhereInput[]
     OR?: SubscriptionWhereInput[]
     NOT?: SubscriptionWhereInput | SubscriptionWhereInput[]
-    type?: StringFilter<"Subscription"> | string
+    companyID?: IntNullableFilter<"Subscription"> | number | null
+    companyemail?: StringFilter<"Subscription"> | string
     startDate?: DateTimeFilter<"Subscription"> | Date | string
-    endDate?: DateTimeFilter<"Subscription"> | Date | string
-  }, "id">
+    endDate?: DateTimeNullableFilter<"Subscription"> | Date | string | null
+    active?: BoolFilter<"Subscription"> | boolean
+    company?: XOR<CompanyNullableScalarRelationFilter, CompanyWhereInput> | null
+  }, "id" | "subscriptionID">
 
   export type SubscriptionOrderByWithAggregationInput = {
     id?: SortOrder
-    type?: SortOrder
+    subscriptionID?: SortOrder
+    companyID?: SortOrderInput | SortOrder
+    companyemail?: SortOrder
     startDate?: SortOrder
-    endDate?: SortOrder
+    endDate?: SortOrderInput | SortOrder
+    active?: SortOrder
     _count?: SubscriptionCountOrderByAggregateInput
     _avg?: SubscriptionAvgOrderByAggregateInput
     _max?: SubscriptionMaxOrderByAggregateInput
@@ -30434,9 +30656,12 @@ export namespace Prisma {
     OR?: SubscriptionScalarWhereWithAggregatesInput[]
     NOT?: SubscriptionScalarWhereWithAggregatesInput | SubscriptionScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Subscription"> | number
-    type?: StringWithAggregatesFilter<"Subscription"> | string
+    subscriptionID?: StringWithAggregatesFilter<"Subscription"> | string
+    companyID?: IntNullableWithAggregatesFilter<"Subscription"> | number | null
+    companyemail?: StringWithAggregatesFilter<"Subscription"> | string
     startDate?: DateTimeWithAggregatesFilter<"Subscription"> | Date | string
-    endDate?: DateTimeWithAggregatesFilter<"Subscription"> | Date | string
+    endDate?: DateTimeNullableWithAggregatesFilter<"Subscription"> | Date | string | null
+    active?: BoolWithAggregatesFilter<"Subscription"> | boolean
   }
 
   export type IncidentHistoryWhereInput = {
@@ -31096,6 +31321,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
     companyFiles?: FileCreateNestedManyWithoutCompanyInput
+    Subscriptions?: SubscriptionCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateInput = {
@@ -31126,6 +31352,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     companyFiles?: FileUncheckedCreateNestedManyWithoutCompanyInput
+    Subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUpdateInput = {
@@ -31155,6 +31382,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
     companyFiles?: FileUpdateManyWithoutCompanyNestedInput
+    Subscriptions?: SubscriptionUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateInput = {
@@ -31185,6 +31413,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     companyFiles?: FileUncheckedUpdateManyWithoutCompanyNestedInput
+    Subscriptions?: SubscriptionUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyCreateManyInput = {
@@ -31806,6 +32035,8 @@ export namespace Prisma {
     amount: Decimal | DecimalJsLike | number | string
     date?: Date | string
     method: string
+    clientEmail: string
+    cardBrand: string
     user: UserCreateNestedOneWithoutPaymentsInput
     company: CompanyCreateNestedOneWithoutPaymentsInput
     receivedBy: CompanyCreateNestedOneWithoutReceivedPaymentsInput
@@ -31822,6 +32053,8 @@ export namespace Prisma {
     companyID: number
     IncidentsID?: number | null
     receivedByID: number
+    clientEmail: string
+    cardBrand: string
     paymentStatus?: paymentStatusUncheckedCreateNestedManyWithoutPaymentInput
   }
 
@@ -31829,6 +32062,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     method?: StringFieldUpdateOperationsInput | string
+    clientEmail?: StringFieldUpdateOperationsInput | string
+    cardBrand?: StringFieldUpdateOperationsInput | string
     user?: UserUpdateOneRequiredWithoutPaymentsNestedInput
     company?: CompanyUpdateOneRequiredWithoutPaymentsNestedInput
     receivedBy?: CompanyUpdateOneRequiredWithoutReceivedPaymentsNestedInput
@@ -31845,6 +32080,8 @@ export namespace Prisma {
     companyID?: IntFieldUpdateOperationsInput | number
     IncidentsID?: NullableIntFieldUpdateOperationsInput | number | null
     receivedByID?: IntFieldUpdateOperationsInput | number
+    clientEmail?: StringFieldUpdateOperationsInput | string
+    cardBrand?: StringFieldUpdateOperationsInput | string
     paymentStatus?: paymentStatusUncheckedUpdateManyWithoutPaymentNestedInput
   }
 
@@ -31857,12 +32094,16 @@ export namespace Prisma {
     companyID: number
     IncidentsID?: number | null
     receivedByID: number
+    clientEmail: string
+    cardBrand: string
   }
 
   export type PaymentsUpdateManyMutationInput = {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     method?: StringFieldUpdateOperationsInput | string
+    clientEmail?: StringFieldUpdateOperationsInput | string
+    cardBrand?: StringFieldUpdateOperationsInput | string
   }
 
   export type PaymentsUncheckedUpdateManyInput = {
@@ -31874,6 +32115,8 @@ export namespace Prisma {
     companyID?: IntFieldUpdateOperationsInput | number
     IncidentsID?: NullableIntFieldUpdateOperationsInput | number | null
     receivedByID?: IntFieldUpdateOperationsInput | number
+    clientEmail?: StringFieldUpdateOperationsInput | string
+    cardBrand?: StringFieldUpdateOperationsInput | string
   }
 
   export type paymentStatusCreateInput = {
@@ -32027,49 +32270,69 @@ export namespace Prisma {
   }
 
   export type SubscriptionCreateInput = {
-    type: string
+    subscriptionID: string
+    companyemail: string
     startDate: Date | string
-    endDate: Date | string
+    endDate?: Date | string | null
+    active?: boolean
+    company?: CompanyCreateNestedOneWithoutSubscriptionsInput
   }
 
   export type SubscriptionUncheckedCreateInput = {
     id?: number
-    type: string
+    subscriptionID: string
+    companyID?: number | null
+    companyemail: string
     startDate: Date | string
-    endDate: Date | string
+    endDate?: Date | string | null
+    active?: boolean
   }
 
   export type SubscriptionUpdateInput = {
-    type?: StringFieldUpdateOperationsInput | string
+    subscriptionID?: StringFieldUpdateOperationsInput | string
+    companyemail?: StringFieldUpdateOperationsInput | string
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    active?: BoolFieldUpdateOperationsInput | boolean
+    company?: CompanyUpdateOneWithoutSubscriptionsNestedInput
   }
 
   export type SubscriptionUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    type?: StringFieldUpdateOperationsInput | string
+    subscriptionID?: StringFieldUpdateOperationsInput | string
+    companyID?: NullableIntFieldUpdateOperationsInput | number | null
+    companyemail?: StringFieldUpdateOperationsInput | string
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    active?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type SubscriptionCreateManyInput = {
     id?: number
-    type: string
+    subscriptionID: string
+    companyID?: number | null
+    companyemail: string
     startDate: Date | string
-    endDate: Date | string
+    endDate?: Date | string | null
+    active?: boolean
   }
 
   export type SubscriptionUpdateManyMutationInput = {
-    type?: StringFieldUpdateOperationsInput | string
+    subscriptionID?: StringFieldUpdateOperationsInput | string
+    companyemail?: StringFieldUpdateOperationsInput | string
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    active?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type SubscriptionUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    type?: StringFieldUpdateOperationsInput | string
+    subscriptionID?: StringFieldUpdateOperationsInput | string
+    companyID?: NullableIntFieldUpdateOperationsInput | number | null
+    companyemail?: StringFieldUpdateOperationsInput | string
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    active?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type IncidentHistoryCreateInput = {
@@ -32891,6 +33154,12 @@ export namespace Prisma {
     none?: workersCompaniesWhereInput
   }
 
+  export type SubscriptionListRelationFilter = {
+    every?: SubscriptionWhereInput
+    some?: SubscriptionWhereInput
+    none?: SubscriptionWhereInput
+  }
+
   export type WorkerOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -32912,6 +33181,10 @@ export namespace Prisma {
   }
 
   export type workersCompaniesOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SubscriptionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -33516,6 +33789,8 @@ export namespace Prisma {
     companyID?: SortOrder
     IncidentsID?: SortOrder
     receivedByID?: SortOrder
+    clientEmail?: SortOrder
+    cardBrand?: SortOrder
   }
 
   export type PaymentsAvgOrderByAggregateInput = {
@@ -33536,6 +33811,8 @@ export namespace Prisma {
     companyID?: SortOrder
     IncidentsID?: SortOrder
     receivedByID?: SortOrder
+    clientEmail?: SortOrder
+    cardBrand?: SortOrder
   }
 
   export type PaymentsMinOrderByAggregateInput = {
@@ -33547,6 +33824,8 @@ export namespace Prisma {
     companyID?: SortOrder
     IncidentsID?: SortOrder
     receivedByID?: SortOrder
+    clientEmail?: SortOrder
+    cardBrand?: SortOrder
   }
 
   export type PaymentsSumOrderByAggregateInput = {
@@ -33748,31 +34027,42 @@ export namespace Prisma {
 
   export type SubscriptionCountOrderByAggregateInput = {
     id?: SortOrder
-    type?: SortOrder
+    subscriptionID?: SortOrder
+    companyID?: SortOrder
+    companyemail?: SortOrder
     startDate?: SortOrder
     endDate?: SortOrder
+    active?: SortOrder
   }
 
   export type SubscriptionAvgOrderByAggregateInput = {
     id?: SortOrder
+    companyID?: SortOrder
   }
 
   export type SubscriptionMaxOrderByAggregateInput = {
     id?: SortOrder
-    type?: SortOrder
+    subscriptionID?: SortOrder
+    companyID?: SortOrder
+    companyemail?: SortOrder
     startDate?: SortOrder
     endDate?: SortOrder
+    active?: SortOrder
   }
 
   export type SubscriptionMinOrderByAggregateInput = {
     id?: SortOrder
-    type?: SortOrder
+    subscriptionID?: SortOrder
+    companyID?: SortOrder
+    companyemail?: SortOrder
     startDate?: SortOrder
     endDate?: SortOrder
+    active?: SortOrder
   }
 
   export type SubscriptionSumOrderByAggregateInput = {
     id?: SortOrder
+    companyID?: SortOrder
   }
 
   export type IncidentsScalarRelationFilter = {
@@ -34664,6 +34954,13 @@ export namespace Prisma {
     connect?: FileWhereUniqueInput | FileWhereUniqueInput[]
   }
 
+  export type SubscriptionCreateNestedManyWithoutCompanyInput = {
+    create?: XOR<SubscriptionCreateWithoutCompanyInput, SubscriptionUncheckedCreateWithoutCompanyInput> | SubscriptionCreateWithoutCompanyInput[] | SubscriptionUncheckedCreateWithoutCompanyInput[]
+    connectOrCreate?: SubscriptionCreateOrConnectWithoutCompanyInput | SubscriptionCreateOrConnectWithoutCompanyInput[]
+    createMany?: SubscriptionCreateManyCompanyInputEnvelope
+    connect?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
+  }
+
   export type WorkerUncheckedCreateNestedManyWithoutCompanyInput = {
     create?: XOR<WorkerCreateWithoutCompanyInput, WorkerUncheckedCreateWithoutCompanyInput> | WorkerCreateWithoutCompanyInput[] | WorkerUncheckedCreateWithoutCompanyInput[]
     connectOrCreate?: WorkerCreateOrConnectWithoutCompanyInput | WorkerCreateOrConnectWithoutCompanyInput[]
@@ -34767,6 +35064,13 @@ export namespace Prisma {
     connectOrCreate?: FileCreateOrConnectWithoutCompanyInput | FileCreateOrConnectWithoutCompanyInput[]
     createMany?: FileCreateManyCompanyInputEnvelope
     connect?: FileWhereUniqueInput | FileWhereUniqueInput[]
+  }
+
+  export type SubscriptionUncheckedCreateNestedManyWithoutCompanyInput = {
+    create?: XOR<SubscriptionCreateWithoutCompanyInput, SubscriptionUncheckedCreateWithoutCompanyInput> | SubscriptionCreateWithoutCompanyInput[] | SubscriptionUncheckedCreateWithoutCompanyInput[]
+    connectOrCreate?: SubscriptionCreateOrConnectWithoutCompanyInput | SubscriptionCreateOrConnectWithoutCompanyInput[]
+    createMany?: SubscriptionCreateManyCompanyInputEnvelope
+    connect?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
   }
 
   export type BoolFieldUpdateOperationsInput = {
@@ -34997,6 +35301,20 @@ export namespace Prisma {
     deleteMany?: FileScalarWhereInput | FileScalarWhereInput[]
   }
 
+  export type SubscriptionUpdateManyWithoutCompanyNestedInput = {
+    create?: XOR<SubscriptionCreateWithoutCompanyInput, SubscriptionUncheckedCreateWithoutCompanyInput> | SubscriptionCreateWithoutCompanyInput[] | SubscriptionUncheckedCreateWithoutCompanyInput[]
+    connectOrCreate?: SubscriptionCreateOrConnectWithoutCompanyInput | SubscriptionCreateOrConnectWithoutCompanyInput[]
+    upsert?: SubscriptionUpsertWithWhereUniqueWithoutCompanyInput | SubscriptionUpsertWithWhereUniqueWithoutCompanyInput[]
+    createMany?: SubscriptionCreateManyCompanyInputEnvelope
+    set?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
+    disconnect?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
+    delete?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
+    connect?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
+    update?: SubscriptionUpdateWithWhereUniqueWithoutCompanyInput | SubscriptionUpdateWithWhereUniqueWithoutCompanyInput[]
+    updateMany?: SubscriptionUpdateManyWithWhereWithoutCompanyInput | SubscriptionUpdateManyWithWhereWithoutCompanyInput[]
+    deleteMany?: SubscriptionScalarWhereInput | SubscriptionScalarWhereInput[]
+  }
+
   export type WorkerUncheckedUpdateManyWithoutCompanyNestedInput = {
     create?: XOR<WorkerCreateWithoutCompanyInput, WorkerUncheckedCreateWithoutCompanyInput> | WorkerCreateWithoutCompanyInput[] | WorkerUncheckedCreateWithoutCompanyInput[]
     connectOrCreate?: WorkerCreateOrConnectWithoutCompanyInput | WorkerCreateOrConnectWithoutCompanyInput[]
@@ -35205,6 +35523,20 @@ export namespace Prisma {
     update?: FileUpdateWithWhereUniqueWithoutCompanyInput | FileUpdateWithWhereUniqueWithoutCompanyInput[]
     updateMany?: FileUpdateManyWithWhereWithoutCompanyInput | FileUpdateManyWithWhereWithoutCompanyInput[]
     deleteMany?: FileScalarWhereInput | FileScalarWhereInput[]
+  }
+
+  export type SubscriptionUncheckedUpdateManyWithoutCompanyNestedInput = {
+    create?: XOR<SubscriptionCreateWithoutCompanyInput, SubscriptionUncheckedCreateWithoutCompanyInput> | SubscriptionCreateWithoutCompanyInput[] | SubscriptionUncheckedCreateWithoutCompanyInput[]
+    connectOrCreate?: SubscriptionCreateOrConnectWithoutCompanyInput | SubscriptionCreateOrConnectWithoutCompanyInput[]
+    upsert?: SubscriptionUpsertWithWhereUniqueWithoutCompanyInput | SubscriptionUpsertWithWhereUniqueWithoutCompanyInput[]
+    createMany?: SubscriptionCreateManyCompanyInputEnvelope
+    set?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
+    disconnect?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
+    delete?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
+    connect?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
+    update?: SubscriptionUpdateWithWhereUniqueWithoutCompanyInput | SubscriptionUpdateWithWhereUniqueWithoutCompanyInput[]
+    updateMany?: SubscriptionUpdateManyWithWhereWithoutCompanyInput | SubscriptionUpdateManyWithWhereWithoutCompanyInput[]
+    deleteMany?: SubscriptionScalarWhereInput | SubscriptionScalarWhereInput[]
   }
 
   export type AdminCreateNestedOneWithoutCompaniesInput = {
@@ -36323,6 +36655,22 @@ export namespace Prisma {
     deleteMany?: FileScalarWhereInput | FileScalarWhereInput[]
   }
 
+  export type CompanyCreateNestedOneWithoutSubscriptionsInput = {
+    create?: XOR<CompanyCreateWithoutSubscriptionsInput, CompanyUncheckedCreateWithoutSubscriptionsInput>
+    connectOrCreate?: CompanyCreateOrConnectWithoutSubscriptionsInput
+    connect?: CompanyWhereUniqueInput
+  }
+
+  export type CompanyUpdateOneWithoutSubscriptionsNestedInput = {
+    create?: XOR<CompanyCreateWithoutSubscriptionsInput, CompanyUncheckedCreateWithoutSubscriptionsInput>
+    connectOrCreate?: CompanyCreateOrConnectWithoutSubscriptionsInput
+    upsert?: CompanyUpsertWithoutSubscriptionsInput
+    disconnect?: CompanyWhereInput | boolean
+    delete?: CompanyWhereInput | boolean
+    connect?: CompanyWhereUniqueInput
+    update?: XOR<XOR<CompanyUpdateToOneWithWhereWithoutSubscriptionsInput, CompanyUpdateWithoutSubscriptionsInput>, CompanyUncheckedUpdateWithoutSubscriptionsInput>
+  }
+
   export type IncidentsCreateNestedOneWithoutIncidentHistoryInput = {
     create?: XOR<IncidentsCreateWithoutIncidentHistoryInput, IncidentsUncheckedCreateWithoutIncidentHistoryInput>
     connectOrCreate?: IncidentsCreateOrConnectWithoutIncidentHistoryInput
@@ -37036,6 +37384,8 @@ export namespace Prisma {
     amount: Decimal | DecimalJsLike | number | string
     date?: Date | string
     method: string
+    clientEmail: string
+    cardBrand: string
     company: CompanyCreateNestedOneWithoutPaymentsInput
     receivedBy: CompanyCreateNestedOneWithoutReceivedPaymentsInput
     incident?: IncidentsCreateNestedOneWithoutPaymentsInput
@@ -37050,6 +37400,8 @@ export namespace Prisma {
     companyID: number
     IncidentsID?: number | null
     receivedByID: number
+    clientEmail: string
+    cardBrand: string
     paymentStatus?: paymentStatusUncheckedCreateNestedManyWithoutPaymentInput
   }
 
@@ -37225,6 +37577,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
     companyFiles?: FileCreateNestedManyWithoutCompanyInput
+    Subscriptions?: SubscriptionCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutUserInput = {
@@ -37254,6 +37607,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     companyFiles?: FileUncheckedCreateNestedManyWithoutCompanyInput
+    Subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutUserInput = {
@@ -37481,6 +37835,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     method?: StringFieldUpdateOperationsInput | string
+    clientEmail?: StringFieldUpdateOperationsInput | string
+    cardBrand?: StringFieldUpdateOperationsInput | string
     company?: CompanyUpdateOneRequiredWithoutPaymentsNestedInput
     receivedBy?: CompanyUpdateOneRequiredWithoutReceivedPaymentsNestedInput
     incident?: IncidentsUpdateOneWithoutPaymentsNestedInput
@@ -37495,6 +37851,8 @@ export namespace Prisma {
     companyID?: IntFieldUpdateOperationsInput | number
     IncidentsID?: NullableIntFieldUpdateOperationsInput | number | null
     receivedByID?: IntFieldUpdateOperationsInput | number
+    clientEmail?: StringFieldUpdateOperationsInput | string
+    cardBrand?: StringFieldUpdateOperationsInput | string
     paymentStatus?: paymentStatusUncheckedUpdateManyWithoutPaymentNestedInput
   }
 
@@ -37660,6 +38018,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
     companyFiles?: FileUpdateManyWithoutCompanyNestedInput
+    Subscriptions?: SubscriptionUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutUserInput = {
@@ -37689,6 +38048,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     companyFiles?: FileUncheckedUpdateManyWithoutCompanyNestedInput
+    Subscriptions?: SubscriptionUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type contractsUpsertWithWhereUniqueWithoutUserInput = {
@@ -37861,6 +38221,8 @@ export namespace Prisma {
     amount: Decimal | DecimalJsLike | number | string
     date?: Date | string
     method: string
+    clientEmail: string
+    cardBrand: string
     user: UserCreateNestedOneWithoutPaymentsInput
     company: CompanyCreateNestedOneWithoutPaymentsInput
     incident?: IncidentsCreateNestedOneWithoutPaymentsInput
@@ -37875,6 +38237,8 @@ export namespace Prisma {
     userID: number
     companyID: number
     IncidentsID?: number | null
+    clientEmail: string
+    cardBrand: string
     paymentStatus?: paymentStatusUncheckedCreateNestedManyWithoutPaymentInput
   }
 
@@ -38064,6 +38428,8 @@ export namespace Prisma {
     amount: Decimal | DecimalJsLike | number | string
     date?: Date | string
     method: string
+    clientEmail: string
+    cardBrand: string
     user: UserCreateNestedOneWithoutPaymentsInput
     receivedBy: CompanyCreateNestedOneWithoutReceivedPaymentsInput
     incident?: IncidentsCreateNestedOneWithoutPaymentsInput
@@ -38078,6 +38444,8 @@ export namespace Prisma {
     userID: number
     IncidentsID?: number | null
     receivedByID: number
+    clientEmail: string
+    cardBrand: string
     paymentStatus?: paymentStatusUncheckedCreateNestedManyWithoutPaymentInput
   }
 
@@ -38348,6 +38716,33 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type SubscriptionCreateWithoutCompanyInput = {
+    subscriptionID: string
+    companyemail: string
+    startDate: Date | string
+    endDate?: Date | string | null
+    active?: boolean
+  }
+
+  export type SubscriptionUncheckedCreateWithoutCompanyInput = {
+    id?: number
+    subscriptionID: string
+    companyemail: string
+    startDate: Date | string
+    endDate?: Date | string | null
+    active?: boolean
+  }
+
+  export type SubscriptionCreateOrConnectWithoutCompanyInput = {
+    where: SubscriptionWhereUniqueInput
+    create: XOR<SubscriptionCreateWithoutCompanyInput, SubscriptionUncheckedCreateWithoutCompanyInput>
+  }
+
+  export type SubscriptionCreateManyCompanyInputEnvelope = {
+    data: SubscriptionCreateManyCompanyInput | SubscriptionCreateManyCompanyInput[]
+    skipDuplicates?: boolean
+  }
+
   export type WorkerUpsertWithWhereUniqueWithoutCompanyInput = {
     where: WorkerWhereUniqueInput
     update: XOR<WorkerUpdateWithoutCompanyInput, WorkerUncheckedUpdateWithoutCompanyInput>
@@ -38406,6 +38801,8 @@ export namespace Prisma {
     companyID?: IntFilter<"Payments"> | number
     IncidentsID?: IntNullableFilter<"Payments"> | number | null
     receivedByID?: IntFilter<"Payments"> | number
+    clientEmail?: StringFilter<"Payments"> | string
+    cardBrand?: StringFilter<"Payments"> | string
   }
 
   export type IncidentsUpsertWithWhereUniqueWithoutCompanyInput = {
@@ -38709,6 +39106,35 @@ export namespace Prisma {
     data: XOR<FileUpdateManyMutationInput, FileUncheckedUpdateManyWithoutCompanyInput>
   }
 
+  export type SubscriptionUpsertWithWhereUniqueWithoutCompanyInput = {
+    where: SubscriptionWhereUniqueInput
+    update: XOR<SubscriptionUpdateWithoutCompanyInput, SubscriptionUncheckedUpdateWithoutCompanyInput>
+    create: XOR<SubscriptionCreateWithoutCompanyInput, SubscriptionUncheckedCreateWithoutCompanyInput>
+  }
+
+  export type SubscriptionUpdateWithWhereUniqueWithoutCompanyInput = {
+    where: SubscriptionWhereUniqueInput
+    data: XOR<SubscriptionUpdateWithoutCompanyInput, SubscriptionUncheckedUpdateWithoutCompanyInput>
+  }
+
+  export type SubscriptionUpdateManyWithWhereWithoutCompanyInput = {
+    where: SubscriptionScalarWhereInput
+    data: XOR<SubscriptionUpdateManyMutationInput, SubscriptionUncheckedUpdateManyWithoutCompanyInput>
+  }
+
+  export type SubscriptionScalarWhereInput = {
+    AND?: SubscriptionScalarWhereInput | SubscriptionScalarWhereInput[]
+    OR?: SubscriptionScalarWhereInput[]
+    NOT?: SubscriptionScalarWhereInput | SubscriptionScalarWhereInput[]
+    id?: IntFilter<"Subscription"> | number
+    subscriptionID?: StringFilter<"Subscription"> | string
+    companyID?: IntNullableFilter<"Subscription"> | number | null
+    companyemail?: StringFilter<"Subscription"> | string
+    startDate?: DateTimeFilter<"Subscription"> | Date | string
+    endDate?: DateTimeNullableFilter<"Subscription"> | Date | string | null
+    active?: BoolFilter<"Subscription"> | boolean
+  }
+
   export type AdminCreateWithoutCompaniesInput = {
     email: string
     password: string
@@ -38757,6 +39183,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
     companyFiles?: FileCreateNestedManyWithoutCompanyInput
+    Subscriptions?: SubscriptionCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutAdminsInput = {
@@ -38786,6 +39213,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     companyFiles?: FileUncheckedCreateNestedManyWithoutCompanyInput
+    Subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutAdminsInput = {
@@ -38858,6 +39286,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
     companyFiles?: FileUpdateManyWithoutCompanyNestedInput
+    Subscriptions?: SubscriptionUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutAdminsInput = {
@@ -38887,6 +39316,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     companyFiles?: FileUncheckedUpdateManyWithoutCompanyNestedInput
+    Subscriptions?: SubscriptionUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyCreateWithoutWorkersInput = {
@@ -38915,6 +39345,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
     companyFiles?: FileCreateNestedManyWithoutCompanyInput
+    Subscriptions?: SubscriptionCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutWorkersInput = {
@@ -38944,6 +39375,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     companyFiles?: FileUncheckedCreateNestedManyWithoutCompanyInput
+    Subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutWorkersInput = {
@@ -39199,6 +39631,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
     companyFiles?: FileUpdateManyWithoutCompanyNestedInput
+    Subscriptions?: SubscriptionUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutWorkersInput = {
@@ -39228,6 +39661,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     companyFiles?: FileUncheckedUpdateManyWithoutCompanyNestedInput
+    Subscriptions?: SubscriptionUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type ShiftWorkerUpsertWithWhereUniqueWithoutWorkerInput = {
@@ -39576,6 +40010,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
+    Subscriptions?: SubscriptionCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutCompanyFilesInput = {
@@ -39605,6 +40040,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
+    Subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutCompanyFilesInput = {
@@ -39857,6 +40293,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
+    Subscriptions?: SubscriptionUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutCompanyFilesInput = {
@@ -39886,6 +40323,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
+    Subscriptions?: SubscriptionUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type WorkerUpsertWithoutWorkerFilesInput = {
@@ -40082,6 +40520,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
     companyFiles?: FileCreateNestedManyWithoutCompanyInput
+    Subscriptions?: SubscriptionCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutUsersCompaniesInput = {
@@ -40111,6 +40550,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     companyFiles?: FileUncheckedCreateNestedManyWithoutCompanyInput
+    Subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutUsersCompaniesInput = {
@@ -40213,6 +40653,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
     companyFiles?: FileUpdateManyWithoutCompanyNestedInput
+    Subscriptions?: SubscriptionUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutUsersCompaniesInput = {
@@ -40242,6 +40683,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     companyFiles?: FileUncheckedUpdateManyWithoutCompanyNestedInput
+    Subscriptions?: SubscriptionUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type UserCreateWithoutContractsInput = {
@@ -40322,6 +40764,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
     companyFiles?: FileCreateNestedManyWithoutCompanyInput
+    Subscriptions?: SubscriptionCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutContractsInput = {
@@ -40351,6 +40794,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     companyFiles?: FileUncheckedCreateNestedManyWithoutCompanyInput
+    Subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutContractsInput = {
@@ -40453,6 +40897,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
     companyFiles?: FileUpdateManyWithoutCompanyNestedInput
+    Subscriptions?: SubscriptionUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutContractsInput = {
@@ -40482,6 +40927,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     companyFiles?: FileUncheckedUpdateManyWithoutCompanyNestedInput
+    Subscriptions?: SubscriptionUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type WorkerCreateWithoutWorkersCompaniesInput = {
@@ -40548,6 +40994,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
     companyFiles?: FileCreateNestedManyWithoutCompanyInput
+    Subscriptions?: SubscriptionCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutWorkersCompaniesInput = {
@@ -40577,6 +41024,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     companyFiles?: FileUncheckedCreateNestedManyWithoutCompanyInput
+    Subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutWorkersCompaniesInput = {
@@ -40665,6 +41113,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
     companyFiles?: FileUpdateManyWithoutCompanyNestedInput
+    Subscriptions?: SubscriptionUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutWorkersCompaniesInput = {
@@ -40694,6 +41143,7 @@ export namespace Prisma {
     admins?: AdminsCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     companyFiles?: FileUncheckedUpdateManyWithoutCompanyNestedInput
+    Subscriptions?: SubscriptionUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyCreateWithoutIncidentsInput = {
@@ -40722,6 +41172,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
     companyFiles?: FileCreateNestedManyWithoutCompanyInput
+    Subscriptions?: SubscriptionCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutIncidentsInput = {
@@ -40751,6 +41202,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     companyFiles?: FileUncheckedCreateNestedManyWithoutCompanyInput
+    Subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutIncidentsInput = {
@@ -40971,6 +41423,8 @@ export namespace Prisma {
     amount: Decimal | DecimalJsLike | number | string
     date?: Date | string
     method: string
+    clientEmail: string
+    cardBrand: string
     user: UserCreateNestedOneWithoutPaymentsInput
     company: CompanyCreateNestedOneWithoutPaymentsInput
     receivedBy: CompanyCreateNestedOneWithoutReceivedPaymentsInput
@@ -40985,6 +41439,8 @@ export namespace Prisma {
     userID: number
     companyID: number
     receivedByID: number
+    clientEmail: string
+    cardBrand: string
     paymentStatus?: paymentStatusUncheckedCreateNestedManyWithoutPaymentInput
   }
 
@@ -41072,6 +41528,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
     companyFiles?: FileUpdateManyWithoutCompanyNestedInput
+    Subscriptions?: SubscriptionUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutIncidentsInput = {
@@ -41101,6 +41558,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     companyFiles?: FileUncheckedUpdateManyWithoutCompanyNestedInput
+    Subscriptions?: SubscriptionUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type WorkerUpsertWithoutAssignedIncidentsInput = {
@@ -41391,6 +41849,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
     companyFiles?: FileCreateNestedManyWithoutCompanyInput
+    Subscriptions?: SubscriptionCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutPaymentsInput = {
@@ -41420,6 +41879,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     companyFiles?: FileUncheckedCreateNestedManyWithoutCompanyInput
+    Subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutPaymentsInput = {
@@ -41453,6 +41913,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
     companyFiles?: FileCreateNestedManyWithoutCompanyInput
+    Subscriptions?: SubscriptionCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutReceivedPaymentsInput = {
@@ -41482,6 +41943,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     companyFiles?: FileUncheckedCreateNestedManyWithoutCompanyInput
+    Subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutReceivedPaymentsInput = {
@@ -41649,6 +42111,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
     companyFiles?: FileUpdateManyWithoutCompanyNestedInput
+    Subscriptions?: SubscriptionUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutPaymentsInput = {
@@ -41678,6 +42141,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     companyFiles?: FileUncheckedUpdateManyWithoutCompanyNestedInput
+    Subscriptions?: SubscriptionUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUpsertWithoutReceivedPaymentsInput = {
@@ -41717,6 +42181,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
     companyFiles?: FileUpdateManyWithoutCompanyNestedInput
+    Subscriptions?: SubscriptionUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutReceivedPaymentsInput = {
@@ -41746,6 +42211,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     companyFiles?: FileUncheckedUpdateManyWithoutCompanyNestedInput
+    Subscriptions?: SubscriptionUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type IncidentsUpsertWithoutPaymentsInput = {
@@ -41829,6 +42295,8 @@ export namespace Prisma {
     amount: Decimal | DecimalJsLike | number | string
     date?: Date | string
     method: string
+    clientEmail: string
+    cardBrand: string
     user: UserCreateNestedOneWithoutPaymentsInput
     company: CompanyCreateNestedOneWithoutPaymentsInput
     receivedBy: CompanyCreateNestedOneWithoutReceivedPaymentsInput
@@ -41844,6 +42312,8 @@ export namespace Prisma {
     companyID: number
     IncidentsID?: number | null
     receivedByID: number
+    clientEmail: string
+    cardBrand: string
   }
 
   export type PaymentsCreateOrConnectWithoutPaymentStatusInput = {
@@ -41866,6 +42336,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     method?: StringFieldUpdateOperationsInput | string
+    clientEmail?: StringFieldUpdateOperationsInput | string
+    cardBrand?: StringFieldUpdateOperationsInput | string
     user?: UserUpdateOneRequiredWithoutPaymentsNestedInput
     company?: CompanyUpdateOneRequiredWithoutPaymentsNestedInput
     receivedBy?: CompanyUpdateOneRequiredWithoutReceivedPaymentsNestedInput
@@ -41881,6 +42353,8 @@ export namespace Prisma {
     companyID?: IntFieldUpdateOperationsInput | number
     IncidentsID?: NullableIntFieldUpdateOperationsInput | number | null
     receivedByID?: IntFieldUpdateOperationsInput | number
+    clientEmail?: StringFieldUpdateOperationsInput | string
+    cardBrand?: StringFieldUpdateOperationsInput | string
   }
 
   export type CompanyCreateWithoutBudgetInput = {
@@ -41909,6 +42383,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
     companyFiles?: FileCreateNestedManyWithoutCompanyInput
+    Subscriptions?: SubscriptionCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutBudgetInput = {
@@ -41938,6 +42413,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     companyFiles?: FileUncheckedCreateNestedManyWithoutCompanyInput
+    Subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutBudgetInput = {
@@ -42069,6 +42545,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
     companyFiles?: FileCreateNestedManyWithoutCompanyInput
+    Subscriptions?: SubscriptionCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutBudgetInput = {
@@ -42098,6 +42575,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     companyFiles?: FileUncheckedCreateNestedManyWithoutCompanyInput
+    Subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateManyBudgetInputEnvelope = {
@@ -42179,6 +42657,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
     companyFiles?: FileUpdateManyWithoutCompanyNestedInput
+    Subscriptions?: SubscriptionUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutBudgetInput = {
@@ -42208,6 +42687,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     companyFiles?: FileUncheckedUpdateManyWithoutCompanyNestedInput
+    Subscriptions?: SubscriptionUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type IncidentsUpsertWithoutBudgetInput = {
@@ -42370,6 +42850,140 @@ export namespace Prisma {
     data: XOR<FileUpdateManyMutationInput, FileUncheckedUpdateManyWithoutBudgetInput>
   }
 
+  export type CompanyCreateWithoutSubscriptionsInput = {
+    name: string
+    phone: string
+    password: string
+    suspended?: boolean
+    suspendedUntil?: Date | string | null
+    role?: $Enums.Role
+    userID?: number | null
+    companyCode?: string | null
+    email: string
+    refreshToken?: string | null
+    workers?: WorkerCreateNestedManyWithoutCompanyInput
+    receivedPayments?: PaymentsCreateNestedManyWithoutReceivedByInput
+    incidents?: IncidentsCreateNestedManyWithoutCompanyInput
+    incidentHistory?: IncidentHistoryCreateNestedManyWithoutCompanyInput
+    budget?: BudgetCreateNestedOneWithoutCompanyInput
+    directions?: DirectionsCreateNestedManyWithoutCompanyInput
+    shiftWorkers?: ShiftWorkerCreateNestedManyWithoutCompanyInput
+    payments?: PaymentsCreateNestedManyWithoutCompanyInput
+    machinery?: machineryCreateNestedManyWithoutCompanyInput
+    Budget?: BudgetCreateNestedManyWithoutCompanyInput
+    User?: UserCreateNestedManyWithoutCompanyInput
+    contracts?: contractsCreateNestedManyWithoutCompanyInput
+    admins?: AdminsCompaniesCreateNestedManyWithoutCompanyInput
+    workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
+    usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
+    companyFiles?: FileCreateNestedManyWithoutCompanyInput
+  }
+
+  export type CompanyUncheckedCreateWithoutSubscriptionsInput = {
+    companyID?: number
+    name: string
+    phone: string
+    password: string
+    budgetID?: number | null
+    suspended?: boolean
+    suspendedUntil?: Date | string | null
+    role?: $Enums.Role
+    userID?: number | null
+    companyCode?: string | null
+    email: string
+    refreshToken?: string | null
+    workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
+    receivedPayments?: PaymentsUncheckedCreateNestedManyWithoutReceivedByInput
+    incidents?: IncidentsUncheckedCreateNestedManyWithoutCompanyInput
+    incidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutCompanyInput
+    directions?: DirectionsUncheckedCreateNestedManyWithoutCompanyInput
+    shiftWorkers?: ShiftWorkerUncheckedCreateNestedManyWithoutCompanyInput
+    payments?: PaymentsUncheckedCreateNestedManyWithoutCompanyInput
+    machinery?: machineryUncheckedCreateNestedManyWithoutCompanyInput
+    Budget?: BudgetUncheckedCreateNestedManyWithoutCompanyInput
+    User?: UserUncheckedCreateNestedManyWithoutCompanyInput
+    contracts?: contractsUncheckedCreateNestedManyWithoutCompanyInput
+    admins?: AdminsCompaniesUncheckedCreateNestedManyWithoutCompanyInput
+    workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
+    usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
+    companyFiles?: FileUncheckedCreateNestedManyWithoutCompanyInput
+  }
+
+  export type CompanyCreateOrConnectWithoutSubscriptionsInput = {
+    where: CompanyWhereUniqueInput
+    create: XOR<CompanyCreateWithoutSubscriptionsInput, CompanyUncheckedCreateWithoutSubscriptionsInput>
+  }
+
+  export type CompanyUpsertWithoutSubscriptionsInput = {
+    update: XOR<CompanyUpdateWithoutSubscriptionsInput, CompanyUncheckedUpdateWithoutSubscriptionsInput>
+    create: XOR<CompanyCreateWithoutSubscriptionsInput, CompanyUncheckedCreateWithoutSubscriptionsInput>
+    where?: CompanyWhereInput
+  }
+
+  export type CompanyUpdateToOneWithWhereWithoutSubscriptionsInput = {
+    where?: CompanyWhereInput
+    data: XOR<CompanyUpdateWithoutSubscriptionsInput, CompanyUncheckedUpdateWithoutSubscriptionsInput>
+  }
+
+  export type CompanyUpdateWithoutSubscriptionsInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    suspended?: BoolFieldUpdateOperationsInput | boolean
+    suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userID?: NullableIntFieldUpdateOperationsInput | number | null
+    companyCode?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    workers?: WorkerUpdateManyWithoutCompanyNestedInput
+    receivedPayments?: PaymentsUpdateManyWithoutReceivedByNestedInput
+    incidents?: IncidentsUpdateManyWithoutCompanyNestedInput
+    incidentHistory?: IncidentHistoryUpdateManyWithoutCompanyNestedInput
+    budget?: BudgetUpdateOneWithoutCompanyNestedInput
+    directions?: DirectionsUpdateManyWithoutCompanyNestedInput
+    shiftWorkers?: ShiftWorkerUpdateManyWithoutCompanyNestedInput
+    payments?: PaymentsUpdateManyWithoutCompanyNestedInput
+    machinery?: machineryUpdateManyWithoutCompanyNestedInput
+    Budget?: BudgetUpdateManyWithoutCompanyNestedInput
+    User?: UserUpdateManyWithoutCompanyNestedInput
+    contracts?: contractsUpdateManyWithoutCompanyNestedInput
+    admins?: AdminsCompaniesUpdateManyWithoutCompanyNestedInput
+    workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
+    usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
+    companyFiles?: FileUpdateManyWithoutCompanyNestedInput
+  }
+
+  export type CompanyUncheckedUpdateWithoutSubscriptionsInput = {
+    companyID?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    budgetID?: NullableIntFieldUpdateOperationsInput | number | null
+    suspended?: BoolFieldUpdateOperationsInput | boolean
+    suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    userID?: NullableIntFieldUpdateOperationsInput | number | null
+    companyCode?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
+    receivedPayments?: PaymentsUncheckedUpdateManyWithoutReceivedByNestedInput
+    incidents?: IncidentsUncheckedUpdateManyWithoutCompanyNestedInput
+    incidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutCompanyNestedInput
+    directions?: DirectionsUncheckedUpdateManyWithoutCompanyNestedInput
+    shiftWorkers?: ShiftWorkerUncheckedUpdateManyWithoutCompanyNestedInput
+    payments?: PaymentsUncheckedUpdateManyWithoutCompanyNestedInput
+    machinery?: machineryUncheckedUpdateManyWithoutCompanyNestedInput
+    Budget?: BudgetUncheckedUpdateManyWithoutCompanyNestedInput
+    User?: UserUncheckedUpdateManyWithoutCompanyNestedInput
+    contracts?: contractsUncheckedUpdateManyWithoutCompanyNestedInput
+    admins?: AdminsCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
+    workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
+    usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
+    companyFiles?: FileUncheckedUpdateManyWithoutCompanyNestedInput
+  }
+
   export type IncidentsCreateWithoutIncidentHistoryInput = {
     title: string
     description: string
@@ -42442,6 +43056,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
     companyFiles?: FileCreateNestedManyWithoutCompanyInput
+    Subscriptions?: SubscriptionCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutIncidentHistoryInput = {
@@ -42471,6 +43086,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     companyFiles?: FileUncheckedCreateNestedManyWithoutCompanyInput
+    Subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutIncidentHistoryInput = {
@@ -42657,6 +43273,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
     companyFiles?: FileUpdateManyWithoutCompanyNestedInput
+    Subscriptions?: SubscriptionUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutIncidentHistoryInput = {
@@ -42686,6 +43303,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     companyFiles?: FileUncheckedUpdateManyWithoutCompanyNestedInput
+    Subscriptions?: SubscriptionUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type UserUpsertWithoutIncidentHistoryInput = {
@@ -42816,6 +43434,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
     companyFiles?: FileCreateNestedManyWithoutCompanyInput
+    Subscriptions?: SubscriptionCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutShiftWorkersInput = {
@@ -42845,6 +43464,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     companyFiles?: FileUncheckedCreateNestedManyWithoutCompanyInput
+    Subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutShiftWorkersInput = {
@@ -42947,6 +43567,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
     companyFiles?: FileUpdateManyWithoutCompanyNestedInput
+    Subscriptions?: SubscriptionUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutShiftWorkersInput = {
@@ -42976,6 +43597,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     companyFiles?: FileUncheckedUpdateManyWithoutCompanyNestedInput
+    Subscriptions?: SubscriptionUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type WorkerUpsertWithoutShiftWorkersInput = {
@@ -43333,6 +43955,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
     companyFiles?: FileCreateNestedManyWithoutCompanyInput
+    Subscriptions?: SubscriptionCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutDirectionsInput = {
@@ -43362,6 +43985,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     companyFiles?: FileUncheckedCreateNestedManyWithoutCompanyInput
+    Subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutDirectionsInput = {
@@ -43464,6 +44088,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
     companyFiles?: FileUpdateManyWithoutCompanyNestedInput
+    Subscriptions?: SubscriptionUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutDirectionsInput = {
@@ -43493,6 +44118,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     companyFiles?: FileUncheckedUpdateManyWithoutCompanyNestedInput
+    Subscriptions?: SubscriptionUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type UserCreateWithoutMachineryInput = {
@@ -43573,6 +44199,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
     companyFiles?: FileCreateNestedManyWithoutCompanyInput
+    Subscriptions?: SubscriptionCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyUncheckedCreateWithoutMachineryInput = {
@@ -43602,6 +44229,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
     companyFiles?: FileUncheckedCreateNestedManyWithoutCompanyInput
+    Subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutCompanyInput
   }
 
   export type CompanyCreateOrConnectWithoutMachineryInput = {
@@ -43722,6 +44350,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
     companyFiles?: FileUpdateManyWithoutCompanyNestedInput
+    Subscriptions?: SubscriptionUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutMachineryInput = {
@@ -43751,6 +44380,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     companyFiles?: FileUncheckedUpdateManyWithoutCompanyNestedInput
+    Subscriptions?: SubscriptionUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type ClientMachineryUpsertWithWhereUniqueWithoutMachineryInput = {
@@ -44371,6 +45001,8 @@ export namespace Prisma {
     userID: number
     companyID: number
     IncidentsID?: number | null
+    clientEmail: string
+    cardBrand: string
   }
 
   export type IncidentsCreateManyCompanyInput = {
@@ -44426,6 +45058,8 @@ export namespace Prisma {
     userID: number
     IncidentsID?: number | null
     receivedByID: number
+    clientEmail: string
+    cardBrand: string
   }
 
   export type machineryCreateManyCompanyInput = {
@@ -44509,6 +45143,15 @@ export namespace Prisma {
     uploadedAt?: Date | string
   }
 
+  export type SubscriptionCreateManyCompanyInput = {
+    id?: number
+    subscriptionID: string
+    companyemail: string
+    startDate: Date | string
+    endDate?: Date | string | null
+    active?: boolean
+  }
+
   export type WorkerUpdateWithoutCompanyInput = {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -44556,6 +45199,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     method?: StringFieldUpdateOperationsInput | string
+    clientEmail?: StringFieldUpdateOperationsInput | string
+    cardBrand?: StringFieldUpdateOperationsInput | string
     user?: UserUpdateOneRequiredWithoutPaymentsNestedInput
     company?: CompanyUpdateOneRequiredWithoutPaymentsNestedInput
     incident?: IncidentsUpdateOneWithoutPaymentsNestedInput
@@ -44570,6 +45215,8 @@ export namespace Prisma {
     userID?: IntFieldUpdateOperationsInput | number
     companyID?: IntFieldUpdateOperationsInput | number
     IncidentsID?: NullableIntFieldUpdateOperationsInput | number | null
+    clientEmail?: StringFieldUpdateOperationsInput | string
+    cardBrand?: StringFieldUpdateOperationsInput | string
     paymentStatus?: paymentStatusUncheckedUpdateManyWithoutPaymentNestedInput
   }
 
@@ -44581,6 +45228,8 @@ export namespace Prisma {
     userID?: IntFieldUpdateOperationsInput | number
     companyID?: IntFieldUpdateOperationsInput | number
     IncidentsID?: NullableIntFieldUpdateOperationsInput | number | null
+    clientEmail?: StringFieldUpdateOperationsInput | string
+    cardBrand?: StringFieldUpdateOperationsInput | string
   }
 
   export type IncidentsUpdateWithoutCompanyInput = {
@@ -44726,6 +45375,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     method?: StringFieldUpdateOperationsInput | string
+    clientEmail?: StringFieldUpdateOperationsInput | string
+    cardBrand?: StringFieldUpdateOperationsInput | string
     user?: UserUpdateOneRequiredWithoutPaymentsNestedInput
     receivedBy?: CompanyUpdateOneRequiredWithoutReceivedPaymentsNestedInput
     incident?: IncidentsUpdateOneWithoutPaymentsNestedInput
@@ -44740,6 +45391,8 @@ export namespace Prisma {
     userID?: IntFieldUpdateOperationsInput | number
     IncidentsID?: NullableIntFieldUpdateOperationsInput | number | null
     receivedByID?: IntFieldUpdateOperationsInput | number
+    clientEmail?: StringFieldUpdateOperationsInput | string
+    cardBrand?: StringFieldUpdateOperationsInput | string
     paymentStatus?: paymentStatusUncheckedUpdateManyWithoutPaymentNestedInput
   }
 
@@ -44751,6 +45404,8 @@ export namespace Prisma {
     userID?: IntFieldUpdateOperationsInput | number
     IncidentsID?: NullableIntFieldUpdateOperationsInput | number | null
     receivedByID?: IntFieldUpdateOperationsInput | number
+    clientEmail?: StringFieldUpdateOperationsInput | string
+    cardBrand?: StringFieldUpdateOperationsInput | string
   }
 
   export type machineryUpdateWithoutCompanyInput = {
@@ -45014,6 +45669,32 @@ export namespace Prisma {
     adminID?: NullableIntFieldUpdateOperationsInput | number | null
     budgetID?: NullableIntFieldUpdateOperationsInput | number | null
     uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SubscriptionUpdateWithoutCompanyInput = {
+    subscriptionID?: StringFieldUpdateOperationsInput | string
+    companyemail?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    active?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type SubscriptionUncheckedUpdateWithoutCompanyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    subscriptionID?: StringFieldUpdateOperationsInput | string
+    companyemail?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    active?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type SubscriptionUncheckedUpdateManyWithoutCompanyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    subscriptionID?: StringFieldUpdateOperationsInput | string
+    companyemail?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    active?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ShiftWorkerCreateManyWorkerInput = {
@@ -45401,6 +46082,8 @@ export namespace Prisma {
     userID: number
     companyID: number
     receivedByID: number
+    clientEmail: string
+    cardBrand: string
   }
 
   export type FileCreateManyIncidentInput = {
@@ -45511,6 +46194,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     method?: StringFieldUpdateOperationsInput | string
+    clientEmail?: StringFieldUpdateOperationsInput | string
+    cardBrand?: StringFieldUpdateOperationsInput | string
     user?: UserUpdateOneRequiredWithoutPaymentsNestedInput
     company?: CompanyUpdateOneRequiredWithoutPaymentsNestedInput
     receivedBy?: CompanyUpdateOneRequiredWithoutReceivedPaymentsNestedInput
@@ -45525,6 +46210,8 @@ export namespace Prisma {
     userID?: IntFieldUpdateOperationsInput | number
     companyID?: IntFieldUpdateOperationsInput | number
     receivedByID?: IntFieldUpdateOperationsInput | number
+    clientEmail?: StringFieldUpdateOperationsInput | string
+    cardBrand?: StringFieldUpdateOperationsInput | string
     paymentStatus?: paymentStatusUncheckedUpdateManyWithoutPaymentNestedInput
   }
 
@@ -45536,6 +46223,8 @@ export namespace Prisma {
     userID?: IntFieldUpdateOperationsInput | number
     companyID?: IntFieldUpdateOperationsInput | number
     receivedByID?: IntFieldUpdateOperationsInput | number
+    clientEmail?: StringFieldUpdateOperationsInput | string
+    cardBrand?: StringFieldUpdateOperationsInput | string
   }
 
   export type FileUpdateWithoutIncidentInput = {
@@ -45652,6 +46341,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
     companyFiles?: FileUpdateManyWithoutCompanyNestedInput
+    Subscriptions?: SubscriptionUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateWithoutBudgetInput = {
@@ -45681,6 +46371,7 @@ export namespace Prisma {
     workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
     companyFiles?: FileUncheckedUpdateManyWithoutCompanyNestedInput
+    Subscriptions?: SubscriptionUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
   export type CompanyUncheckedUpdateManyWithoutBudgetInput = {
