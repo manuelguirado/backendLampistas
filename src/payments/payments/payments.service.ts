@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { createSubcription } from '../../modules/payments/subscriptions/createSubcription';
 import saveSubcriptionInDB from '../../modules/payments/subscriptions/saveSubcription';
+import createAccount from '../../modules/payments/subscriptions/accounts/createAccount';
+import createLoginLink from '../../modules/payments/subscriptions/accounts/createLoginLink';
 @Injectable()
 export class PaymentsService {
   async createSubscription(companyemail: string, price: number) {
@@ -22,5 +24,11 @@ export class PaymentsService {
       subscriptionID,
       endDate,
     );
+  }
+  async createAccount(email: string) {
+    return await createAccount(email);
+  }
+  async createLoginLink(email: string) {
+    return await createLoginLink(email);
   }
 }

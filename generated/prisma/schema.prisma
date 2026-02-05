@@ -46,27 +46,27 @@ model User {
 }
 
 model Company {
-  companyID        Int               @id @default(autoincrement())
-  name             String            @db.VarChar(255)
-  phone            String            @db.VarChar(255)
-  password         String            @db.VarChar(255)
-  workers          Worker[]          @relation("Workers")
-  receivedPayments Payments[]        @relation("ReceivedPayments")
-  incidents        Incidents[]       @relation("CompanyIncidents")
-  incidentHistory  IncidentHistory[] @relation("CompanyIncidentHistory")
+  companyID        Int                @id @default(autoincrement())
+  name             String             @db.VarChar(255)
+  phone            String             @db.VarChar(255)
+  password         String             @db.VarChar(255)
+  workers          Worker[]           @relation("Workers")
+  receivedPayments Payments[]         @relation("ReceivedPayments")
+  incidents        Incidents[]        @relation("CompanyIncidents")
+  incidentHistory  IncidentHistory[]  @relation("CompanyIncidentHistory")
   budgetID         Int?
-  budget           Budget?           @relation(fields: [budgetID], references: [budgetID])
-  suspended        Boolean           @default(false)
+  budget           Budget?            @relation(fields: [budgetID], references: [budgetID])
+  suspended        Boolean            @default(false)
   suspendedUntil   DateTime?
-  directions       Directions[]      @relation("CompanyDirections")
-  shiftWorkers     ShiftWorker[]     @relation("CompanyShiftWorkers")
-  role             Role              @default(COMPANY)
-  userID           Int?              @unique
-  payments         Payments[]        @relation("CompanyPayments")
-  machinery        machinery[]       @relation("CompanyMachinery")
-  companyCode      String?           @db.VarChar(100)
-  email            String            @unique @db.VarChar(255)
-
+  directions       Directions[]       @relation("CompanyDirections")
+  shiftWorkers     ShiftWorker[]      @relation("CompanyShiftWorkers")
+  role             Role               @default(COMPANY)
+  userID           Int?               @unique
+  payments         Payments[]         @relation("CompanyPayments")
+  machinery        machinery[]        @relation("CompanyMachinery")
+  companyCode      String?            @db.VarChar(100)
+  email            String             @unique @db.VarChar(255)
+  stripeAccountID  String?            @db.VarChar(255)
   Budget           Budget[]           @relation("CompanyBudget")
   User             User[]
   contracts        contracts[]        @relation("CompanyToContracts")
@@ -76,6 +76,7 @@ model Company {
   refreshToken     String?            @db.Text
   companyFiles     File[]
   Subscriptions    Subscription[]
+  products         products[]
 }
 
 model AdminsCompanies {
@@ -256,6 +257,29 @@ model Budget {
   Company      Company[]
   title        String     @db.VarChar(255)
   files        File[]
+}
+
+model products {
+  id              Int     @id @default(autoincrement())
+  name            String  @db.VarChar(255)
+  description     String  @db.Text
+  price           Decimal @db.Decimal(10, 2)
+  currency        String  @db.VarChar(10)
+  companyID       Int
+  company         Company @relation(fields: [companyID], references: [companyID])
+  stripeProductID String  @unique @db.VarChar(255)
+  priceID         String  @unique @db.VarChar(255)
+  items           item[]
+}
+
+model item {
+  id   Int    @id @default(autoincrement())
+  name String @db.VarChar(255)
+
+  price     Decimal  @db.Decimal(10, 2)
+  currency  String   @db.VarChar(10)
+  productID Int
+  product   products @relation(fields: [productID], references: [id])
 }
 
 model Subscription {

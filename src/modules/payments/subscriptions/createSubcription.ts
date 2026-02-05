@@ -24,30 +24,32 @@ export async function createSubcription(companyemail: string, price: number) {
         },
       ],
       payment_behavior: 'default_incomplete',
-      expand: ['latest_invoice.payment_intent'],
+      expand: ['latest_invoice.confirmation_secret'],
     })
     .catch((error) => {
       console.error('Error creating subscription:', error);
       throw error;
     });
   console.log('Subscription created:', subscription);
-  console.log('Latest invoice:', subscription.latest_invoice);
-  let clientSecret: string | null = null;
+  console.log('Pending setup intent:', subscription.pending_setup_intent);
+
   if (
-    subscription.latest_invoice &&
-    typeof subscription.latest_invoice === 'object' &&
-    'payment_intent' in subscription.latest_invoice &&
-    subscription.latest_invoice.payment_intent &&
-    typeof subscription.latest_invoice.payment_intent === 'object' &&
-    'client_secret' in subscription.latest_invoice.payment_intent
+    typeof subscription.latest_invoice !== 'string' &&
+    subscription.latest_invoice?.confirmation_secret
   ) {
-    clientSecret = (
-      subscription.latest_invoice.payment_intent as Stripe.PaymentIntent
-    ).client_secret;
+    console.log(
+      'Confirmation secret found:',
+      subscription.latest_invoice.confirmation_secret,
+    );
+    const clientSecret =
+      subscription.latest_invoice.confirmation_secret.client_secret;
+    console.log('Client secret:', clientSecret);
+    return {
+      subscriptionId: subscription.id,
+      clientSecret,
+      status: subscription.status,
+    };
+  } else {
+    throw new Error('Confirmation secret is missing');
   }
-  return {
-    subscriptionId: subscription.id,
-    clientSecret,
-    status: subscription.status,
-  };
 }

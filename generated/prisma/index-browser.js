@@ -148,6 +148,7 @@ exports.Prisma.CompanyScalarFieldEnum = {
   userID: 'userID',
   companyCode: 'companyCode',
   email: 'email',
+  stripeAccountID: 'stripeAccountID',
   refreshToken: 'refreshToken'
 };
 
@@ -263,6 +264,25 @@ exports.Prisma.BudgetScalarFieldEnum = {
   userID: 'userID',
   createdAt: 'createdAt',
   title: 'title'
+};
+
+exports.Prisma.ProductsScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  price: 'price',
+  currency: 'currency',
+  companyID: 'companyID',
+  stripeProductID: 'stripeProductID',
+  priceID: 'priceID'
+};
+
+exports.Prisma.ItemScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  price: 'price',
+  currency: 'currency',
+  productID: 'productID'
 };
 
 exports.Prisma.SubscriptionScalarFieldEnum = {
@@ -407,6 +427,8 @@ exports.Prisma.ModelName = {
   Payments: 'Payments',
   paymentStatus: 'paymentStatus',
   Budget: 'Budget',
+  products: 'products',
+  item: 'item',
   Subscription: 'Subscription',
   IncidentHistory: 'IncidentHistory',
   ShiftWorker: 'ShiftWorker',

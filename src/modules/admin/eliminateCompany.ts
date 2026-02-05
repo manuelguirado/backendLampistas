@@ -1,6 +1,10 @@
 import { PrismaClient } from '../../../generated/prisma';
 import jwt, { SignOptions } from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import Stripe from 'stripe';
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
+  apiVersion: '2025-12-15.clover',
+});
 dotenv.config({ path: '../../../.env' });
 const prisma = new PrismaClient();
 export async function eliminateCompany(companyID: number) {
@@ -27,6 +31,12 @@ export async function eliminateCompany(companyID: number) {
   await prisma.worker.deleteMany({
     where: { companyID: companyID },
   });
+  const subscriptions = await prisma.subscription.findFirst({
+    where: { companyemail: company.email, active: true },
+  });
+  const eliminateSubctiion = await stripe.subscriptions.cancel(
+    subscriptions?.subscriptionID as string,
+  );
   try {
     const payload = { companyID: company.companyID, role: company.role };
     const secret = process.env.JWT_SECRET as string;
@@ -35,6 +45,7 @@ export async function eliminateCompany(companyID: number) {
     return {
       message: 'Company and associated data deleted successfully',
       token,
+      eliminateSubctiion,
     };
   } catch (error) {
     throw new Error(`Error generating token: ${error}`);
