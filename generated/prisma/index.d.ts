@@ -2923,6 +2923,7 @@ export namespace Prisma {
 
   export type UserCountOutputType = {
     directions: number
+    payments: number
     IncidentHistory: number
     ClientMachinery: number
     Incidents: number
@@ -2935,6 +2936,7 @@ export namespace Prisma {
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     directions?: boolean | UserCountOutputTypeCountDirectionsArgs
+    payments?: boolean | UserCountOutputTypeCountPaymentsArgs
     IncidentHistory?: boolean | UserCountOutputTypeCountIncidentHistoryArgs
     ClientMachinery?: boolean | UserCountOutputTypeCountClientMachineryArgs
     Incidents?: boolean | UserCountOutputTypeCountIncidentsArgs
@@ -2961,6 +2963,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountDirectionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: DirectionsWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountPaymentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PaymentsWhereInput
   }
 
   /**
@@ -3026,7 +3035,6 @@ export namespace Prisma {
 
   export type CompanyCountOutputType = {
     workers: number
-    receivedPayments: number
     incidents: number
     incidentHistory: number
     directions: number
@@ -3046,7 +3054,6 @@ export namespace Prisma {
 
   export type CompanyCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     workers?: boolean | CompanyCountOutputTypeCountWorkersArgs
-    receivedPayments?: boolean | CompanyCountOutputTypeCountReceivedPaymentsArgs
     incidents?: boolean | CompanyCountOutputTypeCountIncidentsArgs
     incidentHistory?: boolean | CompanyCountOutputTypeCountIncidentHistoryArgs
     directions?: boolean | CompanyCountOutputTypeCountDirectionsArgs
@@ -3080,13 +3087,6 @@ export namespace Prisma {
    */
   export type CompanyCountOutputTypeCountWorkersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: WorkerWhereInput
-  }
-
-  /**
-   * CompanyCountOutputType without action
-   */
-  export type CompanyCountOutputTypeCountReceivedPaymentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PaymentsWhereInput
   }
 
   /**
@@ -3914,7 +3914,7 @@ export namespace Prisma {
     objects: {
       incidents: Prisma.$IncidentsPayload<ExtArgs> | null
       directions: Prisma.$DirectionsPayload<ExtArgs>[]
-      payments: Prisma.$PaymentsPayload<ExtArgs> | null
+      payments: Prisma.$PaymentsPayload<ExtArgs>[]
       IncidentHistory: Prisma.$IncidentHistoryPayload<ExtArgs>[]
       ClientMachinery: Prisma.$ClientMachineryPayload<ExtArgs>[]
       Incidents: Prisma.$IncidentsPayload<ExtArgs>[]
@@ -4334,7 +4334,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     incidents<T extends User$incidentsArgs<ExtArgs> = {}>(args?: Subset<T, User$incidentsArgs<ExtArgs>>): Prisma__IncidentsClient<$Result.GetResult<Prisma.$IncidentsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     directions<T extends User$directionsArgs<ExtArgs> = {}>(args?: Subset<T, User$directionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DirectionsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    payments<T extends User$paymentsArgs<ExtArgs> = {}>(args?: Subset<T, User$paymentsArgs<ExtArgs>>): Prisma__PaymentsClient<$Result.GetResult<Prisma.$PaymentsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    payments<T extends User$paymentsArgs<ExtArgs> = {}>(args?: Subset<T, User$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     IncidentHistory<T extends User$IncidentHistoryArgs<ExtArgs> = {}>(args?: Subset<T, User$IncidentHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IncidentHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     ClientMachinery<T extends User$ClientMachineryArgs<ExtArgs> = {}>(args?: Subset<T, User$ClientMachineryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClientMachineryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Incidents<T extends User$IncidentsArgs<ExtArgs> = {}>(args?: Subset<T, User$IncidentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IncidentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -4840,6 +4840,11 @@ export namespace Prisma {
      */
     include?: PaymentsInclude<ExtArgs> | null
     where?: PaymentsWhereInput
+    orderBy?: PaymentsOrderByWithRelationInput | PaymentsOrderByWithRelationInput[]
+    cursor?: PaymentsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PaymentsScalarFieldEnum | PaymentsScalarFieldEnum[]
   }
 
   /**
@@ -5343,7 +5348,6 @@ export namespace Prisma {
     stripeAccountID?: boolean
     refreshToken?: boolean
     workers?: boolean | Company$workersArgs<ExtArgs>
-    receivedPayments?: boolean | Company$receivedPaymentsArgs<ExtArgs>
     incidents?: boolean | Company$incidentsArgs<ExtArgs>
     incidentHistory?: boolean | Company$incidentHistoryArgs<ExtArgs>
     budget?: boolean | Company$budgetArgs<ExtArgs>
@@ -5416,7 +5420,6 @@ export namespace Prisma {
   export type CompanyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"companyID" | "name" | "phone" | "password" | "budgetID" | "suspended" | "suspendedUntil" | "role" | "userID" | "companyCode" | "email" | "stripeAccountID" | "refreshToken", ExtArgs["result"]["company"]>
   export type CompanyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     workers?: boolean | Company$workersArgs<ExtArgs>
-    receivedPayments?: boolean | Company$receivedPaymentsArgs<ExtArgs>
     incidents?: boolean | Company$incidentsArgs<ExtArgs>
     incidentHistory?: boolean | Company$incidentHistoryArgs<ExtArgs>
     budget?: boolean | Company$budgetArgs<ExtArgs>
@@ -5446,7 +5449,6 @@ export namespace Prisma {
     name: "Company"
     objects: {
       workers: Prisma.$WorkerPayload<ExtArgs>[]
-      receivedPayments: Prisma.$PaymentsPayload<ExtArgs>[]
       incidents: Prisma.$IncidentsPayload<ExtArgs>[]
       incidentHistory: Prisma.$IncidentHistoryPayload<ExtArgs>[]
       budget: Prisma.$BudgetPayload<ExtArgs> | null
@@ -5873,7 +5875,6 @@ export namespace Prisma {
   export interface Prisma__CompanyClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     workers<T extends Company$workersArgs<ExtArgs> = {}>(args?: Subset<T, Company$workersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WorkerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    receivedPayments<T extends Company$receivedPaymentsArgs<ExtArgs> = {}>(args?: Subset<T, Company$receivedPaymentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     incidents<T extends Company$incidentsArgs<ExtArgs> = {}>(args?: Subset<T, Company$incidentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IncidentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     incidentHistory<T extends Company$incidentHistoryArgs<ExtArgs> = {}>(args?: Subset<T, Company$incidentHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IncidentHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     budget<T extends Company$budgetArgs<ExtArgs> = {}>(args?: Subset<T, Company$budgetArgs<ExtArgs>>): Prisma__BudgetClient<$Result.GetResult<Prisma.$BudgetPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -6349,30 +6350,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: WorkerScalarFieldEnum | WorkerScalarFieldEnum[]
-  }
-
-  /**
-   * Company.receivedPayments
-   */
-  export type Company$receivedPaymentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Payments
-     */
-    select?: PaymentsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Payments
-     */
-    omit?: PaymentsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PaymentsInclude<ExtArgs> | null
-    where?: PaymentsWhereInput
-    orderBy?: PaymentsOrderByWithRelationInput | PaymentsOrderByWithRelationInput[]
-    cursor?: PaymentsWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: PaymentsScalarFieldEnum | PaymentsScalarFieldEnum[]
   }
 
   /**
@@ -16448,41 +16425,41 @@ export namespace Prisma {
 
   export type PaymentsMinAggregateOutputType = {
     id: number | null
+    paymentID: string | null
     amount: Decimal | null
     date: Date | null
-    method: string | null
     userID: number | null
     companyID: number | null
     IncidentsID: number | null
     receivedByID: number | null
     clientEmail: string | null
-    cardBrand: string | null
+    companyEmail: string | null
   }
 
   export type PaymentsMaxAggregateOutputType = {
     id: number | null
+    paymentID: string | null
     amount: Decimal | null
     date: Date | null
-    method: string | null
     userID: number | null
     companyID: number | null
     IncidentsID: number | null
     receivedByID: number | null
     clientEmail: string | null
-    cardBrand: string | null
+    companyEmail: string | null
   }
 
   export type PaymentsCountAggregateOutputType = {
     id: number
+    paymentID: number
     amount: number
     date: number
-    method: number
     userID: number
     companyID: number
     IncidentsID: number
     receivedByID: number
     clientEmail: number
-    cardBrand: number
+    companyEmail: number
     _all: number
   }
 
@@ -16507,41 +16484,41 @@ export namespace Prisma {
 
   export type PaymentsMinAggregateInputType = {
     id?: true
+    paymentID?: true
     amount?: true
     date?: true
-    method?: true
     userID?: true
     companyID?: true
     IncidentsID?: true
     receivedByID?: true
     clientEmail?: true
-    cardBrand?: true
+    companyEmail?: true
   }
 
   export type PaymentsMaxAggregateInputType = {
     id?: true
+    paymentID?: true
     amount?: true
     date?: true
-    method?: true
     userID?: true
     companyID?: true
     IncidentsID?: true
     receivedByID?: true
     clientEmail?: true
-    cardBrand?: true
+    companyEmail?: true
   }
 
   export type PaymentsCountAggregateInputType = {
     id?: true
+    paymentID?: true
     amount?: true
     date?: true
-    method?: true
     userID?: true
     companyID?: true
     IncidentsID?: true
     receivedByID?: true
     clientEmail?: true
-    cardBrand?: true
+    companyEmail?: true
     _all?: true
   }
 
@@ -16633,15 +16610,15 @@ export namespace Prisma {
 
   export type PaymentsGroupByOutputType = {
     id: number
+    paymentID: string
     amount: Decimal
     date: Date
-    method: string
     userID: number
     companyID: number
     IncidentsID: number | null
     receivedByID: number
     clientEmail: string
-    cardBrand: string
+    companyEmail: string
     _count: PaymentsCountAggregateOutputType | null
     _avg: PaymentsAvgAggregateOutputType | null
     _sum: PaymentsSumAggregateOutputType | null
@@ -16665,18 +16642,17 @@ export namespace Prisma {
 
   export type PaymentsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    paymentID?: boolean
     amount?: boolean
     date?: boolean
-    method?: boolean
     userID?: boolean
     companyID?: boolean
     IncidentsID?: boolean
     receivedByID?: boolean
     clientEmail?: boolean
-    cardBrand?: boolean
+    companyEmail?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     company?: boolean | CompanyDefaultArgs<ExtArgs>
-    receivedBy?: boolean | CompanyDefaultArgs<ExtArgs>
     incident?: boolean | Payments$incidentArgs<ExtArgs>
     paymentStatus?: boolean | Payments$paymentStatusArgs<ExtArgs>
     _count?: boolean | PaymentsCountOutputTypeDefaultArgs<ExtArgs>
@@ -16684,56 +16660,53 @@ export namespace Prisma {
 
   export type PaymentsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    paymentID?: boolean
     amount?: boolean
     date?: boolean
-    method?: boolean
     userID?: boolean
     companyID?: boolean
     IncidentsID?: boolean
     receivedByID?: boolean
     clientEmail?: boolean
-    cardBrand?: boolean
+    companyEmail?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     company?: boolean | CompanyDefaultArgs<ExtArgs>
-    receivedBy?: boolean | CompanyDefaultArgs<ExtArgs>
     incident?: boolean | Payments$incidentArgs<ExtArgs>
   }, ExtArgs["result"]["payments"]>
 
   export type PaymentsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    paymentID?: boolean
     amount?: boolean
     date?: boolean
-    method?: boolean
     userID?: boolean
     companyID?: boolean
     IncidentsID?: boolean
     receivedByID?: boolean
     clientEmail?: boolean
-    cardBrand?: boolean
+    companyEmail?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     company?: boolean | CompanyDefaultArgs<ExtArgs>
-    receivedBy?: boolean | CompanyDefaultArgs<ExtArgs>
     incident?: boolean | Payments$incidentArgs<ExtArgs>
   }, ExtArgs["result"]["payments"]>
 
   export type PaymentsSelectScalar = {
     id?: boolean
+    paymentID?: boolean
     amount?: boolean
     date?: boolean
-    method?: boolean
     userID?: boolean
     companyID?: boolean
     IncidentsID?: boolean
     receivedByID?: boolean
     clientEmail?: boolean
-    cardBrand?: boolean
+    companyEmail?: boolean
   }
 
-  export type PaymentsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "amount" | "date" | "method" | "userID" | "companyID" | "IncidentsID" | "receivedByID" | "clientEmail" | "cardBrand", ExtArgs["result"]["payments"]>
+  export type PaymentsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "paymentID" | "amount" | "date" | "userID" | "companyID" | "IncidentsID" | "receivedByID" | "clientEmail" | "companyEmail", ExtArgs["result"]["payments"]>
   export type PaymentsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     company?: boolean | CompanyDefaultArgs<ExtArgs>
-    receivedBy?: boolean | CompanyDefaultArgs<ExtArgs>
     incident?: boolean | Payments$incidentArgs<ExtArgs>
     paymentStatus?: boolean | Payments$paymentStatusArgs<ExtArgs>
     _count?: boolean | PaymentsCountOutputTypeDefaultArgs<ExtArgs>
@@ -16741,13 +16714,11 @@ export namespace Prisma {
   export type PaymentsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     company?: boolean | CompanyDefaultArgs<ExtArgs>
-    receivedBy?: boolean | CompanyDefaultArgs<ExtArgs>
     incident?: boolean | Payments$incidentArgs<ExtArgs>
   }
   export type PaymentsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     company?: boolean | CompanyDefaultArgs<ExtArgs>
-    receivedBy?: boolean | CompanyDefaultArgs<ExtArgs>
     incident?: boolean | Payments$incidentArgs<ExtArgs>
   }
 
@@ -16756,21 +16727,20 @@ export namespace Prisma {
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
       company: Prisma.$CompanyPayload<ExtArgs>
-      receivedBy: Prisma.$CompanyPayload<ExtArgs>
       incident: Prisma.$IncidentsPayload<ExtArgs> | null
       paymentStatus: Prisma.$paymentStatusPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
+      paymentID: string
       amount: Prisma.Decimal
       date: Date
-      method: string
       userID: number
       companyID: number
       IncidentsID: number | null
       receivedByID: number
       clientEmail: string
-      cardBrand: string
+      companyEmail: string
     }, ExtArgs["result"]["payments"]>
     composites: {}
   }
@@ -17167,7 +17137,6 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     company<T extends CompanyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CompanyDefaultArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    receivedBy<T extends CompanyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CompanyDefaultArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     incident<T extends Payments$incidentArgs<ExtArgs> = {}>(args?: Subset<T, Payments$incidentArgs<ExtArgs>>): Prisma__IncidentsClient<$Result.GetResult<Prisma.$IncidentsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     paymentStatus<T extends Payments$paymentStatusArgs<ExtArgs> = {}>(args?: Subset<T, Payments$paymentStatusArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$paymentStatusPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -17200,15 +17169,15 @@ export namespace Prisma {
    */
   interface PaymentsFieldRefs {
     readonly id: FieldRef<"Payments", 'Int'>
+    readonly paymentID: FieldRef<"Payments", 'String'>
     readonly amount: FieldRef<"Payments", 'Decimal'>
     readonly date: FieldRef<"Payments", 'DateTime'>
-    readonly method: FieldRef<"Payments", 'String'>
     readonly userID: FieldRef<"Payments", 'Int'>
     readonly companyID: FieldRef<"Payments", 'Int'>
     readonly IncidentsID: FieldRef<"Payments", 'Int'>
     readonly receivedByID: FieldRef<"Payments", 'Int'>
     readonly clientEmail: FieldRef<"Payments", 'String'>
-    readonly cardBrand: FieldRef<"Payments", 'String'>
+    readonly companyEmail: FieldRef<"Payments", 'String'>
   }
     
 
@@ -31670,15 +31639,15 @@ export namespace Prisma {
 
   export const PaymentsScalarFieldEnum: {
     id: 'id',
+    paymentID: 'paymentID',
     amount: 'amount',
     date: 'date',
-    method: 'method',
     userID: 'userID',
     companyID: 'companyID',
     IncidentsID: 'IncidentsID',
     receivedByID: 'receivedByID',
     clientEmail: 'clientEmail',
-    cardBrand: 'cardBrand'
+    companyEmail: 'companyEmail'
   };
 
   export type PaymentsScalarFieldEnum = (typeof PaymentsScalarFieldEnum)[keyof typeof PaymentsScalarFieldEnum]
@@ -32051,7 +32020,7 @@ export namespace Prisma {
     refreshToken?: StringNullableFilter<"User"> | string | null
     incidents?: XOR<IncidentsNullableScalarRelationFilter, IncidentsWhereInput> | null
     directions?: DirectionsListRelationFilter
-    payments?: XOR<PaymentsNullableScalarRelationFilter, PaymentsWhereInput> | null
+    payments?: PaymentsListRelationFilter
     IncidentHistory?: IncidentHistoryListRelationFilter
     ClientMachinery?: ClientMachineryListRelationFilter
     Incidents?: IncidentsListRelationFilter
@@ -32078,7 +32047,7 @@ export namespace Prisma {
     refreshToken?: SortOrderInput | SortOrder
     incidents?: IncidentsOrderByWithRelationInput
     directions?: DirectionsOrderByRelationAggregateInput
-    payments?: PaymentsOrderByWithRelationInput
+    payments?: PaymentsOrderByRelationAggregateInput
     IncidentHistory?: IncidentHistoryOrderByRelationAggregateInput
     ClientMachinery?: ClientMachineryOrderByRelationAggregateInput
     Incidents?: IncidentsOrderByRelationAggregateInput
@@ -32108,7 +32077,7 @@ export namespace Prisma {
     refreshToken?: StringNullableFilter<"User"> | string | null
     incidents?: XOR<IncidentsNullableScalarRelationFilter, IncidentsWhereInput> | null
     directions?: DirectionsListRelationFilter
-    payments?: XOR<PaymentsNullableScalarRelationFilter, PaymentsWhereInput> | null
+    payments?: PaymentsListRelationFilter
     IncidentHistory?: IncidentHistoryListRelationFilter
     ClientMachinery?: ClientMachineryListRelationFilter
     Incidents?: IncidentsListRelationFilter
@@ -32176,7 +32145,6 @@ export namespace Prisma {
     stripeAccountID?: StringNullableFilter<"Company"> | string | null
     refreshToken?: StringNullableFilter<"Company"> | string | null
     workers?: WorkerListRelationFilter
-    receivedPayments?: PaymentsListRelationFilter
     incidents?: IncidentsListRelationFilter
     incidentHistory?: IncidentHistoryListRelationFilter
     budget?: XOR<BudgetNullableScalarRelationFilter, BudgetWhereInput> | null
@@ -32210,7 +32178,6 @@ export namespace Prisma {
     stripeAccountID?: SortOrderInput | SortOrder
     refreshToken?: SortOrderInput | SortOrder
     workers?: WorkerOrderByRelationAggregateInput
-    receivedPayments?: PaymentsOrderByRelationAggregateInput
     incidents?: IncidentsOrderByRelationAggregateInput
     incidentHistory?: IncidentHistoryOrderByRelationAggregateInput
     budget?: BudgetOrderByWithRelationInput
@@ -32247,7 +32214,6 @@ export namespace Prisma {
     stripeAccountID?: StringNullableFilter<"Company"> | string | null
     refreshToken?: StringNullableFilter<"Company"> | string | null
     workers?: WorkerListRelationFilter
-    receivedPayments?: PaymentsListRelationFilter
     incidents?: IncidentsListRelationFilter
     incidentHistory?: IncidentHistoryListRelationFilter
     budget?: XOR<BudgetNullableScalarRelationFilter, BudgetWhereInput> | null
@@ -32923,72 +32889,69 @@ export namespace Prisma {
     OR?: PaymentsWhereInput[]
     NOT?: PaymentsWhereInput | PaymentsWhereInput[]
     id?: IntFilter<"Payments"> | number
+    paymentID?: StringFilter<"Payments"> | string
     amount?: DecimalFilter<"Payments"> | Decimal | DecimalJsLike | number | string
     date?: DateTimeFilter<"Payments"> | Date | string
-    method?: StringFilter<"Payments"> | string
     userID?: IntFilter<"Payments"> | number
     companyID?: IntFilter<"Payments"> | number
     IncidentsID?: IntNullableFilter<"Payments"> | number | null
     receivedByID?: IntFilter<"Payments"> | number
     clientEmail?: StringFilter<"Payments"> | string
-    cardBrand?: StringFilter<"Payments"> | string
+    companyEmail?: StringFilter<"Payments"> | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
-    receivedBy?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
     incident?: XOR<IncidentsNullableScalarRelationFilter, IncidentsWhereInput> | null
     paymentStatus?: PaymentStatusListRelationFilter
   }
 
   export type PaymentsOrderByWithRelationInput = {
     id?: SortOrder
+    paymentID?: SortOrder
     amount?: SortOrder
     date?: SortOrder
-    method?: SortOrder
     userID?: SortOrder
     companyID?: SortOrder
     IncidentsID?: SortOrderInput | SortOrder
     receivedByID?: SortOrder
     clientEmail?: SortOrder
-    cardBrand?: SortOrder
+    companyEmail?: SortOrder
     user?: UserOrderByWithRelationInput
     company?: CompanyOrderByWithRelationInput
-    receivedBy?: CompanyOrderByWithRelationInput
     incident?: IncidentsOrderByWithRelationInput
     paymentStatus?: paymentStatusOrderByRelationAggregateInput
   }
 
   export type PaymentsWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    userID?: number
+    paymentID?: string
     AND?: PaymentsWhereInput | PaymentsWhereInput[]
     OR?: PaymentsWhereInput[]
     NOT?: PaymentsWhereInput | PaymentsWhereInput[]
     amount?: DecimalFilter<"Payments"> | Decimal | DecimalJsLike | number | string
     date?: DateTimeFilter<"Payments"> | Date | string
-    method?: StringFilter<"Payments"> | string
+    userID?: IntFilter<"Payments"> | number
     companyID?: IntFilter<"Payments"> | number
     IncidentsID?: IntNullableFilter<"Payments"> | number | null
     receivedByID?: IntFilter<"Payments"> | number
     clientEmail?: StringFilter<"Payments"> | string
-    cardBrand?: StringFilter<"Payments"> | string
+    companyEmail?: StringFilter<"Payments"> | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
-    receivedBy?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
     incident?: XOR<IncidentsNullableScalarRelationFilter, IncidentsWhereInput> | null
     paymentStatus?: PaymentStatusListRelationFilter
-  }, "id" | "userID">
+  }, "id" | "paymentID">
 
   export type PaymentsOrderByWithAggregationInput = {
     id?: SortOrder
+    paymentID?: SortOrder
     amount?: SortOrder
     date?: SortOrder
-    method?: SortOrder
     userID?: SortOrder
     companyID?: SortOrder
     IncidentsID?: SortOrderInput | SortOrder
     receivedByID?: SortOrder
     clientEmail?: SortOrder
-    cardBrand?: SortOrder
+    companyEmail?: SortOrder
     _count?: PaymentsCountOrderByAggregateInput
     _avg?: PaymentsAvgOrderByAggregateInput
     _max?: PaymentsMaxOrderByAggregateInput
@@ -33001,15 +32964,15 @@ export namespace Prisma {
     OR?: PaymentsScalarWhereWithAggregatesInput[]
     NOT?: PaymentsScalarWhereWithAggregatesInput | PaymentsScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Payments"> | number
+    paymentID?: StringWithAggregatesFilter<"Payments"> | string
     amount?: DecimalWithAggregatesFilter<"Payments"> | Decimal | DecimalJsLike | number | string
     date?: DateTimeWithAggregatesFilter<"Payments"> | Date | string
-    method?: StringWithAggregatesFilter<"Payments"> | string
     userID?: IntWithAggregatesFilter<"Payments"> | number
     companyID?: IntWithAggregatesFilter<"Payments"> | number
     IncidentsID?: IntNullableWithAggregatesFilter<"Payments"> | number | null
     receivedByID?: IntWithAggregatesFilter<"Payments"> | number
     clientEmail?: StringWithAggregatesFilter<"Payments"> | string
-    cardBrand?: StringWithAggregatesFilter<"Payments"> | string
+    companyEmail?: StringWithAggregatesFilter<"Payments"> | string
   }
 
   export type paymentStatusWhereInput = {
@@ -33864,7 +33827,7 @@ export namespace Prisma {
     refreshToken?: string | null
     incidents?: IncidentsCreateNestedOneWithoutUsersInput
     directions?: DirectionsCreateNestedManyWithoutUserInput
-    payments?: PaymentsCreateNestedOneWithoutUserInput
+    payments?: PaymentsCreateNestedManyWithoutUserInput
     IncidentHistory?: IncidentHistoryCreateNestedManyWithoutUserInput
     ClientMachinery?: ClientMachineryCreateNestedManyWithoutUserInput
     Incidents?: IncidentsCreateNestedManyWithoutUserInput
@@ -33890,7 +33853,7 @@ export namespace Prisma {
     companyID?: number | null
     refreshToken?: string | null
     directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
-    payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
+    payments?: PaymentsUncheckedCreateNestedManyWithoutUserInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
     ClientMachinery?: ClientMachineryUncheckedCreateNestedManyWithoutUserInput
     Incidents?: IncidentsUncheckedCreateNestedManyWithoutUserInput
@@ -33913,7 +33876,7 @@ export namespace Prisma {
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     incidents?: IncidentsUpdateOneWithoutUsersNestedInput
     directions?: DirectionsUpdateManyWithoutUserNestedInput
-    payments?: PaymentsUpdateOneWithoutUserNestedInput
+    payments?: PaymentsUpdateManyWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUpdateManyWithoutUserNestedInput
     ClientMachinery?: ClientMachineryUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUpdateManyWithoutUserNestedInput
@@ -33939,7 +33902,7 @@ export namespace Prisma {
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
-    payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
+    payments?: PaymentsUncheckedUpdateManyWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
     ClientMachinery?: ClientMachineryUncheckedUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUncheckedUpdateManyWithoutUserNestedInput
@@ -34005,7 +33968,6 @@ export namespace Prisma {
     stripeAccountID?: string | null
     refreshToken?: string | null
     workers?: WorkerCreateNestedManyWithoutCompanyInput
-    receivedPayments?: PaymentsCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsCreateNestedManyWithoutCompanyInput
     incidentHistory?: IncidentHistoryCreateNestedManyWithoutCompanyInput
     budget?: BudgetCreateNestedOneWithoutCompanyInput
@@ -34039,7 +34001,6 @@ export namespace Prisma {
     stripeAccountID?: string | null
     refreshToken?: string | null
     workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
-    receivedPayments?: PaymentsUncheckedCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsUncheckedCreateNestedManyWithoutCompanyInput
     incidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutCompanyInput
     directions?: DirectionsUncheckedCreateNestedManyWithoutCompanyInput
@@ -34070,7 +34031,6 @@ export namespace Prisma {
     stripeAccountID?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUpdateManyWithoutCompanyNestedInput
-    receivedPayments?: PaymentsUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUpdateManyWithoutCompanyNestedInput
     incidentHistory?: IncidentHistoryUpdateManyWithoutCompanyNestedInput
     budget?: BudgetUpdateOneWithoutCompanyNestedInput
@@ -34104,7 +34064,6 @@ export namespace Prisma {
     stripeAccountID?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
-    receivedPayments?: PaymentsUncheckedUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUncheckedUpdateManyWithoutCompanyNestedInput
     incidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutCompanyNestedInput
     directions?: DirectionsUncheckedUpdateManyWithoutCompanyNestedInput
@@ -34741,91 +34700,92 @@ export namespace Prisma {
   }
 
   export type PaymentsCreateInput = {
+    paymentID: string
     amount: Decimal | DecimalJsLike | number | string
     date?: Date | string
-    method: string
+    receivedByID: number
     clientEmail: string
-    cardBrand: string
+    companyEmail?: string
     user: UserCreateNestedOneWithoutPaymentsInput
     company: CompanyCreateNestedOneWithoutPaymentsInput
-    receivedBy: CompanyCreateNestedOneWithoutReceivedPaymentsInput
     incident?: IncidentsCreateNestedOneWithoutPaymentsInput
     paymentStatus?: paymentStatusCreateNestedManyWithoutPaymentInput
   }
 
   export type PaymentsUncheckedCreateInput = {
     id?: number
+    paymentID: string
     amount: Decimal | DecimalJsLike | number | string
     date?: Date | string
-    method: string
     userID: number
     companyID: number
     IncidentsID?: number | null
     receivedByID: number
     clientEmail: string
-    cardBrand: string
+    companyEmail?: string
     paymentStatus?: paymentStatusUncheckedCreateNestedManyWithoutPaymentInput
   }
 
   export type PaymentsUpdateInput = {
+    paymentID?: StringFieldUpdateOperationsInput | string
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    method?: StringFieldUpdateOperationsInput | string
+    receivedByID?: IntFieldUpdateOperationsInput | number
     clientEmail?: StringFieldUpdateOperationsInput | string
-    cardBrand?: StringFieldUpdateOperationsInput | string
+    companyEmail?: StringFieldUpdateOperationsInput | string
     user?: UserUpdateOneRequiredWithoutPaymentsNestedInput
     company?: CompanyUpdateOneRequiredWithoutPaymentsNestedInput
-    receivedBy?: CompanyUpdateOneRequiredWithoutReceivedPaymentsNestedInput
     incident?: IncidentsUpdateOneWithoutPaymentsNestedInput
     paymentStatus?: paymentStatusUpdateManyWithoutPaymentNestedInput
   }
 
   export type PaymentsUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
+    paymentID?: StringFieldUpdateOperationsInput | string
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    method?: StringFieldUpdateOperationsInput | string
     userID?: IntFieldUpdateOperationsInput | number
     companyID?: IntFieldUpdateOperationsInput | number
     IncidentsID?: NullableIntFieldUpdateOperationsInput | number | null
     receivedByID?: IntFieldUpdateOperationsInput | number
     clientEmail?: StringFieldUpdateOperationsInput | string
-    cardBrand?: StringFieldUpdateOperationsInput | string
+    companyEmail?: StringFieldUpdateOperationsInput | string
     paymentStatus?: paymentStatusUncheckedUpdateManyWithoutPaymentNestedInput
   }
 
   export type PaymentsCreateManyInput = {
     id?: number
+    paymentID: string
     amount: Decimal | DecimalJsLike | number | string
     date?: Date | string
-    method: string
     userID: number
     companyID: number
     IncidentsID?: number | null
     receivedByID: number
     clientEmail: string
-    cardBrand: string
+    companyEmail?: string
   }
 
   export type PaymentsUpdateManyMutationInput = {
+    paymentID?: StringFieldUpdateOperationsInput | string
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    method?: StringFieldUpdateOperationsInput | string
+    receivedByID?: IntFieldUpdateOperationsInput | number
     clientEmail?: StringFieldUpdateOperationsInput | string
-    cardBrand?: StringFieldUpdateOperationsInput | string
+    companyEmail?: StringFieldUpdateOperationsInput | string
   }
 
   export type PaymentsUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
+    paymentID?: StringFieldUpdateOperationsInput | string
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    method?: StringFieldUpdateOperationsInput | string
     userID?: IntFieldUpdateOperationsInput | number
     companyID?: IntFieldUpdateOperationsInput | number
     IncidentsID?: NullableIntFieldUpdateOperationsInput | number | null
     receivedByID?: IntFieldUpdateOperationsInput | number
     clientEmail?: StringFieldUpdateOperationsInput | string
-    cardBrand?: StringFieldUpdateOperationsInput | string
+    companyEmail?: StringFieldUpdateOperationsInput | string
   }
 
   export type paymentStatusCreateInput = {
@@ -35695,9 +35655,10 @@ export namespace Prisma {
     none?: DirectionsWhereInput
   }
 
-  export type PaymentsNullableScalarRelationFilter = {
-    is?: PaymentsWhereInput | null
-    isNot?: PaymentsWhereInput | null
+  export type PaymentsListRelationFilter = {
+    every?: PaymentsWhereInput
+    some?: PaymentsWhereInput
+    none?: PaymentsWhereInput
   }
 
   export type IncidentHistoryListRelationFilter = {
@@ -35759,6 +35720,10 @@ export namespace Prisma {
   }
 
   export type DirectionsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PaymentsOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -35957,12 +35922,6 @@ export namespace Prisma {
     none?: WorkerWhereInput
   }
 
-  export type PaymentsListRelationFilter = {
-    every?: PaymentsWhereInput
-    some?: PaymentsWhereInput
-    none?: PaymentsWhereInput
-  }
-
   export type BudgetNullableScalarRelationFilter = {
     is?: BudgetWhereInput | null
     isNot?: BudgetWhereInput | null
@@ -36005,10 +35964,6 @@ export namespace Prisma {
   }
 
   export type WorkerOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type PaymentsOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -36633,15 +36588,15 @@ export namespace Prisma {
 
   export type PaymentsCountOrderByAggregateInput = {
     id?: SortOrder
+    paymentID?: SortOrder
     amount?: SortOrder
     date?: SortOrder
-    method?: SortOrder
     userID?: SortOrder
     companyID?: SortOrder
     IncidentsID?: SortOrder
     receivedByID?: SortOrder
     clientEmail?: SortOrder
-    cardBrand?: SortOrder
+    companyEmail?: SortOrder
   }
 
   export type PaymentsAvgOrderByAggregateInput = {
@@ -36655,28 +36610,28 @@ export namespace Prisma {
 
   export type PaymentsMaxOrderByAggregateInput = {
     id?: SortOrder
+    paymentID?: SortOrder
     amount?: SortOrder
     date?: SortOrder
-    method?: SortOrder
     userID?: SortOrder
     companyID?: SortOrder
     IncidentsID?: SortOrder
     receivedByID?: SortOrder
     clientEmail?: SortOrder
-    cardBrand?: SortOrder
+    companyEmail?: SortOrder
   }
 
   export type PaymentsMinOrderByAggregateInput = {
     id?: SortOrder
+    paymentID?: SortOrder
     amount?: SortOrder
     date?: SortOrder
-    method?: SortOrder
     userID?: SortOrder
     companyID?: SortOrder
     IncidentsID?: SortOrder
     receivedByID?: SortOrder
     clientEmail?: SortOrder
-    cardBrand?: SortOrder
+    companyEmail?: SortOrder
   }
 
   export type PaymentsSumOrderByAggregateInput = {
@@ -37333,10 +37288,11 @@ export namespace Prisma {
     connect?: DirectionsWhereUniqueInput | DirectionsWhereUniqueInput[]
   }
 
-  export type PaymentsCreateNestedOneWithoutUserInput = {
-    create?: XOR<PaymentsCreateWithoutUserInput, PaymentsUncheckedCreateWithoutUserInput>
-    connectOrCreate?: PaymentsCreateOrConnectWithoutUserInput
-    connect?: PaymentsWhereUniqueInput
+  export type PaymentsCreateNestedManyWithoutUserInput = {
+    create?: XOR<PaymentsCreateWithoutUserInput, PaymentsUncheckedCreateWithoutUserInput> | PaymentsCreateWithoutUserInput[] | PaymentsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PaymentsCreateOrConnectWithoutUserInput | PaymentsCreateOrConnectWithoutUserInput[]
+    createMany?: PaymentsCreateManyUserInputEnvelope
+    connect?: PaymentsWhereUniqueInput | PaymentsWhereUniqueInput[]
   }
 
   export type IncidentHistoryCreateNestedManyWithoutUserInput = {
@@ -37408,10 +37364,11 @@ export namespace Prisma {
     connect?: DirectionsWhereUniqueInput | DirectionsWhereUniqueInput[]
   }
 
-  export type PaymentsUncheckedCreateNestedOneWithoutUserInput = {
-    create?: XOR<PaymentsCreateWithoutUserInput, PaymentsUncheckedCreateWithoutUserInput>
-    connectOrCreate?: PaymentsCreateOrConnectWithoutUserInput
-    connect?: PaymentsWhereUniqueInput
+  export type PaymentsUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<PaymentsCreateWithoutUserInput, PaymentsUncheckedCreateWithoutUserInput> | PaymentsCreateWithoutUserInput[] | PaymentsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PaymentsCreateOrConnectWithoutUserInput | PaymentsCreateOrConnectWithoutUserInput[]
+    createMany?: PaymentsCreateManyUserInputEnvelope
+    connect?: PaymentsWhereUniqueInput | PaymentsWhereUniqueInput[]
   }
 
   export type IncidentHistoryUncheckedCreateNestedManyWithoutUserInput = {
@@ -37514,14 +37471,18 @@ export namespace Prisma {
     deleteMany?: DirectionsScalarWhereInput | DirectionsScalarWhereInput[]
   }
 
-  export type PaymentsUpdateOneWithoutUserNestedInput = {
-    create?: XOR<PaymentsCreateWithoutUserInput, PaymentsUncheckedCreateWithoutUserInput>
-    connectOrCreate?: PaymentsCreateOrConnectWithoutUserInput
-    upsert?: PaymentsUpsertWithoutUserInput
-    disconnect?: PaymentsWhereInput | boolean
-    delete?: PaymentsWhereInput | boolean
-    connect?: PaymentsWhereUniqueInput
-    update?: XOR<XOR<PaymentsUpdateToOneWithWhereWithoutUserInput, PaymentsUpdateWithoutUserInput>, PaymentsUncheckedUpdateWithoutUserInput>
+  export type PaymentsUpdateManyWithoutUserNestedInput = {
+    create?: XOR<PaymentsCreateWithoutUserInput, PaymentsUncheckedCreateWithoutUserInput> | PaymentsCreateWithoutUserInput[] | PaymentsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PaymentsCreateOrConnectWithoutUserInput | PaymentsCreateOrConnectWithoutUserInput[]
+    upsert?: PaymentsUpsertWithWhereUniqueWithoutUserInput | PaymentsUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: PaymentsCreateManyUserInputEnvelope
+    set?: PaymentsWhereUniqueInput | PaymentsWhereUniqueInput[]
+    disconnect?: PaymentsWhereUniqueInput | PaymentsWhereUniqueInput[]
+    delete?: PaymentsWhereUniqueInput | PaymentsWhereUniqueInput[]
+    connect?: PaymentsWhereUniqueInput | PaymentsWhereUniqueInput[]
+    update?: PaymentsUpdateWithWhereUniqueWithoutUserInput | PaymentsUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: PaymentsUpdateManyWithWhereWithoutUserInput | PaymentsUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: PaymentsScalarWhereInput | PaymentsScalarWhereInput[]
   }
 
   export type IncidentHistoryUpdateManyWithoutUserNestedInput = {
@@ -37668,14 +37629,18 @@ export namespace Prisma {
     deleteMany?: DirectionsScalarWhereInput | DirectionsScalarWhereInput[]
   }
 
-  export type PaymentsUncheckedUpdateOneWithoutUserNestedInput = {
-    create?: XOR<PaymentsCreateWithoutUserInput, PaymentsUncheckedCreateWithoutUserInput>
-    connectOrCreate?: PaymentsCreateOrConnectWithoutUserInput
-    upsert?: PaymentsUpsertWithoutUserInput
-    disconnect?: PaymentsWhereInput | boolean
-    delete?: PaymentsWhereInput | boolean
-    connect?: PaymentsWhereUniqueInput
-    update?: XOR<XOR<PaymentsUpdateToOneWithWhereWithoutUserInput, PaymentsUpdateWithoutUserInput>, PaymentsUncheckedUpdateWithoutUserInput>
+  export type PaymentsUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<PaymentsCreateWithoutUserInput, PaymentsUncheckedCreateWithoutUserInput> | PaymentsCreateWithoutUserInput[] | PaymentsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PaymentsCreateOrConnectWithoutUserInput | PaymentsCreateOrConnectWithoutUserInput[]
+    upsert?: PaymentsUpsertWithWhereUniqueWithoutUserInput | PaymentsUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: PaymentsCreateManyUserInputEnvelope
+    set?: PaymentsWhereUniqueInput | PaymentsWhereUniqueInput[]
+    disconnect?: PaymentsWhereUniqueInput | PaymentsWhereUniqueInput[]
+    delete?: PaymentsWhereUniqueInput | PaymentsWhereUniqueInput[]
+    connect?: PaymentsWhereUniqueInput | PaymentsWhereUniqueInput[]
+    update?: PaymentsUpdateWithWhereUniqueWithoutUserInput | PaymentsUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: PaymentsUpdateManyWithWhereWithoutUserInput | PaymentsUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: PaymentsScalarWhereInput | PaymentsScalarWhereInput[]
   }
 
   export type IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput = {
@@ -37797,13 +37762,6 @@ export namespace Prisma {
     connect?: WorkerWhereUniqueInput | WorkerWhereUniqueInput[]
   }
 
-  export type PaymentsCreateNestedManyWithoutReceivedByInput = {
-    create?: XOR<PaymentsCreateWithoutReceivedByInput, PaymentsUncheckedCreateWithoutReceivedByInput> | PaymentsCreateWithoutReceivedByInput[] | PaymentsUncheckedCreateWithoutReceivedByInput[]
-    connectOrCreate?: PaymentsCreateOrConnectWithoutReceivedByInput | PaymentsCreateOrConnectWithoutReceivedByInput[]
-    createMany?: PaymentsCreateManyReceivedByInputEnvelope
-    connect?: PaymentsWhereUniqueInput | PaymentsWhereUniqueInput[]
-  }
-
   export type IncidentsCreateNestedManyWithoutCompanyInput = {
     create?: XOR<IncidentsCreateWithoutCompanyInput, IncidentsUncheckedCreateWithoutCompanyInput> | IncidentsCreateWithoutCompanyInput[] | IncidentsUncheckedCreateWithoutCompanyInput[]
     connectOrCreate?: IncidentsCreateOrConnectWithoutCompanyInput | IncidentsCreateOrConnectWithoutCompanyInput[]
@@ -37920,13 +37878,6 @@ export namespace Prisma {
     connectOrCreate?: WorkerCreateOrConnectWithoutCompanyInput | WorkerCreateOrConnectWithoutCompanyInput[]
     createMany?: WorkerCreateManyCompanyInputEnvelope
     connect?: WorkerWhereUniqueInput | WorkerWhereUniqueInput[]
-  }
-
-  export type PaymentsUncheckedCreateNestedManyWithoutReceivedByInput = {
-    create?: XOR<PaymentsCreateWithoutReceivedByInput, PaymentsUncheckedCreateWithoutReceivedByInput> | PaymentsCreateWithoutReceivedByInput[] | PaymentsUncheckedCreateWithoutReceivedByInput[]
-    connectOrCreate?: PaymentsCreateOrConnectWithoutReceivedByInput | PaymentsCreateOrConnectWithoutReceivedByInput[]
-    createMany?: PaymentsCreateManyReceivedByInputEnvelope
-    connect?: PaymentsWhereUniqueInput | PaymentsWhereUniqueInput[]
   }
 
   export type IncidentsUncheckedCreateNestedManyWithoutCompanyInput = {
@@ -38054,20 +38005,6 @@ export namespace Prisma {
     update?: WorkerUpdateWithWhereUniqueWithoutCompanyInput | WorkerUpdateWithWhereUniqueWithoutCompanyInput[]
     updateMany?: WorkerUpdateManyWithWhereWithoutCompanyInput | WorkerUpdateManyWithWhereWithoutCompanyInput[]
     deleteMany?: WorkerScalarWhereInput | WorkerScalarWhereInput[]
-  }
-
-  export type PaymentsUpdateManyWithoutReceivedByNestedInput = {
-    create?: XOR<PaymentsCreateWithoutReceivedByInput, PaymentsUncheckedCreateWithoutReceivedByInput> | PaymentsCreateWithoutReceivedByInput[] | PaymentsUncheckedCreateWithoutReceivedByInput[]
-    connectOrCreate?: PaymentsCreateOrConnectWithoutReceivedByInput | PaymentsCreateOrConnectWithoutReceivedByInput[]
-    upsert?: PaymentsUpsertWithWhereUniqueWithoutReceivedByInput | PaymentsUpsertWithWhereUniqueWithoutReceivedByInput[]
-    createMany?: PaymentsCreateManyReceivedByInputEnvelope
-    set?: PaymentsWhereUniqueInput | PaymentsWhereUniqueInput[]
-    disconnect?: PaymentsWhereUniqueInput | PaymentsWhereUniqueInput[]
-    delete?: PaymentsWhereUniqueInput | PaymentsWhereUniqueInput[]
-    connect?: PaymentsWhereUniqueInput | PaymentsWhereUniqueInput[]
-    update?: PaymentsUpdateWithWhereUniqueWithoutReceivedByInput | PaymentsUpdateWithWhereUniqueWithoutReceivedByInput[]
-    updateMany?: PaymentsUpdateManyWithWhereWithoutReceivedByInput | PaymentsUpdateManyWithWhereWithoutReceivedByInput[]
-    deleteMany?: PaymentsScalarWhereInput | PaymentsScalarWhereInput[]
   }
 
   export type IncidentsUpdateManyWithoutCompanyNestedInput = {
@@ -38302,20 +38239,6 @@ export namespace Prisma {
     update?: WorkerUpdateWithWhereUniqueWithoutCompanyInput | WorkerUpdateWithWhereUniqueWithoutCompanyInput[]
     updateMany?: WorkerUpdateManyWithWhereWithoutCompanyInput | WorkerUpdateManyWithWhereWithoutCompanyInput[]
     deleteMany?: WorkerScalarWhereInput | WorkerScalarWhereInput[]
-  }
-
-  export type PaymentsUncheckedUpdateManyWithoutReceivedByNestedInput = {
-    create?: XOR<PaymentsCreateWithoutReceivedByInput, PaymentsUncheckedCreateWithoutReceivedByInput> | PaymentsCreateWithoutReceivedByInput[] | PaymentsUncheckedCreateWithoutReceivedByInput[]
-    connectOrCreate?: PaymentsCreateOrConnectWithoutReceivedByInput | PaymentsCreateOrConnectWithoutReceivedByInput[]
-    upsert?: PaymentsUpsertWithWhereUniqueWithoutReceivedByInput | PaymentsUpsertWithWhereUniqueWithoutReceivedByInput[]
-    createMany?: PaymentsCreateManyReceivedByInputEnvelope
-    set?: PaymentsWhereUniqueInput | PaymentsWhereUniqueInput[]
-    disconnect?: PaymentsWhereUniqueInput | PaymentsWhereUniqueInput[]
-    delete?: PaymentsWhereUniqueInput | PaymentsWhereUniqueInput[]
-    connect?: PaymentsWhereUniqueInput | PaymentsWhereUniqueInput[]
-    update?: PaymentsUpdateWithWhereUniqueWithoutReceivedByInput | PaymentsUpdateWithWhereUniqueWithoutReceivedByInput[]
-    updateMany?: PaymentsUpdateManyWithWhereWithoutReceivedByInput | PaymentsUpdateManyWithWhereWithoutReceivedByInput[]
-    deleteMany?: PaymentsScalarWhereInput | PaymentsScalarWhereInput[]
   }
 
   export type IncidentsUncheckedUpdateManyWithoutCompanyNestedInput = {
@@ -39386,12 +39309,6 @@ export namespace Prisma {
     connect?: CompanyWhereUniqueInput
   }
 
-  export type CompanyCreateNestedOneWithoutReceivedPaymentsInput = {
-    create?: XOR<CompanyCreateWithoutReceivedPaymentsInput, CompanyUncheckedCreateWithoutReceivedPaymentsInput>
-    connectOrCreate?: CompanyCreateOrConnectWithoutReceivedPaymentsInput
-    connect?: CompanyWhereUniqueInput
-  }
-
   export type IncidentsCreateNestedOneWithoutPaymentsInput = {
     create?: XOR<IncidentsCreateWithoutPaymentsInput, IncidentsUncheckedCreateWithoutPaymentsInput>
     connectOrCreate?: IncidentsCreateOrConnectWithoutPaymentsInput
@@ -39434,14 +39351,6 @@ export namespace Prisma {
     upsert?: CompanyUpsertWithoutPaymentsInput
     connect?: CompanyWhereUniqueInput
     update?: XOR<XOR<CompanyUpdateToOneWithWhereWithoutPaymentsInput, CompanyUpdateWithoutPaymentsInput>, CompanyUncheckedUpdateWithoutPaymentsInput>
-  }
-
-  export type CompanyUpdateOneRequiredWithoutReceivedPaymentsNestedInput = {
-    create?: XOR<CompanyCreateWithoutReceivedPaymentsInput, CompanyUncheckedCreateWithoutReceivedPaymentsInput>
-    connectOrCreate?: CompanyCreateOrConnectWithoutReceivedPaymentsInput
-    upsert?: CompanyUpsertWithoutReceivedPaymentsInput
-    connect?: CompanyWhereUniqueInput
-    update?: XOR<XOR<CompanyUpdateToOneWithWhereWithoutReceivedPaymentsInput, CompanyUpdateWithoutReceivedPaymentsInput>, CompanyUncheckedUpdateWithoutReceivedPaymentsInput>
   }
 
   export type IncidentsUpdateOneWithoutPaymentsNestedInput = {
@@ -40440,33 +40349,38 @@ export namespace Prisma {
   }
 
   export type PaymentsCreateWithoutUserInput = {
+    paymentID: string
     amount: Decimal | DecimalJsLike | number | string
     date?: Date | string
-    method: string
+    receivedByID: number
     clientEmail: string
-    cardBrand: string
+    companyEmail?: string
     company: CompanyCreateNestedOneWithoutPaymentsInput
-    receivedBy: CompanyCreateNestedOneWithoutReceivedPaymentsInput
     incident?: IncidentsCreateNestedOneWithoutPaymentsInput
     paymentStatus?: paymentStatusCreateNestedManyWithoutPaymentInput
   }
 
   export type PaymentsUncheckedCreateWithoutUserInput = {
     id?: number
+    paymentID: string
     amount: Decimal | DecimalJsLike | number | string
     date?: Date | string
-    method: string
     companyID: number
     IncidentsID?: number | null
     receivedByID: number
     clientEmail: string
-    cardBrand: string
+    companyEmail?: string
     paymentStatus?: paymentStatusUncheckedCreateNestedManyWithoutPaymentInput
   }
 
   export type PaymentsCreateOrConnectWithoutUserInput = {
     where: PaymentsWhereUniqueInput
     create: XOR<PaymentsCreateWithoutUserInput, PaymentsUncheckedCreateWithoutUserInput>
+  }
+
+  export type PaymentsCreateManyUserInputEnvelope = {
+    data: PaymentsCreateManyUserInput | PaymentsCreateManyUserInput[]
+    skipDuplicates?: boolean
   }
 
   export type IncidentHistoryCreateWithoutUserInput = {
@@ -40623,7 +40537,6 @@ export namespace Prisma {
     stripeAccountID?: string | null
     refreshToken?: string | null
     workers?: WorkerCreateNestedManyWithoutCompanyInput
-    receivedPayments?: PaymentsCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsCreateNestedManyWithoutCompanyInput
     incidentHistory?: IncidentHistoryCreateNestedManyWithoutCompanyInput
     budget?: BudgetCreateNestedOneWithoutCompanyInput
@@ -40656,7 +40569,6 @@ export namespace Prisma {
     stripeAccountID?: string | null
     refreshToken?: string | null
     workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
-    receivedPayments?: PaymentsUncheckedCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsUncheckedCreateNestedManyWithoutCompanyInput
     incidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutCompanyInput
     directions?: DirectionsUncheckedCreateNestedManyWithoutCompanyInput
@@ -40883,40 +40795,36 @@ export namespace Prisma {
     zipCode?: StringFilter<"Directions"> | string
   }
 
-  export type PaymentsUpsertWithoutUserInput = {
+  export type PaymentsUpsertWithWhereUniqueWithoutUserInput = {
+    where: PaymentsWhereUniqueInput
     update: XOR<PaymentsUpdateWithoutUserInput, PaymentsUncheckedUpdateWithoutUserInput>
     create: XOR<PaymentsCreateWithoutUserInput, PaymentsUncheckedCreateWithoutUserInput>
-    where?: PaymentsWhereInput
   }
 
-  export type PaymentsUpdateToOneWithWhereWithoutUserInput = {
-    where?: PaymentsWhereInput
+  export type PaymentsUpdateWithWhereUniqueWithoutUserInput = {
+    where: PaymentsWhereUniqueInput
     data: XOR<PaymentsUpdateWithoutUserInput, PaymentsUncheckedUpdateWithoutUserInput>
   }
 
-  export type PaymentsUpdateWithoutUserInput = {
-    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    method?: StringFieldUpdateOperationsInput | string
-    clientEmail?: StringFieldUpdateOperationsInput | string
-    cardBrand?: StringFieldUpdateOperationsInput | string
-    company?: CompanyUpdateOneRequiredWithoutPaymentsNestedInput
-    receivedBy?: CompanyUpdateOneRequiredWithoutReceivedPaymentsNestedInput
-    incident?: IncidentsUpdateOneWithoutPaymentsNestedInput
-    paymentStatus?: paymentStatusUpdateManyWithoutPaymentNestedInput
+  export type PaymentsUpdateManyWithWhereWithoutUserInput = {
+    where: PaymentsScalarWhereInput
+    data: XOR<PaymentsUpdateManyMutationInput, PaymentsUncheckedUpdateManyWithoutUserInput>
   }
 
-  export type PaymentsUncheckedUpdateWithoutUserInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    method?: StringFieldUpdateOperationsInput | string
-    companyID?: IntFieldUpdateOperationsInput | number
-    IncidentsID?: NullableIntFieldUpdateOperationsInput | number | null
-    receivedByID?: IntFieldUpdateOperationsInput | number
-    clientEmail?: StringFieldUpdateOperationsInput | string
-    cardBrand?: StringFieldUpdateOperationsInput | string
-    paymentStatus?: paymentStatusUncheckedUpdateManyWithoutPaymentNestedInput
+  export type PaymentsScalarWhereInput = {
+    AND?: PaymentsScalarWhereInput | PaymentsScalarWhereInput[]
+    OR?: PaymentsScalarWhereInput[]
+    NOT?: PaymentsScalarWhereInput | PaymentsScalarWhereInput[]
+    id?: IntFilter<"Payments"> | number
+    paymentID?: StringFilter<"Payments"> | string
+    amount?: DecimalFilter<"Payments"> | Decimal | DecimalJsLike | number | string
+    date?: DateTimeFilter<"Payments"> | Date | string
+    userID?: IntFilter<"Payments"> | number
+    companyID?: IntFilter<"Payments"> | number
+    IncidentsID?: IntNullableFilter<"Payments"> | number | null
+    receivedByID?: IntFilter<"Payments"> | number
+    clientEmail?: StringFilter<"Payments"> | string
+    companyEmail?: StringFilter<"Payments"> | string
   }
 
   export type IncidentHistoryUpsertWithWhereUniqueWithoutUserInput = {
@@ -41068,7 +40976,6 @@ export namespace Prisma {
     stripeAccountID?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUpdateManyWithoutCompanyNestedInput
-    receivedPayments?: PaymentsUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUpdateManyWithoutCompanyNestedInput
     incidentHistory?: IncidentHistoryUpdateManyWithoutCompanyNestedInput
     budget?: BudgetUpdateOneWithoutCompanyNestedInput
@@ -41101,7 +41008,6 @@ export namespace Prisma {
     stripeAccountID?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
-    receivedPayments?: PaymentsUncheckedUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUncheckedUpdateManyWithoutCompanyNestedInput
     incidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutCompanyNestedInput
     directions?: DirectionsUncheckedUpdateManyWithoutCompanyNestedInput
@@ -41284,41 +41190,6 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type PaymentsCreateWithoutReceivedByInput = {
-    amount: Decimal | DecimalJsLike | number | string
-    date?: Date | string
-    method: string
-    clientEmail: string
-    cardBrand: string
-    user: UserCreateNestedOneWithoutPaymentsInput
-    company: CompanyCreateNestedOneWithoutPaymentsInput
-    incident?: IncidentsCreateNestedOneWithoutPaymentsInput
-    paymentStatus?: paymentStatusCreateNestedManyWithoutPaymentInput
-  }
-
-  export type PaymentsUncheckedCreateWithoutReceivedByInput = {
-    id?: number
-    amount: Decimal | DecimalJsLike | number | string
-    date?: Date | string
-    method: string
-    userID: number
-    companyID: number
-    IncidentsID?: number | null
-    clientEmail: string
-    cardBrand: string
-    paymentStatus?: paymentStatusUncheckedCreateNestedManyWithoutPaymentInput
-  }
-
-  export type PaymentsCreateOrConnectWithoutReceivedByInput = {
-    where: PaymentsWhereUniqueInput
-    create: XOR<PaymentsCreateWithoutReceivedByInput, PaymentsUncheckedCreateWithoutReceivedByInput>
-  }
-
-  export type PaymentsCreateManyReceivedByInputEnvelope = {
-    data: PaymentsCreateManyReceivedByInput | PaymentsCreateManyReceivedByInput[]
-    skipDuplicates?: boolean
-  }
-
   export type IncidentsCreateWithoutCompanyInput = {
     title: string
     description: string
@@ -41492,27 +41363,27 @@ export namespace Prisma {
   }
 
   export type PaymentsCreateWithoutCompanyInput = {
+    paymentID: string
     amount: Decimal | DecimalJsLike | number | string
     date?: Date | string
-    method: string
+    receivedByID: number
     clientEmail: string
-    cardBrand: string
+    companyEmail?: string
     user: UserCreateNestedOneWithoutPaymentsInput
-    receivedBy: CompanyCreateNestedOneWithoutReceivedPaymentsInput
     incident?: IncidentsCreateNestedOneWithoutPaymentsInput
     paymentStatus?: paymentStatusCreateNestedManyWithoutPaymentInput
   }
 
   export type PaymentsUncheckedCreateWithoutCompanyInput = {
     id?: number
+    paymentID: string
     amount: Decimal | DecimalJsLike | number | string
     date?: Date | string
-    method: string
     userID: number
     IncidentsID?: number | null
     receivedByID: number
     clientEmail: string
-    cardBrand: string
+    companyEmail?: string
     paymentStatus?: paymentStatusUncheckedCreateNestedManyWithoutPaymentInput
   }
 
@@ -41617,7 +41488,7 @@ export namespace Prisma {
     refreshToken?: string | null
     incidents?: IncidentsCreateNestedOneWithoutUsersInput
     directions?: DirectionsCreateNestedManyWithoutUserInput
-    payments?: PaymentsCreateNestedOneWithoutUserInput
+    payments?: PaymentsCreateNestedManyWithoutUserInput
     IncidentHistory?: IncidentHistoryCreateNestedManyWithoutUserInput
     ClientMachinery?: ClientMachineryCreateNestedManyWithoutUserInput
     Incidents?: IncidentsCreateNestedManyWithoutUserInput
@@ -41641,7 +41512,7 @@ export namespace Prisma {
     contractID?: number | null
     refreshToken?: string | null
     directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
-    payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
+    payments?: PaymentsUncheckedCreateNestedManyWithoutUserInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
     ClientMachinery?: ClientMachineryUncheckedCreateNestedManyWithoutUserInput
     Incidents?: IncidentsUncheckedCreateNestedManyWithoutUserInput
@@ -41869,38 +41740,6 @@ export namespace Prisma {
     role?: EnumRoleFilter<"Worker"> | $Enums.Role
     workerCode?: StringNullableFilter<"Worker"> | string | null
     refreshToken?: StringNullableFilter<"Worker"> | string | null
-  }
-
-  export type PaymentsUpsertWithWhereUniqueWithoutReceivedByInput = {
-    where: PaymentsWhereUniqueInput
-    update: XOR<PaymentsUpdateWithoutReceivedByInput, PaymentsUncheckedUpdateWithoutReceivedByInput>
-    create: XOR<PaymentsCreateWithoutReceivedByInput, PaymentsUncheckedCreateWithoutReceivedByInput>
-  }
-
-  export type PaymentsUpdateWithWhereUniqueWithoutReceivedByInput = {
-    where: PaymentsWhereUniqueInput
-    data: XOR<PaymentsUpdateWithoutReceivedByInput, PaymentsUncheckedUpdateWithoutReceivedByInput>
-  }
-
-  export type PaymentsUpdateManyWithWhereWithoutReceivedByInput = {
-    where: PaymentsScalarWhereInput
-    data: XOR<PaymentsUpdateManyMutationInput, PaymentsUncheckedUpdateManyWithoutReceivedByInput>
-  }
-
-  export type PaymentsScalarWhereInput = {
-    AND?: PaymentsScalarWhereInput | PaymentsScalarWhereInput[]
-    OR?: PaymentsScalarWhereInput[]
-    NOT?: PaymentsScalarWhereInput | PaymentsScalarWhereInput[]
-    id?: IntFilter<"Payments"> | number
-    amount?: DecimalFilter<"Payments"> | Decimal | DecimalJsLike | number | string
-    date?: DateTimeFilter<"Payments"> | Date | string
-    method?: StringFilter<"Payments"> | string
-    userID?: IntFilter<"Payments"> | number
-    companyID?: IntFilter<"Payments"> | number
-    IncidentsID?: IntNullableFilter<"Payments"> | number | null
-    receivedByID?: IntFilter<"Payments"> | number
-    clientEmail?: StringFilter<"Payments"> | string
-    cardBrand?: StringFilter<"Payments"> | string
   }
 
   export type IncidentsUpsertWithWhereUniqueWithoutCompanyInput = {
@@ -42298,7 +42137,6 @@ export namespace Prisma {
     stripeAccountID?: string | null
     refreshToken?: string | null
     workers?: WorkerCreateNestedManyWithoutCompanyInput
-    receivedPayments?: PaymentsCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsCreateNestedManyWithoutCompanyInput
     incidentHistory?: IncidentHistoryCreateNestedManyWithoutCompanyInput
     budget?: BudgetCreateNestedOneWithoutCompanyInput
@@ -42331,7 +42169,6 @@ export namespace Prisma {
     stripeAccountID?: string | null
     refreshToken?: string | null
     workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
-    receivedPayments?: PaymentsUncheckedCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsUncheckedCreateNestedManyWithoutCompanyInput
     incidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutCompanyInput
     directions?: DirectionsUncheckedCreateNestedManyWithoutCompanyInput
@@ -42405,7 +42242,6 @@ export namespace Prisma {
     stripeAccountID?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUpdateManyWithoutCompanyNestedInput
-    receivedPayments?: PaymentsUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUpdateManyWithoutCompanyNestedInput
     incidentHistory?: IncidentHistoryUpdateManyWithoutCompanyNestedInput
     budget?: BudgetUpdateOneWithoutCompanyNestedInput
@@ -42438,7 +42274,6 @@ export namespace Prisma {
     stripeAccountID?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
-    receivedPayments?: PaymentsUncheckedUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUncheckedUpdateManyWithoutCompanyNestedInput
     incidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutCompanyNestedInput
     directions?: DirectionsUncheckedUpdateManyWithoutCompanyNestedInput
@@ -42467,7 +42302,6 @@ export namespace Prisma {
     email: string
     stripeAccountID?: string | null
     refreshToken?: string | null
-    receivedPayments?: PaymentsCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsCreateNestedManyWithoutCompanyInput
     incidentHistory?: IncidentHistoryCreateNestedManyWithoutCompanyInput
     budget?: BudgetCreateNestedOneWithoutCompanyInput
@@ -42500,7 +42334,6 @@ export namespace Prisma {
     email: string
     stripeAccountID?: string | null
     refreshToken?: string | null
-    receivedPayments?: PaymentsUncheckedCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsUncheckedCreateNestedManyWithoutCompanyInput
     incidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutCompanyInput
     directions?: DirectionsUncheckedCreateNestedManyWithoutCompanyInput
@@ -42757,7 +42590,6 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     stripeAccountID?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
-    receivedPayments?: PaymentsUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUpdateManyWithoutCompanyNestedInput
     incidentHistory?: IncidentHistoryUpdateManyWithoutCompanyNestedInput
     budget?: BudgetUpdateOneWithoutCompanyNestedInput
@@ -42790,7 +42622,6 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     stripeAccountID?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
-    receivedPayments?: PaymentsUncheckedUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUncheckedUpdateManyWithoutCompanyNestedInput
     incidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutCompanyNestedInput
     directions?: DirectionsUncheckedUpdateManyWithoutCompanyNestedInput
@@ -43088,7 +42919,7 @@ export namespace Prisma {
     refreshToken?: string | null
     incidents?: IncidentsCreateNestedOneWithoutUsersInput
     directions?: DirectionsCreateNestedManyWithoutUserInput
-    payments?: PaymentsCreateNestedOneWithoutUserInput
+    payments?: PaymentsCreateNestedManyWithoutUserInput
     IncidentHistory?: IncidentHistoryCreateNestedManyWithoutUserInput
     ClientMachinery?: ClientMachineryCreateNestedManyWithoutUserInput
     Incidents?: IncidentsCreateNestedManyWithoutUserInput
@@ -43113,7 +42944,7 @@ export namespace Prisma {
     companyID?: number | null
     refreshToken?: string | null
     directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
-    payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
+    payments?: PaymentsUncheckedCreateNestedManyWithoutUserInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
     ClientMachinery?: ClientMachineryUncheckedCreateNestedManyWithoutUserInput
     Incidents?: IncidentsUncheckedCreateNestedManyWithoutUserInput
@@ -43141,7 +42972,6 @@ export namespace Prisma {
     stripeAccountID?: string | null
     refreshToken?: string | null
     workers?: WorkerCreateNestedManyWithoutCompanyInput
-    receivedPayments?: PaymentsCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsCreateNestedManyWithoutCompanyInput
     incidentHistory?: IncidentHistoryCreateNestedManyWithoutCompanyInput
     budget?: BudgetCreateNestedOneWithoutCompanyInput
@@ -43174,7 +43004,6 @@ export namespace Prisma {
     stripeAccountID?: string | null
     refreshToken?: string | null
     workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
-    receivedPayments?: PaymentsUncheckedCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsUncheckedCreateNestedManyWithoutCompanyInput
     incidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutCompanyInput
     directions?: DirectionsUncheckedCreateNestedManyWithoutCompanyInput
@@ -43369,7 +43198,7 @@ export namespace Prisma {
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     incidents?: IncidentsUpdateOneWithoutUsersNestedInput
     directions?: DirectionsUpdateManyWithoutUserNestedInput
-    payments?: PaymentsUpdateOneWithoutUserNestedInput
+    payments?: PaymentsUpdateManyWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUpdateManyWithoutUserNestedInput
     ClientMachinery?: ClientMachineryUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUpdateManyWithoutUserNestedInput
@@ -43394,7 +43223,7 @@ export namespace Prisma {
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
-    payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
+    payments?: PaymentsUncheckedUpdateManyWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
     ClientMachinery?: ClientMachineryUncheckedUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUncheckedUpdateManyWithoutUserNestedInput
@@ -43428,7 +43257,6 @@ export namespace Prisma {
     stripeAccountID?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUpdateManyWithoutCompanyNestedInput
-    receivedPayments?: PaymentsUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUpdateManyWithoutCompanyNestedInput
     incidentHistory?: IncidentHistoryUpdateManyWithoutCompanyNestedInput
     budget?: BudgetUpdateOneWithoutCompanyNestedInput
@@ -43461,7 +43289,6 @@ export namespace Prisma {
     stripeAccountID?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
-    receivedPayments?: PaymentsUncheckedUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUncheckedUpdateManyWithoutCompanyNestedInput
     incidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutCompanyNestedInput
     directions?: DirectionsUncheckedUpdateManyWithoutCompanyNestedInput
@@ -43606,7 +43433,7 @@ export namespace Prisma {
     refreshToken?: string | null
     incidents?: IncidentsCreateNestedOneWithoutUsersInput
     directions?: DirectionsCreateNestedManyWithoutUserInput
-    payments?: PaymentsCreateNestedOneWithoutUserInput
+    payments?: PaymentsCreateNestedManyWithoutUserInput
     IncidentHistory?: IncidentHistoryCreateNestedManyWithoutUserInput
     ClientMachinery?: ClientMachineryCreateNestedManyWithoutUserInput
     Incidents?: IncidentsCreateNestedManyWithoutUserInput
@@ -43631,7 +43458,7 @@ export namespace Prisma {
     companyID?: number | null
     refreshToken?: string | null
     directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
-    payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
+    payments?: PaymentsUncheckedCreateNestedManyWithoutUserInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
     ClientMachinery?: ClientMachineryUncheckedCreateNestedManyWithoutUserInput
     Incidents?: IncidentsUncheckedCreateNestedManyWithoutUserInput
@@ -43659,7 +43486,6 @@ export namespace Prisma {
     stripeAccountID?: string | null
     refreshToken?: string | null
     workers?: WorkerCreateNestedManyWithoutCompanyInput
-    receivedPayments?: PaymentsCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsCreateNestedManyWithoutCompanyInput
     incidentHistory?: IncidentHistoryCreateNestedManyWithoutCompanyInput
     budget?: BudgetCreateNestedOneWithoutCompanyInput
@@ -43692,7 +43518,6 @@ export namespace Prisma {
     stripeAccountID?: string | null
     refreshToken?: string | null
     workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
-    receivedPayments?: PaymentsUncheckedCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsUncheckedCreateNestedManyWithoutCompanyInput
     incidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutCompanyInput
     directions?: DirectionsUncheckedCreateNestedManyWithoutCompanyInput
@@ -43737,7 +43562,7 @@ export namespace Prisma {
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     incidents?: IncidentsUpdateOneWithoutUsersNestedInput
     directions?: DirectionsUpdateManyWithoutUserNestedInput
-    payments?: PaymentsUpdateOneWithoutUserNestedInput
+    payments?: PaymentsUpdateManyWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUpdateManyWithoutUserNestedInput
     ClientMachinery?: ClientMachineryUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUpdateManyWithoutUserNestedInput
@@ -43762,7 +43587,7 @@ export namespace Prisma {
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
-    payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
+    payments?: PaymentsUncheckedUpdateManyWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
     ClientMachinery?: ClientMachineryUncheckedUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUncheckedUpdateManyWithoutUserNestedInput
@@ -43796,7 +43621,6 @@ export namespace Prisma {
     stripeAccountID?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUpdateManyWithoutCompanyNestedInput
-    receivedPayments?: PaymentsUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUpdateManyWithoutCompanyNestedInput
     incidentHistory?: IncidentHistoryUpdateManyWithoutCompanyNestedInput
     budget?: BudgetUpdateOneWithoutCompanyNestedInput
@@ -43829,7 +43653,6 @@ export namespace Prisma {
     stripeAccountID?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
-    receivedPayments?: PaymentsUncheckedUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUncheckedUpdateManyWithoutCompanyNestedInput
     incidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutCompanyNestedInput
     directions?: DirectionsUncheckedUpdateManyWithoutCompanyNestedInput
@@ -43858,7 +43681,7 @@ export namespace Prisma {
     refreshToken?: string | null
     incidents?: IncidentsCreateNestedOneWithoutUsersInput
     directions?: DirectionsCreateNestedManyWithoutUserInput
-    payments?: PaymentsCreateNestedOneWithoutUserInput
+    payments?: PaymentsCreateNestedManyWithoutUserInput
     IncidentHistory?: IncidentHistoryCreateNestedManyWithoutUserInput
     ClientMachinery?: ClientMachineryCreateNestedManyWithoutUserInput
     Incidents?: IncidentsCreateNestedManyWithoutUserInput
@@ -43883,7 +43706,7 @@ export namespace Prisma {
     companyID?: number | null
     refreshToken?: string | null
     directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
-    payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
+    payments?: PaymentsUncheckedCreateNestedManyWithoutUserInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
     ClientMachinery?: ClientMachineryUncheckedCreateNestedManyWithoutUserInput
     Incidents?: IncidentsUncheckedCreateNestedManyWithoutUserInput
@@ -43911,7 +43734,6 @@ export namespace Prisma {
     stripeAccountID?: string | null
     refreshToken?: string | null
     workers?: WorkerCreateNestedManyWithoutCompanyInput
-    receivedPayments?: PaymentsCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsCreateNestedManyWithoutCompanyInput
     incidentHistory?: IncidentHistoryCreateNestedManyWithoutCompanyInput
     budget?: BudgetCreateNestedOneWithoutCompanyInput
@@ -43944,7 +43766,6 @@ export namespace Prisma {
     stripeAccountID?: string | null
     refreshToken?: string | null
     workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
-    receivedPayments?: PaymentsUncheckedCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsUncheckedCreateNestedManyWithoutCompanyInput
     incidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutCompanyInput
     directions?: DirectionsUncheckedCreateNestedManyWithoutCompanyInput
@@ -43989,7 +43810,7 @@ export namespace Prisma {
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     incidents?: IncidentsUpdateOneWithoutUsersNestedInput
     directions?: DirectionsUpdateManyWithoutUserNestedInput
-    payments?: PaymentsUpdateOneWithoutUserNestedInput
+    payments?: PaymentsUpdateManyWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUpdateManyWithoutUserNestedInput
     ClientMachinery?: ClientMachineryUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUpdateManyWithoutUserNestedInput
@@ -44014,7 +43835,7 @@ export namespace Prisma {
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
-    payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
+    payments?: PaymentsUncheckedUpdateManyWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
     ClientMachinery?: ClientMachineryUncheckedUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUncheckedUpdateManyWithoutUserNestedInput
@@ -44048,7 +43869,6 @@ export namespace Prisma {
     stripeAccountID?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUpdateManyWithoutCompanyNestedInput
-    receivedPayments?: PaymentsUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUpdateManyWithoutCompanyNestedInput
     incidentHistory?: IncidentHistoryUpdateManyWithoutCompanyNestedInput
     budget?: BudgetUpdateOneWithoutCompanyNestedInput
@@ -44081,7 +43901,6 @@ export namespace Prisma {
     stripeAccountID?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
-    receivedPayments?: PaymentsUncheckedUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUncheckedUpdateManyWithoutCompanyNestedInput
     incidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutCompanyNestedInput
     directions?: DirectionsUncheckedUpdateManyWithoutCompanyNestedInput
@@ -44149,7 +43968,6 @@ export namespace Prisma {
     stripeAccountID?: string | null
     refreshToken?: string | null
     workers?: WorkerCreateNestedManyWithoutCompanyInput
-    receivedPayments?: PaymentsCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsCreateNestedManyWithoutCompanyInput
     incidentHistory?: IncidentHistoryCreateNestedManyWithoutCompanyInput
     budget?: BudgetCreateNestedOneWithoutCompanyInput
@@ -44182,7 +44000,6 @@ export namespace Prisma {
     stripeAccountID?: string | null
     refreshToken?: string | null
     workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
-    receivedPayments?: PaymentsUncheckedCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsUncheckedCreateNestedManyWithoutCompanyInput
     incidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutCompanyInput
     directions?: DirectionsUncheckedCreateNestedManyWithoutCompanyInput
@@ -44272,7 +44089,6 @@ export namespace Prisma {
     stripeAccountID?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUpdateManyWithoutCompanyNestedInput
-    receivedPayments?: PaymentsUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUpdateManyWithoutCompanyNestedInput
     incidentHistory?: IncidentHistoryUpdateManyWithoutCompanyNestedInput
     budget?: BudgetUpdateOneWithoutCompanyNestedInput
@@ -44305,7 +44121,6 @@ export namespace Prisma {
     stripeAccountID?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
-    receivedPayments?: PaymentsUncheckedUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUncheckedUpdateManyWithoutCompanyNestedInput
     incidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutCompanyNestedInput
     directions?: DirectionsUncheckedUpdateManyWithoutCompanyNestedInput
@@ -44335,7 +44150,6 @@ export namespace Prisma {
     stripeAccountID?: string | null
     refreshToken?: string | null
     workers?: WorkerCreateNestedManyWithoutCompanyInput
-    receivedPayments?: PaymentsCreateNestedManyWithoutReceivedByInput
     incidentHistory?: IncidentHistoryCreateNestedManyWithoutCompanyInput
     budget?: BudgetCreateNestedOneWithoutCompanyInput
     directions?: DirectionsCreateNestedManyWithoutCompanyInput
@@ -44368,7 +44182,6 @@ export namespace Prisma {
     stripeAccountID?: string | null
     refreshToken?: string | null
     workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
-    receivedPayments?: PaymentsUncheckedCreateNestedManyWithoutReceivedByInput
     incidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutCompanyInput
     directions?: DirectionsUncheckedCreateNestedManyWithoutCompanyInput
     shiftWorkers?: ShiftWorkerUncheckedCreateNestedManyWithoutCompanyInput
@@ -44478,7 +44291,7 @@ export namespace Prisma {
     refreshToken?: string | null
     incidents?: IncidentsCreateNestedOneWithoutUsersInput
     directions?: DirectionsCreateNestedManyWithoutUserInput
-    payments?: PaymentsCreateNestedOneWithoutUserInput
+    payments?: PaymentsCreateNestedManyWithoutUserInput
     IncidentHistory?: IncidentHistoryCreateNestedManyWithoutUserInput
     ClientMachinery?: ClientMachineryCreateNestedManyWithoutUserInput
     Budget?: BudgetCreateNestedManyWithoutUserInput
@@ -44503,7 +44316,7 @@ export namespace Prisma {
     companyID?: number | null
     refreshToken?: string | null
     directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
-    payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
+    payments?: PaymentsUncheckedCreateNestedManyWithoutUserInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
     ClientMachinery?: ClientMachineryUncheckedCreateNestedManyWithoutUserInput
     Budget?: BudgetUncheckedCreateNestedManyWithoutUserInput
@@ -44529,7 +44342,7 @@ export namespace Prisma {
     contractID?: number | null
     refreshToken?: string | null
     directions?: DirectionsCreateNestedManyWithoutUserInput
-    payments?: PaymentsCreateNestedOneWithoutUserInput
+    payments?: PaymentsCreateNestedManyWithoutUserInput
     IncidentHistory?: IncidentHistoryCreateNestedManyWithoutUserInput
     ClientMachinery?: ClientMachineryCreateNestedManyWithoutUserInput
     Incidents?: IncidentsCreateNestedManyWithoutUserInput
@@ -44554,7 +44367,7 @@ export namespace Prisma {
     companyID?: number | null
     refreshToken?: string | null
     directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
-    payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
+    payments?: PaymentsUncheckedCreateNestedManyWithoutUserInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
     ClientMachinery?: ClientMachineryUncheckedCreateNestedManyWithoutUserInput
     Incidents?: IncidentsUncheckedCreateNestedManyWithoutUserInput
@@ -44600,27 +44413,27 @@ export namespace Prisma {
   }
 
   export type PaymentsCreateWithoutIncidentInput = {
+    paymentID: string
     amount: Decimal | DecimalJsLike | number | string
     date?: Date | string
-    method: string
+    receivedByID: number
     clientEmail: string
-    cardBrand: string
+    companyEmail?: string
     user: UserCreateNestedOneWithoutPaymentsInput
     company: CompanyCreateNestedOneWithoutPaymentsInput
-    receivedBy: CompanyCreateNestedOneWithoutReceivedPaymentsInput
     paymentStatus?: paymentStatusCreateNestedManyWithoutPaymentInput
   }
 
   export type PaymentsUncheckedCreateWithoutIncidentInput = {
     id?: number
+    paymentID: string
     amount: Decimal | DecimalJsLike | number | string
     date?: Date | string
-    method: string
     userID: number
     companyID: number
     receivedByID: number
     clientEmail: string
-    cardBrand: string
+    companyEmail?: string
     paymentStatus?: paymentStatusUncheckedCreateNestedManyWithoutPaymentInput
   }
 
@@ -44695,7 +44508,6 @@ export namespace Prisma {
     stripeAccountID?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUpdateManyWithoutCompanyNestedInput
-    receivedPayments?: PaymentsUpdateManyWithoutReceivedByNestedInput
     incidentHistory?: IncidentHistoryUpdateManyWithoutCompanyNestedInput
     budget?: BudgetUpdateOneWithoutCompanyNestedInput
     directions?: DirectionsUpdateManyWithoutCompanyNestedInput
@@ -44728,7 +44540,6 @@ export namespace Prisma {
     stripeAccountID?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
-    receivedPayments?: PaymentsUncheckedUpdateManyWithoutReceivedByNestedInput
     incidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutCompanyNestedInput
     directions?: DirectionsUncheckedUpdateManyWithoutCompanyNestedInput
     shiftWorkers?: ShiftWorkerUncheckedUpdateManyWithoutCompanyNestedInput
@@ -44856,7 +44667,7 @@ export namespace Prisma {
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     incidents?: IncidentsUpdateOneWithoutUsersNestedInput
     directions?: DirectionsUpdateManyWithoutUserNestedInput
-    payments?: PaymentsUpdateOneWithoutUserNestedInput
+    payments?: PaymentsUpdateManyWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUpdateManyWithoutUserNestedInput
     ClientMachinery?: ClientMachineryUpdateManyWithoutUserNestedInput
     Budget?: BudgetUpdateManyWithoutUserNestedInput
@@ -44881,7 +44692,7 @@ export namespace Prisma {
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
-    payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
+    payments?: PaymentsUncheckedUpdateManyWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
     ClientMachinery?: ClientMachineryUncheckedUpdateManyWithoutUserNestedInput
     Budget?: BudgetUncheckedUpdateManyWithoutUserNestedInput
@@ -45020,7 +44831,6 @@ export namespace Prisma {
     stripeAccountID?: string | null
     refreshToken?: string | null
     workers?: WorkerCreateNestedManyWithoutCompanyInput
-    receivedPayments?: PaymentsCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsCreateNestedManyWithoutCompanyInput
     incidentHistory?: IncidentHistoryCreateNestedManyWithoutCompanyInput
     budget?: BudgetCreateNestedOneWithoutCompanyInput
@@ -45053,7 +44863,6 @@ export namespace Prisma {
     stripeAccountID?: string | null
     refreshToken?: string | null
     workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
-    receivedPayments?: PaymentsUncheckedCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsUncheckedCreateNestedManyWithoutCompanyInput
     incidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutCompanyInput
     directions?: DirectionsUncheckedCreateNestedManyWithoutCompanyInput
@@ -45073,74 +44882,6 @@ export namespace Prisma {
   export type CompanyCreateOrConnectWithoutPaymentsInput = {
     where: CompanyWhereUniqueInput
     create: XOR<CompanyCreateWithoutPaymentsInput, CompanyUncheckedCreateWithoutPaymentsInput>
-  }
-
-  export type CompanyCreateWithoutReceivedPaymentsInput = {
-    name: string
-    phone: string
-    password: string
-    suspended?: boolean
-    suspendedUntil?: Date | string | null
-    role?: $Enums.Role
-    userID?: number | null
-    companyCode?: string | null
-    email: string
-    stripeAccountID?: string | null
-    refreshToken?: string | null
-    workers?: WorkerCreateNestedManyWithoutCompanyInput
-    incidents?: IncidentsCreateNestedManyWithoutCompanyInput
-    incidentHistory?: IncidentHistoryCreateNestedManyWithoutCompanyInput
-    budget?: BudgetCreateNestedOneWithoutCompanyInput
-    directions?: DirectionsCreateNestedManyWithoutCompanyInput
-    shiftWorkers?: ShiftWorkerCreateNestedManyWithoutCompanyInput
-    payments?: PaymentsCreateNestedManyWithoutCompanyInput
-    machinery?: machineryCreateNestedManyWithoutCompanyInput
-    Budget?: BudgetCreateNestedManyWithoutCompanyInput
-    User?: UserCreateNestedManyWithoutCompanyInput
-    contracts?: contractsCreateNestedManyWithoutCompanyInput
-    admins?: AdminsCompaniesCreateNestedManyWithoutCompanyInput
-    workersCompanies?: workersCompaniesCreateNestedManyWithoutCompanyInput
-    usersCompanies?: usersCompaniesCreateNestedManyWithoutCompanyInput
-    companyFiles?: FileCreateNestedManyWithoutCompanyInput
-    Subscriptions?: SubscriptionCreateNestedManyWithoutCompanyInput
-    products?: productsCreateNestedManyWithoutCompanyInput
-  }
-
-  export type CompanyUncheckedCreateWithoutReceivedPaymentsInput = {
-    companyID?: number
-    name: string
-    phone: string
-    password: string
-    budgetID?: number | null
-    suspended?: boolean
-    suspendedUntil?: Date | string | null
-    role?: $Enums.Role
-    userID?: number | null
-    companyCode?: string | null
-    email: string
-    stripeAccountID?: string | null
-    refreshToken?: string | null
-    workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
-    incidents?: IncidentsUncheckedCreateNestedManyWithoutCompanyInput
-    incidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutCompanyInput
-    directions?: DirectionsUncheckedCreateNestedManyWithoutCompanyInput
-    shiftWorkers?: ShiftWorkerUncheckedCreateNestedManyWithoutCompanyInput
-    payments?: PaymentsUncheckedCreateNestedManyWithoutCompanyInput
-    machinery?: machineryUncheckedCreateNestedManyWithoutCompanyInput
-    Budget?: BudgetUncheckedCreateNestedManyWithoutCompanyInput
-    User?: UserUncheckedCreateNestedManyWithoutCompanyInput
-    contracts?: contractsUncheckedCreateNestedManyWithoutCompanyInput
-    admins?: AdminsCompaniesUncheckedCreateNestedManyWithoutCompanyInput
-    workersCompanies?: workersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
-    usersCompanies?: usersCompaniesUncheckedCreateNestedManyWithoutCompanyInput
-    companyFiles?: FileUncheckedCreateNestedManyWithoutCompanyInput
-    Subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutCompanyInput
-    products?: productsUncheckedCreateNestedManyWithoutCompanyInput
-  }
-
-  export type CompanyCreateOrConnectWithoutReceivedPaymentsInput = {
-    where: CompanyWhereUniqueInput
-    create: XOR<CompanyCreateWithoutReceivedPaymentsInput, CompanyUncheckedCreateWithoutReceivedPaymentsInput>
   }
 
   export type IncidentsCreateWithoutPaymentsInput = {
@@ -45290,7 +45031,6 @@ export namespace Prisma {
     stripeAccountID?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUpdateManyWithoutCompanyNestedInput
-    receivedPayments?: PaymentsUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUpdateManyWithoutCompanyNestedInput
     incidentHistory?: IncidentHistoryUpdateManyWithoutCompanyNestedInput
     budget?: BudgetUpdateOneWithoutCompanyNestedInput
@@ -45323,85 +45063,10 @@ export namespace Prisma {
     stripeAccountID?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
-    receivedPayments?: PaymentsUncheckedUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUncheckedUpdateManyWithoutCompanyNestedInput
     incidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutCompanyNestedInput
     directions?: DirectionsUncheckedUpdateManyWithoutCompanyNestedInput
     shiftWorkers?: ShiftWorkerUncheckedUpdateManyWithoutCompanyNestedInput
-    machinery?: machineryUncheckedUpdateManyWithoutCompanyNestedInput
-    Budget?: BudgetUncheckedUpdateManyWithoutCompanyNestedInput
-    User?: UserUncheckedUpdateManyWithoutCompanyNestedInput
-    contracts?: contractsUncheckedUpdateManyWithoutCompanyNestedInput
-    admins?: AdminsCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
-    workersCompanies?: workersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
-    usersCompanies?: usersCompaniesUncheckedUpdateManyWithoutCompanyNestedInput
-    companyFiles?: FileUncheckedUpdateManyWithoutCompanyNestedInput
-    Subscriptions?: SubscriptionUncheckedUpdateManyWithoutCompanyNestedInput
-    products?: productsUncheckedUpdateManyWithoutCompanyNestedInput
-  }
-
-  export type CompanyUpsertWithoutReceivedPaymentsInput = {
-    update: XOR<CompanyUpdateWithoutReceivedPaymentsInput, CompanyUncheckedUpdateWithoutReceivedPaymentsInput>
-    create: XOR<CompanyCreateWithoutReceivedPaymentsInput, CompanyUncheckedCreateWithoutReceivedPaymentsInput>
-    where?: CompanyWhereInput
-  }
-
-  export type CompanyUpdateToOneWithWhereWithoutReceivedPaymentsInput = {
-    where?: CompanyWhereInput
-    data: XOR<CompanyUpdateWithoutReceivedPaymentsInput, CompanyUncheckedUpdateWithoutReceivedPaymentsInput>
-  }
-
-  export type CompanyUpdateWithoutReceivedPaymentsInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    suspended?: BoolFieldUpdateOperationsInput | boolean
-    suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
-    userID?: NullableIntFieldUpdateOperationsInput | number | null
-    companyCode?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: StringFieldUpdateOperationsInput | string
-    stripeAccountID?: NullableStringFieldUpdateOperationsInput | string | null
-    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
-    workers?: WorkerUpdateManyWithoutCompanyNestedInput
-    incidents?: IncidentsUpdateManyWithoutCompanyNestedInput
-    incidentHistory?: IncidentHistoryUpdateManyWithoutCompanyNestedInput
-    budget?: BudgetUpdateOneWithoutCompanyNestedInput
-    directions?: DirectionsUpdateManyWithoutCompanyNestedInput
-    shiftWorkers?: ShiftWorkerUpdateManyWithoutCompanyNestedInput
-    payments?: PaymentsUpdateManyWithoutCompanyNestedInput
-    machinery?: machineryUpdateManyWithoutCompanyNestedInput
-    Budget?: BudgetUpdateManyWithoutCompanyNestedInput
-    User?: UserUpdateManyWithoutCompanyNestedInput
-    contracts?: contractsUpdateManyWithoutCompanyNestedInput
-    admins?: AdminsCompaniesUpdateManyWithoutCompanyNestedInput
-    workersCompanies?: workersCompaniesUpdateManyWithoutCompanyNestedInput
-    usersCompanies?: usersCompaniesUpdateManyWithoutCompanyNestedInput
-    companyFiles?: FileUpdateManyWithoutCompanyNestedInput
-    Subscriptions?: SubscriptionUpdateManyWithoutCompanyNestedInput
-    products?: productsUpdateManyWithoutCompanyNestedInput
-  }
-
-  export type CompanyUncheckedUpdateWithoutReceivedPaymentsInput = {
-    companyID?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    budgetID?: NullableIntFieldUpdateOperationsInput | number | null
-    suspended?: BoolFieldUpdateOperationsInput | boolean
-    suspendedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
-    userID?: NullableIntFieldUpdateOperationsInput | number | null
-    companyCode?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: StringFieldUpdateOperationsInput | string
-    stripeAccountID?: NullableStringFieldUpdateOperationsInput | string | null
-    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
-    workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
-    incidents?: IncidentsUncheckedUpdateManyWithoutCompanyNestedInput
-    incidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutCompanyNestedInput
-    directions?: DirectionsUncheckedUpdateManyWithoutCompanyNestedInput
-    shiftWorkers?: ShiftWorkerUncheckedUpdateManyWithoutCompanyNestedInput
-    payments?: PaymentsUncheckedUpdateManyWithoutCompanyNestedInput
     machinery?: machineryUncheckedUpdateManyWithoutCompanyNestedInput
     Budget?: BudgetUncheckedUpdateManyWithoutCompanyNestedInput
     User?: UserUncheckedUpdateManyWithoutCompanyNestedInput
@@ -45492,28 +45157,28 @@ export namespace Prisma {
   }
 
   export type PaymentsCreateWithoutPaymentStatusInput = {
+    paymentID: string
     amount: Decimal | DecimalJsLike | number | string
     date?: Date | string
-    method: string
+    receivedByID: number
     clientEmail: string
-    cardBrand: string
+    companyEmail?: string
     user: UserCreateNestedOneWithoutPaymentsInput
     company: CompanyCreateNestedOneWithoutPaymentsInput
-    receivedBy: CompanyCreateNestedOneWithoutReceivedPaymentsInput
     incident?: IncidentsCreateNestedOneWithoutPaymentsInput
   }
 
   export type PaymentsUncheckedCreateWithoutPaymentStatusInput = {
     id?: number
+    paymentID: string
     amount: Decimal | DecimalJsLike | number | string
     date?: Date | string
-    method: string
     userID: number
     companyID: number
     IncidentsID?: number | null
     receivedByID: number
     clientEmail: string
-    cardBrand: string
+    companyEmail?: string
   }
 
   export type PaymentsCreateOrConnectWithoutPaymentStatusInput = {
@@ -45533,28 +45198,28 @@ export namespace Prisma {
   }
 
   export type PaymentsUpdateWithoutPaymentStatusInput = {
+    paymentID?: StringFieldUpdateOperationsInput | string
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    method?: StringFieldUpdateOperationsInput | string
+    receivedByID?: IntFieldUpdateOperationsInput | number
     clientEmail?: StringFieldUpdateOperationsInput | string
-    cardBrand?: StringFieldUpdateOperationsInput | string
+    companyEmail?: StringFieldUpdateOperationsInput | string
     user?: UserUpdateOneRequiredWithoutPaymentsNestedInput
     company?: CompanyUpdateOneRequiredWithoutPaymentsNestedInput
-    receivedBy?: CompanyUpdateOneRequiredWithoutReceivedPaymentsNestedInput
     incident?: IncidentsUpdateOneWithoutPaymentsNestedInput
   }
 
   export type PaymentsUncheckedUpdateWithoutPaymentStatusInput = {
     id?: IntFieldUpdateOperationsInput | number
+    paymentID?: StringFieldUpdateOperationsInput | string
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    method?: StringFieldUpdateOperationsInput | string
     userID?: IntFieldUpdateOperationsInput | number
     companyID?: IntFieldUpdateOperationsInput | number
     IncidentsID?: NullableIntFieldUpdateOperationsInput | number | null
     receivedByID?: IntFieldUpdateOperationsInput | number
     clientEmail?: StringFieldUpdateOperationsInput | string
-    cardBrand?: StringFieldUpdateOperationsInput | string
+    companyEmail?: StringFieldUpdateOperationsInput | string
   }
 
   export type CompanyCreateWithoutBudgetInput = {
@@ -45570,7 +45235,6 @@ export namespace Prisma {
     stripeAccountID?: string | null
     refreshToken?: string | null
     workers?: WorkerCreateNestedManyWithoutCompanyInput
-    receivedPayments?: PaymentsCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsCreateNestedManyWithoutCompanyInput
     incidentHistory?: IncidentHistoryCreateNestedManyWithoutCompanyInput
     budget?: BudgetCreateNestedOneWithoutCompanyInput
@@ -45603,7 +45267,6 @@ export namespace Prisma {
     stripeAccountID?: string | null
     refreshToken?: string | null
     workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
-    receivedPayments?: PaymentsUncheckedCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsUncheckedCreateNestedManyWithoutCompanyInput
     incidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutCompanyInput
     directions?: DirectionsUncheckedCreateNestedManyWithoutCompanyInput
@@ -45683,7 +45346,7 @@ export namespace Prisma {
     refreshToken?: string | null
     incidents?: IncidentsCreateNestedOneWithoutUsersInput
     directions?: DirectionsCreateNestedManyWithoutUserInput
-    payments?: PaymentsCreateNestedOneWithoutUserInput
+    payments?: PaymentsCreateNestedManyWithoutUserInput
     IncidentHistory?: IncidentHistoryCreateNestedManyWithoutUserInput
     ClientMachinery?: ClientMachineryCreateNestedManyWithoutUserInput
     Incidents?: IncidentsCreateNestedManyWithoutUserInput
@@ -45708,7 +45371,7 @@ export namespace Prisma {
     companyID?: number | null
     refreshToken?: string | null
     directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
-    payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
+    payments?: PaymentsUncheckedCreateNestedManyWithoutUserInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
     ClientMachinery?: ClientMachineryUncheckedCreateNestedManyWithoutUserInput
     Incidents?: IncidentsUncheckedCreateNestedManyWithoutUserInput
@@ -45736,7 +45399,6 @@ export namespace Prisma {
     stripeAccountID?: string | null
     refreshToken?: string | null
     workers?: WorkerCreateNestedManyWithoutCompanyInput
-    receivedPayments?: PaymentsCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsCreateNestedManyWithoutCompanyInput
     incidentHistory?: IncidentHistoryCreateNestedManyWithoutCompanyInput
     directions?: DirectionsCreateNestedManyWithoutCompanyInput
@@ -45768,7 +45430,6 @@ export namespace Prisma {
     stripeAccountID?: string | null
     refreshToken?: string | null
     workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
-    receivedPayments?: PaymentsUncheckedCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsUncheckedCreateNestedManyWithoutCompanyInput
     incidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutCompanyInput
     directions?: DirectionsUncheckedCreateNestedManyWithoutCompanyInput
@@ -45852,7 +45513,6 @@ export namespace Prisma {
     stripeAccountID?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUpdateManyWithoutCompanyNestedInput
-    receivedPayments?: PaymentsUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUpdateManyWithoutCompanyNestedInput
     incidentHistory?: IncidentHistoryUpdateManyWithoutCompanyNestedInput
     budget?: BudgetUpdateOneWithoutCompanyNestedInput
@@ -45885,7 +45545,6 @@ export namespace Prisma {
     stripeAccountID?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
-    receivedPayments?: PaymentsUncheckedUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUncheckedUpdateManyWithoutCompanyNestedInput
     incidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutCompanyNestedInput
     directions?: DirectionsUncheckedUpdateManyWithoutCompanyNestedInput
@@ -45977,7 +45636,7 @@ export namespace Prisma {
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     incidents?: IncidentsUpdateOneWithoutUsersNestedInput
     directions?: DirectionsUpdateManyWithoutUserNestedInput
-    payments?: PaymentsUpdateOneWithoutUserNestedInput
+    payments?: PaymentsUpdateManyWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUpdateManyWithoutUserNestedInput
     ClientMachinery?: ClientMachineryUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUpdateManyWithoutUserNestedInput
@@ -46002,7 +45661,7 @@ export namespace Prisma {
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
-    payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
+    payments?: PaymentsUncheckedUpdateManyWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
     ClientMachinery?: ClientMachineryUncheckedUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUncheckedUpdateManyWithoutUserNestedInput
@@ -46076,7 +45735,6 @@ export namespace Prisma {
     stripeAccountID?: string | null
     refreshToken?: string | null
     workers?: WorkerCreateNestedManyWithoutCompanyInput
-    receivedPayments?: PaymentsCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsCreateNestedManyWithoutCompanyInput
     incidentHistory?: IncidentHistoryCreateNestedManyWithoutCompanyInput
     budget?: BudgetCreateNestedOneWithoutCompanyInput
@@ -46109,7 +45767,6 @@ export namespace Prisma {
     stripeAccountID?: string | null
     refreshToken?: string | null
     workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
-    receivedPayments?: PaymentsUncheckedCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsUncheckedCreateNestedManyWithoutCompanyInput
     incidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutCompanyInput
     directions?: DirectionsUncheckedCreateNestedManyWithoutCompanyInput
@@ -46178,7 +45835,6 @@ export namespace Prisma {
     stripeAccountID?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUpdateManyWithoutCompanyNestedInput
-    receivedPayments?: PaymentsUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUpdateManyWithoutCompanyNestedInput
     incidentHistory?: IncidentHistoryUpdateManyWithoutCompanyNestedInput
     budget?: BudgetUpdateOneWithoutCompanyNestedInput
@@ -46211,7 +45867,6 @@ export namespace Prisma {
     stripeAccountID?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
-    receivedPayments?: PaymentsUncheckedUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUncheckedUpdateManyWithoutCompanyNestedInput
     incidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutCompanyNestedInput
     directions?: DirectionsUncheckedUpdateManyWithoutCompanyNestedInput
@@ -46326,7 +45981,6 @@ export namespace Prisma {
     stripeAccountID?: string | null
     refreshToken?: string | null
     workers?: WorkerCreateNestedManyWithoutCompanyInput
-    receivedPayments?: PaymentsCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsCreateNestedManyWithoutCompanyInput
     incidentHistory?: IncidentHistoryCreateNestedManyWithoutCompanyInput
     budget?: BudgetCreateNestedOneWithoutCompanyInput
@@ -46359,7 +46013,6 @@ export namespace Prisma {
     stripeAccountID?: string | null
     refreshToken?: string | null
     workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
-    receivedPayments?: PaymentsUncheckedCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsUncheckedCreateNestedManyWithoutCompanyInput
     incidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutCompanyInput
     directions?: DirectionsUncheckedCreateNestedManyWithoutCompanyInput
@@ -46405,7 +46058,6 @@ export namespace Prisma {
     stripeAccountID?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUpdateManyWithoutCompanyNestedInput
-    receivedPayments?: PaymentsUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUpdateManyWithoutCompanyNestedInput
     incidentHistory?: IncidentHistoryUpdateManyWithoutCompanyNestedInput
     budget?: BudgetUpdateOneWithoutCompanyNestedInput
@@ -46438,7 +46090,6 @@ export namespace Prisma {
     stripeAccountID?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
-    receivedPayments?: PaymentsUncheckedUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUncheckedUpdateManyWithoutCompanyNestedInput
     incidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutCompanyNestedInput
     directions?: DirectionsUncheckedUpdateManyWithoutCompanyNestedInput
@@ -46514,7 +46165,6 @@ export namespace Prisma {
     stripeAccountID?: string | null
     refreshToken?: string | null
     workers?: WorkerCreateNestedManyWithoutCompanyInput
-    receivedPayments?: PaymentsCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsCreateNestedManyWithoutCompanyInput
     budget?: BudgetCreateNestedOneWithoutCompanyInput
     directions?: DirectionsCreateNestedManyWithoutCompanyInput
@@ -46547,7 +46197,6 @@ export namespace Prisma {
     stripeAccountID?: string | null
     refreshToken?: string | null
     workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
-    receivedPayments?: PaymentsUncheckedCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsUncheckedCreateNestedManyWithoutCompanyInput
     directions?: DirectionsUncheckedCreateNestedManyWithoutCompanyInput
     shiftWorkers?: ShiftWorkerUncheckedCreateNestedManyWithoutCompanyInput
@@ -46581,7 +46230,7 @@ export namespace Prisma {
     refreshToken?: string | null
     incidents?: IncidentsCreateNestedOneWithoutUsersInput
     directions?: DirectionsCreateNestedManyWithoutUserInput
-    payments?: PaymentsCreateNestedOneWithoutUserInput
+    payments?: PaymentsCreateNestedManyWithoutUserInput
     ClientMachinery?: ClientMachineryCreateNestedManyWithoutUserInput
     Incidents?: IncidentsCreateNestedManyWithoutUserInput
     Budget?: BudgetCreateNestedManyWithoutUserInput
@@ -46606,7 +46255,7 @@ export namespace Prisma {
     companyID?: number | null
     refreshToken?: string | null
     directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
-    payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
+    payments?: PaymentsUncheckedCreateNestedManyWithoutUserInput
     ClientMachinery?: ClientMachineryUncheckedCreateNestedManyWithoutUserInput
     Incidents?: IncidentsUncheckedCreateNestedManyWithoutUserInput
     Budget?: BudgetUncheckedCreateNestedManyWithoutUserInput
@@ -46735,7 +46384,6 @@ export namespace Prisma {
     stripeAccountID?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUpdateManyWithoutCompanyNestedInput
-    receivedPayments?: PaymentsUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUpdateManyWithoutCompanyNestedInput
     budget?: BudgetUpdateOneWithoutCompanyNestedInput
     directions?: DirectionsUpdateManyWithoutCompanyNestedInput
@@ -46768,7 +46416,6 @@ export namespace Prisma {
     stripeAccountID?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
-    receivedPayments?: PaymentsUncheckedUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUncheckedUpdateManyWithoutCompanyNestedInput
     directions?: DirectionsUncheckedUpdateManyWithoutCompanyNestedInput
     shiftWorkers?: ShiftWorkerUncheckedUpdateManyWithoutCompanyNestedInput
@@ -46808,7 +46455,7 @@ export namespace Prisma {
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     incidents?: IncidentsUpdateOneWithoutUsersNestedInput
     directions?: DirectionsUpdateManyWithoutUserNestedInput
-    payments?: PaymentsUpdateOneWithoutUserNestedInput
+    payments?: PaymentsUpdateManyWithoutUserNestedInput
     ClientMachinery?: ClientMachineryUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUpdateManyWithoutUserNestedInput
     Budget?: BudgetUpdateManyWithoutUserNestedInput
@@ -46833,7 +46480,7 @@ export namespace Prisma {
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
-    payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
+    payments?: PaymentsUncheckedUpdateManyWithoutUserNestedInput
     ClientMachinery?: ClientMachineryUncheckedUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUncheckedUpdateManyWithoutUserNestedInput
     Budget?: BudgetUncheckedUpdateManyWithoutUserNestedInput
@@ -46900,7 +46547,6 @@ export namespace Prisma {
     stripeAccountID?: string | null
     refreshToken?: string | null
     workers?: WorkerCreateNestedManyWithoutCompanyInput
-    receivedPayments?: PaymentsCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsCreateNestedManyWithoutCompanyInput
     incidentHistory?: IncidentHistoryCreateNestedManyWithoutCompanyInput
     budget?: BudgetCreateNestedOneWithoutCompanyInput
@@ -46933,7 +46579,6 @@ export namespace Prisma {
     stripeAccountID?: string | null
     refreshToken?: string | null
     workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
-    receivedPayments?: PaymentsUncheckedCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsUncheckedCreateNestedManyWithoutCompanyInput
     incidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutCompanyInput
     directions?: DirectionsUncheckedCreateNestedManyWithoutCompanyInput
@@ -47037,7 +46682,6 @@ export namespace Prisma {
     stripeAccountID?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUpdateManyWithoutCompanyNestedInput
-    receivedPayments?: PaymentsUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUpdateManyWithoutCompanyNestedInput
     incidentHistory?: IncidentHistoryUpdateManyWithoutCompanyNestedInput
     budget?: BudgetUpdateOneWithoutCompanyNestedInput
@@ -47070,7 +46714,6 @@ export namespace Prisma {
     stripeAccountID?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
-    receivedPayments?: PaymentsUncheckedUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUncheckedUpdateManyWithoutCompanyNestedInput
     incidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutCompanyNestedInput
     directions?: DirectionsUncheckedUpdateManyWithoutCompanyNestedInput
@@ -47375,7 +47018,7 @@ export namespace Prisma {
     contractID?: number | null
     refreshToken?: string | null
     incidents?: IncidentsCreateNestedOneWithoutUsersInput
-    payments?: PaymentsCreateNestedOneWithoutUserInput
+    payments?: PaymentsCreateNestedManyWithoutUserInput
     IncidentHistory?: IncidentHistoryCreateNestedManyWithoutUserInput
     ClientMachinery?: ClientMachineryCreateNestedManyWithoutUserInput
     Incidents?: IncidentsCreateNestedManyWithoutUserInput
@@ -47400,7 +47043,7 @@ export namespace Prisma {
     contractID?: number | null
     companyID?: number | null
     refreshToken?: string | null
-    payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
+    payments?: PaymentsUncheckedCreateNestedManyWithoutUserInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
     ClientMachinery?: ClientMachineryUncheckedCreateNestedManyWithoutUserInput
     Incidents?: IncidentsUncheckedCreateNestedManyWithoutUserInput
@@ -47429,7 +47072,6 @@ export namespace Prisma {
     stripeAccountID?: string | null
     refreshToken?: string | null
     workers?: WorkerCreateNestedManyWithoutCompanyInput
-    receivedPayments?: PaymentsCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsCreateNestedManyWithoutCompanyInput
     incidentHistory?: IncidentHistoryCreateNestedManyWithoutCompanyInput
     budget?: BudgetCreateNestedOneWithoutCompanyInput
@@ -47462,7 +47104,6 @@ export namespace Prisma {
     stripeAccountID?: string | null
     refreshToken?: string | null
     workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
-    receivedPayments?: PaymentsUncheckedCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsUncheckedCreateNestedManyWithoutCompanyInput
     incidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutCompanyInput
     shiftWorkers?: ShiftWorkerUncheckedCreateNestedManyWithoutCompanyInput
@@ -47506,7 +47147,7 @@ export namespace Prisma {
     contractID?: NullableIntFieldUpdateOperationsInput | number | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     incidents?: IncidentsUpdateOneWithoutUsersNestedInput
-    payments?: PaymentsUpdateOneWithoutUserNestedInput
+    payments?: PaymentsUpdateManyWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUpdateManyWithoutUserNestedInput
     ClientMachinery?: ClientMachineryUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUpdateManyWithoutUserNestedInput
@@ -47531,7 +47172,7 @@ export namespace Prisma {
     contractID?: NullableIntFieldUpdateOperationsInput | number | null
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
-    payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
+    payments?: PaymentsUncheckedUpdateManyWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
     ClientMachinery?: ClientMachineryUncheckedUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUncheckedUpdateManyWithoutUserNestedInput
@@ -47566,7 +47207,6 @@ export namespace Prisma {
     stripeAccountID?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUpdateManyWithoutCompanyNestedInput
-    receivedPayments?: PaymentsUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUpdateManyWithoutCompanyNestedInput
     incidentHistory?: IncidentHistoryUpdateManyWithoutCompanyNestedInput
     budget?: BudgetUpdateOneWithoutCompanyNestedInput
@@ -47599,7 +47239,6 @@ export namespace Prisma {
     stripeAccountID?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
-    receivedPayments?: PaymentsUncheckedUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUncheckedUpdateManyWithoutCompanyNestedInput
     incidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutCompanyNestedInput
     shiftWorkers?: ShiftWorkerUncheckedUpdateManyWithoutCompanyNestedInput
@@ -47628,7 +47267,7 @@ export namespace Prisma {
     refreshToken?: string | null
     incidents?: IncidentsCreateNestedOneWithoutUsersInput
     directions?: DirectionsCreateNestedManyWithoutUserInput
-    payments?: PaymentsCreateNestedOneWithoutUserInput
+    payments?: PaymentsCreateNestedManyWithoutUserInput
     IncidentHistory?: IncidentHistoryCreateNestedManyWithoutUserInput
     ClientMachinery?: ClientMachineryCreateNestedManyWithoutUserInput
     Incidents?: IncidentsCreateNestedManyWithoutUserInput
@@ -47653,7 +47292,7 @@ export namespace Prisma {
     companyID?: number | null
     refreshToken?: string | null
     directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
-    payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
+    payments?: PaymentsUncheckedCreateNestedManyWithoutUserInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
     ClientMachinery?: ClientMachineryUncheckedCreateNestedManyWithoutUserInput
     Incidents?: IncidentsUncheckedCreateNestedManyWithoutUserInput
@@ -47681,7 +47320,6 @@ export namespace Prisma {
     stripeAccountID?: string | null
     refreshToken?: string | null
     workers?: WorkerCreateNestedManyWithoutCompanyInput
-    receivedPayments?: PaymentsCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsCreateNestedManyWithoutCompanyInput
     incidentHistory?: IncidentHistoryCreateNestedManyWithoutCompanyInput
     budget?: BudgetCreateNestedOneWithoutCompanyInput
@@ -47714,7 +47352,6 @@ export namespace Prisma {
     stripeAccountID?: string | null
     refreshToken?: string | null
     workers?: WorkerUncheckedCreateNestedManyWithoutCompanyInput
-    receivedPayments?: PaymentsUncheckedCreateNestedManyWithoutReceivedByInput
     incidents?: IncidentsUncheckedCreateNestedManyWithoutCompanyInput
     incidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutCompanyInput
     directions?: DirectionsUncheckedCreateNestedManyWithoutCompanyInput
@@ -47777,7 +47414,7 @@ export namespace Prisma {
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     incidents?: IncidentsUpdateOneWithoutUsersNestedInput
     directions?: DirectionsUpdateManyWithoutUserNestedInput
-    payments?: PaymentsUpdateOneWithoutUserNestedInput
+    payments?: PaymentsUpdateManyWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUpdateManyWithoutUserNestedInput
     ClientMachinery?: ClientMachineryUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUpdateManyWithoutUserNestedInput
@@ -47802,7 +47439,7 @@ export namespace Prisma {
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
-    payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
+    payments?: PaymentsUncheckedUpdateManyWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
     ClientMachinery?: ClientMachineryUncheckedUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUncheckedUpdateManyWithoutUserNestedInput
@@ -47836,7 +47473,6 @@ export namespace Prisma {
     stripeAccountID?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUpdateManyWithoutCompanyNestedInput
-    receivedPayments?: PaymentsUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUpdateManyWithoutCompanyNestedInput
     incidentHistory?: IncidentHistoryUpdateManyWithoutCompanyNestedInput
     budget?: BudgetUpdateOneWithoutCompanyNestedInput
@@ -47869,7 +47505,6 @@ export namespace Prisma {
     stripeAccountID?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
-    receivedPayments?: PaymentsUncheckedUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUncheckedUpdateManyWithoutCompanyNestedInput
     incidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutCompanyNestedInput
     directions?: DirectionsUncheckedUpdateManyWithoutCompanyNestedInput
@@ -47914,7 +47549,7 @@ export namespace Prisma {
     refreshToken?: string | null
     incidents?: IncidentsCreateNestedOneWithoutUsersInput
     directions?: DirectionsCreateNestedManyWithoutUserInput
-    payments?: PaymentsCreateNestedOneWithoutUserInput
+    payments?: PaymentsCreateNestedManyWithoutUserInput
     IncidentHistory?: IncidentHistoryCreateNestedManyWithoutUserInput
     Incidents?: IncidentsCreateNestedManyWithoutUserInput
     Budget?: BudgetCreateNestedManyWithoutUserInput
@@ -47939,7 +47574,7 @@ export namespace Prisma {
     companyID?: number | null
     refreshToken?: string | null
     directions?: DirectionsUncheckedCreateNestedManyWithoutUserInput
-    payments?: PaymentsUncheckedCreateNestedOneWithoutUserInput
+    payments?: PaymentsUncheckedCreateNestedManyWithoutUserInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutUserInput
     Incidents?: IncidentsUncheckedCreateNestedManyWithoutUserInput
     Budget?: BudgetUncheckedCreateNestedManyWithoutUserInput
@@ -48013,7 +47648,7 @@ export namespace Prisma {
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     incidents?: IncidentsUpdateOneWithoutUsersNestedInput
     directions?: DirectionsUpdateManyWithoutUserNestedInput
-    payments?: PaymentsUpdateOneWithoutUserNestedInput
+    payments?: PaymentsUpdateManyWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUpdateManyWithoutUserNestedInput
     Budget?: BudgetUpdateManyWithoutUserNestedInput
@@ -48038,7 +47673,7 @@ export namespace Prisma {
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
-    payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
+    payments?: PaymentsUncheckedUpdateManyWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUncheckedUpdateManyWithoutUserNestedInput
     Budget?: BudgetUncheckedUpdateManyWithoutUserNestedInput
@@ -48097,6 +47732,18 @@ export namespace Prisma {
     city: string
     state: string
     zipCode: string
+  }
+
+  export type PaymentsCreateManyUserInput = {
+    id?: number
+    paymentID: string
+    amount: Decimal | DecimalJsLike | number | string
+    date?: Date | string
+    companyID: number
+    IncidentsID?: number | null
+    receivedByID: number
+    clientEmail: string
+    companyEmail?: string
   }
 
   export type IncidentHistoryCreateManyUserInput = {
@@ -48211,6 +47858,43 @@ export namespace Prisma {
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PaymentsUpdateWithoutUserInput = {
+    paymentID?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    receivedByID?: IntFieldUpdateOperationsInput | number
+    clientEmail?: StringFieldUpdateOperationsInput | string
+    companyEmail?: StringFieldUpdateOperationsInput | string
+    company?: CompanyUpdateOneRequiredWithoutPaymentsNestedInput
+    incident?: IncidentsUpdateOneWithoutPaymentsNestedInput
+    paymentStatus?: paymentStatusUpdateManyWithoutPaymentNestedInput
+  }
+
+  export type PaymentsUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    paymentID?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    companyID?: IntFieldUpdateOperationsInput | number
+    IncidentsID?: NullableIntFieldUpdateOperationsInput | number | null
+    receivedByID?: IntFieldUpdateOperationsInput | number
+    clientEmail?: StringFieldUpdateOperationsInput | string
+    companyEmail?: StringFieldUpdateOperationsInput | string
+    paymentStatus?: paymentStatusUncheckedUpdateManyWithoutPaymentNestedInput
+  }
+
+  export type PaymentsUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    paymentID?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    companyID?: IntFieldUpdateOperationsInput | number
+    IncidentsID?: NullableIntFieldUpdateOperationsInput | number | null
+    receivedByID?: IntFieldUpdateOperationsInput | number
+    clientEmail?: StringFieldUpdateOperationsInput | string
+    companyEmail?: StringFieldUpdateOperationsInput | string
   }
 
   export type IncidentHistoryUpdateWithoutUserInput = {
@@ -48496,18 +48180,6 @@ export namespace Prisma {
     refreshToken?: string | null
   }
 
-  export type PaymentsCreateManyReceivedByInput = {
-    id?: number
-    amount: Decimal | DecimalJsLike | number | string
-    date?: Date | string
-    method: string
-    userID: number
-    companyID: number
-    IncidentsID?: number | null
-    clientEmail: string
-    cardBrand: string
-  }
-
   export type IncidentsCreateManyCompanyInput = {
     IncidentsID?: number
     title: string
@@ -48555,14 +48227,14 @@ export namespace Prisma {
 
   export type PaymentsCreateManyCompanyInput = {
     id?: number
+    paymentID: string
     amount: Decimal | DecimalJsLike | number | string
     date?: Date | string
-    method: string
     userID: number
     IncidentsID?: number | null
     receivedByID: number
     clientEmail: string
-    cardBrand: string
+    companyEmail?: string
   }
 
   export type machineryCreateManyCompanyInput = {
@@ -48708,43 +48380,6 @@ export namespace Prisma {
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type PaymentsUpdateWithoutReceivedByInput = {
-    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    method?: StringFieldUpdateOperationsInput | string
-    clientEmail?: StringFieldUpdateOperationsInput | string
-    cardBrand?: StringFieldUpdateOperationsInput | string
-    user?: UserUpdateOneRequiredWithoutPaymentsNestedInput
-    company?: CompanyUpdateOneRequiredWithoutPaymentsNestedInput
-    incident?: IncidentsUpdateOneWithoutPaymentsNestedInput
-    paymentStatus?: paymentStatusUpdateManyWithoutPaymentNestedInput
-  }
-
-  export type PaymentsUncheckedUpdateWithoutReceivedByInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    method?: StringFieldUpdateOperationsInput | string
-    userID?: IntFieldUpdateOperationsInput | number
-    companyID?: IntFieldUpdateOperationsInput | number
-    IncidentsID?: NullableIntFieldUpdateOperationsInput | number | null
-    clientEmail?: StringFieldUpdateOperationsInput | string
-    cardBrand?: StringFieldUpdateOperationsInput | string
-    paymentStatus?: paymentStatusUncheckedUpdateManyWithoutPaymentNestedInput
-  }
-
-  export type PaymentsUncheckedUpdateManyWithoutReceivedByInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    method?: StringFieldUpdateOperationsInput | string
-    userID?: IntFieldUpdateOperationsInput | number
-    companyID?: IntFieldUpdateOperationsInput | number
-    IncidentsID?: NullableIntFieldUpdateOperationsInput | number | null
-    clientEmail?: StringFieldUpdateOperationsInput | string
-    cardBrand?: StringFieldUpdateOperationsInput | string
-  }
-
   export type IncidentsUpdateWithoutCompanyInput = {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
@@ -48885,40 +48520,40 @@ export namespace Prisma {
   }
 
   export type PaymentsUpdateWithoutCompanyInput = {
+    paymentID?: StringFieldUpdateOperationsInput | string
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    method?: StringFieldUpdateOperationsInput | string
+    receivedByID?: IntFieldUpdateOperationsInput | number
     clientEmail?: StringFieldUpdateOperationsInput | string
-    cardBrand?: StringFieldUpdateOperationsInput | string
+    companyEmail?: StringFieldUpdateOperationsInput | string
     user?: UserUpdateOneRequiredWithoutPaymentsNestedInput
-    receivedBy?: CompanyUpdateOneRequiredWithoutReceivedPaymentsNestedInput
     incident?: IncidentsUpdateOneWithoutPaymentsNestedInput
     paymentStatus?: paymentStatusUpdateManyWithoutPaymentNestedInput
   }
 
   export type PaymentsUncheckedUpdateWithoutCompanyInput = {
     id?: IntFieldUpdateOperationsInput | number
+    paymentID?: StringFieldUpdateOperationsInput | string
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    method?: StringFieldUpdateOperationsInput | string
     userID?: IntFieldUpdateOperationsInput | number
     IncidentsID?: NullableIntFieldUpdateOperationsInput | number | null
     receivedByID?: IntFieldUpdateOperationsInput | number
     clientEmail?: StringFieldUpdateOperationsInput | string
-    cardBrand?: StringFieldUpdateOperationsInput | string
+    companyEmail?: StringFieldUpdateOperationsInput | string
     paymentStatus?: paymentStatusUncheckedUpdateManyWithoutPaymentNestedInput
   }
 
   export type PaymentsUncheckedUpdateManyWithoutCompanyInput = {
     id?: IntFieldUpdateOperationsInput | number
+    paymentID?: StringFieldUpdateOperationsInput | string
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    method?: StringFieldUpdateOperationsInput | string
     userID?: IntFieldUpdateOperationsInput | number
     IncidentsID?: NullableIntFieldUpdateOperationsInput | number | null
     receivedByID?: IntFieldUpdateOperationsInput | number
     clientEmail?: StringFieldUpdateOperationsInput | string
-    cardBrand?: StringFieldUpdateOperationsInput | string
+    companyEmail?: StringFieldUpdateOperationsInput | string
   }
 
   export type machineryUpdateWithoutCompanyInput = {
@@ -49026,7 +48661,7 @@ export namespace Prisma {
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     incidents?: IncidentsUpdateOneWithoutUsersNestedInput
     directions?: DirectionsUpdateManyWithoutUserNestedInput
-    payments?: PaymentsUpdateOneWithoutUserNestedInput
+    payments?: PaymentsUpdateManyWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUpdateManyWithoutUserNestedInput
     ClientMachinery?: ClientMachineryUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUpdateManyWithoutUserNestedInput
@@ -49050,7 +48685,7 @@ export namespace Prisma {
     contractID?: NullableIntFieldUpdateOperationsInput | number | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
-    payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
+    payments?: PaymentsUncheckedUpdateManyWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
     ClientMachinery?: ClientMachineryUncheckedUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUncheckedUpdateManyWithoutUserNestedInput
@@ -49620,14 +49255,14 @@ export namespace Prisma {
 
   export type PaymentsCreateManyIncidentInput = {
     id?: number
+    paymentID: string
     amount: Decimal | DecimalJsLike | number | string
     date?: Date | string
-    method: string
     userID: number
     companyID: number
     receivedByID: number
     clientEmail: string
-    cardBrand: string
+    companyEmail?: string
   }
 
   export type FileCreateManyIncidentInput = {
@@ -49655,7 +49290,7 @@ export namespace Prisma {
     contractID?: NullableIntFieldUpdateOperationsInput | number | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     directions?: DirectionsUpdateManyWithoutUserNestedInput
-    payments?: PaymentsUpdateOneWithoutUserNestedInput
+    payments?: PaymentsUpdateManyWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUpdateManyWithoutUserNestedInput
     ClientMachinery?: ClientMachineryUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUpdateManyWithoutUserNestedInput
@@ -49680,7 +49315,7 @@ export namespace Prisma {
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     directions?: DirectionsUncheckedUpdateManyWithoutUserNestedInput
-    payments?: PaymentsUncheckedUpdateOneWithoutUserNestedInput
+    payments?: PaymentsUncheckedUpdateManyWithoutUserNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutUserNestedInput
     ClientMachinery?: ClientMachineryUncheckedUpdateManyWithoutUserNestedInput
     Incidents?: IncidentsUncheckedUpdateManyWithoutUserNestedInput
@@ -49735,40 +49370,40 @@ export namespace Prisma {
   }
 
   export type PaymentsUpdateWithoutIncidentInput = {
+    paymentID?: StringFieldUpdateOperationsInput | string
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    method?: StringFieldUpdateOperationsInput | string
+    receivedByID?: IntFieldUpdateOperationsInput | number
     clientEmail?: StringFieldUpdateOperationsInput | string
-    cardBrand?: StringFieldUpdateOperationsInput | string
+    companyEmail?: StringFieldUpdateOperationsInput | string
     user?: UserUpdateOneRequiredWithoutPaymentsNestedInput
     company?: CompanyUpdateOneRequiredWithoutPaymentsNestedInput
-    receivedBy?: CompanyUpdateOneRequiredWithoutReceivedPaymentsNestedInput
     paymentStatus?: paymentStatusUpdateManyWithoutPaymentNestedInput
   }
 
   export type PaymentsUncheckedUpdateWithoutIncidentInput = {
     id?: IntFieldUpdateOperationsInput | number
+    paymentID?: StringFieldUpdateOperationsInput | string
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    method?: StringFieldUpdateOperationsInput | string
     userID?: IntFieldUpdateOperationsInput | number
     companyID?: IntFieldUpdateOperationsInput | number
     receivedByID?: IntFieldUpdateOperationsInput | number
     clientEmail?: StringFieldUpdateOperationsInput | string
-    cardBrand?: StringFieldUpdateOperationsInput | string
+    companyEmail?: StringFieldUpdateOperationsInput | string
     paymentStatus?: paymentStatusUncheckedUpdateManyWithoutPaymentNestedInput
   }
 
   export type PaymentsUncheckedUpdateManyWithoutIncidentInput = {
     id?: IntFieldUpdateOperationsInput | number
+    paymentID?: StringFieldUpdateOperationsInput | string
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    method?: StringFieldUpdateOperationsInput | string
     userID?: IntFieldUpdateOperationsInput | number
     companyID?: IntFieldUpdateOperationsInput | number
     receivedByID?: IntFieldUpdateOperationsInput | number
     clientEmail?: StringFieldUpdateOperationsInput | string
-    cardBrand?: StringFieldUpdateOperationsInput | string
+    companyEmail?: StringFieldUpdateOperationsInput | string
   }
 
   export type FileUpdateWithoutIncidentInput = {
@@ -49873,7 +49508,6 @@ export namespace Prisma {
     stripeAccountID?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUpdateManyWithoutCompanyNestedInput
-    receivedPayments?: PaymentsUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUpdateManyWithoutCompanyNestedInput
     incidentHistory?: IncidentHistoryUpdateManyWithoutCompanyNestedInput
     directions?: DirectionsUpdateManyWithoutCompanyNestedInput
@@ -49905,7 +49539,6 @@ export namespace Prisma {
     stripeAccountID?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     workers?: WorkerUncheckedUpdateManyWithoutCompanyNestedInput
-    receivedPayments?: PaymentsUncheckedUpdateManyWithoutReceivedByNestedInput
     incidents?: IncidentsUncheckedUpdateManyWithoutCompanyNestedInput
     incidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutCompanyNestedInput
     directions?: DirectionsUncheckedUpdateManyWithoutCompanyNestedInput

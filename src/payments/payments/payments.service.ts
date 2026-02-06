@@ -3,6 +3,7 @@ import { createSubcription } from '../../modules/payments/subscriptions/createSu
 import saveSubcriptionInDB from '../../modules/payments/subscriptions/saveSubcription';
 import createAccount from '../../modules/payments/subscriptions/accounts/createAccount';
 import createLoginLink from '../../modules/payments/subscriptions/accounts/createLoginLink';
+import { createPayment } from '../../modules/payments/subscriptions/payments/createPayment';
 @Injectable()
 export class PaymentsService {
   async createSubscription(companyemail: string, price: number) {
@@ -30,5 +31,8 @@ export class PaymentsService {
   }
   async createLoginLink(email: string) {
     return await createLoginLink(email);
+  }
+  async createPayment(ammount: number, userID: number, companyID: number) {
+    return await createPayment(ammount, userID, companyID);
   }
 }

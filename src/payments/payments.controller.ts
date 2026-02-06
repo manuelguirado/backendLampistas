@@ -143,4 +143,33 @@ export class PaymentsController {
       });
     }
   }
+  @Post('create-payment')
+  async createPayment(@Req() request: any, @Res() response: any) {
+    try {
+      const { ammount, userID, companyID } = request.body;
+      console.log('Received create-payment request:', {
+        ammount,
+        userID,
+        companyID,
+      });
+      const paymentData = await this.paymentsModule.createPayment(
+        ammount,
+        userID,
+        companyID,
+      );
+      console.log('Payment created:', paymentData);
+      return response.status(HttpStatus.OK).json({
+        status: 'success',
+        message: 'Payment created successfully',
+        paymentData,
+        clientSecret: paymentData.clientSecret,
+      });
+    } catch (error) {
+      console.error('Error creating payment:', (error as Error).message);
+      return response.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+        status: 'error',
+        message: (error as Error).message,
+      });
+    }
+  }
 }

@@ -234,15 +234,15 @@ exports.Prisma.IncidentsScalarFieldEnum = {
 
 exports.Prisma.PaymentsScalarFieldEnum = {
   id: 'id',
+  paymentID: 'paymentID',
   amount: 'amount',
   date: 'date',
-  method: 'method',
   userID: 'userID',
   companyID: 'companyID',
   IncidentsID: 'IncidentsID',
   receivedByID: 'receivedByID',
   clientEmail: 'clientEmail',
-  cardBrand: 'cardBrand'
+  companyEmail: 'companyEmail'
 };
 
 exports.Prisma.PaymentStatusScalarFieldEnum = {

@@ -23,7 +23,7 @@ model User {
   incidents       Incidents?        @relation("IncidentUsers", fields: [incidentsID], references: [IncidentsID])
   directions      Directions[]
   paymentsID      Int?
-  payments        Payments?
+  payments        Payments[]
   IncidentHistory IncidentHistory[]
   machineryID     Int?
 
@@ -51,7 +51,6 @@ model Company {
   phone            String             @db.VarChar(255)
   password         String             @db.VarChar(255)
   workers          Worker[]           @relation("Workers")
-  receivedPayments Payments[]         @relation("ReceivedPayments")
   incidents        Incidents[]        @relation("CompanyIncidents")
   incidentHistory  IncidentHistory[]  @relation("CompanyIncidentHistory")
   budgetID         Int?
@@ -215,19 +214,18 @@ model Incidents {
 
 model Payments {
   id           Int        @id @default(autoincrement())
+  paymentID    String     @unique @db.VarChar(255)
   amount       Decimal    @db.Decimal(10, 2)
   date         DateTime   @default(now()) @db.Timestamp(6)
-  method       String     @db.VarChar(50)
-  userID       Int        @unique
+  userID       Int
   user         User       @relation(fields: [userID], references: [userID])
   companyID    Int
   company      Company    @relation("CompanyPayments", fields: [companyID], references: [companyID])
-  receivedBy   Company    @relation("ReceivedPayments", fields: [receivedByID], references: [companyID])
   IncidentsID  Int?
   incident     Incidents? @relation("IncidentPayments", fields: [IncidentsID], references: [IncidentsID])
   receivedByID Int
   clientEmail  String     @db.VarChar(255)
-  cardBrand    String     @db.VarChar(50)
+  companyEmail String     @default("") @db.VarChar(255)
 
   paymentStatus paymentStatus[]
 }
