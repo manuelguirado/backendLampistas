@@ -3,6 +3,7 @@ import type { ItemType } from '../../utils/types/itemType';
 import jwt, { SignOptions } from 'jsonwebtoken';
 import { uploadFile } from '../../s3/uploadFile';
 import dotenv from 'dotenv';
+
 dotenv.config({ path: '../../../.env' });
 const prisma = new PrismaClient();
 

@@ -509,4 +509,18 @@ export class CompanyController {
 
     return this.companyService.getIncidentHistory(id, userType);
   }
+  @UseGuards(AuthGuard, CompanyGuard)
+  @Get('companyEarnings')
+  async companyEarnings(@Req() req: any) {
+    const companyID = req.user.companyID;
+    console.log('Company ID in controller:', companyID);
+    return this.companyService.companyEarnings(companyID);
+  }
+  @UseGuards(AuthGuard, CompanyGuard)
+  @Get('closedIncidents')
+  async closedIncidents(@Req() req: any) {
+    const companyID = req.user.companyID;
+ 
+    return this.companyService.closedIncidents(companyID);
+  }
 }

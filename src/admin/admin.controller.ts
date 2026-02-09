@@ -186,4 +186,23 @@ export class AdminController {
 
     return this.adminService.uploadFile([file], id, userType);
   }
+  @UseGuards(AuthGuard, AdminGuard)
+  @Get('activeClients')
+  async activeClients(@Request() req: any) {
+    const adminID = req.user.adminID;
+
+    return this.adminService.activeClients(adminID);
+  }
+  @UseGuards(AuthGuard, AdminGuard)
+  @Get('activeCompanies')
+  async activeCompanies(@Request() req: any) {
+    const adminID = req.user.adminID;
+    return this.adminService.activeCompanies(adminID);
+  }
+  @UseGuards(AuthGuard, AdminGuard)
+  @Get('activeIncidents')
+  async activeIncidents(@Request() req: any) {
+    const adminID = req.user.adminID;
+    return this.adminService.activeIncidents(adminID);
+  }
 }

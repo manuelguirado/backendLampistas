@@ -13,6 +13,9 @@ import { eliminateCompany } from '../modules/admin/eliminateCompany';
 import { registerCompany } from '../modules/companies/registerCompany';
 import { uploadFile } from '../s3/uploadFile';
 import { UserType } from '../utils/types/userType';
+import activeClients from '../modules/admin/charts/activeClients';
+import activeCompanies from '../modules/admin/charts/activeCompanies';
+import activeIncidents from '../modules/admin/charts/activeIncidents';
 @Injectable()
 export class adminServices {
   async registerAdmin(email: string, password: string) {
@@ -79,5 +82,14 @@ export class adminServices {
     userType: UserType,
   ) {
     return uploadFile(file, adminID, userType);
+  }
+  async activeClients(adminID: number) {
+    return activeClients(adminID);
+  }
+  async activeCompanies(adminID: number) {
+    return activeCompanies(adminID);
+  }
+  async activeIncidents(adminID: number) {
+    return activeIncidents(adminID);
   }
 }
