@@ -57,7 +57,12 @@ export class UserController {
     body: {
       title: string;
       description: string;
-      location: string;
+      directions: {
+        address: string;
+        city: string;
+        state: string;
+        zipCode: string;
+      };
       priority?: string;
       urgency?: string; // Cambiar a string porque FormData envía strings
     },
@@ -70,7 +75,7 @@ export class UserController {
       throw new Error('El usuario no está asignado a ninguna empresa');
     }
 
-    const { title, description, location, priority, urgency } = body;
+    const { title, description, directions, priority, urgency } = body;
 
     // Convertir urgency de string a boolean
     const urgencyBoolean =
@@ -79,7 +84,7 @@ export class UserController {
     const incident = await this.userService.createIncident(
       title,
       description,
-      location,
+      directions,
       userID,
       companyID,
       priority,
@@ -252,5 +257,16 @@ export class UserController {
       description,
       closedAt,
     );
+  }
+  @Post('forgotPassword')
+  async forgotPassword(
+    @Body()
+    body: {
+      newPassword: string;
+      email: string;
+    },
+  ) {
+    const { newPassword, email } = body;
+    return this.userService.forgotPassword(newPassword, email);
   }
 }

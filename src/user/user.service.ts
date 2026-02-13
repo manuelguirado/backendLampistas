@@ -13,6 +13,7 @@ import { downloadFile } from '../s3/downloadFile';
 import { getIncidentHistory } from '../modules/incidents/getIncidentHistory';
 import { incidentHistory } from '../modules/incidents/incidentHistory';
 import { UserType } from '../utils/types/userType';
+import { forgotPassword } from '../utils/forgotPassword';
 @Injectable()
 export class UserService {
   async userRegister(name: string, email: string, password: string) {
@@ -24,7 +25,12 @@ export class UserService {
   async createIncident(
     title: string,
     description: string,
-    location: string,
+    directions: {
+      address: string;
+      city: string;
+      state: string;
+      zipCode: string;
+    },
     userID: number,
     companyID: number,
     priority?: string,
@@ -34,7 +40,7 @@ export class UserService {
     return createIncident(
       title,
       description,
-      location,
+      directions,
       userID,
       companyID,
       priority,
@@ -94,5 +100,8 @@ export class UserService {
       description,
       closedAt,
     );
+  }
+  async forgotPassword(newPassword: string, email: string) {
+    return forgotPassword(newPassword, email);
   }
 }

@@ -219,7 +219,6 @@ exports.Prisma.IncidentsScalarFieldEnum = {
   title: 'title',
   description: 'description',
   status: 'status',
-  location: 'location',
   priority: 'priority',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
@@ -264,6 +263,12 @@ exports.Prisma.BudgetScalarFieldEnum = {
   userID: 'userID',
   createdAt: 'createdAt',
   title: 'title'
+};
+
+exports.Prisma.NewsLetterScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.ProductsScalarFieldEnum = {
@@ -336,6 +341,7 @@ exports.Prisma.DirectionsScalarFieldEnum = {
   id: 'id',
   userID: 'userID',
   companyID: 'companyID',
+  incidentID: 'incidentID',
   address: 'address',
   city: 'city',
   state: 'state',
@@ -427,6 +433,7 @@ exports.Prisma.ModelName = {
   Payments: 'Payments',
   paymentStatus: 'paymentStatus',
   Budget: 'Budget',
+  newsLetter: 'newsLetter',
   products: 'products',
   item: 'item',
   Subscription: 'Subscription',

@@ -12,8 +12,17 @@ import { CompanyModule } from './company/company.module';
 import { UserModule } from './user/user.module';
 import { WorkerModule } from './worker/worker.module';
 import { PaymentsModule } from './payments/payments.module';
+import { MailingModule } from './mailing/mailing.module';
 @Module({
-  imports: [AuthModule, AdminModule, CompanyModule, UserModule, WorkerModule, PaymentsModule],
+  imports: [
+    AuthModule,
+    AdminModule,
+    CompanyModule,
+    UserModule,
+    WorkerModule,
+    PaymentsModule,
+    MailingModule,
+  ],
   controllers: [
     AppController,
     AdminController,

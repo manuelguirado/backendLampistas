@@ -189,7 +189,7 @@ model Incidents {
   title       String         @db.VarChar(255)
   description String         @db.Text
   status      incidentStatus @default(open)
-  location    String         @db.VarChar(255)
+  location    Directions[]   @relation("IncidentLocations")
 
   priority         String            @db.VarChar(50)
   createdAt        DateTime          @default(now()) @db.Timestamp(6)
@@ -256,7 +256,11 @@ model Budget {
   title        String     @db.VarChar(255)
   files        File[]
 }
-
+model newsLetter {
+  id        Int     @id @default(autoincrement())
+  email     String  @unique @db.VarChar(255)
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+}
 model products {
   id              Int     @id @default(autoincrement())
   name            String  @db.VarChar(255)
@@ -348,7 +352,9 @@ model Directions {
   user      User?    @relation(fields: [userID], references: [userID])
   companyID Int?
   company   Company? @relation("CompanyDirections", fields: [companyID], references: [companyID])
-
+  incidentID Int? 
+  incident Incidents? @relation("IncidentLocations", fields: [incidentID], references: [IncidentsID])
+  
   address String
   city    String
   state   String

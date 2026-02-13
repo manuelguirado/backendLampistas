@@ -24,7 +24,6 @@ export async function listFiles(
       userPermissions(id, userType),
       getFileUrl(id, userType, incidentID),
     ]);
- 
 
     if (!User) throw new Error('User not found');
     if (!permissions)

@@ -8,7 +8,7 @@ const prisma = new PrismaClient();
 export async function createIncident(
   title: string,
   description: string,
-  location: string,
+  direction: { address: string; city: string; state: string; zipCode: string },
   userID: number,
   companyID: number,
   priority?: string,
@@ -32,13 +32,21 @@ export async function createIncident(
   if (!user) {
     throw new Error('User not found');
   }
+  const addDirecctions = await prisma.directions.create({
+    data: {
+      address: direction.address,
+      city: direction.city,
+      state: direction.state,
+      zipCode: direction.zipCode,
+    },
+  });
   const incident = await prisma.$transaction(async (tx) => {
     // Crear incidencia
     const newIncident = await tx.incidents.create({
       data: {
         title,
         description,
-        location,
+        location: { connect: { id: addDirecctions.id } },
         userID,
         companyID,
         priority: priority || (urgency ? 'HIGH' : 'MEDIUM'),

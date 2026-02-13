@@ -79,6 +79,11 @@ export type paymentStatus = $Result.DefaultSelection<Prisma.$paymentStatusPayloa
  */
 export type Budget = $Result.DefaultSelection<Prisma.$BudgetPayload>
 /**
+ * Model newsLetter
+ * 
+ */
+export type newsLetter = $Result.DefaultSelection<Prisma.$newsLetterPayload>
+/**
  * Model products
  * 
  */
@@ -435,6 +440,16 @@ export class PrismaClient<
     * ```
     */
   get budget(): Prisma.BudgetDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.newsLetter`: Exposes CRUD operations for the **newsLetter** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more NewsLetters
+    * const newsLetters = await prisma.newsLetter.findMany()
+    * ```
+    */
+  get newsLetter(): Prisma.newsLetterDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.products`: Exposes CRUD operations for the **products** model.
@@ -989,6 +1004,7 @@ export namespace Prisma {
     Payments: 'Payments',
     paymentStatus: 'paymentStatus',
     Budget: 'Budget',
+    newsLetter: 'newsLetter',
     products: 'products',
     item: 'item',
     Subscription: 'Subscription',
@@ -1017,7 +1033,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "company" | "adminsCompanies" | "worker" | "admin" | "file" | "usersCompanies" | "contracts" | "workersCompanies" | "incidents" | "payments" | "paymentStatus" | "budget" | "products" | "item" | "subscription" | "incidentHistory" | "shiftWorker" | "jobHistory" | "shiftSchedule" | "directions" | "machinery" | "clientMachinery"
+      modelProps: "user" | "company" | "adminsCompanies" | "worker" | "admin" | "file" | "usersCompanies" | "contracts" | "workersCompanies" | "incidents" | "payments" | "paymentStatus" | "budget" | "newsLetter" | "products" | "item" | "subscription" | "incidentHistory" | "shiftWorker" | "jobHistory" | "shiftSchedule" | "directions" | "machinery" | "clientMachinery"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1983,6 +1999,80 @@ export namespace Prisma {
           }
         }
       }
+      newsLetter: {
+        payload: Prisma.$newsLetterPayload<ExtArgs>
+        fields: Prisma.newsLetterFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.newsLetterFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$newsLetterPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.newsLetterFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$newsLetterPayload>
+          }
+          findFirst: {
+            args: Prisma.newsLetterFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$newsLetterPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.newsLetterFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$newsLetterPayload>
+          }
+          findMany: {
+            args: Prisma.newsLetterFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$newsLetterPayload>[]
+          }
+          create: {
+            args: Prisma.newsLetterCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$newsLetterPayload>
+          }
+          createMany: {
+            args: Prisma.newsLetterCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.newsLetterCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$newsLetterPayload>[]
+          }
+          delete: {
+            args: Prisma.newsLetterDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$newsLetterPayload>
+          }
+          update: {
+            args: Prisma.newsLetterUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$newsLetterPayload>
+          }
+          deleteMany: {
+            args: Prisma.newsLetterDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.newsLetterUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.newsLetterUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$newsLetterPayload>[]
+          }
+          upsert: {
+            args: Prisma.newsLetterUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$newsLetterPayload>
+          }
+          aggregate: {
+            args: Prisma.NewsLetterAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateNewsLetter>
+          }
+          groupBy: {
+            args: Prisma.newsLetterGroupByArgs<ExtArgs>
+            result: $Utils.Optional<NewsLetterGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.newsLetterCountArgs<ExtArgs>
+            result: $Utils.Optional<NewsLetterCountAggregateOutputType> | number
+          }
+        }
+      }
       products: {
         payload: Prisma.$productsPayload<ExtArgs>
         fields: Prisma.productsFieldRefs
@@ -2832,6 +2922,7 @@ export namespace Prisma {
     payments?: PaymentsOmit
     paymentStatus?: paymentStatusOmit
     budget?: BudgetOmit
+    newsLetter?: newsLetterOmit
     products?: productsOmit
     item?: itemOmit
     subscription?: SubscriptionOmit
@@ -3325,6 +3416,7 @@ export namespace Prisma {
    */
 
   export type IncidentsCountOutputType = {
+    location: number
     users: number
     IncidentHistory: number
     Payments: number
@@ -3332,6 +3424,7 @@ export namespace Prisma {
   }
 
   export type IncidentsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    location?: boolean | IncidentsCountOutputTypeCountLocationArgs
     users?: boolean | IncidentsCountOutputTypeCountUsersArgs
     IncidentHistory?: boolean | IncidentsCountOutputTypeCountIncidentHistoryArgs
     Payments?: boolean | IncidentsCountOutputTypeCountPaymentsArgs
@@ -3347,6 +3440,13 @@ export namespace Prisma {
      * Select specific fields to fetch from the IncidentsCountOutputType
      */
     select?: IncidentsCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * IncidentsCountOutputType without action
+   */
+  export type IncidentsCountOutputTypeCountLocationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DirectionsWhereInput
   }
 
   /**
@@ -14993,7 +15093,6 @@ export namespace Prisma {
     title: string | null
     description: string | null
     status: $Enums.incidentStatus | null
-    location: string | null
     priority: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -15011,7 +15110,6 @@ export namespace Prisma {
     title: string | null
     description: string | null
     status: $Enums.incidentStatus | null
-    location: string | null
     priority: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -15029,7 +15127,6 @@ export namespace Prisma {
     title: number
     description: number
     status: number
-    location: number
     priority: number
     createdAt: number
     updatedAt: number
@@ -15065,7 +15162,6 @@ export namespace Prisma {
     title?: true
     description?: true
     status?: true
-    location?: true
     priority?: true
     createdAt?: true
     updatedAt?: true
@@ -15083,7 +15179,6 @@ export namespace Prisma {
     title?: true
     description?: true
     status?: true
-    location?: true
     priority?: true
     createdAt?: true
     updatedAt?: true
@@ -15101,7 +15196,6 @@ export namespace Prisma {
     title?: true
     description?: true
     status?: true
-    location?: true
     priority?: true
     createdAt?: true
     updatedAt?: true
@@ -15206,7 +15300,6 @@ export namespace Prisma {
     title: string
     description: string
     status: $Enums.incidentStatus
-    location: string
     priority: string
     createdAt: Date
     updatedAt: Date
@@ -15243,7 +15336,6 @@ export namespace Prisma {
     title?: boolean
     description?: boolean
     status?: boolean
-    location?: boolean
     priority?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -15254,6 +15346,7 @@ export namespace Prisma {
     budgetID?: boolean
     userID?: boolean
     urgency?: boolean
+    location?: boolean | Incidents$locationArgs<ExtArgs>
     company?: boolean | CompanyDefaultArgs<ExtArgs>
     assignedWorker?: boolean | Incidents$assignedWorkerArgs<ExtArgs>
     budget?: boolean | Incidents$budgetArgs<ExtArgs>
@@ -15270,7 +15363,6 @@ export namespace Prisma {
     title?: boolean
     description?: boolean
     status?: boolean
-    location?: boolean
     priority?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -15292,7 +15384,6 @@ export namespace Prisma {
     title?: boolean
     description?: boolean
     status?: boolean
-    location?: boolean
     priority?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -15314,7 +15405,6 @@ export namespace Prisma {
     title?: boolean
     description?: boolean
     status?: boolean
-    location?: boolean
     priority?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -15327,8 +15417,9 @@ export namespace Prisma {
     urgency?: boolean
   }
 
-  export type IncidentsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"IncidentsID" | "title" | "description" | "status" | "location" | "priority" | "createdAt" | "updatedAt" | "closureDate" | "companyID" | "dateReported" | "assignedWorkerID" | "budgetID" | "userID" | "urgency", ExtArgs["result"]["incidents"]>
+  export type IncidentsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"IncidentsID" | "title" | "description" | "status" | "priority" | "createdAt" | "updatedAt" | "closureDate" | "companyID" | "dateReported" | "assignedWorkerID" | "budgetID" | "userID" | "urgency", ExtArgs["result"]["incidents"]>
   export type IncidentsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    location?: boolean | Incidents$locationArgs<ExtArgs>
     company?: boolean | CompanyDefaultArgs<ExtArgs>
     assignedWorker?: boolean | Incidents$assignedWorkerArgs<ExtArgs>
     budget?: boolean | Incidents$budgetArgs<ExtArgs>
@@ -15355,6 +15446,7 @@ export namespace Prisma {
   export type $IncidentsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Incidents"
     objects: {
+      location: Prisma.$DirectionsPayload<ExtArgs>[]
       company: Prisma.$CompanyPayload<ExtArgs>
       assignedWorker: Prisma.$WorkerPayload<ExtArgs> | null
       budget: Prisma.$BudgetPayload<ExtArgs> | null
@@ -15369,7 +15461,6 @@ export namespace Prisma {
       title: string
       description: string
       status: $Enums.incidentStatus
-      location: string
       priority: string
       createdAt: Date
       updatedAt: Date
@@ -15774,6 +15865,7 @@ export namespace Prisma {
    */
   export interface Prisma__IncidentsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    location<T extends Incidents$locationArgs<ExtArgs> = {}>(args?: Subset<T, Incidents$locationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DirectionsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     company<T extends CompanyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CompanyDefaultArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     assignedWorker<T extends Incidents$assignedWorkerArgs<ExtArgs> = {}>(args?: Subset<T, Incidents$assignedWorkerArgs<ExtArgs>>): Prisma__WorkerClient<$Result.GetResult<Prisma.$WorkerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     budget<T extends Incidents$budgetArgs<ExtArgs> = {}>(args?: Subset<T, Incidents$budgetArgs<ExtArgs>>): Prisma__BudgetClient<$Result.GetResult<Prisma.$BudgetPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -15815,7 +15907,6 @@ export namespace Prisma {
     readonly title: FieldRef<"Incidents", 'String'>
     readonly description: FieldRef<"Incidents", 'String'>
     readonly status: FieldRef<"Incidents", 'incidentStatus'>
-    readonly location: FieldRef<"Incidents", 'String'>
     readonly priority: FieldRef<"Incidents", 'String'>
     readonly createdAt: FieldRef<"Incidents", 'DateTime'>
     readonly updatedAt: FieldRef<"Incidents", 'DateTime'>
@@ -16219,6 +16310,30 @@ export namespace Prisma {
      * Limit how many Incidents to delete.
      */
     limit?: number
+  }
+
+  /**
+   * Incidents.location
+   */
+  export type Incidents$locationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Directions
+     */
+    select?: DirectionsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Directions
+     */
+    omit?: DirectionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DirectionsInclude<ExtArgs> | null
+    where?: DirectionsWhereInput
+    orderBy?: DirectionsOrderByWithRelationInput | DirectionsOrderByWithRelationInput[]
+    cursor?: DirectionsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DirectionsScalarFieldEnum | DirectionsScalarFieldEnum[]
   }
 
   /**
@@ -19994,6 +20109,1009 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: BudgetInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model newsLetter
+   */
+
+  export type AggregateNewsLetter = {
+    _count: NewsLetterCountAggregateOutputType | null
+    _avg: NewsLetterAvgAggregateOutputType | null
+    _sum: NewsLetterSumAggregateOutputType | null
+    _min: NewsLetterMinAggregateOutputType | null
+    _max: NewsLetterMaxAggregateOutputType | null
+  }
+
+  export type NewsLetterAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type NewsLetterSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type NewsLetterMinAggregateOutputType = {
+    id: number | null
+    email: string | null
+    createdAt: Date | null
+  }
+
+  export type NewsLetterMaxAggregateOutputType = {
+    id: number | null
+    email: string | null
+    createdAt: Date | null
+  }
+
+  export type NewsLetterCountAggregateOutputType = {
+    id: number
+    email: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type NewsLetterAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type NewsLetterSumAggregateInputType = {
+    id?: true
+  }
+
+  export type NewsLetterMinAggregateInputType = {
+    id?: true
+    email?: true
+    createdAt?: true
+  }
+
+  export type NewsLetterMaxAggregateInputType = {
+    id?: true
+    email?: true
+    createdAt?: true
+  }
+
+  export type NewsLetterCountAggregateInputType = {
+    id?: true
+    email?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type NewsLetterAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which newsLetter to aggregate.
+     */
+    where?: newsLetterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of newsLetters to fetch.
+     */
+    orderBy?: newsLetterOrderByWithRelationInput | newsLetterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: newsLetterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` newsLetters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` newsLetters.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned newsLetters
+    **/
+    _count?: true | NewsLetterCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: NewsLetterAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: NewsLetterSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: NewsLetterMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: NewsLetterMaxAggregateInputType
+  }
+
+  export type GetNewsLetterAggregateType<T extends NewsLetterAggregateArgs> = {
+        [P in keyof T & keyof AggregateNewsLetter]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateNewsLetter[P]>
+      : GetScalarType<T[P], AggregateNewsLetter[P]>
+  }
+
+
+
+
+  export type newsLetterGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: newsLetterWhereInput
+    orderBy?: newsLetterOrderByWithAggregationInput | newsLetterOrderByWithAggregationInput[]
+    by: NewsLetterScalarFieldEnum[] | NewsLetterScalarFieldEnum
+    having?: newsLetterScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: NewsLetterCountAggregateInputType | true
+    _avg?: NewsLetterAvgAggregateInputType
+    _sum?: NewsLetterSumAggregateInputType
+    _min?: NewsLetterMinAggregateInputType
+    _max?: NewsLetterMaxAggregateInputType
+  }
+
+  export type NewsLetterGroupByOutputType = {
+    id: number
+    email: string
+    createdAt: Date
+    _count: NewsLetterCountAggregateOutputType | null
+    _avg: NewsLetterAvgAggregateOutputType | null
+    _sum: NewsLetterSumAggregateOutputType | null
+    _min: NewsLetterMinAggregateOutputType | null
+    _max: NewsLetterMaxAggregateOutputType | null
+  }
+
+  type GetNewsLetterGroupByPayload<T extends newsLetterGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<NewsLetterGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof NewsLetterGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], NewsLetterGroupByOutputType[P]>
+            : GetScalarType<T[P], NewsLetterGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type newsLetterSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    email?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["newsLetter"]>
+
+  export type newsLetterSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    email?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["newsLetter"]>
+
+  export type newsLetterSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    email?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["newsLetter"]>
+
+  export type newsLetterSelectScalar = {
+    id?: boolean
+    email?: boolean
+    createdAt?: boolean
+  }
+
+  export type newsLetterOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "createdAt", ExtArgs["result"]["newsLetter"]>
+
+  export type $newsLetterPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "newsLetter"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      email: string
+      createdAt: Date
+    }, ExtArgs["result"]["newsLetter"]>
+    composites: {}
+  }
+
+  type newsLetterGetPayload<S extends boolean | null | undefined | newsLetterDefaultArgs> = $Result.GetResult<Prisma.$newsLetterPayload, S>
+
+  type newsLetterCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<newsLetterFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: NewsLetterCountAggregateInputType | true
+    }
+
+  export interface newsLetterDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['newsLetter'], meta: { name: 'newsLetter' } }
+    /**
+     * Find zero or one NewsLetter that matches the filter.
+     * @param {newsLetterFindUniqueArgs} args - Arguments to find a NewsLetter
+     * @example
+     * // Get one NewsLetter
+     * const newsLetter = await prisma.newsLetter.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends newsLetterFindUniqueArgs>(args: SelectSubset<T, newsLetterFindUniqueArgs<ExtArgs>>): Prisma__newsLetterClient<$Result.GetResult<Prisma.$newsLetterPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one NewsLetter that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {newsLetterFindUniqueOrThrowArgs} args - Arguments to find a NewsLetter
+     * @example
+     * // Get one NewsLetter
+     * const newsLetter = await prisma.newsLetter.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends newsLetterFindUniqueOrThrowArgs>(args: SelectSubset<T, newsLetterFindUniqueOrThrowArgs<ExtArgs>>): Prisma__newsLetterClient<$Result.GetResult<Prisma.$newsLetterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first NewsLetter that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {newsLetterFindFirstArgs} args - Arguments to find a NewsLetter
+     * @example
+     * // Get one NewsLetter
+     * const newsLetter = await prisma.newsLetter.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends newsLetterFindFirstArgs>(args?: SelectSubset<T, newsLetterFindFirstArgs<ExtArgs>>): Prisma__newsLetterClient<$Result.GetResult<Prisma.$newsLetterPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first NewsLetter that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {newsLetterFindFirstOrThrowArgs} args - Arguments to find a NewsLetter
+     * @example
+     * // Get one NewsLetter
+     * const newsLetter = await prisma.newsLetter.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends newsLetterFindFirstOrThrowArgs>(args?: SelectSubset<T, newsLetterFindFirstOrThrowArgs<ExtArgs>>): Prisma__newsLetterClient<$Result.GetResult<Prisma.$newsLetterPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more NewsLetters that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {newsLetterFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all NewsLetters
+     * const newsLetters = await prisma.newsLetter.findMany()
+     * 
+     * // Get first 10 NewsLetters
+     * const newsLetters = await prisma.newsLetter.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const newsLetterWithIdOnly = await prisma.newsLetter.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends newsLetterFindManyArgs>(args?: SelectSubset<T, newsLetterFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$newsLetterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a NewsLetter.
+     * @param {newsLetterCreateArgs} args - Arguments to create a NewsLetter.
+     * @example
+     * // Create one NewsLetter
+     * const NewsLetter = await prisma.newsLetter.create({
+     *   data: {
+     *     // ... data to create a NewsLetter
+     *   }
+     * })
+     * 
+     */
+    create<T extends newsLetterCreateArgs>(args: SelectSubset<T, newsLetterCreateArgs<ExtArgs>>): Prisma__newsLetterClient<$Result.GetResult<Prisma.$newsLetterPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many NewsLetters.
+     * @param {newsLetterCreateManyArgs} args - Arguments to create many NewsLetters.
+     * @example
+     * // Create many NewsLetters
+     * const newsLetter = await prisma.newsLetter.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends newsLetterCreateManyArgs>(args?: SelectSubset<T, newsLetterCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many NewsLetters and returns the data saved in the database.
+     * @param {newsLetterCreateManyAndReturnArgs} args - Arguments to create many NewsLetters.
+     * @example
+     * // Create many NewsLetters
+     * const newsLetter = await prisma.newsLetter.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many NewsLetters and only return the `id`
+     * const newsLetterWithIdOnly = await prisma.newsLetter.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends newsLetterCreateManyAndReturnArgs>(args?: SelectSubset<T, newsLetterCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$newsLetterPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a NewsLetter.
+     * @param {newsLetterDeleteArgs} args - Arguments to delete one NewsLetter.
+     * @example
+     * // Delete one NewsLetter
+     * const NewsLetter = await prisma.newsLetter.delete({
+     *   where: {
+     *     // ... filter to delete one NewsLetter
+     *   }
+     * })
+     * 
+     */
+    delete<T extends newsLetterDeleteArgs>(args: SelectSubset<T, newsLetterDeleteArgs<ExtArgs>>): Prisma__newsLetterClient<$Result.GetResult<Prisma.$newsLetterPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one NewsLetter.
+     * @param {newsLetterUpdateArgs} args - Arguments to update one NewsLetter.
+     * @example
+     * // Update one NewsLetter
+     * const newsLetter = await prisma.newsLetter.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends newsLetterUpdateArgs>(args: SelectSubset<T, newsLetterUpdateArgs<ExtArgs>>): Prisma__newsLetterClient<$Result.GetResult<Prisma.$newsLetterPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more NewsLetters.
+     * @param {newsLetterDeleteManyArgs} args - Arguments to filter NewsLetters to delete.
+     * @example
+     * // Delete a few NewsLetters
+     * const { count } = await prisma.newsLetter.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends newsLetterDeleteManyArgs>(args?: SelectSubset<T, newsLetterDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more NewsLetters.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {newsLetterUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many NewsLetters
+     * const newsLetter = await prisma.newsLetter.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends newsLetterUpdateManyArgs>(args: SelectSubset<T, newsLetterUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more NewsLetters and returns the data updated in the database.
+     * @param {newsLetterUpdateManyAndReturnArgs} args - Arguments to update many NewsLetters.
+     * @example
+     * // Update many NewsLetters
+     * const newsLetter = await prisma.newsLetter.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more NewsLetters and only return the `id`
+     * const newsLetterWithIdOnly = await prisma.newsLetter.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends newsLetterUpdateManyAndReturnArgs>(args: SelectSubset<T, newsLetterUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$newsLetterPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one NewsLetter.
+     * @param {newsLetterUpsertArgs} args - Arguments to update or create a NewsLetter.
+     * @example
+     * // Update or create a NewsLetter
+     * const newsLetter = await prisma.newsLetter.upsert({
+     *   create: {
+     *     // ... data to create a NewsLetter
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the NewsLetter we want to update
+     *   }
+     * })
+     */
+    upsert<T extends newsLetterUpsertArgs>(args: SelectSubset<T, newsLetterUpsertArgs<ExtArgs>>): Prisma__newsLetterClient<$Result.GetResult<Prisma.$newsLetterPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of NewsLetters.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {newsLetterCountArgs} args - Arguments to filter NewsLetters to count.
+     * @example
+     * // Count the number of NewsLetters
+     * const count = await prisma.newsLetter.count({
+     *   where: {
+     *     // ... the filter for the NewsLetters we want to count
+     *   }
+     * })
+    **/
+    count<T extends newsLetterCountArgs>(
+      args?: Subset<T, newsLetterCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], NewsLetterCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a NewsLetter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NewsLetterAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends NewsLetterAggregateArgs>(args: Subset<T, NewsLetterAggregateArgs>): Prisma.PrismaPromise<GetNewsLetterAggregateType<T>>
+
+    /**
+     * Group by NewsLetter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {newsLetterGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends newsLetterGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: newsLetterGroupByArgs['orderBy'] }
+        : { orderBy?: newsLetterGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, newsLetterGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNewsLetterGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the newsLetter model
+   */
+  readonly fields: newsLetterFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for newsLetter.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__newsLetterClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the newsLetter model
+   */
+  interface newsLetterFieldRefs {
+    readonly id: FieldRef<"newsLetter", 'Int'>
+    readonly email: FieldRef<"newsLetter", 'String'>
+    readonly createdAt: FieldRef<"newsLetter", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * newsLetter findUnique
+   */
+  export type newsLetterFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the newsLetter
+     */
+    select?: newsLetterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the newsLetter
+     */
+    omit?: newsLetterOmit<ExtArgs> | null
+    /**
+     * Filter, which newsLetter to fetch.
+     */
+    where: newsLetterWhereUniqueInput
+  }
+
+  /**
+   * newsLetter findUniqueOrThrow
+   */
+  export type newsLetterFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the newsLetter
+     */
+    select?: newsLetterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the newsLetter
+     */
+    omit?: newsLetterOmit<ExtArgs> | null
+    /**
+     * Filter, which newsLetter to fetch.
+     */
+    where: newsLetterWhereUniqueInput
+  }
+
+  /**
+   * newsLetter findFirst
+   */
+  export type newsLetterFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the newsLetter
+     */
+    select?: newsLetterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the newsLetter
+     */
+    omit?: newsLetterOmit<ExtArgs> | null
+    /**
+     * Filter, which newsLetter to fetch.
+     */
+    where?: newsLetterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of newsLetters to fetch.
+     */
+    orderBy?: newsLetterOrderByWithRelationInput | newsLetterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for newsLetters.
+     */
+    cursor?: newsLetterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` newsLetters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` newsLetters.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of newsLetters.
+     */
+    distinct?: NewsLetterScalarFieldEnum | NewsLetterScalarFieldEnum[]
+  }
+
+  /**
+   * newsLetter findFirstOrThrow
+   */
+  export type newsLetterFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the newsLetter
+     */
+    select?: newsLetterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the newsLetter
+     */
+    omit?: newsLetterOmit<ExtArgs> | null
+    /**
+     * Filter, which newsLetter to fetch.
+     */
+    where?: newsLetterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of newsLetters to fetch.
+     */
+    orderBy?: newsLetterOrderByWithRelationInput | newsLetterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for newsLetters.
+     */
+    cursor?: newsLetterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` newsLetters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` newsLetters.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of newsLetters.
+     */
+    distinct?: NewsLetterScalarFieldEnum | NewsLetterScalarFieldEnum[]
+  }
+
+  /**
+   * newsLetter findMany
+   */
+  export type newsLetterFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the newsLetter
+     */
+    select?: newsLetterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the newsLetter
+     */
+    omit?: newsLetterOmit<ExtArgs> | null
+    /**
+     * Filter, which newsLetters to fetch.
+     */
+    where?: newsLetterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of newsLetters to fetch.
+     */
+    orderBy?: newsLetterOrderByWithRelationInput | newsLetterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing newsLetters.
+     */
+    cursor?: newsLetterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` newsLetters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` newsLetters.
+     */
+    skip?: number
+    distinct?: NewsLetterScalarFieldEnum | NewsLetterScalarFieldEnum[]
+  }
+
+  /**
+   * newsLetter create
+   */
+  export type newsLetterCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the newsLetter
+     */
+    select?: newsLetterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the newsLetter
+     */
+    omit?: newsLetterOmit<ExtArgs> | null
+    /**
+     * The data needed to create a newsLetter.
+     */
+    data: XOR<newsLetterCreateInput, newsLetterUncheckedCreateInput>
+  }
+
+  /**
+   * newsLetter createMany
+   */
+  export type newsLetterCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many newsLetters.
+     */
+    data: newsLetterCreateManyInput | newsLetterCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * newsLetter createManyAndReturn
+   */
+  export type newsLetterCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the newsLetter
+     */
+    select?: newsLetterSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the newsLetter
+     */
+    omit?: newsLetterOmit<ExtArgs> | null
+    /**
+     * The data used to create many newsLetters.
+     */
+    data: newsLetterCreateManyInput | newsLetterCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * newsLetter update
+   */
+  export type newsLetterUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the newsLetter
+     */
+    select?: newsLetterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the newsLetter
+     */
+    omit?: newsLetterOmit<ExtArgs> | null
+    /**
+     * The data needed to update a newsLetter.
+     */
+    data: XOR<newsLetterUpdateInput, newsLetterUncheckedUpdateInput>
+    /**
+     * Choose, which newsLetter to update.
+     */
+    where: newsLetterWhereUniqueInput
+  }
+
+  /**
+   * newsLetter updateMany
+   */
+  export type newsLetterUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update newsLetters.
+     */
+    data: XOR<newsLetterUpdateManyMutationInput, newsLetterUncheckedUpdateManyInput>
+    /**
+     * Filter which newsLetters to update
+     */
+    where?: newsLetterWhereInput
+    /**
+     * Limit how many newsLetters to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * newsLetter updateManyAndReturn
+   */
+  export type newsLetterUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the newsLetter
+     */
+    select?: newsLetterSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the newsLetter
+     */
+    omit?: newsLetterOmit<ExtArgs> | null
+    /**
+     * The data used to update newsLetters.
+     */
+    data: XOR<newsLetterUpdateManyMutationInput, newsLetterUncheckedUpdateManyInput>
+    /**
+     * Filter which newsLetters to update
+     */
+    where?: newsLetterWhereInput
+    /**
+     * Limit how many newsLetters to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * newsLetter upsert
+   */
+  export type newsLetterUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the newsLetter
+     */
+    select?: newsLetterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the newsLetter
+     */
+    omit?: newsLetterOmit<ExtArgs> | null
+    /**
+     * The filter to search for the newsLetter to update in case it exists.
+     */
+    where: newsLetterWhereUniqueInput
+    /**
+     * In case the newsLetter found by the `where` argument doesn't exist, create a new newsLetter with this data.
+     */
+    create: XOR<newsLetterCreateInput, newsLetterUncheckedCreateInput>
+    /**
+     * In case the newsLetter was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<newsLetterUpdateInput, newsLetterUncheckedUpdateInput>
+  }
+
+  /**
+   * newsLetter delete
+   */
+  export type newsLetterDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the newsLetter
+     */
+    select?: newsLetterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the newsLetter
+     */
+    omit?: newsLetterOmit<ExtArgs> | null
+    /**
+     * Filter which newsLetter to delete.
+     */
+    where: newsLetterWhereUniqueInput
+  }
+
+  /**
+   * newsLetter deleteMany
+   */
+  export type newsLetterDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which newsLetters to delete
+     */
+    where?: newsLetterWhereInput
+    /**
+     * Limit how many newsLetters to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * newsLetter without action
+   */
+  export type newsLetterDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the newsLetter
+     */
+    select?: newsLetterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the newsLetter
+     */
+    omit?: newsLetterOmit<ExtArgs> | null
   }
 
 
@@ -28019,18 +29137,21 @@ export namespace Prisma {
     id: number | null
     userID: number | null
     companyID: number | null
+    incidentID: number | null
   }
 
   export type DirectionsSumAggregateOutputType = {
     id: number | null
     userID: number | null
     companyID: number | null
+    incidentID: number | null
   }
 
   export type DirectionsMinAggregateOutputType = {
     id: number | null
     userID: number | null
     companyID: number | null
+    incidentID: number | null
     address: string | null
     city: string | null
     state: string | null
@@ -28041,6 +29162,7 @@ export namespace Prisma {
     id: number | null
     userID: number | null
     companyID: number | null
+    incidentID: number | null
     address: string | null
     city: string | null
     state: string | null
@@ -28051,6 +29173,7 @@ export namespace Prisma {
     id: number
     userID: number
     companyID: number
+    incidentID: number
     address: number
     city: number
     state: number
@@ -28063,18 +29186,21 @@ export namespace Prisma {
     id?: true
     userID?: true
     companyID?: true
+    incidentID?: true
   }
 
   export type DirectionsSumAggregateInputType = {
     id?: true
     userID?: true
     companyID?: true
+    incidentID?: true
   }
 
   export type DirectionsMinAggregateInputType = {
     id?: true
     userID?: true
     companyID?: true
+    incidentID?: true
     address?: true
     city?: true
     state?: true
@@ -28085,6 +29211,7 @@ export namespace Prisma {
     id?: true
     userID?: true
     companyID?: true
+    incidentID?: true
     address?: true
     city?: true
     state?: true
@@ -28095,6 +29222,7 @@ export namespace Prisma {
     id?: true
     userID?: true
     companyID?: true
+    incidentID?: true
     address?: true
     city?: true
     state?: true
@@ -28192,6 +29320,7 @@ export namespace Prisma {
     id: number
     userID: number | null
     companyID: number | null
+    incidentID: number | null
     address: string
     city: string
     state: string
@@ -28221,60 +29350,70 @@ export namespace Prisma {
     id?: boolean
     userID?: boolean
     companyID?: boolean
+    incidentID?: boolean
     address?: boolean
     city?: boolean
     state?: boolean
     zipCode?: boolean
     user?: boolean | Directions$userArgs<ExtArgs>
     company?: boolean | Directions$companyArgs<ExtArgs>
+    incident?: boolean | Directions$incidentArgs<ExtArgs>
   }, ExtArgs["result"]["directions"]>
 
   export type DirectionsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userID?: boolean
     companyID?: boolean
+    incidentID?: boolean
     address?: boolean
     city?: boolean
     state?: boolean
     zipCode?: boolean
     user?: boolean | Directions$userArgs<ExtArgs>
     company?: boolean | Directions$companyArgs<ExtArgs>
+    incident?: boolean | Directions$incidentArgs<ExtArgs>
   }, ExtArgs["result"]["directions"]>
 
   export type DirectionsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userID?: boolean
     companyID?: boolean
+    incidentID?: boolean
     address?: boolean
     city?: boolean
     state?: boolean
     zipCode?: boolean
     user?: boolean | Directions$userArgs<ExtArgs>
     company?: boolean | Directions$companyArgs<ExtArgs>
+    incident?: boolean | Directions$incidentArgs<ExtArgs>
   }, ExtArgs["result"]["directions"]>
 
   export type DirectionsSelectScalar = {
     id?: boolean
     userID?: boolean
     companyID?: boolean
+    incidentID?: boolean
     address?: boolean
     city?: boolean
     state?: boolean
     zipCode?: boolean
   }
 
-  export type DirectionsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userID" | "companyID" | "address" | "city" | "state" | "zipCode", ExtArgs["result"]["directions"]>
+  export type DirectionsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userID" | "companyID" | "incidentID" | "address" | "city" | "state" | "zipCode", ExtArgs["result"]["directions"]>
   export type DirectionsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | Directions$userArgs<ExtArgs>
     company?: boolean | Directions$companyArgs<ExtArgs>
+    incident?: boolean | Directions$incidentArgs<ExtArgs>
   }
   export type DirectionsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | Directions$userArgs<ExtArgs>
     company?: boolean | Directions$companyArgs<ExtArgs>
+    incident?: boolean | Directions$incidentArgs<ExtArgs>
   }
   export type DirectionsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | Directions$userArgs<ExtArgs>
     company?: boolean | Directions$companyArgs<ExtArgs>
+    incident?: boolean | Directions$incidentArgs<ExtArgs>
   }
 
   export type $DirectionsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -28282,11 +29421,13 @@ export namespace Prisma {
     objects: {
       user: Prisma.$UserPayload<ExtArgs> | null
       company: Prisma.$CompanyPayload<ExtArgs> | null
+      incident: Prisma.$IncidentsPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       userID: number | null
       companyID: number | null
+      incidentID: number | null
       address: string
       city: string
       state: string
@@ -28687,6 +29828,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends Directions$userArgs<ExtArgs> = {}>(args?: Subset<T, Directions$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     company<T extends Directions$companyArgs<ExtArgs> = {}>(args?: Subset<T, Directions$companyArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    incident<T extends Directions$incidentArgs<ExtArgs> = {}>(args?: Subset<T, Directions$incidentArgs<ExtArgs>>): Prisma__IncidentsClient<$Result.GetResult<Prisma.$IncidentsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -28719,6 +29861,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Directions", 'Int'>
     readonly userID: FieldRef<"Directions", 'Int'>
     readonly companyID: FieldRef<"Directions", 'Int'>
+    readonly incidentID: FieldRef<"Directions", 'Int'>
     readonly address: FieldRef<"Directions", 'String'>
     readonly city: FieldRef<"Directions", 'String'>
     readonly state: FieldRef<"Directions", 'String'>
@@ -29154,6 +30297,25 @@ export namespace Prisma {
      */
     include?: CompanyInclude<ExtArgs> | null
     where?: CompanyWhereInput
+  }
+
+  /**
+   * Directions.incident
+   */
+  export type Directions$incidentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Incidents
+     */
+    select?: IncidentsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Incidents
+     */
+    omit?: IncidentsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncidentsInclude<ExtArgs> | null
+    where?: IncidentsWhereInput
   }
 
   /**
@@ -31621,7 +32783,6 @@ export namespace Prisma {
     title: 'title',
     description: 'description',
     status: 'status',
-    location: 'location',
     priority: 'priority',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
@@ -31678,6 +32839,15 @@ export namespace Prisma {
   };
 
   export type BudgetScalarFieldEnum = (typeof BudgetScalarFieldEnum)[keyof typeof BudgetScalarFieldEnum]
+
+
+  export const NewsLetterScalarFieldEnum: {
+    id: 'id',
+    email: 'email',
+    createdAt: 'createdAt'
+  };
+
+  export type NewsLetterScalarFieldEnum = (typeof NewsLetterScalarFieldEnum)[keyof typeof NewsLetterScalarFieldEnum]
 
 
   export const ProductsScalarFieldEnum: {
@@ -31771,6 +32941,7 @@ export namespace Prisma {
     id: 'id',
     userID: 'userID',
     companyID: 'companyID',
+    incidentID: 'incidentID',
     address: 'address',
     city: 'city',
     state: 'state',
@@ -32764,7 +33935,6 @@ export namespace Prisma {
     title?: StringFilter<"Incidents"> | string
     description?: StringFilter<"Incidents"> | string
     status?: EnumincidentStatusFilter<"Incidents"> | $Enums.incidentStatus
-    location?: StringFilter<"Incidents"> | string
     priority?: StringFilter<"Incidents"> | string
     createdAt?: DateTimeFilter<"Incidents"> | Date | string
     updatedAt?: DateTimeFilter<"Incidents"> | Date | string
@@ -32775,6 +33945,7 @@ export namespace Prisma {
     budgetID?: IntNullableFilter<"Incidents"> | number | null
     userID?: IntNullableFilter<"Incidents"> | number | null
     urgency?: BoolNullableFilter<"Incidents"> | boolean | null
+    location?: DirectionsListRelationFilter
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
     assignedWorker?: XOR<WorkerNullableScalarRelationFilter, WorkerWhereInput> | null
     budget?: XOR<BudgetNullableScalarRelationFilter, BudgetWhereInput> | null
@@ -32790,7 +33961,6 @@ export namespace Prisma {
     title?: SortOrder
     description?: SortOrder
     status?: SortOrder
-    location?: SortOrder
     priority?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -32801,6 +33971,7 @@ export namespace Prisma {
     budgetID?: SortOrderInput | SortOrder
     userID?: SortOrderInput | SortOrder
     urgency?: SortOrderInput | SortOrder
+    location?: DirectionsOrderByRelationAggregateInput
     company?: CompanyOrderByWithRelationInput
     assignedWorker?: WorkerOrderByWithRelationInput
     budget?: BudgetOrderByWithRelationInput
@@ -32820,7 +33991,6 @@ export namespace Prisma {
     title?: StringFilter<"Incidents"> | string
     description?: StringFilter<"Incidents"> | string
     status?: EnumincidentStatusFilter<"Incidents"> | $Enums.incidentStatus
-    location?: StringFilter<"Incidents"> | string
     priority?: StringFilter<"Incidents"> | string
     createdAt?: DateTimeFilter<"Incidents"> | Date | string
     updatedAt?: DateTimeFilter<"Incidents"> | Date | string
@@ -32830,6 +34000,7 @@ export namespace Prisma {
     assignedWorkerID?: IntNullableFilter<"Incidents"> | number | null
     userID?: IntNullableFilter<"Incidents"> | number | null
     urgency?: BoolNullableFilter<"Incidents"> | boolean | null
+    location?: DirectionsListRelationFilter
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
     assignedWorker?: XOR<WorkerNullableScalarRelationFilter, WorkerWhereInput> | null
     budget?: XOR<BudgetNullableScalarRelationFilter, BudgetWhereInput> | null
@@ -32845,7 +34016,6 @@ export namespace Prisma {
     title?: SortOrder
     description?: SortOrder
     status?: SortOrder
-    location?: SortOrder
     priority?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -32871,7 +34041,6 @@ export namespace Prisma {
     title?: StringWithAggregatesFilter<"Incidents"> | string
     description?: StringWithAggregatesFilter<"Incidents"> | string
     status?: EnumincidentStatusWithAggregatesFilter<"Incidents"> | $Enums.incidentStatus
-    location?: StringWithAggregatesFilter<"Incidents"> | string
     priority?: StringWithAggregatesFilter<"Incidents"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Incidents"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Incidents"> | Date | string
@@ -33124,6 +34293,50 @@ export namespace Prisma {
     userID?: IntWithAggregatesFilter<"Budget"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Budget"> | Date | string
     title?: StringWithAggregatesFilter<"Budget"> | string
+  }
+
+  export type newsLetterWhereInput = {
+    AND?: newsLetterWhereInput | newsLetterWhereInput[]
+    OR?: newsLetterWhereInput[]
+    NOT?: newsLetterWhereInput | newsLetterWhereInput[]
+    id?: IntFilter<"newsLetter"> | number
+    email?: StringFilter<"newsLetter"> | string
+    createdAt?: DateTimeFilter<"newsLetter"> | Date | string
+  }
+
+  export type newsLetterOrderByWithRelationInput = {
+    id?: SortOrder
+    email?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type newsLetterWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    email?: string
+    AND?: newsLetterWhereInput | newsLetterWhereInput[]
+    OR?: newsLetterWhereInput[]
+    NOT?: newsLetterWhereInput | newsLetterWhereInput[]
+    createdAt?: DateTimeFilter<"newsLetter"> | Date | string
+  }, "id" | "email">
+
+  export type newsLetterOrderByWithAggregationInput = {
+    id?: SortOrder
+    email?: SortOrder
+    createdAt?: SortOrder
+    _count?: newsLetterCountOrderByAggregateInput
+    _avg?: newsLetterAvgOrderByAggregateInput
+    _max?: newsLetterMaxOrderByAggregateInput
+    _min?: newsLetterMinOrderByAggregateInput
+    _sum?: newsLetterSumOrderByAggregateInput
+  }
+
+  export type newsLetterScalarWhereWithAggregatesInput = {
+    AND?: newsLetterScalarWhereWithAggregatesInput | newsLetterScalarWhereWithAggregatesInput[]
+    OR?: newsLetterScalarWhereWithAggregatesInput[]
+    NOT?: newsLetterScalarWhereWithAggregatesInput | newsLetterScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"newsLetter"> | number
+    email?: StringWithAggregatesFilter<"newsLetter"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"newsLetter"> | Date | string
   }
 
   export type productsWhereInput = {
@@ -33603,24 +34816,28 @@ export namespace Prisma {
     id?: IntFilter<"Directions"> | number
     userID?: IntNullableFilter<"Directions"> | number | null
     companyID?: IntNullableFilter<"Directions"> | number | null
+    incidentID?: IntNullableFilter<"Directions"> | number | null
     address?: StringFilter<"Directions"> | string
     city?: StringFilter<"Directions"> | string
     state?: StringFilter<"Directions"> | string
     zipCode?: StringFilter<"Directions"> | string
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     company?: XOR<CompanyNullableScalarRelationFilter, CompanyWhereInput> | null
+    incident?: XOR<IncidentsNullableScalarRelationFilter, IncidentsWhereInput> | null
   }
 
   export type DirectionsOrderByWithRelationInput = {
     id?: SortOrder
     userID?: SortOrderInput | SortOrder
     companyID?: SortOrderInput | SortOrder
+    incidentID?: SortOrderInput | SortOrder
     address?: SortOrder
     city?: SortOrder
     state?: SortOrder
     zipCode?: SortOrder
     user?: UserOrderByWithRelationInput
     company?: CompanyOrderByWithRelationInput
+    incident?: IncidentsOrderByWithRelationInput
   }
 
   export type DirectionsWhereUniqueInput = Prisma.AtLeast<{
@@ -33630,18 +34847,21 @@ export namespace Prisma {
     NOT?: DirectionsWhereInput | DirectionsWhereInput[]
     userID?: IntNullableFilter<"Directions"> | number | null
     companyID?: IntNullableFilter<"Directions"> | number | null
+    incidentID?: IntNullableFilter<"Directions"> | number | null
     address?: StringFilter<"Directions"> | string
     city?: StringFilter<"Directions"> | string
     state?: StringFilter<"Directions"> | string
     zipCode?: StringFilter<"Directions"> | string
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     company?: XOR<CompanyNullableScalarRelationFilter, CompanyWhereInput> | null
+    incident?: XOR<IncidentsNullableScalarRelationFilter, IncidentsWhereInput> | null
   }, "id">
 
   export type DirectionsOrderByWithAggregationInput = {
     id?: SortOrder
     userID?: SortOrderInput | SortOrder
     companyID?: SortOrderInput | SortOrder
+    incidentID?: SortOrderInput | SortOrder
     address?: SortOrder
     city?: SortOrder
     state?: SortOrder
@@ -33660,6 +34880,7 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Directions"> | number
     userID?: IntNullableWithAggregatesFilter<"Directions"> | number | null
     companyID?: IntNullableWithAggregatesFilter<"Directions"> | number | null
+    incidentID?: IntNullableWithAggregatesFilter<"Directions"> | number | null
     address?: StringWithAggregatesFilter<"Directions"> | string
     city?: StringWithAggregatesFilter<"Directions"> | string
     state?: StringWithAggregatesFilter<"Directions"> | string
@@ -34568,13 +35789,13 @@ export namespace Prisma {
     title: string
     description: string
     status?: $Enums.incidentStatus
-    location: string
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
     closureDate?: Date | string | null
     dateReported?: Date | string
     urgency?: boolean | null
+    location?: DirectionsCreateNestedManyWithoutIncidentInput
     company: CompanyCreateNestedOneWithoutIncidentsInput
     assignedWorker?: WorkerCreateNestedOneWithoutAssignedIncidentsInput
     budget?: BudgetCreateNestedOneWithoutIncidentInput
@@ -34590,7 +35811,6 @@ export namespace Prisma {
     title: string
     description: string
     status?: $Enums.incidentStatus
-    location: string
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -34601,6 +35821,7 @@ export namespace Prisma {
     budgetID?: number | null
     userID?: number | null
     urgency?: boolean | null
+    location?: DirectionsUncheckedCreateNestedManyWithoutIncidentInput
     users?: UserUncheckedCreateNestedManyWithoutIncidentsInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutIncidentInput
     Payments?: PaymentsUncheckedCreateNestedManyWithoutIncidentInput
@@ -34611,13 +35832,13 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
-    location?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     closureDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dateReported?: DateTimeFieldUpdateOperationsInput | Date | string
     urgency?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    location?: DirectionsUpdateManyWithoutIncidentNestedInput
     company?: CompanyUpdateOneRequiredWithoutIncidentsNestedInput
     assignedWorker?: WorkerUpdateOneWithoutAssignedIncidentsNestedInput
     budget?: BudgetUpdateOneWithoutIncidentNestedInput
@@ -34633,7 +35854,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
-    location?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -34644,6 +35864,7 @@ export namespace Prisma {
     budgetID?: NullableIntFieldUpdateOperationsInput | number | null
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     urgency?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    location?: DirectionsUncheckedUpdateManyWithoutIncidentNestedInput
     users?: UserUncheckedUpdateManyWithoutIncidentsNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutIncidentNestedInput
     Payments?: PaymentsUncheckedUpdateManyWithoutIncidentNestedInput
@@ -34655,7 +35876,6 @@ export namespace Prisma {
     title: string
     description: string
     status?: $Enums.incidentStatus
-    location: string
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -34672,7 +35892,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
-    location?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -34686,7 +35905,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
-    location?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -34936,6 +36154,45 @@ export namespace Prisma {
     userID?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     title?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type newsLetterCreateInput = {
+    email: string
+    createdAt?: Date | string
+  }
+
+  export type newsLetterUncheckedCreateInput = {
+    id?: number
+    email: string
+    createdAt?: Date | string
+  }
+
+  export type newsLetterUpdateInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type newsLetterUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    email?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type newsLetterCreateManyInput = {
+    id?: number
+    email: string
+    createdAt?: Date | string
+  }
+
+  export type newsLetterUpdateManyMutationInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type newsLetterUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    email?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type productsCreateInput = {
@@ -35382,12 +36639,14 @@ export namespace Prisma {
     zipCode: string
     user?: UserCreateNestedOneWithoutDirectionsInput
     company?: CompanyCreateNestedOneWithoutDirectionsInput
+    incident?: IncidentsCreateNestedOneWithoutLocationInput
   }
 
   export type DirectionsUncheckedCreateInput = {
     id?: number
     userID?: number | null
     companyID?: number | null
+    incidentID?: number | null
     address: string
     city: string
     state: string
@@ -35401,12 +36660,14 @@ export namespace Prisma {
     zipCode?: StringFieldUpdateOperationsInput | string
     user?: UserUpdateOneWithoutDirectionsNestedInput
     company?: CompanyUpdateOneWithoutDirectionsNestedInput
+    incident?: IncidentsUpdateOneWithoutLocationNestedInput
   }
 
   export type DirectionsUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
+    incidentID?: NullableIntFieldUpdateOperationsInput | number | null
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
@@ -35417,6 +36678,7 @@ export namespace Prisma {
     id?: number
     userID?: number | null
     companyID?: number | null
+    incidentID?: number | null
     address: string
     city: string
     state: string
@@ -35434,6 +36696,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
+    incidentID?: NullableIntFieldUpdateOperationsInput | number | null
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
@@ -36482,7 +37745,6 @@ export namespace Prisma {
     title?: SortOrder
     description?: SortOrder
     status?: SortOrder
-    location?: SortOrder
     priority?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -36508,7 +37770,6 @@ export namespace Prisma {
     title?: SortOrder
     description?: SortOrder
     status?: SortOrder
-    location?: SortOrder
     priority?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -36526,7 +37787,6 @@ export namespace Prisma {
     title?: SortOrder
     description?: SortOrder
     status?: SortOrder
-    location?: SortOrder
     priority?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -36829,6 +38089,32 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedJsonFilter<$PrismaModel>
     _max?: NestedJsonFilter<$PrismaModel>
+  }
+
+  export type newsLetterCountOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type newsLetterAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type newsLetterMaxOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type newsLetterMinOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type newsLetterSumOrderByAggregateInput = {
+    id?: SortOrder
   }
 
   export type ItemListRelationFilter = {
@@ -37142,6 +38428,7 @@ export namespace Prisma {
     id?: SortOrder
     userID?: SortOrder
     companyID?: SortOrder
+    incidentID?: SortOrder
     address?: SortOrder
     city?: SortOrder
     state?: SortOrder
@@ -37152,12 +38439,14 @@ export namespace Prisma {
     id?: SortOrder
     userID?: SortOrder
     companyID?: SortOrder
+    incidentID?: SortOrder
   }
 
   export type DirectionsMaxOrderByAggregateInput = {
     id?: SortOrder
     userID?: SortOrder
     companyID?: SortOrder
+    incidentID?: SortOrder
     address?: SortOrder
     city?: SortOrder
     state?: SortOrder
@@ -37168,6 +38457,7 @@ export namespace Prisma {
     id?: SortOrder
     userID?: SortOrder
     companyID?: SortOrder
+    incidentID?: SortOrder
     address?: SortOrder
     city?: SortOrder
     state?: SortOrder
@@ -37178,6 +38468,7 @@ export namespace Prisma {
     id?: SortOrder
     userID?: SortOrder
     companyID?: SortOrder
+    incidentID?: SortOrder
   }
 
   export type machineryCountOrderByAggregateInput = {
@@ -39059,6 +40350,13 @@ export namespace Prisma {
     update?: XOR<XOR<CompanyUpdateToOneWithWhereWithoutWorkersCompaniesInput, CompanyUpdateWithoutWorkersCompaniesInput>, CompanyUncheckedUpdateWithoutWorkersCompaniesInput>
   }
 
+  export type DirectionsCreateNestedManyWithoutIncidentInput = {
+    create?: XOR<DirectionsCreateWithoutIncidentInput, DirectionsUncheckedCreateWithoutIncidentInput> | DirectionsCreateWithoutIncidentInput[] | DirectionsUncheckedCreateWithoutIncidentInput[]
+    connectOrCreate?: DirectionsCreateOrConnectWithoutIncidentInput | DirectionsCreateOrConnectWithoutIncidentInput[]
+    createMany?: DirectionsCreateManyIncidentInputEnvelope
+    connect?: DirectionsWhereUniqueInput | DirectionsWhereUniqueInput[]
+  }
+
   export type CompanyCreateNestedOneWithoutIncidentsInput = {
     create?: XOR<CompanyCreateWithoutIncidentsInput, CompanyUncheckedCreateWithoutIncidentsInput>
     connectOrCreate?: CompanyCreateOrConnectWithoutIncidentsInput
@@ -39111,6 +40409,13 @@ export namespace Prisma {
     connect?: FileWhereUniqueInput | FileWhereUniqueInput[]
   }
 
+  export type DirectionsUncheckedCreateNestedManyWithoutIncidentInput = {
+    create?: XOR<DirectionsCreateWithoutIncidentInput, DirectionsUncheckedCreateWithoutIncidentInput> | DirectionsCreateWithoutIncidentInput[] | DirectionsUncheckedCreateWithoutIncidentInput[]
+    connectOrCreate?: DirectionsCreateOrConnectWithoutIncidentInput | DirectionsCreateOrConnectWithoutIncidentInput[]
+    createMany?: DirectionsCreateManyIncidentInputEnvelope
+    connect?: DirectionsWhereUniqueInput | DirectionsWhereUniqueInput[]
+  }
+
   export type UserUncheckedCreateNestedManyWithoutIncidentsInput = {
     create?: XOR<UserCreateWithoutIncidentsInput, UserUncheckedCreateWithoutIncidentsInput> | UserCreateWithoutIncidentsInput[] | UserUncheckedCreateWithoutIncidentsInput[]
     connectOrCreate?: UserCreateOrConnectWithoutIncidentsInput | UserCreateOrConnectWithoutIncidentsInput[]
@@ -39145,6 +40450,20 @@ export namespace Prisma {
 
   export type NullableBoolFieldUpdateOperationsInput = {
     set?: boolean | null
+  }
+
+  export type DirectionsUpdateManyWithoutIncidentNestedInput = {
+    create?: XOR<DirectionsCreateWithoutIncidentInput, DirectionsUncheckedCreateWithoutIncidentInput> | DirectionsCreateWithoutIncidentInput[] | DirectionsUncheckedCreateWithoutIncidentInput[]
+    connectOrCreate?: DirectionsCreateOrConnectWithoutIncidentInput | DirectionsCreateOrConnectWithoutIncidentInput[]
+    upsert?: DirectionsUpsertWithWhereUniqueWithoutIncidentInput | DirectionsUpsertWithWhereUniqueWithoutIncidentInput[]
+    createMany?: DirectionsCreateManyIncidentInputEnvelope
+    set?: DirectionsWhereUniqueInput | DirectionsWhereUniqueInput[]
+    disconnect?: DirectionsWhereUniqueInput | DirectionsWhereUniqueInput[]
+    delete?: DirectionsWhereUniqueInput | DirectionsWhereUniqueInput[]
+    connect?: DirectionsWhereUniqueInput | DirectionsWhereUniqueInput[]
+    update?: DirectionsUpdateWithWhereUniqueWithoutIncidentInput | DirectionsUpdateWithWhereUniqueWithoutIncidentInput[]
+    updateMany?: DirectionsUpdateManyWithWhereWithoutIncidentInput | DirectionsUpdateManyWithWhereWithoutIncidentInput[]
+    deleteMany?: DirectionsScalarWhereInput | DirectionsScalarWhereInput[]
   }
 
   export type CompanyUpdateOneRequiredWithoutIncidentsNestedInput = {
@@ -39239,6 +40558,20 @@ export namespace Prisma {
     update?: FileUpdateWithWhereUniqueWithoutIncidentInput | FileUpdateWithWhereUniqueWithoutIncidentInput[]
     updateMany?: FileUpdateManyWithWhereWithoutIncidentInput | FileUpdateManyWithWhereWithoutIncidentInput[]
     deleteMany?: FileScalarWhereInput | FileScalarWhereInput[]
+  }
+
+  export type DirectionsUncheckedUpdateManyWithoutIncidentNestedInput = {
+    create?: XOR<DirectionsCreateWithoutIncidentInput, DirectionsUncheckedCreateWithoutIncidentInput> | DirectionsCreateWithoutIncidentInput[] | DirectionsUncheckedCreateWithoutIncidentInput[]
+    connectOrCreate?: DirectionsCreateOrConnectWithoutIncidentInput | DirectionsCreateOrConnectWithoutIncidentInput[]
+    upsert?: DirectionsUpsertWithWhereUniqueWithoutIncidentInput | DirectionsUpsertWithWhereUniqueWithoutIncidentInput[]
+    createMany?: DirectionsCreateManyIncidentInputEnvelope
+    set?: DirectionsWhereUniqueInput | DirectionsWhereUniqueInput[]
+    disconnect?: DirectionsWhereUniqueInput | DirectionsWhereUniqueInput[]
+    delete?: DirectionsWhereUniqueInput | DirectionsWhereUniqueInput[]
+    connect?: DirectionsWhereUniqueInput | DirectionsWhereUniqueInput[]
+    update?: DirectionsUpdateWithWhereUniqueWithoutIncidentInput | DirectionsUpdateWithWhereUniqueWithoutIncidentInput[]
+    updateMany?: DirectionsUpdateManyWithWhereWithoutIncidentInput | DirectionsUpdateManyWithWhereWithoutIncidentInput[]
+    deleteMany?: DirectionsScalarWhereInput | DirectionsScalarWhereInput[]
   }
 
   export type UserUncheckedUpdateManyWithoutIncidentsNestedInput = {
@@ -39825,6 +41158,12 @@ export namespace Prisma {
     connect?: CompanyWhereUniqueInput
   }
 
+  export type IncidentsCreateNestedOneWithoutLocationInput = {
+    create?: XOR<IncidentsCreateWithoutLocationInput, IncidentsUncheckedCreateWithoutLocationInput>
+    connectOrCreate?: IncidentsCreateOrConnectWithoutLocationInput
+    connect?: IncidentsWhereUniqueInput
+  }
+
   export type UserUpdateOneWithoutDirectionsNestedInput = {
     create?: XOR<UserCreateWithoutDirectionsInput, UserUncheckedCreateWithoutDirectionsInput>
     connectOrCreate?: UserCreateOrConnectWithoutDirectionsInput
@@ -39843,6 +41182,16 @@ export namespace Prisma {
     delete?: CompanyWhereInput | boolean
     connect?: CompanyWhereUniqueInput
     update?: XOR<XOR<CompanyUpdateToOneWithWhereWithoutDirectionsInput, CompanyUpdateWithoutDirectionsInput>, CompanyUncheckedUpdateWithoutDirectionsInput>
+  }
+
+  export type IncidentsUpdateOneWithoutLocationNestedInput = {
+    create?: XOR<IncidentsCreateWithoutLocationInput, IncidentsUncheckedCreateWithoutLocationInput>
+    connectOrCreate?: IncidentsCreateOrConnectWithoutLocationInput
+    upsert?: IncidentsUpsertWithoutLocationInput
+    disconnect?: IncidentsWhereInput | boolean
+    delete?: IncidentsWhereInput | boolean
+    connect?: IncidentsWhereUniqueInput
+    update?: XOR<XOR<IncidentsUpdateToOneWithWhereWithoutLocationInput, IncidentsUpdateWithoutLocationInput>, IncidentsUncheckedUpdateWithoutLocationInput>
   }
 
   export type UserCreateNestedOneWithoutMachineryInput = {
@@ -40279,13 +41628,13 @@ export namespace Prisma {
     title: string
     description: string
     status?: $Enums.incidentStatus
-    location: string
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
     closureDate?: Date | string | null
     dateReported?: Date | string
     urgency?: boolean | null
+    location?: DirectionsCreateNestedManyWithoutIncidentInput
     company: CompanyCreateNestedOneWithoutIncidentsInput
     assignedWorker?: WorkerCreateNestedOneWithoutAssignedIncidentsInput
     budget?: BudgetCreateNestedOneWithoutIncidentInput
@@ -40300,7 +41649,6 @@ export namespace Prisma {
     title: string
     description: string
     status?: $Enums.incidentStatus
-    location: string
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -40311,6 +41659,7 @@ export namespace Prisma {
     budgetID?: number | null
     userID?: number | null
     urgency?: boolean | null
+    location?: DirectionsUncheckedCreateNestedManyWithoutIncidentInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutIncidentInput
     Payments?: PaymentsUncheckedCreateNestedManyWithoutIncidentInput
     files?: FileUncheckedCreateNestedManyWithoutIncidentInput
@@ -40327,11 +41676,13 @@ export namespace Prisma {
     state: string
     zipCode: string
     company?: CompanyCreateNestedOneWithoutDirectionsInput
+    incident?: IncidentsCreateNestedOneWithoutLocationInput
   }
 
   export type DirectionsUncheckedCreateWithoutUserInput = {
     id?: number
     companyID?: number | null
+    incidentID?: number | null
     address: string
     city: string
     state: string
@@ -40434,13 +41785,13 @@ export namespace Prisma {
     title: string
     description: string
     status?: $Enums.incidentStatus
-    location: string
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
     closureDate?: Date | string | null
     dateReported?: Date | string
     urgency?: boolean | null
+    location?: DirectionsCreateNestedManyWithoutIncidentInput
     company: CompanyCreateNestedOneWithoutIncidentsInput
     assignedWorker?: WorkerCreateNestedOneWithoutAssignedIncidentsInput
     budget?: BudgetCreateNestedOneWithoutIncidentInput
@@ -40455,7 +41806,6 @@ export namespace Prisma {
     title: string
     description: string
     status?: $Enums.incidentStatus
-    location: string
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -40465,6 +41815,7 @@ export namespace Prisma {
     assignedWorkerID?: number | null
     budgetID?: number | null
     urgency?: boolean | null
+    location?: DirectionsUncheckedCreateNestedManyWithoutIncidentInput
     users?: UserUncheckedCreateNestedManyWithoutIncidentsInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutIncidentInput
     Payments?: PaymentsUncheckedCreateNestedManyWithoutIncidentInput
@@ -40729,13 +42080,13 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
-    location?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     closureDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dateReported?: DateTimeFieldUpdateOperationsInput | Date | string
     urgency?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    location?: DirectionsUpdateManyWithoutIncidentNestedInput
     company?: CompanyUpdateOneRequiredWithoutIncidentsNestedInput
     assignedWorker?: WorkerUpdateOneWithoutAssignedIncidentsNestedInput
     budget?: BudgetUpdateOneWithoutIncidentNestedInput
@@ -40750,7 +42101,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
-    location?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -40761,6 +42111,7 @@ export namespace Prisma {
     budgetID?: NullableIntFieldUpdateOperationsInput | number | null
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     urgency?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    location?: DirectionsUncheckedUpdateManyWithoutIncidentNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutIncidentNestedInput
     Payments?: PaymentsUncheckedUpdateManyWithoutIncidentNestedInput
     files?: FileUncheckedUpdateManyWithoutIncidentNestedInput
@@ -40789,6 +42140,7 @@ export namespace Prisma {
     id?: IntFilter<"Directions"> | number
     userID?: IntNullableFilter<"Directions"> | number | null
     companyID?: IntNullableFilter<"Directions"> | number | null
+    incidentID?: IntNullableFilter<"Directions"> | number | null
     address?: StringFilter<"Directions"> | string
     city?: StringFilter<"Directions"> | string
     state?: StringFilter<"Directions"> | string
@@ -40905,7 +42257,6 @@ export namespace Prisma {
     title?: StringFilter<"Incidents"> | string
     description?: StringFilter<"Incidents"> | string
     status?: EnumincidentStatusFilter<"Incidents"> | $Enums.incidentStatus
-    location?: StringFilter<"Incidents"> | string
     priority?: StringFilter<"Incidents"> | string
     createdAt?: DateTimeFilter<"Incidents"> | Date | string
     updatedAt?: DateTimeFilter<"Incidents"> | Date | string
@@ -41194,13 +42545,13 @@ export namespace Prisma {
     title: string
     description: string
     status?: $Enums.incidentStatus
-    location: string
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
     closureDate?: Date | string | null
     dateReported?: Date | string
     urgency?: boolean | null
+    location?: DirectionsCreateNestedManyWithoutIncidentInput
     assignedWorker?: WorkerCreateNestedOneWithoutAssignedIncidentsInput
     budget?: BudgetCreateNestedOneWithoutIncidentInput
     user?: UserCreateNestedOneWithoutIncidentsInput
@@ -41215,7 +42566,6 @@ export namespace Prisma {
     title: string
     description: string
     status?: $Enums.incidentStatus
-    location: string
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -41225,6 +42575,7 @@ export namespace Prisma {
     budgetID?: number | null
     userID?: number | null
     urgency?: boolean | null
+    location?: DirectionsUncheckedCreateNestedManyWithoutIncidentInput
     users?: UserUncheckedCreateNestedManyWithoutIncidentsInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutIncidentInput
     Payments?: PaymentsUncheckedCreateNestedManyWithoutIncidentInput
@@ -41314,11 +42665,13 @@ export namespace Prisma {
     state: string
     zipCode: string
     user?: UserCreateNestedOneWithoutDirectionsInput
+    incident?: IncidentsCreateNestedOneWithoutLocationInput
   }
 
   export type DirectionsUncheckedCreateWithoutCompanyInput = {
     id?: number
     userID?: number | null
+    incidentID?: number | null
     address: string
     city: string
     state: string
@@ -42387,13 +43740,13 @@ export namespace Prisma {
     title: string
     description: string
     status?: $Enums.incidentStatus
-    location: string
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
     closureDate?: Date | string | null
     dateReported?: Date | string
     urgency?: boolean | null
+    location?: DirectionsCreateNestedManyWithoutIncidentInput
     company: CompanyCreateNestedOneWithoutIncidentsInput
     budget?: BudgetCreateNestedOneWithoutIncidentInput
     user?: UserCreateNestedOneWithoutIncidentsInput
@@ -42408,7 +43761,6 @@ export namespace Prisma {
     title: string
     description: string
     status?: $Enums.incidentStatus
-    location: string
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -42418,6 +43770,7 @@ export namespace Prisma {
     budgetID?: number | null
     userID?: number | null
     urgency?: boolean | null
+    location?: DirectionsUncheckedCreateNestedManyWithoutIncidentInput
     users?: UserUncheckedCreateNestedManyWithoutIncidentsInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutIncidentInput
     Payments?: PaymentsUncheckedCreateNestedManyWithoutIncidentInput
@@ -42865,13 +44218,13 @@ export namespace Prisma {
     title: string
     description: string
     status?: $Enums.incidentStatus
-    location: string
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
     closureDate?: Date | string | null
     dateReported?: Date | string
     urgency?: boolean | null
+    location?: DirectionsCreateNestedManyWithoutIncidentInput
     company: CompanyCreateNestedOneWithoutIncidentsInput
     assignedWorker?: WorkerCreateNestedOneWithoutAssignedIncidentsInput
     budget?: BudgetCreateNestedOneWithoutIncidentInput
@@ -42886,7 +44239,6 @@ export namespace Prisma {
     title: string
     description: string
     status?: $Enums.incidentStatus
-    location: string
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -42897,6 +44249,7 @@ export namespace Prisma {
     budgetID?: number | null
     userID?: number | null
     urgency?: boolean | null
+    location?: DirectionsUncheckedCreateNestedManyWithoutIncidentInput
     users?: UserUncheckedCreateNestedManyWithoutIncidentsInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutIncidentInput
     Payments?: PaymentsUncheckedCreateNestedManyWithoutIncidentInput
@@ -43138,13 +44491,13 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
-    location?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     closureDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dateReported?: DateTimeFieldUpdateOperationsInput | Date | string
     urgency?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    location?: DirectionsUpdateManyWithoutIncidentNestedInput
     company?: CompanyUpdateOneRequiredWithoutIncidentsNestedInput
     assignedWorker?: WorkerUpdateOneWithoutAssignedIncidentsNestedInput
     budget?: BudgetUpdateOneWithoutIncidentNestedInput
@@ -43159,7 +44512,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
-    location?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -43170,6 +44522,7 @@ export namespace Prisma {
     budgetID?: NullableIntFieldUpdateOperationsInput | number | null
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     urgency?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    location?: DirectionsUncheckedUpdateManyWithoutIncidentNestedInput
     users?: UserUncheckedUpdateManyWithoutIncidentsNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutIncidentNestedInput
     Payments?: PaymentsUncheckedUpdateManyWithoutIncidentNestedInput
@@ -44137,6 +45490,35 @@ export namespace Prisma {
     products?: productsUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
+  export type DirectionsCreateWithoutIncidentInput = {
+    address: string
+    city: string
+    state: string
+    zipCode: string
+    user?: UserCreateNestedOneWithoutDirectionsInput
+    company?: CompanyCreateNestedOneWithoutDirectionsInput
+  }
+
+  export type DirectionsUncheckedCreateWithoutIncidentInput = {
+    id?: number
+    userID?: number | null
+    companyID?: number | null
+    address: string
+    city: string
+    state: string
+    zipCode: string
+  }
+
+  export type DirectionsCreateOrConnectWithoutIncidentInput = {
+    where: DirectionsWhereUniqueInput
+    create: XOR<DirectionsCreateWithoutIncidentInput, DirectionsUncheckedCreateWithoutIncidentInput>
+  }
+
+  export type DirectionsCreateManyIncidentInputEnvelope = {
+    data: DirectionsCreateManyIncidentInput | DirectionsCreateManyIncidentInput[]
+    skipDuplicates?: boolean
+  }
+
   export type CompanyCreateWithoutIncidentsInput = {
     name: string
     phone: string
@@ -44482,6 +45864,22 @@ export namespace Prisma {
   export type FileCreateManyIncidentInputEnvelope = {
     data: FileCreateManyIncidentInput | FileCreateManyIncidentInput[]
     skipDuplicates?: boolean
+  }
+
+  export type DirectionsUpsertWithWhereUniqueWithoutIncidentInput = {
+    where: DirectionsWhereUniqueInput
+    update: XOR<DirectionsUpdateWithoutIncidentInput, DirectionsUncheckedUpdateWithoutIncidentInput>
+    create: XOR<DirectionsCreateWithoutIncidentInput, DirectionsUncheckedCreateWithoutIncidentInput>
+  }
+
+  export type DirectionsUpdateWithWhereUniqueWithoutIncidentInput = {
+    where: DirectionsWhereUniqueInput
+    data: XOR<DirectionsUpdateWithoutIncidentInput, DirectionsUncheckedUpdateWithoutIncidentInput>
+  }
+
+  export type DirectionsUpdateManyWithWhereWithoutIncidentInput = {
+    where: DirectionsScalarWhereInput
+    data: XOR<DirectionsUpdateManyMutationInput, DirectionsUncheckedUpdateManyWithoutIncidentInput>
   }
 
   export type CompanyUpsertWithoutIncidentsInput = {
@@ -44888,13 +46286,13 @@ export namespace Prisma {
     title: string
     description: string
     status?: $Enums.incidentStatus
-    location: string
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
     closureDate?: Date | string | null
     dateReported?: Date | string
     urgency?: boolean | null
+    location?: DirectionsCreateNestedManyWithoutIncidentInput
     company: CompanyCreateNestedOneWithoutIncidentsInput
     assignedWorker?: WorkerCreateNestedOneWithoutAssignedIncidentsInput
     budget?: BudgetCreateNestedOneWithoutIncidentInput
@@ -44909,7 +46307,6 @@ export namespace Prisma {
     title: string
     description: string
     status?: $Enums.incidentStatus
-    location: string
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -44920,6 +46317,7 @@ export namespace Prisma {
     budgetID?: number | null
     userID?: number | null
     urgency?: boolean | null
+    location?: DirectionsUncheckedCreateNestedManyWithoutIncidentInput
     users?: UserUncheckedCreateNestedManyWithoutIncidentsInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutIncidentInput
     files?: FileUncheckedCreateNestedManyWithoutIncidentInput
@@ -45094,13 +46492,13 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
-    location?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     closureDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dateReported?: DateTimeFieldUpdateOperationsInput | Date | string
     urgency?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    location?: DirectionsUpdateManyWithoutIncidentNestedInput
     company?: CompanyUpdateOneRequiredWithoutIncidentsNestedInput
     assignedWorker?: WorkerUpdateOneWithoutAssignedIncidentsNestedInput
     budget?: BudgetUpdateOneWithoutIncidentNestedInput
@@ -45115,7 +46513,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
-    location?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -45126,6 +46523,7 @@ export namespace Prisma {
     budgetID?: NullableIntFieldUpdateOperationsInput | number | null
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     urgency?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    location?: DirectionsUncheckedUpdateManyWithoutIncidentNestedInput
     users?: UserUncheckedUpdateManyWithoutIncidentsNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutIncidentNestedInput
     files?: FileUncheckedUpdateManyWithoutIncidentNestedInput
@@ -45292,13 +46690,13 @@ export namespace Prisma {
     title: string
     description: string
     status?: $Enums.incidentStatus
-    location: string
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
     closureDate?: Date | string | null
     dateReported?: Date | string
     urgency?: boolean | null
+    location?: DirectionsCreateNestedManyWithoutIncidentInput
     company: CompanyCreateNestedOneWithoutIncidentsInput
     assignedWorker?: WorkerCreateNestedOneWithoutAssignedIncidentsInput
     user?: UserCreateNestedOneWithoutIncidentsInput
@@ -45313,7 +46711,6 @@ export namespace Prisma {
     title: string
     description: string
     status?: $Enums.incidentStatus
-    location: string
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -45323,6 +46720,7 @@ export namespace Prisma {
     assignedWorkerID?: number | null
     userID?: number | null
     urgency?: boolean | null
+    location?: DirectionsUncheckedCreateNestedManyWithoutIncidentInput
     users?: UserUncheckedCreateNestedManyWithoutIncidentsInput
     IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutIncidentInput
     Payments?: PaymentsUncheckedCreateNestedManyWithoutIncidentInput
@@ -45576,13 +46974,13 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
-    location?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     closureDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dateReported?: DateTimeFieldUpdateOperationsInput | Date | string
     urgency?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    location?: DirectionsUpdateManyWithoutIncidentNestedInput
     company?: CompanyUpdateOneRequiredWithoutIncidentsNestedInput
     assignedWorker?: WorkerUpdateOneWithoutAssignedIncidentsNestedInput
     user?: UserUpdateOneWithoutIncidentsNestedInput
@@ -45597,7 +46995,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
-    location?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -45607,6 +47004,7 @@ export namespace Prisma {
     assignedWorkerID?: NullableIntFieldUpdateOperationsInput | number | null
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     urgency?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    location?: DirectionsUncheckedUpdateManyWithoutIncidentNestedInput
     users?: UserUncheckedUpdateManyWithoutIncidentsNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutIncidentNestedInput
     Payments?: PaymentsUncheckedUpdateManyWithoutIncidentNestedInput
@@ -46110,13 +47508,13 @@ export namespace Prisma {
     title: string
     description: string
     status?: $Enums.incidentStatus
-    location: string
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
     closureDate?: Date | string | null
     dateReported?: Date | string
     urgency?: boolean | null
+    location?: DirectionsCreateNestedManyWithoutIncidentInput
     company: CompanyCreateNestedOneWithoutIncidentsInput
     assignedWorker?: WorkerCreateNestedOneWithoutAssignedIncidentsInput
     budget?: BudgetCreateNestedOneWithoutIncidentInput
@@ -46131,7 +47529,6 @@ export namespace Prisma {
     title: string
     description: string
     status?: $Enums.incidentStatus
-    location: string
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -46142,6 +47539,7 @@ export namespace Prisma {
     budgetID?: number | null
     userID?: number | null
     urgency?: boolean | null
+    location?: DirectionsUncheckedCreateNestedManyWithoutIncidentInput
     users?: UserUncheckedCreateNestedManyWithoutIncidentsInput
     Payments?: PaymentsUncheckedCreateNestedManyWithoutIncidentInput
     files?: FileUncheckedCreateNestedManyWithoutIncidentInput
@@ -46323,13 +47721,13 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
-    location?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     closureDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dateReported?: DateTimeFieldUpdateOperationsInput | Date | string
     urgency?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    location?: DirectionsUpdateManyWithoutIncidentNestedInput
     company?: CompanyUpdateOneRequiredWithoutIncidentsNestedInput
     assignedWorker?: WorkerUpdateOneWithoutAssignedIncidentsNestedInput
     budget?: BudgetUpdateOneWithoutIncidentNestedInput
@@ -46344,7 +47742,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
-    location?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -46355,6 +47752,7 @@ export namespace Prisma {
     budgetID?: NullableIntFieldUpdateOperationsInput | number | null
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     urgency?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    location?: DirectionsUncheckedUpdateManyWithoutIncidentNestedInput
     users?: UserUncheckedUpdateManyWithoutIncidentsNestedInput
     Payments?: PaymentsUncheckedUpdateManyWithoutIncidentNestedInput
     files?: FileUncheckedUpdateManyWithoutIncidentNestedInput
@@ -47125,6 +48523,52 @@ export namespace Prisma {
     create: XOR<CompanyCreateWithoutDirectionsInput, CompanyUncheckedCreateWithoutDirectionsInput>
   }
 
+  export type IncidentsCreateWithoutLocationInput = {
+    title: string
+    description: string
+    status?: $Enums.incidentStatus
+    priority: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    closureDate?: Date | string | null
+    dateReported?: Date | string
+    urgency?: boolean | null
+    company: CompanyCreateNestedOneWithoutIncidentsInput
+    assignedWorker?: WorkerCreateNestedOneWithoutAssignedIncidentsInput
+    budget?: BudgetCreateNestedOneWithoutIncidentInput
+    user?: UserCreateNestedOneWithoutIncidentsInput
+    users?: UserCreateNestedManyWithoutIncidentsInput
+    IncidentHistory?: IncidentHistoryCreateNestedManyWithoutIncidentInput
+    Payments?: PaymentsCreateNestedManyWithoutIncidentInput
+    files?: FileCreateNestedManyWithoutIncidentInput
+  }
+
+  export type IncidentsUncheckedCreateWithoutLocationInput = {
+    IncidentsID?: number
+    title: string
+    description: string
+    status?: $Enums.incidentStatus
+    priority: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    closureDate?: Date | string | null
+    companyID: number
+    dateReported?: Date | string
+    assignedWorkerID?: number | null
+    budgetID?: number | null
+    userID?: number | null
+    urgency?: boolean | null
+    users?: UserUncheckedCreateNestedManyWithoutIncidentsInput
+    IncidentHistory?: IncidentHistoryUncheckedCreateNestedManyWithoutIncidentInput
+    Payments?: PaymentsUncheckedCreateNestedManyWithoutIncidentInput
+    files?: FileUncheckedCreateNestedManyWithoutIncidentInput
+  }
+
+  export type IncidentsCreateOrConnectWithoutLocationInput = {
+    where: IncidentsWhereUniqueInput
+    create: XOR<IncidentsCreateWithoutLocationInput, IncidentsUncheckedCreateWithoutLocationInput>
+  }
+
   export type UserUpsertWithoutDirectionsInput = {
     update: XOR<UserUpdateWithoutDirectionsInput, UserUncheckedUpdateWithoutDirectionsInput>
     create: XOR<UserCreateWithoutDirectionsInput, UserUncheckedCreateWithoutDirectionsInput>
@@ -47253,6 +48697,58 @@ export namespace Prisma {
     companyFiles?: FileUncheckedUpdateManyWithoutCompanyNestedInput
     Subscriptions?: SubscriptionUncheckedUpdateManyWithoutCompanyNestedInput
     products?: productsUncheckedUpdateManyWithoutCompanyNestedInput
+  }
+
+  export type IncidentsUpsertWithoutLocationInput = {
+    update: XOR<IncidentsUpdateWithoutLocationInput, IncidentsUncheckedUpdateWithoutLocationInput>
+    create: XOR<IncidentsCreateWithoutLocationInput, IncidentsUncheckedCreateWithoutLocationInput>
+    where?: IncidentsWhereInput
+  }
+
+  export type IncidentsUpdateToOneWithWhereWithoutLocationInput = {
+    where?: IncidentsWhereInput
+    data: XOR<IncidentsUpdateWithoutLocationInput, IncidentsUncheckedUpdateWithoutLocationInput>
+  }
+
+  export type IncidentsUpdateWithoutLocationInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
+    priority?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    closureDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateReported?: DateTimeFieldUpdateOperationsInput | Date | string
+    urgency?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    company?: CompanyUpdateOneRequiredWithoutIncidentsNestedInput
+    assignedWorker?: WorkerUpdateOneWithoutAssignedIncidentsNestedInput
+    budget?: BudgetUpdateOneWithoutIncidentNestedInput
+    user?: UserUpdateOneWithoutIncidentsNestedInput
+    users?: UserUpdateManyWithoutIncidentsNestedInput
+    IncidentHistory?: IncidentHistoryUpdateManyWithoutIncidentNestedInput
+    Payments?: PaymentsUpdateManyWithoutIncidentNestedInput
+    files?: FileUpdateManyWithoutIncidentNestedInput
+  }
+
+  export type IncidentsUncheckedUpdateWithoutLocationInput = {
+    IncidentsID?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
+    priority?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    closureDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    companyID?: IntFieldUpdateOperationsInput | number
+    dateReported?: DateTimeFieldUpdateOperationsInput | Date | string
+    assignedWorkerID?: NullableIntFieldUpdateOperationsInput | number | null
+    budgetID?: NullableIntFieldUpdateOperationsInput | number | null
+    userID?: NullableIntFieldUpdateOperationsInput | number | null
+    urgency?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    users?: UserUncheckedUpdateManyWithoutIncidentsNestedInput
+    IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutIncidentNestedInput
+    Payments?: PaymentsUncheckedUpdateManyWithoutIncidentNestedInput
+    files?: FileUncheckedUpdateManyWithoutIncidentNestedInput
   }
 
   export type UserCreateWithoutMachineryInput = {
@@ -47728,6 +49224,7 @@ export namespace Prisma {
   export type DirectionsCreateManyUserInput = {
     id?: number
     companyID?: number | null
+    incidentID?: number | null
     address: string
     city: string
     state: string
@@ -47765,7 +49262,6 @@ export namespace Prisma {
     title: string
     description: string
     status?: $Enums.incidentStatus
-    location: string
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -47840,11 +49336,13 @@ export namespace Prisma {
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     company?: CompanyUpdateOneWithoutDirectionsNestedInput
+    incident?: IncidentsUpdateOneWithoutLocationNestedInput
   }
 
   export type DirectionsUncheckedUpdateWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
+    incidentID?: NullableIntFieldUpdateOperationsInput | number | null
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
@@ -47854,6 +49352,7 @@ export namespace Prisma {
   export type DirectionsUncheckedUpdateManyWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
     companyID?: NullableIntFieldUpdateOperationsInput | number | null
+    incidentID?: NullableIntFieldUpdateOperationsInput | number | null
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
@@ -47942,13 +49441,13 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
-    location?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     closureDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dateReported?: DateTimeFieldUpdateOperationsInput | Date | string
     urgency?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    location?: DirectionsUpdateManyWithoutIncidentNestedInput
     company?: CompanyUpdateOneRequiredWithoutIncidentsNestedInput
     assignedWorker?: WorkerUpdateOneWithoutAssignedIncidentsNestedInput
     budget?: BudgetUpdateOneWithoutIncidentNestedInput
@@ -47963,7 +49462,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
-    location?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -47973,6 +49471,7 @@ export namespace Prisma {
     assignedWorkerID?: NullableIntFieldUpdateOperationsInput | number | null
     budgetID?: NullableIntFieldUpdateOperationsInput | number | null
     urgency?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    location?: DirectionsUncheckedUpdateManyWithoutIncidentNestedInput
     users?: UserUncheckedUpdateManyWithoutIncidentsNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutIncidentNestedInput
     Payments?: PaymentsUncheckedUpdateManyWithoutIncidentNestedInput
@@ -47984,7 +49483,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
-    location?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -48185,7 +49683,6 @@ export namespace Prisma {
     title: string
     description: string
     status?: $Enums.incidentStatus
-    location: string
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -48210,6 +49707,7 @@ export namespace Prisma {
   export type DirectionsCreateManyCompanyInput = {
     id?: number
     userID?: number | null
+    incidentID?: number | null
     address: string
     city: string
     state: string
@@ -48384,13 +49882,13 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
-    location?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     closureDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dateReported?: DateTimeFieldUpdateOperationsInput | Date | string
     urgency?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    location?: DirectionsUpdateManyWithoutIncidentNestedInput
     assignedWorker?: WorkerUpdateOneWithoutAssignedIncidentsNestedInput
     budget?: BudgetUpdateOneWithoutIncidentNestedInput
     user?: UserUpdateOneWithoutIncidentsNestedInput
@@ -48405,7 +49903,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
-    location?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -48415,6 +49912,7 @@ export namespace Prisma {
     budgetID?: NullableIntFieldUpdateOperationsInput | number | null
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     urgency?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    location?: DirectionsUncheckedUpdateManyWithoutIncidentNestedInput
     users?: UserUncheckedUpdateManyWithoutIncidentsNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutIncidentNestedInput
     Payments?: PaymentsUncheckedUpdateManyWithoutIncidentNestedInput
@@ -48426,7 +49924,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
-    location?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -48473,11 +49970,13 @@ export namespace Prisma {
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     user?: UserUpdateOneWithoutDirectionsNestedInput
+    incident?: IncidentsUpdateOneWithoutLocationNestedInput
   }
 
   export type DirectionsUncheckedUpdateWithoutCompanyInput = {
     id?: IntFieldUpdateOperationsInput | number
     userID?: NullableIntFieldUpdateOperationsInput | number | null
+    incidentID?: NullableIntFieldUpdateOperationsInput | number | null
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
@@ -48487,6 +49986,7 @@ export namespace Prisma {
   export type DirectionsUncheckedUpdateManyWithoutCompanyInput = {
     id?: IntFieldUpdateOperationsInput | number
     userID?: NullableIntFieldUpdateOperationsInput | number | null
+    incidentID?: NullableIntFieldUpdateOperationsInput | number | null
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
@@ -48890,7 +50390,6 @@ export namespace Prisma {
     title: string
     description: string
     status?: $Enums.incidentStatus
-    location: string
     priority: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -48975,13 +50474,13 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
-    location?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     closureDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dateReported?: DateTimeFieldUpdateOperationsInput | Date | string
     urgency?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    location?: DirectionsUpdateManyWithoutIncidentNestedInput
     company?: CompanyUpdateOneRequiredWithoutIncidentsNestedInput
     budget?: BudgetUpdateOneWithoutIncidentNestedInput
     user?: UserUpdateOneWithoutIncidentsNestedInput
@@ -48996,7 +50495,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
-    location?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -49006,6 +50504,7 @@ export namespace Prisma {
     budgetID?: NullableIntFieldUpdateOperationsInput | number | null
     userID?: NullableIntFieldUpdateOperationsInput | number | null
     urgency?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    location?: DirectionsUncheckedUpdateManyWithoutIncidentNestedInput
     users?: UserUncheckedUpdateManyWithoutIncidentsNestedInput
     IncidentHistory?: IncidentHistoryUncheckedUpdateManyWithoutIncidentNestedInput
     Payments?: PaymentsUncheckedUpdateManyWithoutIncidentNestedInput
@@ -49017,7 +50516,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     status?: EnumincidentStatusFieldUpdateOperationsInput | $Enums.incidentStatus
-    location?: StringFieldUpdateOperationsInput | string
     priority?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -49229,6 +50727,16 @@ export namespace Prisma {
     uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type DirectionsCreateManyIncidentInput = {
+    id?: number
+    userID?: number | null
+    companyID?: number | null
+    address: string
+    city: string
+    state: string
+    zipCode: string
+  }
+
   export type UserCreateManyIncidentsInput = {
     userID?: number
     name?: string | null
@@ -49277,6 +50785,35 @@ export namespace Prisma {
     adminID?: number | null
     budgetID?: number | null
     uploadedAt?: Date | string
+  }
+
+  export type DirectionsUpdateWithoutIncidentInput = {
+    address?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    zipCode?: StringFieldUpdateOperationsInput | string
+    user?: UserUpdateOneWithoutDirectionsNestedInput
+    company?: CompanyUpdateOneWithoutDirectionsNestedInput
+  }
+
+  export type DirectionsUncheckedUpdateWithoutIncidentInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userID?: NullableIntFieldUpdateOperationsInput | number | null
+    companyID?: NullableIntFieldUpdateOperationsInput | number | null
+    address?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    zipCode?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type DirectionsUncheckedUpdateManyWithoutIncidentInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userID?: NullableIntFieldUpdateOperationsInput | number | null
+    companyID?: NullableIntFieldUpdateOperationsInput | number | null
+    address?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    zipCode?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserUpdateWithoutIncidentsInput = {
