@@ -3,7 +3,7 @@ import type { ItemType } from '../../utils/types/itemType';
 import jwt, { SignOptions } from 'jsonwebtoken';
 import { uploadFile } from '../../s3/uploadFile';
 import dotenv from 'dotenv';
-
+import { sendBudgetEmail } from '../mailing/sendBudgetEmail';
 dotenv.config({ path: '../../../.env' });
 const prisma = new PrismaClient();
 
@@ -67,6 +67,16 @@ export async function createBudget(
     const fileUpload = file
       ? await uploadFile([file], userID, 'user', newBudget.budgetID)
       : null;
+
+    // Enviar correo electrónico con el presupuesto
+    const itemsHtml = items
+      .map(
+        (item) =>
+          `<p>${item.description}: ${item.quantity} x ${item.total}</p>`,
+      )
+      .join('');
+    await sendBudgetEmail(title, description || '', itemsHtml);
+
     return newBudget;
   });
 

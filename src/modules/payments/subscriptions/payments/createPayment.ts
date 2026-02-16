@@ -1,6 +1,7 @@
 import Stripe from 'stripe';
 import { PrismaClient } from '../../../../../generated/prisma';
 import jwt, { SignOptions } from 'jsonwebtoken';
+import { sendPaymentConfirmationEmail } from '../../../mailing/sendPaymentConfirmation';
 import { savePayment } from '../../../../utils/savePayment';
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2025-12-15.clover',
@@ -61,6 +62,10 @@ export async function createPayment(
     new Date(),
     user.email,
   );
+  const sendEmail = await sendPaymentConfirmationEmail(
+    '¡Pago Recibido!',
+    `Hemos recibido tu pago de ${total} EUR. Gracias por tu confianza en nuestros servicios.`,
+  );
   const secret = process.env.JWT_SECRET;
   const options: SignOptions = {
     expiresIn: '1h',
@@ -79,5 +84,6 @@ export async function createPayment(
     payment,
     token,
     savedPayment,
+    sendEmail,
   };
 }

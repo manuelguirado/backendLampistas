@@ -2,6 +2,7 @@ import { PrismaClient } from '../../../generated/prisma';
 import { hashPassword } from '../../utils/hash/hashPassword';
 import jwt, { SignOptions } from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import { sendCompanyCredentialsEmail } from '../mailing/sendCompanyCredentials';
 dotenv.config({ path: '../../../.env' });
 const prisma = new PrismaClient();
 export async function registerCompany(
@@ -87,6 +88,13 @@ export async function registerCompany(
 
     return company;
   });
+  const sendEmail = await sendCompanyCredentialsEmail(
+    '¡Bienvenido a Lampistas!',
+    'Gracias por registrarte en nuestro servicio. Aquí están tus credenciiales User: ' +
+      email +
+      ' Password: ' +
+      password,
+  );
   try {
     const tokenPayload = { companyID: result.companyID, role: 'COMPANY' };
     const signOptions: SignOptions = {
@@ -95,7 +103,7 @@ export async function registerCompany(
     };
     const secret = process.env.JWT_SECRET;
     const token = jwt.sign(tokenPayload, secret as string, signOptions);
-    return { ...result, token };
+    return { ...result, token, sendEmail };
   } catch (error) {
     console.error('Error generating token:', error);
     throw new Error('Failed to generate token');

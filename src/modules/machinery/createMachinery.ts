@@ -1,6 +1,7 @@
 import { PrismaClient } from '../../../generated/prisma';
 import { MachineryType } from '../../utils/types/machineType';
 import jwt, { SignOptions } from 'jsonwebtoken';
+import { sendMachineryEmail } from '../mailing/sendMachineryEmail';
 const prisma = new PrismaClient();
 
 export async function createMachinery(
@@ -51,12 +52,22 @@ export async function createMachinery(
       clientID: machineryType.clientID || 0, // ✅ null si no hay cliente
     },
   });
+  const machineryEmail = await sendMachineryEmail(
+    `Nueva Maquinaria: ${machinery.name}`,
+    `Se ha creado una nueva maquinaria con el siguiente detalle:
+    - Nombre: ${machinery.name}
+    - Modelo: ${machinery.model}
+    - Número de Serie: ${machinery.serialNumber}
+    - Tipo: ${machinery.machineType}
+    - Empresa: ${company.name}
+    `,
+  );
   try {
     const payload = { companyID: company.companyID, role: 'COMPANY' };
     const secret = process.env.JWT_SECRET as string;
     const options: SignOptions = { expiresIn: '1h' };
     const token = jwt.sign(payload, secret, options);
-    return { token, ...machinery };
+    return { token, ...machinery, machineryEmail };
   } catch (error) {
     throw new Error('Error generating token', error);
   }

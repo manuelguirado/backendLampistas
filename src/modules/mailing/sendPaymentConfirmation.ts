@@ -4,12 +4,15 @@ import { join } from 'node:path';
 import { Resend } from 'resend';
 import { getSubscribers } from './getSubcribers';
 //TODO: cambiar el email de destino por el del usuario a enviar el newsletter
-const templateNewsLetter = readFileSync(
-  join(__dirname, 'emailTemplates', 'templateNewsLetter.html'),
+const templatePayment = readFileSync(
+  join(__dirname, 'emailTemplates', 'templateBudgetPaid.html'),
   'utf-8',
 );
 const resend = new Resend(process.env.RESEND_API_KEY);
-export async function sendNewsLetter(title: string, content: string) {
+export async function sendPaymentConfirmationEmail(
+  title: string,
+  content: string,
+) {
   const subscribers = await getSubscribers();
   const emails = subscribers.map((sub) => sub.email);
   if (emails.length === 0) {
@@ -21,7 +24,7 @@ export async function sendNewsLetter(title: string, content: string) {
       from: 'onboarding@resend.dev',
       to: 'manu22.mgb@gmail.com',
       subject: title,
-      html: templateNewsLetter
+      html: templatePayment
         .replace('{{content}}', content)
         .replace('{{title}}', title),
     });

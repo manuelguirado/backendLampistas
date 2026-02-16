@@ -1,6 +1,7 @@
 import { PrismaClient } from '../../../generated/prisma';
 import jwt, { SignOptions } from 'jsonwebtoken';
 import { uploadFile } from '../../s3/uploadFile';
+import { sendIncidentEmail } from '../mailing/sendIncidentEmail';
 import dotenv from 'dotenv';
 dotenv.config({ path: '../../../.env' });
 const prisma = new PrismaClient();
@@ -67,6 +68,7 @@ export async function createIncident(
 
     return newIncident;
   });
+  const sendEmail = await sendIncidentEmail(title, description);
 
   try {
     const payload = {
@@ -78,7 +80,7 @@ export async function createIncident(
     const options: SignOptions = { expiresIn: '1h' };
     const token = jwt.sign(payload, secret, options);
 
-    return { token, ...incident };
+    return { token, ...incident, sendEmail };
   } catch (error) {
     console.error('Error generating JWT token:', error);
   }

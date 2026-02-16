@@ -1,6 +1,6 @@
 import Stripe from 'stripe';
 import dotenv from 'dotenv';
-
+import { sendSubcribeEmail } from '../../mailing/sendSubcribeEmail';
 dotenv.config();
 
 // Crea un PaymentIntent y devuelve el client_secret
@@ -30,8 +30,10 @@ export async function createSubcription(companyemail: string, price: number) {
       console.error('Error creating subscription:', error);
       throw error;
     });
-  console.log('Subscription created:', subscription);
-  console.log('Pending setup intent:', subscription.pending_setup_intent);
+  const sendEmail = await sendSubcribeEmail(
+    '¡Bienvenido a Lampistas!',
+    'Gracias por suscribirte a nuestro servicio. Estamos emocionados de tenerte con nosotros. Si tienes alguna pregunta o necesitas ayuda, no dudes en contactarnos.',
+  );
 
   if (
     typeof subscription.latest_invoice !== 'string' &&
@@ -48,6 +50,7 @@ export async function createSubcription(companyemail: string, price: number) {
       subscriptionId: subscription.id,
       clientSecret,
       status: subscription.status,
+      sendEmail,
     };
   } else {
     throw new Error('Confirmation secret is missing');
