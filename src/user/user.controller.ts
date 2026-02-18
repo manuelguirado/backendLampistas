@@ -17,7 +17,6 @@ import { UserService } from './user.service';
 import { AuthGuard } from '../auth/auth.guard';
 import { UserGuard } from './user.guard';
 import { UserType } from '../utils/types/userType';
-import { parse } from 'path';
 
 @Controller('user')
 export class UserController {
@@ -35,7 +34,16 @@ export class UserController {
   @Post('userLogin')
   async login(@Body() body: { email: string; password: string }) {
     const { email, password } = body;
-    return this.userService.userLogin(email, password);
+    try {
+      return await this.userService.userLogin(email, password);
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : 'Error al iniciar sesión';
+      return {
+        success: false,
+        message: errorMessage,
+      };
+    }
   }
   @Post('validateCode')
   async validateCode(@Body() body: { userType: 'user'; code: string }) {
@@ -120,12 +128,18 @@ export class UserController {
     @Req() req: any,
     @Query('limit') limit?: string,
     @Query('offset') offset?: string,
+    @Query('search') search?: string,
   ) {
     const userID = req.user.userID;
     const limitNum = limit ? parseInt(limit, 10) : undefined;
     const offsetNum = offset ? parseInt(offset, 10) : undefined;
 
-    return this.userService.myIncidents(userID, limitNum, offsetNum);
+    return this.userService.listIncidents(
+      userID,
+      search || '',
+      limitNum,
+      offsetNum,
+    );
   }
   @UseGuards(AuthGuard, UserGuard)
   @UseInterceptors(FileInterceptor('file'))

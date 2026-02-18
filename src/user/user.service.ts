@@ -3,7 +3,7 @@ import { userLogin } from '../modules/users/userLogin';
 import { createIncident } from '../modules/incidents/createIncident';
 import { findMyMachinery } from '../modules/machinery/findMymachinery';
 import { myContracts } from '../modules/users/Mycontracts';
-import { myIncidents } from '../modules/users/myIncidents';
+import { listIncidents } from '../modules/users/myIncidents';
 import { recievedBudgets } from '../modules/users/recievedBudgets';
 import { validateCode } from '../utils/validateCode';
 import { Injectable } from '@nestjs/common';
@@ -60,8 +60,13 @@ export class UserService {
   async validateCode(userType: 'user', code: string) {
     return validateCode(userType, code);
   }
-  async myIncidents(userID: number, limit?: number, offset?: number) {
-    return myIncidents(userID, limit, offset);
+  async listIncidents(
+    userID: number,
+    search: string,
+    limit?: number,
+    offset?: number,
+  ) {
+    return listIncidents(userID, search, limit, offset);
   }
   async uploadFile(
     file: Array<Express.Multer.File>,

@@ -1,5 +1,6 @@
 import { PrismaClient, Prisma } from '../../../generated/prisma';
 import jwt, { SignOptions } from 'jsonwebtoken';
+
 import dotenv from 'dotenv';
 dotenv.config({ path: '../../../.env' });
 const prisma = new PrismaClient();
@@ -13,20 +14,24 @@ export async function listIncidents(
   if (!companyID) {
     throw new Error('companyID is required');
   }
-  const whereClause = search
-    ? {
-        companyID: companyID,
-        OR: [
-          { title: { contains: search, mode: Prisma.QueryMode.insensitive } },
-          {
-            description: {
-              contains: search,
-              mode: Prisma.QueryMode.insensitive,
+
+  const whereClause: Prisma.IncidentsWhereInput = {
+    companyID: companyID,
+    status: { not: 'closed' },
+    ...(search
+      ? {
+          OR: [
+            { title: { contains: search, mode: Prisma.QueryMode.insensitive } },
+            {
+              description: {
+                contains: search,
+                mode: Prisma.QueryMode.insensitive,
+              },
             },
-          },
-        ],
-      }
-    : { companyID: companyID };
+          ],
+        }
+      : {}),
+  };
 
   const totalIncidents = await prisma.incidents.count({
     where: whereClause,
@@ -37,6 +42,14 @@ export async function listIncidents(
     take: limit,
     skip: offset,
     orderBy: { IncidentsID: 'desc' },
+    include: {
+      assignedWorker: {
+        select: {
+          workerid: true,
+          name: true,
+        },
+      },
+    },
   });
 
   if (!incidents) {
@@ -48,8 +61,16 @@ export async function listIncidents(
       title: incident.title,
       description: incident.description,
       status: incident.status,
+      priority: incident.priority,
       createdAt: incident.createdAt,
       updatedAt: incident.updatedAt,
+      assignedWorkerID: incident.assignedWorkerID,
+      assignedWorker: incident.assignedWorker
+        ? {
+            workerid: incident.assignedWorker.workerid,
+            name: incident.assignedWorker.name,
+          }
+        : null,
     };
   });
 

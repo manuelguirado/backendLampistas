@@ -25,9 +25,18 @@ import { UserType } from '../utils/types/userType';
 export class CompanyController {
   constructor(private readonly companyService: CompanyService) {}
   @Post('CompanyLogin')
-  companyLogin(@Body() body: { email: string; password: string }) {
+  async companyLogin(@Body() body: { email: string; password: string }) {
     const { email, password } = body;
-    return this.companyService.companyLogin(email, password);
+    try {
+      return await this.companyService.companyLogin(email, password);
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : 'Error al iniciar sesión';
+      return {
+        success: false,
+        message: errorMessage,
+      };
+    }
   }
   @UseGuards(AuthGuard, CompanyGuard)
   @Get('assignWorkerCode/:workerID')

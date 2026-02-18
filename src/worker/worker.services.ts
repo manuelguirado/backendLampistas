@@ -20,8 +20,13 @@ export class WorkerService {
     return validateCode(userType, code);
   }
 
-  async listAssignedIncidents(workerID: number) {
-    return listAssignedIncidents(workerID);
+  async listAssignedIncidents(
+    workerID: number,
+    search?: string,
+    limit?: number,
+    offset?: number,
+  ) {
+    return listAssignedIncidents(workerID, search, limit, offset);
   }
 
   async updateStatusIncident(

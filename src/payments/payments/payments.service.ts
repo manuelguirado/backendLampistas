@@ -6,8 +6,12 @@ import createLoginLink from '../../modules/payments/subscriptions/accounts/creat
 import { createPayment } from '../../modules/payments/subscriptions/payments/createPayment';
 @Injectable()
 export class PaymentsService {
-  async createSubscription(companyemail: string, price: number) {
-    return await createSubcription(companyemail, price);
+  async createSubscription(
+    companyemail: string,
+    companyPhone: string,
+    price: number,
+  ) {
+    return await createSubcription(companyemail, companyPhone, price);
   }
   async saveSubscription(
     companyemail: string,

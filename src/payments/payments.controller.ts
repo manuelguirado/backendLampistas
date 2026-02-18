@@ -67,7 +67,7 @@ export class PaymentsController {
   }
   @Post('create-subscription')
   async createSubscription(@Req() request: any, @Res() response: any) {
-    const { companyemail, price } = request.body;
+    const { companyemail, companyPhone, price } = request.body;
     console.log('Received create-subscription request:', {
       companyemail,
       price,
@@ -75,6 +75,7 @@ export class PaymentsController {
     try {
       const subscription = await this.paymentsModule.createSubscription(
         companyemail,
+        companyPhone,
         price,
       );
       console.log('Subscription created:', subscription);

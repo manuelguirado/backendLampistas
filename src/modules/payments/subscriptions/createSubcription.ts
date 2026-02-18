@@ -4,14 +4,27 @@ import { sendSubcribeEmail } from '../../mailing/sendSubcribeEmail';
 dotenv.config();
 
 // Crea un PaymentIntent y devuelve el client_secret
-export async function createSubcription(companyemail: string, price: number) {
-  console.log('createSubscription called with:', { companyemail, price });
+export async function createSubcription(
+  companyemail: string,
+  companyPhone: string,
+  price: number,
+) {
+  console.log('createSubscription called with:', {
+    companyemail,
+    companyPhone,
+    price,
+  });
   const stripeClient = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
     apiVersion: '2025-12-15.clover',
   });
-  console.log('Creating payment intent for:', { companyemail, price });
+  console.log('Creating payment intent for:', {
+    companyemail,
+    companyPhone,
+    price,
+  });
   const customer = await stripeClient.customers.create({
     email: companyemail,
+    phone: companyPhone,
   });
   console.log('Customer created:', customer);
   const subscription = await stripeClient.subscriptions
