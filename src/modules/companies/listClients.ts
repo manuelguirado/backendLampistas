@@ -23,6 +23,7 @@ export async function listClients(
         },
       }
     : { companyID: companyID };
+
   // Primero obtén los contratos de esta compañía
   const contracts = await prisma.contracts.findMany({
     where: whereClause,
@@ -45,7 +46,7 @@ export async function listClients(
       contract: contract.contractType, // ✅ Esto debería ser correcto ahora
     };
   });
-
+  console.log('Mapped Clients:', mappedClients);
   try {
     const payload = { companyID: companyID, role: 'COMPANY' };
     const secret = process.env.JWT_SECRET as string;

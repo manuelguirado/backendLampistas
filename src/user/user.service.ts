@@ -14,10 +14,22 @@ import { getIncidentHistory } from '../modules/incidents/getIncidentHistory';
 import { incidentHistory } from '../modules/incidents/incidentHistory';
 import { UserType } from '../utils/types/userType';
 import { forgotPassword } from '../utils/forgotPassword';
+import { hireCompany } from '../modules/users/hireCompany';
+import { searchCompanies } from '../modules/users/searchCompanies';
 @Injectable()
 export class UserService {
-  async userRegister(name: string, email: string, password: string) {
-    return userRegister(name, email, password);
+  async userRegister(
+    name: string,
+    email: string,
+    password: string,
+    directions: {
+      address: string;
+      city: string;
+      state: string;
+      zipCode: string;
+    }[],
+  ) {
+    return userRegister(name, email, password, directions);
   }
   async userLogin(email: string, password: string) {
     return userLogin(email, password);
@@ -108,5 +120,11 @@ export class UserService {
   }
   async forgotPassword(newPassword: string, email: string) {
     return forgotPassword(newPassword, email);
+  }
+  async hireCompany(userID: number, companyEmail: string) {
+    return hireCompany(userID, companyEmail);
+  }
+  async searchCompanies(userID: number) {
+    return searchCompanies(userID);
   }
 }

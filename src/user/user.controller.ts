@@ -23,12 +23,24 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
   @Post('userRegister')
   async register(
-    @Body() userData: { name: string; email: string; password: string },
+    @Body()
+    userData: {
+      name: string;
+      email: string;
+      password: string;
+      directions: {
+        address: string;
+        city: string;
+        state: string;
+        zipCode: string;
+      }[];
+    },
   ) {
     return this.userService.userRegister(
       userData.name,
       userData.email,
       userData.password,
+      userData.directions,
     );
   }
   @Post('userLogin')
@@ -282,5 +294,18 @@ export class UserController {
   ) {
     const { newPassword, email } = body;
     return this.userService.forgotPassword(newPassword, email);
+  }
+  @UseGuards(AuthGuard, UserGuard)
+  @Post('hireCompany')
+  async hireCompany(@Req() req: any, @Body() body: { companyEmail: string }) {
+    const userID = req.user.userID;
+    const { companyEmail } = body;
+    return this.userService.hireCompany(userID, companyEmail);
+  }
+  @UseGuards(AuthGuard, UserGuard)
+  @Get('searchCompanies')
+  async searchCompanies(@Req() req: any) {
+    const userID = req.user.userID;
+    return this.userService.searchCompanies(userID);
   }
 }
