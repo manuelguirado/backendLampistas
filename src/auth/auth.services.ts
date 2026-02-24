@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { TokenExpiredError } from 'jsonwebtoken';
 
 @Injectable()
 export class AuthService {
@@ -13,7 +14,9 @@ export class AuthService {
         secret: process.env.JWT_SECRET || process.env.JWT_SECRET_KEY,
       });
     } catch (error) {
-      console.error('Token validation error:', error);
+      if (!(error instanceof TokenExpiredError)) {
+        console.error('Token validation error:', error);
+      }
       return null; // o undefined
     }
   }

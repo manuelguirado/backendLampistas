@@ -22,6 +22,14 @@ export async function createSubcription(
     companyPhone,
     price,
   });
+  const listCustomers = await stripeClient.customers.list({
+    email: companyemail,
+  });
+  console.log('List customers response:', listCustomers);
+  if (listCustomers.data.length > 0) {
+    throw new Error('Customer with this email already exists');
+  }
+
   const customer = await stripeClient.customers.create({
     email: companyemail,
     phone: companyPhone,

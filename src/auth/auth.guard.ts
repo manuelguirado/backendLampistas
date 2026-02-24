@@ -3,7 +3,6 @@ import {
   ExecutionContext,
   Injectable,
   UnauthorizedException,
-  ForbiddenException,
 } from '@nestjs/common';
 import { AuthService } from './auth.services';
 
@@ -31,8 +30,10 @@ export class AuthGuard implements CanActivate {
   (request as any).user = resp;
       return true;
     } catch (error) {
-      console.error('AuthGuard error:', error);
-      throw new ForbiddenException('Invalid or expired token');
+      if (error instanceof UnauthorizedException) {
+        throw error;
+      }
+      throw new UnauthorizedException('Invalid or expired token');
     }
   }
 }
