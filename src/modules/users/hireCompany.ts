@@ -31,7 +31,7 @@ export async function hireCompany(userID: number, companyEmail: string) {
         contractType: 'freeChoice',
       },
     });
-    console.log('Company hired successfully:', assignCompany);
+   
     const token = process.env.JWT_SECRET as string;
     const options: SignOptions = {
       expiresIn: '1h',

@@ -160,7 +160,6 @@ export class WorkerController {
   @UseGuards(AuthGuard, WorkerGuard)
   @Get('getIncidentPhotos')
   async getIncidentPhotos(@Req() req, @Query('incidentID') incidentID: string) {
-    console.log('Received incidentID:', incidentID); // Agrega este log para verificar el valor recibido
     const incidentIDNum = parseInt(incidentID, 10);
 
     return this.workerService.getIncidentPhotos(incidentIDNum);
@@ -169,9 +168,7 @@ export class WorkerController {
   @Get('getDirections/:incidentID')
   async getDirections(@Req() req, @Param('incidentID') incidentID?: string) {
     const workerID = req.user.workerID;
-    console.log('Worker ID in getDirections controller:', workerID); // Agrega este log para verificar el valor recibido
     const incidentIDNum = incidentID ? parseInt(incidentID, 10) : undefined;
-    console.log('Incident ID in getDirections controller:', incidentIDNum); // Agrega este log para verificar el valor recibido
     return this.workerService.getDirections(workerID, incidentIDNum);
   }
 }

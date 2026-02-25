@@ -24,7 +24,7 @@ export async function activateCompany(companyID: number) {
       active: true,
     },
   });
-  console.log('Found subscription:', findSubcitpion);
+
   if (!findSubcitpion) {
     throw new Error('No active subscription found for this company');
   }

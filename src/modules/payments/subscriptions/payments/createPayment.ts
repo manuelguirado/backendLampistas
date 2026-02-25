@@ -62,6 +62,16 @@ export async function createPayment(
     new Date(),
     user.email,
   );
+  const updateBudget = await prisma.budget.updateMany({
+    where: {
+      userID: user.userID,
+      paid: false,
+    },
+    data: {
+      paid: true,
+    },
+  });
+
   const sendEmail = await sendPaymentConfirmationEmail(
     '¡Pago Recibido!',
     `Hemos recibido tu pago de ${total} EUR. Gracias por tu confianza en nuestros servicios.`,
@@ -85,5 +95,6 @@ export async function createPayment(
     token,
     savedPayment,
     sendEmail,
+    updateBudget,
   };
 }

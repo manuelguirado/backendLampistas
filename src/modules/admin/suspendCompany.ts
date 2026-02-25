@@ -24,8 +24,7 @@ export async function suspendCompany(companyEmail: string, suspendAt?: Date) {
       },
     },
   );
-  console.log('Found Stripe subscription:', suspendAccount);
-  console.log('Found subscription:', findSubcitpion);
+ 
   if (!findSubcitpion) {
     throw new Error('No active subscription found for this company');
   }

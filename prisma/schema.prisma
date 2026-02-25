@@ -255,6 +255,7 @@ model Budget {
   Company      Company[]
   title        String     @db.VarChar(255)
   files        File[]
+  paid         Boolean?    @default(false)
 } 
 model newsLetter {
   id        Int     @id @default(autoincrement())

@@ -2,7 +2,6 @@ import { PrismaClient } from '../../../generated/prisma';
 import jwt, { SignOptions } from 'jsonwebtoken';
 const prisma = new PrismaClient();
 export async function searchCompanies(userID: number) {
-  console.log('Searching companies for userID:', userID);
   try {
     if (!userID) throw new Error('User ID is required');
     const user = await prisma.user.findUnique({
@@ -13,7 +12,7 @@ export async function searchCompanies(userID: number) {
     });
     if (!user) throw new Error('User not found');
     const userDirection = user.directions[0];
-    console.log('User direction:', userDirection);
+
     if (!userDirection) throw new Error('User direction not found');
     const companies = await prisma.company.findMany({
       where: {
@@ -33,7 +32,6 @@ export async function searchCompanies(userID: number) {
       },
     });
 
-    console.log('Raw companies found:', companies);
     const mappedCompanies = companies.map((company) => ({
       companyID: company.companyID,
       name: company.name,
@@ -46,7 +44,7 @@ export async function searchCompanies(userID: number) {
         zipCode: dir.zipCode,
       })),
     }));
-    console.log('Found companies:', mappedCompanies);
+
     const token = process.env.JWT_SECRET as string;
     const options: SignOptions = {
       expiresIn: '1h',

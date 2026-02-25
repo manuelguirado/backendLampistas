@@ -4,7 +4,6 @@ import { listFiles } from '../../s3/listFiles';
 const prisma = new PrismaClient();
 
 export async function getIncidentPhotos(incidentID: number) {
-  console.log('Fetching photos for incidentID:', incidentID); // Agrega este log para verificar el valor recibido
   const incident = await prisma.incidents.findUnique({
     where: { IncidentsID: incidentID },
     select: {
@@ -21,13 +20,12 @@ export async function getIncidentPhotos(incidentID: number) {
       userID: true,
     },
   });
-  console.log('Fetched files:', files); // Agrega este log para verificar los archivos obtenidos
+
   const token = process.env.JWT_SECRET;
   const options: SignOptions = {
     expiresIn: '1h',
   };
   const file = await listFiles(incident.userID ?? 0, 'user', incidentID);
-  console.log('Files from listFiles:', file); // Agrega este log para verificar los archivos obtenidos de listFiles
 
   const payload = {
     incidentID,

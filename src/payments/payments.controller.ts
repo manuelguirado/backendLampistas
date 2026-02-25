@@ -14,12 +14,6 @@ export class PaymentsController {
       publishedKey: process.env.STRIPE_PUBLIC_KEY,
       clientSecret: process.env.STRIPE_SECRET_KEY,
     });
-    console.log(
-      'Published Key:',
-      process.env.STRIPE_PUBLIC_KEY,
-      'Client Secret:',
-      process.env.STRIPE_SECRET_KEY,
-    );
   }
   @Post('webhook')
   handleStripeWebhook(@Req() req: any, @Res() res: any) {
@@ -45,15 +39,13 @@ export class PaymentsController {
     switch (event.type) {
       case 'checkout.session.completed':
         const session = event.data.object;
-        console.log('Checkout session completed:', session);
+
         break;
       case 'invoice.paid':
         const invoice = event.data.object;
-        console.log('Invoice paid:', invoice);
+
         break;
       case 'customer.subscription.deleted':
-        const subscription = event.data.object;
-
         break;
       case 'account.updated':
         const account = event.data.object;
@@ -68,18 +60,14 @@ export class PaymentsController {
   @Post('create-subscription')
   async createSubscription(@Req() request: any, @Res() response: any) {
     const { companyemail, companyPhone, price } = request.body;
-    console.log('Received create-subscription request:', {
-      companyemail,
-      price,
-    });
+
     try {
       const subscription = await this.paymentsModule.createSubscription(
         companyemail,
         companyPhone,
         price,
       );
-      console.log('Subscription created:', subscription);
-      console.log('secret controller:', subscription.clientSecret);
+
       //then save the subscription in the database
       const saveData = await this.paymentsModule.saveSubscription(
         companyemail,
@@ -91,7 +79,6 @@ export class PaymentsController {
         throw new Error('Subscription ID is missing');
       }
 
-      console.log('clientSecret:', subscription.clientSecret);
       return response.status(HttpStatus.OK).json({
         status: 'success',
         message: 'Subscription created successfully',
@@ -128,9 +115,8 @@ export class PaymentsController {
     try {
       const { email } = request.body;
 
-      console.log('Received create-login-link request for accountId:', email);
       const loginLinkData = await this.paymentsModule.createLoginLink(email);
-      console.log('Login link created:', loginLinkData);
+
       return response.status(HttpStatus.OK).json({
         status: 'success',
         message: 'Login link created successfully',
@@ -148,17 +134,13 @@ export class PaymentsController {
   async createPayment(@Req() request: any, @Res() response: any) {
     try {
       const { ammount, userID, companyID } = request.body;
-      console.log('Received create-payment request:', {
-        ammount,
-        userID,
-        companyID,
-      });
+
       const paymentData = await this.paymentsModule.createPayment(
         ammount,
         userID,
         companyID,
       );
-      console.log('Payment created:', paymentData);
+
       return response.status(HttpStatus.OK).json({
         status: 'success',
         message: 'Payment created successfully',

@@ -20,7 +20,6 @@ export async function getDirections(workerID: number, incidentID?: number) {
     where: { incidentID: incidentID },
   });
 
-  console.log('incident ', incident);
   if (!incident) {
     throw new Error('Incident not found');
   }

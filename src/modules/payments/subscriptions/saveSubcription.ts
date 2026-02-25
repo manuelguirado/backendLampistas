@@ -11,13 +11,6 @@ export default async function saveSubcriptionInDB(
   subscriptionID: string,
   endDate?: Date,
 ) {
-  console.log('Saving subscription to DB:', {
-    companyemail,
-    startDate,
-    subscriptionID,
-    active,
-    endDate,
-  });
   return prisma.subscription.create({
     data: {
       companyemail,

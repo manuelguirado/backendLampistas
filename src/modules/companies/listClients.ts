@@ -46,7 +46,7 @@ export async function listClients(
       contract: contract.contractType, // ✅ Esto debería ser correcto ahora
     };
   });
-  console.log('Mapped Clients:', mappedClients);
+
   try {
     const payload = { companyID: companyID, role: 'COMPANY' };
     const secret = process.env.JWT_SECRET as string;

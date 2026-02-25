@@ -25,8 +25,7 @@ export default async function createAccount(email: string) {
       where: { email: email },
       data: { stripeAccountID: account.id },
     });
-    console.log('accountlink' + accountLink.url);
-    console.log('Company updated with Stripe account ID:', saveData);
+
     if (!saveData) {
       console.error('Failed to update company with Stripe account ID');
       throw new Error('Failed to update company with Stripe account ID');
