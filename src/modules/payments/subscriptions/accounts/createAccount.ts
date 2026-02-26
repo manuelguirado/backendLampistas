@@ -32,7 +32,7 @@ export default async function createAccount(email: string) {
     }
     const tokenPayload = { accountId: account.id };
     const signOptions: SignOptions = {
-      expiresIn: '2h',
+      expiresIn: '1d',
       algorithm: 'HS256',
     };
     const token = jwt.sign(

@@ -1,98 +1,250 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+# Índice
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+- [Descripción del proyecto](#descripción-del-proyecto)
+- [Estructura del proyecto](#estructura-del-proyecto)
+- [Módulos principales](#módulos-principales)
+  - [Admin](#admin)
+  - [Compañías](#compañías)
+  - [Clientes](#clientes)
+  - [Trabajadores](#trabajadores)
+  - [Mailing](#mailing)
+  - [Payments](#payments)
+  - [Ficheros](#ficheros)
+- [Tecnologías usadas](#tecnologías-usadas)
 
-## Description
+## Descripción del proyecto
+Este proyecto trata sobre una aplicación web que permite a las empresas gestionar tanto a sus clientes como a sus trabajadores,
+incluyendo pagos en tiempo real y gráficos que se actualizan conforme se van actualizando los datos en la base de datos.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Project setup
-
+## Estructura del proyecto
 ```bash
-$ pnpm install
-```
+.
+├── admin
+│   ├── admin.controller.spec.ts
+│   ├── admin.controller.ts
+│   ├── admin.guard.spec.ts
+│   ├── admin.guard.ts
+│   ├── admin.module.ts
+│   └── admin.services.ts
+├── app.controller.spec.ts
+├── app.controller.ts
+├── app.module.ts
+├── app.service.ts
+├── auth
+│   ├── auth.controller.ts
+│   ├── auth.guard.ts
+│   ├── auth.module.ts
+│   └── auth.services.ts
+├── company
+│   ├── company1.controller.spec.ts
+│   ├── company.controller.spec.ts
+│   ├── company.controller.ts
+│   ├── company.guard.spec.ts
+│   ├── company.guard.ts
+│   ├── company.module.ts
+│   └── company.service.ts
+├── constants
+│   └── ALLOWED_FILES.ts
+├── mailing
+│   ├── mailing.controller.spec.ts
+│   ├── mailing.controller.ts
+│   ├── mailing.module.ts
+│   ├── mailing.service.spec.ts
+│   └── mailing.service.ts
+├── main.ts
+├── modules
+│   ├── admin
+│   │   ├── activateCompany.ts
+│   │   ├── adminLogin.ts
+│   │   ├── charts
+│   │   │   ├── activeClients.ts
+│   │   │   ├── activeCompanies.ts
+│   │   │   └── activeIncidents.ts
+│   │   ├── consultStatus.ts
+│   │   ├── editCompany.ts
+│   │   ├── eliminateCompany.ts
+│   │   ├── listCompany.ts
+│   │   ├── registerAdmin.ts
+│   │   └── suspendCompany.ts
+│   ├── budgets
+│   │   ├── calculateAmmount.ts
+│   │   └── createbudget.ts
+│   ├── charts
+│   │   └── companyCharts
+│   │       ├── closedIncidents.ts
+│   │       └── companyEarnings.ts
+│   ├── companies
+│   │   ├── assignShiftWorker.ts
+│   │   ├── assignUserCompany.ts
+│   │   ├── companyLogin.ts
+│   │   ├── companyUsers.ts
+│   │   ├── createUser.ts
+│   │   ├── getClientContracts.ts
+│   │   ├── listClients.ts
+│   │   ├── listIncidents.ts
+│   │   ├── listWorkers.ts
+│   │   ├── registerCompany.ts
+│   │   └── updateTypeContractType.ts
+│   ├── directions
+│   │   ├── getDirections.ts
+│   │   └── registerDirections.ts
+│   ├── incidents
+│   │   ├── assignIncident.ts
+│   │   ├── createIncident.ts
+│   │   ├── getIncidentHistory.ts
+│   │   └── incidentHistory.ts
+│   ├── machinery
+│   │   ├── createMachinery.ts
+│   │   ├── editMachinery.ts
+│   │   ├── eliminateMachinery.ts
+│   │   ├── findMymachinery.ts
+│   │   ├── listMachinery.ts
+│   │   └── updateMaintenceDate.ts
+│   ├── mailing
+│   │   ├── emailTemplates
+│   │   │   ├── templateBudget.html
+│   │   │   ├── templateBudgetPaid.html
+│   │   │   ├── templateCompanyData.html
+│   │   │   ├── templateincident.html
+│   │   │   ├── templateMachinery.html
+│   │   │   ├── templateNewsLetter.html
+│   │   │   ├── templateRegisterClient.html
+│   │   │   ├── templateSubcribe.html
+│   │   │   └── templateWorkerCredentials.html
+│   │   ├── getSubcribers.ts
+│   │   ├── sendBudgetEmail.ts
+│   │   ├── sendClientCredentials.ts
+│   │   ├── sendCompanyCredentials.ts
+│   │   ├── sendIncidentEmail.ts
+│   │   ├── sendMachineryEmail.ts
+│   │   ├── sendNewsLetter.ts
+│   │   ├── sendPaymentConfirmation.ts
+│   │   ├── sendSubcribeEmail.ts
+│   │   ├── sentWorkerCredentials.ts
+│   │   └── subcribe.ts
+│   ├── payments
+│   │   └── subscriptions
+│   │       ├── accounts
+│   │       │   ├── createAccount.ts
+│   │       │   └── createLoginLink.ts
+│   │       ├── createSubcription.ts
+│   │       ├── payments
+│   │       │   ├── createCheckoutsession.ts
+│   │       │   └── createPayment.ts
+│   │       ├── products
+│   │       │   └── createProduct.ts
+│   │       └── saveSubcription.ts
+│   ├── users
+│   │   ├── hireCompany.ts
+│   │   ├── Mycontracts.ts
+│   │   ├── myIncidents.ts
+│   │   ├── recievedBudgets.ts
+│   │   ├── searchCompanies.ts
+│   │   ├── userLogin.ts
+│   │   └── userRegister.ts
+│   └── workers
+│       ├── editWorker.ts
+│       ├── eliminateWorker.ts
+│       ├── getIncidentPhotos.ts
+│       ├── listAssignedIncidents.ts
+│       ├── myShifts.ts
+│       ├── registerWorker.ts
+│       ├── updateStatusIncident.ts
+│       └── workerLogin.ts
+├── payments
+│   ├── payments
+│   │   ├── payments.service.spec.ts
+│   │   └── payments.service.ts
+│   ├── payments.controller.spec.ts
+│   ├── payments.controller.ts
+│   └── payments.module.ts
+├── s3
+│   ├── downloadFile.ts
+│   ├── listFiles.ts
+│   ├── permissions.ts
+│   ├── signedUrl.ts
+│   └── uploadFile.ts
+├── shared
+│   ├── prisma.ts
+│   ├── s3Config.ts
+│   └── stripeClient.ts
+├── user
+│   ├── user.controller.spec.ts
+│   ├── user.controller.ts
+│   ├── user.guard.spec.ts
+│   ├── user.guard.ts
+│   ├── user.module.ts
+│   └── user.service.ts
+├── utils
+│   ├── assingCode.ts
+│   ├── filterIncidents.ts
+│   ├── forgotPassword.ts
+│   ├── generateCode.ts
+│   ├── generatePDF.ts
+│   ├── getFileUrl.ts
+│   ├── getuserEmail.ts
+│   ├── getUserID.ts
+│   ├── hash
+│   │   ├── hashPassword.ts
+│   │   └── verifyPassword.ts
+│   ├── refreshToken.ts
+│   ├── savePayment.ts
+│   ├── saveProduct.ts
+│   ├── types
+│   │   ├── budgetData.ts
+│   │   ├── contractType.ts
+│   │   ├── incidentStatus.ts
+│   │   ├── itemType.ts
+│   │   ├── machineType.ts
+│   │   ├── paymentStatus.ts
+│   │   └── userType.ts
+│   ├── validateCode.ts
+│   └── validateFile.ts
+└── worker
+    ├── worker.controller.spec.ts
+    ├── worker.controller.ts
+    ├── worker.guard.spec.ts
+    ├── worker.guard.ts
+    ├── worker.module.ts
+    └── worker.services.ts
+  ```
+## Módulos principales
 
-## Compile and run the project
+### Admin
+El módulo de admin cuenta con funcionalidades para gestionar empresas (crearlas, modificarlas, suspenderlas y activarlas) y con un panel de estadísticas en el que se muestran los datos de incidencias activas, clientes activos y compañías activas.
 
-```bash
-# development
-$ pnpm run start
+### Compañías
+El módulo de compañías cuenta con funcionalidades para gestionar trabajadores (crearlos, editarlos, eliminarlos, asignarles guardias y asignarles incidencias).
+En la parte de clientes, permite crear clientes asociados a la empresa y listarlos.
+También incluye el módulo de creación de presupuestos para clientes, generando un PDF desde el propio servidor con Puppeteer.
+Además, en el módulo de maquinaria, permite crear maquinaria asignada al cliente, modificar sus datos y su última inspección.
 
-# watch mode
-$ pnpm run start:dev
+### Clientes
+El módulo de clientes cuenta con funcionalidades para crear incidencias, ver las incidencias que tiene creadas, consultar la información de la maquinaria instalada y visualizar los presupuestos asignados, con posibilidad de contratar una empresa de su zona.
 
-# production mode
-$ pnpm run start:prod
-```
+### Trabajadores
+El módulo de trabajadores cuenta con funcionalidades para consultar las guardias asignadas, visualizar las incidencias asignadas y cambiar su estado.
 
-## Run tests
+### Mailing
+El módulo de mailing permite la gestión del envío de correos a los usuarios suscritos a la newsletter y el envío de correos con actualizaciones de incidencias creadas por el cliente, información de pagos recibidos, guardias asignadas a trabajadores, trabajadores asignados a una incidencia, creación de presupuestos, alta y registro de usuarios, compañías y trabajadores.
 
-```bash
-# unit tests
-$ pnpm run test
+### Payments
+El módulo de payments permite la gestión de los pagos mediante Stripe, gestionando tanto las suscripciones como los pagos entre el cliente y la empresa, recibiendo una comisión del 10% por gestión.
 
-# e2e tests
-$ pnpm run test:e2e
+### Ficheros
+El módulo de ficheros o S3 permite la gestión de subida, descarga y listado de archivos en un bucket de Cloudflare.
 
-# test coverage
-$ pnpm run test:cov
-```
 
-## Deployment
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+## Tecnologías usadas
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+- **Frontend:** React
+- **Backend:** NestJS
+- **Base de datos:** Prisma ORM (PostgreSQL)
+- **Sistema de pagos:** Stripe
+- **Almacenamiento de archivos:** Cloudflare R2
 
-```bash
-$ pnpm install -g @nestjs/mau
-$ mau deploy
-```
+---
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
-
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+Coded by manudev · [manuelguiradobaeza.com](https://manuelguiradobaeza.com)
