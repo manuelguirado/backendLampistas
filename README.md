@@ -14,7 +14,7 @@
 - [Tecnologías usadas](#tecnologías-usadas)
 
 ## Descripción del proyecto
-Este proyecto trata sobre una aplicación web que permite a las empresas gestionar tanto a sus clientes como a sus trabajadores,
+Este  es el bakend del proyecto trata sobre una aplicación web que permite a las empresas gestionar tanto a sus clientes como a sus trabajadores,
 incluyendo pagos en tiempo real y gráficos que se actualizan conforme se van actualizando los datos en la base de datos.
 
 ## Estructura del proyecto
@@ -239,7 +239,7 @@ El módulo de ficheros o S3 permite la gestión de subida, descarga y listado de
 
 ## Tecnologías usadas
 
-- **Frontend:** React
+
 - **Backend:** NestJS
 - **Base de datos:** Prisma ORM (PostgreSQL)
 - **Sistema de pagos:** Stripe
