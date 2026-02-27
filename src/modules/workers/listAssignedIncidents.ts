@@ -1,10 +1,15 @@
-import { PrismaClient } from '../../../generated/prisma';
+import { Prisma, PrismaClient } from '../../../generated/prisma';
 import jwt, { SignOptions } from 'jsonwebtoken';
 import dotenv from 'dotenv';
 dotenv.config({ path: '../../../.env' });
 const prisma = new PrismaClient();
 
-export async function listAssignedIncidents(workerid: number) {
+export async function listAssignedIncidents(
+  workerid: number,
+  search?: string,
+  limit: number = 5,
+  offset: number = 0,
+) {
   if (!workerid) {
     throw new Error('Worker ID is required');
   }
@@ -24,25 +29,69 @@ export async function listAssignedIncidents(workerid: number) {
   if (!worker) {
     throw new Error('Worker not found');
   }
-
-  const incidents = await prisma.incidents.findMany({
-    where: { assignedWorkerID: workerid },
-    orderBy: { createdAt: 'asc' },
-  });
-  if (!incidents || incidents.length === 0) {
-    return [];
-  }
-  const mappedIncidents = incidents.map((incident) => ({
-    IncidentsID: incident.IncidentsID,
-    title: incident.title,
-    description: incident.description,
-    dateReported: incident.createdAt,
-    status: incident.status,
-    companyID: incident.companyID,
-    reportedByUserID: incident.userID,
-    priority: incident.priority,
-  }));
   try {
+    const whereClause: Prisma.IncidentsWhereInput = {
+      assignedWorkerID: workerid,
+      status: { not: 'closed' },
+      ...(search
+        ? {
+            OR: [
+              {
+                title: { contains: search, mode: Prisma.QueryMode.insensitive },
+              },
+              {
+                description: {
+                  contains: search,
+                  mode: Prisma.QueryMode.insensitive,
+                },
+              },
+            ],
+          }
+        : {}),
+    };
+
+    const incidents = await prisma.incidents.findMany({
+      where: whereClause,
+      take: limit,
+      skip: offset,
+      orderBy: { IncidentsID: 'desc' },
+      include: {
+        user: {
+          select: {
+            name: true,
+          },
+        },
+        assignedWorker: {
+          select: {
+            workerid: true,
+            name: true,
+          },
+        },
+      },
+    });
+
+    if (!incidents || incidents.length === 0) {
+      return [];
+    }
+    const mappedIncidents = incidents.map((incident) => {
+      return {
+        IncidentsID: incident.IncidentsID,
+        title: incident.title,
+        description: incident.description,
+        status: incident.status,
+        priority: incident.priority,
+        createdAt: incident.createdAt,
+        updatedAt: incident.updatedAt,
+        reportedByUserID: incident.user?.name || null,
+        assignedWorkerID: incident.assignedWorkerID,
+        assignedWorker: incident.assignedWorker
+          ? {
+              workerid: incident.assignedWorker.workerid,
+              name: incident.assignedWorker.name,
+            }
+          : null,
+      };
+    });
     const payload = { workerid: worker.workerid, role: worker.role };
     const secret = process.env.JWT_SECRET as string;
     const options: SignOptions = { expiresIn: '1h' };

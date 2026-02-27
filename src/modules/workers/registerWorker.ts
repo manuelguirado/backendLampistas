@@ -2,6 +2,7 @@ import { PrismaClient } from '../../../generated/prisma';
 import { hashPassword } from '../../utils/hash/hashPassword';
 import jwt, { SignOptions } from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import { sendWorkerCredentialsEmail } from '../mailing/sentWorkerCredentials';
 dotenv.config({ path: '../../../.env' });
 
 const prisma = new PrismaClient();
@@ -31,12 +32,19 @@ export async function registerWorker(
       },
     },
   });
+  const sendEmail = await sendWorkerCredentialsEmail(
+    '¡Bienvenido a nuestra plataforma!',
+    'Gracias por registrarte en nuestro servicio. Aquí están tus credenciales worker: ' +
+      email +
+      ' Password: ' +
+      password,
+  );
   try {
     const payload = { workerID: worker.workerid, companyID: worker.companyID };
     const secret = process.env.JWT_SECRET as string;
     const options: SignOptions = { expiresIn: '1h' };
     const token = jwt.sign(payload, secret, options);
-    return { token, ...worker };
+    return { token, ...worker, sendEmail };
   } catch (error) {
     console.error('Error generating JWT:', error);
     throw new Error('Internal server error');

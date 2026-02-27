@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "products" ALTER COLUMN "priceID" SET DATA TYPE VARCHAR(255);

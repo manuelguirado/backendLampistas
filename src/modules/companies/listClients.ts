@@ -23,6 +23,7 @@ export async function listClients(
         },
       }
     : { companyID: companyID };
+
   // Primero obtén los contratos de esta compañía
   const contracts = await prisma.contracts.findMany({
     where: whereClause,

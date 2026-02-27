@@ -46,7 +46,7 @@ export async function incidentHistory(
     const incidentHistory = await prisma.incidentHistory.create({
       data: {
         incidentID: incident.IncidentsID,
-        companyID: getID.companyID || null,
+        companyID: 'companyID' in getID ? getID.companyID : null,
         userID: incident.userID,
         workerID: effectiveWorkerID,
         changeLog,
@@ -56,7 +56,7 @@ export async function incidentHistory(
 
     const payload = {
       incidentID: incident.IncidentsID,
-      companyID: getID.companyID || null,
+      companyID: 'companyID' in getID ? getID.companyID : null,
       userID: incident.userID,
       workerID: effectiveWorkerID || null,
       role: getID.role,

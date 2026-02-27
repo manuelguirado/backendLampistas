@@ -2,11 +2,9 @@ import { PrismaClient } from '../../../generated/prisma';
 import bcrypt from 'bcryptjs';
 const prisma = new PrismaClient();
 import dotenv from 'dotenv';
+
 import jwt, { SignOptions } from 'jsonwebtoken';
 dotenv.config({ path: '../../../.env' });
-
-const MAX_ATTEMPTS = 3;
-const LOCK_TIME = 15 * 60 * 1000; // 15 minutes in milliseconds
 
 const loginAttempts = new Map<string, { count: number; lockUntil: number }>();
 
@@ -24,15 +22,6 @@ export async function userLogin(email: string, password: string) {
 
   const passwordIsValid = await bcrypt.compare(password, user.password);
   if (!passwordIsValid) {
-    const count = attempt ? attempt.count + 1 : 1;
-    let lockUntil = 0;
-    if (count >= MAX_ATTEMPTS) {
-      lockUntil = now + LOCK_TIME;
-    }
-    loginAttempts.set(email, { count, lockUntil });
-    if (lockUntil) {
-      throw new Error('Account locked. Try again later');
-    }
     throw new Error('Invalid password');
   }
 
@@ -49,8 +38,9 @@ export async function userLogin(email: string, password: string) {
       companyID: user.companyID,
     };
     const secret = process.env.JWT_SECRET as string;
-    const options: SignOptions = { expiresIn: '15m' };
+    const options: SignOptions = { expiresIn: '1d' };
     const token = jwt.sign(payload, secret, options);
+
     loginAttempts.delete(email);
     return { token, ...user };
   } catch (error) {

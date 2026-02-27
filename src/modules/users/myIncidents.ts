@@ -1,45 +1,84 @@
-import { PrismaClient } from '../../../generated/prisma';
-import dotenv from 'dotenv';
+import { PrismaClient, Prisma } from '../../../generated/prisma';
 import jwt, { SignOptions } from 'jsonwebtoken';
-
-dotenv.config();
+import dotenv from 'dotenv';
+dotenv.config({ path: '../../../.env' });
 const prisma = new PrismaClient();
-export async function myIncidents(
+
+export async function listIncidents(
   userID: number,
-  limit?: number,
-  offset?: number,
+  search?: string,
+  limit: number = 5,
+  offset: number = 0,
 ) {
   if (!userID) {
-    throw new Error('User ID is required to fetch incidents.');
+    throw new Error('userID is required');
   }
-  const user = await prisma.user.findUnique({
-    where: { userID: userID },
+  const whereClause: Prisma.IncidentsWhereInput = {
+    userID,
+    status: { not: 'closed' },
+    ...(search
+      ? {
+          OR: [
+            { title: { contains: search, mode: Prisma.QueryMode.insensitive } },
+            {
+              description: {
+                contains: search,
+                mode: Prisma.QueryMode.insensitive,
+              },
+            },
+          ],
+        }
+      : {}),
+  };
+
+  const totalIncidents = await prisma.incidents.count({
+    where: whereClause,
   });
-  if (!user) {
-    throw new Error('User does not exist.');
-  }
+
   const incidents = await prisma.incidents.findMany({
-    where: {
-      userID: userID,
-    },
+    where: whereClause,
     take: limit,
     skip: offset,
-    orderBy: {
-      dateReported: 'desc',
+    orderBy: { IncidentsID: 'desc' },
+    include: {
+      assignedWorker: {
+        select: {
+          workerid: true,
+          name: true,
+        },
+      },
     },
   });
-  const mappedIncidents = incidents.map((incident) => ({
-    IncidentsID: incident.IncidentsID,
-    title: incident.title,
-    description: incident.description,
-    status: incident.status,
-    priority: incident.priority,
-    dateReported: incident.dateReported,
-    assignedWorkerID: incident.assignedWorkerID,
-  }));
-  const payload = { userID: user.userID, role: user.role };
-  const secret = process.env.JWT_SECRET as string;
-  const options: SignOptions = { expiresIn: '1h' };
-  const token = jwt.sign(payload, secret, options);
-  return { token, incidents: mappedIncidents };
+
+  if (!incidents) {
+    return [];
+  }
+  const mappedIncidents = incidents.map((incident) => {
+    return {
+      IncidentsID: incident.IncidentsID,
+      title: incident.title,
+      description: incident.description,
+      status: incident.status,
+      priority: incident.priority,
+      createdAt: incident.createdAt,
+      updatedAt: incident.updatedAt,
+      assignedWorkerID: incident.assignedWorkerID,
+      assignedWorker: incident.assignedWorker
+        ? {
+            workerid: incident.assignedWorker.workerid,
+            name: incident.assignedWorker.name,
+          }
+        : null,
+    };
+  });
+
+  try {
+    const payload = { userID: userID, role: 'USER' };
+    const secret = process.env.JWT_SECRET as string;
+    const options: SignOptions = { expiresIn: '1h' };
+    const token = jwt.sign(payload, secret, options);
+    return { token, incidents: mappedIncidents, total: totalIncidents };
+  } catch (error) {
+    throw new Error(`Error generating token ${error}`);
+  }
 }

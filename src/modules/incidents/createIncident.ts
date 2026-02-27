@@ -1,6 +1,7 @@
 import { PrismaClient } from '../../../generated/prisma';
 import jwt, { SignOptions } from 'jsonwebtoken';
 import { uploadFile } from '../../s3/uploadFile';
+import { sendIncidentEmail } from '../mailing/sendIncidentEmail';
 import dotenv from 'dotenv';
 dotenv.config({ path: '../../../.env' });
 const prisma = new PrismaClient();
@@ -8,7 +9,7 @@ const prisma = new PrismaClient();
 export async function createIncident(
   title: string,
   description: string,
-  location: string,
+  direction: { address: string; city: string; state: string; zipCode: string },
   userID: number,
   companyID: number,
   priority?: string,
@@ -32,13 +33,21 @@ export async function createIncident(
   if (!user) {
     throw new Error('User not found');
   }
+  const addDirecctions = await prisma.directions.create({
+    data: {
+      address: direction.address,
+      city: direction.city,
+      state: direction.state,
+      zipCode: direction.zipCode,
+    },
+  });
   const incident = await prisma.$transaction(async (tx) => {
     // Crear incidencia
     const newIncident = await tx.incidents.create({
       data: {
         title,
         description,
-        location,
+        location: { connect: { id: addDirecctions.id } },
         userID,
         companyID,
         priority: priority || (urgency ? 'HIGH' : 'MEDIUM'),
@@ -59,6 +68,7 @@ export async function createIncident(
 
     return newIncident;
   });
+  const sendEmail = await sendIncidentEmail(title, description);
 
   try {
     const payload = {
@@ -70,7 +80,7 @@ export async function createIncident(
     const options: SignOptions = { expiresIn: '1h' };
     const token = jwt.sign(payload, secret, options);
 
-    return { token, ...incident };
+    return { token, ...incident, sendEmail };
   } catch (error) {
     console.error('Error generating JWT token:', error);
   }

@@ -148,6 +148,7 @@ exports.Prisma.CompanyScalarFieldEnum = {
   userID: 'userID',
   companyCode: 'companyCode',
   email: 'email',
+  stripeAccountID: 'stripeAccountID',
   refreshToken: 'refreshToken'
 };
 
@@ -218,7 +219,6 @@ exports.Prisma.IncidentsScalarFieldEnum = {
   title: 'title',
   description: 'description',
   status: 'status',
-  location: 'location',
   priority: 'priority',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
@@ -233,13 +233,15 @@ exports.Prisma.IncidentsScalarFieldEnum = {
 
 exports.Prisma.PaymentsScalarFieldEnum = {
   id: 'id',
+  paymentID: 'paymentID',
   amount: 'amount',
   date: 'date',
-  method: 'method',
   userID: 'userID',
   companyID: 'companyID',
   IncidentsID: 'IncidentsID',
-  receivedByID: 'receivedByID'
+  receivedByID: 'receivedByID',
+  clientEmail: 'clientEmail',
+  companyEmail: 'companyEmail'
 };
 
 exports.Prisma.PaymentStatusScalarFieldEnum = {
@@ -260,14 +262,43 @@ exports.Prisma.BudgetScalarFieldEnum = {
   incidentID: 'incidentID',
   userID: 'userID',
   createdAt: 'createdAt',
-  title: 'title'
+  title: 'title',
+  paid: 'paid'
+};
+
+exports.Prisma.NewsLetterScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.ProductsScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  price: 'price',
+  currency: 'currency',
+  companyID: 'companyID',
+  stripeProductID: 'stripeProductID',
+  priceID: 'priceID'
+};
+
+exports.Prisma.ItemScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  price: 'price',
+  currency: 'currency',
+  productID: 'productID'
 };
 
 exports.Prisma.SubscriptionScalarFieldEnum = {
   id: 'id',
-  type: 'type',
+  subscriptionID: 'subscriptionID',
+  companyID: 'companyID',
+  companyemail: 'companyemail',
   startDate: 'startDate',
-  endDate: 'endDate'
+  endDate: 'endDate',
+  active: 'active'
 };
 
 exports.Prisma.IncidentHistoryScalarFieldEnum = {
@@ -311,6 +342,7 @@ exports.Prisma.DirectionsScalarFieldEnum = {
   id: 'id',
   userID: 'userID',
   companyID: 'companyID',
+  incidentID: 'incidentID',
   address: 'address',
   city: 'city',
   state: 'state',
@@ -382,6 +414,7 @@ exports.incidentStatus = exports.$Enums.incidentStatus = {
 };
 
 exports.paymentStatusEnum = exports.$Enums.paymentStatusEnum = {
+  STARTED: 'STARTED',
   PENDING: 'PENDING',
   COMPLETED: 'COMPLETED',
   FAILED: 'FAILED'
@@ -401,6 +434,9 @@ exports.Prisma.ModelName = {
   Payments: 'Payments',
   paymentStatus: 'paymentStatus',
   Budget: 'Budget',
+  newsLetter: 'newsLetter',
+  products: 'products',
+  item: 'item',
   Subscription: 'Subscription',
   IncidentHistory: 'IncidentHistory',
   ShiftWorker: 'ShiftWorker',

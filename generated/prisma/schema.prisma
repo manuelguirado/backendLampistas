@@ -23,7 +23,7 @@ model User {
   incidents       Incidents?        @relation("IncidentUsers", fields: [incidentsID], references: [IncidentsID])
   directions      Directions[]
   paymentsID      Int?
-  payments        Payments?
+  payments        Payments[]
   IncidentHistory IncidentHistory[]
   machineryID     Int?
 
@@ -46,27 +46,26 @@ model User {
 }
 
 model Company {
-  companyID        Int               @id @default(autoincrement())
-  name             String            @db.VarChar(255)
-  phone            String            @db.VarChar(255)
-  password         String            @db.VarChar(255)
-  workers          Worker[]          @relation("Workers")
-  receivedPayments Payments[]        @relation("ReceivedPayments")
-  incidents        Incidents[]       @relation("CompanyIncidents")
-  incidentHistory  IncidentHistory[] @relation("CompanyIncidentHistory")
+  companyID        Int                @id @default(autoincrement())
+  name             String             @db.VarChar(255)
+  phone            String             @db.VarChar(255)
+  password         String             @db.VarChar(255)
+  workers          Worker[]           @relation("Workers")
+  incidents        Incidents[]        @relation("CompanyIncidents")
+  incidentHistory  IncidentHistory[]  @relation("CompanyIncidentHistory")
   budgetID         Int?
-  budget           Budget?           @relation(fields: [budgetID], references: [budgetID])
-  suspended        Boolean           @default(false)
+  budget           Budget?            @relation(fields: [budgetID], references: [budgetID])
+  suspended        Boolean            @default(false)
   suspendedUntil   DateTime?
-  directions       Directions[]      @relation("CompanyDirections")
-  shiftWorkers     ShiftWorker[]     @relation("CompanyShiftWorkers")
-  role             Role              @default(COMPANY)
-  userID           Int?              @unique
-  payments         Payments[]        @relation("CompanyPayments")
-  machinery        machinery[]       @relation("CompanyMachinery")
-  companyCode      String?           @db.VarChar(100)
-  email            String            @unique @db.VarChar(255)
-
+  directions       Directions[]       @relation("CompanyDirections")
+  shiftWorkers     ShiftWorker[]      @relation("CompanyShiftWorkers")
+  role             Role               @default(COMPANY)
+  userID           Int?               @unique
+  payments         Payments[]         @relation("CompanyPayments")
+  machinery        machinery[]        @relation("CompanyMachinery")
+  companyCode      String?            @db.VarChar(100)
+  email            String             @unique @db.VarChar(255)
+  stripeAccountID  String?            @db.VarChar(255)
   Budget           Budget[]           @relation("CompanyBudget")
   User             User[]
   contracts        contracts[]        @relation("CompanyToContracts")
@@ -75,6 +74,8 @@ model Company {
   usersCompanies   usersCompanies[]
   refreshToken     String?            @db.Text
   companyFiles     File[]
+  Subscriptions    Subscription[]
+  products         products[]
 }
 
 model AdminsCompanies {
@@ -188,7 +189,7 @@ model Incidents {
   title       String         @db.VarChar(255)
   description String         @db.Text
   status      incidentStatus @default(open)
-  location    String         @db.VarChar(255)
+  location    Directions[]   @relation("IncidentLocations")
 
   priority         String            @db.VarChar(50)
   createdAt        DateTime          @default(now()) @db.Timestamp(6)
@@ -212,18 +213,20 @@ model Incidents {
 }
 
 model Payments {
-  id            Int             @id @default(autoincrement())
-  amount        Decimal         @db.Decimal(10, 2)
-  date          DateTime        @default(now()) @db.Timestamp(6)
-  method        String          @db.VarChar(50)
-  userID        Int             @unique
-  user          User            @relation(fields: [userID], references: [userID])
-  companyID     Int
-  company       Company         @relation("CompanyPayments", fields: [companyID], references: [companyID])
-  receivedBy    Company         @relation("ReceivedPayments", fields: [receivedByID], references: [companyID])
-  IncidentsID   Int?
-  incident      Incidents?      @relation("IncidentPayments", fields: [IncidentsID], references: [IncidentsID])
-  receivedByID  Int
+  id           Int        @id @default(autoincrement())
+  paymentID    String     @unique @db.VarChar(255)
+  amount       Decimal    @db.Decimal(10, 2)
+  date         DateTime   @default(now()) @db.Timestamp(6)
+  userID       Int
+  user         User       @relation(fields: [userID], references: [userID])
+  companyID    Int
+  company      Company    @relation("CompanyPayments", fields: [companyID], references: [companyID])
+  IncidentsID  Int?
+  incident     Incidents? @relation("IncidentPayments", fields: [IncidentsID], references: [IncidentsID])
+  receivedByID Int
+  clientEmail  String     @db.VarChar(255)
+  companyEmail String     @default("") @db.VarChar(255)
+
   paymentStatus paymentStatus[]
 }
 
@@ -252,13 +255,50 @@ model Budget {
   Company      Company[]
   title        String     @db.VarChar(255)
   files        File[]
+  paid         Boolean?   @default(false)
+}
+
+model newsLetter {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique @db.VarChar(255)
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+}
+
+model products {
+  id              Int     @id @default(autoincrement())
+  name            String  @db.VarChar(255)
+  description     String  @db.Text
+  price           Decimal @db.Decimal(10, 2)
+  currency        String  @db.VarChar(10)
+  companyID       Int
+  company         Company @relation(fields: [companyID], references: [companyID])
+  stripeProductID String  @unique @db.VarChar(255)
+  priceID         String  @unique @db.VarChar(255)
+  items           item[]
+}
+
+model item {
+  id   Int    @id @default(autoincrement())
+  name String @db.VarChar(255)
+
+  price     Decimal  @db.Decimal(10, 2)
+  currency  String   @db.VarChar(10)
+  productID Int
+  product   products @relation(fields: [productID], references: [id])
 }
 
 model Subscription {
-  id        Int      @id @default(autoincrement())
-  type      String   @db.VarChar(100)
-  startDate DateTime @db.Timestamp(6)
-  endDate   DateTime @db.Timestamp(6)
+  id             Int    @id @default(autoincrement())
+  subscriptionID String @unique @db.VarChar(255)
+
+  companyID    Int?
+  company      Company? @relation(fields: [companyID], references: [companyID])
+  companyemail String   @db.VarChar(255)
+
+  startDate DateTime  @db.Timestamp(6)
+  endDate   DateTime? @db.Timestamp(6)
+
+  active Boolean @default(true)
 }
 
 model IncidentHistory {
@@ -313,9 +353,11 @@ model Directions {
   id     Int  @id @default(autoincrement())
   userID Int?
 
-  user      User?    @relation(fields: [userID], references: [userID])
-  companyID Int?
-  company   Company? @relation("CompanyDirections", fields: [companyID], references: [companyID])
+  user       User?      @relation(fields: [userID], references: [userID])
+  companyID  Int?
+  company    Company?   @relation("CompanyDirections", fields: [companyID], references: [companyID])
+  incidentID Int?
+  incident   Incidents? @relation("IncidentLocations", fields: [incidentID], references: [IncidentsID])
 
   address String
   city    String
@@ -360,6 +402,7 @@ enum Role {
 }
 
 enum paymentStatusEnum {
+  STARTED
   PENDING
   COMPLETED
   FAILED

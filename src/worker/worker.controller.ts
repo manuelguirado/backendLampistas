@@ -10,6 +10,7 @@ import {
   Req,
   UseInterceptors,
   UploadedFiles,
+  Param,
 } from '@nestjs/common';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { WorkerService } from './worker.services';
@@ -23,19 +24,40 @@ export class WorkerController {
   @Post('workerLogin')
   async workerLogin(@Body() body: { email: string; password: string }) {
     const { email, password } = body;
-    return this.workerService.workerLogin(email, password);
+    try {
+      return await this.workerService.workerLogin(email, password);
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : 'Error al iniciar sesión';
+      return {
+        success: false,
+        message: errorMessage,
+      };
+    }
   }
 
   @UseGuards(AuthGuard, WorkerGuard)
   @Get('assignedIncidents')
-  async listAssignedIncidents(@Req() req) {
+  async listAssignedIncidents(
+    @Req() req,
+    @Query('search') search?: string,
+    @Query('limit') limit?: number,
+    @Query('offset') offset?: number,
+  ) {
     const workerID = req.user?.workerID; // ✅ Cambiar a workerID mayúscula
 
     if (!workerID) {
       throw new BadRequestException('Worker ID not found in token');
     }
+    const limitNum = limit ? Number(limit) : 5;
+    const offsetNum = offset ? Number(offset) : 0;
 
-    return this.workerService.listAssignedIncidents(workerID);
+    return this.workerService.listAssignedIncidents(
+      workerID,
+      search,
+      limitNum,
+      offsetNum,
+    );
   }
   @UseGuards(AuthGuard, WorkerGuard)
   @Patch('updateIncidentStatus')
@@ -134,5 +156,19 @@ export class WorkerController {
       description,
       closedAt,
     );
+  }
+  @UseGuards(AuthGuard, WorkerGuard)
+  @Get('getIncidentPhotos')
+  async getIncidentPhotos(@Req() req, @Query('incidentID') incidentID: string) {
+    const incidentIDNum = parseInt(incidentID, 10);
+
+    return this.workerService.getIncidentPhotos(incidentIDNum);
+  }
+  @UseGuards(AuthGuard, WorkerGuard)
+  @Get('getDirections/:incidentID')
+  async getDirections(@Req() req, @Param('incidentID') incidentID?: string) {
+    const workerID = req.user.workerID;
+    const incidentIDNum = incidentID ? parseInt(incidentID, 10) : undefined;
+    return this.workerService.getDirections(workerID, incidentIDNum);
   }
 }

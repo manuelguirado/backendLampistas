@@ -1,6 +1,7 @@
 import { PrismaClient } from '../../../generated/prisma';
 import { hashPassword } from '../../utils/hash/hashPassword';
 import { assingCompanyToUser } from '../companies/assignUserCompany';
+import { sendClientCredentialsEmail } from '../mailing/sendClientCredentials';
 import jwt, { SignOptions } from 'jsonwebtoken';
 const prisma = new PrismaClient();
 export async function companyCreateUser(
@@ -36,6 +37,13 @@ export async function companyCreateUser(
       companyID, // Asignado automáticamente
     },
   });
+  const sendEmail = await sendClientCredentialsEmail(
+    '¡Bienvenido a nuestra plataforma!',
+    'Gracias por registrarte en nuestro servicio. Aquí están tus credenciales User: ' +
+      email +
+      ' Password: ' +
+      password,
+  );
   const newUser = await assingCompanyToUser(companyID, user.userID);
   try {
     const payload = {
@@ -46,7 +54,7 @@ export async function companyCreateUser(
     const secret = process.env.JWT_SECRET as string;
     const options: SignOptions = { expiresIn: '1h' };
     const token = jwt.sign(payload, secret, options);
-    return { token, ...newUser };
+    return { token, ...newUser, sendEmail };
   } catch (error) {
     console.error('Error generating JWT:', error);
     throw new Error('Internal server error');

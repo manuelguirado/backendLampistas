@@ -23,11 +23,11 @@ export async function recievedBudgets(
 
   // Obtener el total de presupuestos
   const totalBudgets = await prisma.budget.count({
-    where: { userID: userID },
+    where: { userID: userID, paid: false },
   });
 
   const budgets = await prisma.budget.findMany({
-    where: { userID: userID },
+    where: { userID: userID, paid: false },
     take: limit,
     skip: offset,
     orderBy: { budgetID: 'desc' },

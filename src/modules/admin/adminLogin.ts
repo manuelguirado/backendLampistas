@@ -36,7 +36,7 @@ export async function adminLogin(email: string, password: string) {
       email: admin.email,
     };
     const secret = process.env.JWT_SECRET as string;
-    const options: SignOptions = { expiresIn: '1h' };
+    const options: SignOptions = { expiresIn: '1d' };
     const token = jwt.sign(payload, secret, options);
     return { token, ...admin };
   } catch (error) {

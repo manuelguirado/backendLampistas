@@ -3,7 +3,7 @@ import { userLogin } from '../modules/users/userLogin';
 import { createIncident } from '../modules/incidents/createIncident';
 import { findMyMachinery } from '../modules/machinery/findMymachinery';
 import { myContracts } from '../modules/users/Mycontracts';
-import { myIncidents } from '../modules/users/myIncidents';
+import { listIncidents } from '../modules/users/myIncidents';
 import { recievedBudgets } from '../modules/users/recievedBudgets';
 import { validateCode } from '../utils/validateCode';
 import { Injectable } from '@nestjs/common';
@@ -13,10 +13,23 @@ import { downloadFile } from '../s3/downloadFile';
 import { getIncidentHistory } from '../modules/incidents/getIncidentHistory';
 import { incidentHistory } from '../modules/incidents/incidentHistory';
 import { UserType } from '../utils/types/userType';
+import { forgotPassword } from '../utils/forgotPassword';
+import { hireCompany } from '../modules/users/hireCompany';
+import { searchCompanies } from '../modules/users/searchCompanies';
 @Injectable()
 export class UserService {
-  async userRegister(name: string, email: string, password: string) {
-    return userRegister(name, email, password);
+  async userRegister(
+    name: string,
+    email: string,
+    password: string,
+    directions: {
+      address: string;
+      city: string;
+      state: string;
+      zipCode: string;
+    }[],
+  ) {
+    return userRegister(name, email, password, directions);
   }
   async userLogin(email: string, password: string) {
     return userLogin(email, password);
@@ -24,7 +37,12 @@ export class UserService {
   async createIncident(
     title: string,
     description: string,
-    location: string,
+    directions: {
+      address: string;
+      city: string;
+      state: string;
+      zipCode: string;
+    },
     userID: number,
     companyID: number,
     priority?: string,
@@ -34,7 +52,7 @@ export class UserService {
     return createIncident(
       title,
       description,
-      location,
+      directions,
       userID,
       companyID,
       priority,
@@ -54,8 +72,13 @@ export class UserService {
   async validateCode(userType: 'user', code: string) {
     return validateCode(userType, code);
   }
-  async myIncidents(userID: number, limit?: number, offset?: number) {
-    return myIncidents(userID, limit, offset);
+  async listIncidents(
+    userID: number,
+    search: string,
+    limit?: number,
+    offset?: number,
+  ) {
+    return listIncidents(userID, search, limit, offset);
   }
   async uploadFile(
     file: Array<Express.Multer.File>,
@@ -94,5 +117,14 @@ export class UserService {
       description,
       closedAt,
     );
+  }
+  async forgotPassword(newPassword: string, email: string) {
+    return forgotPassword(newPassword, email);
+  }
+  async hireCompany(userID: number, companyEmail: string) {
+    return hireCompany(userID, companyEmail);
+  }
+  async searchCompanies(userID: number) {
+    return searchCompanies(userID);
   }
 }

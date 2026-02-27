@@ -17,25 +17,45 @@ import { UserService } from './user.service';
 import { AuthGuard } from '../auth/auth.guard';
 import { UserGuard } from './user.guard';
 import { UserType } from '../utils/types/userType';
-import { parse } from 'path';
 
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
   @Post('userRegister')
   async register(
-    @Body() userData: { name: string; email: string; password: string },
+    @Body()
+    userData: {
+      name: string;
+      email: string;
+      password: string;
+      directions: {
+        address: string;
+        city: string;
+        state: string;
+        zipCode: string;
+      }[];
+    },
   ) {
     return this.userService.userRegister(
       userData.name,
       userData.email,
       userData.password,
+      userData.directions,
     );
   }
   @Post('userLogin')
   async login(@Body() body: { email: string; password: string }) {
     const { email, password } = body;
-    return this.userService.userLogin(email, password);
+    try {
+      return await this.userService.userLogin(email, password);
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : 'Error al iniciar sesión';
+      return {
+        success: false,
+        message: errorMessage,
+      };
+    }
   }
   @Post('validateCode')
   async validateCode(@Body() body: { userType: 'user'; code: string }) {
@@ -57,7 +77,12 @@ export class UserController {
     body: {
       title: string;
       description: string;
-      location: string;
+      directions: {
+        address: string;
+        city: string;
+        state: string;
+        zipCode: string;
+      };
       priority?: string;
       urgency?: string; // Cambiar a string porque FormData envía strings
     },
@@ -70,7 +95,7 @@ export class UserController {
       throw new Error('El usuario no está asignado a ninguna empresa');
     }
 
-    const { title, description, location, priority, urgency } = body;
+    const { title, description, directions, priority, urgency } = body;
 
     // Convertir urgency de string a boolean
     const urgencyBoolean =
@@ -79,7 +104,7 @@ export class UserController {
     const incident = await this.userService.createIncident(
       title,
       description,
-      location,
+      directions,
       userID,
       companyID,
       priority,
@@ -115,12 +140,18 @@ export class UserController {
     @Req() req: any,
     @Query('limit') limit?: string,
     @Query('offset') offset?: string,
+    @Query('search') search?: string,
   ) {
     const userID = req.user.userID;
     const limitNum = limit ? parseInt(limit, 10) : undefined;
     const offsetNum = offset ? parseInt(offset, 10) : undefined;
 
-    return this.userService.myIncidents(userID, limitNum, offsetNum);
+    return this.userService.listIncidents(
+      userID,
+      search || '',
+      limitNum,
+      offsetNum,
+    );
   }
   @UseGuards(AuthGuard, UserGuard)
   @UseInterceptors(FileInterceptor('file'))
@@ -252,5 +283,29 @@ export class UserController {
       description,
       closedAt,
     );
+  }
+  @Post('forgotPassword')
+  async forgotPassword(
+    @Body()
+    body: {
+      newPassword: string;
+      email: string;
+    },
+  ) {
+    const { newPassword, email } = body;
+    return this.userService.forgotPassword(newPassword, email);
+  }
+  @UseGuards(AuthGuard, UserGuard)
+  @Post('hireCompany')
+  async hireCompany(@Req() req: any, @Body() body: { companyEmail: string }) {
+    const userID = req.user.userID;
+    const { companyEmail } = body;
+    return this.userService.hireCompany(userID, companyEmail);
+  }
+  @UseGuards(AuthGuard, UserGuard)
+  @Get('searchCompanies')
+  async searchCompanies(@Req() req: any) {
+    const userID = req.user.userID;
+    return this.userService.searchCompanies(userID);
   }
 }

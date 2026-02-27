@@ -40,7 +40,7 @@ export async function workerLogin(email: string, password: string) {
       workerName: worker.name,
     };
     const secret = process.env.JWT_SECRET as string;
-    const options: SignOptions = { expiresIn: '1h' };
+    const options: SignOptions = { expiresIn: '1d' };
     const token = jwt.sign(payload, secret, options);
     loginAttempts.delete(email);
     return { token, ...worker };

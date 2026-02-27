@@ -28,6 +28,8 @@ import { generatePDF } from '../utils/generatePDF';
 import { BudgetData } from '../utils/types/budgetData';
 import { getIncidentHistory } from '../modules/incidents/getIncidentHistory';
 import type { UserType } from '../utils/types/userType';
+import companyEarnings from '../modules/charts/companyCharts/companyEarnings';
+import closedIncidents from '../modules/charts/companyCharts/closedIncidents';
 @Injectable()
 export class CompanyService {
   async companyLogin(email: string, password: string) {
@@ -184,5 +186,11 @@ export class CompanyService {
   }
   async getIncidentHistory(id: number, userType: UserType) {
     return getIncidentHistory(id, userType);
+  }
+  async companyEarnings(companyID: number) {
+    return companyEarnings(companyID);
+  }
+  async closedIncidents(companyID: number) {
+    return closedIncidents(companyID);
   }
 }

@@ -62,14 +62,10 @@ export class AdminController {
     return this.adminService.assignCode(parseString);
   }
   @UseGuards(AuthGuard, AdminGuard)
-  @Patch('suspendCompany/:companyID')
-  suspendCompany(
-    @Param('companyID') companyID: string,
-    @Body() body: { until?: Date },
-  ) {
-    const parseCompanyID = Number(companyID);
-    const { until } = body;
-    return this.adminService.suspendCompany(parseCompanyID, until);
+  @Patch('suspendCompany')
+  suspendCompany(@Body() body: { companyEmail: string; until?: Date }) {
+    const { companyEmail, until } = body;
+    return this.adminService.suspendCompany(companyEmail, until);
   }
   @UseGuards(AuthGuard, AdminGuard)
   @Post('eliminateCompany/:companyID')
@@ -189,5 +185,24 @@ export class AdminController {
     const userType: UserType = 'admin';
 
     return this.adminService.uploadFile([file], id, userType);
+  }
+  @UseGuards(AuthGuard, AdminGuard)
+  @Get('activeClients')
+  async activeClients(@Request() req: any) {
+    const adminID = req.user.adminID;
+
+    return this.adminService.activeClients(adminID);
+  }
+  @UseGuards(AuthGuard, AdminGuard)
+  @Get('activeCompanies')
+  async activeCompanies(@Request() req: any) {
+    const adminID = req.user.adminID;
+    return this.adminService.activeCompanies(adminID);
+  }
+  @UseGuards(AuthGuard, AdminGuard)
+  @Get('activeIncidents')
+  async activeIncidents(@Request() req: any) {
+    const adminID = req.user.adminID;
+    return this.adminService.activeIncidents(adminID);
   }
 }

@@ -9,6 +9,8 @@ import type { incidentStatus } from '../utils/types/incidentStatus';
 import { uploadFile } from '../s3/uploadFile';
 import { incidentHistory } from '../modules/incidents/incidentHistory';
 import { getIncidentHistory } from '../modules/incidents/getIncidentHistory';
+import { getIncidentPhotos } from '../modules/workers/getIncidentPhotos';
+import { getDirections } from '../modules/directions/getDirections';
 @Injectable()
 export class WorkerService {
   async workerLogin(email: string, password: string) {
@@ -18,8 +20,13 @@ export class WorkerService {
     return validateCode(userType, code);
   }
 
-  async listAssignedIncidents(workerID: number) {
-    return listAssignedIncidents(workerID);
+  async listAssignedIncidents(
+    workerID: number,
+    search?: string,
+    limit?: number,
+    offset?: number,
+  ) {
+    return listAssignedIncidents(workerID, search, limit, offset);
   }
 
   async updateStatusIncident(
@@ -63,5 +70,11 @@ export class WorkerService {
       description,
       closedAt,
     );
+  }
+  async getIncidentPhotos(incidentID: number) {
+    return getIncidentPhotos(incidentID);
+  }
+  async getDirections(workerID: number, incidentID?: number) {
+    return getDirections(workerID, incidentID);
   }
 }
