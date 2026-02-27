@@ -203,36 +203,38 @@ export class UserController {
         throw new Error('No file data received');
       }
 
-      // Convertir el stream a buffer
-      const chunks: Uint8Array[] = [];
-      if (stream instanceof ReadableStream) {
-        const reader = stream.getReader();
-        let done = false;
-        while (!done) {
-          const { value, done: readerDone } = await reader.read();
-          done = readerDone;
-          if (value) {
-            chunks.push(value);
-          }
-        }
-      } else {
-        // Handle Node.js stream
-        for await (const chunk of stream as any) {
-          chunks.push(chunk);
-        }
-      }
-      const buffer = Buffer.concat(chunks);
-
-      // Configurar headers con el tamaño correcto
+      // Configurar headers para streaming
       res.set({
         'Content-Type': 'application/pdf',
-        'Content-Length': buffer.length.toString(),
         'Content-Disposition': `attachment; filename="${pdfFileName}"`,
         'Cache-Control': 'no-cache',
       });
 
-      // Enviar el buffer
-      res.send(buffer);
+      // Stream file directly to response
+      if (typeof stream.pipe === 'function') {
+        stream.pipe(res);
+      } else {
+        // Fallback: convert to buffer if streaming not possible
+        const chunks: Uint8Array[] = [];
+        if (stream instanceof ReadableStream) {
+          const reader = stream.getReader();
+          let done = false;
+          while (!done) {
+            const { value, done: readerDone } = await reader.read();
+            done = readerDone;
+            if (value) {
+              chunks.push(value);
+            }
+          }
+        } else {
+          for await (const chunk of stream as any) {
+            chunks.push(chunk);
+          }
+        }
+        const buffer = Buffer.concat(chunks);
+        res.set({ 'Content-Length': buffer.length.toString() });
+        res.send(buffer);
+      }
     } catch (error) {
       console.error('Error downloading file:', error);
       res.status(500).json({ error: 'Error dow  nloading file' });
