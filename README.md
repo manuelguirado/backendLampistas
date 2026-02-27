@@ -8,7 +8,7 @@
   - [Compañías](#compañías)
   - [Clientes](#clientes)
   - [Trabajadores](#trabajadores)
-  - [Mailing](#mailing)
+  - [Mailing](#mailing)p
   - [Payments](#payments)
   - [Ficheros](#ficheros)
 - [Tecnologías usadas](#tecnologías-usadas)
