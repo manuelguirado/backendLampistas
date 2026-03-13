@@ -7,11 +7,13 @@ async function bootstrap() {
 
   app.enableCors({
     origin: [
-      'http://localhost:5173', // Vite dev
-      'http://localhost:4173', // Vite preview
-      'https://lampistas.vercel.app', // Vercel production
-      'https://*.vercel.app', // Cualquier preview de Vercelu
+      'http://localhost:5173',
+      'http://localhost:4173',
+      'https://lampistas.vercel.app',
+      /^https:\/\/.*\.vercel\.app$/,   // ← RegExp, no string
     ],
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Authorization', 'Content-Type', 'Accept'],
     credentials: true,
   });
 
